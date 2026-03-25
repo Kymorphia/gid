@@ -510,7 +510,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAborted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAborted(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))
@@ -559,7 +559,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAskPassword(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAskPassword(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -621,7 +621,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAskQuestion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAskQuestion(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -668,7 +668,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectReply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReply(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gio.types.MountOperationResult)))
@@ -727,7 +727,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowProcesses(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowProcesses(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -800,7 +800,7 @@ class MountOperation : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowUnmountProgress(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowUnmountProgress(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))

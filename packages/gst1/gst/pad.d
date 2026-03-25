@@ -1613,7 +1613,7 @@ class Pad : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLinked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLinked(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.pad.Pad)))
@@ -1656,7 +1656,7 @@ class Pad : gst.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUnlinked(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnlinked(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.pad.Pad)))

@@ -79,7 +79,7 @@ interface RTSPExtension
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSend(T)(T callback, Flag!"After" after = No.After);
+  gulong connectSend(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface RTSPExtensionGidBuilderImpl(T)

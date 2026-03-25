@@ -265,7 +265,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAuthorize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAuthorize(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_method_invocation.DBusMethodInvocation)))

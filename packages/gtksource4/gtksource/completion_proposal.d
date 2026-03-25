@@ -122,7 +122,7 @@ interface CompletionProposal
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface CompletionProposalGidBuilderImpl(T)

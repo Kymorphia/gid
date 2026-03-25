@@ -81,7 +81,7 @@ template DBusObjectT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_interface.DBusInterface)))
@@ -124,7 +124,7 @@ template DBusObjectT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_interface.DBusInterface)))

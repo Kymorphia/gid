@@ -413,7 +413,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectApplicationActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApplicationActivated(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.app_info.AppInfo)))
@@ -456,7 +456,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectApplicationSelected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApplicationSelected(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.app_info.AppInfo)))
@@ -504,7 +504,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu.Menu)))

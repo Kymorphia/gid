@@ -347,7 +347,7 @@ interface ActionGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `ActionEnabledChanged` signal.
@@ -369,7 +369,7 @@ interface ActionGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `ActionRemoved` signal.
@@ -391,7 +391,7 @@ interface ActionGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `ActionStateChanged` signal.
@@ -413,7 +413,7 @@ interface ActionGroup
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
 }
 
 interface ActionGroupGidBuilderImpl(T)

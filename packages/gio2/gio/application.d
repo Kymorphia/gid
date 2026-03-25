@@ -1298,7 +1298,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
@@ -1342,7 +1342,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCommandLine(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCommandLine(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application_command_line.ApplicationCommandLine)))
@@ -1431,7 +1431,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectHandleLocalOptions(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHandleLocalOptions(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.variant_dict.VariantDict)))
@@ -1479,7 +1479,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectNameLost(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNameLost(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
@@ -1523,7 +1523,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectOpen(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOpen(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File[])))
@@ -1576,7 +1576,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShutdown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShutdown(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))
@@ -1614,7 +1614,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectStartup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStartup(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application.Application)))

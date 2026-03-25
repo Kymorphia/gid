@@ -96,7 +96,7 @@ interface CellEditable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEditingDone(T)(T callback, Flag!"After" after = No.After);
+  gulong connectEditingDone(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `RemoveWidget` signal.
@@ -124,7 +124,7 @@ interface CellEditable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface CellEditableGidBuilderImpl(T)

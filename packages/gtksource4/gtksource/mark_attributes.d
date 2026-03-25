@@ -316,7 +316,7 @@ class MarkAttributes : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectQueryTooltipMarkup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryTooltipMarkup(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.mark.Mark)))
@@ -364,7 +364,7 @@ class MarkAttributes : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectQueryTooltipText(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryTooltipText(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == string)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.mark.Mark)))

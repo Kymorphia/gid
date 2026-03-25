@@ -554,7 +554,7 @@ class Assistant : gtk.window.Window
   
       Deprecated: This widget will be removed in GTK 5
   */
-  ulong connectApply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApply(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
@@ -593,7 +593,7 @@ class Assistant : gtk.window.Window
   
       Deprecated: This widget will be removed in GTK 5
   */
-  ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCancel(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
@@ -634,7 +634,7 @@ class Assistant : gtk.window.Window
   
       Deprecated: This widget will be removed in GTK 5
   */
-  ulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
@@ -673,7 +673,7 @@ class Assistant : gtk.window.Window
   
       Deprecated: This widget will be removed in GTK 5
   */
-  ulong connectEscape(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEscape(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.assistant.Assistant)))
@@ -718,7 +718,7 @@ class Assistant : gtk.window.Window
   
       Deprecated: This widget will be removed in GTK 5
   */
-  ulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))

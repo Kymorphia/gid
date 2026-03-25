@@ -82,7 +82,7 @@ interface SectionModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSectionsChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectSectionsChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface SectionModelGidBuilderImpl(T)

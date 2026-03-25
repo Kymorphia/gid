@@ -497,7 +497,7 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.text.Text)))
@@ -538,7 +538,7 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -591,7 +591,7 @@ template TextT()
       Deprecated: Use #AtkObject::text-insert or
         #AtkObject::text-remove instead.
   */
-  ulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -646,7 +646,7 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -705,7 +705,7 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -755,7 +755,7 @@ template TextT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.text.Text)))

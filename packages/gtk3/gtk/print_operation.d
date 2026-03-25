@@ -1087,7 +1087,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectBeginPrint(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBeginPrint(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
@@ -1139,7 +1139,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCreateCustomWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateCustomWidget(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T : gobject.object.ObjectWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation.PrintOperation)))
@@ -1184,7 +1184,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCustomWidgetApply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCustomWidgetApply(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -1236,7 +1236,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDone(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDone(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PrintOperationResult)))
@@ -1328,7 +1328,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDrawPage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDrawPage(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
@@ -1377,7 +1377,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEndPrint(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEndPrint(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
@@ -1433,7 +1433,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPaginate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPaginate(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
@@ -1498,7 +1498,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPreview(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreview(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation_preview.PrintOperationPreview)))
@@ -1557,7 +1557,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRequestPageSetup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestPageSetup(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
@@ -1609,7 +1609,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_operation.PrintOperation)))
@@ -1654,7 +1654,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUpdateCustomWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUpdateCustomWidget(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))

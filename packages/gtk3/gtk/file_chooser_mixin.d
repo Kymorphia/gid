@@ -1501,7 +1501,7 @@ template FileChooserT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectConfirmOverwrite(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConfirmOverwrite(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gtk.types.FileChooserConfirmation)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser.FileChooser)))
@@ -1552,7 +1552,7 @@ template FileChooserT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCurrentFolderChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCurrentFolderChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser.FileChooser)))
@@ -1599,7 +1599,7 @@ template FileChooserT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFileActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFileActivated(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser.FileChooser)))
@@ -1649,7 +1649,7 @@ template FileChooserT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser.FileChooser)))
@@ -1707,7 +1707,7 @@ template FileChooserT()
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser.FileChooser)))

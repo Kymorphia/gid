@@ -437,7 +437,7 @@ interface RecentChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectItemActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectItemActivated(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `SelectionChanged` signal.
@@ -457,7 +457,7 @@ interface RecentChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface RecentChooserGidBuilderImpl(T)

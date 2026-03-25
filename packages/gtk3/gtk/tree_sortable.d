@@ -117,7 +117,7 @@ interface TreeSortable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSortColumnChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectSortColumnChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface TreeSortableGidBuilderImpl(T)

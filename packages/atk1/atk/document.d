@@ -127,7 +127,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDocumentAttributeChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectDocumentAttributeChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `LoadComplete` signal.
@@ -152,7 +152,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLoadComplete(T)(T callback, Flag!"After" after = No.After);
+  gulong connectLoadComplete(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `LoadStopped` signal.
@@ -174,7 +174,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLoadStopped(T)(T callback, Flag!"After" after = No.After);
+  gulong connectLoadStopped(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `PageChanged` signal.
@@ -196,7 +196,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPageChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectPageChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `Reload` signal.
@@ -217,7 +217,7 @@ interface Document
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectReload(T)(T callback, Flag!"After" after = No.After);
+  gulong connectReload(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface DocumentGidBuilderImpl(T)

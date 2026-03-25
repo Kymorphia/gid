@@ -626,7 +626,7 @@ class GLArea : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCreateContext(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateContext(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T : gdk.glcontext.GLContext)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.glarea.GLArea)))
@@ -672,7 +672,7 @@ class GLArea : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRender(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRender(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.glcontext.GLContext)))
@@ -729,7 +729,7 @@ class GLArea : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectResize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResize(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))

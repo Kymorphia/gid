@@ -1508,7 +1508,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectConnClosed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConnClosed(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
@@ -1545,7 +1545,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectConnOpened(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConnOpened(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
@@ -1582,7 +1582,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectConnToClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConnToClose(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
@@ -1619,7 +1619,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDsnChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDsnChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))
@@ -1659,7 +1659,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectError(T)(T callback, Flag!"After" after = No.After)
+  gulong connectError(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection_event.ConnectionEvent)))
@@ -1701,7 +1701,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTransactionStatusChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTransactionStatusChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.connection.Connection)))

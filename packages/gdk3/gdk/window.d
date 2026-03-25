@@ -2964,7 +2964,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCreateSurface(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateSurface(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == cairo.surface.Surface)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -3024,7 +3024,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFromEmbedder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFromEmbedder(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -3107,7 +3107,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMovedToRect(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMovedToRect(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
@@ -3167,7 +3167,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPickEmbeddedChild(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPickEmbeddedChild(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T : gdk.window.Window)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -3227,7 +3227,7 @@ class Window : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectToEmbedder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectToEmbedder(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))

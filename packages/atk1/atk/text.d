@@ -390,7 +390,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `TextCaretMoved` signal.
@@ -411,7 +411,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `TextChanged` signal.
@@ -440,7 +440,7 @@ interface Text
       Deprecated: Use #AtkObject::text-insert or
         #AtkObject::text-remove instead.
   */
-  ulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `TextInsert` signal.
@@ -467,7 +467,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `TextRemove` signal.
@@ -494,7 +494,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After);
+  gulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `TextSelectionChanged` signal.
@@ -512,7 +512,7 @@ interface Text
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface TextGidBuilderImpl(T)

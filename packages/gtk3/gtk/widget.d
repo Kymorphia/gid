@@ -5997,7 +5997,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAccelClosuresChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAccelClosuresChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -6045,7 +6045,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_button.EventButton)))
@@ -6099,7 +6099,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_button.EventButton)))
@@ -6149,7 +6149,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCanActivateAccel(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCanActivateAccel(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -6197,7 +6197,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChildNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectChildNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gobject.param_spec.ParamSpec)))
@@ -6242,7 +6242,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use GdkScreen::composited-changed instead.
   */
-  ulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -6289,7 +6289,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectConfigureEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectConfigureEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_configure.EventConfigure)))
@@ -6338,7 +6338,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDamageEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDamageEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_expose.EventExpose)))
@@ -6389,7 +6389,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDeleteEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeleteEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
@@ -6436,7 +6436,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDestroy(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDestroy(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -6484,7 +6484,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDestroyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDestroyEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
@@ -6530,7 +6530,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.TextDirection)))
@@ -6579,7 +6579,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6625,7 +6625,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragDataDelete(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragDataDelete(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6679,7 +6679,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragDataGet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragDataGet(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6804,7 +6804,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragDataReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragDataReceived(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6883,7 +6883,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragDrop(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragDrop(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6942,7 +6942,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -6992,7 +6992,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragFailed(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -7051,7 +7051,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragLeave(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragLeave(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -7190,7 +7190,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragMotion(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragMotion(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -7265,7 +7265,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDraw(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDraw(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == cairo.context.Context)))
@@ -7319,7 +7319,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEnterNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnterNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_crossing.EventCrossing)))
@@ -7373,7 +7373,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
@@ -7420,7 +7420,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEventAfter(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEventAfter(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
@@ -7464,7 +7464,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocus(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
@@ -7516,7 +7516,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFocusInEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusInEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_focus.EventFocus)))
@@ -7568,7 +7568,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFocusOutEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusOutEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_focus.EventFocus)))
@@ -7620,7 +7620,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectGrabBrokenEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGrabBrokenEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_grab_broken.EventGrabBroken)))
@@ -7663,7 +7663,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectGrabFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGrabFocus(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -7710,7 +7710,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectGrabNotify(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGrabNotify(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
@@ -7752,7 +7752,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectHide(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHide(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -7796,7 +7796,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectHierarchyChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHierarchyChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -7847,7 +7847,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectKeyPressEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeyPressEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_key.EventKey)))
@@ -7899,7 +7899,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectKeyReleaseEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeyReleaseEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_key.EventKey)))
@@ -7948,7 +7948,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectKeynavFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectKeynavFailed(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
@@ -8002,7 +8002,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLeaveNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeaveNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_crossing.EventCrossing)))
@@ -8053,7 +8053,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMap(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMap(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -8099,7 +8099,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMapEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMapEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_any.EventAny)))
@@ -8147,7 +8147,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMnemonicActivate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMnemonicActivate(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
@@ -8201,7 +8201,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMotionNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMotionNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_motion.EventMotion)))
@@ -8246,7 +8246,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMoveFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveFocus(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DirectionType)))
@@ -8291,7 +8291,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectParentSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectParentSet(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -8339,7 +8339,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -8387,7 +8387,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPropertyNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPropertyNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_property.EventProperty)))
@@ -8438,7 +8438,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectProximityInEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProximityInEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_proximity.EventProximity)))
@@ -8489,7 +8489,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectProximityOutEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProximityOutEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_proximity.EventProximity)))
@@ -8554,7 +8554,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -8611,7 +8611,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRealize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRealize(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -8652,7 +8652,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectScreenChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScreenChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.screen.Screen)))
@@ -8705,7 +8705,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_scroll.EventScroll)))
@@ -8754,7 +8754,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSelectionClearEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionClearEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_selection.EventSelection)))
@@ -8803,7 +8803,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSelectionGet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionGet(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.selection_data.SelectionData)))
@@ -8855,7 +8855,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSelectionNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_selection.EventSelection)))
@@ -8902,7 +8902,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSelectionReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionReceived(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.selection_data.SelectionData)))
@@ -8954,7 +8954,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSelectionRequestEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionRequestEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_selection.EventSelection)))
@@ -8998,7 +8998,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -9039,7 +9039,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowHelp(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowHelp(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.WidgetHelpType)))
@@ -9085,7 +9085,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSizeAllocate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSizeAllocate(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.Allocation)))
@@ -9131,7 +9131,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use #GtkWidget::state-flags-changed instead.
   */
-  ulong connectStateChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStateChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.StateType)))
@@ -9175,7 +9175,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectStateFlagsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStateFlagsChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.StateFlags)))
@@ -9227,7 +9227,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   
       Deprecated: Use the #GtkWidget::style-updated signal
   */
-  ulong connectStyleSet(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStyleSet(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.style.Style)))
@@ -9273,7 +9273,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectStyleUpdated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStyleUpdated(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -9313,7 +9313,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTouchEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTouchEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event.Event)))
@@ -9361,7 +9361,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUnmap(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnmap(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -9407,7 +9407,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUnmapEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnmapEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_any.EventAny)))
@@ -9453,7 +9453,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUnrealize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnrealize(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -9504,7 +9504,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
             reliably, so this signal can not be guaranteed to provide useful
             information.
   */
-  ulong connectVisibilityNotifyEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectVisibilityNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_visibility.EventVisibility)))
@@ -9557,7 +9557,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectWindowStateEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWindowStateEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.event_window_state.EventWindowState)))

@@ -638,7 +638,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragActionAsk(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragActionAsk(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -698,7 +698,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragActionRequested(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragActionRequested(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == int)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
@@ -759,7 +759,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDragPerformDrop(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDragPerformDrop(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File)))
@@ -813,7 +813,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMount(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMount(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))
@@ -861,7 +861,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectOpenLocation(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOpenLocation(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File)))
@@ -938,7 +938,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
@@ -994,7 +994,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Deprecated: use the #GtkPlacesSidebar::show-other-locations signal
             to connect to network servers.
   */
-  ulong connectShowConnectToServer(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowConnectToServer(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
@@ -1034,7 +1034,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowEnterLocation(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowEnterLocation(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
@@ -1078,7 +1078,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowErrorMessage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowErrorMessage(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -1131,7 +1131,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         which includes the open flags in order to allow the user to specify to open
         in a new tab or window, in a similar way than #GtkPlacesSidebar::open-location
   */
-  ulong connectShowOtherLocations(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowOtherLocations(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
@@ -1174,7 +1174,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowOtherLocationsWithFlags(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowOtherLocationsWithFlags(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PlacesOpenFlags)))
@@ -1221,7 +1221,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowStarredLocation(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowStarredLocation(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PlacesOpenFlags)))
@@ -1267,7 +1267,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUnmount(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnmount(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))

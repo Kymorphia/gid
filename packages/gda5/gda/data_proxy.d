@@ -604,7 +604,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFilterChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFilterChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gda.data_proxy.DataProxy)))
@@ -645,7 +645,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRowChangesApplied(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowChangesApplied(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -694,7 +694,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRowDeleteChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRowDeleteChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -744,7 +744,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSampleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSampleChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -791,7 +791,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSampleSizeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSampleSizeChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -838,7 +838,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectValidateRowChanges(T)(T callback, Flag!"After" after = No.After)
+  gulong connectValidateRowChanges(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == glib.error.ErrorWrap)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))

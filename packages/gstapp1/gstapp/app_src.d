@@ -890,7 +890,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEndOfStream(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEndOfStream(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_src.AppSrc)))
@@ -931,7 +931,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEnoughData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnoughData(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_src.AppSrc)))
@@ -977,7 +977,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectNeedData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNeedData(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -1029,7 +1029,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPushBuffer(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPushBuffer(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.buffer.Buffer)))
@@ -1083,7 +1083,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPushBufferList(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPushBufferList(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.buffer_list.BufferList)))
@@ -1141,7 +1141,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPushSample(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPushSample(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.sample.Sample)))
@@ -1189,7 +1189,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSeekData(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSeekData(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))

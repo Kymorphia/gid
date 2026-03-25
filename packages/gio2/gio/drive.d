@@ -331,7 +331,7 @@ interface Drive
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `Disconnected` signal.
@@ -351,7 +351,7 @@ interface Drive
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDisconnected(T)(T callback, Flag!"After" after = No.After);
+  gulong connectDisconnected(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `EjectButton` signal.
@@ -369,7 +369,7 @@ interface Drive
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEjectButton(T)(T callback, Flag!"After" after = No.After);
+  gulong connectEjectButton(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `StopButton` signal.
@@ -387,7 +387,7 @@ interface Drive
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectStopButton(T)(T callback, Flag!"After" after = No.After);
+  gulong connectStopButton(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface DriveGidBuilderImpl(T)

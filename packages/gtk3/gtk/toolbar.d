@@ -404,7 +404,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFocusHomeOrEnd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusHomeOrEnd(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
@@ -449,7 +449,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectOrientationChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectOrientationChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.Orientation)))
@@ -504,7 +504,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPopupContextMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopupContextMenu(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -557,7 +557,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectStyleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStyleChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ToolbarStyle)))

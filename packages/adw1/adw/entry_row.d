@@ -497,7 +497,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectApply(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApply(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.entry_row.EntryRow)))
@@ -534,7 +534,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEntryActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEntryActivated(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.entry_row.EntryRow)))

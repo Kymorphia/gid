@@ -139,7 +139,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDesktopFolder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDesktopFolder(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
@@ -187,7 +187,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDownFolder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDownFolder(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
@@ -231,7 +231,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectHomeFolder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHomeFolder(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
@@ -282,7 +282,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLocationPopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLocationPopup(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -330,7 +330,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLocationPopupOnPaste(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLocationPopupOnPaste(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
@@ -375,7 +375,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLocationTogglePopup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLocationTogglePopup(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
@@ -418,7 +418,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPlacesShortcut(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPlacesShortcut(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
@@ -470,7 +470,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectQuickBookmark(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQuickBookmark(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -517,7 +517,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRecentShortcut(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRecentShortcut(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
@@ -560,7 +560,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSearchShortcut(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSearchShortcut(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
@@ -603,7 +603,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowHidden(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowHidden(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))
@@ -647,7 +647,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUpFolder(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUpFolder(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.file_chooser_widget.FileChooserWidget)))

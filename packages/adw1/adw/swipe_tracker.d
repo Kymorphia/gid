@@ -449,7 +449,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectBeginSwipe(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBeginSwipe(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.swipe_tracker.SwipeTracker)))
@@ -495,7 +495,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEndSwipe(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEndSwipe(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
@@ -545,7 +545,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == adw.types.NavigationDirection)))
@@ -588,7 +588,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUpdateSwipe(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUpdateSwipe(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))

@@ -155,7 +155,7 @@ interface ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChildAdded(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChildAdded(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `ChildRemoved` signal.
@@ -176,7 +176,7 @@ interface ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChildRemoved(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface ChildProxyGidBuilderImpl(T)

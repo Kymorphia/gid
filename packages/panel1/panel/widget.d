@@ -698,7 +698,7 @@ class Widget : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectGetDefaultFocus(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGetDefaultFocus(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T : gtk.widget.Widget)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
@@ -738,7 +738,7 @@ class Widget : gtk.widget.Widget
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPresented(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPresented(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))

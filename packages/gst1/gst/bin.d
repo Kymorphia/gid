@@ -538,7 +538,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDeepElementAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeepElementAdded(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.bin.Bin)))
@@ -587,7 +587,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDeepElementRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeepElementRemoved(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.bin.Bin)))
@@ -643,7 +643,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDoLatency(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDoLatency(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.bin.Bin)))
@@ -684,7 +684,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectElementAdded(T)(T callback, Flag!"After" after = No.After)
+  gulong connectElementAdded(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.element.Element)))
@@ -727,7 +727,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectElementRemoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectElementRemoved(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.element.Element)))

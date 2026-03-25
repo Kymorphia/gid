@@ -193,7 +193,7 @@ class DocumentWorkspace : panel.workspace.Workspace
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAddWidget(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAddWidget(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.widget.Widget)))
@@ -243,7 +243,7 @@ class DocumentWorkspace : panel.workspace.Workspace
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCreateFrame(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreateFrame(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T : panel.frame.Frame)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : panel.position.Position)))

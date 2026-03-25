@@ -183,7 +183,7 @@ interface ColorChooser
       Deprecated: Use [gtk.color_dialog.ColorDialog] and [gtk.color_dialog_button.ColorDialogButton]
           instead of widgets implementing [gtk.color_chooser.ColorChooser]
   */
-  ulong connectColorActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface ColorChooserGidBuilderImpl(T)

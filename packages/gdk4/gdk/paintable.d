@@ -250,7 +250,7 @@ interface Paintable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `InvalidateSize` signal.
@@ -276,7 +276,7 @@ interface Paintable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface PaintableGidBuilderImpl(T)

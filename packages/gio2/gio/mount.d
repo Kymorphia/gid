@@ -395,7 +395,7 @@ interface Mount
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `PreUnmount` signal.
@@ -416,7 +416,7 @@ interface Mount
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After);
+  gulong connectPreUnmount(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `Unmounted` signal.
@@ -436,7 +436,7 @@ interface Mount
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUnmounted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectUnmounted(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface MountGidBuilderImpl(T)

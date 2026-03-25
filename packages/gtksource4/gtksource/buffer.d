@@ -798,7 +798,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectBracketMatched(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBracketMatched(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -849,7 +849,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectHighlightUpdated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHighlightUpdated(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.text_iter.TextIter)))
@@ -894,7 +894,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRedo(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRedo(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.buffer.Buffer)))
@@ -934,7 +934,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSourceMarkUpdated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSourceMarkUpdated(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_mark.TextMark)))
@@ -976,7 +976,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUndo(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUndo(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.buffer.Buffer)))

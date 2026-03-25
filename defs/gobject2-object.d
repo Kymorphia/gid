@@ -5,6 +5,7 @@ import core.atomic;
 import std.conv : to;
 public import std.typecons : Flag, No, Yes;
 
+import gid.basictypes;
 import glib.types;
 import glib.c.functions;
 import gobject.dclosure;
@@ -54,7 +55,7 @@ string objectMixin()
 class ObjectWrap
 {
   protected GObject* _cInstancePtr; // Pointer to wrapped C GObject
-  DClosure[ulong] signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
+  DClosure[gulong] signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
 
   /**
    * Create an ObjectWrap which is wrapping a C GObject with the given GType.
@@ -370,7 +371,7 @@ class ObjectWrap
    *   after = Yes.After to invoke the signal after the default handler, No.After to execute before (default)
    * Returns: The signal connection ID
    */
-  ulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
+  gulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
   {
     auto gclosure = cast(GClosure*)(cast(Closure)closure)._cPtr;
     auto retval = g_signal_connect_closure(_cInstancePtr, signalDetail.toCString(No.Alloc), gclosure, after == Yes.After);

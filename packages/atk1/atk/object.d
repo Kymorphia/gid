@@ -727,7 +727,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectActiveDescendantChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectActiveDescendantChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectWrap)))
@@ -773,7 +773,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAnnouncement(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAnnouncement(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -820,7 +820,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -877,7 +877,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChildrenChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectChildrenChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -928,7 +928,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   
       Deprecated: Use the #AtkObject::state-change signal instead.
   */
-  ulong connectFocusEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
@@ -975,7 +975,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectNotification(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNotification(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -1036,7 +1036,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPropertyChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectPropertyChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == atk.property_values.PropertyValues)))
@@ -1084,7 +1084,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectStateChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
+  gulong connectStateChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -1130,7 +1130,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectVisibleDataChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectVisibleDataChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectWrap)))

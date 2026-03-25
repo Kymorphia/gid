@@ -547,7 +547,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectInterfaceProxyPropertiesChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInterfaceProxyPropertiesChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_object_proxy.DBusObjectProxy)))
@@ -617,7 +617,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectInterfaceProxySignal(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInterfaceProxySignal(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.dbus_object_proxy.DBusObjectProxy)))

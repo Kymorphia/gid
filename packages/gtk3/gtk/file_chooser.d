@@ -1098,7 +1098,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectConfirmOverwrite(T)(T callback, Flag!"After" after = No.After);
+  gulong connectConfirmOverwrite(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `CurrentFolderChanged` signal.
@@ -1127,7 +1127,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCurrentFolderChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectCurrentFolderChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `FileActivated` signal.
@@ -1154,7 +1154,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFileActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectFileActivated(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `SelectionChanged` signal.
@@ -1184,7 +1184,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `UpdatePreview` signal.
@@ -1222,7 +1222,7 @@ interface FileChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After);
+  gulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface FileChooserGidBuilderImpl(T)

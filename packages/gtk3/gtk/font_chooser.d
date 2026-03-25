@@ -330,7 +330,7 @@ interface FontChooser
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFontActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface FontChooserGidBuilderImpl(T)

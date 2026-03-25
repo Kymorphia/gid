@@ -45,7 +45,7 @@ interface StyleProvider
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectGtkPrivateChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectGtkPrivateChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface StyleProviderGidBuilderImpl(T)

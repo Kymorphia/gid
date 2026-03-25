@@ -2999,7 +2999,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectBell(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBell(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3043,7 +3043,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCharSizeChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCharSizeChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -3091,7 +3091,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChildExited(T)(T callback, Flag!"After" after = No.After)
+  gulong connectChildExited(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -3135,7 +3135,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCommit(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCommit(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -3178,7 +3178,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectContentsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectContentsChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3215,7 +3215,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3252,7 +3252,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCurrentDirectoryUriChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCurrentDirectoryUriChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3289,7 +3289,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCurrentFileUriChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCurrentFileUriChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3327,7 +3327,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCursorMoved(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCursorMoved(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3364,7 +3364,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDecreaseFontSize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDecreaseFontSize(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3401,7 +3401,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDeiconifyWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDeiconifyWindow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3440,7 +3440,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEncodingChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEncodingChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3479,7 +3479,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEof(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEof(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3526,7 +3526,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectHyperlinkHoverUriChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectHyperlinkHoverUriChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -3573,7 +3573,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  ulong connectIconTitleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIconTitleChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3610,7 +3610,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectIconifyWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIconifyWindow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3647,7 +3647,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectIncreaseFontSize(T)(T callback, Flag!"After" after = No.After)
+  gulong connectIncreaseFontSize(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3684,7 +3684,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLowerWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLowerWindow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3721,7 +3721,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMaximizeWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMaximizeWindow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3762,7 +3762,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMoveWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveWindow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -3812,7 +3812,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectNotificationReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNotificationReceived(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -3857,7 +3857,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3894,7 +3894,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRaiseWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRaiseWindow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3931,7 +3931,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRefreshWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRefreshWindow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -3972,7 +3972,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectResizeWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResizeWindow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
@@ -4017,7 +4017,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRestoreWindow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRestoreWindow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -4054,7 +4054,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -4104,7 +4104,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSetupContextMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSetupContextMenu(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == vte.event_context.EventContext)))
@@ -4146,7 +4146,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShellPrecmd(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShellPrecmd(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -4184,7 +4184,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShellPreexec(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShellPreexec(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -4223,7 +4223,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  ulong connectTextDeleted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextDeleted(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -4262,7 +4262,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  ulong connectTextInserted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextInserted(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -4301,7 +4301,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  ulong connectTextModified(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextModified(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))
@@ -4342,7 +4342,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   
       Deprecated: This signal is never emitted.
   */
-  ulong connectTextScrolled(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTextScrolled(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
@@ -4383,7 +4383,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectWindowTitleChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWindowTitleChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : vte.terminal.Terminal)))

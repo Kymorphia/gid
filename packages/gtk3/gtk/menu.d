@@ -1018,7 +1018,7 @@ class Menu : gtk.menu_shell.MenuShell
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMoveScroll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMoveScroll(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
@@ -1090,7 +1090,7 @@ class Menu : gtk.menu_shell.MenuShell
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPoppedUp(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPoppedUp(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))

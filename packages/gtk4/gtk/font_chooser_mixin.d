@@ -556,7 +556,7 @@ template FontChooserT()
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  ulong connectFontActivated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))

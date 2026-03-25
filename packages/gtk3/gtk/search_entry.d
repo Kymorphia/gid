@@ -141,7 +141,7 @@ class SearchEntry : gtk.entry.Entry
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectNextMatch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNextMatch(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
@@ -185,7 +185,7 @@ class SearchEntry : gtk.entry.Entry
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPreviousMatch(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
@@ -223,7 +223,7 @@ class SearchEntry : gtk.entry.Entry
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSearchChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))
@@ -266,7 +266,7 @@ class SearchEntry : gtk.entry.Entry
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectStopSearch(T)(T callback, Flag!"After" after = No.After)
+  gulong connectStopSearch(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.search_entry.SearchEntry)))

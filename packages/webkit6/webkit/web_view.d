@@ -1976,7 +1976,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAuthenticate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAuthenticate(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.authentication_request.AuthenticationRequest)))
@@ -2023,7 +2023,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectClose(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
@@ -2098,7 +2098,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectContextMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectContextMenu(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.context_menu.ContextMenu)))
@@ -2146,7 +2146,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectContextMenuDismissed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectContextMenuDismissed(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
@@ -2201,7 +2201,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectCreate(T)(T callback, Flag!"After" after = No.After)
+  gulong connectCreate(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T : gtk.widget.Widget)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.navigation_action.NavigationAction)))
@@ -2290,7 +2290,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectDecidePolicy(T)(T callback, Flag!"After" after = No.After)
+  gulong connectDecidePolicy(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.policy_decision.PolicyDecision)))
@@ -2346,7 +2346,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEnterFullscreen(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEnterFullscreen(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
@@ -2389,7 +2389,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectInsecureContentDetected(T)(T callback, Flag!"After" after = No.After)
+  gulong connectInsecureContentDetected(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.InsecureContentEvent)))
@@ -2435,7 +2435,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLeaveFullscreen(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLeaveFullscreen(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
@@ -2519,7 +2519,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLoadChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLoadChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.LoadEvent)))
@@ -2577,7 +2577,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLoadFailed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLoadFailed(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.LoadEvent)))
@@ -2644,7 +2644,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLoadFailedWithTlsErrors(T)(T callback, Flag!"After" after = No.After)
+  gulong connectLoadFailedWithTlsErrors(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
@@ -2706,7 +2706,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMouseTargetChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMouseTargetChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.hit_test_result.HitTestResult)))
@@ -2800,7 +2800,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPermissionRequest(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPermissionRequest(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.permission_request.PermissionRequest)))
@@ -2855,7 +2855,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPrint(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPrint(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.print_operation.PrintOperation)))
@@ -2907,7 +2907,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectQueryPermissionState(T)(T callback, Flag!"After" after = No.After)
+  gulong connectQueryPermissionState(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.permission_state_query.PermissionStateQuery)))
@@ -2955,7 +2955,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectReadyToShow(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReadyToShow(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
@@ -2999,7 +2999,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectResourceLoadStarted(T)(T callback, Flag!"After" after = No.After)
+  gulong connectResourceLoadStarted(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_resource.WebResource)))
@@ -3050,7 +3050,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRunAsModal(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRunAsModal(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.web_view.WebView)))
@@ -3103,7 +3103,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRunColorChooser(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRunColorChooser(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.color_chooser_request.ColorChooserRequest)))
@@ -3160,7 +3160,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRunFileChooser(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRunFileChooser(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.file_chooser_request.FileChooserRequest)))
@@ -3233,7 +3233,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectScriptDialog(T)(T callback, Flag!"After" after = No.After)
+  gulong connectScriptDialog(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.script_dialog.ScriptDialog)))
@@ -3284,7 +3284,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowNotification(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowNotification(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.notification.Notification)))
@@ -3340,7 +3340,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectShowOptionMenu(T)(T callback, Flag!"After" after = No.After)
+  gulong connectShowOptionMenu(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.option_menu.OptionMenu)))
@@ -3399,7 +3399,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSubmitForm(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSubmitForm(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.form_submission_request.FormSubmissionRequest)))
@@ -3450,7 +3450,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUserMessageReceived(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.user_message.UserMessage)))
@@ -3496,7 +3496,7 @@ class WebView : webkit.web_view_base.WebViewBase
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectWebProcessTerminated(T)(T callback, Flag!"After" after = No.After)
+  gulong connectWebProcessTerminated(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == webkit.types.WebProcessTerminationReason)))

@@ -80,7 +80,7 @@ interface Hypertext
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectLinkSelected(T)(T callback, Flag!"After" after = No.After);
+  gulong connectLinkSelected(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface HypertextGidBuilderImpl(T)

@@ -209,7 +209,7 @@ interface ListModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface ListModelGidBuilderImpl(T)

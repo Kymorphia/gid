@@ -295,7 +295,7 @@ interface Volume
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `Removed` signal.
@@ -314,7 +314,7 @@ interface Volume
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRemoved(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface VolumeGidBuilderImpl(T)

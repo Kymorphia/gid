@@ -128,7 +128,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectBind(T)(T callback, Flag!"After" after = No.After)
+  gulong connectBind(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
@@ -176,7 +176,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectSetup(T)(T callback, Flag!"After" after = No.After)
+  gulong connectSetup(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
@@ -224,7 +224,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTeardown(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTeardown(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))
@@ -272,7 +272,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
+  gulong connectUnbind(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gobject.object.ObjectWrap)))

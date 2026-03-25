@@ -512,7 +512,7 @@ class RTPBasePayload : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAddExtension(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAddExtension(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstrtp.rtpheader_extension.RTPHeaderExtension)))
@@ -553,7 +553,7 @@ class RTPBasePayload : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectClearExtensions(T)(T callback, Flag!"After" after = No.After)
+  gulong connectClearExtensions(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstrtp.rtpbase_payload.RTPBasePayload)))
@@ -596,7 +596,7 @@ class RTPBasePayload : gst.element.Element
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRequestExtension(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRequestExtension(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T : gstrtp.rtpheader_extension.RTPHeaderExtension)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))

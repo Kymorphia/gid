@@ -120,7 +120,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMountpointsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMountpointsChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.unix_mount_monitor.UnixMountMonitor)))
@@ -157,7 +157,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectMountsChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectMountsChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.unix_mount_monitor.UnixMountMonitor)))

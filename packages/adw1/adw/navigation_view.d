@@ -660,7 +660,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectGetNextPage(T)(T callback, Flag!"After" after = No.After)
+  gulong connectGetNextPage(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T : adw.navigation_page.NavigationPage)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_view.NavigationView)))
@@ -707,7 +707,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPopped(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPopped(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
@@ -750,7 +750,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPushed(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPushed(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_view.NavigationView)))
@@ -789,7 +789,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectReplaced(T)(T callback, Flag!"After" after = No.After)
+  gulong connectReplaced(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_view.NavigationView)))

@@ -87,7 +87,7 @@ interface PrintOperationPreview
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After);
+  gulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `Ready` signal.
@@ -109,7 +109,7 @@ interface PrintOperationPreview
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectReady(T)(T callback, Flag!"After" after = No.After);
+  gulong connectReady(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface PrintOperationPreviewGidBuilderImpl(T)

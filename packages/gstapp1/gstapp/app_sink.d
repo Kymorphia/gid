@@ -575,7 +575,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectEos(T)(T callback, Flag!"After" after = No.After)
+  gulong connectEos(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
@@ -623,7 +623,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectNewPreroll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNewPreroll(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
@@ -673,7 +673,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectNewSample(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNewSample(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.types.FlowReturn)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
@@ -729,7 +729,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectNewSerializedEvent(T)(T callback, Flag!"After" after = No.After)
+  gulong connectNewSerializedEvent(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
@@ -774,7 +774,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectProposeAllocation(T)(T callback, Flag!"After" after = No.After)
+  gulong connectProposeAllocation(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == bool)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.query.Query)))
@@ -835,7 +835,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPullPreroll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPullPreroll(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
@@ -888,7 +888,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectPullSample(T)(T callback, Flag!"After" after = No.After)
+  gulong connectPullSample(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstapp.app_sink.AppSink)))
@@ -951,7 +951,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTryPullObject(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTryPullObject(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.mini_object.MiniObject)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
@@ -1016,7 +1016,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTryPullPreroll(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTryPullPreroll(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))
@@ -1076,7 +1076,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectTryPullSample(T)(T callback, Flag!"After" after = No.After)
+  gulong connectTryPullSample(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == gst.sample.Sample)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == ulong)))

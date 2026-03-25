@@ -545,7 +545,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAccessChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectAccessChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `Changed` signal.
@@ -562,7 +562,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"After" after = No.After);
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `Reset` signal.
@@ -580,7 +580,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectReset(T)(T callback, Flag!"After" after = No.After);
+  gulong connectReset(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `RowInserted` signal.
@@ -599,7 +599,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowInserted(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `RowRemoved` signal.
@@ -618,7 +618,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRowRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowRemoved(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `RowUpdated` signal.
@@ -637,7 +637,7 @@ interface DataModel
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRowUpdated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectRowUpdated(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface DataModelGidBuilderImpl(T)

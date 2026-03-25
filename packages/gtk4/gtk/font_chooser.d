@@ -420,7 +420,7 @@ interface FontChooser
   
       Deprecated: Use [gtk.font_dialog.FontDialog] and [gtk.font_dialog_button.FontDialogButton] instead
   */
-  ulong connectFontActivated(T)(T callback, Flag!"After" after = No.After);
+  gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface FontChooserGidBuilderImpl(T)

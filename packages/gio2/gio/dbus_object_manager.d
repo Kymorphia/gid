@@ -90,7 +90,7 @@ interface DBusObjectManager
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `InterfaceRemoved` signal.
@@ -114,7 +114,7 @@ interface DBusObjectManager
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `ObjectAdded` signal.
@@ -133,7 +133,7 @@ interface DBusObjectManager
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectObjectAdded(T)(T callback, Flag!"After" after = No.After);
+  gulong connectObjectAdded(T)(T callback, Flag!"After" after = No.After);
 
   /**
       Connect to `ObjectRemoved` signal.
@@ -152,7 +152,7 @@ interface DBusObjectManager
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectObjectRemoved(T)(T callback, Flag!"After" after = No.After);
+  gulong connectObjectRemoved(T)(T callback, Flag!"After" after = No.After);
 }
 
 interface DBusObjectManagerGidBuilderImpl(T)

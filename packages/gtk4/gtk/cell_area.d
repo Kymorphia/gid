@@ -1141,7 +1141,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectAddEditable(T)(T callback, Flag!"After" after = No.After)
+  gulong connectAddEditable(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.cell_renderer.CellRenderer)))
@@ -1202,7 +1202,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectApplyAttributes(T)(T callback, Flag!"After" after = No.After)
+  gulong connectApplyAttributes(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_model.TreeModel)))
@@ -1266,7 +1266,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectFocusChanged(T)(T callback, Flag!"After" after = No.After)
+  gulong connectFocusChanged(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.cell_renderer.CellRenderer)))
@@ -1316,7 +1316,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
         after = Yes.After to execute callback after default handler, No.After to execute before (default)
       Returns: Signal ID
   */
-  ulong connectRemoveEditable(T)(T callback, Flag!"After" after = No.After)
+  gulong connectRemoveEditable(T)(T callback, Flag!"After" after = No.After)
   if (isCallable!T
     && is(ReturnType!T == void)
   && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.cell_renderer.CellRenderer)))
