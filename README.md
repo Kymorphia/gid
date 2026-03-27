@@ -274,7 +274,7 @@ auto box = Box.builder.orientation(Orientation.Vertical).spacing(4).margin(10).c
 The *cssName* property in this case is a construct-only property.
 
 **NOTE:** The Gtk4 Widget has a `margin` convenience property which provides a way to assign the same value to marginTop, marginBottom, marginStart, and marginEnd.
-This property exists in Gtk3, but was removed in the Gtk4 C API.  giD provides it for convenience using either the usual constructor or builder.
+This property exists in Gtk3, but was removed in the Gtk4 C API.  giD provides it for convenience using either the Widget property or builder methods.
 
 
 ### Signals
@@ -312,9 +312,9 @@ The return value from the connect template is a signal handle,
 which can be passed to functions in GObject.Global such as: [signalHandlerBlock](https://www.kymorphia.com/gid/gobject.global.signalHandlerBlock.html),
 [signalHandlerDisconnect](https://www.kymorphia.com/gid/gobject.global.signalHandlerDisconnect.html), etc.
 
-**NOTE:** The return value from signal connection templates is of type `gulong`.
-This type is an alias to `ulong` (64 bit) on Linux, but aliases to `uint` (32 bit) on Windows.
-To maintain portability, it is recommended that signal handle variables be declared as type `gulong`, otherwise compile errors will likely occur on Windows.
+**NOTE:** The return value from signal connection templates is of type `gulong` from the `gid.basictypes` module.
+This type is an alias to `ulong` (64 bit) on Linux and MacOS, but aliases to `uint` (32 bit) on Windows.
+To maintain portability, it is recommended that signal handle variables be declared as type `gulong` (or auto assignment), otherwise compile errors will likely occur on Windows.
 
 
 ## Interfaces
