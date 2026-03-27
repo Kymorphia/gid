@@ -36,7 +36,21 @@ We welcome your comments, questions, and feature requests.
 
 The use of [Github Discussions](https://github.com/Kymorphia/gid/discussions/) is encouraged for topics which others can benefit from.
 
-There is also a [giD Discord Channel](https://discord.gg/SxJQkrcBs2) if you are looking to chat about all things giD related.
+There is also a [giD Discord Server](https://discord.gg/SxJQkrcBs2) if you are looking to chat about all things giD related.
+
+
+## giD Applications
+
+The following is a growing list of applications which use giD. Have an application you'd like featured here? Open a pull request on this README and feel free to announce it on the [giD Discord Server](https://discord.gg/SxJQkrcBs2).
+
+* [appimage-installer](https://github.com/Hezkore/appimage-installer) - Desktop application for Linux that installs AppImage files and gives them proper desktop integration
+* [Daphne Music Player](https://codeberg.org/Kymorphia/daphne-music) - Music player and library manager (Gt4k, GStreamer)
+* [Dejan's Terminal](https://codeberg.org/dejan/dterm) - Minimalistic terminal (Gtk4, Vte3)
+* [D IDE](https://codeberg.org/dejan/dide) - Simple integrated development environment (IDE) for D programming (Gtk4, Vte3, Gtksource5)
+* [gid-examples](https://codeberg.org/dejan/gid-examples) - Set of tiny D projects to demonstrate giD subpackages (Gtk4, Vte3, GtkSource5, etc)
+* [giD Gtk4 Examples](https://github.com/Kymorphia/gid-gtk4-examples/) - giD Gtk4 examples ported from Python
+* [Hideout](https://github.com/trikko/hideout) - Minimal and secure desktop application for file encryption and decryption
+* [Veb Browser](https://codeberg.org/ddn/veb) - Minimal, yet very usable web browser (Gtk4, libadwaita, and WebKitGTK6)
 
 
 ## Quickstart
@@ -231,9 +245,36 @@ C `GObject` types are wrapped as [gobject.object.ObjectWrap](https://www.kymorph
 This rename was done instead of `Object` so as not to conflict with D's native Object type.
 
 
+### Fluent Builder Pattern
+
+In addition to the usual `new Widget` style object construction, giD also supports the popular fluent builder pattern (also called [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface)).
+This allows for properties to be assigned in a chain prior to actual object construction.
+While some may find this convenient it also has the additional capability of assigning construct-only properties.
+This is currently the only way to set such properties using the giD API, without having to resort to the C API for object construction.
+
+**Fluent builder example**
+
+```D
+auto label = Label.builder.label("Some text").xalign(0).build;
+```
+
+
 ### Properties
 
 GObject properties are provided as D `@property` getter and setter methods using **camelCase** names converted from the **kebab-case** GIR property names.
+
+**NOTE:** GObject construct-only properties can only be specified using the fluent builder syntax.
+This is because such properties cannot be set after the object has been created.
+
+**Construct-only property example**
+
+```D
+auto box = Box.builder.orientation(Orientation.Vertical).spacing(4).margin(10).cssName("container").build;
+```
+The *cssName* property in this case is a construct-only property.
+
+**NOTE:** The Gtk4 Widget has a `margin` convenience property which provides a way to assign the same value to marginTop, marginBottom, marginStart, and marginEnd.
+This property exists in Gtk3, but was removed in the Gtk4 C API.  giD provides it for convenience using either the usual constructor or builder.
 
 
 ### Signals
@@ -270,6 +311,10 @@ if (isCallable!T &&
 The return value from the connect template is a signal handle,
 which can be passed to functions in GObject.Global such as: [signalHandlerBlock](https://www.kymorphia.com/gid/gobject.global.signalHandlerBlock.html),
 [signalHandlerDisconnect](https://www.kymorphia.com/gid/gobject.global.signalHandlerDisconnect.html), etc.
+
+**NOTE:** The return value from signal connection templates is of type `gulong`.
+This type is an alias to `ulong` (64 bit) on Linux, but aliases to `uint` (32 bit) on Windows.
+To maintain portability, it is recommended that signal handle variables be declared as type `gulong`, otherwise compile errors will likely occur on Windows.
 
 
 ## Interfaces
