@@ -45,8 +45,8 @@ class Statement : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.statement.Statement]
-  Returns: New builder object
+      Get builder for [gda.statement.Statement]
+      Returns: New builder object
   */
   static StatementGidBuilder builder()
   {
@@ -351,6 +351,7 @@ class Statement : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.statement.Statement]
 class StatementGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -364,6 +365,10 @@ class StatementGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.statement.Statement]
 final class StatementGidBuilder : StatementGidBuilderImpl!StatementGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Statement build()
   {
     return new Statement(cast(void*)createGObject(Statement._getGType), Yes.Take);

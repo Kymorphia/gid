@@ -85,8 +85,8 @@ class PadController : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.pad_controller.PadController]
-  Returns: New builder object
+      Get builder for [gtk.pad_controller.PadController]
+      Returns: New builder object
   */
   static PadControllerGidBuilder builder()
   {
@@ -155,6 +155,7 @@ class PadController : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.pad_controller.PadController]
 class PadControllerGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 
@@ -174,6 +175,10 @@ class PadControllerGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBu
 /// Fluent builder for [gtk.pad_controller.PadController]
 final class PadControllerGidBuilder : PadControllerGidBuilderImpl!PadControllerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PadController build()
   {
     return new PadController(cast(void*)createGObject(PadController._getGType), Yes.Take);

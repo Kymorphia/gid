@@ -40,8 +40,8 @@ class FilterGZip : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_gzip.FilterGZip]
-  Returns: New builder object
+      Get builder for [gmime.filter_gzip.FilterGZip]
+      Returns: New builder object
   */
   static FilterGZipGidBuilder builder()
   {
@@ -112,6 +112,7 @@ class FilterGZip : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_gzip.FilterGZip]
 class FilterGZipGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -119,6 +120,10 @@ class FilterGZipGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_gzip.FilterGZip]
 final class FilterGZipGidBuilder : FilterGZipGidBuilderImpl!FilterGZipGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterGZip build()
   {
     return new FilterGZip(cast(void*)createGObject(FilterGZip._getGType), Yes.Take);

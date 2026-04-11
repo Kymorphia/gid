@@ -50,8 +50,8 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
   }
 
   /**
-  Get builder for [gtk.cell_renderer_spinner.CellRendererSpinner]
-  Returns: New builder object
+      Get builder for [gtk.cell_renderer_spinner.CellRendererSpinner]
+      Returns: New builder object
   */
   static CellRendererSpinnerGidBuilder builder()
   {
@@ -129,6 +129,7 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_renderer_spinner.CellRendererSpinner]
 class CellRendererSpinnerGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T
 {
 
@@ -168,6 +169,10 @@ class CellRendererSpinnerGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBu
 /// Fluent builder for [gtk.cell_renderer_spinner.CellRendererSpinner]
 final class CellRendererSpinnerGidBuilder : CellRendererSpinnerGidBuilderImpl!CellRendererSpinnerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellRendererSpinner build()
   {
     return new CellRendererSpinner(cast(void*)createGObject(CellRendererSpinner._getGType), No.Take);

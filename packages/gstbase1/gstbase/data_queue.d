@@ -42,8 +42,8 @@ class DataQueue : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstbase.data_queue.DataQueue]
-  Returns: New builder object
+      Get builder for [gstbase.data_queue.DataQueue]
+      Returns: New builder object
   */
   static DataQueueGidBuilder builder()
   {
@@ -69,6 +69,7 @@ class DataQueue : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstbase.data_queue.DataQueue]
 class DataQueueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -76,6 +77,10 @@ class DataQueueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstbase.data_queue.DataQueue]
 final class DataQueueGidBuilder : DataQueueGidBuilderImpl!DataQueueGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataQueue build()
   {
     return new DataQueue(cast(void*)createGObject(DataQueue._getGType), Yes.Take);

@@ -38,8 +38,8 @@ class BroadwayRenderer : gsk.renderer.Renderer
   }
 
   /**
-  Get builder for [gsk.broadway_renderer.BroadwayRenderer]
-  Returns: New builder object
+      Get builder for [gsk.broadway_renderer.BroadwayRenderer]
+      Returns: New builder object
   */
   static BroadwayRendererGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class BroadwayRenderer : gsk.renderer.Renderer
   }
 }
 
+/// Fluent builder implementation template for [gsk.broadway_renderer.BroadwayRenderer]
 class BroadwayRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class BroadwayRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 /// Fluent builder for [gsk.broadway_renderer.BroadwayRenderer]
 final class BroadwayRendererGidBuilder : BroadwayRendererGidBuilderImpl!BroadwayRendererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BroadwayRenderer build()
   {
     return new BroadwayRenderer(cast(void*)createGObject(BroadwayRenderer._getGType), Yes.Take);

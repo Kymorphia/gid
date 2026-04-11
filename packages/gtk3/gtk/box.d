@@ -94,8 +94,8 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.box.Box]
-  Returns: New builder object
+      Get builder for [gtk.box.Box]
+      Returns: New builder object
   */
   static BoxGidBuilder builder()
   {
@@ -372,6 +372,7 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.box.Box]
 class BoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -399,6 +400,10 @@ class BoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orient
 /// Fluent builder for [gtk.box.Box]
 final class BoxGidBuilder : BoxGidBuilderImpl!BoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Box build()
   {
     return new Box(cast(void*)createGObject(Box._getGType), No.Take);

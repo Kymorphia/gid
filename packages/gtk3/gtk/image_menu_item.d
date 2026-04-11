@@ -111,8 +111,8 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   }
 
   /**
-  Get builder for [gtk.image_menu_item.ImageMenuItem]
-  Returns: New builder object
+      Get builder for [gtk.image_menu_item.ImageMenuItem]
+      Returns: New builder object
   */
   static ImageMenuItemGidBuilder builder()
   {
@@ -388,6 +388,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   }
 }
 
+/// Fluent builder implementation template for [gtk.image_menu_item.ImageMenuItem]
 class ImageMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
 {
 
@@ -454,6 +455,10 @@ class ImageMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
 /// Fluent builder for [gtk.image_menu_item.ImageMenuItem]
 final class ImageMenuItemGidBuilder : ImageMenuItemGidBuilderImpl!ImageMenuItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ImageMenuItem build()
   {
     return new ImageMenuItem(cast(void*)createGObject(ImageMenuItem._getGType), No.Take);

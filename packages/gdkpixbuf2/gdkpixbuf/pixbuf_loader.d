@@ -92,8 +92,8 @@ class PixbufLoader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdkpixbuf.pixbuf_loader.PixbufLoader]
-  Returns: New builder object
+      Get builder for [gdkpixbuf.pixbuf_loader.PixbufLoader]
+      Returns: New builder object
   */
   static PixbufLoaderGidBuilder builder()
   {
@@ -537,6 +537,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdkpixbuf.pixbuf_loader.PixbufLoader]
 class PixbufLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -544,6 +545,10 @@ class PixbufLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdkpixbuf.pixbuf_loader.PixbufLoader]
 final class PixbufLoaderGidBuilder : PixbufLoaderGidBuilderImpl!PixbufLoaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PixbufLoader build()
   {
     return new PixbufLoader(cast(void*)createGObject(PixbufLoader._getGType), Yes.Take);

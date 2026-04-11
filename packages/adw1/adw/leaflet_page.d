@@ -43,8 +43,8 @@ class LeafletPage : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [adw.leaflet_page.LeafletPage]
-  Returns: New builder object
+      Get builder for [adw.leaflet_page.LeafletPage]
+      Returns: New builder object
   */
   static LeafletPageGidBuilder builder()
   {
@@ -194,6 +194,7 @@ class LeafletPage : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [adw.leaflet_page.LeafletPage]
 class LeafletPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -246,6 +247,10 @@ class LeafletPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [adw.leaflet_page.LeafletPage]
 final class LeafletPageGidBuilder : LeafletPageGidBuilderImpl!LeafletPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LeafletPage build()
   {
     return new LeafletPage(cast(void*)createGObject(LeafletPage._getGType), No.Take);

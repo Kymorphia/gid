@@ -41,8 +41,8 @@ class RunEndEncodedArray : arrow.array.Array
   }
 
   /**
-  Get builder for [arrow.run_end_encoded_array.RunEndEncodedArray]
-  Returns: New builder object
+      Get builder for [arrow.run_end_encoded_array.RunEndEncodedArray]
+      Returns: New builder object
   */
   static RunEndEncodedArrayGidBuilder builder()
   {
@@ -140,6 +140,7 @@ class RunEndEncodedArray : arrow.array.Array
   }
 }
 
+/// Fluent builder implementation template for [arrow.run_end_encoded_array.RunEndEncodedArray]
 class RunEndEncodedArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 
@@ -159,6 +160,10 @@ class RunEndEncodedArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 /// Fluent builder for [arrow.run_end_encoded_array.RunEndEncodedArray]
 final class RunEndEncodedArrayGidBuilder : RunEndEncodedArrayGidBuilderImpl!RunEndEncodedArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RunEndEncodedArray build()
   {
     return new RunEndEncodedArray(cast(void*)createGObject(RunEndEncodedArray._getGType), Yes.Take);

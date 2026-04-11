@@ -52,8 +52,8 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   }
 
   /**
-  Get builder for [gio.network_address.NetworkAddress]
-  Returns: New builder object
+      Get builder for [gio.network_address.NetworkAddress]
+      Returns: New builder object
   */
   static NetworkAddressGidBuilder builder()
   {
@@ -244,6 +244,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   }
 }
 
+/// Fluent builder implementation template for [gio.network_address.NetworkAddress]
 class NetworkAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.socket_connectable.SocketConnectableGidBuilderImpl!T
 {
 
@@ -286,6 +287,10 @@ class NetworkAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.network_address.NetworkAddress]
 final class NetworkAddressGidBuilder : NetworkAddressGidBuilderImpl!NetworkAddressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NetworkAddress build()
   {
     return new NetworkAddress(cast(void*)createGObject(NetworkAddress._getGType), Yes.Take);

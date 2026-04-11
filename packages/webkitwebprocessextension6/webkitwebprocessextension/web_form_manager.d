@@ -43,8 +43,8 @@ class WebFormManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkitwebprocessextension.web_form_manager.WebFormManager]
-  Returns: New builder object
+      Get builder for [webkitwebprocessextension.web_form_manager.WebFormManager]
+      Returns: New builder object
   */
   static WebFormManagerGidBuilder builder()
   {
@@ -282,6 +282,7 @@ class WebFormManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkitwebprocessextension.web_form_manager.WebFormManager]
 class WebFormManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -289,6 +290,10 @@ class WebFormManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [webkitwebprocessextension.web_form_manager.WebFormManager]
 final class WebFormManagerGidBuilder : WebFormManagerGidBuilderImpl!WebFormManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebFormManager build()
   {
     return new WebFormManager(cast(void*)createGObject(WebFormManager._getGType), No.Take);

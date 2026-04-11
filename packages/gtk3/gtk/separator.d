@@ -54,8 +54,8 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.separator.Separator]
-  Returns: New builder object
+      Get builder for [gtk.separator.Separator]
+      Returns: New builder object
   */
   static SeparatorGidBuilder builder()
   {
@@ -79,6 +79,7 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.separator.Separator]
 class SeparatorGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -88,6 +89,10 @@ class SeparatorGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
 /// Fluent builder for [gtk.separator.Separator]
 final class SeparatorGidBuilder : SeparatorGidBuilderImpl!SeparatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Separator build()
   {
     return new Separator(cast(void*)createGObject(Separator._getGType), No.Take);

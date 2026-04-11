@@ -42,8 +42,8 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.record_batch_builder.RecordBatchBuilder]
-  Returns: New builder object
+      Get builder for [arrow.record_batch_builder.RecordBatchBuilder]
+      Returns: New builder object
   */
   static RecordBatchBuilderGidBuilder builder()
   {
@@ -131,6 +131,7 @@ class RecordBatchBuilder : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.record_batch_builder.RecordBatchBuilder]
 class RecordBatchBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -144,6 +145,10 @@ class RecordBatchBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [arrow.record_batch_builder.RecordBatchBuilder]
 final class RecordBatchBuilderGidBuilder : RecordBatchBuilderGidBuilderImpl!RecordBatchBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecordBatchBuilder build()
   {
     return new RecordBatchBuilder(cast(void*)createGObject(RecordBatchBuilder._getGType), Yes.Take);

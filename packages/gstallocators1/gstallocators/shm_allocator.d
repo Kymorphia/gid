@@ -50,8 +50,8 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
   }
 
   /**
-  Get builder for [gstallocators.shm_allocator.ShmAllocator]
-  Returns: New builder object
+      Get builder for [gstallocators.shm_allocator.ShmAllocator]
+      Returns: New builder object
   */
   static ShmAllocatorGidBuilder builder()
   {
@@ -82,6 +82,7 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
   }
 }
 
+/// Fluent builder implementation template for [gstallocators.shm_allocator.ShmAllocator]
 class ShmAllocatorGidBuilderImpl(T) : gstallocators.fd_allocator.FdAllocatorGidBuilderImpl!T
 {
 }
@@ -89,6 +90,10 @@ class ShmAllocatorGidBuilderImpl(T) : gstallocators.fd_allocator.FdAllocatorGidB
 /// Fluent builder for [gstallocators.shm_allocator.ShmAllocator]
 final class ShmAllocatorGidBuilder : ShmAllocatorGidBuilderImpl!ShmAllocatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ShmAllocator build()
   {
     return new ShmAllocator(cast(void*)createGObject(ShmAllocator._getGType), No.Take);

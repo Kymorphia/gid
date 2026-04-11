@@ -42,8 +42,8 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
   }
 
   /**
-  Get builder for [gtk.plug_accessible.PlugAccessible]
-  Returns: New builder object
+      Get builder for [gtk.plug_accessible.PlugAccessible]
+      Returns: New builder object
   */
   static PlugAccessibleGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.plug_accessible.PlugAccessible]
 class PlugAccessibleGidBuilderImpl(T) : gtk.window_accessible.WindowAccessibleGidBuilderImpl!T
 {
 
@@ -68,6 +69,10 @@ class PlugAccessibleGidBuilderImpl(T) : gtk.window_accessible.WindowAccessibleGi
 /// Fluent builder for [gtk.plug_accessible.PlugAccessible]
 final class PlugAccessibleGidBuilder : PlugAccessibleGidBuilderImpl!PlugAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PlugAccessible build()
   {
     return new PlugAccessible(cast(void*)createGObject(PlugAccessible._getGType), No.Take);

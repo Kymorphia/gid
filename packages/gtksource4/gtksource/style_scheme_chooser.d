@@ -53,6 +53,7 @@ interface StyleSchemeChooser
   void setStyleScheme(gtksource.style_scheme.StyleScheme scheme);
 }
 
+/// Fluent builder implementation template for [gtksource.style_scheme_chooser.StyleSchemeChooser]
 interface StyleSchemeChooserGidBuilderImpl(T)
 {
 

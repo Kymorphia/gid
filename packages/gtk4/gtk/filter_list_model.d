@@ -56,8 +56,8 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   }
 
   /**
-  Get builder for [gtk.filter_list_model.FilterListModel]
-  Returns: New builder object
+      Get builder for [gtk.filter_list_model.FilterListModel]
+      Returns: New builder object
   */
   static FilterListModelGidBuilder builder()
   {
@@ -284,6 +284,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   }
 }
 
+/// Fluent builder implementation template for [gtk.filter_list_model.FilterListModel]
 class FilterListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
 {
 
@@ -327,6 +328,10 @@ class FilterListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.filter_list_model.FilterListModel]
 final class FilterListModelGidBuilder : FilterListModelGidBuilderImpl!FilterListModelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterListModel build()
   {
     return new FilterListModel(cast(void*)createGObject(FilterListModel._getGType), Yes.Take);

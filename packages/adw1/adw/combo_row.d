@@ -98,8 +98,8 @@ class ComboRow : adw.action_row.ActionRow
   }
 
   /**
-  Get builder for [adw.combo_row.ComboRow]
-  Returns: New builder object
+      Get builder for [adw.combo_row.ComboRow]
+      Returns: New builder object
   */
   static ComboRowGidBuilder builder()
   {
@@ -515,6 +515,7 @@ class ComboRow : adw.action_row.ActionRow
   }
 }
 
+/// Fluent builder implementation template for [adw.combo_row.ComboRow]
 class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
 {
 
@@ -627,6 +628,10 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
 /// Fluent builder for [adw.combo_row.ComboRow]
 final class ComboRowGidBuilder : ComboRowGidBuilderImpl!ComboRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ComboRow build()
   {
     return new ComboRow(cast(void*)createGObject(ComboRow._getGType), No.Take);

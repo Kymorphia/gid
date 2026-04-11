@@ -46,8 +46,8 @@ class CairoContext : gdk.draw_context.DrawContext
   }
 
   /**
-  Get builder for [gdk.cairo_context.CairoContext]
-  Returns: New builder object
+      Get builder for [gdk.cairo_context.CairoContext]
+      Returns: New builder object
   */
   static CairoContextGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class CairoContext : gdk.draw_context.DrawContext
   }
 }
 
+/// Fluent builder implementation template for [gdk.cairo_context.CairoContext]
 class CairoContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl!T
 {
 }
@@ -82,6 +83,10 @@ class CairoContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl
 /// Fluent builder for [gdk.cairo_context.CairoContext]
 final class CairoContextGidBuilder : CairoContextGidBuilderImpl!CairoContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CairoContext build()
   {
     return new CairoContext(cast(void*)createGObject(CairoContext._getGType), No.Take);

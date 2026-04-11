@@ -46,8 +46,8 @@ class BinLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-  Get builder for [gtk.bin_layout.BinLayout]
-  Returns: New builder object
+      Get builder for [gtk.bin_layout.BinLayout]
+      Returns: New builder object
   */
   static BinLayoutGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class BinLayout : gtk.layout_manager.LayoutManager
   }
 }
 
+/// Fluent builder implementation template for [gtk.bin_layout.BinLayout]
 class BinLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T
 {
 }
@@ -73,6 +74,10 @@ class BinLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImp
 /// Fluent builder for [gtk.bin_layout.BinLayout]
 final class BinLayoutGidBuilder : BinLayoutGidBuilderImpl!BinLayoutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BinLayout build()
   {
     return new BinLayout(cast(void*)createGObject(BinLayout._getGType), Yes.Take);

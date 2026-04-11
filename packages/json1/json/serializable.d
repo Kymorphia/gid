@@ -168,6 +168,7 @@ interface Serializable
   void setProperty(gobject.param_spec.ParamSpec pspec, gobject.value.Value value);
 }
 
+/// Fluent builder implementation template for [json.serializable.Serializable]
 interface SerializableGidBuilderImpl(T)
 {
 }

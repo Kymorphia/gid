@@ -43,8 +43,8 @@ class WebsitePolicies : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.website_policies.WebsitePolicies]
-  Returns: New builder object
+      Get builder for [webkit.website_policies.WebsitePolicies]
+      Returns: New builder object
   */
   static WebsitePoliciesGidBuilder builder()
   {
@@ -84,6 +84,7 @@ class WebsitePolicies : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.website_policies.WebsitePolicies]
 class WebsitePoliciesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -102,6 +103,10 @@ class WebsitePoliciesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [webkit.website_policies.WebsitePolicies]
 final class WebsitePoliciesGidBuilder : WebsitePoliciesGidBuilderImpl!WebsitePoliciesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebsitePolicies build()
   {
     return new WebsitePolicies(cast(void*)createGObject(WebsitePolicies._getGType), Yes.Take);

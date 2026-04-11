@@ -1225,6 +1225,7 @@ interface FileChooser
   gulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.file_chooser.FileChooser]
 interface FileChooserGidBuilderImpl(T)
 {
 

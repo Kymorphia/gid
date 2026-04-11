@@ -690,6 +690,7 @@ interface AppInfo
   bool supportsUris();
 }
 
+/// Fluent builder implementation template for [gio.app_info.AppInfo]
 interface AppInfoGidBuilderImpl(T)
 {
 }

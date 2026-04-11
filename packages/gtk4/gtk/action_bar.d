@@ -84,8 +84,8 @@ class ActionBar : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.action_bar.ActionBar]
-  Returns: New builder object
+      Get builder for [gtk.action_bar.ActionBar]
+      Returns: New builder object
   */
   static ActionBarGidBuilder builder()
   {
@@ -208,6 +208,7 @@ class ActionBar : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.action_bar.ActionBar]
 class ActionBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -227,6 +228,10 @@ class ActionBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.action_bar.ActionBar]
 final class ActionBarGidBuilder : ActionBarGidBuilderImpl!ActionBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ActionBar build()
   {
     return new ActionBar(cast(void*)createGObject(ActionBar._getGType), No.Take);

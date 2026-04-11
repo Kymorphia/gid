@@ -46,8 +46,8 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   }
 
   /**
-  Get builder for [gtk.multi_filter.MultiFilter]
-  Returns: New builder object
+      Get builder for [gtk.multi_filter.MultiFilter]
+      Returns: New builder object
   */
   static MultiFilterGidBuilder builder()
   {
@@ -102,6 +102,7 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   }
 }
 
+/// Fluent builder implementation template for [gtk.multi_filter.MultiFilter]
 class MultiFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -112,6 +113,10 @@ class MultiFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gio.list
 /// Fluent builder for [gtk.multi_filter.MultiFilter]
 final class MultiFilterGidBuilder : MultiFilterGidBuilderImpl!MultiFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MultiFilter build()
   {
     return new MultiFilter(cast(void*)createGObject(MultiFilter._getGType), No.Take);

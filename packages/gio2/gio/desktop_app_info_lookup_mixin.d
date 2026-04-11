@@ -48,6 +48,7 @@ template DesktopAppInfoLookupT()
   }
 }
 
+/// Fluent builder implementation template for [gio.desktop_app_info_lookup.DesktopAppInfoLookup]
 template DesktopAppInfoLookupGidBuilderT()
 {
 }

@@ -38,8 +38,8 @@ class Int64Statistics : parquet.statistics.Statistics
   }
 
   /**
-  Get builder for [parquet.int64_statistics.Int64Statistics]
-  Returns: New builder object
+      Get builder for [parquet.int64_statistics.Int64Statistics]
+      Returns: New builder object
   */
   static Int64StatisticsGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class Int64Statistics : parquet.statistics.Statistics
   }
 }
 
+/// Fluent builder implementation template for [parquet.int64_statistics.Int64Statistics]
 class Int64StatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class Int64StatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilder
 /// Fluent builder for [parquet.int64_statistics.Int64Statistics]
 final class Int64StatisticsGidBuilder : Int64StatisticsGidBuilderImpl!Int64StatisticsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Int64Statistics build()
   {
     return new Int64Statistics(cast(void*)createGObject(Int64Statistics._getGType), No.Take);

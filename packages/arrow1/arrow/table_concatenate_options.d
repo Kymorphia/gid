@@ -38,8 +38,8 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.table_concatenate_options.TableConcatenateOptions]
-  Returns: New builder object
+      Get builder for [arrow.table_concatenate_options.TableConcatenateOptions]
+      Returns: New builder object
   */
   static TableConcatenateOptionsGidBuilder builder()
   {
@@ -115,6 +115,7 @@ class TableConcatenateOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.table_concatenate_options.TableConcatenateOptions]
 class TableConcatenateOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -155,6 +156,10 @@ class TableConcatenateOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBui
 /// Fluent builder for [arrow.table_concatenate_options.TableConcatenateOptions]
 final class TableConcatenateOptionsGidBuilder : TableConcatenateOptionsGidBuilderImpl!TableConcatenateOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TableConcatenateOptions build()
   {
     return new TableConcatenateOptions(cast(void*)createGObject(TableConcatenateOptions._getGType), Yes.Take);

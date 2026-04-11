@@ -41,8 +41,8 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-  Get builder for [gtk.never_trigger.NeverTrigger]
-  Returns: New builder object
+      Get builder for [gtk.never_trigger.NeverTrigger]
+      Returns: New builder object
   */
   static NeverTriggerGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 }
 
+/// Fluent builder implementation template for [gtk.never_trigger.NeverTrigger]
 class NeverTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBuilderImpl!T
 {
 }
@@ -73,6 +74,10 @@ class NeverTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBui
 /// Fluent builder for [gtk.never_trigger.NeverTrigger]
 final class NeverTriggerGidBuilder : NeverTriggerGidBuilderImpl!NeverTriggerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NeverTrigger build()
   {
     return new NeverTrigger(cast(void*)createGObject(NeverTrigger._getGType), No.Take);

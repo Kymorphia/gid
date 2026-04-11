@@ -156,8 +156,8 @@ class GLArea : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.glarea.GLArea]
-  Returns: New builder object
+      Get builder for [gtk.glarea.GLArea]
+      Returns: New builder object
   */
   static GLAreaGidBuilder builder()
   {
@@ -760,6 +760,7 @@ class GLArea : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.glarea.GLArea]
 class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -841,6 +842,10 @@ class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.glarea.GLArea]
 final class GLAreaGidBuilder : GLAreaGidBuilderImpl!GLAreaGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLArea build()
   {
     return new GLArea(cast(void*)createGObject(GLArea._getGType), No.Take);

@@ -239,6 +239,7 @@ interface SelectionModel
   gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.selection_model.SelectionModel]
 interface SelectionModelGidBuilderImpl(T)
 {
 }

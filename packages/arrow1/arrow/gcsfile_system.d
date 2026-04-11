@@ -38,8 +38,8 @@ class GCSFileSystem : arrow.file_system.FileSystem
   }
 
   /**
-  Get builder for [arrow.gcsfile_system.GCSFileSystem]
-  Returns: New builder object
+      Get builder for [arrow.gcsfile_system.GCSFileSystem]
+      Returns: New builder object
   */
   static GCSFileSystemGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class GCSFileSystem : arrow.file_system.FileSystem
   }
 }
 
+/// Fluent builder implementation template for [arrow.gcsfile_system.GCSFileSystem]
 class GCSFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class GCSFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImp
 /// Fluent builder for [arrow.gcsfile_system.GCSFileSystem]
 final class GCSFileSystemGidBuilder : GCSFileSystemGidBuilderImpl!GCSFileSystemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GCSFileSystem build()
   {
     return new GCSFileSystem(cast(void*)createGObject(GCSFileSystem._getGType), No.Take);

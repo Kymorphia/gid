@@ -70,6 +70,7 @@ interface Root
   void setFocus(gtk.widget.Widget focus = null);
 }
 
+/// Fluent builder implementation template for [gtk.root.Root]
 interface RootGidBuilderImpl(T)
 {
 }

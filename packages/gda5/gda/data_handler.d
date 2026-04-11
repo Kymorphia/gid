@@ -130,6 +130,7 @@ interface DataHandler
   gobject.value.Value getValueFromStr(string str, gobject.types.GType type);
 }
 
+/// Fluent builder implementation template for [gda.data_handler.DataHandler]
 interface DataHandlerGidBuilderImpl(T)
 {
 }

@@ -38,8 +38,8 @@ class ClientOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.client_options.ClientOptions]
-  Returns: New builder object
+      Get builder for [arrowflight.client_options.ClientOptions]
+      Returns: New builder object
   */
   static ClientOptionsGidBuilder builder()
   {
@@ -181,6 +181,7 @@ class ClientOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.client_options.ClientOptions]
 class ClientOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -260,6 +261,10 @@ class ClientOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.client_options.ClientOptions]
 final class ClientOptionsGidBuilder : ClientOptionsGidBuilderImpl!ClientOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ClientOptions build()
   {
     return new ClientOptions(cast(void*)createGObject(ClientOptions._getGType), Yes.Take);

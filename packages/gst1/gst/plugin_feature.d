@@ -42,8 +42,8 @@ class PluginFeature : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.plugin_feature.PluginFeature]
-  Returns: New builder object
+      Get builder for [gst.plugin_feature.PluginFeature]
+      Returns: New builder object
   */
   static PluginFeatureGidBuilder builder()
   {
@@ -202,6 +202,7 @@ class PluginFeature : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.plugin_feature.PluginFeature]
 class PluginFeatureGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -209,6 +210,10 @@ class PluginFeatureGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.plugin_feature.PluginFeature]
 final class PluginFeatureGidBuilder : PluginFeatureGidBuilderImpl!PluginFeatureGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PluginFeature build()
   {
     return new PluginFeature(cast(void*)createGObject(PluginFeature._getGType), No.Take);

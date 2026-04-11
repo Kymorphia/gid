@@ -41,8 +41,8 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-  Get builder for [gtk.keyval_trigger.KeyvalTrigger]
-  Returns: New builder object
+      Get builder for [gtk.keyval_trigger.KeyvalTrigger]
+      Returns: New builder object
   */
   static KeyvalTriggerGidBuilder builder()
   {
@@ -109,6 +109,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 }
 
+/// Fluent builder implementation template for [gtk.keyval_trigger.KeyvalTrigger]
 class KeyvalTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBuilderImpl!T
 {
 
@@ -138,6 +139,10 @@ class KeyvalTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBu
 /// Fluent builder for [gtk.keyval_trigger.KeyvalTrigger]
 final class KeyvalTriggerGidBuilder : KeyvalTriggerGidBuilderImpl!KeyvalTriggerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   KeyvalTrigger build()
   {
     return new KeyvalTrigger(cast(void*)createGObject(KeyvalTrigger._getGType), Yes.Take);

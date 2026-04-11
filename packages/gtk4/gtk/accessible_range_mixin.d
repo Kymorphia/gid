@@ -39,6 +39,7 @@ template AccessibleRangeT()
 {
 }
 
+/// Fluent builder implementation template for [gtk.accessible_range.AccessibleRange]
 template AccessibleRangeGidBuilderT()
 {
 }

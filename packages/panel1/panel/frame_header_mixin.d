@@ -112,6 +112,7 @@ template FrameHeaderT()
   }
 }
 
+/// Fluent builder implementation template for [panel.frame_header.FrameHeader]
 template FrameHeaderGidBuilderT()
 {
 

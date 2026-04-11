@@ -38,8 +38,8 @@ class MonthDayNanoIntervalDataType : arrow.interval_data_type.IntervalDataType
   }
 
   /**
-  Get builder for [arrow.month_day_nano_interval_data_type.MonthDayNanoIntervalDataType]
-  Returns: New builder object
+      Get builder for [arrow.month_day_nano_interval_data_type.MonthDayNanoIntervalDataType]
+      Returns: New builder object
   */
   static MonthDayNanoIntervalDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class MonthDayNanoIntervalDataType : arrow.interval_data_type.IntervalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.month_day_nano_interval_data_type.MonthDayNanoIntervalDataType]
 class MonthDayNanoIntervalDataTypeGidBuilderImpl(T) : arrow.interval_data_type.IntervalDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class MonthDayNanoIntervalDataTypeGidBuilderImpl(T) : arrow.interval_data_type.I
 /// Fluent builder for [arrow.month_day_nano_interval_data_type.MonthDayNanoIntervalDataType]
 final class MonthDayNanoIntervalDataTypeGidBuilder : MonthDayNanoIntervalDataTypeGidBuilderImpl!MonthDayNanoIntervalDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MonthDayNanoIntervalDataType build()
   {
     return new MonthDayNanoIntervalDataType(cast(void*)createGObject(MonthDayNanoIntervalDataType._getGType), Yes.Take);

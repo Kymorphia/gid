@@ -183,6 +183,7 @@ template PollableOutputStreamT()
   }
 }
 
+/// Fluent builder implementation template for [gio.pollable_output_stream.PollableOutputStream]
 template PollableOutputStreamGidBuilderT()
 {
 }

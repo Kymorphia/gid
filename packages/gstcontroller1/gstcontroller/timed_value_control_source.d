@@ -49,8 +49,8 @@ class TimedValueControlSource : gst.control_source.ControlSource
   }
 
   /**
-  Get builder for [gstcontroller.timed_value_control_source.TimedValueControlSource]
-  Returns: New builder object
+      Get builder for [gstcontroller.timed_value_control_source.TimedValueControlSource]
+      Returns: New builder object
   */
   static TimedValueControlSourceGidBuilder builder()
   {
@@ -286,6 +286,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   }
 }
 
+/// Fluent builder implementation template for [gstcontroller.timed_value_control_source.TimedValueControlSource]
 class TimedValueControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBuilderImpl!T
 {
 }
@@ -293,6 +294,10 @@ class TimedValueControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourc
 /// Fluent builder for [gstcontroller.timed_value_control_source.TimedValueControlSource]
 final class TimedValueControlSourceGidBuilder : TimedValueControlSourceGidBuilderImpl!TimedValueControlSourceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TimedValueControlSource build()
   {
     return new TimedValueControlSource(cast(void*)createGObject(TimedValueControlSource._getGType), No.Take);

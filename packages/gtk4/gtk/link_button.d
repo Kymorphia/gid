@@ -75,8 +75,8 @@ class LinkButton : gtk.button.Button
   }
 
   /**
-  Get builder for [gtk.link_button.LinkButton]
-  Returns: New builder object
+      Get builder for [gtk.link_button.LinkButton]
+      Returns: New builder object
   */
   static LinkButtonGidBuilder builder()
   {
@@ -262,6 +262,7 @@ class LinkButton : gtk.button.Button
   }
 }
 
+/// Fluent builder implementation template for [gtk.link_button.LinkButton]
 class LinkButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
 {
 
@@ -294,6 +295,10 @@ class LinkButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
 /// Fluent builder for [gtk.link_button.LinkButton]
 final class LinkButtonGidBuilder : LinkButtonGidBuilderImpl!LinkButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LinkButton build()
   {
     return new LinkButton(cast(void*)createGObject(LinkButton._getGType), No.Take);

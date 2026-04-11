@@ -163,8 +163,8 @@ class Toast : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [adw.toast.Toast]
-  Returns: New builder object
+      Get builder for [adw.toast.Toast]
+      Returns: New builder object
   */
   static ToastGidBuilder builder()
   {
@@ -747,6 +747,7 @@ class Toast : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [adw.toast.Toast]
 class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -879,6 +880,10 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [adw.toast.Toast]
 final class ToastGidBuilder : ToastGidBuilderImpl!ToastGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Toast build()
   {
     return new Toast(cast(void*)createGObject(Toast._getGType), Yes.Take);

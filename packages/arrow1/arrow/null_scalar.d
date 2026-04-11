@@ -38,8 +38,8 @@ class NullScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.null_scalar.NullScalar]
-  Returns: New builder object
+      Get builder for [arrow.null_scalar.NullScalar]
+      Returns: New builder object
   */
   static NullScalarGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class NullScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.null_scalar.NullScalar]
 class NullScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class NullScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.null_scalar.NullScalar]
 final class NullScalarGidBuilder : NullScalarGidBuilderImpl!NullScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NullScalar build()
   {
     return new NullScalar(cast(void*)createGObject(NullScalar._getGType), Yes.Take);

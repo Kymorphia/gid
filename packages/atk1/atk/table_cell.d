@@ -90,6 +90,7 @@ interface TableCell
   atk.object.ObjectWrap getTable();
 }
 
+/// Fluent builder implementation template for [atk.table_cell.TableCell]
 interface TableCellGidBuilderImpl(T)
 {
 }

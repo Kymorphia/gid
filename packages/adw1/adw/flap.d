@@ -111,8 +111,8 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   }
 
   /**
-  Get builder for [adw.flap.Flap]
-  Returns: New builder object
+      Get builder for [adw.flap.Flap]
+      Returns: New builder object
   */
   static FlapGidBuilder builder()
   {
@@ -1019,6 +1019,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   }
 }
 
+/// Fluent builder implementation template for [adw.flap.Flap]
 class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -1254,6 +1255,10 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
 /// Fluent builder for [adw.flap.Flap]
 final class FlapGidBuilder : FlapGidBuilderImpl!FlapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Flap build()
   {
     return new Flap(cast(void*)createGObject(Flap._getGType), No.Take);

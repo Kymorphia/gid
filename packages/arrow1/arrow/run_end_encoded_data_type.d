@@ -40,8 +40,8 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /**
-  Get builder for [arrow.run_end_encoded_data_type.RunEndEncodedDataType]
-  Returns: New builder object
+      Get builder for [arrow.run_end_encoded_data_type.RunEndEncodedDataType]
+      Returns: New builder object
   */
   static RunEndEncodedDataTypeGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.run_end_encoded_data_type.RunEndEncodedDataType]
 class RunEndEncodedDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
 {
 }
@@ -82,6 +83,10 @@ class RunEndEncodedDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.Fixed
 /// Fluent builder for [arrow.run_end_encoded_data_type.RunEndEncodedDataType]
 final class RunEndEncodedDataTypeGidBuilder : RunEndEncodedDataTypeGidBuilderImpl!RunEndEncodedDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RunEndEncodedDataType build()
   {
     return new RunEndEncodedDataType(cast(void*)createGObject(RunEndEncodedDataType._getGType), Yes.Take);

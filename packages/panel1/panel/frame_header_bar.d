@@ -54,8 +54,8 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   }
 
   /**
-  Get builder for [panel.frame_header_bar.FrameHeaderBar]
-  Returns: New builder object
+      Get builder for [panel.frame_header_bar.FrameHeaderBar]
+      Returns: New builder object
   */
   static FrameHeaderBarGidBuilder builder()
   {
@@ -129,6 +129,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   }
 }
 
+/// Fluent builder implementation template for [panel.frame_header_bar.FrameHeaderBar]
 class FrameHeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel.frame_header.FrameHeaderGidBuilderImpl!T
 {
 
@@ -149,6 +150,10 @@ class FrameHeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel
 /// Fluent builder for [panel.frame_header_bar.FrameHeaderBar]
 final class FrameHeaderBarGidBuilder : FrameHeaderBarGidBuilderImpl!FrameHeaderBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FrameHeaderBar build()
   {
     return new FrameHeaderBar(cast(void*)createGObject(FrameHeaderBar._getGType), No.Take);

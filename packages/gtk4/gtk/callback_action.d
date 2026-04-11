@@ -43,8 +43,8 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-  Get builder for [gtk.callback_action.CallbackAction]
-  Returns: New builder object
+      Get builder for [gtk.callback_action.CallbackAction]
+      Returns: New builder object
   */
   static CallbackActionGidBuilder builder()
   {
@@ -80,6 +80,7 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
   }
 }
 
+/// Fluent builder implementation template for [gtk.callback_action.CallbackAction]
 class CallbackActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
 {
 }
@@ -87,6 +88,10 @@ class CallbackActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBui
 /// Fluent builder for [gtk.callback_action.CallbackAction]
 final class CallbackActionGidBuilder : CallbackActionGidBuilderImpl!CallbackActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CallbackAction build()
   {
     return new CallbackAction(cast(void*)createGObject(CallbackAction._getGType), Yes.Take);

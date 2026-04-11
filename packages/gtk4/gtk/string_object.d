@@ -44,8 +44,8 @@ class StringObject : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.string_object.StringObject]
-  Returns: New builder object
+      Get builder for [gtk.string_object.StringObject]
+      Returns: New builder object
   */
   static StringObjectGidBuilder builder()
   {
@@ -89,6 +89,7 @@ class StringObject : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.string_object.StringObject]
 class StringObjectGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -96,6 +97,10 @@ class StringObjectGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.string_object.StringObject]
 final class StringObjectGidBuilder : StringObjectGidBuilderImpl!StringObjectGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StringObject build()
   {
     return new StringObject(cast(void*)createGObject(StringObject._getGType), Yes.Take);

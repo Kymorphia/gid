@@ -30,6 +30,7 @@ template WritableFileT()
   }
 }
 
+/// Fluent builder implementation template for [arrow.writable_file.WritableFile]
 template WritableFileGidBuilderT()
 {
 }

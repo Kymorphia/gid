@@ -44,8 +44,8 @@ class ParamList : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.param_list.ParamList]
-  Returns: New builder object
+      Get builder for [gmime.param_list.ParamList]
+      Returns: New builder object
   */
   static ParamListGidBuilder builder()
   {
@@ -189,6 +189,7 @@ class ParamList : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.param_list.ParamList]
 class ParamListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -196,6 +197,10 @@ class ParamListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.param_list.ParamList]
 final class ParamListGidBuilder : ParamListGidBuilderImpl!ParamListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ParamList build()
   {
     return new ParamList(cast(void*)createGObject(ParamList._getGType), Yes.Take);

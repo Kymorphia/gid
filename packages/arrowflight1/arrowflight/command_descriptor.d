@@ -38,8 +38,8 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
   }
 
   /**
-  Get builder for [arrowflight.command_descriptor.CommandDescriptor]
-  Returns: New builder object
+      Get builder for [arrowflight.command_descriptor.CommandDescriptor]
+      Returns: New builder object
   */
   static CommandDescriptorGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.command_descriptor.CommandDescriptor]
 class CommandDescriptorGidBuilderImpl(T) : arrowflight.descriptor.DescriptorGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class CommandDescriptorGidBuilderImpl(T) : arrowflight.descriptor.DescriptorGidB
 /// Fluent builder for [arrowflight.command_descriptor.CommandDescriptor]
 final class CommandDescriptorGidBuilder : CommandDescriptorGidBuilderImpl!CommandDescriptorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CommandDescriptor build()
   {
     return new CommandDescriptor(cast(void*)createGObject(CommandDescriptor._getGType), Yes.Take);

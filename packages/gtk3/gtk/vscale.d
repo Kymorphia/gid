@@ -54,8 +54,8 @@ class VScale : gtk.scale.Scale
   }
 
   /**
-  Get builder for [gtk.vscale.VScale]
-  Returns: New builder object
+      Get builder for [gtk.vscale.VScale]
+      Returns: New builder object
   */
   static VScaleGidBuilder builder()
   {
@@ -105,6 +105,7 @@ class VScale : gtk.scale.Scale
   }
 }
 
+/// Fluent builder implementation template for [gtk.vscale.VScale]
 class VScaleGidBuilderImpl(T) : gtk.scale.ScaleGidBuilderImpl!T
 {
 
@@ -113,6 +114,10 @@ class VScaleGidBuilderImpl(T) : gtk.scale.ScaleGidBuilderImpl!T
 /// Fluent builder for [gtk.vscale.VScale]
 final class VScaleGidBuilder : VScaleGidBuilderImpl!VScaleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VScale build()
   {
     return new VScale(cast(void*)createGObject(VScale._getGType), No.Take);

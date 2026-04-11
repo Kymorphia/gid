@@ -111,8 +111,8 @@ class Window : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.window.Window]
-  Returns: New builder object
+      Get builder for [gtk.window.Window]
+      Returns: New builder object
   */
   static WindowGidBuilder builder()
   {
@@ -2996,6 +2996,7 @@ class Window : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.window.Window]
 class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -3280,6 +3281,10 @@ class WindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.window.Window]
 final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Window build()
   {
     return new Window(cast(void*)createGObject(Window._getGType), No.Take);

@@ -20,6 +20,7 @@ interface Servable
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.servable.Servable]
 interface ServableGidBuilderImpl(T)
 {
 }

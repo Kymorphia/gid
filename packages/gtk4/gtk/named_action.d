@@ -40,8 +40,8 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-  Get builder for [gtk.named_action.NamedAction]
-  Returns: New builder object
+      Get builder for [gtk.named_action.NamedAction]
+      Returns: New builder object
   */
   static NamedActionGidBuilder builder()
   {
@@ -91,6 +91,7 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   }
 }
 
+/// Fluent builder implementation template for [gtk.named_action.NamedAction]
 class NamedActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
 {
 
@@ -109,6 +110,10 @@ class NamedActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilde
 /// Fluent builder for [gtk.named_action.NamedAction]
 final class NamedActionGidBuilder : NamedActionGidBuilderImpl!NamedActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NamedAction build()
   {
     return new NamedAction(cast(void*)createGObject(NamedAction._getGType), Yes.Take);

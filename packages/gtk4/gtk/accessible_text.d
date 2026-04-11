@@ -65,6 +65,7 @@ interface AccessibleText
   void updateSelectionBound();
 }
 
+/// Fluent builder implementation template for [gtk.accessible_text.AccessibleText]
 interface AccessibleTextGidBuilderImpl(T)
 {
 }

@@ -38,8 +38,8 @@ class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
   }
 
   /**
-  Get builder for [arrow.month_interval_data_type.MonthIntervalDataType]
-  Returns: New builder object
+      Get builder for [arrow.month_interval_data_type.MonthIntervalDataType]
+      Returns: New builder object
   */
   static MonthIntervalDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.month_interval_data_type.MonthIntervalDataType]
 class MonthIntervalDataTypeGidBuilderImpl(T) : arrow.interval_data_type.IntervalDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class MonthIntervalDataTypeGidBuilderImpl(T) : arrow.interval_data_type.Interval
 /// Fluent builder for [arrow.month_interval_data_type.MonthIntervalDataType]
 final class MonthIntervalDataTypeGidBuilder : MonthIntervalDataTypeGidBuilderImpl!MonthIntervalDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MonthIntervalDataType build()
   {
     return new MonthIntervalDataType(cast(void*)createGObject(MonthIntervalDataType._getGType), Yes.Take);

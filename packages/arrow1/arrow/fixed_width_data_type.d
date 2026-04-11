@@ -38,8 +38,8 @@ class FixedWidthDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.fixed_width_data_type.FixedWidthDataType]
-  Returns: New builder object
+      Get builder for [arrow.fixed_width_data_type.FixedWidthDataType]
+      Returns: New builder object
   */
   static FixedWidthDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class FixedWidthDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.fixed_width_data_type.FixedWidthDataType]
 class FixedWidthDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class FixedWidthDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderIm
 /// Fluent builder for [arrow.fixed_width_data_type.FixedWidthDataType]
 final class FixedWidthDataTypeGidBuilder : FixedWidthDataTypeGidBuilderImpl!FixedWidthDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FixedWidthDataType build()
   {
     return new FixedWidthDataType(cast(void*)createGObject(FixedWidthDataType._getGType), No.Take);

@@ -38,8 +38,8 @@ class ParquetFileFormat : arrowdataset.file_format.FileFormat
   }
 
   /**
-  Get builder for [arrowdataset.parquet_file_format.ParquetFileFormat]
-  Returns: New builder object
+      Get builder for [arrowdataset.parquet_file_format.ParquetFileFormat]
+      Returns: New builder object
   */
   static ParquetFileFormatGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class ParquetFileFormat : arrowdataset.file_format.FileFormat
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.parquet_file_format.ParquetFileFormat]
 class ParquetFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class ParquetFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGi
 /// Fluent builder for [arrowdataset.parquet_file_format.ParquetFileFormat]
 final class ParquetFileFormatGidBuilder : ParquetFileFormatGidBuilderImpl!ParquetFileFormatGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ParquetFileFormat build()
   {
     return new ParquetFileFormat(cast(void*)createGObject(ParquetFileFormat._getGType), Yes.Take);

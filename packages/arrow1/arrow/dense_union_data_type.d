@@ -39,8 +39,8 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
   }
 
   /**
-  Get builder for [arrow.dense_union_data_type.DenseUnionDataType]
-  Returns: New builder object
+      Get builder for [arrow.dense_union_data_type.DenseUnionDataType]
+      Returns: New builder object
   */
   static DenseUnionDataTypeGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.dense_union_data_type.DenseUnionDataType]
 class DenseUnionDataTypeGidBuilderImpl(T) : arrow.union_data_type.UnionDataTypeGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class DenseUnionDataTypeGidBuilderImpl(T) : arrow.union_data_type.UnionDataTypeG
 /// Fluent builder for [arrow.dense_union_data_type.DenseUnionDataType]
 final class DenseUnionDataTypeGidBuilder : DenseUnionDataTypeGidBuilderImpl!DenseUnionDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DenseUnionDataType build()
   {
     return new DenseUnionDataType(cast(void*)createGObject(DenseUnionDataType._getGType), Yes.Take);

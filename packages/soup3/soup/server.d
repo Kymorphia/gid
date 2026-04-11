@@ -136,8 +136,8 @@ class Server : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [soup.server.Server]
-  Returns: New builder object
+      Get builder for [soup.server.Server]
+      Returns: New builder object
   */
   static ServerGidBuilder builder()
   {
@@ -1051,6 +1051,7 @@ class Server : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [soup.server.Server]
 class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -1143,6 +1144,10 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [soup.server.Server]
 final class ServerGidBuilder : ServerGidBuilderImpl!ServerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Server build()
   {
     return new Server(cast(void*)createGObject(Server._getGType), Yes.Take);

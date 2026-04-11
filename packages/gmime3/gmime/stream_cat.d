@@ -40,8 +40,8 @@ class StreamCat : gmime.stream.Stream
   }
 
   /**
-  Get builder for [gmime.stream_cat.StreamCat]
-  Returns: New builder object
+      Get builder for [gmime.stream_cat.StreamCat]
+      Returns: New builder object
   */
   static StreamCatGidBuilder builder()
   {
@@ -74,6 +74,7 @@ class StreamCat : gmime.stream.Stream
   }
 }
 
+/// Fluent builder implementation template for [gmime.stream_cat.StreamCat]
 class StreamCatGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 {
 }
@@ -81,6 +82,10 @@ class StreamCatGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 /// Fluent builder for [gmime.stream_cat.StreamCat]
 final class StreamCatGidBuilder : StreamCatGidBuilderImpl!StreamCatGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamCat build()
   {
     return new StreamCat(cast(void*)createGObject(StreamCat._getGType), Yes.Take);

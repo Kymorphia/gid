@@ -87,8 +87,8 @@ class ListItemFactory : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.list_item_factory.ListItemFactory]
-  Returns: New builder object
+      Get builder for [gtk.list_item_factory.ListItemFactory]
+      Returns: New builder object
   */
   static ListItemFactoryGidBuilder builder()
   {
@@ -96,6 +96,7 @@ class ListItemFactory : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.list_item_factory.ListItemFactory]
 class ListItemFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -103,6 +104,10 @@ class ListItemFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.list_item_factory.ListItemFactory]
 final class ListItemFactoryGidBuilder : ListItemFactoryGidBuilderImpl!ListItemFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListItemFactory build()
   {
     return new ListItemFactory(cast(void*)createGObject(ListItemFactory._getGType), No.Take);

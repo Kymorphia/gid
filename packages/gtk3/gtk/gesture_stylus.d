@@ -46,8 +46,8 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
-  Get builder for [gtk.gesture_stylus.GestureStylus]
-  Returns: New builder object
+      Get builder for [gtk.gesture_stylus.GestureStylus]
+      Returns: New builder object
   */
   static GestureStylusGidBuilder builder()
   {
@@ -321,6 +321,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture_stylus.GestureStylus]
 class GestureStylusGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
 {
 }
@@ -328,6 +329,10 @@ class GestureStylusGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilde
 /// Fluent builder for [gtk.gesture_stylus.GestureStylus]
 final class GestureStylusGidBuilder : GestureStylusGidBuilderImpl!GestureStylusGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GestureStylus build()
   {
     return new GestureStylus(cast(void*)createGObject(GestureStylus._getGType), Yes.Take);

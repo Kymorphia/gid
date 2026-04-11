@@ -44,8 +44,8 @@ class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessibl
   }
 
   /**
-  Get builder for [gtk.radio_button_accessible.RadioButtonAccessible]
-  Returns: New builder object
+      Get builder for [gtk.radio_button_accessible.RadioButtonAccessible]
+      Returns: New builder object
   */
   static RadioButtonAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessibl
   }
 }
 
+/// Fluent builder implementation template for [gtk.radio_button_accessible.RadioButtonAccessible]
 class RadioButtonAccessibleGidBuilderImpl(T) : gtk.toggle_button_accessible.ToggleButtonAccessibleGidBuilderImpl!T
 {
 
@@ -61,6 +62,10 @@ class RadioButtonAccessibleGidBuilderImpl(T) : gtk.toggle_button_accessible.Togg
 /// Fluent builder for [gtk.radio_button_accessible.RadioButtonAccessible]
 final class RadioButtonAccessibleGidBuilder : RadioButtonAccessibleGidBuilderImpl!RadioButtonAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RadioButtonAccessible build()
   {
     return new RadioButtonAccessible(cast(void*)createGObject(RadioButtonAccessible._getGType), No.Take);

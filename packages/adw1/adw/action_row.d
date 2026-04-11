@@ -89,8 +89,8 @@ class ActionRow : adw.preferences_row.PreferencesRow
   }
 
   /**
-  Get builder for [adw.action_row.ActionRow]
-  Returns: New builder object
+      Get builder for [adw.action_row.ActionRow]
+      Returns: New builder object
   */
   static ActionRowGidBuilder builder()
   {
@@ -506,6 +506,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   }
 }
 
+/// Fluent builder implementation template for [adw.action_row.ActionRow]
 class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderImpl!T
 {
 
@@ -600,6 +601,10 @@ class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderI
 /// Fluent builder for [adw.action_row.ActionRow]
 final class ActionRowGidBuilder : ActionRowGidBuilderImpl!ActionRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ActionRow build()
   {
     return new ActionRow(cast(void*)createGObject(ActionRow._getGType), No.Take);

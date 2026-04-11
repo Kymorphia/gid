@@ -212,6 +212,7 @@ interface ListModel
   gulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gio.list_model.ListModel]
 interface ListModelGidBuilderImpl(T)
 {
 }

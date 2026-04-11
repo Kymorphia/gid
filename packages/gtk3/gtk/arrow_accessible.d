@@ -42,8 +42,8 @@ class ArrowAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
   }
 
   /**
-  Get builder for [gtk.arrow_accessible.ArrowAccessible]
-  Returns: New builder object
+      Get builder for [gtk.arrow_accessible.ArrowAccessible]
+      Returns: New builder object
   */
   static ArrowAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class ArrowAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
   mixin ImageT!();
 }
 
+/// Fluent builder implementation template for [gtk.arrow_accessible.ArrowAccessible]
 class ArrowAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class ArrowAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleG
 /// Fluent builder for [gtk.arrow_accessible.ArrowAccessible]
 final class ArrowAccessibleGidBuilder : ArrowAccessibleGidBuilderImpl!ArrowAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ArrowAccessible build()
   {
     return new ArrowAccessible(cast(void*)createGObject(ArrowAccessible._getGType), No.Take);

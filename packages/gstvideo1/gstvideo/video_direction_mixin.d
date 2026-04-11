@@ -29,6 +29,7 @@ template VideoDirectionT()
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_direction.VideoDirection]
 template VideoDirectionGidBuilderT()
 {
 

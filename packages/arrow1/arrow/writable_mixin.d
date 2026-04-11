@@ -45,6 +45,7 @@ template WritableT()
   }
 }
 
+/// Fluent builder implementation template for [arrow.writable.Writable]
 template WritableGidBuilderT()
 {
 }

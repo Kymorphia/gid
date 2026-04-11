@@ -52,8 +52,8 @@ class Table : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.table.Table]
-  Returns: New builder object
+      Get builder for [arrow.table.Table]
+      Returns: New builder object
   */
   static TableGidBuilder builder()
   {
@@ -336,6 +336,7 @@ class Table : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.table.Table]
 class TableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -349,6 +350,10 @@ class TableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.table.Table]
 final class TableGidBuilder : TableGidBuilderImpl!TableGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Table build()
   {
     return new Table(cast(void*)createGObject(Table._getGType), No.Take);

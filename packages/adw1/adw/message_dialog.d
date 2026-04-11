@@ -187,8 +187,8 @@ class MessageDialog : gtk.window.Window
   }
 
   /**
-  Get builder for [adw.message_dialog.MessageDialog]
-  Returns: New builder object
+      Get builder for [adw.message_dialog.MessageDialog]
+      Returns: New builder object
   */
   static MessageDialogGidBuilder builder()
   {
@@ -859,6 +859,7 @@ class MessageDialog : gtk.window.Window
   }
 }
 
+/// Fluent builder implementation template for [adw.message_dialog.MessageDialog]
 class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 {
 
@@ -962,6 +963,10 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 /// Fluent builder for [adw.message_dialog.MessageDialog]
 final class MessageDialogGidBuilder : MessageDialogGidBuilderImpl!MessageDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MessageDialog build()
   {
     return new MessageDialog(cast(void*)createGObject(MessageDialog._getGType), No.Take);

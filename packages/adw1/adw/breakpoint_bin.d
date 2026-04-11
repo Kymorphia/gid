@@ -158,8 +158,8 @@ class BreakpointBin : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.breakpoint_bin.BreakpointBin]
-  Returns: New builder object
+      Get builder for [adw.breakpoint_bin.BreakpointBin]
+      Returns: New builder object
   */
   static BreakpointBinGidBuilder builder()
   {
@@ -263,6 +263,7 @@ class BreakpointBin : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.breakpoint_bin.BreakpointBin]
 class BreakpointBinGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -282,6 +283,10 @@ class BreakpointBinGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.breakpoint_bin.BreakpointBin]
 final class BreakpointBinGidBuilder : BreakpointBinGidBuilderImpl!BreakpointBinGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BreakpointBin build()
   {
     return new BreakpointBin(cast(void*)createGObject(BreakpointBin._getGType), No.Take);

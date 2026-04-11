@@ -51,6 +51,7 @@ interface Lockable
   void unlock();
 }
 
+/// Fluent builder implementation template for [gda.lockable.Lockable]
 interface LockableGidBuilderImpl(T)
 {
 }

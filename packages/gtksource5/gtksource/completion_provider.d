@@ -185,6 +185,7 @@ interface CompletionProvider
   void refilter(gtksource.completion_context.CompletionContext context, gio.list_model.ListModel model);
 }
 
+/// Fluent builder implementation template for [gtksource.completion_provider.CompletionProvider]
 interface CompletionProviderGidBuilderImpl(T)
 {
 }

@@ -44,8 +44,8 @@ class WebViewBase : gtk.widget.Widget
   }
 
   /**
-  Get builder for [webkit.web_view_base.WebViewBase]
-  Returns: New builder object
+      Get builder for [webkit.web_view_base.WebViewBase]
+      Returns: New builder object
   */
   static WebViewBaseGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class WebViewBase : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [webkit.web_view_base.WebViewBase]
 class WebViewBaseGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -61,6 +62,10 @@ class WebViewBaseGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [webkit.web_view_base.WebViewBase]
 final class WebViewBaseGidBuilder : WebViewBaseGidBuilderImpl!WebViewBaseGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebViewBase build()
   {
     return new WebViewBase(cast(void*)createGObject(WebViewBase._getGType), No.Take);

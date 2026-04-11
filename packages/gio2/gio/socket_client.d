@@ -61,8 +61,8 @@ class SocketClient : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.socket_client.SocketClient]
-  Returns: New builder object
+      Get builder for [gio.socket_client.SocketClient]
+      Returns: New builder object
   */
   static SocketClientGidBuilder builder()
   {
@@ -1070,6 +1070,7 @@ class SocketClient : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.socket_client.SocketClient]
 class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -1193,6 +1194,10 @@ class SocketClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.socket_client.SocketClient]
 final class SocketClientGidBuilder : SocketClientGidBuilderImpl!SocketClientGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SocketClient build()
   {
     return new SocketClient(cast(void*)createGObject(SocketClient._getGType), Yes.Take);

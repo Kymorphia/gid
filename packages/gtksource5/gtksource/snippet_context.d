@@ -49,8 +49,8 @@ class SnippetContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.snippet_context.SnippetContext]
-  Returns: New builder object
+      Get builder for [gtksource.snippet_context.SnippetContext]
+      Returns: New builder object
   */
   static SnippetContextGidBuilder builder()
   {
@@ -201,6 +201,7 @@ class SnippetContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.snippet_context.SnippetContext]
 class SnippetContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -208,6 +209,10 @@ class SnippetContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtksource.snippet_context.SnippetContext]
 final class SnippetContextGidBuilder : SnippetContextGidBuilderImpl!SnippetContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SnippetContext build()
   {
     return new SnippetContext(cast(void*)createGObject(SnippetContext._getGType), Yes.Take);

@@ -78,6 +78,7 @@ template AppChooserT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.app_chooser.AppChooser]
 template AppChooserGidBuilderT()
 {
 

@@ -40,8 +40,8 @@ class MetadataReader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.metadata_reader.MetadataReader]
-  Returns: New builder object
+      Get builder for [arrowflight.metadata_reader.MetadataReader]
+      Returns: New builder object
   */
   static MetadataReaderGidBuilder builder()
   {
@@ -61,6 +61,7 @@ class MetadataReader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.metadata_reader.MetadataReader]
 class MetadataReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -74,6 +75,10 @@ class MetadataReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [arrowflight.metadata_reader.MetadataReader]
 final class MetadataReaderGidBuilder : MetadataReaderGidBuilderImpl!MetadataReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MetadataReader build()
   {
     return new MetadataReader(cast(void*)createGObject(MetadataReader._getGType), No.Take);

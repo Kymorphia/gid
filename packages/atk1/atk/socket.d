@@ -67,8 +67,8 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
   }
 
   /**
-  Get builder for [atk.socket.Socket]
-  Returns: New builder object
+      Get builder for [atk.socket.Socket]
+      Returns: New builder object
   */
   static SocketGidBuilder builder()
   {
@@ -121,6 +121,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
   }
 }
 
+/// Fluent builder implementation template for [atk.socket.Socket]
 class SocketGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T
 {
 
@@ -130,6 +131,10 @@ class SocketGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.compo
 /// Fluent builder for [atk.socket.Socket]
 final class SocketGidBuilder : SocketGidBuilderImpl!SocketGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Socket build()
   {
     return new Socket(cast(void*)createGObject(Socket._getGType), Yes.Take);

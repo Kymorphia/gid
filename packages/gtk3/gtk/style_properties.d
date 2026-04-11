@@ -59,8 +59,8 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   }
 
   /**
-  Get builder for [gtk.style_properties.StyleProperties]
-  Returns: New builder object
+      Get builder for [gtk.style_properties.StyleProperties]
+      Returns: New builder object
   */
   static StylePropertiesGidBuilder builder()
   {
@@ -202,6 +202,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   }
 }
 
+/// Fluent builder implementation template for [gtk.style_properties.StyleProperties]
 class StylePropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.style_provider.StyleProviderGidBuilderImpl!T
 {
 
@@ -211,6 +212,10 @@ class StylePropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.style_properties.StyleProperties]
 final class StylePropertiesGidBuilder : StylePropertiesGidBuilderImpl!StylePropertiesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StyleProperties build()
   {
     return new StyleProperties(cast(void*)createGObject(StyleProperties._getGType), Yes.Take);

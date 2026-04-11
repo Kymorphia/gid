@@ -39,8 +39,8 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
   }
 
   /**
-  Get builder for [arrow.decimal32_data_type.Decimal32DataType]
-  Returns: New builder object
+      Get builder for [arrow.decimal32_data_type.Decimal32DataType]
+      Returns: New builder object
   */
   static Decimal32DataTypeGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal32_data_type.Decimal32DataType]
 class Decimal32DataTypeGidBuilderImpl(T) : arrow.decimal_data_type.DecimalDataTypeGidBuilderImpl!T
 {
 }
@@ -74,6 +75,10 @@ class Decimal32DataTypeGidBuilderImpl(T) : arrow.decimal_data_type.DecimalDataTy
 /// Fluent builder for [arrow.decimal32_data_type.Decimal32DataType]
 final class Decimal32DataTypeGidBuilder : Decimal32DataTypeGidBuilderImpl!Decimal32DataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal32DataType build()
   {
     return new Decimal32DataType(cast(void*)createGObject(Decimal32DataType._getGType), Yes.Take);

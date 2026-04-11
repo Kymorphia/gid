@@ -44,8 +44,8 @@ class HeaderList : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.header_list.HeaderList]
-  Returns: New builder object
+      Get builder for [gmime.header_list.HeaderList]
+      Returns: New builder object
   */
   static HeaderListGidBuilder builder()
   {
@@ -249,6 +249,7 @@ class HeaderList : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.header_list.HeaderList]
 class HeaderListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -256,6 +257,10 @@ class HeaderListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.header_list.HeaderList]
 final class HeaderListGidBuilder : HeaderListGidBuilderImpl!HeaderListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HeaderList build()
   {
     return new HeaderList(cast(void*)createGObject(HeaderList._getGType), Yes.Take);

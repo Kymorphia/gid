@@ -55,8 +55,8 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
   }
 
   /**
-  Get builder for [gio.file_input_stream.FileInputStream]
-  Returns: New builder object
+      Get builder for [gio.file_input_stream.FileInputStream]
+      Returns: New builder object
   */
   static FileInputStreamGidBuilder builder()
   {
@@ -145,6 +145,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
   }
 }
 
+/// Fluent builder implementation template for [gio.file_input_stream.FileInputStream]
 class FileInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
 {
 
@@ -154,6 +155,10 @@ class FileInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderI
 /// Fluent builder for [gio.file_input_stream.FileInputStream]
 final class FileInputStreamGidBuilder : FileInputStreamGidBuilderImpl!FileInputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileInputStream build()
   {
     return new FileInputStream(cast(void*)createGObject(FileInputStream._getGType), No.Take);

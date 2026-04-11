@@ -52,8 +52,8 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 
   /**
-  Get builder for [gtk.media_file.MediaFile]
-  Returns: New builder object
+      Get builder for [gtk.media_file.MediaFile]
+      Returns: New builder object
   */
   static MediaFileGidBuilder builder()
   {
@@ -282,6 +282,7 @@ class MediaFile : gtk.media_stream.MediaStream
   }
 }
 
+/// Fluent builder implementation template for [gtk.media_file.MediaFile]
 class MediaFileGidBuilderImpl(T) : gtk.media_stream.MediaStreamGidBuilderImpl!T
 {
 
@@ -314,6 +315,10 @@ class MediaFileGidBuilderImpl(T) : gtk.media_stream.MediaStreamGidBuilderImpl!T
 /// Fluent builder for [gtk.media_file.MediaFile]
 final class MediaFileGidBuilder : MediaFileGidBuilderImpl!MediaFileGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MediaFile build()
   {
     return new MediaFile(cast(void*)createGObject(MediaFile._getGType), Yes.Take);

@@ -70,8 +70,8 @@ class VBox : gtk.box.Box
   }
 
   /**
-  Get builder for [gtk.vbox.VBox]
-  Returns: New builder object
+      Get builder for [gtk.vbox.VBox]
+      Returns: New builder object
   */
   static VBoxGidBuilder builder()
   {
@@ -97,6 +97,7 @@ class VBox : gtk.box.Box
   }
 }
 
+/// Fluent builder implementation template for [gtk.vbox.VBox]
 class VBoxGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 {
 
@@ -105,6 +106,10 @@ class VBoxGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 /// Fluent builder for [gtk.vbox.VBox]
 final class VBoxGidBuilder : VBoxGidBuilderImpl!VBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VBox build()
   {
     return new VBox(cast(void*)createGObject(VBox._getGType), No.Take);

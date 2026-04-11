@@ -117,8 +117,8 @@ class ViewSwitcher : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.view_switcher.ViewSwitcher]
-  Returns: New builder object
+      Get builder for [adw.view_switcher.ViewSwitcher]
+      Returns: New builder object
   */
   static ViewSwitcherGidBuilder builder()
   {
@@ -221,6 +221,7 @@ class ViewSwitcher : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.view_switcher.ViewSwitcher]
 class ViewSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -251,6 +252,10 @@ class ViewSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.view_switcher.ViewSwitcher]
 final class ViewSwitcherGidBuilder : ViewSwitcherGidBuilderImpl!ViewSwitcherGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ViewSwitcher build()
   {
     return new ViewSwitcher(cast(void*)createGObject(ViewSwitcher._getGType), No.Take);

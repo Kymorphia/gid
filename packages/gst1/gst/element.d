@@ -106,8 +106,8 @@ class Element : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.element.Element]
-  Returns: New builder object
+      Get builder for [gst.element.Element]
+      Returns: New builder object
   */
   static ElementGidBuilder builder()
   {
@@ -1727,6 +1727,7 @@ class Element : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.element.Element]
 class ElementGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -1734,6 +1735,10 @@ class ElementGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.element.Element]
 final class ElementGidBuilder : ElementGidBuilderImpl!ElementGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Element build()
   {
     return new Element(cast(void*)createGObject(Element._getGType), No.Take);

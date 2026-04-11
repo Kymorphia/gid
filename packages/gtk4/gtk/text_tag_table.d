@@ -64,8 +64,8 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
-  Get builder for [gtk.text_tag_table.TextTagTable]
-  Returns: New builder object
+      Get builder for [gtk.text_tag_table.TextTagTable]
+      Returns: New builder object
   */
   static TextTagTableGidBuilder builder()
   {
@@ -310,6 +310,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 }
 
+/// Fluent builder implementation template for [gtk.text_tag_table.TextTagTable]
 class TextTagTableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -319,6 +320,10 @@ class TextTagTableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
 /// Fluent builder for [gtk.text_tag_table.TextTagTable]
 final class TextTagTableGidBuilder : TextTagTableGidBuilderImpl!TextTagTableGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextTagTable build()
   {
     return new TextTagTable(cast(void*)createGObject(TextTagTable._getGType), Yes.Take);

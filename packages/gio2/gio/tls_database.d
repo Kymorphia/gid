@@ -54,8 +54,8 @@ class TlsDatabase : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.tls_database.TlsDatabase]
-  Returns: New builder object
+      Get builder for [gio.tls_database.TlsDatabase]
+      Returns: New builder object
   */
   static TlsDatabaseGidBuilder builder()
   {
@@ -483,6 +483,7 @@ class TlsDatabase : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.tls_database.TlsDatabase]
 class TlsDatabaseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -490,6 +491,10 @@ class TlsDatabaseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.tls_database.TlsDatabase]
 final class TlsDatabaseGidBuilder : TlsDatabaseGidBuilderImpl!TlsDatabaseGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TlsDatabase build()
   {
     return new TlsDatabase(cast(void*)createGObject(TlsDatabase._getGType), No.Take);

@@ -40,8 +40,8 @@ class FilterYenc : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_yenc.FilterYenc]
-  Returns: New builder object
+      Get builder for [gmime.filter_yenc.FilterYenc]
+      Returns: New builder object
   */
   static FilterYencGidBuilder builder()
   {
@@ -107,6 +107,7 @@ class FilterYenc : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_yenc.FilterYenc]
 class FilterYencGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -114,6 +115,10 @@ class FilterYencGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_yenc.FilterYenc]
 final class FilterYencGidBuilder : FilterYencGidBuilderImpl!FilterYencGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterYenc build()
   {
     return new FilterYenc(cast(void*)createGObject(FilterYenc._getGType), Yes.Take);

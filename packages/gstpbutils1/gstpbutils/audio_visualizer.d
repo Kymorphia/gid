@@ -47,8 +47,8 @@ class AudioVisualizer : gst.element.Element
   }
 
   /**
-  Get builder for [gstpbutils.audio_visualizer.AudioVisualizer]
-  Returns: New builder object
+      Get builder for [gstpbutils.audio_visualizer.AudioVisualizer]
+      Returns: New builder object
   */
   static AudioVisualizerGidBuilder builder()
   {
@@ -80,6 +80,7 @@ class AudioVisualizer : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.audio_visualizer.AudioVisualizer]
 class AudioVisualizerGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
@@ -99,6 +100,10 @@ class AudioVisualizerGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstpbutils.audio_visualizer.AudioVisualizer]
 final class AudioVisualizerGidBuilder : AudioVisualizerGidBuilderImpl!AudioVisualizerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioVisualizer build()
   {
     return new AudioVisualizer(cast(void*)createGObject(AudioVisualizer._getGType), No.Take);

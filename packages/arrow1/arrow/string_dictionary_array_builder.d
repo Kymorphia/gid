@@ -41,8 +41,8 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.string_dictionary_array_builder.StringDictionaryArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.string_dictionary_array_builder.StringDictionaryArrayBuilder]
+      Returns: New builder object
   */
   static StringDictionaryArrayBuilderGidBuilder builder()
   {
@@ -155,6 +155,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.string_dictionary_array_builder.StringDictionaryArrayBuilder]
 class StringDictionaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -162,6 +163,10 @@ class StringDictionaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayB
 /// Fluent builder for [arrow.string_dictionary_array_builder.StringDictionaryArrayBuilder]
 final class StringDictionaryArrayBuilderGidBuilder : StringDictionaryArrayBuilderGidBuilderImpl!StringDictionaryArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StringDictionaryArrayBuilder build()
   {
     return new StringDictionaryArrayBuilder(cast(void*)createGObject(StringDictionaryArrayBuilder._getGType), Yes.Take);

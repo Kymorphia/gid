@@ -46,8 +46,8 @@ class MetaStore : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.meta_store.MetaStore]
-  Returns: New builder object
+      Get builder for [gda.meta_store.MetaStore]
+      Returns: New builder object
   */
   static MetaStoreGidBuilder builder()
   {
@@ -659,6 +659,7 @@ class MetaStore : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.meta_store.MetaStore]
 class MetaStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -690,6 +691,10 @@ class MetaStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.meta_store.MetaStore]
 final class MetaStoreGidBuilder : MetaStoreGidBuilderImpl!MetaStoreGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MetaStore build()
   {
     return new MetaStore(cast(void*)createGObject(MetaStore._getGType), Yes.Take);

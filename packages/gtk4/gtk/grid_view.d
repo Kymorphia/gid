@@ -89,8 +89,8 @@ class GridView : gtk.list_base.ListBase
   }
 
   /**
-  Get builder for [gtk.grid_view.GridView]
-  Returns: New builder object
+      Get builder for [gtk.grid_view.GridView]
+      Returns: New builder object
   */
   static GridViewGidBuilder builder()
   {
@@ -497,6 +497,7 @@ class GridView : gtk.list_base.ListBase
   }
 }
 
+/// Fluent builder implementation template for [gtk.grid_view.GridView]
 class GridViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
 {
 
@@ -585,6 +586,10 @@ class GridViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
 /// Fluent builder for [gtk.grid_view.GridView]
 final class GridViewGidBuilder : GridViewGidBuilderImpl!GridViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GridView build()
   {
     return new GridView(cast(void*)createGObject(GridView._getGType), No.Take);

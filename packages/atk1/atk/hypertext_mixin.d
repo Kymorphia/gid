@@ -116,6 +116,7 @@ template HypertextT()
   }
 }
 
+/// Fluent builder implementation template for [atk.hypertext.Hypertext]
 template HypertextGidBuilderT()
 {
 }

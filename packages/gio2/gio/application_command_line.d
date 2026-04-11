@@ -211,8 +211,8 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.application_command_line.ApplicationCommandLine]
-  Returns: New builder object
+      Get builder for [gio.application_command_line.ApplicationCommandLine]
+      Returns: New builder object
   */
   static ApplicationCommandLineGidBuilder builder()
   {
@@ -539,6 +539,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.application_command_line.ApplicationCommandLine]
 class ApplicationCommandLineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -580,6 +581,10 @@ class ApplicationCommandLineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
 /// Fluent builder for [gio.application_command_line.ApplicationCommandLine]
 final class ApplicationCommandLineGidBuilder : ApplicationCommandLineGidBuilderImpl!ApplicationCommandLineGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ApplicationCommandLine build()
   {
     return new ApplicationCommandLine(cast(void*)createGObject(ApplicationCommandLine._getGType), No.Take);

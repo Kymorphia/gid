@@ -158,8 +158,8 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
   }
 
   /**
-  Get builder for [gio.debug_controller_dbus.DebugControllerDBus]
-  Returns: New builder object
+      Get builder for [gio.debug_controller_dbus.DebugControllerDBus]
+      Returns: New builder object
   */
   static DebugControllerDBusGidBuilder builder()
   {
@@ -294,6 +294,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
   }
 }
 
+/// Fluent builder implementation template for [gio.debug_controller_dbus.DebugControllerDBus]
 class DebugControllerDBusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.debug_controller.DebugControllerGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -319,6 +320,10 @@ class DebugControllerDBusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [gio.debug_controller_dbus.DebugControllerDBus]
 final class DebugControllerDBusGidBuilder : DebugControllerDBusGidBuilderImpl!DebugControllerDBusGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DebugControllerDBus build()
   {
     return new DebugControllerDBus(cast(void*)createGObject(DebugControllerDBus._getGType), Yes.Take);

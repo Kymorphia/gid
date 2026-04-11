@@ -51,8 +51,8 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   }
 
   /**
-  Get builder for [atk.hyperlink.Hyperlink]
-  Returns: New builder object
+      Get builder for [atk.hyperlink.Hyperlink]
+      Returns: New builder object
   */
   static HyperlinkGidBuilder builder()
   {
@@ -242,6 +242,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   }
 }
 
+/// Fluent builder implementation template for [atk.hyperlink.Hyperlink]
 class HyperlinkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T
 {
 
@@ -251,6 +252,10 @@ class HyperlinkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, at
 /// Fluent builder for [atk.hyperlink.Hyperlink]
 final class HyperlinkGidBuilder : HyperlinkGidBuilderImpl!HyperlinkGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Hyperlink build()
   {
     return new Hyperlink(cast(void*)createGObject(Hyperlink._getGType), No.Take);

@@ -41,8 +41,8 @@ class FdAllocator : gst.allocator.Allocator
   }
 
   /**
-  Get builder for [gstallocators.fd_allocator.FdAllocator]
-  Returns: New builder object
+      Get builder for [gstallocators.fd_allocator.FdAllocator]
+      Returns: New builder object
   */
   static FdAllocatorGidBuilder builder()
   {
@@ -83,6 +83,7 @@ class FdAllocator : gst.allocator.Allocator
   }
 }
 
+/// Fluent builder implementation template for [gstallocators.fd_allocator.FdAllocator]
 class FdAllocatorGidBuilderImpl(T) : gst.allocator.AllocatorGidBuilderImpl!T
 {
 }
@@ -90,6 +91,10 @@ class FdAllocatorGidBuilderImpl(T) : gst.allocator.AllocatorGidBuilderImpl!T
 /// Fluent builder for [gstallocators.fd_allocator.FdAllocator]
 final class FdAllocatorGidBuilder : FdAllocatorGidBuilderImpl!FdAllocatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FdAllocator build()
   {
     return new FdAllocator(cast(void*)createGObject(FdAllocator._getGType), Yes.Take);

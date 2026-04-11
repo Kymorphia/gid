@@ -159,6 +159,7 @@ interface DatagramBased
   glib.source.Source createSource(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable = null);
 }
 
+/// Fluent builder implementation template for [gio.datagram_based.DatagramBased]
 interface DatagramBasedGidBuilderImpl(T)
 {
 }

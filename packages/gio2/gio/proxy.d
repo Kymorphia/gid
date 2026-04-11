@@ -101,6 +101,7 @@ interface Proxy
   bool supportsHostname();
 }
 
+/// Fluent builder implementation template for [gio.proxy.Proxy]
 interface ProxyGidBuilderImpl(T)
 {
 }

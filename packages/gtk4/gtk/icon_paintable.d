@@ -47,8 +47,8 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   }
 
   /**
-  Get builder for [gtk.icon_paintable.IconPaintable]
-  Returns: New builder object
+      Get builder for [gtk.icon_paintable.IconPaintable]
+      Returns: New builder object
   */
   static IconPaintableGidBuilder builder()
   {
@@ -149,6 +149,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   }
 }
 
+/// Fluent builder implementation template for [gtk.icon_paintable.IconPaintable]
 class IconPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.paintable.PaintableGidBuilderImpl!T, gtk.symbolic_paintable.SymbolicPaintableGidBuilderImpl!T
 {
 
@@ -181,6 +182,10 @@ class IconPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.icon_paintable.IconPaintable]
 final class IconPaintableGidBuilder : IconPaintableGidBuilderImpl!IconPaintableGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IconPaintable build()
   {
     return new IconPaintable(cast(void*)createGObject(IconPaintable._getGType), No.Take);

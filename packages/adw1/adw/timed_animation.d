@@ -57,8 +57,8 @@ class TimedAnimation : adw.animation.Animation
   }
 
   /**
-  Get builder for [adw.timed_animation.TimedAnimation]
-  Returns: New builder object
+      Get builder for [adw.timed_animation.TimedAnimation]
+      Returns: New builder object
   */
   static TimedAnimationGidBuilder builder()
   {
@@ -437,6 +437,7 @@ class TimedAnimation : adw.animation.Animation
   }
 }
 
+/// Fluent builder implementation template for [adw.timed_animation.TimedAnimation]
 class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
 {
 
@@ -544,6 +545,10 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
 /// Fluent builder for [adw.timed_animation.TimedAnimation]
 final class TimedAnimationGidBuilder : TimedAnimationGidBuilderImpl!TimedAnimationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TimedAnimation build()
   {
     return new TimedAnimation(cast(void*)createGObject(TimedAnimation._getGType), No.Take);

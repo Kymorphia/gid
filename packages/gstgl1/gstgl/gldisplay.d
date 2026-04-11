@@ -68,8 +68,8 @@ class GLDisplay : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstgl.gldisplay.GLDisplay]
-  Returns: New builder object
+      Get builder for [gstgl.gldisplay.GLDisplay]
+      Returns: New builder object
   */
   static GLDisplayGidBuilder builder()
   {
@@ -350,6 +350,7 @@ class GLDisplay : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstgl.gldisplay.GLDisplay]
 class GLDisplayGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -357,6 +358,10 @@ class GLDisplayGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstgl.gldisplay.GLDisplay]
 final class GLDisplayGidBuilder : GLDisplayGidBuilderImpl!GLDisplayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLDisplay build()
   {
     return new GLDisplay(cast(void*)createGObject(GLDisplay._getGType), Yes.Take);

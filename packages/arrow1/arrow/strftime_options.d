@@ -39,8 +39,8 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.strftime_options.StrftimeOptions]
-  Returns: New builder object
+      Get builder for [arrow.strftime_options.StrftimeOptions]
+      Returns: New builder object
   */
   static StrftimeOptionsGidBuilder builder()
   {
@@ -94,6 +94,7 @@ class StrftimeOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.strftime_options.StrftimeOptions]
 class StrftimeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -123,6 +124,10 @@ class StrftimeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsG
 /// Fluent builder for [arrow.strftime_options.StrftimeOptions]
 final class StrftimeOptionsGidBuilder : StrftimeOptionsGidBuilderImpl!StrftimeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StrftimeOptions build()
   {
     return new StrftimeOptions(cast(void*)createGObject(StrftimeOptions._getGType), Yes.Take);

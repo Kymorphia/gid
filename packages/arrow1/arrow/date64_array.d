@@ -39,8 +39,8 @@ class Date64Array : arrow.numeric_array.NumericArray
   }
 
   /**
-  Get builder for [arrow.date64_array.Date64Array]
-  Returns: New builder object
+      Get builder for [arrow.date64_array.Date64Array]
+      Returns: New builder object
   */
   static Date64ArrayGidBuilder builder()
   {
@@ -79,6 +79,7 @@ class Date64Array : arrow.numeric_array.NumericArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.date64_array.Date64Array]
 class Date64ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
 {
 }
@@ -86,6 +87,10 @@ class Date64ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderI
 /// Fluent builder for [arrow.date64_array.Date64Array]
 final class Date64ArrayGidBuilder : Date64ArrayGidBuilderImpl!Date64ArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Date64Array build()
   {
     return new Date64Array(cast(void*)createGObject(Date64Array._getGType), Yes.Take);

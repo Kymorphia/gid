@@ -45,8 +45,8 @@ class GLWindow : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstgl.glwindow.GLWindow]
-  Returns: New builder object
+      Get builder for [gstgl.glwindow.GLWindow]
+      Returns: New builder object
   */
   static GLWindowGidBuilder builder()
   {
@@ -568,6 +568,7 @@ class GLWindow : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glwindow.GLWindow]
 class GLWindowGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -575,6 +576,10 @@ class GLWindowGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstgl.glwindow.GLWindow]
 final class GLWindowGidBuilder : GLWindowGidBuilderImpl!GLWindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLWindow build()
   {
     return new GLWindow(cast(void*)createGObject(GLWindow._getGType), Yes.Take);

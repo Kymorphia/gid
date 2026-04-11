@@ -46,8 +46,8 @@ class GridColumn : gtk.widget.Widget
   }
 
   /**
-  Get builder for [panel.grid_column.GridColumn]
-  Returns: New builder object
+      Get builder for [panel.grid_column.GridColumn]
+      Returns: New builder object
   */
   static GridColumnGidBuilder builder()
   {
@@ -125,6 +125,7 @@ class GridColumn : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [panel.grid_column.GridColumn]
 class GridColumnGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -133,6 +134,10 @@ class GridColumnGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [panel.grid_column.GridColumn]
 final class GridColumnGidBuilder : GridColumnGidBuilderImpl!GridColumnGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GridColumn build()
   {
     return new GridColumn(cast(void*)createGObject(GridColumn._getGType), No.Take);

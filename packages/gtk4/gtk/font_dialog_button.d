@@ -67,8 +67,8 @@ class FontDialogButton : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.font_dialog_button.FontDialogButton]
-  Returns: New builder object
+      Get builder for [gtk.font_dialog_button.FontDialogButton]
+      Returns: New builder object
   */
   static FontDialogButtonGidBuilder builder()
   {
@@ -487,6 +487,7 @@ class FontDialogButton : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.font_dialog_button.FontDialogButton]
 class FontDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -592,6 +593,10 @@ class FontDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.font_dialog_button.FontDialogButton]
 final class FontDialogButtonGidBuilder : FontDialogButtonGidBuilderImpl!FontDialogButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontDialogButton build()
   {
     return new FontDialogButton(cast(void*)createGObject(FontDialogButton._getGType), No.Take);

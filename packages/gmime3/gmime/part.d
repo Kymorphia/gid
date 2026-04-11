@@ -45,8 +45,8 @@ class Part : gmime.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.part.Part]
-  Returns: New builder object
+      Get builder for [gmime.part.Part]
+      Returns: New builder object
   */
   static PartGidBuilder builder()
   {
@@ -415,6 +415,7 @@ class Part : gmime.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.part.Part]
 class PartGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -422,6 +423,10 @@ class PartGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.part.Part]
 final class PartGidBuilder : PartGidBuilderImpl!PartGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Part build()
   {
     return new Part(cast(void*)createGObject(Part._getGType), Yes.Take);

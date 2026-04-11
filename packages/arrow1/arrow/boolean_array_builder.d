@@ -39,8 +39,8 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.boolean_array_builder.BooleanArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.boolean_array_builder.BooleanArrayBuilder]
+      Returns: New builder object
   */
   static BooleanArrayBuilderGidBuilder builder()
   {
@@ -111,6 +111,7 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.boolean_array_builder.BooleanArrayBuilder]
 class BooleanArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -118,6 +119,10 @@ class BooleanArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGid
 /// Fluent builder for [arrow.boolean_array_builder.BooleanArrayBuilder]
 final class BooleanArrayBuilderGidBuilder : BooleanArrayBuilderGidBuilderImpl!BooleanArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BooleanArrayBuilder build()
   {
     return new BooleanArrayBuilder(cast(void*)createGObject(BooleanArrayBuilder._getGType), Yes.Take);

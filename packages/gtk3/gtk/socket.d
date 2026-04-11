@@ -98,8 +98,8 @@ class Socket : gtk.container.Container
   }
 
   /**
-  Get builder for [gtk.socket.Socket]
-  Returns: New builder object
+      Get builder for [gtk.socket.Socket]
+      Returns: New builder object
   */
   static SocketGidBuilder builder()
   {
@@ -250,6 +250,7 @@ class Socket : gtk.container.Container
   }
 }
 
+/// Fluent builder implementation template for [gtk.socket.Socket]
 class SocketGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 {
 
@@ -258,6 +259,10 @@ class SocketGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 /// Fluent builder for [gtk.socket.Socket]
 final class SocketGidBuilder : SocketGidBuilderImpl!SocketGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Socket build()
   {
     return new Socket(cast(void*)createGObject(Socket._getGType), No.Take);

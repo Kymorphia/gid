@@ -227,8 +227,8 @@ class Label : gtk.misc.Misc
   }
 
   /**
-  Get builder for [gtk.label.Label]
-  Returns: New builder object
+      Get builder for [gtk.label.Label]
+      Returns: New builder object
   */
   static LabelGidBuilder builder()
   {
@@ -1652,6 +1652,7 @@ class Label : gtk.misc.Misc
   }
 }
 
+/// Fluent builder implementation template for [gtk.label.Label]
 class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
 {
 
@@ -1879,6 +1880,10 @@ class LabelGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
 /// Fluent builder for [gtk.label.Label]
 final class LabelGidBuilder : LabelGidBuilderImpl!LabelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Label build()
   {
     return new Label(cast(void*)createGObject(Label._getGType), No.Take);

@@ -39,8 +39,8 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /**
-  Get builder for [arrow.filter_node_options.FilterNodeOptions]
-  Returns: New builder object
+      Get builder for [arrow.filter_node_options.FilterNodeOptions]
+      Returns: New builder object
   */
   static FilterNodeOptionsGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.filter_node_options.FilterNodeOptions]
 class FilterNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class FilterNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNod
 /// Fluent builder for [arrow.filter_node_options.FilterNodeOptions]
 final class FilterNodeOptionsGidBuilder : FilterNodeOptionsGidBuilderImpl!FilterNodeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterNodeOptions build()
   {
     return new FilterNodeOptions(cast(void*)createGObject(FilterNodeOptions._getGType), Yes.Take);

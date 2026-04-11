@@ -107,6 +107,7 @@ interface MemoryMonitor
   gulong connectLowMemoryWarning(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gio.memory_monitor.MemoryMonitor]
 interface MemoryMonitorGidBuilderImpl(T)
 {
 }

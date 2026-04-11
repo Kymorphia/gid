@@ -47,8 +47,8 @@ class EntryAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Actio
   }
 
   /**
-  Get builder for [gtk.entry_accessible.EntryAccessible]
-  Returns: New builder object
+      Get builder for [gtk.entry_accessible.EntryAccessible]
+      Returns: New builder object
   */
   static EntryAccessibleGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class EntryAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Actio
   alias setDescription = atk.object.ObjectWrap.setDescription;
 }
 
+/// Fluent builder implementation template for [gtk.entry_accessible.EntryAccessible]
 class EntryAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.editable_text.EditableTextGidBuilderImpl!T, atk.text.TextGidBuilderImpl!T
 {
 
@@ -74,6 +75,10 @@ class EntryAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleG
 /// Fluent builder for [gtk.entry_accessible.EntryAccessible]
 final class EntryAccessibleGidBuilder : EntryAccessibleGidBuilderImpl!EntryAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EntryAccessible build()
   {
     return new EntryAccessible(cast(void*)createGObject(EntryAccessible._getGType), No.Take);

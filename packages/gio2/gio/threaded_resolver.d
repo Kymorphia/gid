@@ -41,8 +41,8 @@ class ThreadedResolver : gio.resolver.Resolver
   }
 
   /**
-  Get builder for [gio.threaded_resolver.ThreadedResolver]
-  Returns: New builder object
+      Get builder for [gio.threaded_resolver.ThreadedResolver]
+      Returns: New builder object
   */
   static ThreadedResolverGidBuilder builder()
   {
@@ -50,6 +50,7 @@ class ThreadedResolver : gio.resolver.Resolver
   }
 }
 
+/// Fluent builder implementation template for [gio.threaded_resolver.ThreadedResolver]
 class ThreadedResolverGidBuilderImpl(T) : gio.resolver.ResolverGidBuilderImpl!T
 {
 }
@@ -57,6 +58,10 @@ class ThreadedResolverGidBuilderImpl(T) : gio.resolver.ResolverGidBuilderImpl!T
 /// Fluent builder for [gio.threaded_resolver.ThreadedResolver]
 final class ThreadedResolverGidBuilder : ThreadedResolverGidBuilderImpl!ThreadedResolverGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ThreadedResolver build()
   {
     return new ThreadedResolver(cast(void*)createGObject(ThreadedResolver._getGType), No.Take);

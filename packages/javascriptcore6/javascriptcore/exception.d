@@ -41,8 +41,8 @@ class ExceptionWrap : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [javascriptcore.exception.ExceptionWrap]
-  Returns: New builder object
+      Get builder for [javascriptcore.exception.ExceptionWrap]
+      Returns: New builder object
   */
   static ExceptionWrapGidBuilder builder()
   {
@@ -180,6 +180,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [javascriptcore.exception.ExceptionWrap]
 class ExceptionWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -187,6 +188,10 @@ class ExceptionWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [javascriptcore.exception.ExceptionWrap]
 final class ExceptionWrapGidBuilder : ExceptionWrapGidBuilderImpl!ExceptionWrapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExceptionWrap build()
   {
     return new ExceptionWrap(cast(void*)createGObject(ExceptionWrap._getGType), Yes.Take);

@@ -45,8 +45,8 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
   }
 
   /**
-  Get builder for [gstgl.glbase_filter.GLBaseFilter]
-  Returns: New builder object
+      Get builder for [gstgl.glbase_filter.GLBaseFilter]
+      Returns: New builder object
   */
   static GLBaseFilterGidBuilder builder()
   {
@@ -77,6 +77,7 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glbase_filter.GLBaseFilter]
 class GLBaseFilterGidBuilderImpl(T) : gstbase.base_transform.BaseTransformGidBuilderImpl!T
 {
 }
@@ -84,6 +85,10 @@ class GLBaseFilterGidBuilderImpl(T) : gstbase.base_transform.BaseTransformGidBui
 /// Fluent builder for [gstgl.glbase_filter.GLBaseFilter]
 final class GLBaseFilterGidBuilder : GLBaseFilterGidBuilderImpl!GLBaseFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLBaseFilter build()
   {
     return new GLBaseFilter(cast(void*)createGObject(GLBaseFilter._getGType), No.Take);

@@ -40,8 +40,8 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.schema.Schema]
-  Returns: New builder object
+      Get builder for [arrow.schema.Schema]
+      Returns: New builder object
   */
   static SchemaGidBuilder builder()
   {
@@ -216,6 +216,7 @@ class Schema : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.schema.Schema]
 class SchemaGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -229,6 +230,10 @@ class SchemaGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.schema.Schema]
 final class SchemaGidBuilder : SchemaGidBuilderImpl!SchemaGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Schema build()
   {
     return new Schema(cast(void*)createGObject(Schema._getGType), Yes.Take);

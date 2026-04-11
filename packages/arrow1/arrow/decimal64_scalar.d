@@ -41,8 +41,8 @@ class Decimal64Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.decimal64_scalar.Decimal64Scalar]
-  Returns: New builder object
+      Get builder for [arrow.decimal64_scalar.Decimal64Scalar]
+      Returns: New builder object
   */
   static Decimal64ScalarGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class Decimal64Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal64_scalar.Decimal64Scalar]
 class Decimal64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 
@@ -85,6 +86,10 @@ class Decimal64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.decimal64_scalar.Decimal64Scalar]
 final class Decimal64ScalarGidBuilder : Decimal64ScalarGidBuilderImpl!Decimal64ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal64Scalar build()
   {
     return new Decimal64Scalar(cast(void*)createGObject(Decimal64Scalar._getGType), Yes.Take);

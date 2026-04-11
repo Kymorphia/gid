@@ -48,8 +48,8 @@ class Cancellable : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.cancellable.Cancellable]
-  Returns: New builder object
+      Get builder for [gio.cancellable.Cancellable]
+      Returns: New builder object
   */
   static CancellableGidBuilder builder()
   {
@@ -384,6 +384,7 @@ class Cancellable : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.cancellable.Cancellable]
 class CancellableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -391,6 +392,10 @@ class CancellableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.cancellable.Cancellable]
 final class CancellableGidBuilder : CancellableGidBuilderImpl!CancellableGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Cancellable build()
   {
     return new Cancellable(cast(void*)createGObject(Cancellable._getGType), Yes.Take);

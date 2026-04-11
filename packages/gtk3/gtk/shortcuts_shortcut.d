@@ -50,8 +50,8 @@ class ShortcutsShortcut : gtk.box.Box
   }
 
   /**
-  Get builder for [gtk.shortcuts_shortcut.ShortcutsShortcut]
-  Returns: New builder object
+      Get builder for [gtk.shortcuts_shortcut.ShortcutsShortcut]
+      Returns: New builder object
   */
   static ShortcutsShortcutGidBuilder builder()
   {
@@ -326,6 +326,7 @@ class ShortcutsShortcut : gtk.box.Box
   }
 }
 
+/// Fluent builder implementation template for [gtk.shortcuts_shortcut.ShortcutsShortcut]
 class ShortcutsShortcutGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 {
 
@@ -495,6 +496,10 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 /// Fluent builder for [gtk.shortcuts_shortcut.ShortcutsShortcut]
 final class ShortcutsShortcutGidBuilder : ShortcutsShortcutGidBuilderImpl!ShortcutsShortcutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ShortcutsShortcut build()
   {
     return new ShortcutsShortcut(cast(void*)createGObject(ShortcutsShortcut._getGType), No.Take);

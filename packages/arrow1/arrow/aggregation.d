@@ -39,8 +39,8 @@ class Aggregation : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.aggregation.Aggregation]
-  Returns: New builder object
+      Get builder for [arrow.aggregation.Aggregation]
+      Returns: New builder object
   */
   static AggregationGidBuilder builder()
   {
@@ -95,6 +95,7 @@ class Aggregation : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.aggregation.Aggregation]
 class AggregationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -146,6 +147,10 @@ class AggregationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.aggregation.Aggregation]
 final class AggregationGidBuilder : AggregationGidBuilderImpl!AggregationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Aggregation build()
   {
     return new Aggregation(cast(void*)createGObject(Aggregation._getGType), Yes.Take);

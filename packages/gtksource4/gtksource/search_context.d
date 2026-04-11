@@ -46,8 +46,8 @@ class SearchContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.search_context.SearchContext]
-  Returns: New builder object
+      Get builder for [gtksource.search_context.SearchContext]
+      Returns: New builder object
   */
   static SearchContextGidBuilder builder()
   {
@@ -517,6 +517,7 @@ class SearchContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.search_context.SearchContext]
 class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -570,6 +571,10 @@ class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.search_context.SearchContext]
 final class SearchContextGidBuilder : SearchContextGidBuilderImpl!SearchContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SearchContext build()
   {
     return new SearchContext(cast(void*)createGObject(SearchContext._getGType), Yes.Take);

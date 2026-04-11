@@ -45,8 +45,8 @@ class Class : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [javascriptcore.class_.Class]
-  Returns: New builder object
+      Get builder for [javascriptcore.class_.Class]
+      Returns: New builder object
   */
   static ClassGidBuilder builder()
   {
@@ -96,6 +96,7 @@ class Class : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [javascriptcore.class_.Class]
 class ClassGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -136,6 +137,10 @@ class ClassGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [javascriptcore.class_.Class]
 final class ClassGidBuilder : ClassGidBuilderImpl!ClassGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Class build()
   {
     return new Class(cast(void*)createGObject(Class._getGType), No.Take);

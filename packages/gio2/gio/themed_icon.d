@@ -50,8 +50,8 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   }
 
   /**
-  Get builder for [gio.themed_icon.ThemedIcon]
-  Returns: New builder object
+      Get builder for [gio.themed_icon.ThemedIcon]
+      Returns: New builder object
   */
   static ThemedIconGidBuilder builder()
   {
@@ -205,6 +205,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   }
 }
 
+/// Fluent builder implementation template for [gio.themed_icon.ThemedIcon]
 class ThemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T
 {
 
@@ -250,6 +251,10 @@ class ThemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [gio.themed_icon.ThemedIcon]
 final class ThemedIconGidBuilder : ThemedIconGidBuilderImpl!ThemedIconGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ThemedIcon build()
   {
     return new ThemedIcon(cast(void*)createGObject(ThemedIcon._getGType), Yes.Take);

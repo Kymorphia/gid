@@ -42,8 +42,8 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
   }
 
   /**
-  Get builder for [gstallocators.dma_buf_allocator.DmaBufAllocator]
-  Returns: New builder object
+      Get builder for [gstallocators.dma_buf_allocator.DmaBufAllocator]
+      Returns: New builder object
   */
   static DmaBufAllocatorGidBuilder builder()
   {
@@ -104,6 +104,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
   }
 }
 
+/// Fluent builder implementation template for [gstallocators.dma_buf_allocator.DmaBufAllocator]
 class DmaBufAllocatorGidBuilderImpl(T) : gstallocators.fd_allocator.FdAllocatorGidBuilderImpl!T
 {
 }
@@ -111,6 +112,10 @@ class DmaBufAllocatorGidBuilderImpl(T) : gstallocators.fd_allocator.FdAllocatorG
 /// Fluent builder for [gstallocators.dma_buf_allocator.DmaBufAllocator]
 final class DmaBufAllocatorGidBuilder : DmaBufAllocatorGidBuilderImpl!DmaBufAllocatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DmaBufAllocator build()
   {
     return new DmaBufAllocator(cast(void*)createGObject(DmaBufAllocator._getGType), Yes.Take);

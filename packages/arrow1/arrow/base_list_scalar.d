@@ -40,8 +40,8 @@ class BaseListScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.base_list_scalar.BaseListScalar]
-  Returns: New builder object
+      Get builder for [arrow.base_list_scalar.BaseListScalar]
+      Returns: New builder object
   */
   static BaseListScalarGidBuilder builder()
   {
@@ -58,6 +58,7 @@ class BaseListScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.base_list_scalar.BaseListScalar]
 class BaseListScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class BaseListScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.base_list_scalar.BaseListScalar]
 final class BaseListScalarGidBuilder : BaseListScalarGidBuilderImpl!BaseListScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BaseListScalar build()
   {
     return new BaseListScalar(cast(void*)createGObject(BaseListScalar._getGType), No.Take);

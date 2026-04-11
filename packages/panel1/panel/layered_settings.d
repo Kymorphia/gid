@@ -45,8 +45,8 @@ class LayeredSettings : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [panel.layered_settings.LayeredSettings]
-  Returns: New builder object
+      Get builder for [panel.layered_settings.LayeredSettings]
+      Returns: New builder object
   */
   static LayeredSettingsGidBuilder builder()
   {
@@ -351,6 +351,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [panel.layered_settings.LayeredSettings]
 class LayeredSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -370,6 +371,10 @@ class LayeredSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [panel.layered_settings.LayeredSettings]
 final class LayeredSettingsGidBuilder : LayeredSettingsGidBuilderImpl!LayeredSettingsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LayeredSettings build()
   {
     return new LayeredSettings(cast(void*)createGObject(LayeredSettings._getGType), Yes.Take);

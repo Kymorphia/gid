@@ -39,8 +39,8 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
   }
 
   /**
-  Get builder for [arrow.resizable_buffer.ResizableBuffer]
-  Returns: New builder object
+      Get builder for [arrow.resizable_buffer.ResizableBuffer]
+      Returns: New builder object
   */
   static ResizableBufferGidBuilder builder()
   {
@@ -81,6 +81,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
   }
 }
 
+/// Fluent builder implementation template for [arrow.resizable_buffer.ResizableBuffer]
 class ResizableBufferGidBuilderImpl(T) : arrow.mutable_buffer.MutableBufferGidBuilderImpl!T
 {
 }
@@ -88,6 +89,10 @@ class ResizableBufferGidBuilderImpl(T) : arrow.mutable_buffer.MutableBufferGidBu
 /// Fluent builder for [arrow.resizable_buffer.ResizableBuffer]
 final class ResizableBufferGidBuilder : ResizableBufferGidBuilderImpl!ResizableBufferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ResizableBuffer build()
   {
     return new ResizableBuffer(cast(void*)createGObject(ResizableBuffer._getGType), Yes.Take);

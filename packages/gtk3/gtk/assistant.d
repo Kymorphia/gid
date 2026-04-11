@@ -75,8 +75,8 @@ class Assistant : gtk.window.Window
   }
 
   /**
-  Get builder for [gtk.assistant.Assistant]
-  Returns: New builder object
+      Get builder for [gtk.assistant.Assistant]
+      Returns: New builder object
   */
   static AssistantGidBuilder builder()
   {
@@ -727,6 +727,7 @@ class Assistant : gtk.window.Window
   }
 }
 
+/// Fluent builder implementation template for [gtk.assistant.Assistant]
 class AssistantGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 {
 
@@ -750,6 +751,10 @@ class AssistantGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 /// Fluent builder for [gtk.assistant.Assistant]
 final class AssistantGidBuilder : AssistantGidBuilderImpl!AssistantGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Assistant build()
   {
     return new Assistant(cast(void*)createGObject(Assistant._getGType), No.Take);

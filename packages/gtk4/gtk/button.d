@@ -79,8 +79,8 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-  Get builder for [gtk.button.Button]
-  Returns: New builder object
+      Get builder for [gtk.button.Button]
+      Returns: New builder object
   */
   static ButtonGidBuilder builder()
   {
@@ -541,6 +541,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   }
 }
 
+/// Fluent builder implementation template for [gtk.button.Button]
 class ButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
 {
 
@@ -623,6 +624,10 @@ class ButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
 /// Fluent builder for [gtk.button.Button]
 final class ButtonGidBuilder : ButtonGidBuilderImpl!ButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Button build()
   {
     return new Button(cast(void*)createGObject(Button._getGType), No.Take);

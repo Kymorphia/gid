@@ -2924,6 +2924,7 @@ interface File
   bool unmountMountableWithOperationFinish(gio.async_result.AsyncResult result);
 }
 
+/// Fluent builder implementation template for [gio.file.File]
 interface FileGidBuilderImpl(T)
 {
 }

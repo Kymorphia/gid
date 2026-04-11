@@ -87,8 +87,8 @@ class Frame : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.frame.Frame]
-  Returns: New builder object
+      Get builder for [gtk.frame.Frame]
+      Returns: New builder object
   */
   static FrameGidBuilder builder()
   {
@@ -289,6 +289,7 @@ class Frame : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.frame.Frame]
 class FrameGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -327,6 +328,10 @@ class FrameGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.frame.Frame]
 final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Frame build()
   {
     return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);

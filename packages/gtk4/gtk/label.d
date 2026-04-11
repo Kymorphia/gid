@@ -235,8 +235,8 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-  Get builder for [gtk.label.Label]
-  Returns: New builder object
+      Get builder for [gtk.label.Label]
+      Returns: New builder object
   */
   static LabelGidBuilder builder()
   {
@@ -1767,6 +1767,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 }
 
+/// Fluent builder implementation template for [gtk.label.Label]
 class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_text.AccessibleTextGidBuilderImpl!T
 {
 
@@ -2051,6 +2052,10 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
 /// Fluent builder for [gtk.label.Label]
 final class LabelGidBuilder : LabelGidBuilderImpl!LabelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Label build()
   {
     return new Label(cast(void*)createGObject(Label._getGType), No.Take);

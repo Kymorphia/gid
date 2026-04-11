@@ -41,8 +41,8 @@ class TcpConnection : gio.socket_connection.SocketConnection
   }
 
   /**
-  Get builder for [gio.tcp_connection.TcpConnection]
-  Returns: New builder object
+      Get builder for [gio.tcp_connection.TcpConnection]
+      Returns: New builder object
   */
   static TcpConnectionGidBuilder builder()
   {
@@ -100,6 +100,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
   }
 }
 
+/// Fluent builder implementation template for [gio.tcp_connection.TcpConnection]
 class TcpConnectionGidBuilderImpl(T) : gio.socket_connection.SocketConnectionGidBuilderImpl!T
 {
 
@@ -118,6 +119,10 @@ class TcpConnectionGidBuilderImpl(T) : gio.socket_connection.SocketConnectionGid
 /// Fluent builder for [gio.tcp_connection.TcpConnection]
 final class TcpConnectionGidBuilder : TcpConnectionGidBuilderImpl!TcpConnectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TcpConnection build()
   {
     return new TcpConnection(cast(void*)createGObject(TcpConnection._getGType), No.Take);

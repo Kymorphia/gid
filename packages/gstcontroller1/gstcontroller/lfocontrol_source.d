@@ -48,8 +48,8 @@ class LFOControlSource : gst.control_source.ControlSource
   }
 
   /**
-  Get builder for [gstcontroller.lfocontrol_source.LFOControlSource]
-  Returns: New builder object
+      Get builder for [gstcontroller.lfocontrol_source.LFOControlSource]
+      Returns: New builder object
   */
   static LFOControlSourceGidBuilder builder()
   {
@@ -175,6 +175,7 @@ class LFOControlSource : gst.control_source.ControlSource
   }
 }
 
+/// Fluent builder implementation template for [gstcontroller.lfocontrol_source.LFOControlSource]
 class LFOControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBuilderImpl!T
 {
 
@@ -243,6 +244,10 @@ class LFOControlSourceGidBuilderImpl(T) : gst.control_source.ControlSourceGidBui
 /// Fluent builder for [gstcontroller.lfocontrol_source.LFOControlSource]
 final class LFOControlSourceGidBuilder : LFOControlSourceGidBuilderImpl!LFOControlSourceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LFOControlSource build()
   {
     return new LFOControlSource(cast(void*)createGObject(LFOControlSource._getGType), Yes.Take);

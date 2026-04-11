@@ -38,8 +38,8 @@ class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
   }
 
   /**
-  Get builder for [arrow.half_float_data_type.HalfFloatDataType]
-  Returns: New builder object
+      Get builder for [arrow.half_float_data_type.HalfFloatDataType]
+      Returns: New builder object
   */
   static HalfFloatDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.half_float_data_type.HalfFloatDataType]
 class HalfFloatDataTypeGidBuilderImpl(T) : arrow.floating_point_data_type.FloatingPointDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class HalfFloatDataTypeGidBuilderImpl(T) : arrow.floating_point_data_type.Floati
 /// Fluent builder for [arrow.half_float_data_type.HalfFloatDataType]
 final class HalfFloatDataTypeGidBuilder : HalfFloatDataTypeGidBuilderImpl!HalfFloatDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HalfFloatDataType build()
   {
     return new HalfFloatDataType(cast(void*)createGObject(HalfFloatDataType._getGType), Yes.Take);

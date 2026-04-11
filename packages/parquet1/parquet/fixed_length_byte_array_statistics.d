@@ -39,8 +39,8 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
   }
 
   /**
-  Get builder for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
-  Returns: New builder object
+      Get builder for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
+      Returns: New builder object
   */
   static FixedLengthByteArrayStatisticsGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
   }
 }
 
+/// Fluent builder implementation template for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
 class FixedLengthByteArrayStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
 {
 }
@@ -73,6 +74,10 @@ class FixedLengthByteArrayStatisticsGidBuilderImpl(T) : parquet.statistics.Stati
 /// Fluent builder for [parquet.fixed_length_byte_array_statistics.FixedLengthByteArrayStatistics]
 final class FixedLengthByteArrayStatisticsGidBuilder : FixedLengthByteArrayStatisticsGidBuilderImpl!FixedLengthByteArrayStatisticsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FixedLengthByteArrayStatistics build()
   {
     return new FixedLengthByteArrayStatistics(cast(void*)createGObject(FixedLengthByteArrayStatistics._getGType), No.Take);

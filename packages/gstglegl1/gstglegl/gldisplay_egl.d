@@ -43,8 +43,8 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   }
 
   /**
-  Get builder for [gstglegl.gldisplay_egl.GLDisplayEGL]
-  Returns: New builder object
+      Get builder for [gstglegl.gldisplay_egl.GLDisplayEGL]
+      Returns: New builder object
   */
   static GLDisplayEGLGidBuilder builder()
   {
@@ -119,6 +119,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   }
 }
 
+/// Fluent builder implementation template for [gstglegl.gldisplay_egl.GLDisplayEGL]
 class GLDisplayEGLGidBuilderImpl(T) : gstgl.gldisplay.GLDisplayGidBuilderImpl!T
 {
 }
@@ -126,6 +127,10 @@ class GLDisplayEGLGidBuilderImpl(T) : gstgl.gldisplay.GLDisplayGidBuilderImpl!T
 /// Fluent builder for [gstglegl.gldisplay_egl.GLDisplayEGL]
 final class GLDisplayEGLGidBuilder : GLDisplayEGLGidBuilderImpl!GLDisplayEGLGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLDisplayEGL build()
   {
     return new GLDisplayEGL(cast(void*)createGObject(GLDisplayEGL._getGType), Yes.Take);

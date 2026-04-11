@@ -188,8 +188,8 @@ class BaseParse : gst.element.Element
   }
 
   /**
-  Get builder for [gstbase.base_parse.BaseParse]
-  Returns: New builder object
+      Get builder for [gstbase.base_parse.BaseParse]
+      Returns: New builder object
   */
   static BaseParseGidBuilder builder()
   {
@@ -511,6 +511,7 @@ class BaseParse : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstbase.base_parse.BaseParse]
 class BaseParseGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
@@ -534,6 +535,10 @@ class BaseParseGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstbase.base_parse.BaseParse]
 final class BaseParseGidBuilder : BaseParseGidBuilderImpl!BaseParseGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BaseParse build()
   {
     return new BaseParse(cast(void*)createGObject(BaseParse._getGType), No.Take);

@@ -48,8 +48,8 @@ class StringSorter : gtk.sorter.Sorter
   }
 
   /**
-  Get builder for [gtk.string_sorter.StringSorter]
-  Returns: New builder object
+      Get builder for [gtk.string_sorter.StringSorter]
+      Returns: New builder object
   */
   static StringSorterGidBuilder builder()
   {
@@ -214,6 +214,7 @@ class StringSorter : gtk.sorter.Sorter
   }
 }
 
+/// Fluent builder implementation template for [gtk.string_sorter.StringSorter]
 class StringSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 {
 
@@ -260,6 +261,10 @@ class StringSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 /// Fluent builder for [gtk.string_sorter.StringSorter]
 final class StringSorterGidBuilder : StringSorterGidBuilderImpl!StringSorterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StringSorter build()
   {
     return new StringSorter(cast(void*)createGObject(StringSorter._getGType), Yes.Take);

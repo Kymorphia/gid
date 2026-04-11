@@ -111,8 +111,8 @@ class PrintContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.print_context.PrintContext]
-  Returns: New builder object
+      Get builder for [gtk.print_context.PrintContext]
+      Returns: New builder object
   */
   static PrintContextGidBuilder builder()
   {
@@ -266,6 +266,7 @@ class PrintContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.print_context.PrintContext]
 class PrintContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -273,6 +274,10 @@ class PrintContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.print_context.PrintContext]
 final class PrintContextGidBuilder : PrintContextGidBuilderImpl!PrintContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PrintContext build()
   {
     return new PrintContext(cast(void*)createGObject(PrintContext._getGType), No.Take);

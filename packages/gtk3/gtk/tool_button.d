@@ -72,8 +72,8 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /**
-  Get builder for [gtk.tool_button.ToolButton]
-  Returns: New builder object
+      Get builder for [gtk.tool_button.ToolButton]
+      Returns: New builder object
   */
   static ToolButtonGidBuilder builder()
   {
@@ -425,6 +425,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 }
 
+/// Fluent builder implementation template for [gtk.tool_button.ToolButton]
 class ToolButtonGidBuilderImpl(T) : gtk.tool_item.ToolItemGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
 {
 
@@ -478,6 +479,10 @@ class ToolButtonGidBuilderImpl(T) : gtk.tool_item.ToolItemGidBuilderImpl!T, gtk.
 /// Fluent builder for [gtk.tool_button.ToolButton]
 final class ToolButtonGidBuilder : ToolButtonGidBuilderImpl!ToolButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToolButton build()
   {
     return new ToolButton(cast(void*)createGObject(ToolButton._getGType), No.Take);

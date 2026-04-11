@@ -56,8 +56,8 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   }
 
   /**
-  Get builder for [gtk.tool_item_group.ToolItemGroup]
-  Returns: New builder object
+      Get builder for [gtk.tool_item_group.ToolItemGroup]
+      Returns: New builder object
   */
   static ToolItemGroupGidBuilder builder()
   {
@@ -348,6 +348,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   }
 }
 
+/// Fluent builder implementation template for [gtk.tool_item_group.ToolItemGroup]
 class ToolItemGroupGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.tool_shell.ToolShellGidBuilderImpl!T
 {
 
@@ -387,6 +388,10 @@ class ToolItemGroupGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, 
 /// Fluent builder for [gtk.tool_item_group.ToolItemGroup]
 final class ToolItemGroupGidBuilder : ToolItemGroupGidBuilderImpl!ToolItemGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToolItemGroup build()
   {
     return new ToolItemGroup(cast(void*)createGObject(ToolItemGroup._getGType), No.Take);

@@ -63,8 +63,8 @@ class HBox : gtk.box.Box
   }
 
   /**
-  Get builder for [gtk.hbox.HBox]
-  Returns: New builder object
+      Get builder for [gtk.hbox.HBox]
+      Returns: New builder object
   */
   static HBoxGidBuilder builder()
   {
@@ -90,6 +90,7 @@ class HBox : gtk.box.Box
   }
 }
 
+/// Fluent builder implementation template for [gtk.hbox.HBox]
 class HBoxGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 {
 
@@ -98,6 +99,10 @@ class HBoxGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 /// Fluent builder for [gtk.hbox.HBox]
 final class HBoxGidBuilder : HBoxGidBuilderImpl!HBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HBox build()
   {
     return new HBox(cast(void*)createGObject(HBox._getGType), No.Take);

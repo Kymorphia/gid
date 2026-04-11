@@ -52,8 +52,8 @@ class CookieManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.cookie_manager.CookieManager]
-  Returns: New builder object
+      Get builder for [webkit.cookie_manager.CookieManager]
+      Returns: New builder object
   */
   static CookieManagerGidBuilder builder()
   {
@@ -412,6 +412,7 @@ class CookieManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.cookie_manager.CookieManager]
 class CookieManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -419,6 +420,10 @@ class CookieManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.cookie_manager.CookieManager]
 final class CookieManagerGidBuilder : CookieManagerGidBuilderImpl!CookieManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CookieManager build()
   {
     return new CookieManager(cast(void*)createGObject(CookieManager._getGType), No.Take);

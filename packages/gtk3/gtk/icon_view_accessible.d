@@ -42,8 +42,8 @@ class IconViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
   }
 
   /**
-  Get builder for [gtk.icon_view_accessible.IconViewAccessible]
-  Returns: New builder object
+      Get builder for [gtk.icon_view_accessible.IconViewAccessible]
+      Returns: New builder object
   */
   static IconViewAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class IconViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
   mixin SelectionT!();
 }
 
+/// Fluent builder implementation template for [gtk.icon_view_accessible.IconViewAccessible]
 class IconViewAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class IconViewAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAc
 /// Fluent builder for [gtk.icon_view_accessible.IconViewAccessible]
 final class IconViewAccessibleGidBuilder : IconViewAccessibleGidBuilderImpl!IconViewAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IconViewAccessible build()
   {
     return new IconViewAccessible(cast(void*)createGObject(IconViewAccessible._getGType), No.Take);

@@ -384,6 +384,7 @@ template ValueT()
   }
 }
 
+/// Fluent builder implementation template for [atk.value.Value]
 template ValueGidBuilderT()
 {
 }

@@ -54,8 +54,8 @@ class URISchemeRequest : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.urischeme_request.URISchemeRequest]
-  Returns: New builder object
+      Get builder for [webkit.urischeme_request.URISchemeRequest]
+      Returns: New builder object
   */
   static URISchemeRequestGidBuilder builder()
   {
@@ -183,6 +183,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.urischeme_request.URISchemeRequest]
 class URISchemeRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -190,6 +191,10 @@ class URISchemeRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [webkit.urischeme_request.URISchemeRequest]
 final class URISchemeRequestGidBuilder : URISchemeRequestGidBuilderImpl!URISchemeRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   URISchemeRequest build()
   {
     return new URISchemeRequest(cast(void*)createGObject(URISchemeRequest._getGType), No.Take);

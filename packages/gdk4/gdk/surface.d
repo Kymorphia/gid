@@ -62,8 +62,8 @@ class Surface : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.surface.Surface]
-  Returns: New builder object
+      Get builder for [gdk.surface.Surface]
+      Returns: New builder object
   */
   static SurfaceGidBuilder builder()
   {
@@ -856,6 +856,7 @@ class Surface : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.surface.Surface]
 class SurfaceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -896,6 +897,10 @@ class SurfaceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.surface.Surface]
 final class SurfaceGidBuilder : SurfaceGidBuilderImpl!SurfaceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Surface build()
   {
     return new Surface(cast(void*)createGObject(Surface._getGType), No.Take);

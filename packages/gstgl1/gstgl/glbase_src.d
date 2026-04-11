@@ -44,8 +44,8 @@ class GLBaseSrc : gstbase.push_src.PushSrc
   }
 
   /**
-  Get builder for [gstgl.glbase_src.GLBaseSrc]
-  Returns: New builder object
+      Get builder for [gstgl.glbase_src.GLBaseSrc]
+      Returns: New builder object
   */
   static GLBaseSrcGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class GLBaseSrc : gstbase.push_src.PushSrc
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glbase_src.GLBaseSrc]
 class GLBaseSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T
 {
 
@@ -78,6 +79,10 @@ class GLBaseSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T
 /// Fluent builder for [gstgl.glbase_src.GLBaseSrc]
 final class GLBaseSrcGidBuilder : GLBaseSrcGidBuilderImpl!GLBaseSrcGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLBaseSrc build()
   {
     return new GLBaseSrc(cast(void*)createGObject(GLBaseSrc._getGType), No.Take);

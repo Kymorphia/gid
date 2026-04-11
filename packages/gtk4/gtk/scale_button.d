@@ -69,8 +69,8 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /**
-  Get builder for [gtk.scale_button.ScaleButton]
-  Returns: New builder object
+      Get builder for [gtk.scale_button.ScaleButton]
+      Returns: New builder object
   */
   static ScaleButtonGidBuilder builder()
   {
@@ -449,6 +449,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 }
 
+/// Fluent builder implementation template for [gtk.scale_button.ScaleButton]
 class ScaleButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_range.AccessibleRangeGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -492,6 +493,10 @@ class ScaleButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
 /// Fluent builder for [gtk.scale_button.ScaleButton]
 final class ScaleButtonGidBuilder : ScaleButtonGidBuilderImpl!ScaleButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ScaleButton build()
   {
     return new ScaleButton(cast(void*)createGObject(ScaleButton._getGType), No.Take);

@@ -78,8 +78,8 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   }
 
   /**
-  Get builder for [gtk.app_chooser_dialog.AppChooserDialog]
-  Returns: New builder object
+      Get builder for [gtk.app_chooser_dialog.AppChooserDialog]
+      Returns: New builder object
   */
   static AppChooserDialogGidBuilder builder()
   {
@@ -211,6 +211,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.app_chooser_dialog.AppChooserDialog]
 class AppChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk.app_chooser.AppChooserGidBuilderImpl!T
 {
 
@@ -247,6 +248,10 @@ class AppChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk
 /// Fluent builder for [gtk.app_chooser_dialog.AppChooserDialog]
 final class AppChooserDialogGidBuilder : AppChooserDialogGidBuilderImpl!AppChooserDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AppChooserDialog build()
   {
     return new AppChooserDialog(cast(void*)createGObject(AppChooserDialog._getGType), No.Take);

@@ -44,8 +44,8 @@ class ToggleButtonAccessible : gtk.button_accessible.ButtonAccessible
   }
 
   /**
-  Get builder for [gtk.toggle_button_accessible.ToggleButtonAccessible]
-  Returns: New builder object
+      Get builder for [gtk.toggle_button_accessible.ToggleButtonAccessible]
+      Returns: New builder object
   */
   static ToggleButtonAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class ToggleButtonAccessible : gtk.button_accessible.ButtonAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.toggle_button_accessible.ToggleButtonAccessible]
 class ToggleButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAccessibleGidBuilderImpl!T
 {
 
@@ -61,6 +62,10 @@ class ToggleButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAcce
 /// Fluent builder for [gtk.toggle_button_accessible.ToggleButtonAccessible]
 final class ToggleButtonAccessibleGidBuilder : ToggleButtonAccessibleGidBuilderImpl!ToggleButtonAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToggleButtonAccessible build()
   {
     return new ToggleButtonAccessible(cast(void*)createGObject(ToggleButtonAccessible._getGType), No.Take);

@@ -41,8 +41,8 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
   }
 
   /**
-  Get builder for [gstpbutils.discoverer_container_info.DiscovererContainerInfo]
-  Returns: New builder object
+      Get builder for [gstpbutils.discoverer_container_info.DiscovererContainerInfo]
+      Returns: New builder object
   */
   static DiscovererContainerInfoGidBuilder builder()
   {
@@ -68,6 +68,7 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.discoverer_container_info.DiscovererContainerInfo]
 class DiscovererContainerInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.DiscovererStreamInfoGidBuilderImpl!T
 {
 }
@@ -75,6 +76,10 @@ class DiscovererContainerInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_in
 /// Fluent builder for [gstpbutils.discoverer_container_info.DiscovererContainerInfo]
 final class DiscovererContainerInfoGidBuilder : DiscovererContainerInfoGidBuilderImpl!DiscovererContainerInfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DiscovererContainerInfo build()
   {
     return new DiscovererContainerInfo(cast(void*)createGObject(DiscovererContainerInfo._getGType), No.Take);

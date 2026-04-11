@@ -56,8 +56,8 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-  Get builder for [gtksource.style_scheme_preview.StyleSchemePreview]
-  Returns: New builder object
+      Get builder for [gtksource.style_scheme_preview.StyleSchemePreview]
+      Returns: New builder object
   */
   static StyleSchemePreviewGidBuilder builder()
   {
@@ -163,6 +163,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   }
 }
 
+/// Fluent builder implementation template for [gtksource.style_scheme_preview.StyleSchemePreview]
 class StyleSchemePreviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
 {
 
@@ -184,6 +185,10 @@ class StyleSchemePreviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, g
 /// Fluent builder for [gtksource.style_scheme_preview.StyleSchemePreview]
 final class StyleSchemePreviewGidBuilder : StyleSchemePreviewGidBuilderImpl!StyleSchemePreviewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StyleSchemePreview build()
   {
     return new StyleSchemePreview(cast(void*)createGObject(StyleSchemePreview._getGType), No.Take);

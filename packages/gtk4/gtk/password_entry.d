@@ -82,8 +82,8 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /**
-  Get builder for [gtk.password_entry.PasswordEntry]
-  Returns: New builder object
+      Get builder for [gtk.password_entry.PasswordEntry]
+      Returns: New builder object
   */
   static PasswordEntryGidBuilder builder()
   {
@@ -273,6 +273,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 }
 
+/// Fluent builder implementation template for [gtk.password_entry.PasswordEntry]
 class PasswordEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
 {
 
@@ -328,6 +329,10 @@ class PasswordEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.ed
 /// Fluent builder for [gtk.password_entry.PasswordEntry]
 final class PasswordEntryGidBuilder : PasswordEntryGidBuilderImpl!PasswordEntryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PasswordEntry build()
   {
     return new PasswordEntry(cast(void*)createGObject(PasswordEntry._getGType), No.Take);

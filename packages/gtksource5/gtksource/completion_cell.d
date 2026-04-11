@@ -64,8 +64,8 @@ class CompletionCell : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtksource.completion_cell.CompletionCell]
-  Returns: New builder object
+      Get builder for [gtksource.completion_cell.CompletionCell]
+      Returns: New builder object
   */
   static CompletionCellGidBuilder builder()
   {
@@ -199,6 +199,7 @@ class CompletionCell : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion_cell.CompletionCell]
 class CompletionCellGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -237,6 +238,10 @@ class CompletionCellGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtksource.completion_cell.CompletionCell]
 final class CompletionCellGidBuilder : CompletionCellGidBuilderImpl!CompletionCellGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CompletionCell build()
   {
     return new CompletionCell(cast(void*)createGObject(CompletionCell._getGType), No.Take);

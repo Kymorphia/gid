@@ -38,8 +38,8 @@ class GLMixerPad : gstgl.glbase_mixer_pad.GLBaseMixerPad
   }
 
   /**
-  Get builder for [gstgl.glmixer_pad.GLMixerPad]
-  Returns: New builder object
+      Get builder for [gstgl.glmixer_pad.GLMixerPad]
+      Returns: New builder object
   */
   static GLMixerPadGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class GLMixerPad : gstgl.glbase_mixer_pad.GLBaseMixerPad
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glmixer_pad.GLMixerPad]
 class GLMixerPadGidBuilderImpl(T) : gstgl.glbase_mixer_pad.GLBaseMixerPadGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class GLMixerPadGidBuilderImpl(T) : gstgl.glbase_mixer_pad.GLBaseMixerPadGidBuil
 /// Fluent builder for [gstgl.glmixer_pad.GLMixerPad]
 final class GLMixerPadGidBuilder : GLMixerPadGidBuilderImpl!GLMixerPadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLMixerPad build()
   {
     return new GLMixerPad(cast(void*)createGObject(GLMixerPad._getGType), No.Take);

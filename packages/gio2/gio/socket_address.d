@@ -46,8 +46,8 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
   }
 
   /**
-  Get builder for [gio.socket_address.SocketAddress]
-  Returns: New builder object
+      Get builder for [gio.socket_address.SocketAddress]
+      Returns: New builder object
   */
   static SocketAddressGidBuilder builder()
   {
@@ -136,6 +136,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
   }
 }
 
+/// Fluent builder implementation template for [gio.socket_address.SocketAddress]
 class SocketAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.socket_connectable.SocketConnectableGidBuilderImpl!T
 {
 
@@ -145,6 +146,10 @@ class SocketAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.socket_address.SocketAddress]
 final class SocketAddressGidBuilder : SocketAddressGidBuilderImpl!SocketAddressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SocketAddress build()
   {
     return new SocketAddress(cast(void*)createGObject(SocketAddress._getGType), No.Take);

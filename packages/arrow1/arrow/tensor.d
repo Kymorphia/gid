@@ -40,8 +40,8 @@ class Tensor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.tensor.Tensor]
-  Returns: New builder object
+      Get builder for [arrow.tensor.Tensor]
+      Returns: New builder object
   */
   static TensorGidBuilder builder()
   {
@@ -206,6 +206,7 @@ class Tensor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.tensor.Tensor]
 class TensorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -225,6 +226,10 @@ class TensorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.tensor.Tensor]
 final class TensorGidBuilder : TensorGidBuilderImpl!TensorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Tensor build()
   {
     return new Tensor(cast(void*)createGObject(Tensor._getGType), Yes.Take);

@@ -38,8 +38,8 @@ class Date64Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.date64_scalar.Date64Scalar]
-  Returns: New builder object
+      Get builder for [arrow.date64_scalar.Date64Scalar]
+      Returns: New builder object
   */
   static Date64ScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class Date64Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.date64_scalar.Date64Scalar]
 class Date64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class Date64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.date64_scalar.Date64Scalar]
 final class Date64ScalarGidBuilder : Date64ScalarGidBuilderImpl!Date64ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Date64Scalar build()
   {
     return new Date64Scalar(cast(void*)createGObject(Date64Scalar._getGType), Yes.Take);

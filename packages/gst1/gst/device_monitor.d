@@ -104,8 +104,8 @@ class DeviceMonitor : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.device_monitor.DeviceMonitor]
-  Returns: New builder object
+      Get builder for [gst.device_monitor.DeviceMonitor]
+      Returns: New builder object
   */
   static DeviceMonitorGidBuilder builder()
   {
@@ -276,6 +276,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.device_monitor.DeviceMonitor]
 class DeviceMonitorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -289,6 +290,10 @@ class DeviceMonitorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.device_monitor.DeviceMonitor]
 final class DeviceMonitorGidBuilder : DeviceMonitorGidBuilderImpl!DeviceMonitorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DeviceMonitor build()
   {
     return new DeviceMonitor(cast(void*)createGObject(DeviceMonitor._getGType), Yes.Take);

@@ -98,8 +98,8 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-  Get builder for [gst.object.ObjectWrap]
-  Returns: New builder object
+      Get builder for [gst.object.ObjectWrap]
+      Returns: New builder object
   */
   static ObjectWrapGidBuilder builder()
   {
@@ -658,6 +658,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   }
 }
 
+/// Fluent builder implementation template for [gst.object.ObjectWrap]
 class ObjectWrapGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
 {
 
@@ -686,6 +687,10 @@ class ObjectWrapGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
 /// Fluent builder for [gst.object.ObjectWrap]
 final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ObjectWrap build()
   {
     return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), No.Take);

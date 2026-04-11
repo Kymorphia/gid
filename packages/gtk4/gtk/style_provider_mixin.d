@@ -61,6 +61,7 @@ template StyleProviderT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.style_provider.StyleProvider]
 template StyleProviderGidBuilderT()
 {
 }

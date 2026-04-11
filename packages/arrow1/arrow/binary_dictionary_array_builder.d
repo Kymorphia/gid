@@ -42,8 +42,8 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.binary_dictionary_array_builder.BinaryDictionaryArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.binary_dictionary_array_builder.BinaryDictionaryArrayBuilder]
+      Returns: New builder object
   */
   static BinaryDictionaryArrayBuilderGidBuilder builder()
   {
@@ -171,6 +171,7 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.binary_dictionary_array_builder.BinaryDictionaryArrayBuilder]
 class BinaryDictionaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -178,6 +179,10 @@ class BinaryDictionaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayB
 /// Fluent builder for [arrow.binary_dictionary_array_builder.BinaryDictionaryArrayBuilder]
 final class BinaryDictionaryArrayBuilderGidBuilder : BinaryDictionaryArrayBuilderGidBuilderImpl!BinaryDictionaryArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BinaryDictionaryArrayBuilder build()
   {
     return new BinaryDictionaryArrayBuilder(cast(void*)createGObject(BinaryDictionaryArrayBuilder._getGType), Yes.Take);

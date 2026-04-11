@@ -48,8 +48,8 @@ class GLTexture : gdk.texture.Texture
   }
 
   /**
-  Get builder for [gdk.gltexture.GLTexture]
-  Returns: New builder object
+      Get builder for [gdk.gltexture.GLTexture]
+      Returns: New builder object
   */
   static GLTextureGidBuilder builder()
   {
@@ -105,6 +105,7 @@ class GLTexture : gdk.texture.Texture
   }
 }
 
+/// Fluent builder implementation template for [gdk.gltexture.GLTexture]
 class GLTextureGidBuilderImpl(T) : gdk.texture.TextureGidBuilderImpl!T
 {
 
@@ -113,6 +114,10 @@ class GLTextureGidBuilderImpl(T) : gdk.texture.TextureGidBuilderImpl!T
 /// Fluent builder for [gdk.gltexture.GLTexture]
 final class GLTextureGidBuilder : GLTextureGidBuilderImpl!GLTextureGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLTexture build()
   {
     return new GLTexture(cast(void*)createGObject(GLTexture._getGType), Yes.Take);

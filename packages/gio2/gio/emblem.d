@@ -47,8 +47,8 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
   }
 
   /**
-  Get builder for [gio.emblem.Emblem]
-  Returns: New builder object
+      Get builder for [gio.emblem.Emblem]
+      Returns: New builder object
   */
   static EmblemGidBuilder builder()
   {
@@ -131,6 +131,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
   }
 }
 
+/// Fluent builder implementation template for [gio.emblem.Emblem]
 class EmblemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T
 {
 
@@ -162,6 +163,10 @@ class EmblemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.i
 /// Fluent builder for [gio.emblem.Emblem]
 final class EmblemGidBuilder : EmblemGidBuilderImpl!EmblemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Emblem build()
   {
     return new Emblem(cast(void*)createGObject(Emblem._getGType), Yes.Take);

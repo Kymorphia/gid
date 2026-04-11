@@ -41,8 +41,8 @@ class RowGroupMetadata : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [parquet.row_group_metadata.RowGroupMetadata]
-  Returns: New builder object
+      Get builder for [parquet.row_group_metadata.RowGroupMetadata]
+      Returns: New builder object
   */
   static RowGroupMetadataGidBuilder builder()
   {
@@ -118,6 +118,7 @@ class RowGroupMetadata : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [parquet.row_group_metadata.RowGroupMetadata]
 class RowGroupMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -137,6 +138,10 @@ class RowGroupMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [parquet.row_group_metadata.RowGroupMetadata]
 final class RowGroupMetadataGidBuilder : RowGroupMetadataGidBuilderImpl!RowGroupMetadataGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RowGroupMetadata build()
   {
     return new RowGroupMetadata(cast(void*)createGObject(RowGroupMetadata._getGType), No.Take);

@@ -61,6 +61,7 @@ interface CellAccessibleParent
   void updateRelationset(gtk.cell_accessible.CellAccessible cell, atk.relation_set.RelationSet relationset);
 }
 
+/// Fluent builder implementation template for [gtk.cell_accessible_parent.CellAccessibleParent]
 interface CellAccessibleParentGidBuilderImpl(T)
 {
 }

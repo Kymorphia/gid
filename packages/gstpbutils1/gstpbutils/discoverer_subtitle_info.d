@@ -41,8 +41,8 @@ class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStrea
   }
 
   /**
-  Get builder for [gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo]
-  Returns: New builder object
+      Get builder for [gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo]
+      Returns: New builder object
   */
   static DiscovererSubtitleInfoGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStrea
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo]
 class DiscovererSubtitleInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.DiscovererStreamInfoGidBuilderImpl!T
 {
 }
@@ -66,6 +67,10 @@ class DiscovererSubtitleInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_inf
 /// Fluent builder for [gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo]
 final class DiscovererSubtitleInfoGidBuilder : DiscovererSubtitleInfoGidBuilderImpl!DiscovererSubtitleInfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DiscovererSubtitleInfo build()
   {
     return new DiscovererSubtitleInfo(cast(void*)createGObject(DiscovererSubtitleInfo._getGType), No.Take);

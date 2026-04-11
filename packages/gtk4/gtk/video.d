@@ -62,8 +62,8 @@ class Video : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.video.Video]
-  Returns: New builder object
+      Get builder for [gtk.video.Video]
+      Returns: New builder object
   */
   static VideoGidBuilder builder()
   {
@@ -399,6 +399,7 @@ class Video : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.video.Video]
 class VideoGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -462,6 +463,10 @@ class VideoGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.video.Video]
 final class VideoGidBuilder : VideoGidBuilderImpl!VideoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Video build()
   {
     return new Video(cast(void*)createGObject(Video._getGType), No.Take);

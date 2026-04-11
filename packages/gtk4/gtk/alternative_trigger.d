@@ -45,8 +45,8 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-  Get builder for [gtk.alternative_trigger.AlternativeTrigger]
-  Returns: New builder object
+      Get builder for [gtk.alternative_trigger.AlternativeTrigger]
+      Returns: New builder object
   */
   static AlternativeTriggerGidBuilder builder()
   {
@@ -123,6 +123,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 }
 
+/// Fluent builder implementation template for [gtk.alternative_trigger.AlternativeTrigger]
 class AlternativeTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBuilderImpl!T
 {
 
@@ -152,6 +153,10 @@ class AlternativeTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTrigger
 /// Fluent builder for [gtk.alternative_trigger.AlternativeTrigger]
 final class AlternativeTriggerGidBuilder : AlternativeTriggerGidBuilderImpl!AlternativeTriggerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AlternativeTrigger build()
   {
     return new AlternativeTrigger(cast(void*)createGObject(AlternativeTrigger._getGType), Yes.Take);

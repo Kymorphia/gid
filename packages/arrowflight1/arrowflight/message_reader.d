@@ -40,8 +40,8 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
   }
 
   /**
-  Get builder for [arrowflight.message_reader.MessageReader]
-  Returns: New builder object
+      Get builder for [arrowflight.message_reader.MessageReader]
+      Returns: New builder object
   */
   static MessageReaderGidBuilder builder()
   {
@@ -58,6 +58,7 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.message_reader.MessageReader]
 class MessageReaderGidBuilderImpl(T) : arrowflight.record_batch_reader.RecordBatchReaderGidBuilderImpl!T
 {
 }
@@ -65,6 +66,10 @@ class MessageReaderGidBuilderImpl(T) : arrowflight.record_batch_reader.RecordBat
 /// Fluent builder for [arrowflight.message_reader.MessageReader]
 final class MessageReaderGidBuilder : MessageReaderGidBuilderImpl!MessageReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MessageReader build()
   {
     return new MessageReader(cast(void*)createGObject(MessageReader._getGType), No.Take);

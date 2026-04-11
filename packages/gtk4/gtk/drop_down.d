@@ -106,8 +106,8 @@ class DropDown : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.drop_down.DropDown]
-  Returns: New builder object
+      Get builder for [gtk.drop_down.DropDown]
+      Returns: New builder object
   */
   static DropDownGidBuilder builder()
   {
@@ -631,6 +631,7 @@ class DropDown : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.drop_down.DropDown]
 class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -751,6 +752,10 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.drop_down.DropDown]
 final class DropDownGidBuilder : DropDownGidBuilderImpl!DropDownGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DropDown build()
   {
     return new DropDown(cast(void*)createGObject(DropDown._getGType), No.Take);

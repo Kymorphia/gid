@@ -248,6 +248,7 @@ template ScrollableT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.scrollable.Scrollable]
 template ScrollableGidBuilderT()
 {
 

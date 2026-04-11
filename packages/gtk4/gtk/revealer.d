@@ -67,8 +67,8 @@ class Revealer : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.revealer.Revealer]
-  Returns: New builder object
+      Get builder for [gtk.revealer.Revealer]
+      Returns: New builder object
   */
   static RevealerGidBuilder builder()
   {
@@ -289,6 +289,7 @@ class Revealer : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.revealer.Revealer]
 class RevealerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -341,6 +342,10 @@ class RevealerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.revealer.Revealer]
 final class RevealerGidBuilder : RevealerGidBuilderImpl!RevealerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Revealer build()
   {
     return new Revealer(cast(void*)createGObject(Revealer._getGType), No.Take);

@@ -39,8 +39,8 @@ class Time64DataType : arrow.time_data_type.TimeDataType
   }
 
   /**
-  Get builder for [arrow.time64_data_type.Time64DataType]
-  Returns: New builder object
+      Get builder for [arrow.time64_data_type.Time64DataType]
+      Returns: New builder object
   */
   static Time64DataTypeGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class Time64DataType : arrow.time_data_type.TimeDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.time64_data_type.Time64DataType]
 class Time64DataTypeGidBuilderImpl(T) : arrow.time_data_type.TimeDataTypeGidBuilderImpl!T
 {
 }
@@ -66,6 +67,10 @@ class Time64DataTypeGidBuilderImpl(T) : arrow.time_data_type.TimeDataTypeGidBuil
 /// Fluent builder for [arrow.time64_data_type.Time64DataType]
 final class Time64DataTypeGidBuilder : Time64DataTypeGidBuilderImpl!Time64DataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Time64DataType build()
   {
     return new Time64DataType(cast(void*)createGObject(Time64DataType._getGType), Yes.Take);

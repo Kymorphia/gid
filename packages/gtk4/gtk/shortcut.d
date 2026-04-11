@@ -57,8 +57,8 @@ class Shortcut : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.shortcut.Shortcut]
-  Returns: New builder object
+      Get builder for [gtk.shortcut.Shortcut]
+      Returns: New builder object
   */
   static ShortcutGidBuilder builder()
   {
@@ -211,6 +211,7 @@ class Shortcut : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.shortcut.Shortcut]
 class ShortcutGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -251,6 +252,10 @@ class ShortcutGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.shortcut.Shortcut]
 final class ShortcutGidBuilder : ShortcutGidBuilderImpl!ShortcutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Shortcut build()
   {
     return new Shortcut(cast(void*)createGObject(Shortcut._getGType), Yes.Take);

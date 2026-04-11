@@ -72,8 +72,8 @@ class TagDemux : gst.element.Element
   }
 
   /**
-  Get builder for [gsttag.tag_demux.TagDemux]
-  Returns: New builder object
+      Get builder for [gsttag.tag_demux.TagDemux]
+      Returns: New builder object
   */
   static TagDemuxGidBuilder builder()
   {
@@ -81,6 +81,7 @@ class TagDemux : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gsttag.tag_demux.TagDemux]
 class TagDemuxGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 }
@@ -88,6 +89,10 @@ class TagDemuxGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gsttag.tag_demux.TagDemux]
 final class TagDemuxGidBuilder : TagDemuxGidBuilderImpl!TagDemuxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TagDemux build()
   {
     return new TagDemux(cast(void*)createGObject(TagDemux._getGType), No.Take);

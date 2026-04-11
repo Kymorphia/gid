@@ -171,6 +171,7 @@ template CellEditableT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_editable.CellEditable]
 template CellEditableGidBuilderT()
 {
 

@@ -53,8 +53,8 @@ class AlertDialog : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.alert_dialog.AlertDialog]
-  Returns: New builder object
+      Get builder for [gtk.alert_dialog.AlertDialog]
+      Returns: New builder object
   */
   static AlertDialogGidBuilder builder()
   {
@@ -418,6 +418,7 @@ class AlertDialog : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.alert_dialog.AlertDialog]
 class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -496,6 +497,10 @@ class AlertDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.alert_dialog.AlertDialog]
 final class AlertDialogGidBuilder : AlertDialogGidBuilderImpl!AlertDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AlertDialog build()
   {
     return new AlertDialog(cast(void*)createGObject(AlertDialog._getGType), Yes.Take);

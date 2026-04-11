@@ -96,8 +96,8 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 
   /**
-  Get builder for [secret.service.Service]
-  Returns: New builder object
+      Get builder for [secret.service.Service]
+      Returns: New builder object
   */
   static ServiceGidBuilder builder()
   {
@@ -1323,6 +1323,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 }
 
+/// Fluent builder implementation template for [secret.service.Service]
 class ServiceGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T, secret.backend.BackendGidBuilderImpl!T
 {
 
@@ -1332,6 +1333,10 @@ class ServiceGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T, secre
 /// Fluent builder for [secret.service.Service]
 final class ServiceGidBuilder : ServiceGidBuilderImpl!ServiceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Service build()
   {
     return new Service(cast(void*)createGObject(Service._getGType), No.Take);

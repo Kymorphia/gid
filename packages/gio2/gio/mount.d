@@ -439,6 +439,7 @@ interface Mount
   gulong connectUnmounted(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gio.mount.Mount]
 interface MountGidBuilderImpl(T)
 {
 }

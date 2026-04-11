@@ -82,8 +82,8 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.stack_switcher.StackSwitcher]
-  Returns: New builder object
+      Get builder for [gtk.stack_switcher.StackSwitcher]
+      Returns: New builder object
   */
   static StackSwitcherGidBuilder builder()
   {
@@ -146,6 +146,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.stack_switcher.StackSwitcher]
 class StackSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -166,6 +167,10 @@ class StackSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.or
 /// Fluent builder for [gtk.stack_switcher.StackSwitcher]
 final class StackSwitcherGidBuilder : StackSwitcherGidBuilderImpl!StackSwitcherGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StackSwitcher build()
   {
     return new StackSwitcher(cast(void*)createGObject(StackSwitcher._getGType), No.Take);

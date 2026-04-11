@@ -64,8 +64,8 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.scale_button.ScaleButton]
-  Returns: New builder object
+      Get builder for [gtk.scale_button.ScaleButton]
+      Returns: New builder object
   */
   static ScaleButtonGidBuilder builder()
   {
@@ -370,6 +370,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.scale_button.ScaleButton]
 class ScaleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -397,6 +398,10 @@ class ScaleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.orie
 /// Fluent builder for [gtk.scale_button.ScaleButton]
 final class ScaleButtonGidBuilder : ScaleButtonGidBuilderImpl!ScaleButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ScaleButton build()
   {
     return new ScaleButton(cast(void*)createGObject(ScaleButton._getGType), No.Take);

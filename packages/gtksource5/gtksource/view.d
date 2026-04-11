@@ -122,8 +122,8 @@ class View : gtk.text_view.TextView
   }
 
   /**
-  Get builder for [gtksource.view.View]
-  Returns: New builder object
+      Get builder for [gtksource.view.View]
+      Returns: New builder object
   */
   static ViewGidBuilder builder()
   {
@@ -1480,6 +1480,7 @@ class View : gtk.text_view.TextView
   }
 }
 
+/// Fluent builder implementation template for [gtksource.view.View]
 class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
 {
 
@@ -1640,6 +1641,10 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
 /// Fluent builder for [gtksource.view.View]
 final class ViewGidBuilder : ViewGidBuilderImpl!ViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   View build()
   {
     return new View(cast(void*)createGObject(View._getGType), No.Take);

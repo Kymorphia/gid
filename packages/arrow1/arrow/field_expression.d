@@ -39,8 +39,8 @@ class FieldExpression : arrow.expression.Expression
   }
 
   /**
-  Get builder for [arrow.field_expression.FieldExpression]
-  Returns: New builder object
+      Get builder for [arrow.field_expression.FieldExpression]
+      Returns: New builder object
   */
   static FieldExpressionGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class FieldExpression : arrow.expression.Expression
   }
 }
 
+/// Fluent builder implementation template for [arrow.field_expression.FieldExpression]
 class FieldExpressionGidBuilderImpl(T) : arrow.expression.ExpressionGidBuilderImpl!T
 {
 }
@@ -67,6 +68,10 @@ class FieldExpressionGidBuilderImpl(T) : arrow.expression.ExpressionGidBuilderIm
 /// Fluent builder for [arrow.field_expression.FieldExpression]
 final class FieldExpressionGidBuilder : FieldExpressionGidBuilderImpl!FieldExpressionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FieldExpression build()
   {
     return new FieldExpression(cast(void*)createGObject(FieldExpression._getGType), Yes.Take);

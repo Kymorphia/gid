@@ -43,8 +43,8 @@ class FontFace : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [pango.font_face.FontFace]
-  Returns: New builder object
+      Get builder for [pango.font_face.FontFace]
+      Returns: New builder object
   */
   static FontFaceGidBuilder builder()
   {
@@ -136,6 +136,7 @@ class FontFace : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [pango.font_face.FontFace]
 class FontFaceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -143,6 +144,10 @@ class FontFaceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [pango.font_face.FontFace]
 final class FontFaceGidBuilder : FontFaceGidBuilderImpl!FontFaceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontFace build()
   {
     return new FontFace(cast(void*)createGObject(FontFace._getGType), No.Take);

@@ -44,8 +44,8 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
   }
 
   /**
-  Get builder for [gstgl.glbase_mixer.GLBaseMixer]
-  Returns: New builder object
+      Get builder for [gstgl.glbase_mixer.GLBaseMixer]
+      Returns: New builder object
   */
   static GLBaseMixerGidBuilder builder()
   {
@@ -71,6 +71,7 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glbase_mixer.GLBaseMixer]
 class GLBaseMixerGidBuilderImpl(T) : gstvideo.video_aggregator.VideoAggregatorGidBuilderImpl!T
 {
 }
@@ -78,6 +79,10 @@ class GLBaseMixerGidBuilderImpl(T) : gstvideo.video_aggregator.VideoAggregatorGi
 /// Fluent builder for [gstgl.glbase_mixer.GLBaseMixer]
 final class GLBaseMixerGidBuilder : GLBaseMixerGidBuilderImpl!GLBaseMixerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLBaseMixer build()
   {
     return new GLBaseMixer(cast(void*)createGObject(GLBaseMixer._getGType), No.Take);

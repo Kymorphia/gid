@@ -105,6 +105,7 @@ template EditableTextT()
   }
 }
 
+/// Fluent builder implementation template for [atk.editable_text.EditableText]
 template EditableTextGidBuilderT()
 {
 }

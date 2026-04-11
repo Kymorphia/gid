@@ -46,8 +46,8 @@ class AutocryptHeader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.autocrypt_header.AutocryptHeader]
-  Returns: New builder object
+      Get builder for [gmime.autocrypt_header.AutocryptHeader]
+      Returns: New builder object
   */
   static AutocryptHeaderGidBuilder builder()
   {
@@ -277,6 +277,7 @@ class AutocryptHeader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.autocrypt_header.AutocryptHeader]
 class AutocryptHeaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -284,6 +285,10 @@ class AutocryptHeaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gmime.autocrypt_header.AutocryptHeader]
 final class AutocryptHeaderGidBuilder : AutocryptHeaderGidBuilderImpl!AutocryptHeaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AutocryptHeader build()
   {
     return new AutocryptHeader(cast(void*)createGObject(AutocryptHeader._getGType), Yes.Take);

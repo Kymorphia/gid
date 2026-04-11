@@ -42,8 +42,8 @@ class BoolFilter : gtk.filter.Filter
   }
 
   /**
-  Get builder for [gtk.bool_filter.BoolFilter]
-  Returns: New builder object
+      Get builder for [gtk.bool_filter.BoolFilter]
+      Returns: New builder object
   */
   static BoolFilterGidBuilder builder()
   {
@@ -152,6 +152,7 @@ class BoolFilter : gtk.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gtk.bool_filter.BoolFilter]
 class BoolFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
 {
 
@@ -181,6 +182,10 @@ class BoolFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gtk.bool_filter.BoolFilter]
 final class BoolFilterGidBuilder : BoolFilterGidBuilderImpl!BoolFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BoolFilter build()
   {
     return new BoolFilter(cast(void*)createGObject(BoolFilter._getGType), Yes.Take);

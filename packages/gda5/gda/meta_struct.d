@@ -43,8 +43,8 @@ class MetaStruct : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.meta_struct.MetaStruct]
-  Returns: New builder object
+      Get builder for [gda.meta_struct.MetaStruct]
+      Returns: New builder object
   */
   static MetaStructGidBuilder builder()
   {
@@ -294,6 +294,7 @@ class MetaStruct : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.meta_struct.MetaStruct]
 class MetaStructGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -313,6 +314,10 @@ class MetaStructGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.meta_struct.MetaStruct]
 final class MetaStructGidBuilder : MetaStructGidBuilderImpl!MetaStructGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MetaStruct build()
   {
     return new MetaStruct(cast(void*)createGObject(MetaStruct._getGType), Yes.Take);

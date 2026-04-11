@@ -66,8 +66,8 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [adw.carousel_indicator_lines.CarouselIndicatorLines]
-  Returns: New builder object
+      Get builder for [adw.carousel_indicator_lines.CarouselIndicatorLines]
+      Returns: New builder object
   */
   static CarouselIndicatorLinesGidBuilder builder()
   {
@@ -130,6 +130,7 @@ class CarouselIndicatorLines : gtk.widget.Widget, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [adw.carousel_indicator_lines.CarouselIndicatorLines]
 class CarouselIndicatorLinesGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -150,6 +151,10 @@ class CarouselIndicatorLinesGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!
 /// Fluent builder for [adw.carousel_indicator_lines.CarouselIndicatorLines]
 final class CarouselIndicatorLinesGidBuilder : CarouselIndicatorLinesGidBuilderImpl!CarouselIndicatorLinesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CarouselIndicatorLines build()
   {
     return new CarouselIndicatorLines(cast(void*)createGObject(CarouselIndicatorLines._getGType), No.Take);

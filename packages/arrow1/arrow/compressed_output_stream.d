@@ -45,8 +45,8 @@ class CompressedOutputStream : arrow.output_stream.OutputStream
   }
 
   /**
-  Get builder for [arrow.compressed_output_stream.CompressedOutputStream]
-  Returns: New builder object
+      Get builder for [arrow.compressed_output_stream.CompressedOutputStream]
+      Returns: New builder object
   */
   static CompressedOutputStreamGidBuilder builder()
   {
@@ -77,6 +77,7 @@ class CompressedOutputStream : arrow.output_stream.OutputStream
   }
 }
 
+/// Fluent builder implementation template for [arrow.compressed_output_stream.CompressedOutputStream]
 class CompressedOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBuilderImpl!T
 {
 
@@ -97,6 +98,10 @@ class CompressedOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStream
 /// Fluent builder for [arrow.compressed_output_stream.CompressedOutputStream]
 final class CompressedOutputStreamGidBuilder : CompressedOutputStreamGidBuilderImpl!CompressedOutputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CompressedOutputStream build()
   {
     return new CompressedOutputStream(cast(void*)createGObject(CompressedOutputStream._getGType), Yes.Take);

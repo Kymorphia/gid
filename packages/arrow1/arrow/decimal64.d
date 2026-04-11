@@ -40,8 +40,8 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.decimal64.Decimal64]
-  Returns: New builder object
+      Get builder for [arrow.decimal64.Decimal64]
+      Returns: New builder object
   */
   static Decimal64GidBuilder builder()
   {
@@ -232,6 +232,7 @@ class Decimal64 : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal64.Decimal64]
 class Decimal64GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -245,6 +246,10 @@ class Decimal64GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.decimal64.Decimal64]
 final class Decimal64GidBuilder : Decimal64GidBuilderImpl!Decimal64GidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal64 build()
   {
     return new Decimal64(cast(void*)createGObject(Decimal64._getGType), No.Take);

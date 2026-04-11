@@ -113,6 +113,7 @@ template MemoryMonitorT()
   }
 }
 
+/// Fluent builder implementation template for [gio.memory_monitor.MemoryMonitor]
 template MemoryMonitorGidBuilderT()
 {
 }

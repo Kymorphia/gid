@@ -74,8 +74,8 @@ class ColorChooserWidget : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 
   /**
-  Get builder for [gtk.color_chooser_widget.ColorChooserWidget]
-  Returns: New builder object
+      Get builder for [gtk.color_chooser_widget.ColorChooserWidget]
+      Returns: New builder object
   */
   static ColorChooserWidgetGidBuilder builder()
   {
@@ -119,6 +119,7 @@ class ColorChooserWidget : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.color_chooser_widget.ColorChooserWidget]
 class ColorChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.color_chooser.ColorChooserGidBuilderImpl!T
 {
 
@@ -141,6 +142,10 @@ class ColorChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, g
 /// Fluent builder for [gtk.color_chooser_widget.ColorChooserWidget]
 final class ColorChooserWidgetGidBuilder : ColorChooserWidgetGidBuilderImpl!ColorChooserWidgetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColorChooserWidget build()
   {
     return new ColorChooserWidget(cast(void*)createGObject(ColorChooserWidget._getGType), No.Take);

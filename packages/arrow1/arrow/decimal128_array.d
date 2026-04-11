@@ -40,8 +40,8 @@ class Decimal128Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   }
 
   /**
-  Get builder for [arrow.decimal128_array.Decimal128Array]
-  Returns: New builder object
+      Get builder for [arrow.decimal128_array.Decimal128Array]
+      Returns: New builder object
   */
   static Decimal128ArrayGidBuilder builder()
   {
@@ -69,6 +69,7 @@ class Decimal128Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal128_array.Decimal128Array]
 class Decimal128ArrayGidBuilderImpl(T) : arrow.fixed_size_binary_array.FixedSizeBinaryArrayGidBuilderImpl!T
 {
 }
@@ -76,6 +77,10 @@ class Decimal128ArrayGidBuilderImpl(T) : arrow.fixed_size_binary_array.FixedSize
 /// Fluent builder for [arrow.decimal128_array.Decimal128Array]
 final class Decimal128ArrayGidBuilder : Decimal128ArrayGidBuilderImpl!Decimal128ArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal128Array build()
   {
     return new Decimal128Array(cast(void*)createGObject(Decimal128Array._getGType), No.Take);

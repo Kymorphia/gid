@@ -40,8 +40,8 @@ class ContainerAccessible : gtk.widget_accessible.WidgetAccessible
   }
 
   /**
-  Get builder for [gtk.container_accessible.ContainerAccessible]
-  Returns: New builder object
+      Get builder for [gtk.container_accessible.ContainerAccessible]
+      Returns: New builder object
   */
   static ContainerAccessibleGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class ContainerAccessible : gtk.widget_accessible.WidgetAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.container_accessible.ContainerAccessible]
 class ContainerAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T
 {
 
@@ -57,6 +58,10 @@ class ContainerAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessi
 /// Fluent builder for [gtk.container_accessible.ContainerAccessible]
 final class ContainerAccessibleGidBuilder : ContainerAccessibleGidBuilderImpl!ContainerAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContainerAccessible build()
   {
     return new ContainerAccessible(cast(void*)createGObject(ContainerAccessible._getGType), No.Take);

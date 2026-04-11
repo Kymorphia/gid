@@ -40,8 +40,8 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.day_time_interval_scalar.DayTimeIntervalScalar]
-  Returns: New builder object
+      Get builder for [arrow.day_time_interval_scalar.DayTimeIntervalScalar]
+      Returns: New builder object
   */
   static DayTimeIntervalScalarGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.day_time_interval_scalar.DayTimeIntervalScalar]
 class DayTimeIntervalScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -73,6 +74,10 @@ class DayTimeIntervalScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl
 /// Fluent builder for [arrow.day_time_interval_scalar.DayTimeIntervalScalar]
 final class DayTimeIntervalScalarGidBuilder : DayTimeIntervalScalarGidBuilderImpl!DayTimeIntervalScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DayTimeIntervalScalar build()
   {
     return new DayTimeIntervalScalar(cast(void*)createGObject(DayTimeIntervalScalar._getGType), Yes.Take);

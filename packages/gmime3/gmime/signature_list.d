@@ -41,8 +41,8 @@ class SignatureList : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.signature_list.SignatureList]
-  Returns: New builder object
+      Get builder for [gmime.signature_list.SignatureList]
+      Returns: New builder object
   */
   static SignatureListGidBuilder builder()
   {
@@ -198,6 +198,7 @@ class SignatureList : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.signature_list.SignatureList]
 class SignatureListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -205,6 +206,10 @@ class SignatureListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.signature_list.SignatureList]
 final class SignatureListGidBuilder : SignatureListGidBuilderImpl!SignatureListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SignatureList build()
   {
     return new SignatureList(cast(void*)createGObject(SignatureList._getGType), Yes.Take);

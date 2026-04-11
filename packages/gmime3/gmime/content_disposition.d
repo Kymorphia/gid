@@ -43,8 +43,8 @@ class ContentDisposition : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.content_disposition.ContentDisposition]
-  Returns: New builder object
+      Get builder for [gmime.content_disposition.ContentDisposition]
+      Returns: New builder object
   */
   static ContentDispositionGidBuilder builder()
   {
@@ -181,6 +181,7 @@ class ContentDisposition : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.content_disposition.ContentDisposition]
 class ContentDispositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -188,6 +189,10 @@ class ContentDispositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [gmime.content_disposition.ContentDisposition]
 final class ContentDispositionGidBuilder : ContentDispositionGidBuilderImpl!ContentDispositionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContentDisposition build()
   {
     return new ContentDisposition(cast(void*)createGObject(ContentDisposition._getGType), Yes.Take);

@@ -42,8 +42,8 @@ class GLShader : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstgl.glshader.GLShader]
-  Returns: New builder object
+      Get builder for [gstgl.glshader.GLShader]
+      Returns: New builder object
   */
   static GLShaderGidBuilder builder()
   {
@@ -577,6 +577,7 @@ class GLShader : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glshader.GLShader]
 class GLShaderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -584,6 +585,10 @@ class GLShaderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstgl.glshader.GLShader]
 final class GLShaderGidBuilder : GLShaderGidBuilderImpl!GLShaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLShader build()
   {
     return new GLShader(cast(void*)createGObject(GLShader._getGType), Yes.Take);

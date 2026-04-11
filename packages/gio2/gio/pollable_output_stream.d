@@ -147,6 +147,7 @@ interface PollableOutputStream
   gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null);
 }
 
+/// Fluent builder implementation template for [gio.pollable_output_stream.PollableOutputStream]
 interface PollableOutputStreamGidBuilderImpl(T)
 {
 }

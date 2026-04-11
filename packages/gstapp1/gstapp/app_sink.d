@@ -84,8 +84,8 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   }
 
   /**
-  Get builder for [gstapp.app_sink.AppSink]
-  Returns: New builder object
+      Get builder for [gstapp.app_sink.AppSink]
+      Returns: New builder object
   */
   static AppSinkGidBuilder builder()
   {
@@ -1105,6 +1105,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   }
 }
 
+/// Fluent builder implementation template for [gstapp.app_sink.AppSink]
 class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst.urihandler.URIHandlerGidBuilderImpl!T
 {
 
@@ -1185,6 +1186,10 @@ class AppSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T, gst
 /// Fluent builder for [gstapp.app_sink.AppSink]
 final class AppSinkGidBuilder : AppSinkGidBuilderImpl!AppSinkGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AppSink build()
   {
     return new AppSink(cast(void*)createGObject(AppSink._getGType), No.Take);

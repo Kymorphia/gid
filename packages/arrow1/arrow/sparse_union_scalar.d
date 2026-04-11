@@ -40,8 +40,8 @@ class SparseUnionScalar : arrow.union_scalar.UnionScalar
   }
 
   /**
-  Get builder for [arrow.sparse_union_scalar.SparseUnionScalar]
-  Returns: New builder object
+      Get builder for [arrow.sparse_union_scalar.SparseUnionScalar]
+      Returns: New builder object
   */
   static SparseUnionScalarGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class SparseUnionScalar : arrow.union_scalar.UnionScalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.sparse_union_scalar.SparseUnionScalar]
 class SparseUnionScalarGidBuilderImpl(T) : arrow.union_scalar.UnionScalarGidBuilderImpl!T
 {
 }
@@ -64,6 +65,10 @@ class SparseUnionScalarGidBuilderImpl(T) : arrow.union_scalar.UnionScalarGidBuil
 /// Fluent builder for [arrow.sparse_union_scalar.SparseUnionScalar]
 final class SparseUnionScalarGidBuilder : SparseUnionScalarGidBuilderImpl!SparseUnionScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SparseUnionScalar build()
   {
     return new SparseUnionScalar(cast(void*)createGObject(SparseUnionScalar._getGType), Yes.Take);

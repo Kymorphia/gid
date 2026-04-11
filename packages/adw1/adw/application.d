@@ -76,8 +76,8 @@ class Application : gtk.application.Application
   }
 
   /**
-  Get builder for [adw.application.Application]
-  Returns: New builder object
+      Get builder for [adw.application.Application]
+      Returns: New builder object
   */
   static ApplicationGidBuilder builder()
   {
@@ -134,6 +134,7 @@ class Application : gtk.application.Application
   }
 }
 
+/// Fluent builder implementation template for [adw.application.Application]
 class ApplicationGidBuilderImpl(T) : gtk.application.ApplicationGidBuilderImpl!T
 {
 
@@ -142,6 +143,10 @@ class ApplicationGidBuilderImpl(T) : gtk.application.ApplicationGidBuilderImpl!T
 /// Fluent builder for [adw.application.Application]
 final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Application build()
   {
     return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);

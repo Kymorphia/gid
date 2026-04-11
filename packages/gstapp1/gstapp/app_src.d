@@ -113,8 +113,8 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   }
 
   /**
-  Get builder for [gstapp.app_src.AppSrc]
-  Returns: New builder object
+      Get builder for [gstapp.app_src.AppSrc]
+      Returns: New builder object
   */
   static AppSrcGidBuilder builder()
   {
@@ -1218,6 +1218,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   }
 }
 
+/// Fluent builder implementation template for [gstapp.app_src.AppSrc]
 class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.urihandler.URIHandlerGidBuilderImpl!T
 {
 
@@ -1426,6 +1427,10 @@ class AppSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T, gst.ur
 /// Fluent builder for [gstapp.app_src.AppSrc]
 final class AppSrcGidBuilder : AppSrcGidBuilderImpl!AppSrcGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AppSrc build()
   {
     return new AppSrc(cast(void*)createGObject(AppSrc._getGType), No.Take);

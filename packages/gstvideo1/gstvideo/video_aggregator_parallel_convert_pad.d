@@ -42,8 +42,8 @@ class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.
   }
 
   /**
-  Get builder for [gstvideo.video_aggregator_parallel_convert_pad.VideoAggregatorParallelConvertPad]
-  Returns: New builder object
+      Get builder for [gstvideo.video_aggregator_parallel_convert_pad.VideoAggregatorParallelConvertPad]
+      Returns: New builder object
   */
   static VideoAggregatorParallelConvertPadGidBuilder builder()
   {
@@ -51,6 +51,7 @@ class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_aggregator_parallel_convert_pad.VideoAggregatorParallelConvertPad]
 class VideoAggregatorParallelConvertPadGidBuilderImpl(T) : gstvideo.video_aggregator_convert_pad.VideoAggregatorConvertPadGidBuilderImpl!T
 {
 }
@@ -58,6 +59,10 @@ class VideoAggregatorParallelConvertPadGidBuilderImpl(T) : gstvideo.video_aggreg
 /// Fluent builder for [gstvideo.video_aggregator_parallel_convert_pad.VideoAggregatorParallelConvertPad]
 final class VideoAggregatorParallelConvertPadGidBuilder : VideoAggregatorParallelConvertPadGidBuilderImpl!VideoAggregatorParallelConvertPadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VideoAggregatorParallelConvertPad build()
   {
     return new VideoAggregatorParallelConvertPad(cast(void*)createGObject(VideoAggregatorParallelConvertPad._getGType), No.Take);

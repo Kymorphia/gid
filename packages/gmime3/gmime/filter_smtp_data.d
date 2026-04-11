@@ -40,8 +40,8 @@ class FilterSmtpData : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_smtp_data.FilterSmtpData]
-  Returns: New builder object
+      Get builder for [gmime.filter_smtp_data.FilterSmtpData]
+      Returns: New builder object
   */
   static FilterSmtpDataGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class FilterSmtpData : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_smtp_data.FilterSmtpData]
 class FilterSmtpDataGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -67,6 +68,10 @@ class FilterSmtpDataGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_smtp_data.FilterSmtpData]
 final class FilterSmtpDataGidBuilder : FilterSmtpDataGidBuilderImpl!FilterSmtpDataGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterSmtpData build()
   {
     return new FilterSmtpData(cast(void*)createGObject(FilterSmtpData._getGType), Yes.Take);

@@ -146,6 +146,7 @@ template ProxyResolverT()
   }
 }
 
+/// Fluent builder implementation template for [gio.proxy_resolver.ProxyResolver]
 template ProxyResolverGidBuilderT()
 {
 }

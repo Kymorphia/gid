@@ -55,8 +55,8 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.column_view_column.ColumnViewColumn]
-  Returns: New builder object
+      Get builder for [gtk.column_view_column.ColumnViewColumn]
+      Returns: New builder object
   */
   static ColumnViewColumnGidBuilder builder()
   {
@@ -532,6 +532,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.column_view_column.ColumnViewColumn]
 class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -645,6 +646,10 @@ class ColumnViewColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gtk.column_view_column.ColumnViewColumn]
 final class ColumnViewColumnGidBuilder : ColumnViewColumnGidBuilderImpl!ColumnViewColumnGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColumnViewColumn build()
   {
     return new ColumnViewColumn(cast(void*)createGObject(ColumnViewColumn._getGType), Yes.Take);

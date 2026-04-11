@@ -107,8 +107,8 @@ class AccelLabel : gtk.label.Label
   }
 
   /**
-  Get builder for [gtk.accel_label.AccelLabel]
-  Returns: New builder object
+      Get builder for [gtk.accel_label.AccelLabel]
+      Returns: New builder object
   */
   static AccelLabelGidBuilder builder()
   {
@@ -252,6 +252,7 @@ class AccelLabel : gtk.label.Label
   }
 }
 
+/// Fluent builder implementation template for [gtk.accel_label.AccelLabel]
 class AccelLabelGidBuilderImpl(T) : gtk.label.LabelGidBuilderImpl!T
 {
 
@@ -272,6 +273,10 @@ class AccelLabelGidBuilderImpl(T) : gtk.label.LabelGidBuilderImpl!T
 /// Fluent builder for [gtk.accel_label.AccelLabel]
 final class AccelLabelGidBuilder : AccelLabelGidBuilderImpl!AccelLabelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AccelLabel build()
   {
     return new AccelLabel(cast(void*)createGObject(AccelLabel._getGType), No.Take);

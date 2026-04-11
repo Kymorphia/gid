@@ -82,8 +82,8 @@ class Tooltip : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.tooltip.Tooltip]
-  Returns: New builder object
+      Get builder for [gtk.tooltip.Tooltip]
+      Returns: New builder object
   */
   static TooltipGidBuilder builder()
   {
@@ -224,6 +224,7 @@ class Tooltip : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.tooltip.Tooltip]
 class TooltipGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -231,6 +232,10 @@ class TooltipGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.tooltip.Tooltip]
 final class TooltipGidBuilder : TooltipGidBuilderImpl!TooltipGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Tooltip build()
   {
     return new Tooltip(cast(void*)createGObject(Tooltip._getGType), No.Take);

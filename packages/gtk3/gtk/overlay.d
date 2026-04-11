@@ -73,8 +73,8 @@ class Overlay : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.overlay.Overlay]
-  Returns: New builder object
+      Get builder for [gtk.overlay.Overlay]
+      Returns: New builder object
   */
   static OverlayGidBuilder builder()
   {
@@ -228,6 +228,7 @@ class Overlay : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.overlay.Overlay]
 class OverlayGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -236,6 +237,10 @@ class OverlayGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.overlay.Overlay]
 final class OverlayGidBuilder : OverlayGidBuilderImpl!OverlayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Overlay build()
   {
     return new Overlay(cast(void*)createGObject(Overlay._getGType), No.Take);

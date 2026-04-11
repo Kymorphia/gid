@@ -51,8 +51,8 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   }
 
   /**
-  Get builder for [gio.desktop_app_info.DesktopAppInfo]
-  Returns: New builder object
+      Get builder for [gio.desktop_app_info.DesktopAppInfo]
+      Returns: New builder object
   */
   static DesktopAppInfoGidBuilder builder()
   {
@@ -581,6 +581,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
   }
 }
 
+/// Fluent builder implementation template for [gio.desktop_app_info.DesktopAppInfo]
 class DesktopAppInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.app_info.AppInfoGidBuilderImpl!T
 {
 
@@ -601,6 +602,10 @@ class DesktopAppInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.desktop_app_info.DesktopAppInfo]
 final class DesktopAppInfoGidBuilder : DesktopAppInfoGidBuilderImpl!DesktopAppInfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DesktopAppInfo build()
   {
     return new DesktopAppInfo(cast(void*)createGObject(DesktopAppInfo._getGType), Yes.Take);

@@ -66,8 +66,8 @@ class Plug : gtk.window.Window
   }
 
   /**
-  Get builder for [gtk.plug.Plug]
-  Returns: New builder object
+      Get builder for [gtk.plug.Plug]
+      Returns: New builder object
   */
   static PlugGidBuilder builder()
   {
@@ -225,6 +225,7 @@ class Plug : gtk.window.Window
   }
 }
 
+/// Fluent builder implementation template for [gtk.plug.Plug]
 class PlugGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 {
 
@@ -233,6 +234,10 @@ class PlugGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 /// Fluent builder for [gtk.plug.Plug]
 final class PlugGidBuilder : PlugGidBuilderImpl!PlugGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Plug build()
   {
     return new Plug(cast(void*)createGObject(Plug._getGType), No.Take);

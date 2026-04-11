@@ -85,8 +85,8 @@ class ProgressBar : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.progress_bar.ProgressBar]
-  Returns: New builder object
+      Get builder for [gtk.progress_bar.ProgressBar]
+      Returns: New builder object
   */
   static ProgressBarGidBuilder builder()
   {
@@ -397,6 +397,7 @@ class ProgressBar : gtk.widget.Widget, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.progress_bar.ProgressBar]
 class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -467,6 +468,10 @@ class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orie
 /// Fluent builder for [gtk.progress_bar.ProgressBar]
 final class ProgressBarGidBuilder : ProgressBarGidBuilderImpl!ProgressBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ProgressBar build()
   {
     return new ProgressBar(cast(void*)createGObject(ProgressBar._getGType), No.Take);

@@ -39,8 +39,8 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
   }
 
   /**
-  Get builder for [arrow.decimal_data_type.DecimalDataType]
-  Returns: New builder object
+      Get builder for [arrow.decimal_data_type.DecimalDataType]
+      Returns: New builder object
   */
   static DecimalDataTypeGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal_data_type.DecimalDataType]
 class DecimalDataTypeGidBuilderImpl(T) : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTypeGidBuilderImpl!T
 {
 }
@@ -82,6 +83,10 @@ class DecimalDataTypeGidBuilderImpl(T) : arrow.fixed_size_binary_data_type.Fixed
 /// Fluent builder for [arrow.decimal_data_type.DecimalDataType]
 final class DecimalDataTypeGidBuilder : DecimalDataTypeGidBuilderImpl!DecimalDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DecimalDataType build()
   {
     return new DecimalDataType(cast(void*)createGObject(DecimalDataType._getGType), Yes.Take);

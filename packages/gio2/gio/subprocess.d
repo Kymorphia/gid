@@ -104,8 +104,8 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /**
-  Get builder for [gio.subprocess.Subprocess]
-  Returns: New builder object
+      Get builder for [gio.subprocess.Subprocess]
+      Returns: New builder object
   */
   static SubprocessGidBuilder builder()
   {
@@ -664,6 +664,7 @@ class Subprocess : gobject.object.ObjectWrap, gio.initable.Initable
   }
 }
 
+/// Fluent builder implementation template for [gio.subprocess.Subprocess]
 class SubprocessGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -684,6 +685,10 @@ class SubprocessGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [gio.subprocess.Subprocess]
 final class SubprocessGidBuilder : SubprocessGidBuilderImpl!SubprocessGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Subprocess build()
   {
     return new Subprocess(cast(void*)createGObject(Subprocess._getGType), Yes.Take);

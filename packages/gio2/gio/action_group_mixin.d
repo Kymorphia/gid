@@ -610,6 +610,7 @@ template ActionGroupT()
   }
 }
 
+/// Fluent builder implementation template for [gio.action_group.ActionGroup]
 template ActionGroupGidBuilderT()
 {
 }

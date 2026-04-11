@@ -43,8 +43,8 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-  Get builder for [gtk.signal_action.SignalAction]
-  Returns: New builder object
+      Get builder for [gtk.signal_action.SignalAction]
+      Returns: New builder object
   */
   static SignalActionGidBuilder builder()
   {
@@ -91,6 +91,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   }
 }
 
+/// Fluent builder implementation template for [gtk.signal_action.SignalAction]
 class SignalActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
 {
 
@@ -109,6 +110,10 @@ class SignalActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuild
 /// Fluent builder for [gtk.signal_action.SignalAction]
 final class SignalActionGidBuilder : SignalActionGidBuilderImpl!SignalActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SignalAction build()
   {
     return new SignalAction(cast(void*)createGObject(SignalAction._getGType), Yes.Take);

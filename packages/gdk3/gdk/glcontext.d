@@ -93,8 +93,8 @@ class GLContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.glcontext.GLContext]
-  Returns: New builder object
+      Get builder for [gdk.glcontext.GLContext]
+      Returns: New builder object
   */
   static GLContextGidBuilder builder()
   {
@@ -374,6 +374,7 @@ class GLContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.glcontext.GLContext]
 class GLContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -414,6 +415,10 @@ class GLContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.glcontext.GLContext]
 final class GLContextGidBuilder : GLContextGidBuilderImpl!GLContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLContext build()
   {
     return new GLContext(cast(void*)createGObject(GLContext._getGType), No.Take);

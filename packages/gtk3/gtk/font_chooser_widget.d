@@ -66,8 +66,8 @@ class FontChooserWidget : gtk.box.Box, gtk.font_chooser.FontChooser
   }
 
   /**
-  Get builder for [gtk.font_chooser_widget.FontChooserWidget]
-  Returns: New builder object
+      Get builder for [gtk.font_chooser_widget.FontChooserWidget]
+      Returns: New builder object
   */
   static FontChooserWidgetGidBuilder builder()
   {
@@ -102,6 +102,7 @@ class FontChooserWidget : gtk.box.Box, gtk.font_chooser.FontChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.font_chooser_widget.FontChooserWidget]
 class FontChooserWidgetGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.font_chooser.FontChooserGidBuilderImpl!T
 {
 
@@ -111,6 +112,10 @@ class FontChooserWidgetGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.font
 /// Fluent builder for [gtk.font_chooser_widget.FontChooserWidget]
 final class FontChooserWidgetGidBuilder : FontChooserWidgetGidBuilderImpl!FontChooserWidgetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontChooserWidget build()
   {
     return new FontChooserWidget(cast(void*)createGObject(FontChooserWidget._getGType), No.Take);

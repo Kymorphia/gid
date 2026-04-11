@@ -64,8 +64,8 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   }
 
   /**
-  Get builder for [gtk.drag_icon.DragIcon]
-  Returns: New builder object
+      Get builder for [gtk.drag_icon.DragIcon]
+      Returns: New builder object
   */
   static DragIconGidBuilder builder()
   {
@@ -179,6 +179,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   }
 }
 
+/// Fluent builder implementation template for [gtk.drag_icon.DragIcon]
 class DragIconGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.NativeGidBuilderImpl!T, gtk.root.RootGidBuilderImpl!T
 {
 
@@ -200,6 +201,10 @@ class DragIconGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.
 /// Fluent builder for [gtk.drag_icon.DragIcon]
 final class DragIconGidBuilder : DragIconGidBuilderImpl!DragIconGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DragIcon build()
   {
     return new DragIcon(cast(void*)createGObject(DragIcon._getGType), No.Take);

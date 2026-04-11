@@ -39,8 +39,8 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.uint32_array_builder.UInt32ArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.uint32_array_builder.UInt32ArrayBuilder]
+      Returns: New builder object
   */
   static UInt32ArrayBuilderGidBuilder builder()
   {
@@ -111,6 +111,7 @@ class UInt32ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.uint32_array_builder.UInt32ArrayBuilder]
 class UInt32ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -118,6 +119,10 @@ class UInt32ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidB
 /// Fluent builder for [arrow.uint32_array_builder.UInt32ArrayBuilder]
 final class UInt32ArrayBuilderGidBuilder : UInt32ArrayBuilderGidBuilderImpl!UInt32ArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UInt32ArrayBuilder build()
   {
     return new UInt32ArrayBuilder(cast(void*)createGObject(UInt32ArrayBuilder._getGType), Yes.Take);

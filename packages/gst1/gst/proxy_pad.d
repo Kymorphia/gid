@@ -43,8 +43,8 @@ class ProxyPad : gst.pad.Pad
   }
 
   /**
-  Get builder for [gst.proxy_pad.ProxyPad]
-  Returns: New builder object
+      Get builder for [gst.proxy_pad.ProxyPad]
+      Returns: New builder object
   */
   static ProxyPadGidBuilder builder()
   {
@@ -143,6 +143,7 @@ class ProxyPad : gst.pad.Pad
   }
 }
 
+/// Fluent builder implementation template for [gst.proxy_pad.ProxyPad]
 class ProxyPadGidBuilderImpl(T) : gst.pad.PadGidBuilderImpl!T
 {
 }
@@ -150,6 +151,10 @@ class ProxyPadGidBuilderImpl(T) : gst.pad.PadGidBuilderImpl!T
 /// Fluent builder for [gst.proxy_pad.ProxyPad]
 final class ProxyPadGidBuilder : ProxyPadGidBuilderImpl!ProxyPadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ProxyPad build()
   {
     return new ProxyPad(cast(void*)createGObject(ProxyPad._getGType), No.Take);

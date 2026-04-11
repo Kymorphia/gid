@@ -70,6 +70,7 @@ interface TreeDragSource
   bool rowDraggable(gtk.tree_path.TreePath path);
 }
 
+/// Fluent builder implementation template for [gtk.tree_drag_source.TreeDragSource]
 interface TreeDragSourceGidBuilderImpl(T)
 {
 }

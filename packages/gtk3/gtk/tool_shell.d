@@ -98,6 +98,7 @@ interface ToolShell
   void rebuildMenu();
 }
 
+/// Fluent builder implementation template for [gtk.tool_shell.ToolShell]
 interface ToolShellGidBuilderImpl(T)
 {
 }

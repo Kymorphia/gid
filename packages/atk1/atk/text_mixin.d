@@ -778,6 +778,7 @@ template TextT()
   }
 }
 
+/// Fluent builder implementation template for [atk.text.Text]
 template TextGidBuilderT()
 {
 }

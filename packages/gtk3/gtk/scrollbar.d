@@ -85,8 +85,8 @@ class Scrollbar : gtk.range.Range
   }
 
   /**
-  Get builder for [gtk.scrollbar.Scrollbar]
-  Returns: New builder object
+      Get builder for [gtk.scrollbar.Scrollbar]
+      Returns: New builder object
   */
   static ScrollbarGidBuilder builder()
   {
@@ -109,6 +109,7 @@ class Scrollbar : gtk.range.Range
   }
 }
 
+/// Fluent builder implementation template for [gtk.scrollbar.Scrollbar]
 class ScrollbarGidBuilderImpl(T) : gtk.range.RangeGidBuilderImpl!T
 {
 
@@ -117,6 +118,10 @@ class ScrollbarGidBuilderImpl(T) : gtk.range.RangeGidBuilderImpl!T
 /// Fluent builder for [gtk.scrollbar.Scrollbar]
 final class ScrollbarGidBuilder : ScrollbarGidBuilderImpl!ScrollbarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Scrollbar build()
   {
     return new Scrollbar(cast(void*)createGObject(Scrollbar._getGType), No.Take);

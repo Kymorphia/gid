@@ -497,6 +497,7 @@ template VolumeT()
   }
 }
 
+/// Fluent builder implementation template for [gio.volume.Volume]
 template VolumeGidBuilderT()
 {
 }

@@ -42,8 +42,8 @@ class StreamGIO : gmime.stream.Stream
   }
 
   /**
-  Get builder for [gmime.stream_gio.StreamGIO]
-  Returns: New builder object
+      Get builder for [gmime.stream_gio.StreamGIO]
+      Returns: New builder object
   */
   static StreamGIOGidBuilder builder()
   {
@@ -110,6 +110,7 @@ class StreamGIO : gmime.stream.Stream
   }
 }
 
+/// Fluent builder implementation template for [gmime.stream_gio.StreamGIO]
 class StreamGIOGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 {
 }
@@ -117,6 +118,10 @@ class StreamGIOGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 /// Fluent builder for [gmime.stream_gio.StreamGIO]
 final class StreamGIOGidBuilder : StreamGIOGidBuilderImpl!StreamGIOGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamGIO build()
   {
     return new StreamGIO(cast(void*)createGObject(StreamGIO._getGType), Yes.Take);

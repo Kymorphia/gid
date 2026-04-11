@@ -170,8 +170,8 @@ class Path : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [json.path.Path]
-  Returns: New builder object
+      Get builder for [json.path.Path]
+      Returns: New builder object
   */
   static PathGidBuilder builder()
   {
@@ -262,6 +262,7 @@ class Path : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [json.path.Path]
 class PathGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -269,6 +270,10 @@ class PathGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [json.path.Path]
 final class PathGidBuilder : PathGidBuilderImpl!PathGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Path build()
   {
     return new Path(cast(void*)createGObject(Path._getGType), Yes.Take);

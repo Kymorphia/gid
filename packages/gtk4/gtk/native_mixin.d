@@ -92,6 +92,7 @@ template NativeT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.native.Native]
 template NativeGidBuilderT()
 {
 }

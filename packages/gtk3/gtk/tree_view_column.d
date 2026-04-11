@@ -58,8 +58,8 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   }
 
   /**
-  Get builder for [gtk.tree_view_column.TreeViewColumn]
-  Returns: New builder object
+      Get builder for [gtk.tree_view_column.TreeViewColumn]
+      Returns: New builder object
   */
   static TreeViewColumnGidBuilder builder()
   {
@@ -1007,6 +1007,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_view_column.TreeViewColumn]
 class TreeViewColumnGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T
 {
 
@@ -1133,6 +1134,10 @@ class TreeViewColumnGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnown
 /// Fluent builder for [gtk.tree_view_column.TreeViewColumn]
 final class TreeViewColumnGidBuilder : TreeViewColumnGidBuilderImpl!TreeViewColumnGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeViewColumn build()
   {
     return new TreeViewColumn(cast(void*)createGObject(TreeViewColumn._getGType), No.Take);

@@ -1007,6 +1007,7 @@ template DataModelT()
   }
 }
 
+/// Fluent builder implementation template for [gda.data_model.DataModel]
 template DataModelGidBuilderT()
 {
 }

@@ -67,8 +67,8 @@ class TreeSelection : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.tree_selection.TreeSelection]
-  Returns: New builder object
+      Get builder for [gtk.tree_selection.TreeSelection]
+      Returns: New builder object
   */
   static TreeSelectionGidBuilder builder()
   {
@@ -409,6 +409,7 @@ class TreeSelection : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_selection.TreeSelection]
 class TreeSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -428,6 +429,10 @@ class TreeSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.tree_selection.TreeSelection]
 final class TreeSelectionGidBuilder : TreeSelectionGidBuilderImpl!TreeSelectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeSelection build()
   {
     return new TreeSelection(cast(void*)createGObject(TreeSelection._getGType), No.Take);

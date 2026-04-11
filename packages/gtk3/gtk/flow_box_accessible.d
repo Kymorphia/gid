@@ -42,8 +42,8 @@ class FlowBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
   }
 
   /**
-  Get builder for [gtk.flow_box_accessible.FlowBoxAccessible]
-  Returns: New builder object
+      Get builder for [gtk.flow_box_accessible.FlowBoxAccessible]
+      Returns: New builder object
   */
   static FlowBoxAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class FlowBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
   mixin SelectionT!();
 }
 
+/// Fluent builder implementation template for [gtk.flow_box_accessible.FlowBoxAccessible]
 class FlowBoxAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class FlowBoxAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAcc
 /// Fluent builder for [gtk.flow_box_accessible.FlowBoxAccessible]
 final class FlowBoxAccessibleGidBuilder : FlowBoxAccessibleGidBuilderImpl!FlowBoxAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FlowBoxAccessible build()
   {
     return new FlowBoxAccessible(cast(void*)createGObject(FlowBoxAccessible._getGType), No.Take);

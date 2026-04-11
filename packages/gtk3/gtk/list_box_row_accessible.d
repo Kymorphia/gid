@@ -40,8 +40,8 @@ class ListBoxRowAccessible : gtk.container_accessible.ContainerAccessible
   }
 
   /**
-  Get builder for [gtk.list_box_row_accessible.ListBoxRowAccessible]
-  Returns: New builder object
+      Get builder for [gtk.list_box_row_accessible.ListBoxRowAccessible]
+      Returns: New builder object
   */
   static ListBoxRowAccessibleGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class ListBoxRowAccessible : gtk.container_accessible.ContainerAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.list_box_row_accessible.ListBoxRowAccessible]
 class ListBoxRowAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
 {
 
@@ -57,6 +58,10 @@ class ListBoxRowAccessibleGidBuilderImpl(T) : gtk.container_accessible.Container
 /// Fluent builder for [gtk.list_box_row_accessible.ListBoxRowAccessible]
 final class ListBoxRowAccessibleGidBuilder : ListBoxRowAccessibleGidBuilderImpl!ListBoxRowAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListBoxRowAccessible build()
   {
     return new ListBoxRowAccessible(cast(void*)createGObject(ListBoxRowAccessible._getGType), No.Take);

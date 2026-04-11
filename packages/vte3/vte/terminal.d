@@ -62,8 +62,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-  Get builder for [vte.terminal.Terminal]
-  Returns: New builder object
+      Get builder for [vte.terminal.Terminal]
+      Returns: New builder object
   */
   static TerminalGidBuilder builder()
   {
@@ -3953,6 +3953,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 }
 
+/// Fluent builder implementation template for [vte.terminal.Terminal]
 class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -4395,6 +4396,10 @@ class TerminalGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
 /// Fluent builder for [vte.terminal.Terminal]
 final class TerminalGidBuilder : TerminalGidBuilderImpl!TerminalGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Terminal build()
   {
     return new Terminal(cast(void*)createGObject(Terminal._getGType), No.Take);

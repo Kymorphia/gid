@@ -44,8 +44,8 @@ class EventController : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.event_controller.EventController]
-  Returns: New builder object
+      Get builder for [gtk.event_controller.EventController]
+      Returns: New builder object
   */
   static EventControllerGidBuilder builder()
   {
@@ -146,6 +146,7 @@ class EventController : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.event_controller.EventController]
 class EventControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -175,6 +176,10 @@ class EventControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.event_controller.EventController]
 final class EventControllerGidBuilder : EventControllerGidBuilderImpl!EventControllerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EventController build()
   {
     return new EventController(cast(void*)createGObject(EventController._getGType), No.Take);

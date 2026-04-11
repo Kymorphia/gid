@@ -57,8 +57,8 @@ class TextBuffer : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.text_buffer.TextBuffer]
-  Returns: New builder object
+      Get builder for [gtk.text_buffer.TextBuffer]
+      Returns: New builder object
   */
   static TextBufferGidBuilder builder()
   {
@@ -2173,6 +2173,7 @@ class TextBuffer : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.text_buffer.TextBuffer]
 class TextBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -2216,6 +2217,10 @@ class TextBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.text_buffer.TextBuffer]
 final class TextBufferGidBuilder : TextBufferGidBuilderImpl!TextBufferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextBuffer build()
   {
     return new TextBuffer(cast(void*)createGObject(TextBuffer._getGType), Yes.Take);

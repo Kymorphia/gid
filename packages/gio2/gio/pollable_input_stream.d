@@ -109,6 +109,7 @@ interface PollableInputStream
   ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null);
 }
 
+/// Fluent builder implementation template for [gio.pollable_input_stream.PollableInputStream]
 interface PollableInputStreamGidBuilderImpl(T)
 {
 }

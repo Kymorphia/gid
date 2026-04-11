@@ -52,8 +52,8 @@ class HSV : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.hsv.HSV]
-  Returns: New builder object
+      Get builder for [gtk.hsv.HSV]
+      Returns: New builder object
   */
   static HSVGidBuilder builder()
   {
@@ -239,6 +239,7 @@ class HSV : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.hsv.HSV]
 class HSVGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -247,6 +248,10 @@ class HSVGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.hsv.HSV]
 final class HSVGidBuilder : HSVGidBuilderImpl!HSVGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HSV build()
   {
     return new HSV(cast(void*)createGObject(HSV._getGType), No.Take);

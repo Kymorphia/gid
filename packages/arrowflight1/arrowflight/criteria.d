@@ -39,8 +39,8 @@ class Criteria : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.criteria.Criteria]
-  Returns: New builder object
+      Get builder for [arrowflight.criteria.Criteria]
+      Returns: New builder object
   */
   static CriteriaGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class Criteria : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.criteria.Criteria]
 class CriteriaGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -93,6 +94,10 @@ class CriteriaGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.criteria.Criteria]
 final class CriteriaGidBuilder : CriteriaGidBuilderImpl!CriteriaGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Criteria build()
   {
     return new Criteria(cast(void*)createGObject(Criteria._getGType), Yes.Take);

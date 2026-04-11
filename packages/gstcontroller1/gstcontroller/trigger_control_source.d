@@ -48,8 +48,8 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
   }
 
   /**
-  Get builder for [gstcontroller.trigger_control_source.TriggerControlSource]
-  Returns: New builder object
+      Get builder for [gstcontroller.trigger_control_source.TriggerControlSource]
+      Returns: New builder object
   */
   static TriggerControlSourceGidBuilder builder()
   {
@@ -80,6 +80,7 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
   }
 }
 
+/// Fluent builder implementation template for [gstcontroller.trigger_control_source.TriggerControlSource]
 class TriggerControlSourceGidBuilderImpl(T) : gstcontroller.timed_value_control_source.TimedValueControlSourceGidBuilderImpl!T
 {
 
@@ -93,6 +94,10 @@ class TriggerControlSourceGidBuilderImpl(T) : gstcontroller.timed_value_control_
 /// Fluent builder for [gstcontroller.trigger_control_source.TriggerControlSource]
 final class TriggerControlSourceGidBuilder : TriggerControlSourceGidBuilderImpl!TriggerControlSourceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TriggerControlSource build()
   {
     return new TriggerControlSource(cast(void*)createGObject(TriggerControlSource._getGType), Yes.Take);

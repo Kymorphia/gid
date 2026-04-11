@@ -92,6 +92,7 @@ interface Native
   void unrealize();
 }
 
+/// Fluent builder implementation template for [gtk.native.Native]
 interface NativeGidBuilderImpl(T)
 {
 }

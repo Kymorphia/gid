@@ -52,8 +52,8 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   }
 
   /**
-  Get builder for [gio.unix_input_stream.UnixInputStream]
-  Returns: New builder object
+      Get builder for [gio.unix_input_stream.UnixInputStream]
+      Returns: New builder object
   */
   static UnixInputStreamGidBuilder builder()
   {
@@ -145,6 +145,7 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
   }
 }
 
+/// Fluent builder implementation template for [gio.unix_input_stream.UnixInputStream]
 class UnixInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!T, gio.file_descriptor_based.FileDescriptorBasedGidBuilderImpl!T, gio.pollable_input_stream.PollableInputStreamGidBuilderImpl!T
 {
 
@@ -177,6 +178,10 @@ class UnixInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderI
 /// Fluent builder for [gio.unix_input_stream.UnixInputStream]
 final class UnixInputStreamGidBuilder : UnixInputStreamGidBuilderImpl!UnixInputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnixInputStream build()
   {
     return new UnixInputStream(cast(void*)createGObject(UnixInputStream._getGType), Yes.Take);

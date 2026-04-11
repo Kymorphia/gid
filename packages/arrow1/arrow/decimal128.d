@@ -40,8 +40,8 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.decimal128.Decimal128]
-  Returns: New builder object
+      Get builder for [arrow.decimal128.Decimal128]
+      Returns: New builder object
   */
   static Decimal128GidBuilder builder()
   {
@@ -232,6 +232,7 @@ class Decimal128 : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal128.Decimal128]
 class Decimal128GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -245,6 +246,10 @@ class Decimal128GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.decimal128.Decimal128]
 final class Decimal128GidBuilder : Decimal128GidBuilderImpl!Decimal128GidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal128 build()
   {
     return new Decimal128(cast(void*)createGObject(Decimal128._getGType), No.Take);

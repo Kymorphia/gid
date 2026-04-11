@@ -416,6 +416,7 @@ interface ActionGroup
   gulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gio.action_group.ActionGroup]
 interface ActionGroupGidBuilderImpl(T)
 {
 }

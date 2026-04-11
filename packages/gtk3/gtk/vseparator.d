@@ -50,8 +50,8 @@ class VSeparator : gtk.separator.Separator
   }
 
   /**
-  Get builder for [gtk.vseparator.VSeparator]
-  Returns: New builder object
+      Get builder for [gtk.vseparator.VSeparator]
+      Returns: New builder object
   */
   static VSeparatorGidBuilder builder()
   {
@@ -72,6 +72,7 @@ class VSeparator : gtk.separator.Separator
   }
 }
 
+/// Fluent builder implementation template for [gtk.vseparator.VSeparator]
 class VSeparatorGidBuilderImpl(T) : gtk.separator.SeparatorGidBuilderImpl!T
 {
 
@@ -80,6 +81,10 @@ class VSeparatorGidBuilderImpl(T) : gtk.separator.SeparatorGidBuilderImpl!T
 /// Fluent builder for [gtk.vseparator.VSeparator]
 final class VSeparatorGidBuilder : VSeparatorGidBuilderImpl!VSeparatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VSeparator build()
   {
     return new VSeparator(cast(void*)createGObject(VSeparator._getGType), No.Take);

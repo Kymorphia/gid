@@ -40,8 +40,8 @@ class DoPutResult : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.do_put_result.DoPutResult]
-  Returns: New builder object
+      Get builder for [arrowflight.do_put_result.DoPutResult]
+      Returns: New builder object
   */
   static DoPutResultGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class DoPutResult : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.do_put_result.DoPutResult]
 class DoPutResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -80,6 +81,10 @@ class DoPutResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.do_put_result.DoPutResult]
 final class DoPutResultGidBuilder : DoPutResultGidBuilderImpl!DoPutResultGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DoPutResult build()
   {
     return new DoPutResult(cast(void*)createGObject(DoPutResult._getGType), No.Take);

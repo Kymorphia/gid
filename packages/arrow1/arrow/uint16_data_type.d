@@ -38,8 +38,8 @@ class UInt16DataType : arrow.integer_data_type.IntegerDataType
   }
 
   /**
-  Get builder for [arrow.uint16_data_type.UInt16DataType]
-  Returns: New builder object
+      Get builder for [arrow.uint16_data_type.UInt16DataType]
+      Returns: New builder object
   */
   static UInt16DataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class UInt16DataType : arrow.integer_data_type.IntegerDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.uint16_data_type.UInt16DataType]
 class UInt16DataTypeGidBuilderImpl(T) : arrow.integer_data_type.IntegerDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class UInt16DataTypeGidBuilderImpl(T) : arrow.integer_data_type.IntegerDataTypeG
 /// Fluent builder for [arrow.uint16_data_type.UInt16DataType]
 final class UInt16DataTypeGidBuilder : UInt16DataTypeGidBuilderImpl!UInt16DataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UInt16DataType build()
   {
     return new UInt16DataType(cast(void*)createGObject(UInt16DataType._getGType), Yes.Take);

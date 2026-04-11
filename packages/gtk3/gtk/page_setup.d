@@ -86,8 +86,8 @@ class PageSetup : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.page_setup.PageSetup]
-  Returns: New builder object
+      Get builder for [gtk.page_setup.PageSetup]
+      Returns: New builder object
   */
   static PageSetupGidBuilder builder()
   {
@@ -503,6 +503,7 @@ class PageSetup : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.page_setup.PageSetup]
 class PageSetupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -510,6 +511,10 @@ class PageSetupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.page_setup.PageSetup]
 final class PageSetupGidBuilder : PageSetupGidBuilderImpl!PageSetupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PageSetup build()
   {
     return new PageSetup(cast(void*)createGObject(PageSetup._getGType), Yes.Take);

@@ -51,8 +51,8 @@ class PrintOperation : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.print_operation.PrintOperation]
-  Returns: New builder object
+      Get builder for [webkit.print_operation.PrintOperation]
+      Returns: New builder object
   */
   static PrintOperationGidBuilder builder()
   {
@@ -314,6 +314,7 @@ class PrintOperation : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.print_operation.PrintOperation]
 class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -354,6 +355,10 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [webkit.print_operation.PrintOperation]
 final class PrintOperationGidBuilder : PrintOperationGidBuilderImpl!PrintOperationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PrintOperation build()
   {
     return new PrintOperation(cast(void*)createGObject(PrintOperation._getGType), Yes.Take);

@@ -115,8 +115,8 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /**
-  Get builder for [gtksource.buffer.Buffer]
-  Returns: New builder object
+      Get builder for [gtksource.buffer.Buffer]
+      Returns: New builder object
   */
   static BufferGidBuilder builder()
   {
@@ -906,6 +906,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 }
 
+/// Fluent builder implementation template for [gtksource.buffer.Buffer]
 class BufferGidBuilderImpl(T) : gtk.text_buffer.TextBufferGidBuilderImpl!T
 {
 
@@ -966,6 +967,10 @@ class BufferGidBuilderImpl(T) : gtk.text_buffer.TextBufferGidBuilderImpl!T
 /// Fluent builder for [gtksource.buffer.Buffer]
 final class BufferGidBuilder : BufferGidBuilderImpl!BufferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Buffer build()
   {
     return new Buffer(cast(void*)createGObject(Buffer._getGType), Yes.Take);

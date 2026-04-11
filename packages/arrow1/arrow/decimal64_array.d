@@ -40,8 +40,8 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   }
 
   /**
-  Get builder for [arrow.decimal64_array.Decimal64Array]
-  Returns: New builder object
+      Get builder for [arrow.decimal64_array.Decimal64Array]
+      Returns: New builder object
   */
   static Decimal64ArrayGidBuilder builder()
   {
@@ -69,6 +69,7 @@ class Decimal64Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal64_array.Decimal64Array]
 class Decimal64ArrayGidBuilderImpl(T) : arrow.fixed_size_binary_array.FixedSizeBinaryArrayGidBuilderImpl!T
 {
 }
@@ -76,6 +77,10 @@ class Decimal64ArrayGidBuilderImpl(T) : arrow.fixed_size_binary_array.FixedSizeB
 /// Fluent builder for [arrow.decimal64_array.Decimal64Array]
 final class Decimal64ArrayGidBuilder : Decimal64ArrayGidBuilderImpl!Decimal64ArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal64Array build()
   {
     return new Decimal64Array(cast(void*)createGObject(Decimal64Array._getGType), No.Take);

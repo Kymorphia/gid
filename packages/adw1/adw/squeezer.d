@@ -74,8 +74,8 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [adw.squeezer.Squeezer]
-  Returns: New builder object
+      Get builder for [adw.squeezer.Squeezer]
+      Returns: New builder object
   */
   static SqueezerGidBuilder builder()
   {
@@ -729,6 +729,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [adw.squeezer.Squeezer]
 class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -876,6 +877,10 @@ class SqueezerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
 /// Fluent builder for [adw.squeezer.Squeezer]
 final class SqueezerGidBuilder : SqueezerGidBuilderImpl!SqueezerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Squeezer build()
   {
     return new Squeezer(cast(void*)createGObject(Squeezer._getGType), No.Take);

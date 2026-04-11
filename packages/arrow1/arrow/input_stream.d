@@ -48,8 +48,8 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   }
 
   /**
-  Get builder for [arrow.input_stream.InputStream]
-  Returns: New builder object
+      Get builder for [arrow.input_stream.InputStream]
+      Returns: New builder object
   */
   static InputStreamGidBuilder builder()
   {
@@ -109,6 +109,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   }
 }
 
+/// Fluent builder implementation template for [arrow.input_stream.InputStream]
 class InputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!T, arrow.file.FileGidBuilderImpl!T, arrow.readable.ReadableGidBuilderImpl!T
 {
 
@@ -125,6 +126,10 @@ class InputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!
 /// Fluent builder for [arrow.input_stream.InputStream]
 final class InputStreamGidBuilder : InputStreamGidBuilderImpl!InputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InputStream build()
   {
     return new InputStream(cast(void*)createGObject(InputStream._getGType), No.Take);

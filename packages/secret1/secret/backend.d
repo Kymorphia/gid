@@ -84,6 +84,7 @@ interface Backend
   }
 }
 
+/// Fluent builder implementation template for [secret.backend.Backend]
 interface BackendGidBuilderImpl(T)
 {
 

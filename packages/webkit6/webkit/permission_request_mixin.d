@@ -38,6 +38,7 @@ template PermissionRequestT()
   }
 }
 
+/// Fluent builder implementation template for [webkit.permission_request.PermissionRequest]
 template PermissionRequestGidBuilderT()
 {
 }

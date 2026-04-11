@@ -74,8 +74,8 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   }
 
   /**
-  Get builder for [gtk.app_chooser_button.AppChooserButton]
-  Returns: New builder object
+      Get builder for [gtk.app_chooser_button.AppChooserButton]
+      Returns: New builder object
   */
   static AppChooserButtonGidBuilder builder()
   {
@@ -333,6 +333,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.app_chooser_button.AppChooserButton]
 class AppChooserButtonGidBuilderImpl(T) : gtk.combo_box.ComboBoxGidBuilderImpl!T, gtk.app_chooser.AppChooserGidBuilderImpl!T
 {
 
@@ -380,6 +381,10 @@ class AppChooserButtonGidBuilderImpl(T) : gtk.combo_box.ComboBoxGidBuilderImpl!T
 /// Fluent builder for [gtk.app_chooser_button.AppChooserButton]
 final class AppChooserButtonGidBuilder : AppChooserButtonGidBuilderImpl!AppChooserButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AppChooserButton build()
   {
     return new AppChooserButton(cast(void*)createGObject(AppChooserButton._getGType), No.Take);

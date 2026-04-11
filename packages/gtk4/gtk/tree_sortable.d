@@ -125,6 +125,7 @@ interface TreeSortable
   gulong connectSortColumnChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.tree_sortable.TreeSortable]
 interface TreeSortableGidBuilderImpl(T)
 {
 }

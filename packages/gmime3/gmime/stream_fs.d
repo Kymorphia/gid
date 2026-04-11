@@ -42,8 +42,8 @@ class StreamFs : gmime.stream.Stream
   }
 
   /**
-  Get builder for [gmime.stream_fs.StreamFs]
-  Returns: New builder object
+      Get builder for [gmime.stream_fs.StreamFs]
+      Returns: New builder object
   */
   static StreamFsGidBuilder builder()
   {
@@ -132,6 +132,7 @@ class StreamFs : gmime.stream.Stream
   }
 }
 
+/// Fluent builder implementation template for [gmime.stream_fs.StreamFs]
 class StreamFsGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 {
 }
@@ -139,6 +140,10 @@ class StreamFsGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 /// Fluent builder for [gmime.stream_fs.StreamFs]
 final class StreamFsGidBuilder : StreamFsGidBuilderImpl!StreamFsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamFs build()
   {
     return new StreamFs(cast(void*)createGObject(StreamFs._getGType), Yes.Take);

@@ -56,8 +56,8 @@ class InputStream : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.input_stream.InputStream]
-  Returns: New builder object
+      Get builder for [gio.input_stream.InputStream]
+      Returns: New builder object
   */
   static InputStreamGidBuilder builder()
   {
@@ -613,6 +613,7 @@ class InputStream : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.input_stream.InputStream]
 class InputStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -620,6 +621,10 @@ class InputStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.input_stream.InputStream]
 final class InputStreamGidBuilder : InputStreamGidBuilderImpl!InputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InputStream build()
   {
     return new InputStream(cast(void*)createGObject(InputStream._getGType), No.Take);

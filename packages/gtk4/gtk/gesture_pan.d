@@ -54,8 +54,8 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   }
 
   /**
-  Get builder for [gtk.gesture_pan.GesturePan]
-  Returns: New builder object
+      Get builder for [gtk.gesture_pan.GesturePan]
+      Returns: New builder object
   */
   static GesturePanGidBuilder builder()
   {
@@ -168,6 +168,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture_pan.GesturePan]
 class GesturePanGidBuilderImpl(T) : gtk.gesture_drag.GestureDragGidBuilderImpl!T
 {
 
@@ -186,6 +187,10 @@ class GesturePanGidBuilderImpl(T) : gtk.gesture_drag.GestureDragGidBuilderImpl!T
 /// Fluent builder for [gtk.gesture_pan.GesturePan]
 final class GesturePanGidBuilder : GesturePanGidBuilderImpl!GesturePanGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GesturePan build()
   {
     return new GesturePan(cast(void*)createGObject(GesturePan._getGType), Yes.Take);

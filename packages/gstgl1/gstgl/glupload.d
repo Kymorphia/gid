@@ -47,8 +47,8 @@ class GLUpload : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstgl.glupload.GLUpload]
-  Returns: New builder object
+      Get builder for [gstgl.glupload.GLUpload]
+      Returns: New builder object
   */
   static GLUploadGidBuilder builder()
   {
@@ -161,6 +161,7 @@ class GLUpload : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glupload.GLUpload]
 class GLUploadGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -168,6 +169,10 @@ class GLUploadGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstgl.glupload.GLUpload]
 final class GLUploadGidBuilder : GLUploadGidBuilderImpl!GLUploadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLUpload build()
   {
     return new GLUpload(cast(void*)createGObject(GLUpload._getGType), Yes.Take);

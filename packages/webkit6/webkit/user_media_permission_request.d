@@ -49,8 +49,8 @@ class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
   }
 
   /**
-  Get builder for [webkit.user_media_permission_request.UserMediaPermissionRequest]
-  Returns: New builder object
+      Get builder for [webkit.user_media_permission_request.UserMediaPermissionRequest]
+      Returns: New builder object
   */
   static UserMediaPermissionRequestGidBuilder builder()
   {
@@ -78,6 +78,7 @@ class UserMediaPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
   mixin PermissionRequestT!();
 }
 
+/// Fluent builder implementation template for [webkit.user_media_permission_request.UserMediaPermissionRequest]
 class UserMediaPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
 {
 
@@ -87,6 +88,10 @@ class UserMediaPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGid
 /// Fluent builder for [webkit.user_media_permission_request.UserMediaPermissionRequest]
 final class UserMediaPermissionRequestGidBuilder : UserMediaPermissionRequestGidBuilderImpl!UserMediaPermissionRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UserMediaPermissionRequest build()
   {
     return new UserMediaPermissionRequest(cast(void*)createGObject(UserMediaPermissionRequest._getGType), No.Take);

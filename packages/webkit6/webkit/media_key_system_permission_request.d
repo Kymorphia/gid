@@ -52,8 +52,8 @@ class MediaKeySystemPermissionRequest : gobject.object.ObjectWrap, webkit.permis
   }
 
   /**
-  Get builder for [webkit.media_key_system_permission_request.MediaKeySystemPermissionRequest]
-  Returns: New builder object
+      Get builder for [webkit.media_key_system_permission_request.MediaKeySystemPermissionRequest]
+      Returns: New builder object
   */
   static MediaKeySystemPermissionRequestGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class MediaKeySystemPermissionRequest : gobject.object.ObjectWrap, webkit.permis
   mixin PermissionRequestT!();
 }
 
+/// Fluent builder implementation template for [webkit.media_key_system_permission_request.MediaKeySystemPermissionRequest]
 class MediaKeySystemPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
 {
 
@@ -72,6 +73,10 @@ class MediaKeySystemPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWr
 /// Fluent builder for [webkit.media_key_system_permission_request.MediaKeySystemPermissionRequest]
 final class MediaKeySystemPermissionRequestGidBuilder : MediaKeySystemPermissionRequestGidBuilderImpl!MediaKeySystemPermissionRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MediaKeySystemPermissionRequest build()
   {
     return new MediaKeySystemPermissionRequest(cast(void*)createGObject(MediaKeySystemPermissionRequest._getGType), No.Take);

@@ -41,8 +41,8 @@ class MutableBuffer : arrow.buffer.Buffer
   }
 
   /**
-  Get builder for [arrow.mutable_buffer.MutableBuffer]
-  Returns: New builder object
+      Get builder for [arrow.mutable_buffer.MutableBuffer]
+      Returns: New builder object
   */
   static MutableBufferGidBuilder builder()
   {
@@ -99,6 +99,7 @@ class MutableBuffer : arrow.buffer.Buffer
   }
 }
 
+/// Fluent builder implementation template for [arrow.mutable_buffer.MutableBuffer]
 class MutableBufferGidBuilderImpl(T) : arrow.buffer.BufferGidBuilderImpl!T
 {
 }
@@ -106,6 +107,10 @@ class MutableBufferGidBuilderImpl(T) : arrow.buffer.BufferGidBuilderImpl!T
 /// Fluent builder for [arrow.mutable_buffer.MutableBuffer]
 final class MutableBufferGidBuilder : MutableBufferGidBuilderImpl!MutableBufferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MutableBuffer build()
   {
     return new MutableBuffer(cast(void*)createGObject(MutableBuffer._getGType), Yes.Take);

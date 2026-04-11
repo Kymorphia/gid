@@ -40,8 +40,8 @@ class FilterCharset : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_charset.FilterCharset]
-  Returns: New builder object
+      Get builder for [gmime.filter_charset.FilterCharset]
+      Returns: New builder object
   */
   static FilterCharsetGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class FilterCharset : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_charset.FilterCharset]
 class FilterCharsetGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -74,6 +75,10 @@ class FilterCharsetGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_charset.FilterCharset]
 final class FilterCharsetGidBuilder : FilterCharsetGidBuilderImpl!FilterCharsetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterCharset build()
   {
     return new FilterCharset(cast(void*)createGObject(FilterCharset._getGType), Yes.Take);

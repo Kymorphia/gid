@@ -56,8 +56,8 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.box_layout.BoxLayout]
-  Returns: New builder object
+      Get builder for [gtk.box_layout.BoxLayout]
+      Returns: New builder object
   */
   static BoxLayoutGidBuilder builder()
   {
@@ -275,6 +275,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.box_layout.BoxLayout]
 class BoxLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -338,6 +339,10 @@ class BoxLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImp
 /// Fluent builder for [gtk.box_layout.BoxLayout]
 final class BoxLayoutGidBuilder : BoxLayoutGidBuilderImpl!BoxLayoutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BoxLayout build()
   {
     return new BoxLayout(cast(void*)createGObject(BoxLayout._getGType), Yes.Take);

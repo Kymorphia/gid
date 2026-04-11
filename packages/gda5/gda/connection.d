@@ -57,8 +57,8 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /**
-  Get builder for [gda.connection.Connection]
-  Returns: New builder object
+      Get builder for [gda.connection.Connection]
+      Returns: New builder object
   */
   static ConnectionGidBuilder builder()
   {
@@ -1724,6 +1724,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 }
 
+/// Fluent builder implementation template for [gda.connection.Connection]
 class ConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.lockable.LockableGidBuilderImpl!T
 {
 
@@ -1835,6 +1836,10 @@ class ConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [gda.connection.Connection]
 final class ConnectionGidBuilder : ConnectionGidBuilderImpl!ConnectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Connection build()
   {
     return new Connection(cast(void*)createGObject(Connection._getGType), No.Take);

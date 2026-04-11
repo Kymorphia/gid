@@ -89,6 +89,7 @@ template FontMapT()
   }
 }
 
+/// Fluent builder implementation template for [pangocairo.font_map.FontMap]
 template FontMapGidBuilderT()
 {
 }

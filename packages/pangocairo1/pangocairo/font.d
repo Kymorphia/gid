@@ -36,6 +36,7 @@ interface Font
   cairo.scaled_font.ScaledFont getScaledFont();
 }
 
+/// Fluent builder implementation template for [pangocairo.font.Font]
 interface FontGidBuilderImpl(T)
 {
 }

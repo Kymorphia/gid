@@ -138,6 +138,7 @@ interface Buildable
   void setName(string name);
 }
 
+/// Fluent builder implementation template for [gtk.buildable.Buildable]
 interface BuildableGidBuilderImpl(T)
 {
 }

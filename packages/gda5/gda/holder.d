@@ -47,8 +47,8 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /**
-  Get builder for [gda.holder.Holder]
-  Returns: New builder object
+      Get builder for [gda.holder.Holder]
+      Returns: New builder object
   */
   static HolderGidBuilder builder()
   {
@@ -795,6 +795,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 }
 
+/// Fluent builder implementation template for [gda.holder.Holder]
 class HolderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.lockable.LockableGidBuilderImpl!T
 {
 
@@ -870,6 +871,10 @@ class HolderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.l
 /// Fluent builder for [gda.holder.Holder]
 final class HolderGidBuilder : HolderGidBuilderImpl!HolderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Holder build()
   {
     return new Holder(cast(void*)createGObject(Holder._getGType), Yes.Take);

@@ -148,8 +148,8 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   }
 
   /**
-  Get builder for [gtk.level_bar.LevelBar]
-  Returns: New builder object
+      Get builder for [gtk.level_bar.LevelBar]
+      Returns: New builder object
   */
   static LevelBarGidBuilder builder()
   {
@@ -528,6 +528,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   }
 }
 
+/// Fluent builder implementation template for [gtk.level_bar.LevelBar]
 class LevelBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_range.AccessibleRangeGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -605,6 +606,10 @@ class LevelBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
 /// Fluent builder for [gtk.level_bar.LevelBar]
 final class LevelBarGidBuilder : LevelBarGidBuilderImpl!LevelBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LevelBar build()
   {
     return new LevelBar(cast(void*)createGObject(LevelBar._getGType), No.Take);

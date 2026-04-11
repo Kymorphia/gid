@@ -49,8 +49,8 @@ class GeolocationManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.geolocation_manager.GeolocationManager]
-  Returns: New builder object
+      Get builder for [webkit.geolocation_manager.GeolocationManager]
+      Returns: New builder object
   */
   static GeolocationManagerGidBuilder builder()
   {
@@ -189,6 +189,7 @@ class GeolocationManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.geolocation_manager.GeolocationManager]
 class GeolocationManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -196,6 +197,10 @@ class GeolocationManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [webkit.geolocation_manager.GeolocationManager]
 final class GeolocationManagerGidBuilder : GeolocationManagerGidBuilderImpl!GeolocationManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GeolocationManager build()
   {
     return new GeolocationManager(cast(void*)createGObject(GeolocationManager._getGType), No.Take);

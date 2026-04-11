@@ -79,6 +79,7 @@ interface RemoteActionGroup
   void changeActionStateFull(string actionName, glib.variant.Variant value, glib.variant.Variant platformData);
 }
 
+/// Fluent builder implementation template for [gio.remote_action_group.RemoteActionGroup]
 interface RemoteActionGroupGidBuilderImpl(T)
 {
 }

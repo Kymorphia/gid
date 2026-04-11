@@ -92,8 +92,8 @@ class ButtonContent : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.button_content.ButtonContent]
-  Returns: New builder object
+      Get builder for [adw.button_content.ButtonContent]
+      Returns: New builder object
   */
   static ButtonContentGidBuilder builder()
   {
@@ -310,6 +310,7 @@ class ButtonContent : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.button_content.ButtonContent]
 class ButtonContentGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -372,6 +373,10 @@ class ButtonContentGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.button_content.ButtonContent]
 final class ButtonContentGidBuilder : ButtonContentGidBuilderImpl!ButtonContentGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ButtonContent build()
   {
     return new ButtonContent(cast(void*)createGObject(ButtonContent._getGType), No.Take);

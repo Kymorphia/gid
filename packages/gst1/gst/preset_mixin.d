@@ -204,6 +204,7 @@ template PresetT()
   }
 }
 
+/// Fluent builder implementation template for [gst.preset.Preset]
 template PresetGidBuilderT()
 {
 }

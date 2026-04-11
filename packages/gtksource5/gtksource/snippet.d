@@ -55,8 +55,8 @@ class Snippet : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.snippet.Snippet]
-  Returns: New builder object
+      Get builder for [gtksource.snippet.Snippet]
+      Returns: New builder object
   */
   static SnippetGidBuilder builder()
   {
@@ -345,6 +345,7 @@ class Snippet : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.snippet.Snippet]
 class SnippetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -376,6 +377,10 @@ class SnippetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.snippet.Snippet]
 final class SnippetGidBuilder : SnippetGidBuilderImpl!SnippetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Snippet build()
   {
     return new Snippet(cast(void*)createGObject(Snippet._getGType), Yes.Take);

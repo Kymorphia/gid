@@ -90,8 +90,8 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
-  Get builder for [adw.breakpoint.Breakpoint]
-  Returns: New builder object
+      Get builder for [adw.breakpoint.Breakpoint]
+      Returns: New builder object
   */
   static BreakpointGidBuilder builder()
   {
@@ -328,6 +328,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 }
 
+/// Fluent builder implementation template for [adw.breakpoint.Breakpoint]
 class BreakpointGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -348,6 +349,10 @@ class BreakpointGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [adw.breakpoint.Breakpoint]
 final class BreakpointGidBuilder : BreakpointGidBuilderImpl!BreakpointGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Breakpoint build()
   {
     return new Breakpoint(cast(void*)createGObject(Breakpoint._getGType), Yes.Take);

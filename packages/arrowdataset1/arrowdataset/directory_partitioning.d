@@ -42,8 +42,8 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
   }
 
   /**
-  Get builder for [arrowdataset.directory_partitioning.DirectoryPartitioning]
-  Returns: New builder object
+      Get builder for [arrowdataset.directory_partitioning.DirectoryPartitioning]
+      Returns: New builder object
   */
   static DirectoryPartitioningGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.directory_partitioning.DirectoryPartitioning]
 class DirectoryPartitioningGidBuilderImpl(T) : arrowdataset.key_value_partitioning.KeyValuePartitioningGidBuilderImpl!T
 {
 }
@@ -71,6 +72,10 @@ class DirectoryPartitioningGidBuilderImpl(T) : arrowdataset.key_value_partitioni
 /// Fluent builder for [arrowdataset.directory_partitioning.DirectoryPartitioning]
 final class DirectoryPartitioningGidBuilder : DirectoryPartitioningGidBuilderImpl!DirectoryPartitioningGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DirectoryPartitioning build()
   {
     return new DirectoryPartitioning(cast(void*)createGObject(DirectoryPartitioning._getGType), Yes.Take);

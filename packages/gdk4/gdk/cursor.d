@@ -74,8 +74,8 @@ class Cursor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.cursor.Cursor]
-  Returns: New builder object
+      Get builder for [gdk.cursor.Cursor]
+      Returns: New builder object
   */
   static CursorGidBuilder builder()
   {
@@ -269,6 +269,7 @@ class Cursor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.cursor.Cursor]
 class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -335,6 +336,10 @@ class CursorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.cursor.Cursor]
 final class CursorGidBuilder : CursorGidBuilderImpl!CursorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Cursor build()
   {
     return new Cursor(cast(void*)createGObject(Cursor._getGType), No.Take);

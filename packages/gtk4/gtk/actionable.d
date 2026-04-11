@@ -116,6 +116,7 @@ interface Actionable
   void setDetailedActionName(string detailedActionName);
 }
 
+/// Fluent builder implementation template for [gtk.actionable.Actionable]
 interface ActionableGidBuilderImpl(T)
 {
 

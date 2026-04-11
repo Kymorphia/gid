@@ -39,8 +39,8 @@ class Time64Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.time64_scalar.Time64Scalar]
-  Returns: New builder object
+      Get builder for [arrow.time64_scalar.Time64Scalar]
+      Returns: New builder object
   */
   static Time64ScalarGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class Time64Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.time64_scalar.Time64Scalar]
 class Time64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -71,6 +72,10 @@ class Time64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.time64_scalar.Time64Scalar]
 final class Time64ScalarGidBuilder : Time64ScalarGidBuilderImpl!Time64ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Time64Scalar build()
   {
     return new Time64Scalar(cast(void*)createGObject(Time64Scalar._getGType), Yes.Take);

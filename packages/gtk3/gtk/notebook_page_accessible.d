@@ -42,8 +42,8 @@ class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
   }
 
   /**
-  Get builder for [gtk.notebook_page_accessible.NotebookPageAccessible]
-  Returns: New builder object
+      Get builder for [gtk.notebook_page_accessible.NotebookPageAccessible]
+      Returns: New builder object
   */
   static NotebookPageAccessibleGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class NotebookPageAccessible : atk.object.ObjectWrap, atk.component.Component
   }
 }
 
+/// Fluent builder implementation template for [gtk.notebook_page_accessible.NotebookPageAccessible]
 class NotebookPageAccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class NotebookPageAccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderI
 /// Fluent builder for [gtk.notebook_page_accessible.NotebookPageAccessible]
 final class NotebookPageAccessibleGidBuilder : NotebookPageAccessibleGidBuilderImpl!NotebookPageAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NotebookPageAccessible build()
   {
     return new NotebookPageAccessible(cast(void*)createGObject(NotebookPageAccessible._getGType), Yes.Take);

@@ -106,8 +106,8 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
-  Get builder for [gtk.size_group.SizeGroup]
-  Returns: New builder object
+      Get builder for [gtk.size_group.SizeGroup]
+      Returns: New builder object
   */
   static SizeGroupGidBuilder builder()
   {
@@ -224,6 +224,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 }
 
+/// Fluent builder implementation template for [gtk.size_group.SizeGroup]
 class SizeGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -244,6 +245,10 @@ class SizeGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
 /// Fluent builder for [gtk.size_group.SizeGroup]
 final class SizeGroupGidBuilder : SizeGroupGidBuilderImpl!SizeGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SizeGroup build()
   {
     return new SizeGroup(cast(void*)createGObject(SizeGroup._getGType), Yes.Take);

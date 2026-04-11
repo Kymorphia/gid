@@ -48,8 +48,8 @@ class Set : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.set.Set]
-  Returns: New builder object
+      Get builder for [gda.set.Set]
+      Returns: New builder object
   */
   static SetGidBuilder builder()
   {
@@ -720,6 +720,7 @@ class Set : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.set.Set]
 class SetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -764,6 +765,10 @@ class SetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.set.Set]
 final class SetGidBuilder : SetGidBuilderImpl!SetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Set build()
   {
     return new Set(cast(void*)createGObject(Set._getGType), Yes.Take);

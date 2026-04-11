@@ -45,8 +45,8 @@ class EditorState : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.editor_state.EditorState]
-  Returns: New builder object
+      Get builder for [webkit.editor_state.EditorState]
+      Returns: New builder object
   */
   static EditorStateGidBuilder builder()
   {
@@ -172,6 +172,7 @@ class EditorState : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.editor_state.EditorState]
 class EditorStateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -179,6 +180,10 @@ class EditorStateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.editor_state.EditorState]
 final class EditorStateGidBuilder : EditorStateGidBuilderImpl!EditorStateGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EditorState build()
   {
     return new EditorState(cast(void*)createGObject(EditorState._getGType), No.Take);

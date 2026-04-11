@@ -178,8 +178,8 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   }
 
   /**
-  Get builder for [gio.application.Application]
-  Returns: New builder object
+      Get builder for [gio.application.Application]
+      Returns: New builder object
   */
   static ApplicationGidBuilder builder()
   {
@@ -1637,6 +1637,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   }
 }
 
+/// Fluent builder implementation template for [gio.application.Application]
 class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T, gio.action_map.ActionMapGidBuilderImpl!T
 {
 
@@ -1713,6 +1714,10 @@ class ApplicationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [gio.application.Application]
 final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Application build()
   {
     return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);

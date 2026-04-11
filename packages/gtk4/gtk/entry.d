@@ -148,8 +148,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   }
 
   /**
-  Get builder for [gtk.entry.Entry]
-  Returns: New builder object
+      Get builder for [gtk.entry.Entry]
+      Returns: New builder object
   */
   static EntryGidBuilder builder()
   {
@@ -2002,6 +2002,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   }
 }
 
+/// Fluent builder implementation template for [gtk.entry.Entry]
 class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_editable.CellEditableGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
 {
 
@@ -2451,6 +2452,10 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
 /// Fluent builder for [gtk.entry.Entry]
 final class EntryGidBuilder : EntryGidBuilderImpl!EntryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Entry build()
   {
     return new Entry(cast(void*)createGObject(Entry._getGType), No.Take);

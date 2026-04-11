@@ -44,8 +44,8 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
   }
 
   /**
-  Get builder for [atk.plug.Plug]
-  Returns: New builder object
+      Get builder for [atk.plug.Plug]
+      Returns: New builder object
   */
   static PlugGidBuilder builder()
   {
@@ -104,6 +104,7 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
   }
 }
 
+/// Fluent builder implementation template for [atk.plug.Plug]
 class PlugGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T
 {
 
@@ -113,6 +114,10 @@ class PlugGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.compone
 /// Fluent builder for [atk.plug.Plug]
 final class PlugGidBuilder : PlugGidBuilderImpl!PlugGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Plug build()
   {
     return new Plug(cast(void*)createGObject(Plug._getGType), Yes.Take);

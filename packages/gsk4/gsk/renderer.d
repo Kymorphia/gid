@@ -57,8 +57,8 @@ class Renderer : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gsk.renderer.Renderer]
-  Returns: New builder object
+      Get builder for [gsk.renderer.Renderer]
+      Returns: New builder object
   */
   static RendererGidBuilder builder()
   {
@@ -234,6 +234,7 @@ class Renderer : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gsk.renderer.Renderer]
 class RendererGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -241,6 +242,10 @@ class RendererGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gsk.renderer.Renderer]
 final class RendererGidBuilder : RendererGidBuilderImpl!RendererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Renderer build()
   {
     return new Renderer(cast(void*)createGObject(Renderer._getGType), No.Take);

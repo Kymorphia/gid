@@ -423,6 +423,7 @@ interface FontChooser
   gulong connectFontActivated(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.font_chooser.FontChooser]
 interface FontChooserGidBuilderImpl(T)
 {
 

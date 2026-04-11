@@ -133,8 +133,8 @@ class Image : gtk.misc.Misc
   }
 
   /**
-  Get builder for [gtk.image.Image]
-  Returns: New builder object
+      Get builder for [gtk.image.Image]
+      Returns: New builder object
   */
   static ImageGidBuilder builder()
   {
@@ -844,6 +844,7 @@ class Image : gtk.misc.Misc
   }
 }
 
+/// Fluent builder implementation template for [gtk.image.Image]
 class ImageGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
 {
 
@@ -957,6 +958,10 @@ class ImageGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
 /// Fluent builder for [gtk.image.Image]
 final class ImageGidBuilder : ImageGidBuilderImpl!ImageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Image build()
   {
     return new Image(cast(void*)createGObject(Image._getGType), No.Take);

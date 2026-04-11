@@ -70,8 +70,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   }
 
   /**
-  Get builder for [gtk.settings.Settings]
-  Returns: New builder object
+      Get builder for [gtk.settings.Settings]
+      Returns: New builder object
   */
   static SettingsGidBuilder builder()
   {
@@ -1439,6 +1439,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   }
 }
 
+/// Fluent builder implementation template for [gtk.settings.Settings]
 class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.style_provider.StyleProviderGidBuilderImpl!T
 {
 
@@ -2180,6 +2181,10 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
 /// Fluent builder for [gtk.settings.Settings]
 final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Settings build()
   {
     return new Settings(cast(void*)createGObject(Settings._getGType), No.Take);

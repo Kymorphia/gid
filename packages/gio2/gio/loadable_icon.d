@@ -68,6 +68,7 @@ interface LoadableIcon
   gio.input_stream.InputStream loadFinish(gio.async_result.AsyncResult res, out string type);
 }
 
+/// Fluent builder implementation template for [gio.loadable_icon.LoadableIcon]
 interface LoadableIconGidBuilderImpl(T)
 {
 }

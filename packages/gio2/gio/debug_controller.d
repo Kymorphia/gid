@@ -66,6 +66,7 @@ interface DebugController
   void setDebugEnabled(bool debugEnabled);
 }
 
+/// Fluent builder implementation template for [gio.debug_controller.DebugController]
 interface DebugControllerGidBuilderImpl(T)
 {
 

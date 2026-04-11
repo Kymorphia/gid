@@ -40,8 +40,8 @@ class ServerOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.server_options.ServerOptions]
-  Returns: New builder object
+      Get builder for [arrowflight.server_options.ServerOptions]
+      Returns: New builder object
   */
   static ServerOptionsGidBuilder builder()
   {
@@ -85,6 +85,7 @@ class ServerOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.server_options.ServerOptions]
 class ServerOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -114,6 +115,10 @@ class ServerOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.server_options.ServerOptions]
 final class ServerOptionsGidBuilder : ServerOptionsGidBuilderImpl!ServerOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ServerOptions build()
   {
     return new ServerOptions(cast(void*)createGObject(ServerOptions._getGType), Yes.Take);

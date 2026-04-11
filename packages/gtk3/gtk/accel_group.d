@@ -58,8 +58,8 @@ class AccelGroup : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.accel_group.AccelGroup]
-  Returns: New builder object
+      Get builder for [gtk.accel_group.AccelGroup]
+      Returns: New builder object
   */
   static AccelGroupGidBuilder builder()
   {
@@ -411,6 +411,7 @@ class AccelGroup : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.accel_group.AccelGroup]
 class AccelGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -418,6 +419,10 @@ class AccelGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.accel_group.AccelGroup]
 final class AccelGroupGidBuilder : AccelGroupGidBuilderImpl!AccelGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AccelGroup build()
   {
     return new AccelGroup(cast(void*)createGObject(AccelGroup._getGType), Yes.Take);

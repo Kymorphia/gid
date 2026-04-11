@@ -75,6 +75,7 @@ interface PowerProfileMonitor
   bool getPowerSaverEnabled();
 }
 
+/// Fluent builder implementation template for [gio.power_profile_monitor.PowerProfileMonitor]
 interface PowerProfileMonitorGidBuilderImpl(T)
 {
 }

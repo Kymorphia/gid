@@ -42,8 +42,8 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
   }
 
   /**
-  Get builder for [gtk.paned_accessible.PanedAccessible]
-  Returns: New builder object
+      Get builder for [gtk.paned_accessible.PanedAccessible]
+      Returns: New builder object
   */
   static PanedAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
   mixin ValueT!();
 }
 
+/// Fluent builder implementation template for [gtk.paned_accessible.PanedAccessible]
 class PanedAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class PanedAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAcces
 /// Fluent builder for [gtk.paned_accessible.PanedAccessible]
 final class PanedAccessibleGidBuilder : PanedAccessibleGidBuilderImpl!PanedAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PanedAccessible build()
   {
     return new PanedAccessible(cast(void*)createGObject(PanedAccessible._getGType), No.Take);

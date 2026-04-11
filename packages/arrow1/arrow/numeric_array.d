@@ -39,8 +39,8 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
   }
 
   /**
-  Get builder for [arrow.numeric_array.NumericArray]
-  Returns: New builder object
+      Get builder for [arrow.numeric_array.NumericArray]
+      Returns: New builder object
   */
   static NumericArrayGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.numeric_array.NumericArray]
 class NumericArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBuilderImpl!T
 {
 }
@@ -66,6 +67,10 @@ class NumericArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBui
 /// Fluent builder for [arrow.numeric_array.NumericArray]
 final class NumericArrayGidBuilder : NumericArrayGidBuilderImpl!NumericArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NumericArray build()
   {
     return new NumericArray(cast(void*)createGObject(NumericArray._getGType), No.Take);

@@ -38,8 +38,8 @@ class BinaryDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.binary_data_type.BinaryDataType]
-  Returns: New builder object
+      Get builder for [arrow.binary_data_type.BinaryDataType]
+      Returns: New builder object
   */
   static BinaryDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class BinaryDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.binary_data_type.BinaryDataType]
 class BinaryDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class BinaryDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 /// Fluent builder for [arrow.binary_data_type.BinaryDataType]
 final class BinaryDataTypeGidBuilder : BinaryDataTypeGidBuilderImpl!BinaryDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BinaryDataType build()
   {
     return new BinaryDataType(cast(void*)createGObject(BinaryDataType._getGType), Yes.Take);

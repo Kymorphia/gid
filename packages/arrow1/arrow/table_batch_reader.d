@@ -39,8 +39,8 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
   }
 
   /**
-  Get builder for [arrow.table_batch_reader.TableBatchReader]
-  Returns: New builder object
+      Get builder for [arrow.table_batch_reader.TableBatchReader]
+      Returns: New builder object
   */
   static TableBatchReaderGidBuilder builder()
   {
@@ -70,6 +70,7 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
   }
 }
 
+/// Fluent builder implementation template for [arrow.table_batch_reader.TableBatchReader]
 class TableBatchReaderGidBuilderImpl(T) : arrow.record_batch_reader.RecordBatchReaderGidBuilderImpl!T
 {
 }
@@ -77,6 +78,10 @@ class TableBatchReaderGidBuilderImpl(T) : arrow.record_batch_reader.RecordBatchR
 /// Fluent builder for [arrow.table_batch_reader.TableBatchReader]
 final class TableBatchReaderGidBuilder : TableBatchReaderGidBuilderImpl!TableBatchReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TableBatchReader build()
   {
     return new TableBatchReader(cast(void*)createGObject(TableBatchReader._getGType), Yes.Take);

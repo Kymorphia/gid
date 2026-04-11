@@ -43,8 +43,8 @@ class FileOutputStream : arrow.output_stream.OutputStream
   }
 
   /**
-  Get builder for [arrow.file_output_stream.FileOutputStream]
-  Returns: New builder object
+      Get builder for [arrow.file_output_stream.FileOutputStream]
+      Returns: New builder object
   */
   static FileOutputStreamGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class FileOutputStream : arrow.output_stream.OutputStream
   }
 }
 
+/// Fluent builder implementation template for [arrow.file_output_stream.FileOutputStream]
 class FileOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBuilderImpl!T
 {
 
@@ -72,6 +73,10 @@ class FileOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBui
 /// Fluent builder for [arrow.file_output_stream.FileOutputStream]
 final class FileOutputStreamGidBuilder : FileOutputStreamGidBuilderImpl!FileOutputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileOutputStream build()
   {
     return new FileOutputStream(cast(void*)createGObject(FileOutputStream._getGType), Yes.Take);

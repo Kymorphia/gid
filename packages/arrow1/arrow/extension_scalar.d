@@ -38,8 +38,8 @@ class ExtensionScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.extension_scalar.ExtensionScalar]
-  Returns: New builder object
+      Get builder for [arrow.extension_scalar.ExtensionScalar]
+      Returns: New builder object
   */
   static ExtensionScalarGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class ExtensionScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.extension_scalar.ExtensionScalar]
 class ExtensionScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class ExtensionScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.extension_scalar.ExtensionScalar]
 final class ExtensionScalarGidBuilder : ExtensionScalarGidBuilderImpl!ExtensionScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExtensionScalar build()
   {
     return new ExtensionScalar(cast(void*)createGObject(ExtensionScalar._getGType), No.Take);

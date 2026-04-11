@@ -43,8 +43,8 @@ class SwitchAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Acti
   }
 
   /**
-  Get builder for [gtk.switch_accessible.SwitchAccessible]
-  Returns: New builder object
+      Get builder for [gtk.switch_accessible.SwitchAccessible]
+      Returns: New builder object
   */
   static SwitchAccessibleGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class SwitchAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Acti
   alias setDescription = atk.object.ObjectWrap.setDescription;
 }
 
+/// Fluent builder implementation template for [gtk.switch_accessible.SwitchAccessible]
 class SwitchAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T
 {
 
@@ -66,6 +67,10 @@ class SwitchAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessible
 /// Fluent builder for [gtk.switch_accessible.SwitchAccessible]
 final class SwitchAccessibleGidBuilder : SwitchAccessibleGidBuilderImpl!SwitchAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SwitchAccessible build()
   {
     return new SwitchAccessible(cast(void*)createGObject(SwitchAccessible._getGType), No.Take);

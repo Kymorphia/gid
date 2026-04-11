@@ -66,8 +66,8 @@ class ShortcutsGroup : gtk.box.Box
   }
 
   /**
-  Get builder for [gtk.shortcuts_group.ShortcutsGroup]
-  Returns: New builder object
+      Get builder for [gtk.shortcuts_group.ShortcutsGroup]
+      Returns: New builder object
   */
   static ShortcutsGroupGidBuilder builder()
   {
@@ -173,6 +173,7 @@ class ShortcutsGroup : gtk.box.Box
   }
 }
 
+/// Fluent builder implementation template for [gtk.shortcuts_group.ShortcutsGroup]
 class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 {
 
@@ -234,6 +235,10 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 /// Fluent builder for [gtk.shortcuts_group.ShortcutsGroup]
 final class ShortcutsGroupGidBuilder : ShortcutsGroupGidBuilderImpl!ShortcutsGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ShortcutsGroup build()
   {
     return new ShortcutsGroup(cast(void*)createGObject(ShortcutsGroup._getGType), No.Take);

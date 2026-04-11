@@ -41,8 +41,8 @@ class StreamMmap : gmime.stream.Stream
   }
 
   /**
-  Get builder for [gmime.stream_mmap.StreamMmap]
-  Returns: New builder object
+      Get builder for [gmime.stream_mmap.StreamMmap]
+      Returns: New builder object
   */
   static StreamMmapGidBuilder builder()
   {
@@ -112,6 +112,7 @@ class StreamMmap : gmime.stream.Stream
   }
 }
 
+/// Fluent builder implementation template for [gmime.stream_mmap.StreamMmap]
 class StreamMmapGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 {
 }
@@ -119,6 +120,10 @@ class StreamMmapGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 /// Fluent builder for [gmime.stream_mmap.StreamMmap]
 final class StreamMmapGidBuilder : StreamMmapGidBuilderImpl!StreamMmapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamMmap build()
   {
     return new StreamMmap(cast(void*)createGObject(StreamMmap._getGType), Yes.Take);

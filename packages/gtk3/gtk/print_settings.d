@@ -55,8 +55,8 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.print_settings.PrintSettings]
-  Returns: New builder object
+      Get builder for [gtk.print_settings.PrintSettings]
+      Returns: New builder object
   */
   static PrintSettingsGidBuilder builder()
   {
@@ -1099,6 +1099,7 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.print_settings.PrintSettings]
 class PrintSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -1106,6 +1107,10 @@ class PrintSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.print_settings.PrintSettings]
 final class PrintSettingsGidBuilder : PrintSettingsGidBuilderImpl!PrintSettingsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PrintSettings build()
   {
     return new PrintSettings(cast(void*)createGObject(PrintSettings._getGType), Yes.Take);

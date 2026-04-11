@@ -68,8 +68,8 @@ class PasswordEntryRow : adw.entry_row.EntryRow
   }
 
   /**
-  Get builder for [adw.password_entry_row.PasswordEntryRow]
-  Returns: New builder object
+      Get builder for [adw.password_entry_row.PasswordEntryRow]
+      Returns: New builder object
   */
   static PasswordEntryRowGidBuilder builder()
   {
@@ -88,6 +88,7 @@ class PasswordEntryRow : adw.entry_row.EntryRow
   }
 }
 
+/// Fluent builder implementation template for [adw.password_entry_row.PasswordEntryRow]
 class PasswordEntryRowGidBuilderImpl(T) : adw.entry_row.EntryRowGidBuilderImpl!T
 {
 
@@ -96,6 +97,10 @@ class PasswordEntryRowGidBuilderImpl(T) : adw.entry_row.EntryRowGidBuilderImpl!T
 /// Fluent builder for [adw.password_entry_row.PasswordEntryRow]
 final class PasswordEntryRowGidBuilder : PasswordEntryRowGidBuilderImpl!PasswordEntryRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PasswordEntryRow build()
   {
     return new PasswordEntryRow(cast(void*)createGObject(PasswordEntryRow._getGType), No.Take);

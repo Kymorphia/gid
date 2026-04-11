@@ -56,8 +56,8 @@ class VolumeButton : gtk.scale_button.ScaleButton
   }
 
   /**
-  Get builder for [gtk.volume_button.VolumeButton]
-  Returns: New builder object
+      Get builder for [gtk.volume_button.VolumeButton]
+      Returns: New builder object
   */
   static VolumeButtonGidBuilder builder()
   {
@@ -111,6 +111,7 @@ class VolumeButton : gtk.scale_button.ScaleButton
   }
 }
 
+/// Fluent builder implementation template for [gtk.volume_button.VolumeButton]
 class VolumeButtonGidBuilderImpl(T) : gtk.scale_button.ScaleButtonGidBuilderImpl!T
 {
 
@@ -135,6 +136,10 @@ class VolumeButtonGidBuilderImpl(T) : gtk.scale_button.ScaleButtonGidBuilderImpl
 /// Fluent builder for [gtk.volume_button.VolumeButton]
 final class VolumeButtonGidBuilder : VolumeButtonGidBuilderImpl!VolumeButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VolumeButton build()
   {
     return new VolumeButton(cast(void*)createGObject(VolumeButton._getGType), No.Take);

@@ -44,8 +44,8 @@ class FontSelectionDialog : gtk.dialog.Dialog
   }
 
   /**
-  Get builder for [gtk.font_selection_dialog.FontSelectionDialog]
-  Returns: New builder object
+      Get builder for [gtk.font_selection_dialog.FontSelectionDialog]
+      Returns: New builder object
   */
   static FontSelectionDialogGidBuilder builder()
   {
@@ -184,6 +184,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   }
 }
 
+/// Fluent builder implementation template for [gtk.font_selection_dialog.FontSelectionDialog]
 class FontSelectionDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 {
 
@@ -192,6 +193,10 @@ class FontSelectionDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 /// Fluent builder for [gtk.font_selection_dialog.FontSelectionDialog]
 final class FontSelectionDialogGidBuilder : FontSelectionDialogGidBuilderImpl!FontSelectionDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontSelectionDialog build()
   {
     return new FontSelectionDialog(cast(void*)createGObject(FontSelectionDialog._getGType), No.Take);

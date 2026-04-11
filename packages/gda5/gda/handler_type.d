@@ -40,8 +40,8 @@ class HandlerType : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 
   /**
-  Get builder for [gda.handler_type.HandlerType]
-  Returns: New builder object
+      Get builder for [gda.handler_type.HandlerType]
+      Returns: New builder object
   */
   static HandlerTypeGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class HandlerType : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 }
 
+/// Fluent builder implementation template for [gda.handler_type.HandlerType]
 class HandlerTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
 {
 
@@ -72,6 +73,10 @@ class HandlerTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [gda.handler_type.HandlerType]
 final class HandlerTypeGidBuilder : HandlerTypeGidBuilderImpl!HandlerTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HandlerType build()
   {
     return new HandlerType(cast(void*)createGObject(HandlerType._getGType), No.Take);

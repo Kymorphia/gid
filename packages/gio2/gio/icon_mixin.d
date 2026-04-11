@@ -121,6 +121,7 @@ template IconT()
   }
 }
 
+/// Fluent builder implementation template for [gio.icon.Icon]
 template IconGidBuilderT()
 {
 }

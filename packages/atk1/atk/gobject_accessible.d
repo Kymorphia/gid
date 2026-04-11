@@ -46,8 +46,8 @@ class GObjectAccessible : atk.object.ObjectWrap
   }
 
   /**
-  Get builder for [atk.gobject_accessible.GObjectAccessible]
-  Returns: New builder object
+      Get builder for [atk.gobject_accessible.GObjectAccessible]
+      Returns: New builder object
   */
   static GObjectAccessibleGidBuilder builder()
   {
@@ -84,6 +84,7 @@ class GObjectAccessible : atk.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [atk.gobject_accessible.GObjectAccessible]
 class GObjectAccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -91,6 +92,10 @@ class GObjectAccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [atk.gobject_accessible.GObjectAccessible]
 final class GObjectAccessibleGidBuilder : GObjectAccessibleGidBuilderImpl!GObjectAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GObjectAccessible build()
   {
     return new GObjectAccessible(cast(void*)createGObject(GObjectAccessible._getGType), No.Take);

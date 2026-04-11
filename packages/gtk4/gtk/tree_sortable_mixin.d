@@ -180,6 +180,7 @@ template TreeSortableT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_sortable.TreeSortable]
 template TreeSortableGidBuilderT()
 {
 }

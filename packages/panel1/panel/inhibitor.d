@@ -38,8 +38,8 @@ class Inhibitor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [panel.inhibitor.Inhibitor]
-  Returns: New builder object
+      Get builder for [panel.inhibitor.Inhibitor]
+      Returns: New builder object
   */
   static InhibitorGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class Inhibitor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [panel.inhibitor.Inhibitor]
 class InhibitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -60,6 +61,10 @@ class InhibitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [panel.inhibitor.Inhibitor]
 final class InhibitorGidBuilder : InhibitorGidBuilderImpl!InhibitorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Inhibitor build()
   {
     return new Inhibitor(cast(void*)createGObject(Inhibitor._getGType), No.Take);

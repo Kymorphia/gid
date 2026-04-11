@@ -45,6 +45,7 @@ template TlsFileDatabaseT()
 
 }
 
+/// Fluent builder implementation template for [gio.tls_file_database.TlsFileDatabase]
 template TlsFileDatabaseGidBuilderT()
 {
 

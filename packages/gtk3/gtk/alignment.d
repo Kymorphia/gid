@@ -61,8 +61,8 @@ class Alignment : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.alignment.Alignment]
-  Returns: New builder object
+      Get builder for [gtk.alignment.Alignment]
+      Returns: New builder object
   */
   static AlignmentGidBuilder builder()
   {
@@ -359,6 +359,7 @@ class Alignment : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.alignment.Alignment]
 class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -479,6 +480,10 @@ class AlignmentGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.alignment.Alignment]
 final class AlignmentGidBuilder : AlignmentGidBuilderImpl!AlignmentGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Alignment build()
   {
     return new Alignment(cast(void*)createGObject(Alignment._getGType), No.Take);

@@ -39,8 +39,8 @@ class LargeStringScalar : arrow.base_binary_scalar.BaseBinaryScalar
   }
 
   /**
-  Get builder for [arrow.large_string_scalar.LargeStringScalar]
-  Returns: New builder object
+      Get builder for [arrow.large_string_scalar.LargeStringScalar]
+      Returns: New builder object
   */
   static LargeStringScalarGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class LargeStringScalar : arrow.base_binary_scalar.BaseBinaryScalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.large_string_scalar.LargeStringScalar]
 class LargeStringScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinaryScalarGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class LargeStringScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinarySc
 /// Fluent builder for [arrow.large_string_scalar.LargeStringScalar]
 final class LargeStringScalarGidBuilder : LargeStringScalarGidBuilderImpl!LargeStringScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LargeStringScalar build()
   {
     return new LargeStringScalar(cast(void*)createGObject(LargeStringScalar._getGType), Yes.Take);

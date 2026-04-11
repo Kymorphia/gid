@@ -38,8 +38,8 @@ class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
   }
 
   /**
-  Get builder for [arrowflight.stream_reader.StreamReader]
-  Returns: New builder object
+      Get builder for [arrowflight.stream_reader.StreamReader]
+      Returns: New builder object
   */
   static StreamReaderGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.stream_reader.StreamReader]
 class StreamReaderGidBuilderImpl(T) : arrowflight.record_batch_reader.RecordBatchReaderGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class StreamReaderGidBuilderImpl(T) : arrowflight.record_batch_reader.RecordBatc
 /// Fluent builder for [arrowflight.stream_reader.StreamReader]
 final class StreamReaderGidBuilder : StreamReaderGidBuilderImpl!StreamReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamReader build()
   {
     return new StreamReader(cast(void*)createGObject(StreamReader._getGType), No.Take);

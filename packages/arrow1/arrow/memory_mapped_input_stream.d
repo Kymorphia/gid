@@ -43,8 +43,8 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
   }
 
   /**
-  Get builder for [arrow.memory_mapped_input_stream.MemoryMappedInputStream]
-  Returns: New builder object
+      Get builder for [arrow.memory_mapped_input_stream.MemoryMappedInputStream]
+      Returns: New builder object
   */
   static MemoryMappedInputStreamGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
   }
 }
 
+/// Fluent builder implementation template for [arrow.memory_mapped_input_stream.MemoryMappedInputStream]
 class MemoryMappedInputStreamGidBuilderImpl(T) : arrow.seekable_input_stream.SeekableInputStreamGidBuilderImpl!T
 {
 
@@ -72,6 +73,10 @@ class MemoryMappedInputStreamGidBuilderImpl(T) : arrow.seekable_input_stream.See
 /// Fluent builder for [arrow.memory_mapped_input_stream.MemoryMappedInputStream]
 final class MemoryMappedInputStreamGidBuilder : MemoryMappedInputStreamGidBuilderImpl!MemoryMappedInputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MemoryMappedInputStream build()
   {
     return new MemoryMappedInputStream(cast(void*)createGObject(MemoryMappedInputStream._getGType), Yes.Take);

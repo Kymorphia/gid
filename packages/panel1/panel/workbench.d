@@ -43,8 +43,8 @@ class Workbench : gtk.window_group.WindowGroup
   }
 
   /**
-  Get builder for [panel.workbench.Workbench]
-  Returns: New builder object
+      Get builder for [panel.workbench.Workbench]
+      Returns: New builder object
   */
   static WorkbenchGidBuilder builder()
   {
@@ -218,6 +218,7 @@ class Workbench : gtk.window_group.WindowGroup
   }
 }
 
+/// Fluent builder implementation template for [panel.workbench.Workbench]
 class WorkbenchGidBuilderImpl(T) : gtk.window_group.WindowGroupGidBuilderImpl!T
 {
 
@@ -239,6 +240,10 @@ class WorkbenchGidBuilderImpl(T) : gtk.window_group.WindowGroupGidBuilderImpl!T
 /// Fluent builder for [panel.workbench.Workbench]
 final class WorkbenchGidBuilder : WorkbenchGidBuilderImpl!WorkbenchGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Workbench build()
   {
     return new Workbench(cast(void*)createGObject(Workbench._getGType), Yes.Take);

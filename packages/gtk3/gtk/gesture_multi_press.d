@@ -52,8 +52,8 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   }
 
   /**
-  Get builder for [gtk.gesture_multi_press.GestureMultiPress]
-  Returns: New builder object
+      Get builder for [gtk.gesture_multi_press.GestureMultiPress]
+      Returns: New builder object
   */
   static GestureMultiPressGidBuilder builder()
   {
@@ -263,6 +263,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture_multi_press.GestureMultiPress]
 class GestureMultiPressGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
 {
 }
@@ -270,6 +271,10 @@ class GestureMultiPressGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBu
 /// Fluent builder for [gtk.gesture_multi_press.GestureMultiPress]
 final class GestureMultiPressGidBuilder : GestureMultiPressGidBuilderImpl!GestureMultiPressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GestureMultiPress build()
   {
     return new GestureMultiPress(cast(void*)createGObject(GestureMultiPress._getGType), Yes.Take);

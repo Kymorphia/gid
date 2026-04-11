@@ -38,8 +38,8 @@ class LargeBinaryDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.large_binary_data_type.LargeBinaryDataType]
-  Returns: New builder object
+      Get builder for [arrow.large_binary_data_type.LargeBinaryDataType]
+      Returns: New builder object
   */
   static LargeBinaryDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class LargeBinaryDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.large_binary_data_type.LargeBinaryDataType]
 class LargeBinaryDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class LargeBinaryDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderI
 /// Fluent builder for [arrow.large_binary_data_type.LargeBinaryDataType]
 final class LargeBinaryDataTypeGidBuilder : LargeBinaryDataTypeGidBuilderImpl!LargeBinaryDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LargeBinaryDataType build()
   {
     return new LargeBinaryDataType(cast(void*)createGObject(LargeBinaryDataType._getGType), Yes.Take);

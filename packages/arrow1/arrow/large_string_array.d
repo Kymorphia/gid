@@ -39,8 +39,8 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
   }
 
   /**
-  Get builder for [arrow.large_string_array.LargeStringArray]
-  Returns: New builder object
+      Get builder for [arrow.large_string_array.LargeStringArray]
+      Returns: New builder object
   */
   static LargeStringArrayGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.large_string_array.LargeStringArray]
 class LargeStringArrayGidBuilderImpl(T) : arrow.large_binary_array.LargeBinaryArrayGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class LargeStringArrayGidBuilderImpl(T) : arrow.large_binary_array.LargeBinaryAr
 /// Fluent builder for [arrow.large_string_array.LargeStringArray]
 final class LargeStringArrayGidBuilder : LargeStringArrayGidBuilderImpl!LargeStringArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LargeStringArray build()
   {
     return new LargeStringArray(cast(void*)createGObject(LargeStringArray._getGType), Yes.Take);

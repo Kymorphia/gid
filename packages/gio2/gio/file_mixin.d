@@ -3894,6 +3894,7 @@ template FileT()
   }
 }
 
+/// Fluent builder implementation template for [gio.file.File]
 template FileGidBuilderT()
 {
 }

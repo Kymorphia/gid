@@ -60,8 +60,8 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   }
 
   /**
-  Get builder for [gtk.tool_item.ToolItem]
-  Returns: New builder object
+      Get builder for [gtk.tool_item.ToolItem]
+      Returns: New builder object
   */
   static ToolItemGidBuilder builder()
   {
@@ -617,6 +617,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   }
 }
 
+/// Fluent builder implementation template for [gtk.tool_item.ToolItem]
 class ToolItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T
 {
 
@@ -644,6 +645,10 @@ class ToolItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.activatable.A
 /// Fluent builder for [gtk.tool_item.ToolItem]
 final class ToolItemGidBuilder : ToolItemGidBuilderImpl!ToolItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToolItem build()
   {
     return new ToolItem(cast(void*)createGObject(ToolItem._getGType), No.Take);

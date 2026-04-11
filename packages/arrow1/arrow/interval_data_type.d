@@ -38,8 +38,8 @@ class IntervalDataType : arrow.temporal_data_type.TemporalDataType
   }
 
   /**
-  Get builder for [arrow.interval_data_type.IntervalDataType]
-  Returns: New builder object
+      Get builder for [arrow.interval_data_type.IntervalDataType]
+      Returns: New builder object
   */
   static IntervalDataTypeGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class IntervalDataType : arrow.temporal_data_type.TemporalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.interval_data_type.IntervalDataType]
 class IntervalDataTypeGidBuilderImpl(T) : arrow.temporal_data_type.TemporalDataTypeGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class IntervalDataTypeGidBuilderImpl(T) : arrow.temporal_data_type.TemporalDataT
 /// Fluent builder for [arrow.interval_data_type.IntervalDataType]
 final class IntervalDataTypeGidBuilder : IntervalDataTypeGidBuilderImpl!IntervalDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IntervalDataType build()
   {
     return new IntervalDataType(cast(void*)createGObject(IntervalDataType._getGType), No.Take);

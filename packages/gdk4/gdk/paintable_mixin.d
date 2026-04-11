@@ -330,6 +330,7 @@ template PaintableT()
   }
 }
 
+/// Fluent builder implementation template for [gdk.paintable.Paintable]
 template PaintableGidBuilderT()
 {
 }

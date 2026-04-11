@@ -46,8 +46,8 @@ class CookieJarText : soup.cookie_jar.CookieJar
   }
 
   /**
-  Get builder for [soup.cookie_jar_text.CookieJarText]
-  Returns: New builder object
+      Get builder for [soup.cookie_jar_text.CookieJarText]
+      Returns: New builder object
   */
   static CookieJarTextGidBuilder builder()
   {
@@ -86,6 +86,7 @@ class CookieJarText : soup.cookie_jar.CookieJar
   }
 }
 
+/// Fluent builder implementation template for [soup.cookie_jar_text.CookieJarText]
 class CookieJarTextGidBuilderImpl(T) : soup.cookie_jar.CookieJarGidBuilderImpl!T
 {
 
@@ -105,6 +106,10 @@ class CookieJarTextGidBuilderImpl(T) : soup.cookie_jar.CookieJarGidBuilderImpl!T
 /// Fluent builder for [soup.cookie_jar_text.CookieJarText]
 final class CookieJarTextGidBuilder : CookieJarTextGidBuilderImpl!CookieJarTextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CookieJarText build()
   {
     return new CookieJarText(cast(void*)createGObject(CookieJarText._getGType), Yes.Take);

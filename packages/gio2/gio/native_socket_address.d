@@ -45,8 +45,8 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-  Get builder for [gio.native_socket_address.NativeSocketAddress]
-  Returns: New builder object
+      Get builder for [gio.native_socket_address.NativeSocketAddress]
+      Returns: New builder object
   */
   static NativeSocketAddressGidBuilder builder()
   {
@@ -69,6 +69,7 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
   }
 }
 
+/// Fluent builder implementation template for [gio.native_socket_address.NativeSocketAddress]
 class NativeSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBuilderImpl!T
 {
 
@@ -77,6 +78,10 @@ class NativeSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGid
 /// Fluent builder for [gio.native_socket_address.NativeSocketAddress]
 final class NativeSocketAddressGidBuilder : NativeSocketAddressGidBuilderImpl!NativeSocketAddressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NativeSocketAddress build()
   {
     return new NativeSocketAddress(cast(void*)createGObject(NativeSocketAddress._getGType), Yes.Take);

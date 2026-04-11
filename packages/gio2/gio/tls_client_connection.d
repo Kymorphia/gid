@@ -269,6 +269,7 @@ interface TlsClientConnection
   void setValidationFlags(gio.types.TlsCertificateFlags flags);
 }
 
+/// Fluent builder implementation template for [gio.tls_client_connection.TlsClientConnection]
 interface TlsClientConnectionGidBuilderImpl(T)
 {
 

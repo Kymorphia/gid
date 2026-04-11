@@ -39,8 +39,8 @@ class JSONReadOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.jsonread_options.JSONReadOptions]
-  Returns: New builder object
+      Get builder for [arrow.jsonread_options.JSONReadOptions]
+      Returns: New builder object
   */
   static JSONReadOptionsGidBuilder builder()
   {
@@ -155,6 +155,7 @@ class JSONReadOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.jsonread_options.JSONReadOptions]
 class JSONReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -219,6 +220,10 @@ class JSONReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [arrow.jsonread_options.JSONReadOptions]
 final class JSONReadOptionsGidBuilder : JSONReadOptionsGidBuilderImpl!JSONReadOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   JSONReadOptions build()
   {
     return new JSONReadOptions(cast(void*)createGObject(JSONReadOptions._getGType), Yes.Take);

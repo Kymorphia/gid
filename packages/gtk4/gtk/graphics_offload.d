@@ -84,8 +84,8 @@ class GraphicsOffload : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.graphics_offload.GraphicsOffload]
-  Returns: New builder object
+      Get builder for [gtk.graphics_offload.GraphicsOffload]
+      Returns: New builder object
   */
   static GraphicsOffloadGidBuilder builder()
   {
@@ -192,6 +192,7 @@ class GraphicsOffload : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.graphics_offload.GraphicsOffload]
 class GraphicsOffloadGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -222,6 +223,10 @@ class GraphicsOffloadGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.graphics_offload.GraphicsOffload]
 final class GraphicsOffloadGidBuilder : GraphicsOffloadGidBuilderImpl!GraphicsOffloadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GraphicsOffload build()
   {
     return new GraphicsOffload(cast(void*)createGObject(GraphicsOffload._getGType), Yes.Take);

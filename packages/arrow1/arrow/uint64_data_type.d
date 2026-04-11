@@ -38,8 +38,8 @@ class UInt64DataType : arrow.integer_data_type.IntegerDataType
   }
 
   /**
-  Get builder for [arrow.uint64_data_type.UInt64DataType]
-  Returns: New builder object
+      Get builder for [arrow.uint64_data_type.UInt64DataType]
+      Returns: New builder object
   */
   static UInt64DataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class UInt64DataType : arrow.integer_data_type.IntegerDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.uint64_data_type.UInt64DataType]
 class UInt64DataTypeGidBuilderImpl(T) : arrow.integer_data_type.IntegerDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class UInt64DataTypeGidBuilderImpl(T) : arrow.integer_data_type.IntegerDataTypeG
 /// Fluent builder for [arrow.uint64_data_type.UInt64DataType]
 final class UInt64DataTypeGidBuilder : UInt64DataTypeGidBuilderImpl!UInt64DataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UInt64DataType build()
   {
     return new UInt64DataType(cast(void*)createGObject(UInt64DataType._getGType), Yes.Take);

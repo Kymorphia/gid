@@ -40,8 +40,8 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.decimal256.Decimal256]
-  Returns: New builder object
+      Get builder for [arrow.decimal256.Decimal256]
+      Returns: New builder object
   */
   static Decimal256GidBuilder builder()
   {
@@ -215,6 +215,7 @@ class Decimal256 : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal256.Decimal256]
 class Decimal256GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -228,6 +229,10 @@ class Decimal256GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.decimal256.Decimal256]
 final class Decimal256GidBuilder : Decimal256GidBuilderImpl!Decimal256GidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal256 build()
   {
     return new Decimal256(cast(void*)createGObject(Decimal256._getGType), No.Take);

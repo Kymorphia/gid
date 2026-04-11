@@ -40,8 +40,8 @@ class GLBufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
   }
 
   /**
-  Get builder for [gstgl.glbuffer_allocator.GLBufferAllocator]
-  Returns: New builder object
+      Get builder for [gstgl.glbuffer_allocator.GLBufferAllocator]
+      Returns: New builder object
   */
   static GLBufferAllocatorGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class GLBufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glbuffer_allocator.GLBufferAllocator]
 class GLBufferAllocatorGidBuilderImpl(T) : gstgl.glbase_memory_allocator.GLBaseMemoryAllocatorGidBuilderImpl!T
 {
 }
@@ -56,6 +57,10 @@ class GLBufferAllocatorGidBuilderImpl(T) : gstgl.glbase_memory_allocator.GLBaseM
 /// Fluent builder for [gstgl.glbuffer_allocator.GLBufferAllocator]
 final class GLBufferAllocatorGidBuilder : GLBufferAllocatorGidBuilderImpl!GLBufferAllocatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLBufferAllocator build()
   {
     return new GLBufferAllocator(cast(void*)createGObject(GLBufferAllocator._getGType), No.Take);

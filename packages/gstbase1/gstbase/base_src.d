@@ -165,8 +165,8 @@ class BaseSrc : gst.element.Element
   }
 
   /**
-  Get builder for [gstbase.base_src.BaseSrc]
-  Returns: New builder object
+      Get builder for [gstbase.base_src.BaseSrc]
+      Returns: New builder object
   */
   static BaseSrcGidBuilder builder()
   {
@@ -617,6 +617,7 @@ class BaseSrc : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstbase.base_src.BaseSrc]
 class BaseSrcGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
@@ -659,6 +660,10 @@ class BaseSrcGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstbase.base_src.BaseSrc]
 final class BaseSrcGidBuilder : BaseSrcGidBuilderImpl!BaseSrcGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BaseSrc build()
   {
     return new BaseSrc(cast(void*)createGObject(BaseSrc._getGType), No.Take);

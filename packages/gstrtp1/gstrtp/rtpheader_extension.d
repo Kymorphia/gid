@@ -43,8 +43,8 @@ class RTPHeaderExtension : gst.element.Element
   }
 
   /**
-  Get builder for [gstrtp.rtpheader_extension.RTPHeaderExtension]
-  Returns: New builder object
+      Get builder for [gstrtp.rtpheader_extension.RTPHeaderExtension]
+      Returns: New builder object
   */
   static RTPHeaderExtensionGidBuilder builder()
   {
@@ -317,6 +317,7 @@ class RTPHeaderExtension : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstrtp.rtpheader_extension.RTPHeaderExtension]
 class RTPHeaderExtensionGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 }
@@ -324,6 +325,10 @@ class RTPHeaderExtensionGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstrtp.rtpheader_extension.RTPHeaderExtension]
 final class RTPHeaderExtensionGidBuilder : RTPHeaderExtensionGidBuilderImpl!RTPHeaderExtensionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RTPHeaderExtension build()
   {
     return new RTPHeaderExtension(cast(void*)createGObject(RTPHeaderExtension._getGType), No.Take);

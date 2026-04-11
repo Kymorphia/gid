@@ -39,8 +39,8 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.array_sort_options.ArraySortOptions]
-  Returns: New builder object
+      Get builder for [arrow.array_sort_options.ArraySortOptions]
+      Returns: New builder object
   */
   static ArraySortOptionsGidBuilder builder()
   {
@@ -85,6 +85,7 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.array_sort_options.ArraySortOptions]
 class ArraySortOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -103,6 +104,10 @@ class ArraySortOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptions
 /// Fluent builder for [arrow.array_sort_options.ArraySortOptions]
 final class ArraySortOptionsGidBuilder : ArraySortOptionsGidBuilderImpl!ArraySortOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ArraySortOptions build()
   {
     return new ArraySortOptions(cast(void*)createGObject(ArraySortOptions._getGType), Yes.Take);

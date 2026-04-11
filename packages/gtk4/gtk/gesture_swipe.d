@@ -52,8 +52,8 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   }
 
   /**
-  Get builder for [gtk.gesture_swipe.GestureSwipe]
-  Returns: New builder object
+      Get builder for [gtk.gesture_swipe.GestureSwipe]
+      Returns: New builder object
   */
   static GestureSwipeGidBuilder builder()
   {
@@ -142,6 +142,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture_swipe.GestureSwipe]
 class GestureSwipeGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
 {
 }
@@ -149,6 +150,10 @@ class GestureSwipeGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilder
 /// Fluent builder for [gtk.gesture_swipe.GestureSwipe]
 final class GestureSwipeGidBuilder : GestureSwipeGidBuilderImpl!GestureSwipeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GestureSwipe build()
   {
     return new GestureSwipe(cast(void*)createGObject(GestureSwipe._getGType), Yes.Take);

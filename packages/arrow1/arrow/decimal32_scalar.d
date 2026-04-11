@@ -41,8 +41,8 @@ class Decimal32Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.decimal32_scalar.Decimal32Scalar]
-  Returns: New builder object
+      Get builder for [arrow.decimal32_scalar.Decimal32Scalar]
+      Returns: New builder object
   */
   static Decimal32ScalarGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class Decimal32Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal32_scalar.Decimal32Scalar]
 class Decimal32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 
@@ -85,6 +86,10 @@ class Decimal32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.decimal32_scalar.Decimal32Scalar]
 final class Decimal32ScalarGidBuilder : Decimal32ScalarGidBuilderImpl!Decimal32ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal32Scalar build()
   {
     return new Decimal32Scalar(cast(void*)createGObject(Decimal32Scalar._getGType), Yes.Take);

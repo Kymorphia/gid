@@ -46,8 +46,8 @@ class Map : gtksource.view.View
   }
 
   /**
-  Get builder for [gtksource.map.Map]
-  Returns: New builder object
+      Get builder for [gtksource.map.Map]
+      Returns: New builder object
   */
   static MapGidBuilder builder()
   {
@@ -113,6 +113,7 @@ class Map : gtksource.view.View
   }
 }
 
+/// Fluent builder implementation template for [gtksource.map.Map]
 class MapGidBuilderImpl(T) : gtksource.view.ViewGidBuilderImpl!T
 {
 
@@ -133,6 +134,10 @@ class MapGidBuilderImpl(T) : gtksource.view.ViewGidBuilderImpl!T
 /// Fluent builder for [gtksource.map.Map]
 final class MapGidBuilder : MapGidBuilderImpl!MapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Map build()
   {
     return new Map(cast(void*)createGObject(Map._getGType), No.Take);

@@ -52,8 +52,8 @@ class GLFramebuffer : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstgl.glframebuffer.GLFramebuffer]
-  Returns: New builder object
+      Get builder for [gstgl.glframebuffer.GLFramebuffer]
+      Returns: New builder object
   */
   static GLFramebufferGidBuilder builder()
   {
@@ -141,6 +141,7 @@ class GLFramebuffer : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glframebuffer.GLFramebuffer]
 class GLFramebufferGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -148,6 +149,10 @@ class GLFramebufferGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstgl.glframebuffer.GLFramebuffer]
 final class GLFramebufferGidBuilder : GLFramebufferGidBuilderImpl!GLFramebufferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLFramebuffer build()
   {
     return new GLFramebuffer(cast(void*)createGObject(GLFramebuffer._getGType), Yes.Take);

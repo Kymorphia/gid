@@ -48,8 +48,8 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-  Get builder for [gio.inet_socket_address.InetSocketAddress]
-  Returns: New builder object
+      Get builder for [gio.inet_socket_address.InetSocketAddress]
+      Returns: New builder object
   */
   static InetSocketAddressGidBuilder builder()
   {
@@ -177,6 +177,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   }
 }
 
+/// Fluent builder implementation template for [gio.inet_socket_address.InetSocketAddress]
 class InetSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBuilderImpl!T
 {
 
@@ -229,6 +230,10 @@ class InetSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
 /// Fluent builder for [gio.inet_socket_address.InetSocketAddress]
 final class InetSocketAddressGidBuilder : InetSocketAddressGidBuilderImpl!InetSocketAddressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InetSocketAddress build()
   {
     return new InetSocketAddress(cast(void*)createGObject(InetSocketAddress._getGType), Yes.Take);

@@ -114,8 +114,8 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
-  Get builder for [gtk.icon_factory.IconFactory]
-  Returns: New builder object
+      Get builder for [gtk.icon_factory.IconFactory]
+      Returns: New builder object
   */
   static IconFactoryGidBuilder builder()
   {
@@ -245,6 +245,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 }
 
+/// Fluent builder implementation template for [gtk.icon_factory.IconFactory]
 class IconFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -254,6 +255,10 @@ class IconFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [gtk.icon_factory.IconFactory]
 final class IconFactoryGidBuilder : IconFactoryGidBuilderImpl!IconFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IconFactory build()
   {
     return new IconFactory(cast(void*)createGObject(IconFactory._getGType), Yes.Take);

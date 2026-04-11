@@ -42,8 +42,8 @@ class TreeMgrSelect : gda.tree_manager.TreeManager
   }
 
   /**
-  Get builder for [gda.tree_mgr_select.TreeMgrSelect]
-  Returns: New builder object
+      Get builder for [gda.tree_mgr_select.TreeMgrSelect]
+      Returns: New builder object
   */
   static TreeMgrSelectGidBuilder builder()
   {
@@ -86,6 +86,7 @@ class TreeMgrSelect : gda.tree_manager.TreeManager
   }
 }
 
+/// Fluent builder implementation template for [gda.tree_mgr_select.TreeMgrSelect]
 class TreeMgrSelectGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImpl!T
 {
 
@@ -111,6 +112,10 @@ class TreeMgrSelectGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImp
 /// Fluent builder for [gda.tree_mgr_select.TreeMgrSelect]
 final class TreeMgrSelectGidBuilder : TreeMgrSelectGidBuilderImpl!TreeMgrSelectGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeMgrSelect build()
   {
     return new TreeMgrSelect(cast(void*)createGObject(TreeMgrSelect._getGType), Yes.Take);

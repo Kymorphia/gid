@@ -43,8 +43,8 @@ class ContentType : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.content_type.ContentType]
-  Returns: New builder object
+      Get builder for [gmime.content_type.ContentType]
+      Returns: New builder object
   */
   static ContentTypeGidBuilder builder()
   {
@@ -229,6 +229,7 @@ class ContentType : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.content_type.ContentType]
 class ContentTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -236,6 +237,10 @@ class ContentTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.content_type.ContentType]
 final class ContentTypeGidBuilder : ContentTypeGidBuilderImpl!ContentTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContentType build()
   {
     return new ContentType(cast(void*)createGObject(ContentType._getGType), Yes.Take);

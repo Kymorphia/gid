@@ -43,8 +43,8 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   }
 
   /**
-  Get builder for [gstgl.glmixer.GLMixer]
-  Returns: New builder object
+      Get builder for [gstgl.glmixer.GLMixer]
+      Returns: New builder object
   */
   static GLMixerGidBuilder builder()
   {
@@ -77,6 +77,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glmixer.GLMixer]
 class GLMixerGidBuilderImpl(T) : gstgl.glbase_mixer.GLBaseMixerGidBuilderImpl!T
 {
 }
@@ -84,6 +85,10 @@ class GLMixerGidBuilderImpl(T) : gstgl.glbase_mixer.GLBaseMixerGidBuilderImpl!T
 /// Fluent builder for [gstgl.glmixer.GLMixer]
 final class GLMixerGidBuilder : GLMixerGidBuilderImpl!GLMixerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLMixer build()
   {
     return new GLMixer(cast(void*)createGObject(GLMixer._getGType), No.Take);

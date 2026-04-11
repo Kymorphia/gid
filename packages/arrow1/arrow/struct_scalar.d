@@ -39,8 +39,8 @@ class StructScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.struct_scalar.StructScalar]
-  Returns: New builder object
+      Get builder for [arrow.struct_scalar.StructScalar]
+      Returns: New builder object
   */
   static StructScalarGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class StructScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.struct_scalar.StructScalar]
 class StructScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -74,6 +75,10 @@ class StructScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.struct_scalar.StructScalar]
 final class StructScalarGidBuilder : StructScalarGidBuilderImpl!StructScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StructScalar build()
   {
     return new StructScalar(cast(void*)createGObject(StructScalar._getGType), Yes.Take);

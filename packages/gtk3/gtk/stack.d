@@ -61,8 +61,8 @@ class Stack : gtk.container.Container
   }
 
   /**
-  Get builder for [gtk.stack.Stack]
-  Returns: New builder object
+      Get builder for [gtk.stack.Stack]
+      Returns: New builder object
   */
   static StackGidBuilder builder()
   {
@@ -506,6 +506,7 @@ class Stack : gtk.container.Container
   }
 }
 
+/// Fluent builder implementation template for [gtk.stack.Stack]
 class StackGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 {
 
@@ -572,6 +573,10 @@ class StackGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 /// Fluent builder for [gtk.stack.Stack]
 final class StackGidBuilder : StackGidBuilderImpl!StackGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Stack build()
   {
     return new Stack(cast(void*)createGObject(Stack._getGType), No.Take);

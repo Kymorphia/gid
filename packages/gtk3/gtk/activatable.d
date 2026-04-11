@@ -381,6 +381,7 @@ interface Activatable
   void syncActionProperties(gtk.action.Action action = null);
 }
 
+/// Fluent builder implementation template for [gtk.activatable.Activatable]
 interface ActivatableGidBuilderImpl(T)
 {
 

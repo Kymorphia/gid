@@ -44,8 +44,8 @@ class CryptoContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.crypto_context.CryptoContext]
-  Returns: New builder object
+      Get builder for [gmime.crypto_context.CryptoContext]
+      Returns: New builder object
   */
   static CryptoContextGidBuilder builder()
   {
@@ -301,6 +301,7 @@ class CryptoContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.crypto_context.CryptoContext]
 class CryptoContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -308,6 +309,10 @@ class CryptoContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.crypto_context.CryptoContext]
 final class CryptoContextGidBuilder : CryptoContextGidBuilderImpl!CryptoContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CryptoContext build()
   {
     return new CryptoContext(cast(void*)createGObject(CryptoContext._getGType), Yes.Take);

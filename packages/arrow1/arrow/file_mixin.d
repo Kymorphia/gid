@@ -53,6 +53,7 @@ template FileT()
   }
 }
 
+/// Fluent builder implementation template for [arrow.file.File]
 template FileGidBuilderT()
 {
 }

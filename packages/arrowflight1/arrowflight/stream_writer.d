@@ -39,8 +39,8 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
   }
 
   /**
-  Get builder for [arrowflight.stream_writer.StreamWriter]
-  Returns: New builder object
+      Get builder for [arrowflight.stream_writer.StreamWriter]
+      Returns: New builder object
   */
   static StreamWriterGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.stream_writer.StreamWriter]
 class StreamWriterGidBuilderImpl(T) : arrowflight.record_batch_writer.RecordBatchWriterGidBuilderImpl!T
 {
 }
@@ -66,6 +67,10 @@ class StreamWriterGidBuilderImpl(T) : arrowflight.record_batch_writer.RecordBatc
 /// Fluent builder for [arrowflight.stream_writer.StreamWriter]
 final class StreamWriterGidBuilder : StreamWriterGidBuilderImpl!StreamWriterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamWriter build()
   {
     return new StreamWriter(cast(void*)createGObject(StreamWriter._getGType), No.Take);

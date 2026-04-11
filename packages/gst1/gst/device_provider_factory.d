@@ -50,8 +50,8 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   }
 
   /**
-  Get builder for [gst.device_provider_factory.DeviceProviderFactory]
-  Returns: New builder object
+      Get builder for [gst.device_provider_factory.DeviceProviderFactory]
+      Returns: New builder object
   */
   static DeviceProviderFactoryGidBuilder builder()
   {
@@ -217,6 +217,7 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
   }
 }
 
+/// Fluent builder implementation template for [gst.device_provider_factory.DeviceProviderFactory]
 class DeviceProviderFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
 {
 }
@@ -224,6 +225,10 @@ class DeviceProviderFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureG
 /// Fluent builder for [gst.device_provider_factory.DeviceProviderFactory]
 final class DeviceProviderFactoryGidBuilder : DeviceProviderFactoryGidBuilderImpl!DeviceProviderFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DeviceProviderFactory build()
   {
     return new DeviceProviderFactory(cast(void*)createGObject(DeviceProviderFactory._getGType), No.Take);

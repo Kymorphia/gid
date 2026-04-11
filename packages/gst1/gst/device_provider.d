@@ -55,8 +55,8 @@ class DeviceProvider : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.device_provider.DeviceProvider]
-  Returns: New builder object
+      Get builder for [gst.device_provider.DeviceProvider]
+      Returns: New builder object
   */
   static DeviceProviderGidBuilder builder()
   {
@@ -384,6 +384,7 @@ class DeviceProvider : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.device_provider.DeviceProvider]
 class DeviceProviderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -391,6 +392,10 @@ class DeviceProviderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.device_provider.DeviceProvider]
 final class DeviceProviderGidBuilder : DeviceProviderGidBuilderImpl!DeviceProviderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DeviceProvider build()
   {
     return new DeviceProvider(cast(void*)createGObject(DeviceProvider._getGType), No.Take);

@@ -40,8 +40,8 @@ class Time32Array : arrow.numeric_array.NumericArray
   }
 
   /**
-  Get builder for [arrow.time32_array.Time32Array]
-  Returns: New builder object
+      Get builder for [arrow.time32_array.Time32Array]
+      Returns: New builder object
   */
   static Time32ArrayGidBuilder builder()
   {
@@ -80,6 +80,7 @@ class Time32Array : arrow.numeric_array.NumericArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.time32_array.Time32Array]
 class Time32ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
 {
 }
@@ -87,6 +88,10 @@ class Time32ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderI
 /// Fluent builder for [arrow.time32_array.Time32Array]
 final class Time32ArrayGidBuilder : Time32ArrayGidBuilderImpl!Time32ArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Time32Array build()
   {
     return new Time32Array(cast(void*)createGObject(Time32Array._getGType), Yes.Take);

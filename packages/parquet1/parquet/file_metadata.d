@@ -40,8 +40,8 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [parquet.file_metadata.FileMetadata]
-  Returns: New builder object
+      Get builder for [parquet.file_metadata.FileMetadata]
+      Returns: New builder object
   */
   static FileMetadataGidBuilder builder()
   {
@@ -126,6 +126,7 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [parquet.file_metadata.FileMetadata]
 class FileMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -139,6 +140,10 @@ class FileMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [parquet.file_metadata.FileMetadata]
 final class FileMetadataGidBuilder : FileMetadataGidBuilderImpl!FileMetadataGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileMetadata build()
   {
     return new FileMetadata(cast(void*)createGObject(FileMetadata._getGType), No.Take);

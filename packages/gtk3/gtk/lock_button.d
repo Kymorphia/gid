@@ -79,8 +79,8 @@ class LockButton : gtk.button.Button
   }
 
   /**
-  Get builder for [gtk.lock_button.LockButton]
-  Returns: New builder object
+      Get builder for [gtk.lock_button.LockButton]
+      Returns: New builder object
   */
   static LockButtonGidBuilder builder()
   {
@@ -197,6 +197,7 @@ class LockButton : gtk.button.Button
   }
 }
 
+/// Fluent builder implementation template for [gtk.lock_button.LockButton]
 class LockButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
 {
 
@@ -241,6 +242,10 @@ class LockButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
 /// Fluent builder for [gtk.lock_button.LockButton]
 final class LockButtonGidBuilder : LockButtonGidBuilderImpl!LockButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LockButton build()
   {
     return new LockButton(cast(void*)createGObject(LockButton._getGType), No.Take);

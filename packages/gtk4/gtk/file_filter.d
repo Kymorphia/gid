@@ -89,8 +89,8 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   }
 
   /**
-  Get builder for [gtk.file_filter.FileFilter]
-  Returns: New builder object
+      Get builder for [gtk.file_filter.FileFilter]
+      Returns: New builder object
   */
   static FileFilterGidBuilder builder()
   {
@@ -294,6 +294,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
   }
 }
 
+/// Fluent builder implementation template for [gtk.file_filter.FileFilter]
 class FileFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -317,6 +318,10 @@ class FileFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T, gtk.build
 /// Fluent builder for [gtk.file_filter.FileFilter]
 final class FileFilterGidBuilder : FileFilterGidBuilderImpl!FileFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileFilter build()
   {
     return new FileFilter(cast(void*)createGObject(FileFilter._getGType), Yes.Take);

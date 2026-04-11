@@ -98,8 +98,8 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
-  Get builder for [gtk.action.Action]
-  Returns: New builder object
+      Get builder for [gtk.action.Action]
+      Returns: New builder object
   */
   static ActionGidBuilder builder()
   {
@@ -1255,6 +1255,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 }
 
+/// Fluent builder implementation template for [gtk.action.Action]
 class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -1514,6 +1515,10 @@ class ActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.b
 /// Fluent builder for [gtk.action.Action]
 final class ActionGidBuilder : ActionGidBuilderImpl!ActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Action build()
   {
     return new Action(cast(void*)createGObject(Action._getGType), Yes.Take);

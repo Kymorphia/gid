@@ -40,8 +40,8 @@ class Endpoint : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.endpoint.Endpoint]
-  Returns: New builder object
+      Get builder for [arrowflight.endpoint.Endpoint]
+      Returns: New builder object
   */
   static EndpointGidBuilder builder()
   {
@@ -85,6 +85,7 @@ class Endpoint : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.endpoint.Endpoint]
 class EndpointGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -92,6 +93,10 @@ class EndpointGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.endpoint.Endpoint]
 final class EndpointGidBuilder : EndpointGidBuilderImpl!EndpointGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Endpoint build()
   {
     return new Endpoint(cast(void*)createGObject(Endpoint._getGType), Yes.Take);

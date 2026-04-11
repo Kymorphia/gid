@@ -65,8 +65,8 @@ class GeolocationPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
   }
 
   /**
-  Get builder for [webkit.geolocation_permission_request.GeolocationPermissionRequest]
-  Returns: New builder object
+      Get builder for [webkit.geolocation_permission_request.GeolocationPermissionRequest]
+      Returns: New builder object
   */
   static GeolocationPermissionRequestGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class GeolocationPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
   mixin PermissionRequestT!();
 }
 
+/// Fluent builder implementation template for [webkit.geolocation_permission_request.GeolocationPermissionRequest]
 class GeolocationPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
 {
 
@@ -85,6 +86,10 @@ class GeolocationPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapG
 /// Fluent builder for [webkit.geolocation_permission_request.GeolocationPermissionRequest]
 final class GeolocationPermissionRequestGidBuilder : GeolocationPermissionRequestGidBuilderImpl!GeolocationPermissionRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GeolocationPermissionRequest build()
   {
     return new GeolocationPermissionRequest(cast(void*)createGObject(GeolocationPermissionRequest._getGType), No.Take);

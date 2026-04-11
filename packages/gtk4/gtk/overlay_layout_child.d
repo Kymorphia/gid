@@ -40,8 +40,8 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
-  Get builder for [gtk.overlay_layout_child.OverlayLayoutChild]
-  Returns: New builder object
+      Get builder for [gtk.overlay_layout_child.OverlayLayoutChild]
+      Returns: New builder object
   */
   static OverlayLayoutChildGidBuilder builder()
   {
@@ -133,6 +133,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   }
 }
 
+/// Fluent builder implementation template for [gtk.overlay_layout_child.OverlayLayoutChild]
 class OverlayLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilderImpl!T
 {
 
@@ -163,6 +164,10 @@ class OverlayLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuild
 /// Fluent builder for [gtk.overlay_layout_child.OverlayLayoutChild]
 final class OverlayLayoutChildGidBuilder : OverlayLayoutChildGidBuilderImpl!OverlayLayoutChildGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   OverlayLayoutChild build()
   {
     return new OverlayLayoutChild(cast(void*)createGObject(OverlayLayoutChild._getGType), No.Take);

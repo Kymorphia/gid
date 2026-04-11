@@ -40,8 +40,8 @@ class StreamChunk : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.stream_chunk.StreamChunk]
-  Returns: New builder object
+      Get builder for [arrowflight.stream_chunk.StreamChunk]
+      Returns: New builder object
   */
   static StreamChunkGidBuilder builder()
   {
@@ -69,6 +69,7 @@ class StreamChunk : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.stream_chunk.StreamChunk]
 class StreamChunkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -82,6 +83,10 @@ class StreamChunkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.stream_chunk.StreamChunk]
 final class StreamChunkGidBuilder : StreamChunkGidBuilderImpl!StreamChunkGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamChunk build()
   {
     return new StreamChunk(cast(void*)createGObject(StreamChunk._getGType), No.Take);

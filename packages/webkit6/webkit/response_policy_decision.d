@@ -49,8 +49,8 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   }
 
   /**
-  Get builder for [webkit.response_policy_decision.ResponsePolicyDecision]
-  Returns: New builder object
+      Get builder for [webkit.response_policy_decision.ResponsePolicyDecision]
+      Returns: New builder object
   */
   static ResponsePolicyDecisionGidBuilder builder()
   {
@@ -133,6 +133,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   }
 }
 
+/// Fluent builder implementation template for [webkit.response_policy_decision.ResponsePolicyDecision]
 class ResponsePolicyDecisionGidBuilderImpl(T) : webkit.policy_decision.PolicyDecisionGidBuilderImpl!T
 {
 }
@@ -140,6 +141,10 @@ class ResponsePolicyDecisionGidBuilderImpl(T) : webkit.policy_decision.PolicyDec
 /// Fluent builder for [webkit.response_policy_decision.ResponsePolicyDecision]
 final class ResponsePolicyDecisionGidBuilder : ResponsePolicyDecisionGidBuilderImpl!ResponsePolicyDecisionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ResponsePolicyDecision build()
   {
     return new ResponsePolicyDecision(cast(void*)createGObject(ResponsePolicyDecision._getGType), No.Take);

@@ -38,8 +38,8 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
   }
 
   /**
-  Get builder for [arrow.strptime_timestamp_parser.StrptimeTimestampParser]
-  Returns: New builder object
+      Get builder for [arrow.strptime_timestamp_parser.StrptimeTimestampParser]
+      Returns: New builder object
   */
   static StrptimeTimestampParserGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
   }
 }
 
+/// Fluent builder implementation template for [arrow.strptime_timestamp_parser.StrptimeTimestampParser]
 class StrptimeTimestampParserGidBuilderImpl(T) : arrow.timestamp_parser.TimestampParserGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class StrptimeTimestampParserGidBuilderImpl(T) : arrow.timestamp_parser.Timestam
 /// Fluent builder for [arrow.strptime_timestamp_parser.StrptimeTimestampParser]
 final class StrptimeTimestampParserGidBuilder : StrptimeTimestampParserGidBuilderImpl!StrptimeTimestampParserGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StrptimeTimestampParser build()
   {
     return new StrptimeTimestampParser(cast(void*)createGObject(StrptimeTimestampParser._getGType), Yes.Take);

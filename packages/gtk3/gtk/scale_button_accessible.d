@@ -46,8 +46,8 @@ class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.
   }
 
   /**
-  Get builder for [gtk.scale_button_accessible.ScaleButtonAccessible]
-  Returns: New builder object
+      Get builder for [gtk.scale_button_accessible.ScaleButtonAccessible]
+      Returns: New builder object
   */
   static ScaleButtonAccessibleGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.
   mixin ValueT!();
 }
 
+/// Fluent builder implementation template for [gtk.scale_button_accessible.ScaleButtonAccessible]
 class ScaleButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
 {
 
@@ -66,6 +67,10 @@ class ScaleButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAcces
 /// Fluent builder for [gtk.scale_button_accessible.ScaleButtonAccessible]
 final class ScaleButtonAccessibleGidBuilder : ScaleButtonAccessibleGidBuilderImpl!ScaleButtonAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ScaleButtonAccessible build()
   {
     return new ScaleButtonAccessible(cast(void*)createGObject(ScaleButtonAccessible._getGType), No.Take);

@@ -58,8 +58,8 @@ class Bin : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.bin.Bin]
-  Returns: New builder object
+      Get builder for [adw.bin.Bin]
+      Returns: New builder object
   */
   static BinGidBuilder builder()
   {
@@ -120,6 +120,7 @@ class Bin : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.bin.Bin]
 class BinGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -139,6 +140,10 @@ class BinGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.bin.Bin]
 final class BinGidBuilder : BinGidBuilderImpl!BinGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Bin build()
   {
     return new Bin(cast(void*)createGObject(Bin._getGType), No.Take);

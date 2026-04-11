@@ -47,8 +47,8 @@ class BindingGroup : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gobject.binding_group.BindingGroup]
-  Returns: New builder object
+      Get builder for [gobject.binding_group.BindingGroup]
+      Returns: New builder object
   */
   static BindingGroupGidBuilder builder()
   {
@@ -166,6 +166,7 @@ class BindingGroup : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gobject.binding_group.BindingGroup]
 class BindingGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -184,6 +185,10 @@ class BindingGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gobject.binding_group.BindingGroup]
 final class BindingGroupGidBuilder : BindingGroupGidBuilderImpl!BindingGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BindingGroup build()
   {
     return new BindingGroup(cast(void*)createGObject(BindingGroup._getGType), Yes.Take);

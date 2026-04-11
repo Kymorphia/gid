@@ -38,8 +38,8 @@ class MemoryPool : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.memory_pool.MemoryPool]
-  Returns: New builder object
+      Get builder for [arrow.memory_pool.MemoryPool]
+      Returns: New builder object
   */
   static MemoryPoolGidBuilder builder()
   {
@@ -85,6 +85,7 @@ class MemoryPool : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.memory_pool.MemoryPool]
 class MemoryPoolGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -98,6 +99,10 @@ class MemoryPoolGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.memory_pool.MemoryPool]
 final class MemoryPoolGidBuilder : MemoryPoolGidBuilderImpl!MemoryPoolGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MemoryPool build()
   {
     return new MemoryPool(cast(void*)createGObject(MemoryPool._getGType), No.Take);

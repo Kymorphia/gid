@@ -39,8 +39,8 @@ class ByteArrayStatistics : parquet.statistics.Statistics
   }
 
   /**
-  Get builder for [parquet.byte_array_statistics.ByteArrayStatistics]
-  Returns: New builder object
+      Get builder for [parquet.byte_array_statistics.ByteArrayStatistics]
+      Returns: New builder object
   */
   static ByteArrayStatisticsGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class ByteArrayStatistics : parquet.statistics.Statistics
   }
 }
 
+/// Fluent builder implementation template for [parquet.byte_array_statistics.ByteArrayStatistics]
 class ByteArrayStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
 {
 }
@@ -73,6 +74,10 @@ class ByteArrayStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBui
 /// Fluent builder for [parquet.byte_array_statistics.ByteArrayStatistics]
 final class ByteArrayStatisticsGidBuilder : ByteArrayStatisticsGidBuilderImpl!ByteArrayStatisticsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ByteArrayStatistics build()
   {
     return new ByteArrayStatistics(cast(void*)createGObject(ByteArrayStatistics._getGType), No.Take);

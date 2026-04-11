@@ -56,8 +56,8 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   }
 
   /**
-  Get builder for [gtk.cell_renderer_text.CellRendererText]
-  Returns: New builder object
+      Get builder for [gtk.cell_renderer_text.CellRendererText]
+      Returns: New builder object
   */
   static CellRendererTextGidBuilder builder()
   {
@@ -790,6 +790,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_renderer_text.CellRendererText]
 class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T
 {
 
@@ -1139,6 +1140,10 @@ class CellRendererTextGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuild
 /// Fluent builder for [gtk.cell_renderer_text.CellRendererText]
 final class CellRendererTextGidBuilder : CellRendererTextGidBuilderImpl!CellRendererTextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellRendererText build()
   {
     return new CellRendererText(cast(void*)createGObject(CellRendererText._getGType), No.Take);

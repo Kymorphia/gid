@@ -45,8 +45,8 @@ class Config : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.config.Config]
-  Returns: New builder object
+      Get builder for [gda.config.Config]
+      Returns: New builder object
   */
   static ConfigGidBuilder builder()
   {
@@ -498,6 +498,7 @@ class Config : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.config.Config]
 class ConfigGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -527,6 +528,10 @@ class ConfigGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.config.Config]
 final class ConfigGidBuilder : ConfigGidBuilderImpl!ConfigGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Config build()
   {
     return new Config(cast(void*)createGObject(Config._getGType), No.Take);

@@ -42,8 +42,8 @@ class Position : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [panel.position.Position]
-  Returns: New builder object
+      Get builder for [panel.position.Position]
+      Returns: New builder object
   */
   static PositionGidBuilder builder()
   {
@@ -369,6 +369,7 @@ class Position : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [panel.position.Position]
 class PositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -444,6 +445,10 @@ class PositionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [panel.position.Position]
 final class PositionGidBuilder : PositionGidBuilderImpl!PositionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Position build()
   {
     return new Position(cast(void*)createGObject(Position._getGType), Yes.Take);

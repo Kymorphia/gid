@@ -44,8 +44,8 @@ class DBusMenuModel : gio.menu_model.MenuModel
   }
 
   /**
-  Get builder for [gio.dbus_menu_model.DBusMenuModel]
-  Returns: New builder object
+      Get builder for [gio.dbus_menu_model.DBusMenuModel]
+      Returns: New builder object
   */
   static DBusMenuModelGidBuilder builder()
   {
@@ -81,6 +81,7 @@ class DBusMenuModel : gio.menu_model.MenuModel
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_menu_model.DBusMenuModel]
 class DBusMenuModelGidBuilderImpl(T) : gio.menu_model.MenuModelGidBuilderImpl!T
 {
 }
@@ -88,6 +89,10 @@ class DBusMenuModelGidBuilderImpl(T) : gio.menu_model.MenuModelGidBuilderImpl!T
 /// Fluent builder for [gio.dbus_menu_model.DBusMenuModel]
 final class DBusMenuModelGidBuilder : DBusMenuModelGidBuilderImpl!DBusMenuModelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusMenuModel build()
   {
     return new DBusMenuModel(cast(void*)createGObject(DBusMenuModel._getGType), No.Take);

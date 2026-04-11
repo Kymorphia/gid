@@ -95,6 +95,7 @@ template LoadableIconT()
   }
 }
 
+/// Fluent builder implementation template for [gio.loadable_icon.LoadableIcon]
 template LoadableIconGidBuilderT()
 {
 }

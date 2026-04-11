@@ -105,8 +105,8 @@ class PadTemplate : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.pad_template.PadTemplate]
-  Returns: New builder object
+      Get builder for [gst.pad_template.PadTemplate]
+      Returns: New builder object
   */
   static PadTemplateGidBuilder builder()
   {
@@ -309,6 +309,7 @@ class PadTemplate : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.pad_template.PadTemplate]
 class PadTemplateGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -371,6 +372,10 @@ class PadTemplateGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.pad_template.PadTemplate]
 final class PadTemplateGidBuilder : PadTemplateGidBuilderImpl!PadTemplateGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PadTemplate build()
   {
     return new PadTemplate(cast(void*)createGObject(PadTemplate._getGType), No.Take);

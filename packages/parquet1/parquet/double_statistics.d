@@ -38,8 +38,8 @@ class DoubleStatistics : parquet.statistics.Statistics
   }
 
   /**
-  Get builder for [parquet.double_statistics.DoubleStatistics]
-  Returns: New builder object
+      Get builder for [parquet.double_statistics.DoubleStatistics]
+      Returns: New builder object
   */
   static DoubleStatisticsGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class DoubleStatistics : parquet.statistics.Statistics
   }
 }
 
+/// Fluent builder implementation template for [parquet.double_statistics.DoubleStatistics]
 class DoubleStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class DoubleStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilde
 /// Fluent builder for [parquet.double_statistics.DoubleStatistics]
 final class DoubleStatisticsGidBuilder : DoubleStatisticsGidBuilderImpl!DoubleStatisticsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DoubleStatistics build()
   {
     return new DoubleStatistics(cast(void*)createGObject(DoubleStatistics._getGType), No.Take);

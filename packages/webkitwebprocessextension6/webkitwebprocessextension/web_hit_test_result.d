@@ -45,8 +45,8 @@ class WebHitTestResult : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkitwebprocessextension.web_hit_test_result.WebHitTestResult]
-  Returns: New builder object
+      Get builder for [webkitwebprocessextension.web_hit_test_result.WebHitTestResult]
+      Returns: New builder object
   */
   static WebHitTestResultGidBuilder builder()
   {
@@ -226,6 +226,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkitwebprocessextension.web_hit_test_result.WebHitTestResult]
 class WebHitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -233,6 +234,10 @@ class WebHitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [webkitwebprocessextension.web_hit_test_result.WebHitTestResult]
 final class WebHitTestResultGidBuilder : WebHitTestResultGidBuilderImpl!WebHitTestResultGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebHitTestResult build()
   {
     return new WebHitTestResult(cast(void*)createGObject(WebHitTestResult._getGType), No.Take);

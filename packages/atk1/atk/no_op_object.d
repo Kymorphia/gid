@@ -70,8 +70,8 @@ class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Compo
   }
 
   /**
-  Get builder for [atk.no_op_object.NoOpObject]
-  Returns: New builder object
+      Get builder for [atk.no_op_object.NoOpObject]
+      Returns: New builder object
   */
   static NoOpObjectGidBuilder builder()
   {
@@ -110,6 +110,7 @@ class NoOpObject : atk.object.ObjectWrap, atk.action.Action, atk.component.Compo
   }
 }
 
+/// Fluent builder implementation template for [atk.no_op_object.NoOpObject]
 class NoOpObjectGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T, atk.document.DocumentGidBuilderImpl!T, atk.editable_text.EditableTextGidBuilderImpl!T, atk.hypertext.HypertextGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T, atk.table.TableGidBuilderImpl!T, atk.table_cell.TableCellGidBuilderImpl!T, atk.text.TextGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T, atk.window.WindowGidBuilderImpl!T
 {
 
@@ -130,6 +131,10 @@ class NoOpObjectGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T, atk.a
 /// Fluent builder for [atk.no_op_object.NoOpObject]
 final class NoOpObjectGidBuilder : NoOpObjectGidBuilderImpl!NoOpObjectGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NoOpObject build()
   {
     return new NoOpObject(cast(void*)createGObject(NoOpObject._getGType), Yes.Take);

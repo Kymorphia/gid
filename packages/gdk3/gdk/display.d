@@ -69,8 +69,8 @@ class Display : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.display.Display]
-  Returns: New builder object
+      Get builder for [gdk.display.Display]
+      Returns: New builder object
   */
   static DisplayGidBuilder builder()
   {
@@ -1033,6 +1033,7 @@ class Display : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.display.Display]
 class DisplayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -1040,6 +1041,10 @@ class DisplayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.display.Display]
 final class DisplayGidBuilder : DisplayGidBuilderImpl!DisplayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Display build()
   {
     return new Display(cast(void*)createGObject(Display._getGType), No.Take);

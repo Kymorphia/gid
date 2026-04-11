@@ -41,8 +41,8 @@ class TreeMgrColumns : gda.tree_manager.TreeManager
   }
 
   /**
-  Get builder for [gda.tree_mgr_columns.TreeMgrColumns]
-  Returns: New builder object
+      Get builder for [gda.tree_mgr_columns.TreeMgrColumns]
+      Returns: New builder object
   */
   static TreeMgrColumnsGidBuilder builder()
   {
@@ -90,6 +90,7 @@ class TreeMgrColumns : gda.tree_manager.TreeManager
   }
 }
 
+/// Fluent builder implementation template for [gda.tree_mgr_columns.TreeMgrColumns]
 class TreeMgrColumnsGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImpl!T
 {
 
@@ -144,6 +145,10 @@ class TreeMgrColumnsGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderIm
 /// Fluent builder for [gda.tree_mgr_columns.TreeMgrColumns]
 final class TreeMgrColumnsGidBuilder : TreeMgrColumnsGidBuilderImpl!TreeMgrColumnsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeMgrColumns build()
   {
     return new TreeMgrColumns(cast(void*)createGObject(TreeMgrColumns._getGType), Yes.Take);

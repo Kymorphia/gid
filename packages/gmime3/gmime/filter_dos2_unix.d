@@ -40,8 +40,8 @@ class FilterDos2Unix : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_dos2_unix.FilterDos2Unix]
-  Returns: New builder object
+      Get builder for [gmime.filter_dos2_unix.FilterDos2Unix]
+      Returns: New builder object
   */
   static FilterDos2UnixGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class FilterDos2Unix : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_dos2_unix.FilterDos2Unix]
 class FilterDos2UnixGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class FilterDos2UnixGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_dos2_unix.FilterDos2Unix]
 final class FilterDos2UnixGidBuilder : FilterDos2UnixGidBuilderImpl!FilterDos2UnixGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterDos2Unix build()
   {
     return new FilterDos2Unix(cast(void*)createGObject(FilterDos2Unix._getGType), Yes.Take);

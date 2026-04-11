@@ -59,8 +59,8 @@ class SocketControlMessage : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.socket_control_message.SocketControlMessage]
-  Returns: New builder object
+      Get builder for [gio.socket_control_message.SocketControlMessage]
+      Returns: New builder object
   */
   static SocketControlMessageGidBuilder builder()
   {
@@ -148,6 +148,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.socket_control_message.SocketControlMessage]
 class SocketControlMessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -155,6 +156,10 @@ class SocketControlMessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
 /// Fluent builder for [gio.socket_control_message.SocketControlMessage]
 final class SocketControlMessageGidBuilder : SocketControlMessageGidBuilderImpl!SocketControlMessageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SocketControlMessage build()
   {
     return new SocketControlMessage(cast(void*)createGObject(SocketControlMessage._getGType), No.Take);

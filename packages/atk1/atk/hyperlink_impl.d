@@ -35,6 +35,7 @@ interface HyperlinkImpl
   atk.hyperlink.Hyperlink getHyperlink();
 }
 
+/// Fluent builder implementation template for [atk.hyperlink_impl.HyperlinkImpl]
 interface HyperlinkImplGidBuilderImpl(T)
 {
 }

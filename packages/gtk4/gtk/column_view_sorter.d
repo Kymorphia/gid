@@ -73,8 +73,8 @@ class ColumnViewSorter : gtk.sorter.Sorter
   }
 
   /**
-  Get builder for [gtk.column_view_sorter.ColumnViewSorter]
-  Returns: New builder object
+      Get builder for [gtk.column_view_sorter.ColumnViewSorter]
+      Returns: New builder object
   */
   static ColumnViewSorterGidBuilder builder()
   {
@@ -179,6 +179,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
   }
 }
 
+/// Fluent builder implementation template for [gtk.column_view_sorter.ColumnViewSorter]
 class ColumnViewSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 {
 }
@@ -186,6 +187,10 @@ class ColumnViewSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 /// Fluent builder for [gtk.column_view_sorter.ColumnViewSorter]
 final class ColumnViewSorterGidBuilder : ColumnViewSorterGidBuilderImpl!ColumnViewSorterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColumnViewSorter build()
   {
     return new ColumnViewSorter(cast(void*)createGObject(ColumnViewSorter._getGType), No.Take);

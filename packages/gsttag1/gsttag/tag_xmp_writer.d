@@ -70,6 +70,7 @@ interface TagXmpWriter
   gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList taglist, bool readOnly);
 }
 
+/// Fluent builder implementation template for [gsttag.tag_xmp_writer.TagXmpWriter]
 interface TagXmpWriterGidBuilderImpl(T)
 {
 }

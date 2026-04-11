@@ -64,8 +64,8 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [adw.clamp_layout.ClampLayout]
-  Returns: New builder object
+      Get builder for [adw.clamp_layout.ClampLayout]
+      Returns: New builder object
   */
   static ClampLayoutGidBuilder builder()
   {
@@ -263,6 +263,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [adw.clamp_layout.ClampLayout]
 class ClampLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -323,6 +324,10 @@ class ClampLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderI
 /// Fluent builder for [adw.clamp_layout.ClampLayout]
 final class ClampLayoutGidBuilder : ClampLayoutGidBuilderImpl!ClampLayoutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ClampLayout build()
   {
     return new ClampLayout(cast(void*)createGObject(ClampLayout._getGType), Yes.Take);

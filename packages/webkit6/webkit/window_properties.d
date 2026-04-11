@@ -94,8 +94,8 @@ class WindowProperties : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.window_properties.WindowProperties]
-  Returns: New builder object
+      Get builder for [webkit.window_properties.WindowProperties]
+      Returns: New builder object
   */
   static WindowPropertiesGidBuilder builder()
   {
@@ -263,6 +263,7 @@ class WindowProperties : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.window_properties.WindowProperties]
 class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -358,6 +359,10 @@ class WindowPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [webkit.window_properties.WindowProperties]
 final class WindowPropertiesGidBuilder : WindowPropertiesGidBuilderImpl!WindowPropertiesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WindowProperties build()
   {
     return new WindowProperties(cast(void*)createGObject(WindowProperties._getGType), No.Take);

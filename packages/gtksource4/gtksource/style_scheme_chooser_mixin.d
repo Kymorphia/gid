@@ -61,6 +61,7 @@ template StyleSchemeChooserT()
   }
 }
 
+/// Fluent builder implementation template for [gtksource.style_scheme_chooser.StyleSchemeChooser]
 template StyleSchemeChooserGidBuilderT()
 {
 

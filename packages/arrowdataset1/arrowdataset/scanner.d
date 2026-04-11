@@ -41,8 +41,8 @@ class Scanner : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.scanner.Scanner]
-  Returns: New builder object
+      Get builder for [arrowdataset.scanner.Scanner]
+      Returns: New builder object
   */
   static ScannerGidBuilder builder()
   {
@@ -74,6 +74,7 @@ class Scanner : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.scanner.Scanner]
 class ScannerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -87,6 +88,10 @@ class ScannerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowdataset.scanner.Scanner]
 final class ScannerGidBuilder : ScannerGidBuilderImpl!ScannerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Scanner build()
   {
     return new Scanner(cast(void*)createGObject(Scanner._getGType), No.Take);

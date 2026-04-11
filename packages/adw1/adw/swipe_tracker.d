@@ -54,8 +54,8 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [adw.swipe_tracker.SwipeTracker]
-  Returns: New builder object
+      Get builder for [adw.swipe_tracker.SwipeTracker]
+      Returns: New builder object
   */
   static SwipeTrackerGidBuilder builder()
   {
@@ -615,6 +615,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [adw.swipe_tracker.SwipeTracker]
 class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -723,6 +724,10 @@ class SwipeTrackerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
 /// Fluent builder for [adw.swipe_tracker.SwipeTracker]
 final class SwipeTrackerGidBuilder : SwipeTrackerGidBuilderImpl!SwipeTrackerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SwipeTracker build()
   {
     return new SwipeTracker(cast(void*)createGObject(SwipeTracker._getGType), Yes.Take);

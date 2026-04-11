@@ -38,8 +38,8 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
   }
 
   /**
-  Get builder for [arrowflight.path_descriptor.PathDescriptor]
-  Returns: New builder object
+      Get builder for [arrowflight.path_descriptor.PathDescriptor]
+      Returns: New builder object
   */
   static PathDescriptorGidBuilder builder()
   {
@@ -84,6 +84,7 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.path_descriptor.PathDescriptor]
 class PathDescriptorGidBuilderImpl(T) : arrowflight.descriptor.DescriptorGidBuilderImpl!T
 {
 }
@@ -91,6 +92,10 @@ class PathDescriptorGidBuilderImpl(T) : arrowflight.descriptor.DescriptorGidBuil
 /// Fluent builder for [arrowflight.path_descriptor.PathDescriptor]
 final class PathDescriptorGidBuilder : PathDescriptorGidBuilderImpl!PathDescriptorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PathDescriptor build()
   {
     return new PathDescriptor(cast(void*)createGObject(PathDescriptor._getGType), Yes.Take);

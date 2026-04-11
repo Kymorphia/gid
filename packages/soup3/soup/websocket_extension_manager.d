@@ -49,8 +49,8 @@ class WebsocketExtensionManager : gobject.object.ObjectWrap, soup.session_featur
   }
 
   /**
-  Get builder for [soup.websocket_extension_manager.WebsocketExtensionManager]
-  Returns: New builder object
+      Get builder for [soup.websocket_extension_manager.WebsocketExtensionManager]
+      Returns: New builder object
   */
   static WebsocketExtensionManagerGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class WebsocketExtensionManager : gobject.object.ObjectWrap, soup.session_featur
   mixin SessionFeatureT!();
 }
 
+/// Fluent builder implementation template for [soup.websocket_extension_manager.WebsocketExtensionManager]
 class WebsocketExtensionManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
 {
 
@@ -69,6 +70,10 @@ class WebsocketExtensionManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidB
 /// Fluent builder for [soup.websocket_extension_manager.WebsocketExtensionManager]
 final class WebsocketExtensionManagerGidBuilder : WebsocketExtensionManagerGidBuilderImpl!WebsocketExtensionManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebsocketExtensionManager build()
   {
     return new WebsocketExtensionManager(cast(void*)createGObject(WebsocketExtensionManager._getGType), No.Take);

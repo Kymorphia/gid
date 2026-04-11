@@ -65,6 +65,7 @@ interface DtlsServerConnection
   }
 }
 
+/// Fluent builder implementation template for [gio.dtls_server_connection.DtlsServerConnection]
 interface DtlsServerConnectionGidBuilderImpl(T)
 {
 

@@ -66,8 +66,8 @@ class Prompt : gio.dbus_proxy.DBusProxy
   }
 
   /**
-  Get builder for [secret.prompt.Prompt]
-  Returns: New builder object
+      Get builder for [secret.prompt.Prompt]
+      Returns: New builder object
   */
   static PromptGidBuilder builder()
   {
@@ -205,6 +205,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
   }
 }
 
+/// Fluent builder implementation template for [secret.prompt.Prompt]
 class PromptGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
 {
 
@@ -213,6 +214,10 @@ class PromptGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
 /// Fluent builder for [secret.prompt.Prompt]
 final class PromptGidBuilder : PromptGidBuilderImpl!PromptGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Prompt build()
   {
     return new Prompt(cast(void*)createGObject(Prompt._getGType), No.Take);

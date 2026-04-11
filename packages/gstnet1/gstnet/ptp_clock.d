@@ -62,8 +62,8 @@ class PtpClock : gst.system_clock.SystemClock
   }
 
   /**
-  Get builder for [gstnet.ptp_clock.PtpClock]
-  Returns: New builder object
+      Get builder for [gstnet.ptp_clock.PtpClock]
+      Returns: New builder object
   */
   static PtpClockGidBuilder builder()
   {
@@ -121,6 +121,7 @@ class PtpClock : gst.system_clock.SystemClock
   }
 }
 
+/// Fluent builder implementation template for [gstnet.ptp_clock.PtpClock]
 class PtpClockGidBuilderImpl(T) : gst.system_clock.SystemClockGidBuilderImpl!T
 {
 
@@ -134,6 +135,10 @@ class PtpClockGidBuilderImpl(T) : gst.system_clock.SystemClockGidBuilderImpl!T
 /// Fluent builder for [gstnet.ptp_clock.PtpClock]
 final class PtpClockGidBuilder : PtpClockGidBuilderImpl!PtpClockGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PtpClock build()
   {
     return new PtpClock(cast(void*)createGObject(PtpClock._getGType), Yes.Take);

@@ -182,6 +182,7 @@ interface DtlsClientConnection
   void setValidationFlags(gio.types.TlsCertificateFlags flags);
 }
 
+/// Fluent builder implementation template for [gio.dtls_client_connection.DtlsClientConnection]
 interface DtlsClientConnectionGidBuilderImpl(T)
 {
 

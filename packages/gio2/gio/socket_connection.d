@@ -62,8 +62,8 @@ class SocketConnection : gio.iostream.IOStream
   }
 
   /**
-  Get builder for [gio.socket_connection.SocketConnection]
-  Returns: New builder object
+      Get builder for [gio.socket_connection.SocketConnection]
+      Returns: New builder object
   */
   static SocketConnectionGidBuilder builder()
   {
@@ -251,6 +251,7 @@ class SocketConnection : gio.iostream.IOStream
   }
 }
 
+/// Fluent builder implementation template for [gio.socket_connection.SocketConnection]
 class SocketConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
 {
 
@@ -269,6 +270,10 @@ class SocketConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
 /// Fluent builder for [gio.socket_connection.SocketConnection]
 final class SocketConnectionGidBuilder : SocketConnectionGidBuilderImpl!SocketConnectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SocketConnection build()
   {
     return new SocketConnection(cast(void*)createGObject(SocketConnection._getGType), No.Take);

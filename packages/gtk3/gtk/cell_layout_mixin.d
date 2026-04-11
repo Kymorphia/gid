@@ -266,6 +266,7 @@ template CellLayoutT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_layout.CellLayout]
 template CellLayoutGidBuilderT()
 {
 }

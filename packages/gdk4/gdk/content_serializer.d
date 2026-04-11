@@ -59,8 +59,8 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   }
 
   /**
-  Get builder for [gdk.content_serializer.ContentSerializer]
-  Returns: New builder object
+      Get builder for [gdk.content_serializer.ContentSerializer]
+      Returns: New builder object
   */
   static ContentSerializerGidBuilder builder()
   {
@@ -209,6 +209,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   }
 }
 
+/// Fluent builder implementation template for [gdk.content_serializer.ContentSerializer]
 class ContentSerializerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_result.AsyncResultGidBuilderImpl!T
 {
 
@@ -218,6 +219,10 @@ class ContentSerializerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [gdk.content_serializer.ContentSerializer]
 final class ContentSerializerGidBuilder : ContentSerializerGidBuilderImpl!ContentSerializerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContentSerializer build()
   {
     return new ContentSerializer(cast(void*)createGObject(ContentSerializer._getGType), No.Take);

@@ -47,8 +47,8 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /**
-  Get builder for [gio.inet_address_mask.InetAddressMask]
-  Returns: New builder object
+      Get builder for [gio.inet_address_mask.InetAddressMask]
+      Returns: New builder object
   */
   static InetAddressMaskGidBuilder builder()
   {
@@ -225,6 +225,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   }
 }
 
+/// Fluent builder implementation template for [gio.inet_address_mask.InetAddressMask]
 class InetAddressMaskGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -256,6 +257,10 @@ class InetAddressMaskGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gio.inet_address_mask.InetAddressMask]
 final class InetAddressMaskGidBuilder : InetAddressMaskGidBuilderImpl!InetAddressMaskGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InetAddressMask build()
   {
     return new InetAddressMask(cast(void*)createGObject(InetAddressMask._getGType), Yes.Take);

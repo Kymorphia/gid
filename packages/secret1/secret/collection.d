@@ -65,8 +65,8 @@ class Collection : gio.dbus_proxy.DBusProxy
   }
 
   /**
-  Get builder for [secret.collection.Collection]
-  Returns: New builder object
+      Get builder for [secret.collection.Collection]
+      Returns: New builder object
   */
   static CollectionGidBuilder builder()
   {
@@ -768,6 +768,7 @@ class Collection : gio.dbus_proxy.DBusProxy
   }
 }
 
+/// Fluent builder implementation template for [secret.collection.Collection]
 class CollectionGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
 {
 
@@ -839,6 +840,10 @@ class CollectionGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
 /// Fluent builder for [secret.collection.Collection]
 final class CollectionGidBuilder : CollectionGidBuilderImpl!CollectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Collection build()
   {
     return new Collection(cast(void*)createGObject(Collection._getGType), No.Take);

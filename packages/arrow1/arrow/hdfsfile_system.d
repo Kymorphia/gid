@@ -38,8 +38,8 @@ class HDFSFileSystem : arrow.file_system.FileSystem
   }
 
   /**
-  Get builder for [arrow.hdfsfile_system.HDFSFileSystem]
-  Returns: New builder object
+      Get builder for [arrow.hdfsfile_system.HDFSFileSystem]
+      Returns: New builder object
   */
   static HDFSFileSystemGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class HDFSFileSystem : arrow.file_system.FileSystem
   }
 }
 
+/// Fluent builder implementation template for [arrow.hdfsfile_system.HDFSFileSystem]
 class HDFSFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class HDFSFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderIm
 /// Fluent builder for [arrow.hdfsfile_system.HDFSFileSystem]
 final class HDFSFileSystemGidBuilder : HDFSFileSystemGidBuilderImpl!HDFSFileSystemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HDFSFileSystem build()
   {
     return new HDFSFileSystem(cast(void*)createGObject(HDFSFileSystem._getGType), No.Take);

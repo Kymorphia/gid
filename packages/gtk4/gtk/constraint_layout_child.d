@@ -40,8 +40,8 @@ class ConstraintLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /**
-  Get builder for [gtk.constraint_layout_child.ConstraintLayoutChild]
-  Returns: New builder object
+      Get builder for [gtk.constraint_layout_child.ConstraintLayoutChild]
+      Returns: New builder object
   */
   static ConstraintLayoutChildGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class ConstraintLayoutChild : gtk.layout_child.LayoutChild
   }
 }
 
+/// Fluent builder implementation template for [gtk.constraint_layout_child.ConstraintLayoutChild]
 class ConstraintLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBuilderImpl!T
 {
 }
@@ -56,6 +57,10 @@ class ConstraintLayoutChildGidBuilderImpl(T) : gtk.layout_child.LayoutChildGidBu
 /// Fluent builder for [gtk.constraint_layout_child.ConstraintLayoutChild]
 final class ConstraintLayoutChildGidBuilder : ConstraintLayoutChildGidBuilderImpl!ConstraintLayoutChildGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ConstraintLayoutChild build()
   {
     return new ConstraintLayoutChild(cast(void*)createGObject(ConstraintLayoutChild._getGType), No.Take);

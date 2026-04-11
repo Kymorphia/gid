@@ -66,8 +66,8 @@ class Gutter : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtksource.gutter.Gutter]
-  Returns: New builder object
+      Get builder for [gtksource.gutter.Gutter]
+      Returns: New builder object
   */
   static GutterGidBuilder builder()
   {
@@ -137,6 +137,7 @@ class Gutter : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtksource.gutter.Gutter]
 class GutterGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -167,6 +168,10 @@ class GutterGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtksource.gutter.Gutter]
 final class GutterGidBuilder : GutterGidBuilderImpl!GutterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Gutter build()
   {
     return new Gutter(cast(void*)createGObject(Gutter._getGType), No.Take);

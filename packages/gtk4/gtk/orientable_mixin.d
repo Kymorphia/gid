@@ -67,6 +67,7 @@ template OrientableT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.orientable.Orientable]
 template OrientableGidBuilderT()
 {
 

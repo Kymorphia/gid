@@ -39,8 +39,8 @@ class RoundOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.round_options.RoundOptions]
-  Returns: New builder object
+      Get builder for [arrow.round_options.RoundOptions]
+      Returns: New builder object
   */
   static RoundOptionsGidBuilder builder()
   {
@@ -94,6 +94,7 @@ class RoundOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.round_options.RoundOptions]
 class RoundOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -123,6 +124,10 @@ class RoundOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidB
 /// Fluent builder for [arrow.round_options.RoundOptions]
 final class RoundOptionsGidBuilder : RoundOptionsGidBuilderImpl!RoundOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RoundOptions build()
   {
     return new RoundOptions(cast(void*)createGObject(RoundOptions._getGType), Yes.Take);

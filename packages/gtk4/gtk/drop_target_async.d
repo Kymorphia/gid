@@ -77,8 +77,8 @@ class DropTargetAsync : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.drop_target_async.DropTargetAsync]
-  Returns: New builder object
+      Get builder for [gtk.drop_target_async.DropTargetAsync]
+      Returns: New builder object
   */
   static DropTargetAsyncGidBuilder builder()
   {
@@ -497,6 +497,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.drop_target_async.DropTargetAsync]
 class DropTargetAsyncGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 
@@ -526,6 +527,10 @@ class DropTargetAsyncGidBuilderImpl(T) : gtk.event_controller.EventControllerGid
 /// Fluent builder for [gtk.drop_target_async.DropTargetAsync]
 final class DropTargetAsyncGidBuilder : DropTargetAsyncGidBuilderImpl!DropTargetAsyncGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DropTargetAsync build()
   {
     return new DropTargetAsync(cast(void*)createGObject(DropTargetAsync._getGType), Yes.Take);

@@ -119,8 +119,8 @@ class DropTarget : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.drop_target.DropTarget]
-  Returns: New builder object
+      Get builder for [gtk.drop_target.DropTarget]
+      Returns: New builder object
   */
   static DropTargetGidBuilder builder()
   {
@@ -683,6 +683,7 @@ class DropTarget : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.drop_target.DropTarget]
 class DropTargetGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 
@@ -740,6 +741,10 @@ class DropTargetGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuild
 /// Fluent builder for [gtk.drop_target.DropTarget]
 final class DropTargetGidBuilder : DropTargetGidBuilderImpl!DropTargetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DropTarget build()
   {
     return new DropTarget(cast(void*)createGObject(DropTarget._getGType), Yes.Take);

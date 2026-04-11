@@ -55,8 +55,8 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /**
-  Get builder for [gtk.gesture_long_press.GestureLongPress]
-  Returns: New builder object
+      Get builder for [gtk.gesture_long_press.GestureLongPress]
+      Returns: New builder object
   */
   static GestureLongPressGidBuilder builder()
   {
@@ -207,6 +207,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture_long_press.GestureLongPress]
 class GestureLongPressGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
 {
 
@@ -225,6 +226,10 @@ class GestureLongPressGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBui
 /// Fluent builder for [gtk.gesture_long_press.GestureLongPress]
 final class GestureLongPressGidBuilder : GestureLongPressGidBuilderImpl!GestureLongPressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GestureLongPress build()
   {
     return new GestureLongPress(cast(void*)createGObject(GestureLongPress._getGType), Yes.Take);

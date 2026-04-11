@@ -39,8 +39,8 @@ class Decimal256DataType : arrow.decimal_data_type.DecimalDataType
   }
 
   /**
-  Get builder for [arrow.decimal256_data_type.Decimal256DataType]
-  Returns: New builder object
+      Get builder for [arrow.decimal256_data_type.Decimal256DataType]
+      Returns: New builder object
   */
   static Decimal256DataTypeGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class Decimal256DataType : arrow.decimal_data_type.DecimalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal256_data_type.Decimal256DataType]
 class Decimal256DataTypeGidBuilderImpl(T) : arrow.decimal_data_type.DecimalDataTypeGidBuilderImpl!T
 {
 }
@@ -74,6 +75,10 @@ class Decimal256DataTypeGidBuilderImpl(T) : arrow.decimal_data_type.DecimalDataT
 /// Fluent builder for [arrow.decimal256_data_type.Decimal256DataType]
 final class Decimal256DataTypeGidBuilder : Decimal256DataTypeGidBuilderImpl!Decimal256DataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal256DataType build()
   {
     return new Decimal256DataType(cast(void*)createGObject(Decimal256DataType._getGType), Yes.Take);

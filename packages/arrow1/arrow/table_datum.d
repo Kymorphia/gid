@@ -40,8 +40,8 @@ class TableDatum : arrow.datum.Datum
   }
 
   /**
-  Get builder for [arrow.table_datum.TableDatum]
-  Returns: New builder object
+      Get builder for [arrow.table_datum.TableDatum]
+      Returns: New builder object
   */
   static TableDatumGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class TableDatum : arrow.datum.Datum
   }
 }
 
+/// Fluent builder implementation template for [arrow.table_datum.TableDatum]
 class TableDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class TableDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 /// Fluent builder for [arrow.table_datum.TableDatum]
 final class TableDatumGidBuilder : TableDatumGidBuilderImpl!TableDatumGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TableDatum build()
   {
     return new TableDatum(cast(void*)createGObject(TableDatum._getGType), Yes.Take);

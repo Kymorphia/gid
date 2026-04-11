@@ -78,8 +78,8 @@ class EmojiChooser : gtk.popover.Popover
   }
 
   /**
-  Get builder for [gtk.emoji_chooser.EmojiChooser]
-  Returns: New builder object
+      Get builder for [gtk.emoji_chooser.EmojiChooser]
+      Returns: New builder object
   */
   static EmojiChooserGidBuilder builder()
   {
@@ -141,6 +141,7 @@ class EmojiChooser : gtk.popover.Popover
   }
 }
 
+/// Fluent builder implementation template for [gtk.emoji_chooser.EmojiChooser]
 class EmojiChooserGidBuilderImpl(T) : gtk.popover.PopoverGidBuilderImpl!T
 {
 
@@ -149,6 +150,10 @@ class EmojiChooserGidBuilderImpl(T) : gtk.popover.PopoverGidBuilderImpl!T
 /// Fluent builder for [gtk.emoji_chooser.EmojiChooser]
 final class EmojiChooserGidBuilder : EmojiChooserGidBuilderImpl!EmojiChooserGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EmojiChooser build()
   {
     return new EmojiChooser(cast(void*)createGObject(EmojiChooser._getGType), No.Take);

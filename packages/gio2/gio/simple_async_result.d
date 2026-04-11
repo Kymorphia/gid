@@ -209,8 +209,8 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   }
 
   /**
-  Get builder for [gio.simple_async_result.SimpleAsyncResult]
-  Returns: New builder object
+      Get builder for [gio.simple_async_result.SimpleAsyncResult]
+      Returns: New builder object
   */
   static SimpleAsyncResultGidBuilder builder()
   {
@@ -476,6 +476,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   }
 }
 
+/// Fluent builder implementation template for [gio.simple_async_result.SimpleAsyncResult]
 class SimpleAsyncResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_result.AsyncResultGidBuilderImpl!T
 {
 
@@ -485,6 +486,10 @@ class SimpleAsyncResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [gio.simple_async_result.SimpleAsyncResult]
 final class SimpleAsyncResultGidBuilder : SimpleAsyncResultGidBuilderImpl!SimpleAsyncResultGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SimpleAsyncResult build()
   {
     return new SimpleAsyncResult(cast(void*)createGObject(SimpleAsyncResult._getGType), Yes.Take);

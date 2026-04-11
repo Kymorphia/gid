@@ -38,8 +38,8 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.file_info.FileInfo]
-  Returns: New builder object
+      Get builder for [arrow.file_info.FileInfo]
+      Returns: New builder object
   */
   static FileInfoGidBuilder builder()
   {
@@ -193,6 +193,7 @@ class FileInfo : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.file_info.FileInfo]
 class FileInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -245,6 +246,10 @@ class FileInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.file_info.FileInfo]
 final class FileInfoGidBuilder : FileInfoGidBuilderImpl!FileInfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileInfo build()
   {
     return new FileInfo(cast(void*)createGObject(FileInfo._getGType), Yes.Take);

@@ -42,8 +42,8 @@ class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
   }
 
   /**
-  Get builder for [arrow.decimal32_array_builder.Decimal32ArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.decimal32_array_builder.Decimal32ArrayBuilder]
+      Returns: New builder object
   */
   static Decimal32ArrayBuilderGidBuilder builder()
   {
@@ -111,6 +111,7 @@ class Decimal32ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal32_array_builder.Decimal32ArrayBuilder]
 class Decimal32ArrayBuilderGidBuilderImpl(T) : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilderGidBuilderImpl!T
 {
 }
@@ -118,6 +119,10 @@ class Decimal32ArrayBuilderGidBuilderImpl(T) : arrow.fixed_size_binary_array_bui
 /// Fluent builder for [arrow.decimal32_array_builder.Decimal32ArrayBuilder]
 final class Decimal32ArrayBuilderGidBuilder : Decimal32ArrayBuilderGidBuilderImpl!Decimal32ArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal32ArrayBuilder build()
   {
     return new Decimal32ArrayBuilder(cast(void*)createGObject(Decimal32ArrayBuilder._getGType), Yes.Take);

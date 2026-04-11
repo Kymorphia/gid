@@ -52,8 +52,8 @@ class ControlSource : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.control_source.ControlSource]
-  Returns: New builder object
+      Get builder for [gst.control_source.ControlSource]
+      Returns: New builder object
   */
   static ControlSourceGidBuilder builder()
   {
@@ -98,6 +98,7 @@ class ControlSource : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.control_source.ControlSource]
 class ControlSourceGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -105,6 +106,10 @@ class ControlSourceGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.control_source.ControlSource]
 final class ControlSourceGidBuilder : ControlSourceGidBuilderImpl!ControlSourceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ControlSource build()
   {
     return new ControlSource(cast(void*)createGObject(ControlSource._getGType), No.Take);

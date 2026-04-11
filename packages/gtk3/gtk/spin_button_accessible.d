@@ -48,8 +48,8 @@ class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Val
   }
 
   /**
-  Get builder for [gtk.spin_button_accessible.SpinButtonAccessible]
-  Returns: New builder object
+      Get builder for [gtk.spin_button_accessible.SpinButtonAccessible]
+      Returns: New builder object
   */
   static SpinButtonAccessibleGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Val
   mixin ValueT!();
 }
 
+/// Fluent builder implementation template for [gtk.spin_button_accessible.SpinButtonAccessible]
 class SpinButtonAccessibleGidBuilderImpl(T) : gtk.entry_accessible.EntryAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
 {
 
@@ -68,6 +69,10 @@ class SpinButtonAccessibleGidBuilderImpl(T) : gtk.entry_accessible.EntryAccessib
 /// Fluent builder for [gtk.spin_button_accessible.SpinButtonAccessible]
 final class SpinButtonAccessibleGidBuilder : SpinButtonAccessibleGidBuilderImpl!SpinButtonAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SpinButtonAccessible build()
   {
     return new SpinButtonAccessible(cast(void*)createGObject(SpinButtonAccessible._getGType), No.Take);

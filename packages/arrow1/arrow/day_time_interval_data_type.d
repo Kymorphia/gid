@@ -38,8 +38,8 @@ class DayTimeIntervalDataType : arrow.interval_data_type.IntervalDataType
   }
 
   /**
-  Get builder for [arrow.day_time_interval_data_type.DayTimeIntervalDataType]
-  Returns: New builder object
+      Get builder for [arrow.day_time_interval_data_type.DayTimeIntervalDataType]
+      Returns: New builder object
   */
   static DayTimeIntervalDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class DayTimeIntervalDataType : arrow.interval_data_type.IntervalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.day_time_interval_data_type.DayTimeIntervalDataType]
 class DayTimeIntervalDataTypeGidBuilderImpl(T) : arrow.interval_data_type.IntervalDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class DayTimeIntervalDataTypeGidBuilderImpl(T) : arrow.interval_data_type.Interv
 /// Fluent builder for [arrow.day_time_interval_data_type.DayTimeIntervalDataType]
 final class DayTimeIntervalDataTypeGidBuilder : DayTimeIntervalDataTypeGidBuilderImpl!DayTimeIntervalDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DayTimeIntervalDataType build()
   {
     return new DayTimeIntervalDataType(cast(void*)createGObject(DayTimeIntervalDataType._getGType), Yes.Take);

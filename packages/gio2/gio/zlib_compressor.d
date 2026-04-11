@@ -44,8 +44,8 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 
   /**
-  Get builder for [gio.zlib_compressor.ZlibCompressor]
-  Returns: New builder object
+      Get builder for [gio.zlib_compressor.ZlibCompressor]
+      Returns: New builder object
   */
   static ZlibCompressorGidBuilder builder()
   {
@@ -142,6 +142,7 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 }
 
+/// Fluent builder implementation template for [gio.zlib_compressor.ZlibCompressor]
 class ZlibCompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.converter.ConverterGidBuilderImpl!T
 {
 
@@ -187,6 +188,10 @@ class ZlibCompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.zlib_compressor.ZlibCompressor]
 final class ZlibCompressorGidBuilder : ZlibCompressorGidBuilderImpl!ZlibCompressorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ZlibCompressor build()
   {
     return new ZlibCompressor(cast(void*)createGObject(ZlibCompressor._getGType), Yes.Take);

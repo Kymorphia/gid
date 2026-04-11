@@ -47,8 +47,8 @@ class Fontset : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [pango.fontset.Fontset]
-  Returns: New builder object
+      Get builder for [pango.fontset.Fontset]
+      Returns: New builder object
   */
   static FontsetGidBuilder builder()
   {
@@ -112,6 +112,7 @@ class Fontset : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [pango.fontset.Fontset]
 class FontsetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -119,6 +120,10 @@ class FontsetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [pango.fontset.Fontset]
 final class FontsetGidBuilder : FontsetGidBuilderImpl!FontsetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Fontset build()
   {
     return new Fontset(cast(void*)createGObject(Fontset._getGType), No.Take);

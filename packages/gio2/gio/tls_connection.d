@@ -54,8 +54,8 @@ class TlsConnection : gio.iostream.IOStream
   }
 
   /**
-  Get builder for [gio.tls_connection.TlsConnection]
-  Returns: New builder object
+      Get builder for [gio.tls_connection.TlsConnection]
+      Returns: New builder object
   */
   static TlsConnectionGidBuilder builder()
   {
@@ -878,6 +878,7 @@ class TlsConnection : gio.iostream.IOStream
   }
 }
 
+/// Fluent builder implementation template for [gio.tls_connection.TlsConnection]
 class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
 {
 
@@ -992,6 +993,10 @@ class TlsConnectionGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
 /// Fluent builder for [gio.tls_connection.TlsConnection]
 final class TlsConnectionGidBuilder : TlsConnectionGidBuilderImpl!TlsConnectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TlsConnection build()
   {
     return new TlsConnection(cast(void*)createGObject(TlsConnection._getGType), No.Take);

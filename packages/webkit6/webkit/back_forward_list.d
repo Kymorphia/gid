@@ -56,8 +56,8 @@ class BackForwardList : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.back_forward_list.BackForwardList]
-  Returns: New builder object
+      Get builder for [webkit.back_forward_list.BackForwardList]
+      Returns: New builder object
   */
   static BackForwardListGidBuilder builder()
   {
@@ -242,6 +242,7 @@ class BackForwardList : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.back_forward_list.BackForwardList]
 class BackForwardListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -249,6 +250,10 @@ class BackForwardListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [webkit.back_forward_list.BackForwardList]
 final class BackForwardListGidBuilder : BackForwardListGidBuilderImpl!BackForwardListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BackForwardList build()
   {
     return new BackForwardList(cast(void*)createGObject(BackForwardList._getGType), No.Take);

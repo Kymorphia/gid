@@ -61,8 +61,8 @@ class SocketListener : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.socket_listener.SocketListener]
-  Returns: New builder object
+      Get builder for [gio.socket_listener.SocketListener]
+      Returns: New builder object
   */
   static SocketListenerGidBuilder builder()
   {
@@ -472,6 +472,7 @@ class SocketListener : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.socket_listener.SocketListener]
 class SocketListenerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -490,6 +491,10 @@ class SocketListenerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.socket_listener.SocketListener]
 final class SocketListenerGidBuilder : SocketListenerGidBuilderImpl!SocketListenerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SocketListener build()
   {
     return new SocketListener(cast(void*)createGObject(SocketListener._getGType), Yes.Take);

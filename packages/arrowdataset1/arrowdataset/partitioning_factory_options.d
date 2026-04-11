@@ -39,8 +39,8 @@ class PartitioningFactoryOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.partitioning_factory_options.PartitioningFactoryOptions]
-  Returns: New builder object
+      Get builder for [arrowdataset.partitioning_factory_options.PartitioningFactoryOptions]
+      Returns: New builder object
   */
   static PartitioningFactoryOptionsGidBuilder builder()
   {
@@ -127,6 +127,7 @@ class PartitioningFactoryOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.partitioning_factory_options.PartitioningFactoryOptions]
 class PartitioningFactoryOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -174,6 +175,10 @@ class PartitioningFactoryOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGid
 /// Fluent builder for [arrowdataset.partitioning_factory_options.PartitioningFactoryOptions]
 final class PartitioningFactoryOptionsGidBuilder : PartitioningFactoryOptionsGidBuilderImpl!PartitioningFactoryOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PartitioningFactoryOptions build()
   {
     return new PartitioningFactoryOptions(cast(void*)createGObject(PartitioningFactoryOptions._getGType), Yes.Take);

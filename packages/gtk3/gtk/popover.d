@@ -109,8 +109,8 @@ class Popover : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.popover.Popover]
-  Returns: New builder object
+      Get builder for [gtk.popover.Popover]
+      Returns: New builder object
   */
   static PopoverGidBuilder builder()
   {
@@ -575,6 +575,7 @@ class Popover : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.popover.Popover]
 class PopoverGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -654,6 +655,10 @@ class PopoverGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.popover.Popover]
 final class PopoverGidBuilder : PopoverGidBuilderImpl!PopoverGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Popover build()
   {
     return new Popover(cast(void*)createGObject(Popover._getGType), No.Take);

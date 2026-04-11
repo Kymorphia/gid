@@ -38,8 +38,8 @@ class CallOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.call_options.CallOptions]
-  Returns: New builder object
+      Get builder for [arrowflight.call_options.CallOptions]
+      Returns: New builder object
   */
   static CallOptionsGidBuilder builder()
   {
@@ -121,6 +121,7 @@ class CallOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.call_options.CallOptions]
 class CallOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -141,6 +142,10 @@ class CallOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.call_options.CallOptions]
 final class CallOptionsGidBuilder : CallOptionsGidBuilderImpl!CallOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CallOptions build()
   {
     return new CallOptions(cast(void*)createGObject(CallOptions._getGType), Yes.Take);

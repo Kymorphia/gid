@@ -41,8 +41,8 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-  Get builder for [gtk.nothing_action.NothingAction]
-  Returns: New builder object
+      Get builder for [gtk.nothing_action.NothingAction]
+      Returns: New builder object
   */
   static NothingActionGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
   }
 }
 
+/// Fluent builder implementation template for [gtk.nothing_action.NothingAction]
 class NothingActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class NothingActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuil
 /// Fluent builder for [gtk.nothing_action.NothingAction]
 final class NothingActionGidBuilder : NothingActionGidBuilderImpl!NothingActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NothingAction build()
   {
     return new NothingAction(cast(void*)createGObject(NothingAction._getGType), No.Take);

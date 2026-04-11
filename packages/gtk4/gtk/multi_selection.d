@@ -48,8 +48,8 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /**
-  Get builder for [gtk.multi_selection.MultiSelection]
-  Returns: New builder object
+      Get builder for [gtk.multi_selection.MultiSelection]
+      Returns: New builder object
   */
   static MultiSelectionGidBuilder builder()
   {
@@ -137,6 +137,7 @@ class MultiSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 }
 
+/// Fluent builder implementation template for [gtk.multi_selection.MultiSelection]
 class MultiSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
 {
 
@@ -159,6 +160,10 @@ class MultiSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtk.multi_selection.MultiSelection]
 final class MultiSelectionGidBuilder : MultiSelectionGidBuilderImpl!MultiSelectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MultiSelection build()
   {
     return new MultiSelection(cast(void*)createGObject(MultiSelection._getGType), Yes.Take);

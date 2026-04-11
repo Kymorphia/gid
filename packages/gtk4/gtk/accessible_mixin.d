@@ -352,6 +352,7 @@ template AccessibleT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.accessible.Accessible]
 template AccessibleGidBuilderT()
 {
 

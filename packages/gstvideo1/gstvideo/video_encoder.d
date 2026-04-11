@@ -116,8 +116,8 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /**
-  Get builder for [gstvideo.video_encoder.VideoEncoder]
-  Returns: New builder object
+      Get builder for [gstvideo.video_encoder.VideoEncoder]
+      Returns: New builder object
   */
   static VideoEncoderGidBuilder builder()
   {
@@ -508,6 +508,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_encoder.VideoEncoder]
 class VideoEncoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.preset.PresetGidBuilderImpl!T
 {
 
@@ -535,6 +536,10 @@ class VideoEncoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.p
 /// Fluent builder for [gstvideo.video_encoder.VideoEncoder]
 final class VideoEncoderGidBuilder : VideoEncoderGidBuilderImpl!VideoEncoderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VideoEncoder build()
   {
     return new VideoEncoder(cast(void*)createGObject(VideoEncoder._getGType), No.Take);

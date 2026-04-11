@@ -40,8 +40,8 @@ class TimestampArray : arrow.numeric_array.NumericArray
   }
 
   /**
-  Get builder for [arrow.timestamp_array.TimestampArray]
-  Returns: New builder object
+      Get builder for [arrow.timestamp_array.TimestampArray]
+      Returns: New builder object
   */
   static TimestampArrayGidBuilder builder()
   {
@@ -80,6 +80,7 @@ class TimestampArray : arrow.numeric_array.NumericArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.timestamp_array.TimestampArray]
 class TimestampArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
 {
 }
@@ -87,6 +88,10 @@ class TimestampArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuild
 /// Fluent builder for [arrow.timestamp_array.TimestampArray]
 final class TimestampArrayGidBuilder : TimestampArrayGidBuilderImpl!TimestampArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TimestampArray build()
   {
     return new TimestampArray(cast(void*)createGObject(TimestampArray._getGType), Yes.Take);

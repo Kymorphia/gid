@@ -44,8 +44,8 @@ class DBusMessage : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.dbus_message.DBusMessage]
-  Returns: New builder object
+      Get builder for [gio.dbus_message.DBusMessage]
+      Returns: New builder object
   */
   static DBusMessageGidBuilder builder()
   {
@@ -800,6 +800,7 @@ class DBusMessage : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_message.DBusMessage]
 class DBusMessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -807,6 +808,10 @@ class DBusMessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.dbus_message.DBusMessage]
 final class DBusMessageGidBuilder : DBusMessageGidBuilderImpl!DBusMessageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusMessage build()
   {
     return new DBusMessage(cast(void*)createGObject(DBusMessage._getGType), Yes.Take);

@@ -77,8 +77,8 @@ class IMContextSimple : gtk.imcontext.IMContext
   }
 
   /**
-  Get builder for [gtk.imcontext_simple.IMContextSimple]
-  Returns: New builder object
+      Get builder for [gtk.imcontext_simple.IMContextSimple]
+      Returns: New builder object
   */
   static IMContextSimpleGidBuilder builder()
   {
@@ -109,6 +109,7 @@ class IMContextSimple : gtk.imcontext.IMContext
   }
 }
 
+/// Fluent builder implementation template for [gtk.imcontext_simple.IMContextSimple]
 class IMContextSimpleGidBuilderImpl(T) : gtk.imcontext.IMContextGidBuilderImpl!T
 {
 }
@@ -116,6 +117,10 @@ class IMContextSimpleGidBuilderImpl(T) : gtk.imcontext.IMContextGidBuilderImpl!T
 /// Fluent builder for [gtk.imcontext_simple.IMContextSimple]
 final class IMContextSimpleGidBuilder : IMContextSimpleGidBuilderImpl!IMContextSimpleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IMContextSimple build()
   {
     return new IMContextSimple(cast(void*)createGObject(IMContextSimple._getGType), Yes.Take);

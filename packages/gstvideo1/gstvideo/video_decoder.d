@@ -177,8 +177,8 @@ class VideoDecoder : gst.element.Element
   }
 
   /**
-  Get builder for [gstvideo.video_decoder.VideoDecoder]
-  Returns: New builder object
+      Get builder for [gstvideo.video_decoder.VideoDecoder]
+      Returns: New builder object
   */
   static VideoDecoderGidBuilder builder()
   {
@@ -1000,6 +1000,7 @@ class VideoDecoder : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_decoder.VideoDecoder]
 class VideoDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
@@ -1086,6 +1087,10 @@ class VideoDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstvideo.video_decoder.VideoDecoder]
 final class VideoDecoderGidBuilder : VideoDecoderGidBuilderImpl!VideoDecoderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VideoDecoder build()
   {
     return new VideoDecoder(cast(void*)createGObject(VideoDecoder._getGType), No.Take);

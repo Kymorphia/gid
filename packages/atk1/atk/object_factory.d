@@ -49,8 +49,8 @@ class ObjectFactory : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [atk.object_factory.ObjectFactory]
-  Returns: New builder object
+      Get builder for [atk.object_factory.ObjectFactory]
+      Returns: New builder object
   */
   static ObjectFactoryGidBuilder builder()
   {
@@ -99,6 +99,7 @@ class ObjectFactory : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [atk.object_factory.ObjectFactory]
 class ObjectFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -106,6 +107,10 @@ class ObjectFactoryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [atk.object_factory.ObjectFactory]
 final class ObjectFactoryGidBuilder : ObjectFactoryGidBuilderImpl!ObjectFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ObjectFactory build()
   {
     return new ObjectFactory(cast(void*)createGObject(ObjectFactory._getGType), No.Take);

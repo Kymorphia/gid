@@ -51,8 +51,8 @@ class DrawContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.draw_context.DrawContext]
-  Returns: New builder object
+      Get builder for [gdk.draw_context.DrawContext]
+      Returns: New builder object
   */
   static DrawContextGidBuilder builder()
   {
@@ -186,6 +186,7 @@ class DrawContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.draw_context.DrawContext]
 class DrawContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -215,6 +216,10 @@ class DrawContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.draw_context.DrawContext]
 final class DrawContextGidBuilder : DrawContextGidBuilderImpl!DrawContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DrawContext build()
   {
     return new DrawContext(cast(void*)createGObject(DrawContext._getGType), No.Take);

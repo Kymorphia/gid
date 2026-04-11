@@ -46,8 +46,8 @@ class EveryFilter : gtk.multi_filter.MultiFilter
   }
 
   /**
-  Get builder for [gtk.every_filter.EveryFilter]
-  Returns: New builder object
+      Get builder for [gtk.every_filter.EveryFilter]
+      Returns: New builder object
   */
   static EveryFilterGidBuilder builder()
   {
@@ -72,6 +72,7 @@ class EveryFilter : gtk.multi_filter.MultiFilter
   }
 }
 
+/// Fluent builder implementation template for [gtk.every_filter.EveryFilter]
 class EveryFilterGidBuilderImpl(T) : gtk.multi_filter.MultiFilterGidBuilderImpl!T
 {
 
@@ -80,6 +81,10 @@ class EveryFilterGidBuilderImpl(T) : gtk.multi_filter.MultiFilterGidBuilderImpl!
 /// Fluent builder for [gtk.every_filter.EveryFilter]
 final class EveryFilterGidBuilder : EveryFilterGidBuilderImpl!EveryFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EveryFilter build()
   {
     return new EveryFilter(cast(void*)createGObject(EveryFilter._getGType), Yes.Take);

@@ -89,8 +89,8 @@ class LayoutManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.layout_manager.LayoutManager]
-  Returns: New builder object
+      Get builder for [gtk.layout_manager.LayoutManager]
+      Returns: New builder object
   */
   static LayoutManagerGidBuilder builder()
   {
@@ -201,6 +201,7 @@ class LayoutManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.layout_manager.LayoutManager]
 class LayoutManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -208,6 +209,10 @@ class LayoutManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.layout_manager.LayoutManager]
 final class LayoutManagerGidBuilder : LayoutManagerGidBuilderImpl!LayoutManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LayoutManager build()
   {
     return new LayoutManager(cast(void*)createGObject(LayoutManager._getGType), No.Take);

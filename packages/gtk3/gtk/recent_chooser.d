@@ -460,6 +460,7 @@ interface RecentChooser
   gulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.recent_chooser.RecentChooser]
 interface RecentChooserGidBuilderImpl(T)
 {
 

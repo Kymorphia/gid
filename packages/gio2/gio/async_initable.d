@@ -231,6 +231,7 @@ interface AsyncInitable
   gobject.object.ObjectWrap newFinish(gio.async_result.AsyncResult res);
 }
 
+/// Fluent builder implementation template for [gio.async_initable.AsyncInitable]
 interface AsyncInitableGidBuilderImpl(T)
 {
 }

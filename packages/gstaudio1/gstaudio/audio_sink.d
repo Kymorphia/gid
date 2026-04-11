@@ -64,8 +64,8 @@ class AudioSink : gstaudio.audio_base_sink.AudioBaseSink
   }
 
   /**
-  Get builder for [gstaudio.audio_sink.AudioSink]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_sink.AudioSink]
+      Returns: New builder object
   */
   static AudioSinkGidBuilder builder()
   {
@@ -73,6 +73,7 @@ class AudioSink : gstaudio.audio_base_sink.AudioBaseSink
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_sink.AudioSink]
 class AudioSinkGidBuilderImpl(T) : gstaudio.audio_base_sink.AudioBaseSinkGidBuilderImpl!T
 {
 }
@@ -80,6 +81,10 @@ class AudioSinkGidBuilderImpl(T) : gstaudio.audio_base_sink.AudioBaseSinkGidBuil
 /// Fluent builder for [gstaudio.audio_sink.AudioSink]
 final class AudioSinkGidBuilder : AudioSinkGidBuilderImpl!AudioSinkGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioSink build()
   {
     return new AudioSink(cast(void*)createGObject(AudioSink._getGType), No.Take);

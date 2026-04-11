@@ -40,8 +40,8 @@ class Int16Array : arrow.numeric_array.NumericArray
   }
 
   /**
-  Get builder for [arrow.int16_array.Int16Array]
-  Returns: New builder object
+      Get builder for [arrow.int16_array.Int16Array]
+      Returns: New builder object
   */
   static Int16ArrayGidBuilder builder()
   {
@@ -91,6 +91,7 @@ class Int16Array : arrow.numeric_array.NumericArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.int16_array.Int16Array]
 class Int16ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
 {
 }
@@ -98,6 +99,10 @@ class Int16ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderIm
 /// Fluent builder for [arrow.int16_array.Int16Array]
 final class Int16ArrayGidBuilder : Int16ArrayGidBuilderImpl!Int16ArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Int16Array build()
   {
     return new Int16Array(cast(void*)createGObject(Int16Array._getGType), Yes.Take);

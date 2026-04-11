@@ -151,6 +151,7 @@ template DBusObjectT()
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_object.DBusObject]
 template DBusObjectGidBuilderT()
 {
 }

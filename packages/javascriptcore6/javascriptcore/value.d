@@ -45,8 +45,8 @@ class Value : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [javascriptcore.value.Value]
-  Returns: New builder object
+      Get builder for [javascriptcore.value.Value]
+      Returns: New builder object
   */
   static ValueGidBuilder builder()
   {
@@ -912,6 +912,7 @@ class Value : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [javascriptcore.value.Value]
 class ValueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -930,6 +931,10 @@ class ValueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [javascriptcore.value.Value]
 final class ValueGidBuilder : ValueGidBuilderImpl!ValueGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Value build()
   {
     return new Value(cast(void*)createGObject(Value._getGType), No.Take);

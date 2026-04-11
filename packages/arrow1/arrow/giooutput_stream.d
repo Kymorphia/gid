@@ -44,8 +44,8 @@ class GIOOutputStream : arrow.output_stream.OutputStream
   }
 
   /**
-  Get builder for [arrow.giooutput_stream.GIOOutputStream]
-  Returns: New builder object
+      Get builder for [arrow.giooutput_stream.GIOOutputStream]
+      Returns: New builder object
   */
   static GIOOutputStreamGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class GIOOutputStream : arrow.output_stream.OutputStream
   }
 }
 
+/// Fluent builder implementation template for [arrow.giooutput_stream.GIOOutputStream]
 class GIOOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBuilderImpl!T
 {
 
@@ -90,6 +91,10 @@ class GIOOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBuil
 /// Fluent builder for [arrow.giooutput_stream.GIOOutputStream]
 final class GIOOutputStreamGidBuilder : GIOOutputStreamGidBuilderImpl!GIOOutputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GIOOutputStream build()
   {
     return new GIOOutputStream(cast(void*)createGObject(GIOOutputStream._getGType), Yes.Take);

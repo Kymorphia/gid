@@ -58,8 +58,8 @@ class FileChooserRequest : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.file_chooser_request.FileChooserRequest]
-  Returns: New builder object
+      Get builder for [webkit.file_chooser_request.FileChooserRequest]
+      Returns: New builder object
   */
   static FileChooserRequestGidBuilder builder()
   {
@@ -230,6 +230,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.file_chooser_request.FileChooserRequest]
 class FileChooserRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -237,6 +238,10 @@ class FileChooserRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [webkit.file_chooser_request.FileChooserRequest]
 final class FileChooserRequestGidBuilder : FileChooserRequestGidBuilderImpl!FileChooserRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileChooserRequest build()
   {
     return new FileChooserRequest(cast(void*)createGObject(FileChooserRequest._getGType), No.Take);

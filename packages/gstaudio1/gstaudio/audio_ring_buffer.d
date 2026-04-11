@@ -51,8 +51,8 @@ class AudioRingBuffer : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstaudio.audio_ring_buffer.AudioRingBuffer]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_ring_buffer.AudioRingBuffer]
+      Returns: New builder object
   */
   static AudioRingBufferGidBuilder builder()
   {
@@ -542,6 +542,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_ring_buffer.AudioRingBuffer]
 class AudioRingBufferGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -549,6 +550,10 @@ class AudioRingBufferGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstaudio.audio_ring_buffer.AudioRingBuffer]
 final class AudioRingBufferGidBuilder : AudioRingBufferGidBuilderImpl!AudioRingBufferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioRingBuffer build()
   {
     return new AudioRingBuffer(cast(void*)createGObject(AudioRingBuffer._getGType), No.Take);

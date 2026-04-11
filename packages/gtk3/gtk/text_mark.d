@@ -69,8 +69,8 @@ class TextMark : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.text_mark.TextMark]
-  Returns: New builder object
+      Get builder for [gtk.text_mark.TextMark]
+      Returns: New builder object
   */
   static TextMarkGidBuilder builder()
   {
@@ -198,6 +198,7 @@ class TextMark : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.text_mark.TextMark]
 class TextMarkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -229,6 +230,10 @@ class TextMarkGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.text_mark.TextMark]
 final class TextMarkGidBuilder : TextMarkGidBuilderImpl!TextMarkGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextMark build()
   {
     return new TextMark(cast(void*)createGObject(TextMark._getGType), Yes.Take);

@@ -43,8 +43,8 @@ class FilenameCompleter : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.filename_completer.FilenameCompleter]
-  Returns: New builder object
+      Get builder for [gio.filename_completer.FilenameCompleter]
+      Returns: New builder object
   */
   static FilenameCompleterGidBuilder builder()
   {
@@ -158,6 +158,7 @@ class FilenameCompleter : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.filename_completer.FilenameCompleter]
 class FilenameCompleterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -165,6 +166,10 @@ class FilenameCompleterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [gio.filename_completer.FilenameCompleter]
 final class FilenameCompleterGidBuilder : FilenameCompleterGidBuilderImpl!FilenameCompleterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilenameCompleter build()
   {
     return new FilenameCompleter(cast(void*)createGObject(FilenameCompleter._getGType), Yes.Take);

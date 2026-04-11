@@ -24,6 +24,7 @@ interface ImplementorIface
   }
 }
 
+/// Fluent builder implementation template for [atk.implementor_iface.ImplementorIface]
 interface ImplementorIfaceGidBuilderImpl(T)
 {
 }

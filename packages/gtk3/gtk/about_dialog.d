@@ -83,8 +83,8 @@ class AboutDialog : gtk.dialog.Dialog
   }
 
   /**
-  Get builder for [gtk.about_dialog.AboutDialog]
-  Returns: New builder object
+      Get builder for [gtk.about_dialog.AboutDialog]
+      Returns: New builder object
   */
   static AboutDialogGidBuilder builder()
   {
@@ -912,6 +912,7 @@ class AboutDialog : gtk.dialog.Dialog
   }
 }
 
+/// Fluent builder implementation template for [gtk.about_dialog.AboutDialog]
 class AboutDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 {
 
@@ -1081,6 +1082,10 @@ class AboutDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 /// Fluent builder for [gtk.about_dialog.AboutDialog]
 final class AboutDialogGidBuilder : AboutDialogGidBuilderImpl!AboutDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AboutDialog build()
   {
     return new AboutDialog(cast(void*)createGObject(AboutDialog._getGType), No.Take);

@@ -40,8 +40,8 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
   }
 
   /**
-  Get builder for [arrow.dense_union_array_builder.DenseUnionArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.dense_union_array_builder.DenseUnionArrayBuilder]
+      Returns: New builder object
   */
   static DenseUnionArrayBuilderGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.dense_union_array_builder.DenseUnionArrayBuilder]
 class DenseUnionArrayBuilderGidBuilderImpl(T) : arrow.union_array_builder.UnionArrayBuilderGidBuilderImpl!T
 {
 }
@@ -67,6 +68,10 @@ class DenseUnionArrayBuilderGidBuilderImpl(T) : arrow.union_array_builder.UnionA
 /// Fluent builder for [arrow.dense_union_array_builder.DenseUnionArrayBuilder]
 final class DenseUnionArrayBuilderGidBuilder : DenseUnionArrayBuilderGidBuilderImpl!DenseUnionArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DenseUnionArrayBuilder build()
   {
     return new DenseUnionArrayBuilder(cast(void*)createGObject(DenseUnionArrayBuilder._getGType), Yes.Take);

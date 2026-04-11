@@ -186,6 +186,7 @@ interface Scrollable
   void setVscrollPolicy(gtk.types.ScrollablePolicy policy);
 }
 
+/// Fluent builder implementation template for [gtk.scrollable.Scrollable]
 interface ScrollableGidBuilderImpl(T)
 {
 

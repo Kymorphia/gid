@@ -38,8 +38,8 @@ class HalfFloatScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.half_float_scalar.HalfFloatScalar]
-  Returns: New builder object
+      Get builder for [arrow.half_float_scalar.HalfFloatScalar]
+      Returns: New builder object
   */
   static HalfFloatScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class HalfFloatScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.half_float_scalar.HalfFloatScalar]
 class HalfFloatScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class HalfFloatScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.half_float_scalar.HalfFloatScalar]
 final class HalfFloatScalarGidBuilder : HalfFloatScalarGidBuilderImpl!HalfFloatScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HalfFloatScalar build()
   {
     return new HalfFloatScalar(cast(void*)createGObject(HalfFloatScalar._getGType), Yes.Take);

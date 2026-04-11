@@ -38,8 +38,8 @@ class TimeDataType : arrow.temporal_data_type.TemporalDataType
   }
 
   /**
-  Get builder for [arrow.time_data_type.TimeDataType]
-  Returns: New builder object
+      Get builder for [arrow.time_data_type.TimeDataType]
+      Returns: New builder object
   */
   static TimeDataTypeGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class TimeDataType : arrow.temporal_data_type.TemporalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.time_data_type.TimeDataType]
 class TimeDataTypeGidBuilderImpl(T) : arrow.temporal_data_type.TemporalDataTypeGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class TimeDataTypeGidBuilderImpl(T) : arrow.temporal_data_type.TemporalDataTypeG
 /// Fluent builder for [arrow.time_data_type.TimeDataType]
 final class TimeDataTypeGidBuilder : TimeDataTypeGidBuilderImpl!TimeDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TimeDataType build()
   {
     return new TimeDataType(cast(void*)createGObject(TimeDataType._getGType), No.Take);

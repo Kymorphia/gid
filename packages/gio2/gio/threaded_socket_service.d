@@ -58,8 +58,8 @@ class ThreadedSocketService : gio.socket_service.SocketService
   }
 
   /**
-  Get builder for [gio.threaded_socket_service.ThreadedSocketService]
-  Returns: New builder object
+      Get builder for [gio.threaded_socket_service.ThreadedSocketService]
+      Returns: New builder object
   */
   static ThreadedSocketServiceGidBuilder builder()
   {
@@ -147,6 +147,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
   }
 }
 
+/// Fluent builder implementation template for [gio.threaded_socket_service.ThreadedSocketService]
 class ThreadedSocketServiceGidBuilderImpl(T) : gio.socket_service.SocketServiceGidBuilderImpl!T
 {
 
@@ -165,6 +166,10 @@ class ThreadedSocketServiceGidBuilderImpl(T) : gio.socket_service.SocketServiceG
 /// Fluent builder for [gio.threaded_socket_service.ThreadedSocketService]
 final class ThreadedSocketServiceGidBuilder : ThreadedSocketServiceGidBuilderImpl!ThreadedSocketServiceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ThreadedSocketService build()
   {
     return new ThreadedSocketService(cast(void*)createGObject(ThreadedSocketService._getGType), Yes.Take);

@@ -49,8 +49,8 @@ class ClipboardPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
   }
 
   /**
-  Get builder for [webkit.clipboard_permission_request.ClipboardPermissionRequest]
-  Returns: New builder object
+      Get builder for [webkit.clipboard_permission_request.ClipboardPermissionRequest]
+      Returns: New builder object
   */
   static ClipboardPermissionRequestGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class ClipboardPermissionRequest : gobject.object.ObjectWrap, webkit.permission_
   mixin PermissionRequestT!();
 }
 
+/// Fluent builder implementation template for [webkit.clipboard_permission_request.ClipboardPermissionRequest]
 class ClipboardPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
 {
 
@@ -69,6 +70,10 @@ class ClipboardPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGid
 /// Fluent builder for [webkit.clipboard_permission_request.ClipboardPermissionRequest]
 final class ClipboardPermissionRequestGidBuilder : ClipboardPermissionRequestGidBuilderImpl!ClipboardPermissionRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ClipboardPermissionRequest build()
   {
     return new ClipboardPermissionRequest(cast(void*)createGObject(ClipboardPermissionRequest._getGType), No.Take);

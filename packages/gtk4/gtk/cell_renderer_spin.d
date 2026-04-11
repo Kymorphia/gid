@@ -57,8 +57,8 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
-  Get builder for [gtk.cell_renderer_spin.CellRendererSpin]
-  Returns: New builder object
+      Get builder for [gtk.cell_renderer_spin.CellRendererSpin]
+      Returns: New builder object
   */
   static CellRendererSpinGidBuilder builder()
   {
@@ -136,6 +136,7 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_renderer_spin.CellRendererSpin]
 class CellRendererSpinGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTextGidBuilderImpl!T
 {
 
@@ -177,6 +178,10 @@ class CellRendererSpinGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTex
 /// Fluent builder for [gtk.cell_renderer_spin.CellRendererSpin]
 final class CellRendererSpinGidBuilder : CellRendererSpinGidBuilderImpl!CellRendererSpinGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellRendererSpin build()
   {
     return new CellRendererSpin(cast(void*)createGObject(CellRendererSpin._getGType), No.Take);

@@ -276,6 +276,7 @@ template NetworkMonitorT()
   }
 }
 
+/// Fluent builder implementation template for [gio.network_monitor.NetworkMonitor]
 template NetworkMonitorGidBuilderT()
 {
 }

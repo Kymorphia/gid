@@ -40,8 +40,8 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 
   /**
-  Get builder for [gda.data_model_dir.DataModelDir]
-  Returns: New builder object
+      Get builder for [gda.data_model_dir.DataModelDir]
+      Returns: New builder object
   */
   static DataModelDirGidBuilder builder()
   {
@@ -81,6 +81,7 @@ class DataModelDir : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 }
 
+/// Fluent builder implementation template for [gda.data_model_dir.DataModelDir]
 class DataModelDirGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
 {
 
@@ -96,6 +97,10 @@ class DataModelDirGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
 /// Fluent builder for [gda.data_model_dir.DataModelDir]
 final class DataModelDirGidBuilder : DataModelDirGidBuilderImpl!DataModelDirGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataModelDir build()
   {
     return new DataModelDir(cast(void*)createGObject(DataModelDir._getGType), No.Take);

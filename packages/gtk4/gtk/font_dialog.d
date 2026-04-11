@@ -62,8 +62,8 @@ class FontDialog : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.font_dialog.FontDialog]
-  Returns: New builder object
+      Get builder for [gtk.font_dialog.FontDialog]
+      Returns: New builder object
   */
   static FontDialogGidBuilder builder()
   {
@@ -529,6 +529,7 @@ class FontDialog : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.font_dialog.FontDialog]
 class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -596,6 +597,10 @@ class FontDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.font_dialog.FontDialog]
 final class FontDialogGidBuilder : FontDialogGidBuilderImpl!FontDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontDialog build()
   {
     return new FontDialog(cast(void*)createGObject(FontDialog._getGType), Yes.Take);

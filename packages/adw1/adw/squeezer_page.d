@@ -43,8 +43,8 @@ class SqueezerPage : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [adw.squeezer_page.SqueezerPage]
-  Returns: New builder object
+      Get builder for [adw.squeezer_page.SqueezerPage]
+      Returns: New builder object
   */
   static SqueezerPageGidBuilder builder()
   {
@@ -153,6 +153,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [adw.squeezer_page.SqueezerPage]
 class SqueezerPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -195,6 +196,10 @@ class SqueezerPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [adw.squeezer_page.SqueezerPage]
 final class SqueezerPageGidBuilder : SqueezerPageGidBuilderImpl!SqueezerPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SqueezerPage build()
   {
     return new SqueezerPage(cast(void*)createGObject(SqueezerPage._getGType), No.Take);

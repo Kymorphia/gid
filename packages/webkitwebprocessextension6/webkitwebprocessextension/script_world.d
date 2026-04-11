@@ -41,8 +41,8 @@ class ScriptWorld : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkitwebprocessextension.script_world.ScriptWorld]
-  Returns: New builder object
+      Get builder for [webkitwebprocessextension.script_world.ScriptWorld]
+      Returns: New builder object
   */
   static ScriptWorldGidBuilder builder()
   {
@@ -168,6 +168,7 @@ class ScriptWorld : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkitwebprocessextension.script_world.ScriptWorld]
 class ScriptWorldGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -175,6 +176,10 @@ class ScriptWorldGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkitwebprocessextension.script_world.ScriptWorld]
 final class ScriptWorldGidBuilder : ScriptWorldGidBuilderImpl!ScriptWorldGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ScriptWorld build()
   {
     return new ScriptWorld(cast(void*)createGObject(ScriptWorld._getGType), Yes.Take);

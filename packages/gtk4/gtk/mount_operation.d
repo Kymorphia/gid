@@ -55,8 +55,8 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /**
-  Get builder for [gtk.mount_operation.MountOperation]
-  Returns: New builder object
+      Get builder for [gtk.mount_operation.MountOperation]
+      Returns: New builder object
   */
   static MountOperationGidBuilder builder()
   {
@@ -176,6 +176,7 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 }
 
+/// Fluent builder implementation template for [gtk.mount_operation.MountOperation]
 class MountOperationGidBuilderImpl(T) : gio.mount_operation.MountOperationGidBuilderImpl!T
 {
 
@@ -205,6 +206,10 @@ class MountOperationGidBuilderImpl(T) : gio.mount_operation.MountOperationGidBui
 /// Fluent builder for [gtk.mount_operation.MountOperation]
 final class MountOperationGidBuilder : MountOperationGidBuilderImpl!MountOperationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MountOperation build()
   {
     return new MountOperation(cast(void*)createGObject(MountOperation._getGType), Yes.Take);

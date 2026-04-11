@@ -70,6 +70,7 @@ interface TlsServerConnection
   }
 }
 
+/// Fluent builder implementation template for [gio.tls_server_connection.TlsServerConnection]
 interface TlsServerConnectionGidBuilderImpl(T)
 {
 

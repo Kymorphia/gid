@@ -182,8 +182,8 @@ class AlertDialog : adw.dialog.Dialog
   }
 
   /**
-  Get builder for [adw.alert_dialog.AlertDialog]
-  Returns: New builder object
+      Get builder for [adw.alert_dialog.AlertDialog]
+      Returns: New builder object
   */
   static AlertDialogGidBuilder builder()
   {
@@ -843,6 +843,7 @@ class AlertDialog : adw.dialog.Dialog
   }
 }
 
+/// Fluent builder implementation template for [adw.alert_dialog.AlertDialog]
 class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
 {
 
@@ -946,6 +947,10 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
 /// Fluent builder for [adw.alert_dialog.AlertDialog]
 final class AlertDialogGidBuilder : AlertDialogGidBuilderImpl!AlertDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AlertDialog build()
   {
     return new AlertDialog(cast(void*)createGObject(AlertDialog._getGType), No.Take);

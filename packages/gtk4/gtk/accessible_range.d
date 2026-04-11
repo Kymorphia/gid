@@ -46,6 +46,7 @@ interface AccessibleRange
   }
 }
 
+/// Fluent builder implementation template for [gtk.accessible_range.AccessibleRange]
 interface AccessibleRangeGidBuilderImpl(T)
 {
 }

@@ -47,8 +47,8 @@ class ShortcutLabel : gtk.box.Box
   }
 
   /**
-  Get builder for [gtk.shortcut_label.ShortcutLabel]
-  Returns: New builder object
+      Get builder for [gtk.shortcut_label.ShortcutLabel]
+      Returns: New builder object
   */
   static ShortcutLabelGidBuilder builder()
   {
@@ -160,6 +160,7 @@ class ShortcutLabel : gtk.box.Box
   }
 }
 
+/// Fluent builder implementation template for [gtk.shortcut_label.ShortcutLabel]
 class ShortcutLabelGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 {
 
@@ -191,6 +192,10 @@ class ShortcutLabelGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 /// Fluent builder for [gtk.shortcut_label.ShortcutLabel]
 final class ShortcutLabelGidBuilder : ShortcutLabelGidBuilderImpl!ShortcutLabelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ShortcutLabel build()
   {
     return new ShortcutLabel(cast(void*)createGObject(ShortcutLabel._getGType), Yes.Take);

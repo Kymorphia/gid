@@ -55,8 +55,8 @@ class WebPage : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkitwebprocessextension.web_page.WebPage]
-  Returns: New builder object
+      Get builder for [webkitwebprocessextension.web_page.WebPage]
+      Returns: New builder object
   */
   static WebPageGidBuilder builder()
   {
@@ -448,6 +448,7 @@ class WebPage : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkitwebprocessextension.web_page.WebPage]
 class WebPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -455,6 +456,10 @@ class WebPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkitwebprocessextension.web_page.WebPage]
 final class WebPageGidBuilder : WebPageGidBuilderImpl!WebPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebPage build()
   {
     return new WebPage(cast(void*)createGObject(WebPage._getGType), No.Take);

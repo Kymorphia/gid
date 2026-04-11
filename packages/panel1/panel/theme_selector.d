@@ -55,8 +55,8 @@ class ThemeSelector : gtk.widget.Widget
   }
 
   /**
-  Get builder for [panel.theme_selector.ThemeSelector]
-  Returns: New builder object
+      Get builder for [panel.theme_selector.ThemeSelector]
+      Returns: New builder object
   */
   static ThemeSelectorGidBuilder builder()
   {
@@ -118,6 +118,7 @@ class ThemeSelector : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [panel.theme_selector.ThemeSelector]
 class ThemeSelectorGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -137,6 +138,10 @@ class ThemeSelectorGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [panel.theme_selector.ThemeSelector]
 final class ThemeSelectorGidBuilder : ThemeSelectorGidBuilderImpl!ThemeSelectorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ThemeSelector build()
   {
     return new ThemeSelector(cast(void*)createGObject(ThemeSelector._getGType), No.Take);

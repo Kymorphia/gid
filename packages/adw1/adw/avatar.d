@@ -71,8 +71,8 @@ class Avatar : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.avatar.Avatar]
-  Returns: New builder object
+      Get builder for [adw.avatar.Avatar]
+      Returns: New builder object
   */
   static AvatarGidBuilder builder()
   {
@@ -354,6 +354,7 @@ class Avatar : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.avatar.Avatar]
 class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -426,6 +427,10 @@ class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.avatar.Avatar]
 final class AvatarGidBuilder : AvatarGidBuilderImpl!AvatarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Avatar build()
   {
     return new Avatar(cast(void*)createGObject(Avatar._getGType), No.Take);

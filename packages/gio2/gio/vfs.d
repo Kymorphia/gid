@@ -41,8 +41,8 @@ class Vfs : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.vfs.Vfs]
-  Returns: New builder object
+      Get builder for [gio.vfs.Vfs]
+      Returns: New builder object
   */
   static VfsGidBuilder builder()
   {
@@ -250,6 +250,7 @@ class Vfs : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.vfs.Vfs]
 class VfsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -257,6 +258,10 @@ class VfsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.vfs.Vfs]
 final class VfsGidBuilder : VfsGidBuilderImpl!VfsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Vfs build()
   {
     return new Vfs(cast(void*)createGObject(Vfs._getGType), No.Take);

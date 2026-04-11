@@ -44,8 +44,8 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 
   /**
-  Get builder for [gio.zlib_decompressor.ZlibDecompressor]
-  Returns: New builder object
+      Get builder for [gio.zlib_decompressor.ZlibDecompressor]
+      Returns: New builder object
   */
   static ZlibDecompressorGidBuilder builder()
   {
@@ -106,6 +106,7 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 }
 
+/// Fluent builder implementation template for [gio.zlib_decompressor.ZlibDecompressor]
 class ZlibDecompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.converter.ConverterGidBuilderImpl!T
 {
 
@@ -126,6 +127,10 @@ class ZlibDecompressorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gio.zlib_decompressor.ZlibDecompressor]
 final class ZlibDecompressorGidBuilder : ZlibDecompressorGidBuilderImpl!ZlibDecompressorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ZlibDecompressor build()
   {
     return new ZlibDecompressor(cast(void*)createGObject(ZlibDecompressor._getGType), Yes.Take);

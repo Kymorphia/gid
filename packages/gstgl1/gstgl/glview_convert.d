@@ -46,8 +46,8 @@ class GLViewConvert : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstgl.glview_convert.GLViewConvert]
-  Returns: New builder object
+      Get builder for [gstgl.glview_convert.GLViewConvert]
+      Returns: New builder object
   */
   static GLViewConvertGidBuilder builder()
   {
@@ -241,6 +241,7 @@ class GLViewConvert : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glview_convert.GLViewConvert]
 class GLViewConvertGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -278,6 +279,10 @@ class GLViewConvertGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstgl.glview_convert.GLViewConvert]
 final class GLViewConvertGidBuilder : GLViewConvertGidBuilderImpl!GLViewConvertGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLViewConvert build()
   {
     return new GLViewConvert(cast(void*)createGObject(GLViewConvert._getGType), Yes.Take);

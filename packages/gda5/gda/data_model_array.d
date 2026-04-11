@@ -42,8 +42,8 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 
   /**
-  Get builder for [gda.data_model_array.DataModelArray]
-  Returns: New builder object
+      Get builder for [gda.data_model_array.DataModelArray]
+      Returns: New builder object
   */
   static DataModelArrayGidBuilder builder()
   {
@@ -134,6 +134,7 @@ class DataModelArray : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 }
 
+/// Fluent builder implementation template for [gda.data_model_array.DataModelArray]
 class DataModelArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
 {
 
@@ -155,6 +156,10 @@ class DataModelArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gda.data_model_array.DataModelArray]
 final class DataModelArrayGidBuilder : DataModelArrayGidBuilderImpl!DataModelArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataModelArray build()
   {
     return new DataModelArray(cast(void*)createGObject(DataModelArray._getGType), No.Take);

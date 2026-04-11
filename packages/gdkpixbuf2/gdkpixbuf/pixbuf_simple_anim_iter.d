@@ -38,8 +38,8 @@ class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
   }
 
   /**
-  Get builder for [gdkpixbuf.pixbuf_simple_anim_iter.PixbufSimpleAnimIter]
-  Returns: New builder object
+      Get builder for [gdkpixbuf.pixbuf_simple_anim_iter.PixbufSimpleAnimIter]
+      Returns: New builder object
   */
   static PixbufSimpleAnimIterGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
   }
 }
 
+/// Fluent builder implementation template for [gdkpixbuf.pixbuf_simple_anim_iter.PixbufSimpleAnimIter]
 class PixbufSimpleAnimIterGidBuilderImpl(T) : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIterGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class PixbufSimpleAnimIterGidBuilderImpl(T) : gdkpixbuf.pixbuf_animation_iter.Pi
 /// Fluent builder for [gdkpixbuf.pixbuf_simple_anim_iter.PixbufSimpleAnimIter]
 final class PixbufSimpleAnimIterGidBuilder : PixbufSimpleAnimIterGidBuilderImpl!PixbufSimpleAnimIterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PixbufSimpleAnimIter build()
   {
     return new PixbufSimpleAnimIter(cast(void*)createGObject(PixbufSimpleAnimIter._getGType), No.Take);

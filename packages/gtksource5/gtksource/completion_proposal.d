@@ -39,6 +39,7 @@ interface CompletionProposal
   string getTypedText();
 }
 
+/// Fluent builder implementation template for [gtksource.completion_proposal.CompletionProposal]
 interface CompletionProposalGidBuilderImpl(T)
 {
 }

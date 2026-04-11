@@ -220,6 +220,7 @@ interface Document
   gulong connectReload(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [atk.document.Document]
 interface DocumentGidBuilderImpl(T)
 {
 }

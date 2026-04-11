@@ -94,8 +94,8 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-  Get builder for [gtk.text_view.TextView]
-  Returns: New builder object
+      Get builder for [gtk.text_view.TextView]
+      Returns: New builder object
   */
   static TextViewGidBuilder builder()
   {
@@ -2471,6 +2471,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 }
 
+/// Fluent builder implementation template for [gtk.text_view.TextView]
 class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_text.AccessibleTextGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -2717,6 +2718,10 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
 /// Fluent builder for [gtk.text_view.TextView]
 final class TextViewGidBuilder : TextViewGidBuilderImpl!TextViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextView build()
   {
     return new TextView(cast(void*)createGObject(TextView._getGType), No.Take);

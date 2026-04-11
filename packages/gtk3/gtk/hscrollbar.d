@@ -54,8 +54,8 @@ class HScrollbar : gtk.scrollbar.Scrollbar
   }
 
   /**
-  Get builder for [gtk.hscrollbar.HScrollbar]
-  Returns: New builder object
+      Get builder for [gtk.hscrollbar.HScrollbar]
+      Returns: New builder object
   */
   static HScrollbarGidBuilder builder()
   {
@@ -79,6 +79,7 @@ class HScrollbar : gtk.scrollbar.Scrollbar
   }
 }
 
+/// Fluent builder implementation template for [gtk.hscrollbar.HScrollbar]
 class HScrollbarGidBuilderImpl(T) : gtk.scrollbar.ScrollbarGidBuilderImpl!T
 {
 
@@ -87,6 +88,10 @@ class HScrollbarGidBuilderImpl(T) : gtk.scrollbar.ScrollbarGidBuilderImpl!T
 /// Fluent builder for [gtk.hscrollbar.HScrollbar]
 final class HScrollbarGidBuilder : HScrollbarGidBuilderImpl!HScrollbarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HScrollbar build()
   {
     return new HScrollbar(cast(void*)createGObject(HScrollbar._getGType), No.Take);

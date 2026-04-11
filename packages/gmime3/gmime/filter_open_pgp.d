@@ -40,8 +40,8 @@ class FilterOpenPGP : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_open_pgp.FilterOpenPGP]
-  Returns: New builder object
+      Get builder for [gmime.filter_open_pgp.FilterOpenPGP]
+      Returns: New builder object
   */
   static FilterOpenPGPGidBuilder builder()
   {
@@ -94,6 +94,7 @@ class FilterOpenPGP : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_open_pgp.FilterOpenPGP]
 class FilterOpenPGPGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -101,6 +102,10 @@ class FilterOpenPGPGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_open_pgp.FilterOpenPGP]
 final class FilterOpenPGPGidBuilder : FilterOpenPGPGidBuilderImpl!FilterOpenPGPGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterOpenPGP build()
   {
     return new FilterOpenPGP(cast(void*)createGObject(FilterOpenPGP._getGType), Yes.Take);

@@ -29,6 +29,7 @@ interface VideoDirection
   @property void videoDirection(gstvideo.types.VideoOrientationMethod propval);
 }
 
+/// Fluent builder implementation template for [gstvideo.video_direction.VideoDirection]
 interface VideoDirectionGidBuilderImpl(T)
 {
 

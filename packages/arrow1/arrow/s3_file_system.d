@@ -38,8 +38,8 @@ class S3FileSystem : arrow.file_system.FileSystem
   }
 
   /**
-  Get builder for [arrow.s3_file_system.S3FileSystem]
-  Returns: New builder object
+      Get builder for [arrow.s3_file_system.S3FileSystem]
+      Returns: New builder object
   */
   static S3FileSystemGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class S3FileSystem : arrow.file_system.FileSystem
   }
 }
 
+/// Fluent builder implementation template for [arrow.s3_file_system.S3FileSystem]
 class S3FileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class S3FileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl
 /// Fluent builder for [arrow.s3_file_system.S3FileSystem]
 final class S3FileSystemGidBuilder : S3FileSystemGidBuilderImpl!S3FileSystemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   S3FileSystem build()
   {
     return new S3FileSystem(cast(void*)createGObject(S3FileSystem._getGType), No.Take);

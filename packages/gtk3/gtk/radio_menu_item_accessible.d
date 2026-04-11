@@ -44,8 +44,8 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
   }
 
   /**
-  Get builder for [gtk.radio_menu_item_accessible.RadioMenuItemAccessible]
-  Returns: New builder object
+      Get builder for [gtk.radio_menu_item_accessible.RadioMenuItemAccessible]
+      Returns: New builder object
   */
   static RadioMenuItemAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
   }
 }
 
+/// Fluent builder implementation template for [gtk.radio_menu_item_accessible.RadioMenuItemAccessible]
 class RadioMenuItemAccessibleGidBuilderImpl(T) : gtk.check_menu_item_accessible.CheckMenuItemAccessibleGidBuilderImpl!T
 {
 
@@ -61,6 +62,10 @@ class RadioMenuItemAccessibleGidBuilderImpl(T) : gtk.check_menu_item_accessible.
 /// Fluent builder for [gtk.radio_menu_item_accessible.RadioMenuItemAccessible]
 final class RadioMenuItemAccessibleGidBuilder : RadioMenuItemAccessibleGidBuilderImpl!RadioMenuItemAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RadioMenuItemAccessible build()
   {
     return new RadioMenuItemAccessible(cast(void*)createGObject(RadioMenuItemAccessible._getGType), No.Take);

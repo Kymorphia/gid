@@ -38,8 +38,8 @@ class ServerCallContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.server_call_context.ServerCallContext]
-  Returns: New builder object
+      Get builder for [arrowflight.server_call_context.ServerCallContext]
+      Returns: New builder object
   */
   static ServerCallContextGidBuilder builder()
   {
@@ -68,6 +68,7 @@ class ServerCallContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.server_call_context.ServerCallContext]
 class ServerCallContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -81,6 +82,10 @@ class ServerCallContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [arrowflight.server_call_context.ServerCallContext]
 final class ServerCallContextGidBuilder : ServerCallContextGidBuilderImpl!ServerCallContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ServerCallContext build()
   {
     return new ServerCallContext(cast(void*)createGObject(ServerCallContext._getGType), No.Take);

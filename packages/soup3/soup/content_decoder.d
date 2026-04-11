@@ -65,8 +65,8 @@ class ContentDecoder : gobject.object.ObjectWrap, soup.session_feature.SessionFe
   }
 
   /**
-  Get builder for [soup.content_decoder.ContentDecoder]
-  Returns: New builder object
+      Get builder for [soup.content_decoder.ContentDecoder]
+      Returns: New builder object
   */
   static ContentDecoderGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class ContentDecoder : gobject.object.ObjectWrap, soup.session_feature.SessionFe
   mixin SessionFeatureT!();
 }
 
+/// Fluent builder implementation template for [soup.content_decoder.ContentDecoder]
 class ContentDecoderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
 {
 
@@ -85,6 +86,10 @@ class ContentDecoderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [soup.content_decoder.ContentDecoder]
 final class ContentDecoderGidBuilder : ContentDecoderGidBuilderImpl!ContentDecoderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContentDecoder build()
   {
     return new ContentDecoder(cast(void*)createGObject(ContentDecoder._getGType), No.Take);

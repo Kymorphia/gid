@@ -45,8 +45,8 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
   }
 
   /**
-  Get builder for [gtk.cell_accessible.CellAccessible]
-  Returns: New builder object
+      Get builder for [gtk.cell_accessible.CellAccessible]
+      Returns: New builder object
   */
   static CellAccessibleGidBuilder builder()
   {
@@ -61,6 +61,7 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
   alias setDescription = atk.object.ObjectWrap.setDescription;
 }
 
+/// Fluent builder implementation template for [gtk.cell_accessible.CellAccessible]
 class CellAccessibleGidBuilderImpl(T) : gtk.accessible.AccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.component.ComponentGidBuilderImpl!T, atk.table_cell.TableCellGidBuilderImpl!T
 {
 
@@ -72,6 +73,10 @@ class CellAccessibleGidBuilderImpl(T) : gtk.accessible.AccessibleGidBuilderImpl!
 /// Fluent builder for [gtk.cell_accessible.CellAccessible]
 final class CellAccessibleGidBuilder : CellAccessibleGidBuilderImpl!CellAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellAccessible build()
   {
     return new CellAccessible(cast(void*)createGObject(CellAccessible._getGType), No.Take);

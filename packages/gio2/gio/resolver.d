@@ -65,8 +65,8 @@ class Resolver : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.resolver.Resolver]
-  Returns: New builder object
+      Get builder for [gio.resolver.Resolver]
+      Returns: New builder object
   */
   static ResolverGidBuilder builder()
   {
@@ -652,6 +652,7 @@ class Resolver : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.resolver.Resolver]
 class ResolverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -679,6 +680,10 @@ class ResolverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.resolver.Resolver]
 final class ResolverGidBuilder : ResolverGidBuilderImpl!ResolverGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Resolver build()
   {
     return new Resolver(cast(void*)createGObject(Resolver._getGType), No.Take);

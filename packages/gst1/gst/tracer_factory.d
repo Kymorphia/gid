@@ -42,8 +42,8 @@ class TracerFactory : gst.plugin_feature.PluginFeature
   }
 
   /**
-  Get builder for [gst.tracer_factory.TracerFactory]
-  Returns: New builder object
+      Get builder for [gst.tracer_factory.TracerFactory]
+      Returns: New builder object
   */
   static TracerFactoryGidBuilder builder()
   {
@@ -83,6 +83,7 @@ class TracerFactory : gst.plugin_feature.PluginFeature
   }
 }
 
+/// Fluent builder implementation template for [gst.tracer_factory.TracerFactory]
 class TracerFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
 {
 }
@@ -90,6 +91,10 @@ class TracerFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilde
 /// Fluent builder for [gst.tracer_factory.TracerFactory]
 final class TracerFactoryGidBuilder : TracerFactoryGidBuilderImpl!TracerFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TracerFactory build()
   {
     return new TracerFactory(cast(void*)createGObject(TracerFactory._getGType), No.Take);

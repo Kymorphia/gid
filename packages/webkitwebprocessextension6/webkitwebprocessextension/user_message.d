@@ -50,8 +50,8 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-  Get builder for [webkitwebprocessextension.user_message.UserMessage]
-  Returns: New builder object
+      Get builder for [webkitwebprocessextension.user_message.UserMessage]
+      Returns: New builder object
   */
   static UserMessageGidBuilder builder()
   {
@@ -173,6 +173,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   }
 }
 
+/// Fluent builder implementation template for [webkitwebprocessextension.user_message.UserMessage]
 class UserMessageGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
 {
 
@@ -215,6 +216,10 @@ class UserMessageGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedG
 /// Fluent builder for [webkitwebprocessextension.user_message.UserMessage]
 final class UserMessageGidBuilder : UserMessageGidBuilderImpl!UserMessageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UserMessage build()
   {
     return new UserMessage(cast(void*)createGObject(UserMessage._getGType), No.Take);

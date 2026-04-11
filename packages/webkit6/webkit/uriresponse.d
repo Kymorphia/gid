@@ -45,8 +45,8 @@ class URIResponse : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.uriresponse.URIResponse]
-  Returns: New builder object
+      Get builder for [webkit.uriresponse.URIResponse]
+      Returns: New builder object
   */
   static URIResponseGidBuilder builder()
   {
@@ -191,6 +191,7 @@ class URIResponse : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.uriresponse.URIResponse]
 class URIResponseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -198,6 +199,10 @@ class URIResponseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.uriresponse.URIResponse]
 final class URIResponseGidBuilder : URIResponseGidBuilderImpl!URIResponseGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   URIResponse build()
   {
     return new URIResponse(cast(void*)createGObject(URIResponse._getGType), No.Take);

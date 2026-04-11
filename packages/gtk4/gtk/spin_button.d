@@ -168,8 +168,8 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   }
 
   /**
-  Get builder for [gtk.spin_button.SpinButton]
-  Returns: New builder object
+      Get builder for [gtk.spin_button.SpinButton]
+      Returns: New builder object
   */
   static SpinButtonGidBuilder builder()
   {
@@ -1021,6 +1021,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   }
 }
 
+/// Fluent builder implementation template for [gtk.spin_button.SpinButton]
 class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_range.AccessibleRangeGidBuilderImpl!T, gtk.cell_editable.CellEditableGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -1136,6 +1137,10 @@ class SpinButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acces
 /// Fluent builder for [gtk.spin_button.SpinButton]
 final class SpinButtonGidBuilder : SpinButtonGidBuilderImpl!SpinButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SpinButton build()
   {
     return new SpinButton(cast(void*)createGObject(SpinButton._getGType), No.Take);

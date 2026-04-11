@@ -52,8 +52,8 @@ class Accessible : atk.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.accessible.Accessible]
-  Returns: New builder object
+      Get builder for [gtk.accessible.Accessible]
+      Returns: New builder object
   */
   static AccessibleGidBuilder builder()
   {
@@ -115,6 +115,7 @@ class Accessible : atk.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.accessible.Accessible]
 class AccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -128,6 +129,10 @@ class AccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.accessible.Accessible]
 final class AccessibleGidBuilder : AccessibleGidBuilderImpl!AccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Accessible build()
   {
     return new Accessible(cast(void*)createGObject(Accessible._getGType), No.Take);

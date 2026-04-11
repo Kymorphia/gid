@@ -50,8 +50,8 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   }
 
   /**
-  Get builder for [gio.network_service.NetworkService]
-  Returns: New builder object
+      Get builder for [gio.network_service.NetworkService]
+      Returns: New builder object
   */
   static NetworkServiceGidBuilder builder()
   {
@@ -191,6 +191,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   }
 }
 
+/// Fluent builder implementation template for [gio.network_service.NetworkService]
 class NetworkServiceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.socket_connectable.SocketConnectableGidBuilderImpl!T
 {
 
@@ -244,6 +245,10 @@ class NetworkServiceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.network_service.NetworkService]
 final class NetworkServiceGidBuilder : NetworkServiceGidBuilderImpl!NetworkServiceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NetworkService build()
   {
     return new NetworkService(cast(void*)createGObject(NetworkService._getGType), Yes.Take);

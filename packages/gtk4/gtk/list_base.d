@@ -51,8 +51,8 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
   }
 
   /**
-  Get builder for [gtk.list_base.ListBase]
-  Returns: New builder object
+      Get builder for [gtk.list_base.ListBase]
+      Returns: New builder object
   */
   static ListBaseGidBuilder builder()
   {
@@ -84,6 +84,7 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
   mixin ScrollableT!();
 }
 
+/// Fluent builder implementation template for [gtk.list_base.ListBase]
 class ListBaseGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -106,6 +107,10 @@ class ListBaseGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orienta
 /// Fluent builder for [gtk.list_base.ListBase]
 final class ListBaseGidBuilder : ListBaseGidBuilderImpl!ListBaseGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListBase build()
   {
     return new ListBase(cast(void*)createGObject(ListBase._getGType), No.Take);

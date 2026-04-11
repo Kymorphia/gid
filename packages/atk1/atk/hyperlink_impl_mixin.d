@@ -34,6 +34,7 @@ template HyperlinkImplT()
   }
 }
 
+/// Fluent builder implementation template for [atk.hyperlink_impl.HyperlinkImpl]
 template HyperlinkImplGidBuilderT()
 {
 }

@@ -73,8 +73,8 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-  Get builder for [gtk.menu_tool_button.MenuToolButton]
-  Returns: New builder object
+      Get builder for [gtk.menu_tool_button.MenuToolButton]
+      Returns: New builder object
   */
   static MenuToolButtonGidBuilder builder()
   {
@@ -228,6 +228,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 }
 
+/// Fluent builder implementation template for [gtk.menu_tool_button.MenuToolButton]
 class MenuToolButtonGidBuilderImpl(T) : gtk.tool_button.ToolButtonGidBuilderImpl!T
 {
 
@@ -242,6 +243,10 @@ class MenuToolButtonGidBuilderImpl(T) : gtk.tool_button.ToolButtonGidBuilderImpl
 /// Fluent builder for [gtk.menu_tool_button.MenuToolButton]
 final class MenuToolButtonGidBuilder : MenuToolButtonGidBuilderImpl!MenuToolButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuToolButton build()
   {
     return new MenuToolButton(cast(void*)createGObject(MenuToolButton._getGType), No.Take);

@@ -52,8 +52,8 @@ class FindController : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.find_controller.FindController]
-  Returns: New builder object
+      Get builder for [webkit.find_controller.FindController]
+      Returns: New builder object
   */
   static FindControllerGidBuilder builder()
   {
@@ -384,6 +384,7 @@ class FindController : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.find_controller.FindController]
 class FindControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -402,6 +403,10 @@ class FindControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [webkit.find_controller.FindController]
 final class FindControllerGidBuilder : FindControllerGidBuilderImpl!FindControllerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FindController build()
   {
     return new FindController(cast(void*)createGObject(FindController._getGType), No.Take);

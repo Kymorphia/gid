@@ -56,8 +56,8 @@ class UriLauncher : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.uri_launcher.UriLauncher]
-  Returns: New builder object
+      Get builder for [gtk.uri_launcher.UriLauncher]
+      Returns: New builder object
   */
   static UriLauncherGidBuilder builder()
   {
@@ -171,6 +171,7 @@ class UriLauncher : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.uri_launcher.UriLauncher]
 class UriLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -189,6 +190,10 @@ class UriLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.uri_launcher.UriLauncher]
 final class UriLauncherGidBuilder : UriLauncherGidBuilderImpl!UriLauncherGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UriLauncher build()
   {
     return new UriLauncher(cast(void*)createGObject(UriLauncher._getGType), Yes.Take);

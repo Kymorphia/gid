@@ -122,8 +122,8 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   }
 
   /**
-  Get builder for [gio.socket.Socket]
-  Returns: New builder object
+      Get builder for [gio.socket.Socket]
+      Returns: New builder object
   */
   static SocketGidBuilder builder()
   {
@@ -1855,6 +1855,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
   }
 }
 
+/// Fluent builder implementation template for [gio.socket.Socket]
 class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.datagram_based.DatagramBasedGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -1997,6 +1998,10 @@ class SocketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.d
 /// Fluent builder for [gio.socket.Socket]
 final class SocketGidBuilder : SocketGidBuilderImpl!SocketGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Socket build()
   {
     return new Socket(cast(void*)createGObject(Socket._getGType), Yes.Take);

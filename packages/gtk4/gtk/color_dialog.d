@@ -57,8 +57,8 @@ class ColorDialog : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.color_dialog.ColorDialog]
-  Returns: New builder object
+      Get builder for [gtk.color_dialog.ColorDialog]
+      Returns: New builder object
   */
   static ColorDialogGidBuilder builder()
   {
@@ -267,6 +267,7 @@ class ColorDialog : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.color_dialog.ColorDialog]
 class ColorDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -311,6 +312,10 @@ class ColorDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.color_dialog.ColorDialog]
 final class ColorDialogGidBuilder : ColorDialogGidBuilderImpl!ColorDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColorDialog build()
   {
     return new ColorDialog(cast(void*)createGObject(ColorDialog._getGType), Yes.Take);

@@ -93,8 +93,8 @@ class Pipeline : gst.bin.Bin
   }
 
   /**
-  Get builder for [gst.pipeline.Pipeline]
-  Returns: New builder object
+      Get builder for [gst.pipeline.Pipeline]
+      Returns: New builder object
   */
   static PipelineGidBuilder builder()
   {
@@ -376,6 +376,7 @@ class Pipeline : gst.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gst.pipeline.Pipeline]
 class PipelineGidBuilderImpl(T) : gst.bin.BinGidBuilderImpl!T
 {
 
@@ -421,6 +422,10 @@ class PipelineGidBuilderImpl(T) : gst.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gst.pipeline.Pipeline]
 final class PipelineGidBuilder : PipelineGidBuilderImpl!PipelineGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Pipeline build()
   {
     return new Pipeline(cast(void*)createGObject(Pipeline._getGType), No.Take);

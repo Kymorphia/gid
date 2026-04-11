@@ -64,8 +64,8 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
   }
 
   /**
-  Get builder for [gio.dbus_object_manager_server.DBusObjectManagerServer]
-  Returns: New builder object
+      Get builder for [gio.dbus_object_manager_server.DBusObjectManagerServer]
+      Returns: New builder object
   */
   static DBusObjectManagerServerGidBuilder builder()
   {
@@ -217,6 +217,7 @@ class DBusObjectManagerServer : gobject.object.ObjectWrap, gio.dbus_object_manag
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_object_manager_server.DBusObjectManagerServer]
 class DBusObjectManagerServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.dbus_object_manager.DBusObjectManagerGidBuilderImpl!T
 {
 
@@ -248,6 +249,10 @@ class DBusObjectManagerServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBui
 /// Fluent builder for [gio.dbus_object_manager_server.DBusObjectManagerServer]
 final class DBusObjectManagerServerGidBuilder : DBusObjectManagerServerGidBuilderImpl!DBusObjectManagerServerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusObjectManagerServer build()
   {
     return new DBusObjectManagerServer(cast(void*)createGObject(DBusObjectManagerServer._getGType), Yes.Take);

@@ -47,8 +47,8 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /**
-  Get builder for [adw.view_stack_pages.ViewStackPages]
-  Returns: New builder object
+      Get builder for [adw.view_stack_pages.ViewStackPages]
+      Returns: New builder object
   */
   static ViewStackPagesGidBuilder builder()
   {
@@ -117,6 +117,7 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 }
 
+/// Fluent builder implementation template for [adw.view_stack_pages.ViewStackPages]
 class ViewStackPagesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
 {
 
@@ -143,6 +144,10 @@ class ViewStackPagesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [adw.view_stack_pages.ViewStackPages]
 final class ViewStackPagesGidBuilder : ViewStackPagesGidBuilderImpl!ViewStackPagesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ViewStackPages build()
   {
     return new ViewStackPages(cast(void*)createGObject(ViewStackPages._getGType), No.Take);

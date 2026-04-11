@@ -38,8 +38,8 @@ class MonthIntervalScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.month_interval_scalar.MonthIntervalScalar]
-  Returns: New builder object
+      Get builder for [arrow.month_interval_scalar.MonthIntervalScalar]
+      Returns: New builder object
   */
   static MonthIntervalScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class MonthIntervalScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.month_interval_scalar.MonthIntervalScalar]
 class MonthIntervalScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class MonthIntervalScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.month_interval_scalar.MonthIntervalScalar]
 final class MonthIntervalScalarGidBuilder : MonthIntervalScalarGidBuilderImpl!MonthIntervalScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MonthIntervalScalar build()
   {
     return new MonthIntervalScalar(cast(void*)createGObject(MonthIntervalScalar._getGType), Yes.Take);

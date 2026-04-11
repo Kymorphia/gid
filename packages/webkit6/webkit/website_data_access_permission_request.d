@@ -48,8 +48,8 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
   }
 
   /**
-  Get builder for [webkit.website_data_access_permission_request.WebsiteDataAccessPermissionRequest]
-  Returns: New builder object
+      Get builder for [webkit.website_data_access_permission_request.WebsiteDataAccessPermissionRequest]
+      Returns: New builder object
   */
   static WebsiteDataAccessPermissionRequestGidBuilder builder()
   {
@@ -83,6 +83,7 @@ class WebsiteDataAccessPermissionRequest : gobject.object.ObjectWrap, webkit.per
   }
 }
 
+/// Fluent builder implementation template for [webkit.website_data_access_permission_request.WebsiteDataAccessPermissionRequest]
 class WebsiteDataAccessPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
 {
 
@@ -92,6 +93,10 @@ class WebsiteDataAccessPermissionRequestGidBuilderImpl(T) : gobject.object.Objec
 /// Fluent builder for [webkit.website_data_access_permission_request.WebsiteDataAccessPermissionRequest]
 final class WebsiteDataAccessPermissionRequestGidBuilder : WebsiteDataAccessPermissionRequestGidBuilderImpl!WebsiteDataAccessPermissionRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebsiteDataAccessPermissionRequest build()
   {
     return new WebsiteDataAccessPermissionRequest(cast(void*)createGObject(WebsiteDataAccessPermissionRequest._getGType), No.Take);

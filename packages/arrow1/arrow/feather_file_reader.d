@@ -41,8 +41,8 @@ class FeatherFileReader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.feather_file_reader.FeatherFileReader]
-  Returns: New builder object
+      Get builder for [arrow.feather_file_reader.FeatherFileReader]
+      Returns: New builder object
   */
   static FeatherFileReaderGidBuilder builder()
   {
@@ -119,6 +119,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.feather_file_reader.FeatherFileReader]
 class FeatherFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -132,6 +133,10 @@ class FeatherFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [arrow.feather_file_reader.FeatherFileReader]
 final class FeatherFileReaderGidBuilder : FeatherFileReaderGidBuilderImpl!FeatherFileReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FeatherFileReader build()
   {
     return new FeatherFileReader(cast(void*)createGObject(FeatherFileReader._getGType), Yes.Take);

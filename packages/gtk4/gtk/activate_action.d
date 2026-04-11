@@ -41,8 +41,8 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-  Get builder for [gtk.activate_action.ActivateAction]
-  Returns: New builder object
+      Get builder for [gtk.activate_action.ActivateAction]
+      Returns: New builder object
   */
   static ActivateActionGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
   }
 }
 
+/// Fluent builder implementation template for [gtk.activate_action.ActivateAction]
 class ActivateActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class ActivateActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBui
 /// Fluent builder for [gtk.activate_action.ActivateAction]
 final class ActivateActionGidBuilder : ActivateActionGidBuilderImpl!ActivateActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ActivateAction build()
   {
     return new ActivateAction(cast(void*)createGObject(ActivateAction._getGType), No.Take);

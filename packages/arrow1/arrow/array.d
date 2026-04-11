@@ -53,8 +53,8 @@ class Array : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.array.Array]
-  Returns: New builder object
+      Get builder for [arrow.array.Array]
+      Returns: New builder object
   */
   static ArrayGidBuilder builder()
   {
@@ -425,6 +425,7 @@ class Array : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.array.Array]
 class ArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -468,6 +469,10 @@ class ArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.array.Array]
 final class ArrayGidBuilder : ArrayGidBuilderImpl!ArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Array build()
   {
     return new Array(cast(void*)createGObject(Array._getGType), No.Take);

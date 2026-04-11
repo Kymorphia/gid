@@ -40,8 +40,8 @@ class ChunkedArrayDatum : arrow.datum.Datum
   }
 
   /**
-  Get builder for [arrow.chunked_array_datum.ChunkedArrayDatum]
-  Returns: New builder object
+      Get builder for [arrow.chunked_array_datum.ChunkedArrayDatum]
+      Returns: New builder object
   */
   static ChunkedArrayDatumGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class ChunkedArrayDatum : arrow.datum.Datum
   }
 }
 
+/// Fluent builder implementation template for [arrow.chunked_array_datum.ChunkedArrayDatum]
 class ChunkedArrayDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class ChunkedArrayDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 /// Fluent builder for [arrow.chunked_array_datum.ChunkedArrayDatum]
 final class ChunkedArrayDatumGidBuilder : ChunkedArrayDatumGidBuilderImpl!ChunkedArrayDatumGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ChunkedArrayDatum build()
   {
     return new ChunkedArrayDatum(cast(void*)createGObject(ChunkedArrayDatum._getGType), Yes.Take);

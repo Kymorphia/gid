@@ -51,8 +51,8 @@ class VPaned : gtk.paned.Paned
   }
 
   /**
-  Get builder for [gtk.vpaned.VPaned]
-  Returns: New builder object
+      Get builder for [gtk.vpaned.VPaned]
+      Returns: New builder object
   */
   static VPanedGidBuilder builder()
   {
@@ -73,6 +73,7 @@ class VPaned : gtk.paned.Paned
   }
 }
 
+/// Fluent builder implementation template for [gtk.vpaned.VPaned]
 class VPanedGidBuilderImpl(T) : gtk.paned.PanedGidBuilderImpl!T
 {
 
@@ -81,6 +82,10 @@ class VPanedGidBuilderImpl(T) : gtk.paned.PanedGidBuilderImpl!T
 /// Fluent builder for [gtk.vpaned.VPaned]
 final class VPanedGidBuilder : VPanedGidBuilderImpl!VPanedGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VPaned build()
   {
     return new VPaned(cast(void*)createGObject(VPaned._getGType), No.Take);

@@ -45,8 +45,8 @@ class ControlBinding : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.control_binding.ControlBinding]
-  Returns: New builder object
+      Get builder for [gst.control_binding.ControlBinding]
+      Returns: New builder object
   */
   static ControlBindingGidBuilder builder()
   {
@@ -163,6 +163,7 @@ class ControlBinding : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.control_binding.ControlBinding]
 class ControlBindingGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -182,6 +183,10 @@ class ControlBindingGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.control_binding.ControlBinding]
 final class ControlBindingGidBuilder : ControlBindingGidBuilderImpl!ControlBindingGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ControlBinding build()
   {
     return new ControlBinding(cast(void*)createGObject(ControlBinding._getGType), No.Take);

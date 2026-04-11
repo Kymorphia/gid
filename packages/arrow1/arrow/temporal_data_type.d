@@ -38,8 +38,8 @@ class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /**
-  Get builder for [arrow.temporal_data_type.TemporalDataType]
-  Returns: New builder object
+      Get builder for [arrow.temporal_data_type.TemporalDataType]
+      Returns: New builder object
   */
   static TemporalDataTypeGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.temporal_data_type.TemporalDataType]
 class TemporalDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class TemporalDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidth
 /// Fluent builder for [arrow.temporal_data_type.TemporalDataType]
 final class TemporalDataTypeGidBuilder : TemporalDataTypeGidBuilderImpl!TemporalDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TemporalDataType build()
   {
     return new TemporalDataType(cast(void*)createGObject(TemporalDataType._getGType), No.Take);

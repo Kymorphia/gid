@@ -38,8 +38,8 @@ class Statistics : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [parquet.statistics.Statistics]
-  Returns: New builder object
+      Get builder for [parquet.statistics.Statistics]
+      Returns: New builder object
   */
   static StatisticsGidBuilder builder()
   {
@@ -103,6 +103,7 @@ class Statistics : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [parquet.statistics.Statistics]
 class StatisticsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -116,6 +117,10 @@ class StatisticsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [parquet.statistics.Statistics]
 final class StatisticsGidBuilder : StatisticsGidBuilderImpl!StatisticsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Statistics build()
   {
     return new Statistics(cast(void*)createGObject(Statistics._getGType), No.Take);

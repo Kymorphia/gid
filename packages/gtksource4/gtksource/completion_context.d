@@ -44,8 +44,8 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-  Get builder for [gtksource.completion_context.CompletionContext]
-  Returns: New builder object
+      Get builder for [gtksource.completion_context.CompletionContext]
+      Returns: New builder object
   */
   static CompletionContextGidBuilder builder()
   {
@@ -188,6 +188,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion_context.CompletionContext]
 class CompletionContextGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
 {
 
@@ -228,6 +229,10 @@ class CompletionContextGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUn
 /// Fluent builder for [gtksource.completion_context.CompletionContext]
 final class CompletionContextGidBuilder : CompletionContextGidBuilderImpl!CompletionContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CompletionContext build()
   {
     return new CompletionContext(cast(void*)createGObject(CompletionContext._getGType), No.Take);

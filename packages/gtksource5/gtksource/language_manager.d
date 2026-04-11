@@ -50,8 +50,8 @@ class LanguageManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.language_manager.LanguageManager]
-  Returns: New builder object
+      Get builder for [gtksource.language_manager.LanguageManager]
+      Returns: New builder object
   */
   static LanguageManagerGidBuilder builder()
   {
@@ -270,6 +270,7 @@ class LanguageManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.language_manager.LanguageManager]
 class LanguageManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -277,6 +278,10 @@ class LanguageManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtksource.language_manager.LanguageManager]
 final class LanguageManagerGidBuilder : LanguageManagerGidBuilderImpl!LanguageManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LanguageManager build()
   {
     return new LanguageManager(cast(void*)createGObject(LanguageManager._getGType), Yes.Take);

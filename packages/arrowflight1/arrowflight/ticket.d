@@ -39,8 +39,8 @@ class Ticket : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.ticket.Ticket]
-  Returns: New builder object
+      Get builder for [arrowflight.ticket.Ticket]
+      Returns: New builder object
   */
   static TicketGidBuilder builder()
   {
@@ -85,6 +85,7 @@ class Ticket : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.ticket.Ticket]
 class TicketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -104,6 +105,10 @@ class TicketGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.ticket.Ticket]
 final class TicketGidBuilder : TicketGidBuilderImpl!TicketGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Ticket build()
   {
     return new Ticket(cast(void*)createGObject(Ticket._getGType), Yes.Take);

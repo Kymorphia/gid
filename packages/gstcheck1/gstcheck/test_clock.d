@@ -185,8 +185,8 @@ class TestClock : gst.clock.Clock
   }
 
   /**
-  Get builder for [gstcheck.test_clock.TestClock]
-  Returns: New builder object
+      Get builder for [gstcheck.test_clock.TestClock]
+      Returns: New builder object
   */
   static TestClockGidBuilder builder()
   {
@@ -506,6 +506,7 @@ class TestClock : gst.clock.Clock
   }
 }
 
+/// Fluent builder implementation template for [gstcheck.test_clock.TestClock]
 class TestClockGidBuilderImpl(T) : gst.clock.ClockGidBuilderImpl!T
 {
 
@@ -534,6 +535,10 @@ class TestClockGidBuilderImpl(T) : gst.clock.ClockGidBuilderImpl!T
 /// Fluent builder for [gstcheck.test_clock.TestClock]
 final class TestClockGidBuilder : TestClockGidBuilderImpl!TestClockGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TestClock build()
   {
     return new TestClock(cast(void*)createGObject(TestClock._getGType), Yes.Take);

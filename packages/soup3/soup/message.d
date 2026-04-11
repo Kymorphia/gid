@@ -76,8 +76,8 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [soup.message.Message]
-  Returns: New builder object
+      Get builder for [soup.message.Message]
+      Returns: New builder object
   */
   static MessageGidBuilder builder()
   {
@@ -1815,6 +1815,7 @@ class Message : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [soup.message.Message]
 class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -1917,6 +1918,10 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [soup.message.Message]
 final class MessageGidBuilder : MessageGidBuilderImpl!MessageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Message build()
   {
     return new Message(cast(void*)createGObject(Message._getGType), Yes.Take);

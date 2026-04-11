@@ -40,8 +40,8 @@ class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
   }
 
   /**
-  Get builder for [arrow.record_batch_stream_reader.RecordBatchStreamReader]
-  Returns: New builder object
+      Get builder for [arrow.record_batch_stream_reader.RecordBatchStreamReader]
+      Returns: New builder object
   */
   static RecordBatchStreamReaderGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
   }
 }
 
+/// Fluent builder implementation template for [arrow.record_batch_stream_reader.RecordBatchStreamReader]
 class RecordBatchStreamReaderGidBuilderImpl(T) : arrow.record_batch_reader.RecordBatchReaderGidBuilderImpl!T
 {
 }
@@ -67,6 +68,10 @@ class RecordBatchStreamReaderGidBuilderImpl(T) : arrow.record_batch_reader.Recor
 /// Fluent builder for [arrow.record_batch_stream_reader.RecordBatchStreamReader]
 final class RecordBatchStreamReaderGidBuilder : RecordBatchStreamReaderGidBuilderImpl!RecordBatchStreamReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecordBatchStreamReader build()
   {
     return new RecordBatchStreamReader(cast(void*)createGObject(RecordBatchStreamReader._getGType), Yes.Take);

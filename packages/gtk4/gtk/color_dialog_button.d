@@ -67,8 +67,8 @@ class ColorDialogButton : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.color_dialog_button.ColorDialogButton]
-  Returns: New builder object
+      Get builder for [gtk.color_dialog_button.ColorDialogButton]
+      Returns: New builder object
   */
   static ColorDialogButtonGidBuilder builder()
   {
@@ -242,6 +242,7 @@ class ColorDialogButton : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.color_dialog_button.ColorDialogButton]
 class ColorDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -280,6 +281,10 @@ class ColorDialogButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.color_dialog_button.ColorDialogButton]
 final class ColorDialogButtonGidBuilder : ColorDialogButtonGidBuilderImpl!ColorDialogButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColorDialogButton build()
   {
     return new ColorDialogButton(cast(void*)createGObject(ColorDialogButton._getGType), No.Take);

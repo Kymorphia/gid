@@ -42,8 +42,8 @@ class ScaleAccessible : gtk.range_accessible.RangeAccessible
   }
 
   /**
-  Get builder for [gtk.scale_accessible.ScaleAccessible]
-  Returns: New builder object
+      Get builder for [gtk.scale_accessible.ScaleAccessible]
+      Returns: New builder object
   */
   static ScaleAccessibleGidBuilder builder()
   {
@@ -51,6 +51,7 @@ class ScaleAccessible : gtk.range_accessible.RangeAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.scale_accessible.ScaleAccessible]
 class ScaleAccessibleGidBuilderImpl(T) : gtk.range_accessible.RangeAccessibleGidBuilderImpl!T
 {
 
@@ -59,6 +60,10 @@ class ScaleAccessibleGidBuilderImpl(T) : gtk.range_accessible.RangeAccessibleGid
 /// Fluent builder for [gtk.scale_accessible.ScaleAccessible]
 final class ScaleAccessibleGidBuilder : ScaleAccessibleGidBuilderImpl!ScaleAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ScaleAccessible build()
   {
     return new ScaleAccessible(cast(void*)createGObject(ScaleAccessible._getGType), No.Take);

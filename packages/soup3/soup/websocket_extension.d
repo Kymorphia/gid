@@ -44,8 +44,8 @@ class WebsocketExtension : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [soup.websocket_extension.WebsocketExtension]
-  Returns: New builder object
+      Get builder for [soup.websocket_extension.WebsocketExtension]
+      Returns: New builder object
   */
   static WebsocketExtensionGidBuilder builder()
   {
@@ -135,6 +135,7 @@ class WebsocketExtension : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [soup.websocket_extension.WebsocketExtension]
 class WebsocketExtensionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -142,6 +143,10 @@ class WebsocketExtensionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [soup.websocket_extension.WebsocketExtension]
 final class WebsocketExtensionGidBuilder : WebsocketExtensionGidBuilderImpl!WebsocketExtensionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebsocketExtension build()
   {
     return new WebsocketExtension(cast(void*)createGObject(WebsocketExtension._getGType), No.Take);

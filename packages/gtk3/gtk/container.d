@@ -252,8 +252,8 @@ class Container : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.container.Container]
-  Returns: New builder object
+      Get builder for [gtk.container.Container]
+      Returns: New builder object
   */
   static ContainerGidBuilder builder()
   {
@@ -952,6 +952,7 @@ class Container : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.container.Container]
 class ContainerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -978,6 +979,10 @@ class ContainerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.container.Container]
 final class ContainerGidBuilder : ContainerGidBuilderImpl!ContainerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Container build()
   {
     return new Container(cast(void*)createGObject(Container._getGType), No.Take);

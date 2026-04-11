@@ -64,8 +64,8 @@ class StatusPage : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.status_page.StatusPage]
-  Returns: New builder object
+      Get builder for [adw.status_page.StatusPage]
+      Returns: New builder object
   */
   static StatusPageGidBuilder builder()
   {
@@ -317,6 +317,7 @@ class StatusPage : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.status_page.StatusPage]
 class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -386,6 +387,10 @@ class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.status_page.StatusPage]
 final class StatusPageGidBuilder : StatusPageGidBuilderImpl!StatusPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StatusPage build()
   {
     return new StatusPage(cast(void*)createGObject(StatusPage._getGType), No.Take);

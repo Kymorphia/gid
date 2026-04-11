@@ -124,8 +124,8 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   }
 
   /**
-  Get builder for [gtk.tool_palette.ToolPalette]
-  Returns: New builder object
+      Get builder for [gtk.tool_palette.ToolPalette]
+      Returns: New builder object
   */
   static ToolPaletteGidBuilder builder()
   {
@@ -503,6 +503,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   }
 }
 
+/// Fluent builder implementation template for [gtk.tool_palette.ToolPalette]
 class ToolPaletteGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -551,6 +552,10 @@ class ToolPaletteGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gt
 /// Fluent builder for [gtk.tool_palette.ToolPalette]
 final class ToolPaletteGidBuilder : ToolPaletteGidBuilderImpl!ToolPaletteGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToolPalette build()
   {
     return new ToolPalette(cast(void*)createGObject(ToolPalette._getGType), No.Take);

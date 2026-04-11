@@ -88,8 +88,8 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-  Get builder for [adw.split_button.SplitButton]
-  Returns: New builder object
+      Get builder for [adw.split_button.SplitButton]
+      Returns: New builder object
   */
   static SplitButtonGidBuilder builder()
   {
@@ -703,6 +703,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 }
 
+/// Fluent builder implementation template for [adw.split_button.SplitButton]
 class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
 {
 
@@ -850,6 +851,10 @@ class SplitButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
 /// Fluent builder for [adw.split_button.SplitButton]
 final class SplitButtonGidBuilder : SplitButtonGidBuilderImpl!SplitButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SplitButton build()
   {
     return new SplitButton(cast(void*)createGObject(SplitButton._getGType), No.Take);

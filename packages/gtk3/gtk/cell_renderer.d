@@ -84,8 +84,8 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-  Get builder for [gtk.cell_renderer.CellRenderer]
-  Returns: New builder object
+      Get builder for [gtk.cell_renderer.CellRenderer]
+      Returns: New builder object
   */
   static CellRendererGidBuilder builder()
   {
@@ -763,6 +763,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_renderer.CellRenderer]
 class CellRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
 {
 
@@ -872,6 +873,10 @@ class CellRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnowned
 /// Fluent builder for [gtk.cell_renderer.CellRenderer]
 final class CellRendererGidBuilder : CellRendererGidBuilderImpl!CellRendererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellRenderer build()
   {
     return new CellRenderer(cast(void*)createGObject(CellRenderer._getGType), No.Take);

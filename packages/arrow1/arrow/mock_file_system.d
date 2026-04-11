@@ -38,8 +38,8 @@ class MockFileSystem : arrow.file_system.FileSystem
   }
 
   /**
-  Get builder for [arrow.mock_file_system.MockFileSystem]
-  Returns: New builder object
+      Get builder for [arrow.mock_file_system.MockFileSystem]
+      Returns: New builder object
   */
   static MockFileSystemGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class MockFileSystem : arrow.file_system.FileSystem
   }
 }
 
+/// Fluent builder implementation template for [arrow.mock_file_system.MockFileSystem]
 class MockFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class MockFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderIm
 /// Fluent builder for [arrow.mock_file_system.MockFileSystem]
 final class MockFileSystemGidBuilder : MockFileSystemGidBuilderImpl!MockFileSystemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MockFileSystem build()
   {
     return new MockFileSystem(cast(void*)createGObject(MockFileSystem._getGType), No.Take);

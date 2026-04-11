@@ -42,8 +42,8 @@ class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
   }
 
   /**
-  Get builder for [gtk.range_accessible.RangeAccessible]
-  Returns: New builder object
+      Get builder for [gtk.range_accessible.RangeAccessible]
+      Returns: New builder object
   */
   static RangeAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
   mixin ValueT!();
 }
 
+/// Fluent builder implementation template for [gtk.range_accessible.RangeAccessible]
 class RangeAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class RangeAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleG
 /// Fluent builder for [gtk.range_accessible.RangeAccessible]
 final class RangeAccessibleGidBuilder : RangeAccessibleGidBuilderImpl!RangeAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RangeAccessible build()
   {
     return new RangeAccessible(cast(void*)createGObject(RangeAccessible._getGType), No.Take);

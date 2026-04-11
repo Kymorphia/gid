@@ -44,8 +44,8 @@ class VButtonBox : gtk.button_box.ButtonBox
   }
 
   /**
-  Get builder for [gtk.vbutton_box.VButtonBox]
-  Returns: New builder object
+      Get builder for [gtk.vbutton_box.VButtonBox]
+      Returns: New builder object
   */
   static VButtonBoxGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class VButtonBox : gtk.button_box.ButtonBox
   }
 }
 
+/// Fluent builder implementation template for [gtk.vbutton_box.VButtonBox]
 class VButtonBoxGidBuilderImpl(T) : gtk.button_box.ButtonBoxGidBuilderImpl!T
 {
 
@@ -74,6 +75,10 @@ class VButtonBoxGidBuilderImpl(T) : gtk.button_box.ButtonBoxGidBuilderImpl!T
 /// Fluent builder for [gtk.vbutton_box.VButtonBox]
 final class VButtonBoxGidBuilder : VButtonBoxGidBuilderImpl!VButtonBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VButtonBox build()
   {
     return new VButtonBox(cast(void*)createGObject(VButtonBox._getGType), No.Take);

@@ -45,8 +45,8 @@ class MultipartEncrypted : gmime.multipart.Multipart
   }
 
   /**
-  Get builder for [gmime.multipart_encrypted.MultipartEncrypted]
-  Returns: New builder object
+      Get builder for [gmime.multipart_encrypted.MultipartEncrypted]
+      Returns: New builder object
   */
   static MultipartEncryptedGidBuilder builder()
   {
@@ -133,6 +133,7 @@ class MultipartEncrypted : gmime.multipart.Multipart
   }
 }
 
+/// Fluent builder implementation template for [gmime.multipart_encrypted.MultipartEncrypted]
 class MultipartEncryptedGidBuilderImpl(T) : gmime.multipart.MultipartGidBuilderImpl!T
 {
 }
@@ -140,6 +141,10 @@ class MultipartEncryptedGidBuilderImpl(T) : gmime.multipart.MultipartGidBuilderI
 /// Fluent builder for [gmime.multipart_encrypted.MultipartEncrypted]
 final class MultipartEncryptedGidBuilder : MultipartEncryptedGidBuilderImpl!MultipartEncryptedGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MultipartEncrypted build()
   {
     return new MultipartEncrypted(cast(void*)createGObject(MultipartEncrypted._getGType), Yes.Take);

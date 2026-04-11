@@ -103,6 +103,7 @@ template StreamableContentT()
   }
 }
 
+/// Fluent builder implementation template for [atk.streamable_content.StreamableContent]
 template StreamableContentGidBuilderT()
 {
 }

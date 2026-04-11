@@ -208,8 +208,8 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   }
 
   /**
-  Get builder for [gtk.file_chooser_native.FileChooserNative]
-  Returns: New builder object
+      Get builder for [gtk.file_chooser_native.FileChooserNative]
+      Returns: New builder object
   */
   static FileChooserNativeGidBuilder builder()
   {
@@ -344,6 +344,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   }
 }
 
+/// Fluent builder implementation template for [gtk.file_chooser_native.FileChooserNative]
 class FileChooserNativeGidBuilderImpl(T) : gtk.native_dialog.NativeDialogGidBuilderImpl!T, gtk.file_chooser.FileChooserGidBuilderImpl!T
 {
 
@@ -377,6 +378,10 @@ class FileChooserNativeGidBuilderImpl(T) : gtk.native_dialog.NativeDialogGidBuil
 /// Fluent builder for [gtk.file_chooser_native.FileChooserNative]
 final class FileChooserNativeGidBuilder : FileChooserNativeGidBuilderImpl!FileChooserNativeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileChooserNative build()
   {
     return new FileChooserNative(cast(void*)createGObject(FileChooserNative._getGType), Yes.Take);

@@ -49,8 +49,8 @@ class PointerLockPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
   }
 
   /**
-  Get builder for [webkit.pointer_lock_permission_request.PointerLockPermissionRequest]
-  Returns: New builder object
+      Get builder for [webkit.pointer_lock_permission_request.PointerLockPermissionRequest]
+      Returns: New builder object
   */
   static PointerLockPermissionRequestGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class PointerLockPermissionRequest : gobject.object.ObjectWrap, webkit.permissio
   mixin PermissionRequestT!();
 }
 
+/// Fluent builder implementation template for [webkit.pointer_lock_permission_request.PointerLockPermissionRequest]
 class PointerLockPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
 {
 
@@ -69,6 +70,10 @@ class PointerLockPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapG
 /// Fluent builder for [webkit.pointer_lock_permission_request.PointerLockPermissionRequest]
 final class PointerLockPermissionRequestGidBuilder : PointerLockPermissionRequestGidBuilderImpl!PointerLockPermissionRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PointerLockPermissionRequest build()
   {
     return new PointerLockPermissionRequest(cast(void*)createGObject(PointerLockPermissionRequest._getGType), No.Take);

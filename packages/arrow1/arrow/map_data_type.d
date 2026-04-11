@@ -40,8 +40,8 @@ class MapDataType : arrow.list_data_type.ListDataType
   }
 
   /**
-  Get builder for [arrow.map_data_type.MapDataType]
-  Returns: New builder object
+      Get builder for [arrow.map_data_type.MapDataType]
+      Returns: New builder object
   */
   static MapDataTypeGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class MapDataType : arrow.list_data_type.ListDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.map_data_type.MapDataType]
 class MapDataTypeGidBuilderImpl(T) : arrow.list_data_type.ListDataTypeGidBuilderImpl!T
 {
 }
@@ -82,6 +83,10 @@ class MapDataTypeGidBuilderImpl(T) : arrow.list_data_type.ListDataTypeGidBuilder
 /// Fluent builder for [arrow.map_data_type.MapDataType]
 final class MapDataTypeGidBuilder : MapDataTypeGidBuilderImpl!MapDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MapDataType build()
   {
     return new MapDataType(cast(void*)createGObject(MapDataType._getGType), Yes.Take);

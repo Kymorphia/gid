@@ -44,8 +44,8 @@ class FilterInputStream : gio.input_stream.InputStream
   }
 
   /**
-  Get builder for [gio.filter_input_stream.FilterInputStream]
-  Returns: New builder object
+      Get builder for [gio.filter_input_stream.FilterInputStream]
+      Returns: New builder object
   */
   static FilterInputStreamGidBuilder builder()
   {
@@ -116,6 +116,7 @@ class FilterInputStream : gio.input_stream.InputStream
   }
 }
 
+/// Fluent builder implementation template for [gio.filter_input_stream.FilterInputStream]
 class FilterInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!T
 {
 
@@ -145,6 +146,10 @@ class FilterInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilde
 /// Fluent builder for [gio.filter_input_stream.FilterInputStream]
 final class FilterInputStreamGidBuilder : FilterInputStreamGidBuilderImpl!FilterInputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterInputStream build()
   {
     return new FilterInputStream(cast(void*)createGObject(FilterInputStream._getGType), No.Take);

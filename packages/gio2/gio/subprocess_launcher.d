@@ -49,8 +49,8 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.subprocess_launcher.SubprocessLauncher]
-  Returns: New builder object
+      Get builder for [gio.subprocess_launcher.SubprocessLauncher]
+      Returns: New builder object
   */
   static SubprocessLauncherGidBuilder builder()
   {
@@ -422,6 +422,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.subprocess_launcher.SubprocessLauncher]
 class SubprocessLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -440,6 +441,10 @@ class SubprocessLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [gio.subprocess_launcher.SubprocessLauncher]
 final class SubprocessLauncherGidBuilder : SubprocessLauncherGidBuilderImpl!SubprocessLauncherGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SubprocessLauncher build()
   {
     return new SubprocessLauncher(cast(void*)createGObject(SubprocessLauncher._getGType), Yes.Take);

@@ -112,6 +112,7 @@ template SectionModelT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.section_model.SectionModel]
 template SectionModelGidBuilderT()
 {
 }

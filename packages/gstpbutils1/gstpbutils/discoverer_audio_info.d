@@ -40,8 +40,8 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /**
-  Get builder for [gstpbutils.discoverer_audio_info.DiscovererAudioInfo]
-  Returns: New builder object
+      Get builder for [gstpbutils.discoverer_audio_info.DiscovererAudioInfo]
+      Returns: New builder object
   */
   static DiscovererAudioInfoGidBuilder builder()
   {
@@ -106,6 +106,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.discoverer_audio_info.DiscovererAudioInfo]
 class DiscovererAudioInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.DiscovererStreamInfoGidBuilderImpl!T
 {
 }
@@ -113,6 +114,10 @@ class DiscovererAudioInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.D
 /// Fluent builder for [gstpbutils.discoverer_audio_info.DiscovererAudioInfo]
 final class DiscovererAudioInfoGidBuilder : DiscovererAudioInfoGidBuilderImpl!DiscovererAudioInfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DiscovererAudioInfo build()
   {
     return new DiscovererAudioInfo(cast(void*)createGObject(DiscovererAudioInfo._getGType), No.Take);

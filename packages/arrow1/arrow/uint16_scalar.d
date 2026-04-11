@@ -38,8 +38,8 @@ class UInt16Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.uint16_scalar.UInt16Scalar]
-  Returns: New builder object
+      Get builder for [arrow.uint16_scalar.UInt16Scalar]
+      Returns: New builder object
   */
   static UInt16ScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class UInt16Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.uint16_scalar.UInt16Scalar]
 class UInt16ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class UInt16ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.uint16_scalar.UInt16Scalar]
 final class UInt16ScalarGidBuilder : UInt16ScalarGidBuilderImpl!UInt16ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UInt16Scalar build()
   {
     return new UInt16Scalar(cast(void*)createGObject(UInt16Scalar._getGType), Yes.Take);

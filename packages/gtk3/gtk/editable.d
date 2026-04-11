@@ -277,6 +277,7 @@ interface Editable
   gulong connectInsertText(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.editable.Editable]
 interface EditableGidBuilderImpl(T)
 {
 }

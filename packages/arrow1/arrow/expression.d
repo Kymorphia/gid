@@ -38,8 +38,8 @@ class Expression : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.expression.Expression]
-  Returns: New builder object
+      Get builder for [arrow.expression.Expression]
+      Returns: New builder object
   */
   static ExpressionGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class Expression : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.expression.Expression]
 class ExpressionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -71,6 +72,10 @@ class ExpressionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.expression.Expression]
 final class ExpressionGidBuilder : ExpressionGidBuilderImpl!ExpressionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Expression build()
   {
     return new Expression(cast(void*)createGObject(Expression._getGType), No.Take);

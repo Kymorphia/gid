@@ -64,8 +64,8 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   }
 
   /**
-  Get builder for [gtk.switch_.Switch]
-  Returns: New builder object
+      Get builder for [gtk.switch_.Switch]
+      Returns: New builder object
   */
   static SwitchGidBuilder builder()
   {
@@ -279,6 +279,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   }
 }
 
+/// Fluent builder implementation template for [gtk.switch_.Switch]
 class SwitchGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T
 {
 
@@ -312,6 +313,10 @@ class SwitchGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
 /// Fluent builder for [gtk.switch_.Switch]
 final class SwitchGidBuilder : SwitchGidBuilderImpl!SwitchGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Switch build()
   {
     return new Switch(cast(void*)createGObject(Switch._getGType), No.Take);

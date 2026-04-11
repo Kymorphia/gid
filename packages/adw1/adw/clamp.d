@@ -75,8 +75,8 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [adw.clamp.Clamp]
-  Returns: New builder object
+      Get builder for [adw.clamp.Clamp]
+      Returns: New builder object
   */
   static ClampGidBuilder builder()
   {
@@ -314,6 +314,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [adw.clamp.Clamp]
 class ClampGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -384,6 +385,10 @@ class ClampGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable
 /// Fluent builder for [adw.clamp.Clamp]
 final class ClampGidBuilder : ClampGidBuilderImpl!ClampGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Clamp build()
   {
     return new Clamp(cast(void*)createGObject(Clamp._getGType), No.Take);

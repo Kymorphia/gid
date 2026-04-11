@@ -84,6 +84,7 @@ template StreamVolumeT()
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.stream_volume.StreamVolume]
 template StreamVolumeGidBuilderT()
 {
 

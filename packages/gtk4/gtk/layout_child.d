@@ -50,8 +50,8 @@ class LayoutChild : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.layout_child.LayoutChild]
-  Returns: New builder object
+      Get builder for [gtk.layout_child.LayoutChild]
+      Returns: New builder object
   */
   static LayoutChildGidBuilder builder()
   {
@@ -102,6 +102,7 @@ class LayoutChild : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.layout_child.LayoutChild]
 class LayoutChildGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -131,6 +132,10 @@ class LayoutChildGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.layout_child.LayoutChild]
 final class LayoutChildGidBuilder : LayoutChildGidBuilderImpl!LayoutChildGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LayoutChild build()
   {
     return new LayoutChild(cast(void*)createGObject(LayoutChild._getGType), No.Take);

@@ -95,8 +95,8 @@ class WindowControls : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.window_controls.WindowControls]
-  Returns: New builder object
+      Get builder for [gtk.window_controls.WindowControls]
+      Returns: New builder object
   */
   static WindowControlsGidBuilder builder()
   {
@@ -249,6 +249,7 @@ class WindowControls : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.window_controls.WindowControls]
 class WindowControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -284,6 +285,10 @@ class WindowControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.window_controls.WindowControls]
 final class WindowControlsGidBuilder : WindowControlsGidBuilderImpl!WindowControlsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WindowControls build()
   {
     return new WindowControls(cast(void*)createGObject(WindowControls._getGType), No.Take);

@@ -100,8 +100,8 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 
   /**
-  Get builder for [soup.logger.Logger]
-  Returns: New builder object
+      Get builder for [soup.logger.Logger]
+      Returns: New builder object
   */
   static LoggerGidBuilder builder()
   {
@@ -273,6 +273,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 }
 
+/// Fluent builder implementation template for [soup.logger.Logger]
 class LoggerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
 {
 
@@ -306,6 +307,10 @@ class LoggerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.
 /// Fluent builder for [soup.logger.Logger]
 final class LoggerGidBuilder : LoggerGidBuilderImpl!LoggerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Logger build()
   {
     return new Logger(cast(void*)createGObject(Logger._getGType), Yes.Take);

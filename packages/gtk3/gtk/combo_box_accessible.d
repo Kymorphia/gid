@@ -45,8 +45,8 @@ class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.act
   }
 
   /**
-  Get builder for [gtk.combo_box_accessible.ComboBoxAccessible]
-  Returns: New builder object
+      Get builder for [gtk.combo_box_accessible.ComboBoxAccessible]
+      Returns: New builder object
   */
   static ComboBoxAccessibleGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.act
   alias setDescription = atk.object.ObjectWrap.setDescription;
 }
 
+/// Fluent builder implementation template for [gtk.combo_box_accessible.ComboBoxAccessible]
 class ComboBoxAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
 {
 
@@ -70,6 +71,10 @@ class ComboBoxAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAc
 /// Fluent builder for [gtk.combo_box_accessible.ComboBoxAccessible]
 final class ComboBoxAccessibleGidBuilder : ComboBoxAccessibleGidBuilderImpl!ComboBoxAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ComboBoxAccessible build()
   {
     return new ComboBoxAccessible(cast(void*)createGObject(ComboBoxAccessible._getGType), No.Take);

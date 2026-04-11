@@ -45,8 +45,8 @@ class Util : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [atk.util.Util]
-  Returns: New builder object
+      Get builder for [atk.util.Util]
+      Returns: New builder object
   */
   static UtilGidBuilder builder()
   {
@@ -54,6 +54,7 @@ class Util : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [atk.util.Util]
 class UtilGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -61,6 +62,10 @@ class UtilGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [atk.util.Util]
 final class UtilGidBuilder : UtilGidBuilderImpl!UtilGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Util build()
   {
     return new Util(cast(void*)createGObject(Util._getGType), No.Take);

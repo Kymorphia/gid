@@ -38,8 +38,8 @@ class TimestampParser : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.timestamp_parser.TimestampParser]
-  Returns: New builder object
+      Get builder for [arrow.timestamp_parser.TimestampParser]
+      Returns: New builder object
   */
   static TimestampParserGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class TimestampParser : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.timestamp_parser.TimestampParser]
 class TimestampParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -69,6 +70,10 @@ class TimestampParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [arrow.timestamp_parser.TimestampParser]
 final class TimestampParserGidBuilder : TimestampParserGidBuilderImpl!TimestampParserGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TimestampParser build()
   {
     return new TimestampParser(cast(void*)createGObject(TimestampParser._getGType), No.Take);

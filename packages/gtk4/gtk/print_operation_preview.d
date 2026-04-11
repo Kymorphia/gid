@@ -112,6 +112,7 @@ interface PrintOperationPreview
   gulong connectReady(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.print_operation_preview.PrintOperationPreview]
 interface PrintOperationPreviewGidBuilderImpl(T)
 {
 }

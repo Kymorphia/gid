@@ -40,8 +40,8 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.set_lookup_options.SetLookupOptions]
-  Returns: New builder object
+      Get builder for [arrow.set_lookup_options.SetLookupOptions]
+      Returns: New builder object
   */
   static SetLookupOptionsGidBuilder builder()
   {
@@ -95,6 +95,7 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.set_lookup_options.SetLookupOptions]
 class SetLookupOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -124,6 +125,10 @@ class SetLookupOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptions
 /// Fluent builder for [arrow.set_lookup_options.SetLookupOptions]
 final class SetLookupOptionsGidBuilder : SetLookupOptionsGidBuilderImpl!SetLookupOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SetLookupOptions build()
   {
     return new SetLookupOptions(cast(void*)createGObject(SetLookupOptions._getGType), Yes.Take);

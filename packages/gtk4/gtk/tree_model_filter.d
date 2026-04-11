@@ -118,8 +118,8 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
   }
 
   /**
-  Get builder for [gtk.tree_model_filter.TreeModelFilter]
-  Returns: New builder object
+      Get builder for [gtk.tree_model_filter.TreeModelFilter]
+      Returns: New builder object
   */
   static TreeModelFilterGidBuilder builder()
   {
@@ -361,6 +361,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_model_filter.TreeModelFilter]
 class TreeModelFilterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.tree_drag_source.TreeDragSourceGidBuilderImpl!T, gtk.tree_model.TreeModelGidBuilderImpl!T
 {
 
@@ -383,6 +384,10 @@ class TreeModelFilterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.tree_model_filter.TreeModelFilter]
 final class TreeModelFilterGidBuilder : TreeModelFilterGidBuilderImpl!TreeModelFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeModelFilter build()
   {
     return new TreeModelFilter(cast(void*)createGObject(TreeModelFilter._getGType), No.Take);

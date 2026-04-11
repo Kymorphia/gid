@@ -39,8 +39,8 @@ class LargeListScalar : arrow.base_list_scalar.BaseListScalar
   }
 
   /**
-  Get builder for [arrow.large_list_scalar.LargeListScalar]
-  Returns: New builder object
+      Get builder for [arrow.large_list_scalar.LargeListScalar]
+      Returns: New builder object
   */
   static LargeListScalarGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class LargeListScalar : arrow.base_list_scalar.BaseListScalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.large_list_scalar.LargeListScalar]
 class LargeListScalarGidBuilderImpl(T) : arrow.base_list_scalar.BaseListScalarGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class LargeListScalarGidBuilderImpl(T) : arrow.base_list_scalar.BaseListScalarGi
 /// Fluent builder for [arrow.large_list_scalar.LargeListScalar]
 final class LargeListScalarGidBuilder : LargeListScalarGidBuilderImpl!LargeListScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LargeListScalar build()
   {
     return new LargeListScalar(cast(void*)createGObject(LargeListScalar._getGType), Yes.Take);

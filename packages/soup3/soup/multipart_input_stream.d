@@ -60,8 +60,8 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   }
 
   /**
-  Get builder for [soup.multipart_input_stream.MultipartInputStream]
-  Returns: New builder object
+      Get builder for [soup.multipart_input_stream.MultipartInputStream]
+      Returns: New builder object
   */
   static MultipartInputStreamGidBuilder builder()
   {
@@ -197,6 +197,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   }
 }
 
+/// Fluent builder implementation template for [soup.multipart_input_stream.MultipartInputStream]
 class MultipartInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInputStreamGidBuilderImpl!T, gio.pollable_input_stream.PollableInputStreamGidBuilderImpl!T
 {
 
@@ -217,6 +218,10 @@ class MultipartInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInpu
 /// Fluent builder for [soup.multipart_input_stream.MultipartInputStream]
 final class MultipartInputStreamGidBuilder : MultipartInputStreamGidBuilderImpl!MultipartInputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MultipartInputStream build()
   {
     return new MultipartInputStream(cast(void*)createGObject(MultipartInputStream._getGType), Yes.Take);

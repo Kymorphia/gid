@@ -45,8 +45,8 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /**
-  Get builder for [vte.pty.Pty]
-  Returns: New builder object
+      Get builder for [vte.pty.Pty]
+      Returns: New builder object
   */
   static PtyGidBuilder builder()
   {
@@ -387,6 +387,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   }
 }
 
+/// Fluent builder implementation template for [vte.pty.Pty]
 class PtyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -418,6 +419,10 @@ class PtyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.init
 /// Fluent builder for [vte.pty.Pty]
 final class PtyGidBuilder : PtyGidBuilderImpl!PtyGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Pty build()
   {
     return new Pty(cast(void*)createGObject(Pty._getGType), No.Take);

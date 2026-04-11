@@ -144,8 +144,8 @@ class AudioDecoder : gst.element.Element
   }
 
   /**
-  Get builder for [gstaudio.audio_decoder.AudioDecoder]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_decoder.AudioDecoder]
+      Returns: New builder object
   */
   static AudioDecoderGidBuilder builder()
   {
@@ -665,6 +665,7 @@ class AudioDecoder : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_decoder.AudioDecoder]
 class AudioDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
@@ -702,6 +703,10 @@ class AudioDecoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstaudio.audio_decoder.AudioDecoder]
 final class AudioDecoderGidBuilder : AudioDecoderGidBuilderImpl!AudioDecoderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioDecoder build()
   {
     return new AudioDecoder(cast(void*)createGObject(AudioDecoder._getGType), No.Take);

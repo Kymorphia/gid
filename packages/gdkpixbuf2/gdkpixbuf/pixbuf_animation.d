@@ -60,8 +60,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdkpixbuf.pixbuf_animation.PixbufAnimation]
-  Returns: New builder object
+      Get builder for [gdkpixbuf.pixbuf_animation.PixbufAnimation]
+      Returns: New builder object
   */
   static PixbufAnimationGidBuilder builder()
   {
@@ -308,6 +308,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdkpixbuf.pixbuf_animation.PixbufAnimation]
 class PixbufAnimationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -315,6 +316,10 @@ class PixbufAnimationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gdkpixbuf.pixbuf_animation.PixbufAnimation]
 final class PixbufAnimationGidBuilder : PixbufAnimationGidBuilderImpl!PixbufAnimationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PixbufAnimation build()
   {
     return new PixbufAnimation(cast(void*)createGObject(PixbufAnimation._getGType), No.Take);

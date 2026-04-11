@@ -111,8 +111,8 @@ class MenuButton : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.menu_button.MenuButton]
-  Returns: New builder object
+      Get builder for [gtk.menu_button.MenuButton]
+      Returns: New builder object
   */
   static MenuButtonGidBuilder builder()
   {
@@ -805,6 +805,7 @@ class MenuButton : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.menu_button.MenuButton]
 class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -952,6 +953,10 @@ class MenuButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.menu_button.MenuButton]
 final class MenuButtonGidBuilder : MenuButtonGidBuilderImpl!MenuButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuButton build()
   {
     return new MenuButton(cast(void*)createGObject(MenuButton._getGType), No.Take);

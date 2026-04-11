@@ -145,6 +145,7 @@ interface Icon
   string toString_();
 }
 
+/// Fluent builder implementation template for [gio.icon.Icon]
 interface IconGidBuilderImpl(T)
 {
 }

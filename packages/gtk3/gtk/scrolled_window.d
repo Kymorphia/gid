@@ -124,8 +124,8 @@ class ScrolledWindow : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.scrolled_window.ScrolledWindow]
-  Returns: New builder object
+      Get builder for [gtk.scrolled_window.ScrolledWindow]
+      Returns: New builder object
   */
   static ScrolledWindowGidBuilder builder()
   {
@@ -1088,6 +1088,7 @@ class ScrolledWindow : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.scrolled_window.ScrolledWindow]
 class ScrolledWindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -1250,6 +1251,10 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.scrolled_window.ScrolledWindow]
 final class ScrolledWindowGidBuilder : ScrolledWindowGidBuilderImpl!ScrolledWindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ScrolledWindow build()
   {
     return new ScrolledWindow(cast(void*)createGObject(ScrolledWindow._getGType), No.Take);

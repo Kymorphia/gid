@@ -122,6 +122,7 @@ interface CellEditable
   gulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.cell_editable.CellEditable]
 interface CellEditableGidBuilderImpl(T)
 {
 

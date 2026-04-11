@@ -68,8 +68,8 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-  Get builder for [gtk.viewport.Viewport]
-  Returns: New builder object
+      Get builder for [gtk.viewport.Viewport]
+      Returns: New builder object
   */
   static ViewportGidBuilder builder()
   {
@@ -206,6 +206,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 }
 
+/// Fluent builder implementation template for [gtk.viewport.Viewport]
 class ViewportGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -241,6 +242,10 @@ class ViewportGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
 /// Fluent builder for [gtk.viewport.Viewport]
 final class ViewportGidBuilder : ViewportGidBuilderImpl!ViewportGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Viewport build()
   {
     return new Viewport(cast(void*)createGObject(Viewport._getGType), No.Take);

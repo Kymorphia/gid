@@ -530,6 +530,7 @@ interface FileChooser
   void setSelectMultiple(bool selectMultiple);
 }
 
+/// Fluent builder implementation template for [gtk.file_chooser.FileChooser]
 interface FileChooserGidBuilderImpl(T)
 {
 

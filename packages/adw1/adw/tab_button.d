@@ -78,8 +78,8 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-  Get builder for [adw.tab_button.TabButton]
-  Returns: New builder object
+      Get builder for [adw.tab_button.TabButton]
+      Returns: New builder object
   */
   static TabButtonGidBuilder builder()
   {
@@ -219,6 +219,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 }
 
+/// Fluent builder implementation template for [adw.tab_button.TabButton]
 class TabButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
 {
 
@@ -239,6 +240,10 @@ class TabButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.action
 /// Fluent builder for [adw.tab_button.TabButton]
 final class TabButtonGidBuilder : TabButtonGidBuilderImpl!TabButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TabButton build()
   {
     return new TabButton(cast(void*)createGObject(TabButton._getGType), No.Take);

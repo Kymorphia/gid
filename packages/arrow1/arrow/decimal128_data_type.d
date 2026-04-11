@@ -39,8 +39,8 @@ class Decimal128DataType : arrow.decimal_data_type.DecimalDataType
   }
 
   /**
-  Get builder for [arrow.decimal128_data_type.Decimal128DataType]
-  Returns: New builder object
+      Get builder for [arrow.decimal128_data_type.Decimal128DataType]
+      Returns: New builder object
   */
   static Decimal128DataTypeGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class Decimal128DataType : arrow.decimal_data_type.DecimalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal128_data_type.Decimal128DataType]
 class Decimal128DataTypeGidBuilderImpl(T) : arrow.decimal_data_type.DecimalDataTypeGidBuilderImpl!T
 {
 }
@@ -74,6 +75,10 @@ class Decimal128DataTypeGidBuilderImpl(T) : arrow.decimal_data_type.DecimalDataT
 /// Fluent builder for [arrow.decimal128_data_type.Decimal128DataType]
 final class Decimal128DataTypeGidBuilder : Decimal128DataTypeGidBuilderImpl!Decimal128DataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal128DataType build()
   {
     return new Decimal128DataType(cast(void*)createGObject(Decimal128DataType._getGType), Yes.Take);

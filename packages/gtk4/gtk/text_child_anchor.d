@@ -44,8 +44,8 @@ class TextChildAnchor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.text_child_anchor.TextChildAnchor]
-  Returns: New builder object
+      Get builder for [gtk.text_child_anchor.TextChildAnchor]
+      Returns: New builder object
   */
   static TextChildAnchorGidBuilder builder()
   {
@@ -130,6 +130,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.text_child_anchor.TextChildAnchor]
 class TextChildAnchorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -137,6 +138,10 @@ class TextChildAnchorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.text_child_anchor.TextChildAnchor]
 final class TextChildAnchorGidBuilder : TextChildAnchorGidBuilderImpl!TextChildAnchorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextChildAnchor build()
   {
     return new TextChildAnchor(cast(void*)createGObject(TextChildAnchor._getGType), Yes.Take);

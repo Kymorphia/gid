@@ -41,8 +41,8 @@ class StreamMem : gmime.stream.Stream
   }
 
   /**
-  Get builder for [gmime.stream_mem.StreamMem]
-  Returns: New builder object
+      Get builder for [gmime.stream_mem.StreamMem]
+      Returns: New builder object
   */
   static StreamMemGidBuilder builder()
   {
@@ -153,6 +153,7 @@ class StreamMem : gmime.stream.Stream
   }
 }
 
+/// Fluent builder implementation template for [gmime.stream_mem.StreamMem]
 class StreamMemGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 {
 }
@@ -160,6 +161,10 @@ class StreamMemGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 /// Fluent builder for [gmime.stream_mem.StreamMem]
 final class StreamMemGidBuilder : StreamMemGidBuilderImpl!StreamMemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamMem build()
   {
     return new StreamMem(cast(void*)createGObject(StreamMem._getGType), Yes.Take);

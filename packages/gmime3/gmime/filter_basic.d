@@ -40,8 +40,8 @@ class FilterBasic : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_basic.FilterBasic]
-  Returns: New builder object
+      Get builder for [gmime.filter_basic.FilterBasic]
+      Returns: New builder object
   */
   static FilterBasicGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class FilterBasic : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_basic.FilterBasic]
 class FilterBasicGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -71,6 +72,10 @@ class FilterBasicGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_basic.FilterBasic]
 final class FilterBasicGidBuilder : FilterBasicGidBuilderImpl!FilterBasicGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterBasic build()
   {
     return new FilterBasic(cast(void*)createGObject(FilterBasic._getGType), Yes.Take);

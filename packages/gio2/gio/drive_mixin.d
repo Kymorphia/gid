@@ -673,6 +673,7 @@ template DriveT()
   }
 }
 
+/// Fluent builder implementation template for [gio.drive.Drive]
 template DriveGidBuilderT()
 {
 }

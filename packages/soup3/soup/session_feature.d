@@ -30,6 +30,7 @@ interface SessionFeature
   }
 }
 
+/// Fluent builder implementation template for [soup.session_feature.SessionFeature]
 interface SessionFeatureGidBuilderImpl(T)
 {
 }

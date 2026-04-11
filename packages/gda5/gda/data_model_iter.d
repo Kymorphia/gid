@@ -45,8 +45,8 @@ class DataModelIter : gda.set.Set
   }
 
   /**
-  Get builder for [gda.data_model_iter.DataModelIter]
-  Returns: New builder object
+      Get builder for [gda.data_model_iter.DataModelIter]
+      Returns: New builder object
   */
   static DataModelIterGidBuilder builder()
   {
@@ -397,6 +397,7 @@ class DataModelIter : gda.set.Set
   }
 }
 
+/// Fluent builder implementation template for [gda.data_model_iter.DataModelIter]
 class DataModelIterGidBuilderImpl(T) : gda.set.SetGidBuilderImpl!T
 {
 
@@ -428,6 +429,10 @@ class DataModelIterGidBuilderImpl(T) : gda.set.SetGidBuilderImpl!T
 /// Fluent builder for [gda.data_model_iter.DataModelIter]
 final class DataModelIterGidBuilder : DataModelIterGidBuilderImpl!DataModelIterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataModelIter build()
   {
     return new DataModelIter(cast(void*)createGObject(DataModelIter._getGType), No.Take);

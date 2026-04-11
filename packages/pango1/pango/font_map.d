@@ -53,8 +53,8 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-  Get builder for [pango.font_map.FontMap]
-  Returns: New builder object
+      Get builder for [pango.font_map.FontMap]
+      Returns: New builder object
   */
   static FontMapGidBuilder builder()
   {
@@ -237,6 +237,7 @@ class FontMap : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 }
 
+/// Fluent builder implementation template for [pango.font_map.FontMap]
 class FontMapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
 {
 
@@ -246,6 +247,10 @@ class FontMapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.
 /// Fluent builder for [pango.font_map.FontMap]
 final class FontMapGidBuilder : FontMapGidBuilderImpl!FontMapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontMap build()
   {
     return new FontMap(cast(void*)createGObject(FontMap._getGType), No.Take);

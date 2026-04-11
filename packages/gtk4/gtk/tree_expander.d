@@ -101,8 +101,8 @@ class TreeExpander : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.tree_expander.TreeExpander]
-  Returns: New builder object
+      Get builder for [gtk.tree_expander.TreeExpander]
+      Returns: New builder object
   */
   static TreeExpanderGidBuilder builder()
   {
@@ -365,6 +365,7 @@ class TreeExpander : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_expander.TreeExpander]
 class TreeExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -433,6 +434,10 @@ class TreeExpanderGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.tree_expander.TreeExpander]
 final class TreeExpanderGidBuilder : TreeExpanderGidBuilderImpl!TreeExpanderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeExpander build()
   {
     return new TreeExpander(cast(void*)createGObject(TreeExpander._getGType), No.Take);

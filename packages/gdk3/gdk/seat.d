@@ -48,8 +48,8 @@ class Seat : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.seat.Seat]
-  Returns: New builder object
+      Get builder for [gdk.seat.Seat]
+      Returns: New builder object
   */
   static SeatGidBuilder builder()
   {
@@ -384,6 +384,7 @@ class Seat : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.seat.Seat]
 class SeatGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -402,6 +403,10 @@ class SeatGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.seat.Seat]
 final class SeatGidBuilder : SeatGidBuilderImpl!SeatGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Seat build()
   {
     return new Seat(cast(void*)createGObject(Seat._getGType), No.Take);

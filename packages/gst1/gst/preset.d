@@ -159,6 +159,7 @@ interface Preset
   bool setMeta(string name, string tag, string value = null);
 }
 
+/// Fluent builder implementation template for [gst.preset.Preset]
 interface PresetGidBuilderImpl(T)
 {
 }

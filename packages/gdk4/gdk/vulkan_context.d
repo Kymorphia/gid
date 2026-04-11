@@ -51,8 +51,8 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
   }
 
   /**
-  Get builder for [gdk.vulkan_context.VulkanContext]
-  Returns: New builder object
+      Get builder for [gdk.vulkan_context.VulkanContext]
+      Returns: New builder object
   */
   static VulkanContextGidBuilder builder()
   {
@@ -102,6 +102,7 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
   }
 }
 
+/// Fluent builder implementation template for [gdk.vulkan_context.VulkanContext]
 class VulkanContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -111,6 +112,10 @@ class VulkanContextGidBuilderImpl(T) : gdk.draw_context.DrawContextGidBuilderImp
 /// Fluent builder for [gdk.vulkan_context.VulkanContext]
 final class VulkanContextGidBuilder : VulkanContextGidBuilderImpl!VulkanContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VulkanContext build()
   {
     return new VulkanContext(cast(void*)createGObject(VulkanContext._getGType), No.Take);

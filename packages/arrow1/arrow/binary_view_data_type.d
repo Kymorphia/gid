@@ -38,8 +38,8 @@ class BinaryViewDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.binary_view_data_type.BinaryViewDataType]
-  Returns: New builder object
+      Get builder for [arrow.binary_view_data_type.BinaryViewDataType]
+      Returns: New builder object
   */
   static BinaryViewDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class BinaryViewDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.binary_view_data_type.BinaryViewDataType]
 class BinaryViewDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class BinaryViewDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderIm
 /// Fluent builder for [arrow.binary_view_data_type.BinaryViewDataType]
 final class BinaryViewDataTypeGidBuilder : BinaryViewDataTypeGidBuilderImpl!BinaryViewDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BinaryViewDataType build()
   {
     return new BinaryViewDataType(cast(void*)createGObject(BinaryViewDataType._getGType), Yes.Take);

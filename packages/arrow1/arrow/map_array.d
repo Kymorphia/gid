@@ -41,8 +41,8 @@ class MapArray : arrow.list_array.ListArray
   }
 
   /**
-  Get builder for [arrow.map_array.MapArray]
-  Returns: New builder object
+      Get builder for [arrow.map_array.MapArray]
+      Returns: New builder object
   */
   static MapArrayGidBuilder builder()
   {
@@ -97,6 +97,7 @@ class MapArray : arrow.list_array.ListArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.map_array.MapArray]
 class MapArrayGidBuilderImpl(T) : arrow.list_array.ListArrayGidBuilderImpl!T
 {
 
@@ -122,6 +123,10 @@ class MapArrayGidBuilderImpl(T) : arrow.list_array.ListArrayGidBuilderImpl!T
 /// Fluent builder for [arrow.map_array.MapArray]
 final class MapArrayGidBuilder : MapArrayGidBuilderImpl!MapArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MapArray build()
   {
     return new MapArray(cast(void*)createGObject(MapArray._getGType), Yes.Take);

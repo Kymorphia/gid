@@ -45,8 +45,8 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   }
 
   /**
-  Get builder for [gstgl.glfilter.GLFilter]
-  Returns: New builder object
+      Get builder for [gstgl.glfilter.GLFilter]
+      Returns: New builder object
   */
   static GLFilterGidBuilder builder()
   {
@@ -123,6 +123,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glfilter.GLFilter]
 class GLFilterGidBuilderImpl(T) : gstgl.glbase_filter.GLBaseFilterGidBuilderImpl!T
 {
 }
@@ -130,6 +131,10 @@ class GLFilterGidBuilderImpl(T) : gstgl.glbase_filter.GLBaseFilterGidBuilderImpl
 /// Fluent builder for [gstgl.glfilter.GLFilter]
 final class GLFilterGidBuilder : GLFilterGidBuilderImpl!GLFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLFilter build()
   {
     return new GLFilter(cast(void*)createGObject(GLFilter._getGType), No.Take);

@@ -115,8 +115,8 @@ class PrintUnixDialog : gtk.dialog.Dialog
   }
 
   /**
-  Get builder for [gtk.print_unix_dialog.PrintUnixDialog]
-  Returns: New builder object
+      Get builder for [gtk.print_unix_dialog.PrintUnixDialog]
+      Returns: New builder object
   */
   static PrintUnixDialogGidBuilder builder()
   {
@@ -493,6 +493,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   }
 }
 
+/// Fluent builder implementation template for [gtk.print_unix_dialog.PrintUnixDialog]
 class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 {
 
@@ -578,6 +579,10 @@ class PrintUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 /// Fluent builder for [gtk.print_unix_dialog.PrintUnixDialog]
 final class PrintUnixDialogGidBuilder : PrintUnixDialogGidBuilderImpl!PrintUnixDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PrintUnixDialog build()
   {
     return new PrintUnixDialog(cast(void*)createGObject(PrintUnixDialog._getGType), No.Take);

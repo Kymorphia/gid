@@ -3,5 +3,6 @@
 *.so
 dub.selections.json
 doc/api
+doc/api-old
 doc/doc_packages
-doc/gen-adrdox
+doc/doc_packages-old

@@ -43,8 +43,8 @@ class InitiallyUnowned : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gobject.initially_unowned.InitiallyUnowned]
-  Returns: New builder object
+      Get builder for [gobject.initially_unowned.InitiallyUnowned]
+      Returns: New builder object
   */
   static InitiallyUnownedGidBuilder builder()
   {
@@ -52,6 +52,7 @@ class InitiallyUnowned : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gobject.initially_unowned.InitiallyUnowned]
 class InitiallyUnownedGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -59,6 +60,10 @@ class InitiallyUnownedGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gobject.initially_unowned.InitiallyUnowned]
 final class InitiallyUnownedGidBuilder : InitiallyUnownedGidBuilderImpl!InitiallyUnownedGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InitiallyUnowned build()
   {
     return new InitiallyUnowned(cast(void*)createGObject(InitiallyUnowned._getGType), No.Take);

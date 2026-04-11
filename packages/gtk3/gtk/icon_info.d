@@ -54,8 +54,8 @@ class IconInfo : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.icon_info.IconInfo]
-  Returns: New builder object
+      Get builder for [gtk.icon_info.IconInfo]
+      Returns: New builder object
   */
   static IconInfoGidBuilder builder()
   {
@@ -585,6 +585,7 @@ class IconInfo : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.icon_info.IconInfo]
 class IconInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -592,6 +593,10 @@ class IconInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.icon_info.IconInfo]
 final class IconInfoGidBuilder : IconInfoGidBuilderImpl!IconInfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IconInfo build()
   {
     return new IconInfo(cast(void*)createGObject(IconInfo._getGType), No.Take);

@@ -53,8 +53,8 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 
   /**
-  Get builder for [soup.cookie_jar.CookieJar]
-  Returns: New builder object
+      Get builder for [soup.cookie_jar.CookieJar]
+      Returns: New builder object
   */
   static CookieJarGidBuilder builder()
   {
@@ -413,6 +413,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 }
 
+/// Fluent builder implementation template for [soup.cookie_jar.CookieJar]
 class CookieJarGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
 {
 
@@ -444,6 +445,10 @@ class CookieJarGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, so
 /// Fluent builder for [soup.cookie_jar.CookieJar]
 final class CookieJarGidBuilder : CookieJarGidBuilderImpl!CookieJarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CookieJar build()
   {
     return new CookieJar(cast(void*)createGObject(CookieJar._getGType), Yes.Take);

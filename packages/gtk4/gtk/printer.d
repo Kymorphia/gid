@@ -51,8 +51,8 @@ class Printer : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.printer.Printer]
-  Returns: New builder object
+      Get builder for [gtk.printer.Printer]
+      Returns: New builder object
   */
   static PrinterGidBuilder builder()
   {
@@ -494,6 +494,7 @@ class Printer : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.printer.Printer]
 class PrinterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -512,6 +513,10 @@ class PrinterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.printer.Printer]
 final class PrinterGidBuilder : PrinterGidBuilderImpl!PrinterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Printer build()
   {
     return new Printer(cast(void*)createGObject(Printer._getGType), Yes.Take);

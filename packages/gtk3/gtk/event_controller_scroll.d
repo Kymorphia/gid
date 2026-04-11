@@ -75,8 +75,8 @@ class EventControllerScroll : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.event_controller_scroll.EventControllerScroll]
-  Returns: New builder object
+      Get builder for [gtk.event_controller_scroll.EventControllerScroll]
+      Returns: New builder object
   */
   static EventControllerScrollGidBuilder builder()
   {
@@ -320,6 +320,7 @@ class EventControllerScroll : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.event_controller_scroll.EventControllerScroll]
 class EventControllerScrollGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 
@@ -338,6 +339,10 @@ class EventControllerScrollGidBuilderImpl(T) : gtk.event_controller.EventControl
 /// Fluent builder for [gtk.event_controller_scroll.EventControllerScroll]
 final class EventControllerScrollGidBuilder : EventControllerScrollGidBuilderImpl!EventControllerScrollGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EventControllerScroll build()
   {
     return new EventControllerScroll(cast(void*)createGObject(EventControllerScroll._getGType), Yes.Take);

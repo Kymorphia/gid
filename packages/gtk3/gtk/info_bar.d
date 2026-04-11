@@ -119,8 +119,8 @@ class InfoBar : gtk.box.Box
   }
 
   /**
-  Get builder for [gtk.info_bar.InfoBar]
-  Returns: New builder object
+      Get builder for [gtk.info_bar.InfoBar]
+      Returns: New builder object
   */
   static InfoBarGidBuilder builder()
   {
@@ -453,6 +453,7 @@ class InfoBar : gtk.box.Box
   }
 }
 
+/// Fluent builder implementation template for [gtk.info_bar.InfoBar]
 class InfoBarGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 {
 
@@ -491,6 +492,10 @@ class InfoBarGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 /// Fluent builder for [gtk.info_bar.InfoBar]
 final class InfoBarGidBuilder : InfoBarGidBuilderImpl!InfoBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InfoBar build()
   {
     return new InfoBar(cast(void*)createGObject(InfoBar._getGType), No.Take);

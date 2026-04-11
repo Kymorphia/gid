@@ -57,8 +57,8 @@ class Screen : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.screen.Screen]
-  Returns: New builder object
+      Get builder for [gdk.screen.Screen]
+      Returns: New builder object
   */
   static ScreenGidBuilder builder()
   {
@@ -813,6 +813,7 @@ class Screen : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.screen.Screen]
 class ScreenGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -832,6 +833,10 @@ class ScreenGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.screen.Screen]
 final class ScreenGidBuilder : ScreenGidBuilderImpl!ScreenGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Screen build()
   {
     return new Screen(cast(void*)createGObject(Screen._getGType), No.Take);

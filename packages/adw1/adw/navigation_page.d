@@ -73,8 +73,8 @@ class NavigationPage : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.navigation_page.NavigationPage]
-  Returns: New builder object
+      Get builder for [adw.navigation_page.NavigationPage]
+      Returns: New builder object
   */
   static NavigationPageGidBuilder builder()
   {
@@ -513,6 +513,7 @@ class NavigationPage : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.navigation_page.NavigationPage]
 class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -586,6 +587,10 @@ class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.navigation_page.NavigationPage]
 final class NavigationPageGidBuilder : NavigationPageGidBuilderImpl!NavigationPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NavigationPage build()
   {
     return new NavigationPage(cast(void*)createGObject(NavigationPage._getGType), No.Take);

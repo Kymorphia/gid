@@ -44,8 +44,8 @@ class MenuButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessible
   }
 
   /**
-  Get builder for [gtk.menu_button_accessible.MenuButtonAccessible]
-  Returns: New builder object
+      Get builder for [gtk.menu_button_accessible.MenuButtonAccessible]
+      Returns: New builder object
   */
   static MenuButtonAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class MenuButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.menu_button_accessible.MenuButtonAccessible]
 class MenuButtonAccessibleGidBuilderImpl(T) : gtk.toggle_button_accessible.ToggleButtonAccessibleGidBuilderImpl!T
 {
 
@@ -61,6 +62,10 @@ class MenuButtonAccessibleGidBuilderImpl(T) : gtk.toggle_button_accessible.Toggl
 /// Fluent builder for [gtk.menu_button_accessible.MenuButtonAccessible]
 final class MenuButtonAccessibleGidBuilder : MenuButtonAccessibleGidBuilderImpl!MenuButtonAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuButtonAccessible build()
   {
     return new MenuButtonAccessible(cast(void*)createGObject(MenuButtonAccessible._getGType), No.Take);

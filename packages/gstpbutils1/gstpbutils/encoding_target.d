@@ -45,8 +45,8 @@ class EncodingTarget : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstpbutils.encoding_target.EncodingTarget]
-  Returns: New builder object
+      Get builder for [gstpbutils.encoding_target.EncodingTarget]
+      Returns: New builder object
   */
   static EncodingTargetGidBuilder builder()
   {
@@ -247,6 +247,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.encoding_target.EncodingTarget]
 class EncodingTargetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -254,6 +255,10 @@ class EncodingTargetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gstpbutils.encoding_target.EncodingTarget]
 final class EncodingTargetGidBuilder : EncodingTargetGidBuilderImpl!EncodingTargetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EncodingTarget build()
   {
     return new EncodingTarget(cast(void*)createGObject(EncodingTarget._getGType), Yes.Take);

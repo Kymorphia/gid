@@ -43,8 +43,8 @@ class Info : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.info.Info]
-  Returns: New builder object
+      Get builder for [arrowflight.info.Info]
+      Returns: New builder object
   */
   static InfoGidBuilder builder()
   {
@@ -119,6 +119,7 @@ class Info : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.info.Info]
 class InfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -132,6 +133,10 @@ class InfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.info.Info]
 final class InfoGidBuilder : InfoGidBuilderImpl!InfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Info build()
   {
     return new Info(cast(void*)createGObject(Info._getGType), Yes.Take);

@@ -38,8 +38,8 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
   }
 
   /**
-  Get builder for [gstvideo.video_buffer_pool.VideoBufferPool]
-  Returns: New builder object
+      Get builder for [gstvideo.video_buffer_pool.VideoBufferPool]
+      Returns: New builder object
   */
   static VideoBufferPoolGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_buffer_pool.VideoBufferPool]
 class VideoBufferPoolGidBuilderImpl(T) : gst.buffer_pool.BufferPoolGidBuilderImpl!T
 {
 }
@@ -66,6 +67,10 @@ class VideoBufferPoolGidBuilderImpl(T) : gst.buffer_pool.BufferPoolGidBuilderImp
 /// Fluent builder for [gstvideo.video_buffer_pool.VideoBufferPool]
 final class VideoBufferPoolGidBuilder : VideoBufferPoolGidBuilderImpl!VideoBufferPoolGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VideoBufferPool build()
   {
     return new VideoBufferPool(cast(void*)createGObject(VideoBufferPool._getGType), Yes.Take);

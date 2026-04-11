@@ -59,8 +59,8 @@ class Misc : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.misc.Misc]
-  Returns: New builder object
+      Get builder for [gtk.misc.Misc]
+      Returns: New builder object
   */
   static MiscGidBuilder builder()
   {
@@ -240,6 +240,7 @@ class Misc : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.misc.Misc]
 class MiscGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -309,6 +310,10 @@ class MiscGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.misc.Misc]
 final class MiscGidBuilder : MiscGidBuilderImpl!MiscGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Misc build()
   {
     return new Misc(cast(void*)createGObject(Misc._getGType), No.Take);

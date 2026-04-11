@@ -43,8 +43,8 @@ class ExpanderAccessible : gtk.container_accessible.ContainerAccessible, atk.act
   }
 
   /**
-  Get builder for [gtk.expander_accessible.ExpanderAccessible]
-  Returns: New builder object
+      Get builder for [gtk.expander_accessible.ExpanderAccessible]
+      Returns: New builder object
   */
   static ExpanderAccessibleGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class ExpanderAccessible : gtk.container_accessible.ContainerAccessible, atk.act
   alias setDescription = atk.object.ObjectWrap.setDescription;
 }
 
+/// Fluent builder implementation template for [gtk.expander_accessible.ExpanderAccessible]
 class ExpanderAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T
 {
 
@@ -66,6 +67,10 @@ class ExpanderAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAc
 /// Fluent builder for [gtk.expander_accessible.ExpanderAccessible]
 final class ExpanderAccessibleGidBuilder : ExpanderAccessibleGidBuilderImpl!ExpanderAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExpanderAccessible build()
   {
     return new ExpanderAccessible(cast(void*)createGObject(ExpanderAccessible._getGType), No.Take);

@@ -45,8 +45,8 @@ class ButtonAccessible : gtk.container_accessible.ContainerAccessible, atk.actio
   }
 
   /**
-  Get builder for [gtk.button_accessible.ButtonAccessible]
-  Returns: New builder object
+      Get builder for [gtk.button_accessible.ButtonAccessible]
+      Returns: New builder object
   */
   static ButtonAccessibleGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class ButtonAccessible : gtk.container_accessible.ContainerAccessible, atk.actio
   alias setDescription = atk.object.ObjectWrap.setDescription;
 }
 
+/// Fluent builder implementation template for [gtk.button_accessible.ButtonAccessible]
 class ButtonAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T
 {
 
@@ -70,6 +71,10 @@ class ButtonAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAcce
 /// Fluent builder for [gtk.button_accessible.ButtonAccessible]
 final class ButtonAccessibleGidBuilder : ButtonAccessibleGidBuilderImpl!ButtonAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ButtonAccessible build()
   {
     return new ButtonAccessible(cast(void*)createGObject(ButtonAccessible._getGType), No.Take);

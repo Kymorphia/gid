@@ -145,8 +145,8 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
   }
 
   /**
-  Get builder for [gtk.tree_model_sort.TreeModelSort]
-  Returns: New builder object
+      Get builder for [gtk.tree_model_sort.TreeModelSort]
+      Returns: New builder object
   */
   static TreeModelSortGidBuilder builder()
   {
@@ -303,6 +303,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_model_sort.TreeModelSort]
 class TreeModelSortGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.tree_drag_source.TreeDragSourceGidBuilderImpl!T, gtk.tree_model.TreeModelGidBuilderImpl!T, gtk.tree_sortable.TreeSortableGidBuilderImpl!T
 {
 
@@ -320,6 +321,10 @@ class TreeModelSortGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.tree_model_sort.TreeModelSort]
 final class TreeModelSortGidBuilder : TreeModelSortGidBuilderImpl!TreeModelSortGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeModelSort build()
   {
     return new TreeModelSort(cast(void*)createGObject(TreeModelSort._getGType), No.Take);

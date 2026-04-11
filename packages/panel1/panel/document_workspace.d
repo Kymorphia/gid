@@ -63,8 +63,8 @@ class DocumentWorkspace : panel.workspace.Workspace
   }
 
   /**
-  Get builder for [panel.document_workspace.DocumentWorkspace]
-  Returns: New builder object
+      Get builder for [panel.document_workspace.DocumentWorkspace]
+      Returns: New builder object
   */
   static DocumentWorkspaceGidBuilder builder()
   {
@@ -272,6 +272,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   }
 }
 
+/// Fluent builder implementation template for [panel.document_workspace.DocumentWorkspace]
 class DocumentWorkspaceGidBuilderImpl(T) : panel.workspace.WorkspaceGidBuilderImpl!T
 {
 
@@ -280,6 +281,10 @@ class DocumentWorkspaceGidBuilderImpl(T) : panel.workspace.WorkspaceGidBuilderIm
 /// Fluent builder for [panel.document_workspace.DocumentWorkspace]
 final class DocumentWorkspaceGidBuilder : DocumentWorkspaceGidBuilderImpl!DocumentWorkspaceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DocumentWorkspace build()
   {
     return new DocumentWorkspace(cast(void*)createGObject(DocumentWorkspace._getGType), Yes.Take);

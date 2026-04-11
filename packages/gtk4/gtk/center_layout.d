@@ -48,8 +48,8 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-  Get builder for [gtk.center_layout.CenterLayout]
-  Returns: New builder object
+      Get builder for [gtk.center_layout.CenterLayout]
+      Returns: New builder object
   */
   static CenterLayoutGidBuilder builder()
   {
@@ -251,6 +251,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   }
 }
 
+/// Fluent builder implementation template for [gtk.center_layout.CenterLayout]
 class CenterLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T
 {
 
@@ -276,6 +277,10 @@ class CenterLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilder
 /// Fluent builder for [gtk.center_layout.CenterLayout]
 final class CenterLayoutGidBuilder : CenterLayoutGidBuilderImpl!CenterLayoutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CenterLayout build()
   {
     return new CenterLayout(cast(void*)createGObject(CenterLayout._getGType), Yes.Take);

@@ -33,6 +33,7 @@ template BackendT()
 
 }
 
+/// Fluent builder implementation template for [secret.backend.Backend]
 template BackendGidBuilderT()
 {
 

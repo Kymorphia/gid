@@ -64,6 +64,7 @@ template TocSetterT()
   }
 }
 
+/// Fluent builder implementation template for [gst.toc_setter.TocSetter]
 template TocSetterGidBuilderT()
 {
 }

@@ -137,6 +137,7 @@ interface Converter
   void reset();
 }
 
+/// Fluent builder implementation template for [gio.converter.Converter]
 interface ConverterGidBuilderImpl(T)
 {
 }

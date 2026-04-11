@@ -44,8 +44,8 @@ class AuthDigest : soup.auth.Auth
   }
 
   /**
-  Get builder for [soup.auth_digest.AuthDigest]
-  Returns: New builder object
+      Get builder for [soup.auth_digest.AuthDigest]
+      Returns: New builder object
   */
   static AuthDigestGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class AuthDigest : soup.auth.Auth
   }
 }
 
+/// Fluent builder implementation template for [soup.auth_digest.AuthDigest]
 class AuthDigestGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
 {
 }
@@ -60,6 +61,10 @@ class AuthDigestGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
 /// Fluent builder for [soup.auth_digest.AuthDigest]
 final class AuthDigestGidBuilder : AuthDigestGidBuilderImpl!AuthDigestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AuthDigest build()
   {
     return new AuthDigest(cast(void*)createGObject(AuthDigest._getGType), No.Take);

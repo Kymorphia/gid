@@ -46,8 +46,8 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
   }
 
   /**
-  Get builder for [soup.hstsenforcer_db.HSTSEnforcerDB]
-  Returns: New builder object
+      Get builder for [soup.hstsenforcer_db.HSTSEnforcerDB]
+      Returns: New builder object
   */
   static HSTSEnforcerDBGidBuilder builder()
   {
@@ -86,6 +86,7 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
   }
 }
 
+/// Fluent builder implementation template for [soup.hstsenforcer_db.HSTSEnforcerDB]
 class HSTSEnforcerDBGidBuilderImpl(T) : soup.hstsenforcer.HSTSEnforcerGidBuilderImpl!T
 {
 
@@ -105,6 +106,10 @@ class HSTSEnforcerDBGidBuilderImpl(T) : soup.hstsenforcer.HSTSEnforcerGidBuilder
 /// Fluent builder for [soup.hstsenforcer_db.HSTSEnforcerDB]
 final class HSTSEnforcerDBGidBuilder : HSTSEnforcerDBGidBuilderImpl!HSTSEnforcerDBGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HSTSEnforcerDB build()
   {
     return new HSTSEnforcerDB(cast(void*)createGObject(HSTSEnforcerDB._getGType), Yes.Take);

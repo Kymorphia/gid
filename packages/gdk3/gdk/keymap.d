@@ -48,8 +48,8 @@ class Keymap : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.keymap.Keymap]
-  Returns: New builder object
+      Get builder for [gdk.keymap.Keymap]
+      Returns: New builder object
   */
   static KeymapGidBuilder builder()
   {
@@ -485,6 +485,7 @@ class Keymap : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.keymap.Keymap]
 class KeymapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -492,6 +493,10 @@ class KeymapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.keymap.Keymap]
 final class KeymapGidBuilder : KeymapGidBuilderImpl!KeymapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Keymap build()
   {
     return new Keymap(cast(void*)createGObject(Keymap._getGType), No.Take);

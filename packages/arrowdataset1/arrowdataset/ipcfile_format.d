@@ -38,8 +38,8 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
   }
 
   /**
-  Get builder for [arrowdataset.ipcfile_format.IPCFileFormat]
-  Returns: New builder object
+      Get builder for [arrowdataset.ipcfile_format.IPCFileFormat]
+      Returns: New builder object
   */
   static IPCFileFormatGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.ipcfile_format.IPCFileFormat]
 class IPCFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class IPCFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGidBui
 /// Fluent builder for [arrowdataset.ipcfile_format.IPCFileFormat]
 final class IPCFileFormatGidBuilder : IPCFileFormatGidBuilderImpl!IPCFileFormatGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IPCFileFormat build()
   {
     return new IPCFileFormat(cast(void*)createGObject(IPCFileFormat._getGType), Yes.Take);

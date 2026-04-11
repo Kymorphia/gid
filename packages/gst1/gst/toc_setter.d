@@ -59,6 +59,7 @@ interface TocSetter
   void setToc(gst.toc.Toc toc = null);
 }
 
+/// Fluent builder implementation template for [gst.toc_setter.TocSetter]
 interface TocSetterGidBuilderImpl(T)
 {
 }

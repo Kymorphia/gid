@@ -105,8 +105,8 @@ class ShortcutsWindow : gtk.window.Window
   }
 
   /**
-  Get builder for [gtk.shortcuts_window.ShortcutsWindow]
-  Returns: New builder object
+      Get builder for [gtk.shortcuts_window.ShortcutsWindow]
+      Returns: New builder object
   */
   static ShortcutsWindowGidBuilder builder()
   {
@@ -269,6 +269,7 @@ class ShortcutsWindow : gtk.window.Window
   }
 }
 
+/// Fluent builder implementation template for [gtk.shortcuts_window.ShortcutsWindow]
 class ShortcutsWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 {
 
@@ -308,6 +309,10 @@ class ShortcutsWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 /// Fluent builder for [gtk.shortcuts_window.ShortcutsWindow]
 final class ShortcutsWindowGidBuilder : ShortcutsWindowGidBuilderImpl!ShortcutsWindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ShortcutsWindow build()
   {
     return new ShortcutsWindow(cast(void*)createGObject(ShortcutsWindow._getGType), No.Take);

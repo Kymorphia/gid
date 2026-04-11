@@ -304,6 +304,7 @@ interface Action
   glib.variant_type.VariantType getStateType();
 }
 
+/// Fluent builder implementation template for [gio.action.Action]
 interface ActionGidBuilderImpl(T)
 {
 }

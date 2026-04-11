@@ -85,8 +85,8 @@ class Fixed : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.fixed.Fixed]
-  Returns: New builder object
+      Get builder for [gtk.fixed.Fixed]
+      Returns: New builder object
   */
   static FixedGidBuilder builder()
   {
@@ -192,6 +192,7 @@ class Fixed : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.fixed.Fixed]
 class FixedGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -200,6 +201,10 @@ class FixedGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.fixed.Fixed]
 final class FixedGidBuilder : FixedGidBuilderImpl!FixedGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Fixed build()
   {
     return new Fixed(cast(void*)createGObject(Fixed._getGType), No.Take);

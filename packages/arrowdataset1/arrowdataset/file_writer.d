@@ -41,8 +41,8 @@ class FileWriter : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.file_writer.FileWriter]
-  Returns: New builder object
+      Get builder for [arrowdataset.file_writer.FileWriter]
+      Returns: New builder object
   */
   static FileWriterGidBuilder builder()
   {
@@ -83,6 +83,7 @@ class FileWriter : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.file_writer.FileWriter]
 class FileWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -96,6 +97,10 @@ class FileWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowdataset.file_writer.FileWriter]
 final class FileWriterGidBuilder : FileWriterGidBuilderImpl!FileWriterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileWriter build()
   {
     return new FileWriter(cast(void*)createGObject(FileWriter._getGType), No.Take);

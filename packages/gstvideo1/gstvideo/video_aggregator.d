@@ -50,8 +50,8 @@ class VideoAggregator : gstbase.aggregator.Aggregator
   }
 
   /**
-  Get builder for [gstvideo.video_aggregator.VideoAggregator]
-  Returns: New builder object
+      Get builder for [gstvideo.video_aggregator.VideoAggregator]
+      Returns: New builder object
   */
   static VideoAggregatorGidBuilder builder()
   {
@@ -88,6 +88,7 @@ class VideoAggregator : gstbase.aggregator.Aggregator
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_aggregator.VideoAggregator]
 class VideoAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilderImpl!T
 {
 
@@ -109,6 +110,10 @@ class VideoAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilder
 /// Fluent builder for [gstvideo.video_aggregator.VideoAggregator]
 final class VideoAggregatorGidBuilder : VideoAggregatorGidBuilderImpl!VideoAggregatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VideoAggregator build()
   {
     return new VideoAggregator(cast(void*)createGObject(VideoAggregator._getGType), No.Take);

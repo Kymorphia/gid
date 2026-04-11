@@ -55,6 +55,7 @@ template LockableT()
   }
 }
 
+/// Fluent builder implementation template for [gda.lockable.Lockable]
 template LockableGidBuilderT()
 {
 }

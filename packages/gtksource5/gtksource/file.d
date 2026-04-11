@@ -50,8 +50,8 @@ class File : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.file.File]
-  Returns: New builder object
+      Get builder for [gtksource.file.File]
+      Returns: New builder object
   */
   static FileGidBuilder builder()
   {
@@ -248,6 +248,7 @@ class File : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.file.File]
 class FileGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -266,6 +267,10 @@ class FileGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.file.File]
 final class FileGidBuilder : FileGidBuilderImpl!FileGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   File build()
   {
     return new File(cast(void*)createGObject(File._getGType), Yes.Take);

@@ -66,8 +66,8 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.file_loader.FileLoader]
-  Returns: New builder object
+      Get builder for [gtksource.file_loader.FileLoader]
+      Returns: New builder object
   */
   static FileLoaderGidBuilder builder()
   {
@@ -300,6 +300,7 @@ class FileLoader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.file_loader.FileLoader]
 class FileLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -356,6 +357,10 @@ class FileLoaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.file_loader.FileLoader]
 final class FileLoaderGidBuilder : FileLoaderGidBuilderImpl!FileLoaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileLoader build()
   {
     return new FileLoader(cast(void*)createGObject(FileLoader._getGType), Yes.Take);

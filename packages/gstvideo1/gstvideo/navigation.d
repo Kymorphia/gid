@@ -818,6 +818,7 @@ interface Navigation
   void sendMouseScrollEvent(double x, double y, double deltaX, double deltaY);
 }
 
+/// Fluent builder implementation template for [gstvideo.navigation.Navigation]
 interface NavigationGidBuilderImpl(T)
 {
 }

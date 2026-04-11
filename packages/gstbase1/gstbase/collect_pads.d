@@ -84,8 +84,8 @@ class CollectPads : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstbase.collect_pads.CollectPads]
-  Returns: New builder object
+      Get builder for [gstbase.collect_pads.CollectPads]
+      Returns: New builder object
   */
   static CollectPadsGidBuilder builder()
   {
@@ -579,6 +579,7 @@ class CollectPads : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstbase.collect_pads.CollectPads]
 class CollectPadsGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -586,6 +587,10 @@ class CollectPadsGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstbase.collect_pads.CollectPads]
 final class CollectPadsGidBuilder : CollectPadsGidBuilderImpl!CollectPadsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CollectPads build()
   {
     return new CollectPads(cast(void*)createGObject(CollectPads._getGType), Yes.Take);

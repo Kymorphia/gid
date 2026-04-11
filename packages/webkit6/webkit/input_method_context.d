@@ -52,8 +52,8 @@ class InputMethodContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.input_method_context.InputMethodContext]
-  Returns: New builder object
+      Get builder for [webkit.input_method_context.InputMethodContext]
+      Returns: New builder object
   */
   static InputMethodContextGidBuilder builder()
   {
@@ -461,6 +461,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.input_method_context.InputMethodContext]
 class InputMethodContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -490,6 +491,10 @@ class InputMethodContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [webkit.input_method_context.InputMethodContext]
 final class InputMethodContextGidBuilder : InputMethodContextGidBuilderImpl!InputMethodContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InputMethodContext build()
   {
     return new InputMethodContext(cast(void*)createGObject(InputMethodContext._getGType), No.Take);

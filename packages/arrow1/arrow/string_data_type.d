@@ -38,8 +38,8 @@ class StringDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.string_data_type.StringDataType]
-  Returns: New builder object
+      Get builder for [arrow.string_data_type.StringDataType]
+      Returns: New builder object
   */
   static StringDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class StringDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.string_data_type.StringDataType]
 class StringDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class StringDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 /// Fluent builder for [arrow.string_data_type.StringDataType]
 final class StringDataTypeGidBuilder : StringDataTypeGidBuilderImpl!StringDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StringDataType build()
   {
     return new StringDataType(cast(void*)createGObject(StringDataType._getGType), Yes.Take);

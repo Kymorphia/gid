@@ -133,6 +133,7 @@ template TagSetterT()
   }
 }
 
+/// Fluent builder implementation template for [gst.tag_setter.TagSetter]
 template TagSetterGidBuilderT()
 {
 }

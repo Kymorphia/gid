@@ -141,6 +141,7 @@ template ToolShellT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.tool_shell.ToolShell]
 template ToolShellGidBuilderT()
 {
 }

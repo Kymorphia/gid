@@ -42,8 +42,8 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 
   /**
-  Get builder for [gda.data_pivot.DataPivot]
-  Returns: New builder object
+      Get builder for [gda.data_pivot.DataPivot]
+      Returns: New builder object
   */
   static DataPivotGidBuilder builder()
   {
@@ -173,6 +173,7 @@ class DataPivot : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 }
 
+/// Fluent builder implementation template for [gda.data_pivot.DataPivot]
 class DataPivotGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
 {
 
@@ -188,6 +189,10 @@ class DataPivotGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gd
 /// Fluent builder for [gda.data_pivot.DataPivot]
 final class DataPivotGidBuilder : DataPivotGidBuilderImpl!DataPivotGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataPivot build()
   {
     return new DataPivot(cast(void*)createGObject(DataPivot._getGType), No.Take);

@@ -70,8 +70,8 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-  Get builder for [adw.banner.Banner]
-  Returns: New builder object
+      Get builder for [adw.banner.Banner]
+      Returns: New builder object
   */
   static BannerGidBuilder builder()
   {
@@ -330,6 +330,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   }
 }
 
+/// Fluent builder implementation template for [adw.banner.Banner]
 class BannerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
 {
 
@@ -392,6 +393,10 @@ class BannerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
 /// Fluent builder for [adw.banner.Banner]
 final class BannerGidBuilder : BannerGidBuilderImpl!BannerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Banner build()
   {
     return new Banner(cast(void*)createGObject(Banner._getGType), No.Take);

@@ -70,8 +70,8 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   }
 
   /**
-  Get builder for [gstrtp.rtpbase_audio_payload.RTPBaseAudioPayload]
-  Returns: New builder object
+      Get builder for [gstrtp.rtpbase_audio_payload.RTPBaseAudioPayload]
+      Returns: New builder object
   */
   static RTPBaseAudioPayloadGidBuilder builder()
   {
@@ -201,6 +201,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   }
 }
 
+/// Fluent builder implementation template for [gstrtp.rtpbase_audio_payload.RTPBaseAudioPayload]
 class RTPBaseAudioPayloadGidBuilderImpl(T) : gstrtp.rtpbase_payload.RTPBasePayloadGidBuilderImpl!T
 {
 
@@ -214,6 +215,10 @@ class RTPBaseAudioPayloadGidBuilderImpl(T) : gstrtp.rtpbase_payload.RTPBasePaylo
 /// Fluent builder for [gstrtp.rtpbase_audio_payload.RTPBaseAudioPayload]
 final class RTPBaseAudioPayloadGidBuilder : RTPBaseAudioPayloadGidBuilderImpl!RTPBaseAudioPayloadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RTPBaseAudioPayload build()
   {
     return new RTPBaseAudioPayload(cast(void*)createGObject(RTPBaseAudioPayload._getGType), No.Take);

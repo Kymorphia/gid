@@ -41,8 +41,8 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder]
+      Returns: New builder object
   */
   static FixedSizeBinaryArrayBuilderGidBuilder builder()
   {
@@ -153,6 +153,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder]
 class FixedSizeBinaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -160,6 +161,10 @@ class FixedSizeBinaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBu
 /// Fluent builder for [arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder]
 final class FixedSizeBinaryArrayBuilderGidBuilder : FixedSizeBinaryArrayBuilderGidBuilderImpl!FixedSizeBinaryArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FixedSizeBinaryArrayBuilder build()
   {
     return new FixedSizeBinaryArrayBuilder(cast(void*)createGObject(FixedSizeBinaryArrayBuilder._getGType), Yes.Take);

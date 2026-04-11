@@ -44,8 +44,8 @@ class Function : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.function_.Function]
-  Returns: New builder object
+      Get builder for [arrow.function_.Function]
+      Returns: New builder object
   */
   static FunctionGidBuilder builder()
   {
@@ -138,6 +138,7 @@ class Function : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.function_.Function]
 class FunctionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -151,6 +152,10 @@ class FunctionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.function_.Function]
 final class FunctionGidBuilder : FunctionGidBuilderImpl!FunctionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Function build()
   {
     return new Function(cast(void*)createGObject(Function._getGType), No.Take);

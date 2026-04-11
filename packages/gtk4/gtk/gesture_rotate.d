@@ -44,8 +44,8 @@ class GestureRotate : gtk.gesture.Gesture
   }
 
   /**
-  Get builder for [gtk.gesture_rotate.GestureRotate]
-  Returns: New builder object
+      Get builder for [gtk.gesture_rotate.GestureRotate]
+      Returns: New builder object
   */
   static GestureRotateGidBuilder builder()
   {
@@ -129,6 +129,7 @@ class GestureRotate : gtk.gesture.Gesture
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture_rotate.GestureRotate]
 class GestureRotateGidBuilderImpl(T) : gtk.gesture.GestureGidBuilderImpl!T
 {
 }
@@ -136,6 +137,10 @@ class GestureRotateGidBuilderImpl(T) : gtk.gesture.GestureGidBuilderImpl!T
 /// Fluent builder for [gtk.gesture_rotate.GestureRotate]
 final class GestureRotateGidBuilder : GestureRotateGidBuilderImpl!GestureRotateGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GestureRotate build()
   {
     return new GestureRotate(cast(void*)createGObject(GestureRotate._getGType), Yes.Take);

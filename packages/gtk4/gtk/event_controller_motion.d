@@ -49,8 +49,8 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.event_controller_motion.EventControllerMotion]
-  Returns: New builder object
+      Get builder for [gtk.event_controller_motion.EventControllerMotion]
+      Returns: New builder object
   */
   static EventControllerMotionGidBuilder builder()
   {
@@ -226,6 +226,7 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.event_controller_motion.EventControllerMotion]
 class EventControllerMotionGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 }
@@ -233,6 +234,10 @@ class EventControllerMotionGidBuilderImpl(T) : gtk.event_controller.EventControl
 /// Fluent builder for [gtk.event_controller_motion.EventControllerMotion]
 final class EventControllerMotionGidBuilder : EventControllerMotionGidBuilderImpl!EventControllerMotionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EventControllerMotion build()
   {
     return new EventControllerMotion(cast(void*)createGObject(EventControllerMotion._getGType), Yes.Take);

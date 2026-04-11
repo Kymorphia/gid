@@ -68,8 +68,8 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   }
 
   /**
-  Get builder for [gtk.page_setup_unix_dialog.PageSetupUnixDialog]
-  Returns: New builder object
+      Get builder for [gtk.page_setup_unix_dialog.PageSetupUnixDialog]
+      Returns: New builder object
   */
   static PageSetupUnixDialogGidBuilder builder()
   {
@@ -141,6 +141,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   }
 }
 
+/// Fluent builder implementation template for [gtk.page_setup_unix_dialog.PageSetupUnixDialog]
 class PageSetupUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 {
 
@@ -149,6 +150,10 @@ class PageSetupUnixDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 /// Fluent builder for [gtk.page_setup_unix_dialog.PageSetupUnixDialog]
 final class PageSetupUnixDialogGidBuilder : PageSetupUnixDialogGidBuilderImpl!PageSetupUnixDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PageSetupUnixDialog build()
   {
     return new PageSetupUnixDialog(cast(void*)createGObject(PageSetupUnixDialog._getGType), No.Take);

@@ -45,8 +45,8 @@ class ServerOperation : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.server_operation.ServerOperation]
-  Returns: New builder object
+      Get builder for [gda.server_operation.ServerOperation]
+      Returns: New builder object
   */
   static ServerOperationGidBuilder builder()
   {
@@ -662,6 +662,7 @@ class ServerOperation : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.server_operation.ServerOperation]
 class ServerOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -693,6 +694,10 @@ class ServerOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gda.server_operation.ServerOperation]
 final class ServerOperationGidBuilder : ServerOperationGidBuilderImpl!ServerOperationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ServerOperation build()
   {
     return new ServerOperation(cast(void*)createGObject(ServerOperation._getGType), Yes.Take);

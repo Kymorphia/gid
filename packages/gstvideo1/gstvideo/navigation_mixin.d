@@ -156,6 +156,7 @@ template NavigationT()
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.navigation.Navigation]
 template NavigationGidBuilderT()
 {
 }

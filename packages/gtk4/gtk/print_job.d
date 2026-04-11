@@ -55,8 +55,8 @@ class PrintJob : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.print_job.PrintJob]
-  Returns: New builder object
+      Get builder for [gtk.print_job.PrintJob]
+      Returns: New builder object
   */
   static PrintJobGidBuilder builder()
   {
@@ -572,6 +572,7 @@ class PrintJob : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.print_job.PrintJob]
 class PrintJobGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -635,6 +636,10 @@ class PrintJobGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.print_job.PrintJob]
 final class PrintJobGidBuilder : PrintJobGidBuilderImpl!PrintJobGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PrintJob build()
   {
     return new PrintJob(cast(void*)createGObject(PrintJob._getGType), Yes.Take);

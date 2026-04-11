@@ -152,8 +152,8 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-  Get builder for [gtk.tree_view.TreeView]
-  Returns: New builder object
+      Get builder for [gtk.tree_view.TreeView]
+      Returns: New builder object
   */
   static TreeViewGidBuilder builder()
   {
@@ -2773,6 +2773,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_view.TreeView]
 class TreeViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -2930,6 +2931,10 @@ class TreeViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrolla
 /// Fluent builder for [gtk.tree_view.TreeView]
 final class TreeViewGidBuilder : TreeViewGidBuilderImpl!TreeViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeView build()
   {
     return new TreeView(cast(void*)createGObject(TreeView._getGType), No.Take);

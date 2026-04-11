@@ -59,8 +59,8 @@ class StreamCollection : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.stream_collection.StreamCollection]
-  Returns: New builder object
+      Get builder for [gst.stream_collection.StreamCollection]
+      Returns: New builder object
   */
   static StreamCollectionGidBuilder builder()
   {
@@ -207,6 +207,7 @@ class StreamCollection : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.stream_collection.StreamCollection]
 class StreamCollectionGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -225,6 +226,10 @@ class StreamCollectionGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.stream_collection.StreamCollection]
 final class StreamCollectionGidBuilder : StreamCollectionGidBuilderImpl!StreamCollectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamCollection build()
   {
     return new StreamCollection(cast(void*)createGObject(StreamCollection._getGType), Yes.Take);

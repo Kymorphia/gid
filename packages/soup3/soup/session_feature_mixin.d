@@ -23,6 +23,7 @@ template SessionFeatureT()
 {
 }
 
+/// Fluent builder implementation template for [soup.session_feature.SessionFeature]
 template SessionFeatureGidBuilderT()
 {
 }

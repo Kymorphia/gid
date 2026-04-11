@@ -60,8 +60,8 @@ class Discoverer : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstpbutils.discoverer.Discoverer]
-  Returns: New builder object
+      Get builder for [gstpbutils.discoverer.Discoverer]
+      Returns: New builder object
   */
   static DiscovererGidBuilder builder()
   {
@@ -423,6 +423,7 @@ class Discoverer : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.discoverer.Discoverer]
 class DiscovererGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -451,6 +452,10 @@ class DiscovererGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstpbutils.discoverer.Discoverer]
 final class DiscovererGidBuilder : DiscovererGidBuilderImpl!DiscovererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Discoverer build()
   {
     return new Discoverer(cast(void*)createGObject(Discoverer._getGType), Yes.Take);

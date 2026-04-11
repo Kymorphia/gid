@@ -41,8 +41,8 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
   }
 
   /**
-  Get builder for [arrow.boolean_array.BooleanArray]
-  Returns: New builder object
+      Get builder for [arrow.boolean_array.BooleanArray]
+      Returns: New builder object
   */
   static BooleanArrayGidBuilder builder()
   {
@@ -132,6 +132,7 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.boolean_array.BooleanArray]
 class BooleanArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBuilderImpl!T
 {
 }
@@ -139,6 +140,10 @@ class BooleanArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBui
 /// Fluent builder for [arrow.boolean_array.BooleanArray]
 final class BooleanArrayGidBuilder : BooleanArrayGidBuilderImpl!BooleanArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BooleanArray build()
   {
     return new BooleanArray(cast(void*)createGObject(BooleanArray._getGType), Yes.Take);

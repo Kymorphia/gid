@@ -38,8 +38,8 @@ class SearchSettings : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.search_settings.SearchSettings]
-  Returns: New builder object
+      Get builder for [gtksource.search_settings.SearchSettings]
+      Returns: New builder object
   */
   static SearchSettingsGidBuilder builder()
   {
@@ -285,6 +285,7 @@ class SearchSettings : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.search_settings.SearchSettings]
 class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -353,6 +354,10 @@ class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtksource.search_settings.SearchSettings]
 final class SearchSettingsGidBuilder : SearchSettingsGidBuilderImpl!SearchSettingsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SearchSettings build()
   {
     return new SearchSettings(cast(void*)createGObject(SearchSettings._getGType), Yes.Take);

@@ -40,8 +40,8 @@ class ServerAuthReader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.server_auth_reader.ServerAuthReader]
-  Returns: New builder object
+      Get builder for [arrowflight.server_auth_reader.ServerAuthReader]
+      Returns: New builder object
   */
   static ServerAuthReaderGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class ServerAuthReader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.server_auth_reader.ServerAuthReader]
 class ServerAuthReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -79,6 +80,10 @@ class ServerAuthReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [arrowflight.server_auth_reader.ServerAuthReader]
 final class ServerAuthReaderGidBuilder : ServerAuthReaderGidBuilderImpl!ServerAuthReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ServerAuthReader build()
   {
     return new ServerAuthReader(cast(void*)createGObject(ServerAuthReader._getGType), No.Take);

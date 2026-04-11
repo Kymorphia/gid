@@ -371,8 +371,8 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   }
 
   /**
-  Get builder for [gtk.cell_area.CellArea]
-  Returns: New builder object
+      Get builder for [gtk.cell_area.CellArea]
+      Returns: New builder object
   */
   static CellAreaGidBuilder builder()
   {
@@ -1347,6 +1347,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_area.CellArea]
 class CellAreaGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T
 {
 
@@ -1368,6 +1369,10 @@ class CellAreaGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidB
 /// Fluent builder for [gtk.cell_area.CellArea]
 final class CellAreaGidBuilder : CellAreaGidBuilderImpl!CellAreaGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellArea build()
   {
     return new CellArea(cast(void*)createGObject(CellArea._getGType), No.Take);

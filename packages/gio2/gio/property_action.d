@@ -95,8 +95,8 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
   }
 
   /**
-  Get builder for [gio.property_action.PropertyAction]
-  Returns: New builder object
+      Get builder for [gio.property_action.PropertyAction]
+      Returns: New builder object
   */
   static PropertyActionGidBuilder builder()
   {
@@ -193,6 +193,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
   }
 }
 
+/// Fluent builder implementation template for [gio.property_action.PropertyAction]
 class PropertyActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action.ActionGidBuilderImpl!T
 {
 
@@ -253,6 +254,10 @@ class PropertyActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.property_action.PropertyAction]
 final class PropertyActionGidBuilder : PropertyActionGidBuilderImpl!PropertyActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PropertyAction build()
   {
     return new PropertyAction(cast(void*)createGObject(PropertyAction._getGType), Yes.Take);

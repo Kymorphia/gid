@@ -76,8 +76,8 @@ class Builder : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [json.builder.Builder]
-  Returns: New builder object
+      Get builder for [json.builder.Builder]
+      Returns: New builder object
   */
   static BuilderGidBuilder builder()
   {
@@ -366,6 +366,7 @@ class Builder : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [json.builder.Builder]
 class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -387,6 +388,10 @@ class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [json.builder.Builder]
 final class BuilderGidBuilder : BuilderGidBuilderImpl!BuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Builder build()
   {
     return new Builder(cast(void*)createGObject(Builder._getGType), Yes.Take);

@@ -45,8 +45,8 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
   }
 
   /**
-  Get builder for [gstcontroller.argbcontrol_binding.ARGBControlBinding]
-  Returns: New builder object
+      Get builder for [gstcontroller.argbcontrol_binding.ARGBControlBinding]
+      Returns: New builder object
   */
   static ARGBControlBindingGidBuilder builder()
   {
@@ -123,6 +123,7 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
   }
 }
 
+/// Fluent builder implementation template for [gstcontroller.argbcontrol_binding.ARGBControlBinding]
 class ARGBControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBindingGidBuilderImpl!T
 {
 
@@ -154,6 +155,10 @@ class ARGBControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBindingGi
 /// Fluent builder for [gstcontroller.argbcontrol_binding.ARGBControlBinding]
 final class ARGBControlBindingGidBuilder : ARGBControlBindingGidBuilderImpl!ARGBControlBindingGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ARGBControlBinding build()
   {
     return new ARGBControlBinding(cast(void*)createGObject(ARGBControlBinding._getGType), No.Take);

@@ -39,8 +39,8 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
   }
 
   /**
-  Get builder for [arrow.half_float_array.HalfFloatArray]
-  Returns: New builder object
+      Get builder for [arrow.half_float_array.HalfFloatArray]
+      Returns: New builder object
   */
   static HalfFloatArrayGidBuilder builder()
   {
@@ -79,6 +79,7 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.half_float_array.HalfFloatArray]
 class HalfFloatArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
 {
 }
@@ -86,6 +87,10 @@ class HalfFloatArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuild
 /// Fluent builder for [arrow.half_float_array.HalfFloatArray]
 final class HalfFloatArrayGidBuilder : HalfFloatArrayGidBuilderImpl!HalfFloatArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HalfFloatArray build()
   {
     return new HalfFloatArray(cast(void*)createGObject(HalfFloatArray._getGType), Yes.Take);

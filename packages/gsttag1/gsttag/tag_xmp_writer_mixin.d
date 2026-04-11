@@ -89,6 +89,7 @@ template TagXmpWriterT()
   }
 }
 
+/// Fluent builder implementation template for [gsttag.tag_xmp_writer.TagXmpWriter]
 template TagXmpWriterGidBuilderT()
 {
 }

@@ -40,8 +40,8 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
   }
 
   /**
-  Get builder for [arrowdataset.in_memory_fragment.InMemoryFragment]
-  Returns: New builder object
+      Get builder for [arrowdataset.in_memory_fragment.InMemoryFragment]
+      Returns: New builder object
   */
   static InMemoryFragmentGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.in_memory_fragment.InMemoryFragment]
 class InMemoryFragmentGidBuilderImpl(T) : arrowdataset.fragment.FragmentGidBuilderImpl!T
 {
 }
@@ -73,6 +74,10 @@ class InMemoryFragmentGidBuilderImpl(T) : arrowdataset.fragment.FragmentGidBuild
 /// Fluent builder for [arrowdataset.in_memory_fragment.InMemoryFragment]
 final class InMemoryFragmentGidBuilder : InMemoryFragmentGidBuilderImpl!InMemoryFragmentGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InMemoryFragment build()
   {
     return new InMemoryFragment(cast(void*)createGObject(InMemoryFragment._getGType), Yes.Take);

@@ -39,8 +39,8 @@ class SlowFileSystem : arrow.file_system.FileSystem
   }
 
   /**
-  Get builder for [arrow.slow_file_system.SlowFileSystem]
-  Returns: New builder object
+      Get builder for [arrow.slow_file_system.SlowFileSystem]
+      Returns: New builder object
   */
   static SlowFileSystemGidBuilder builder()
   {
@@ -91,6 +91,7 @@ class SlowFileSystem : arrow.file_system.FileSystem
   }
 }
 
+/// Fluent builder implementation template for [arrow.slow_file_system.SlowFileSystem]
 class SlowFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
 {
 
@@ -104,6 +105,10 @@ class SlowFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderIm
 /// Fluent builder for [arrow.slow_file_system.SlowFileSystem]
 final class SlowFileSystemGidBuilder : SlowFileSystemGidBuilderImpl!SlowFileSystemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SlowFileSystem build()
   {
     return new SlowFileSystem(cast(void*)createGObject(SlowFileSystem._getGType), No.Take);

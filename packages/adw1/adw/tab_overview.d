@@ -109,8 +109,8 @@ class TabOverview : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.tab_overview.TabOverview]
-  Returns: New builder object
+      Get builder for [adw.tab_overview.TabOverview]
+      Returns: New builder object
   */
   static TabOverviewGidBuilder builder()
   {
@@ -855,6 +855,7 @@ class TabOverview : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.tab_overview.TabOverview]
 class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -997,6 +998,10 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.tab_overview.TabOverview]
 final class TabOverviewGidBuilder : TabOverviewGidBuilderImpl!TabOverviewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TabOverview build()
   {
     return new TabOverview(cast(void*)createGObject(TabOverview._getGType), No.Take);

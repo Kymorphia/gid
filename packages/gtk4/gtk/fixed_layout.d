@@ -72,8 +72,8 @@ class FixedLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-  Get builder for [gtk.fixed_layout.FixedLayout]
-  Returns: New builder object
+      Get builder for [gtk.fixed_layout.FixedLayout]
+      Returns: New builder object
   */
   static FixedLayoutGidBuilder builder()
   {
@@ -92,6 +92,7 @@ class FixedLayout : gtk.layout_manager.LayoutManager
   }
 }
 
+/// Fluent builder implementation template for [gtk.fixed_layout.FixedLayout]
 class FixedLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T
 {
 }
@@ -99,6 +100,10 @@ class FixedLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderI
 /// Fluent builder for [gtk.fixed_layout.FixedLayout]
 final class FixedLayoutGidBuilder : FixedLayoutGidBuilderImpl!FixedLayoutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FixedLayout build()
   {
     return new FixedLayout(cast(void*)createGObject(FixedLayout._getGType), Yes.Take);

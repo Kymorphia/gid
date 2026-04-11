@@ -73,8 +73,8 @@ class SpringAnimation : adw.animation.Animation
   }
 
   /**
-  Get builder for [adw.spring_animation.SpringAnimation]
-  Returns: New builder object
+      Get builder for [adw.spring_animation.SpringAnimation]
+      Returns: New builder object
   */
   static SpringAnimationGidBuilder builder()
   {
@@ -507,6 +507,7 @@ class SpringAnimation : adw.animation.Animation
   }
 }
 
+/// Fluent builder implementation template for [adw.spring_animation.SpringAnimation]
 class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
 {
 
@@ -605,6 +606,10 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
 /// Fluent builder for [adw.spring_animation.SpringAnimation]
 final class SpringAnimationGidBuilder : SpringAnimationGidBuilderImpl!SpringAnimationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SpringAnimation build()
   {
     return new SpringAnimation(cast(void*)createGObject(SpringAnimation._getGType), No.Take);

@@ -96,6 +96,7 @@ template InitableT()
   }
 }
 
+/// Fluent builder implementation template for [gio.initable.Initable]
 template InitableGidBuilderT()
 {
 }

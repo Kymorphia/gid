@@ -39,8 +39,8 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
   }
 
   /**
-  Get builder for [arrowdataset.hive_partitioning_options.HivePartitioningOptions]
-  Returns: New builder object
+      Get builder for [arrowdataset.hive_partitioning_options.HivePartitioningOptions]
+      Returns: New builder object
   */
   static HivePartitioningOptionsGidBuilder builder()
   {
@@ -77,6 +77,7 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.hive_partitioning_options.HivePartitioningOptions]
 class HivePartitioningOptionsGidBuilderImpl(T) : arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptionsGidBuilderImpl!T
 {
 
@@ -96,6 +97,10 @@ class HivePartitioningOptionsGidBuilderImpl(T) : arrowdataset.key_value_partitio
 /// Fluent builder for [arrowdataset.hive_partitioning_options.HivePartitioningOptions]
 final class HivePartitioningOptionsGidBuilder : HivePartitioningOptionsGidBuilderImpl!HivePartitioningOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HivePartitioningOptions build()
   {
     return new HivePartitioningOptions(cast(void*)createGObject(HivePartitioningOptions._getGType), Yes.Take);

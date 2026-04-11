@@ -86,8 +86,8 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   }
 
   /**
-  Get builder for [gtk.entry_completion.EntryCompletion]
-  Returns: New builder object
+      Get builder for [gtk.entry_completion.EntryCompletion]
+      Returns: New builder object
   */
   static EntryCompletionGidBuilder builder()
   {
@@ -869,6 +869,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   }
 }
 
+/// Fluent builder implementation template for [gtk.entry_completion.EntryCompletion]
 class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T
 {
 
@@ -985,6 +986,10 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.entry_completion.EntryCompletion]
 final class EntryCompletionGidBuilder : EntryCompletionGidBuilderImpl!EntryCompletionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EntryCompletion build()
   {
     return new EntryCompletion(cast(void*)createGObject(EntryCompletion._getGType), Yes.Take);

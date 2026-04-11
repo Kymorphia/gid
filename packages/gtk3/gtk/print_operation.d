@@ -109,8 +109,8 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   }
 
   /**
-  Get builder for [gtk.print_operation.PrintOperation]
-  Returns: New builder object
+      Get builder for [gtk.print_operation.PrintOperation]
+      Returns: New builder object
   */
   static PrintOperationGidBuilder builder()
   {
@@ -1689,6 +1689,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   }
 }
 
+/// Fluent builder implementation template for [gtk.print_operation.PrintOperation]
 class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.print_operation_preview.PrintOperationPreviewGidBuilderImpl!T
 {
 
@@ -1926,6 +1927,10 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtk.print_operation.PrintOperation]
 final class PrintOperationGidBuilder : PrintOperationGidBuilderImpl!PrintOperationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PrintOperation build()
   {
     return new PrintOperation(cast(void*)createGObject(PrintOperation._getGType), Yes.Take);

@@ -69,8 +69,8 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   }
 
   /**
-  Get builder for [gst.element_factory.ElementFactory]
-  Returns: New builder object
+      Get builder for [gst.element_factory.ElementFactory]
+      Returns: New builder object
   */
   static ElementFactoryGidBuilder builder()
   {
@@ -460,6 +460,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   }
 }
 
+/// Fluent builder implementation template for [gst.element_factory.ElementFactory]
 class ElementFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
 {
 }
@@ -467,6 +468,10 @@ class ElementFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuild
 /// Fluent builder for [gst.element_factory.ElementFactory]
 final class ElementFactoryGidBuilder : ElementFactoryGidBuilderImpl!ElementFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ElementFactory build()
   {
     return new ElementFactory(cast(void*)createGObject(ElementFactory._getGType), No.Take);

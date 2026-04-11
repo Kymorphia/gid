@@ -39,8 +39,8 @@ class StringScalar : arrow.base_binary_scalar.BaseBinaryScalar
   }
 
   /**
-  Get builder for [arrow.string_scalar.StringScalar]
-  Returns: New builder object
+      Get builder for [arrow.string_scalar.StringScalar]
+      Returns: New builder object
   */
   static StringScalarGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class StringScalar : arrow.base_binary_scalar.BaseBinaryScalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.string_scalar.StringScalar]
 class StringScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinaryScalarGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class StringScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinaryScalarG
 /// Fluent builder for [arrow.string_scalar.StringScalar]
 final class StringScalarGidBuilder : StringScalarGidBuilderImpl!StringScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StringScalar build()
   {
     return new StringScalar(cast(void*)createGObject(StringScalar._getGType), Yes.Take);

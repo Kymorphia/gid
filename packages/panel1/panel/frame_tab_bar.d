@@ -49,8 +49,8 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   }
 
   /**
-  Get builder for [panel.frame_tab_bar.FrameTabBar]
-  Returns: New builder object
+      Get builder for [panel.frame_tab_bar.FrameTabBar]
+      Returns: New builder object
   */
   static FrameTabBarGidBuilder builder()
   {
@@ -194,6 +194,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   }
 }
 
+/// Fluent builder implementation template for [panel.frame_tab_bar.FrameTabBar]
 class FrameTabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel.frame_header.FrameHeaderGidBuilderImpl!T
 {
 
@@ -236,6 +237,10 @@ class FrameTabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, panel.fr
 /// Fluent builder for [panel.frame_tab_bar.FrameTabBar]
 final class FrameTabBarGidBuilder : FrameTabBarGidBuilderImpl!FrameTabBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FrameTabBar build()
   {
     return new FrameTabBar(cast(void*)createGObject(FrameTabBar._getGType), No.Take);

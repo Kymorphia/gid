@@ -51,8 +51,8 @@ class Download : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.download.Download]
-  Returns: New builder object
+      Get builder for [webkit.download.Download]
+      Returns: New builder object
   */
   static DownloadGidBuilder builder()
   {
@@ -519,6 +519,7 @@ class Download : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.download.Download]
 class DownloadGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -539,6 +540,10 @@ class DownloadGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.download.Download]
 final class DownloadGidBuilder : DownloadGidBuilderImpl!DownloadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Download build()
   {
     return new Download(cast(void*)createGObject(Download._getGType), No.Take);

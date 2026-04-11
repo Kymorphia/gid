@@ -38,8 +38,8 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.feather_write_properties.FeatherWriteProperties]
-  Returns: New builder object
+      Get builder for [arrow.feather_write_properties.FeatherWriteProperties]
+      Returns: New builder object
   */
   static FeatherWritePropertiesGidBuilder builder()
   {
@@ -88,6 +88,7 @@ class FeatherWriteProperties : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.feather_write_properties.FeatherWriteProperties]
 class FeatherWritePropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -113,6 +114,10 @@ class FeatherWritePropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
 /// Fluent builder for [arrow.feather_write_properties.FeatherWriteProperties]
 final class FeatherWritePropertiesGidBuilder : FeatherWritePropertiesGidBuilderImpl!FeatherWritePropertiesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FeatherWriteProperties build()
   {
     return new FeatherWriteProperties(cast(void*)createGObject(FeatherWriteProperties._getGType), Yes.Take);

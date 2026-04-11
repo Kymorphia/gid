@@ -41,8 +41,8 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   }
 
   /**
-  Get builder for [gstvideo.video_aggregator_pad.VideoAggregatorPad]
-  Returns: New builder object
+      Get builder for [gstvideo.video_aggregator_pad.VideoAggregatorPad]
+      Returns: New builder object
   */
   static VideoAggregatorPadGidBuilder builder()
   {
@@ -150,6 +150,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_aggregator_pad.VideoAggregatorPad]
 class VideoAggregatorPadGidBuilderImpl(T) : gstbase.aggregator_pad.AggregatorPadGidBuilderImpl!T
 {
 
@@ -175,6 +176,10 @@ class VideoAggregatorPadGidBuilderImpl(T) : gstbase.aggregator_pad.AggregatorPad
 /// Fluent builder for [gstvideo.video_aggregator_pad.VideoAggregatorPad]
 final class VideoAggregatorPadGidBuilder : VideoAggregatorPadGidBuilderImpl!VideoAggregatorPadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VideoAggregatorPad build()
   {
     return new VideoAggregatorPad(cast(void*)createGObject(VideoAggregatorPad._getGType), No.Take);

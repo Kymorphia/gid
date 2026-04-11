@@ -45,8 +45,8 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-  Get builder for [gtk.selection_filter_model.SelectionFilterModel]
-  Returns: New builder object
+      Get builder for [gtk.selection_filter_model.SelectionFilterModel]
+      Returns: New builder object
   */
   static SelectionFilterModelGidBuilder builder()
   {
@@ -136,6 +136,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 }
 
+/// Fluent builder implementation template for [gtk.selection_filter_model.SelectionFilterModel]
 class SelectionFilterModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
 {
 
@@ -156,6 +157,10 @@ class SelectionFilterModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
 /// Fluent builder for [gtk.selection_filter_model.SelectionFilterModel]
 final class SelectionFilterModelGidBuilder : SelectionFilterModelGidBuilderImpl!SelectionFilterModelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SelectionFilterModel build()
   {
     return new SelectionFilterModel(cast(void*)createGObject(SelectionFilterModel._getGType), Yes.Take);

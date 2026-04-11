@@ -52,8 +52,8 @@ class AudioFilter : gstbase.base_transform.BaseTransform
   }
 
   /**
-  Get builder for [gstaudio.audio_filter.AudioFilter]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_filter.AudioFilter]
+      Returns: New builder object
   */
   static AudioFilterGidBuilder builder()
   {
@@ -61,6 +61,7 @@ class AudioFilter : gstbase.base_transform.BaseTransform
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_filter.AudioFilter]
 class AudioFilterGidBuilderImpl(T) : gstbase.base_transform.BaseTransformGidBuilderImpl!T
 {
 }
@@ -68,6 +69,10 @@ class AudioFilterGidBuilderImpl(T) : gstbase.base_transform.BaseTransformGidBuil
 /// Fluent builder for [gstaudio.audio_filter.AudioFilter]
 final class AudioFilterGidBuilder : AudioFilterGidBuilderImpl!AudioFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioFilter build()
   {
     return new AudioFilter(cast(void*)createGObject(AudioFilter._getGType), No.Take);

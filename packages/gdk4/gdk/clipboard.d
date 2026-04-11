@@ -68,8 +68,8 @@ class Clipboard : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.clipboard.Clipboard]
-  Returns: New builder object
+      Get builder for [gdk.clipboard.Clipboard]
+      Returns: New builder object
   */
   static ClipboardGidBuilder builder()
   {
@@ -511,6 +511,7 @@ class Clipboard : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.clipboard.Clipboard]
 class ClipboardGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -529,6 +530,10 @@ class ClipboardGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.clipboard.Clipboard]
 final class ClipboardGidBuilder : ClipboardGidBuilderImpl!ClipboardGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Clipboard build()
   {
     return new Clipboard(cast(void*)createGObject(Clipboard._getGType), No.Take);

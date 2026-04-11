@@ -61,8 +61,8 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.website_data_manager.WebsiteDataManager]
-  Returns: New builder object
+      Get builder for [webkit.website_data_manager.WebsiteDataManager]
+      Returns: New builder object
   */
   static WebsiteDataManagerGidBuilder builder()
   {
@@ -357,6 +357,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.website_data_manager.WebsiteDataManager]
 class WebsiteDataManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -414,6 +415,10 @@ class WebsiteDataManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [webkit.website_data_manager.WebsiteDataManager]
 final class WebsiteDataManagerGidBuilder : WebsiteDataManagerGidBuilderImpl!WebsiteDataManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebsiteDataManager build()
   {
     return new WebsiteDataManager(cast(void*)createGObject(WebsiteDataManager._getGType), No.Take);

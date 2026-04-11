@@ -40,8 +40,8 @@ class RankOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.rank_options.RankOptions]
-  Returns: New builder object
+      Get builder for [arrow.rank_options.RankOptions]
+      Returns: New builder object
   */
   static RankOptionsGidBuilder builder()
   {
@@ -138,6 +138,7 @@ class RankOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.rank_options.RankOptions]
 class RankOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -167,6 +168,10 @@ class RankOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
 /// Fluent builder for [arrow.rank_options.RankOptions]
 final class RankOptionsGidBuilder : RankOptionsGidBuilderImpl!RankOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RankOptions build()
   {
     return new RankOptions(cast(void*)createGObject(RankOptions._getGType), Yes.Take);

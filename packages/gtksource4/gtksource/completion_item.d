@@ -42,8 +42,8 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   }
 
   /**
-  Get builder for [gtksource.completion_item.CompletionItem]
-  Returns: New builder object
+      Get builder for [gtksource.completion_item.CompletionItem]
+      Returns: New builder object
   */
   static CompletionItemGidBuilder builder()
   {
@@ -245,6 +245,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion_item.CompletionItem]
 class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtksource.completion_proposal.CompletionProposalGidBuilderImpl!T
 {
 
@@ -331,6 +332,10 @@ class CompletionItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtksource.completion_item.CompletionItem]
 final class CompletionItemGidBuilder : CompletionItemGidBuilderImpl!CompletionItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CompletionItem build()
   {
     return new CompletionItem(cast(void*)createGObject(CompletionItem._getGType), Yes.Take);

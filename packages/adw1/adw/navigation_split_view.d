@@ -185,8 +185,8 @@ class NavigationSplitView : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.navigation_split_view.NavigationSplitView]
-  Returns: New builder object
+      Get builder for [adw.navigation_split_view.NavigationSplitView]
+      Returns: New builder object
   */
   static NavigationSplitViewGidBuilder builder()
   {
@@ -640,6 +640,7 @@ class NavigationSplitView : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.navigation_split_view.NavigationSplitView]
 class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -771,6 +772,10 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.navigation_split_view.NavigationSplitView]
 final class NavigationSplitViewGidBuilder : NavigationSplitViewGidBuilderImpl!NavigationSplitViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NavigationSplitView build()
   {
     return new NavigationSplitView(cast(void*)createGObject(NavigationSplitView._getGType), No.Take);

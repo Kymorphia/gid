@@ -56,8 +56,8 @@ class FaviconDatabase : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.favicon_database.FaviconDatabase]
-  Returns: New builder object
+      Get builder for [webkit.favicon_database.FaviconDatabase]
+      Returns: New builder object
   */
   static FaviconDatabaseGidBuilder builder()
   {
@@ -195,6 +195,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.favicon_database.FaviconDatabase]
 class FaviconDatabaseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -202,6 +203,10 @@ class FaviconDatabaseGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [webkit.favicon_database.FaviconDatabase]
 final class FaviconDatabaseGidBuilder : FaviconDatabaseGidBuilderImpl!FaviconDatabaseGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FaviconDatabase build()
   {
     return new FaviconDatabase(cast(void*)createGObject(FaviconDatabase._getGType), No.Take);

@@ -43,8 +43,8 @@ class AssistantPage : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.assistant_page.AssistantPage]
-  Returns: New builder object
+      Get builder for [gtk.assistant_page.AssistantPage]
+      Returns: New builder object
   */
   static AssistantPageGidBuilder builder()
   {
@@ -152,6 +152,7 @@ class AssistantPage : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.assistant_page.AssistantPage]
 class AssistantPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -214,6 +215,10 @@ class AssistantPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.assistant_page.AssistantPage]
 final class AssistantPageGidBuilder : AssistantPageGidBuilderImpl!AssistantPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AssistantPage build()
   {
     return new AssistantPage(cast(void*)createGObject(AssistantPage._getGType), No.Take);

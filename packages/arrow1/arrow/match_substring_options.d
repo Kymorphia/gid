@@ -39,8 +39,8 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.match_substring_options.MatchSubstringOptions]
-  Returns: New builder object
+      Get builder for [arrow.match_substring_options.MatchSubstringOptions]
+      Returns: New builder object
   */
   static MatchSubstringOptionsGidBuilder builder()
   {
@@ -96,6 +96,7 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.match_substring_options.MatchSubstringOptions]
 class MatchSubstringOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -126,6 +127,10 @@ class MatchSubstringOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOp
 /// Fluent builder for [arrow.match_substring_options.MatchSubstringOptions]
 final class MatchSubstringOptionsGidBuilder : MatchSubstringOptionsGidBuilderImpl!MatchSubstringOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MatchSubstringOptions build()
   {
     return new MatchSubstringOptions(cast(void*)createGObject(MatchSubstringOptions._getGType), Yes.Take);

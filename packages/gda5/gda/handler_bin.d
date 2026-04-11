@@ -40,8 +40,8 @@ class HandlerBin : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 
   /**
-  Get builder for [gda.handler_bin.HandlerBin]
-  Returns: New builder object
+      Get builder for [gda.handler_bin.HandlerBin]
+      Returns: New builder object
   */
   static HandlerBinGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class HandlerBin : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 }
 
+/// Fluent builder implementation template for [gda.handler_bin.HandlerBin]
 class HandlerBinGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
 {
 
@@ -72,6 +73,10 @@ class HandlerBinGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [gda.handler_bin.HandlerBin]
 final class HandlerBinGidBuilder : HandlerBinGidBuilderImpl!HandlerBinGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HandlerBin build()
   {
     return new HandlerBin(cast(void*)createGObject(HandlerBin._getGType), No.Take);

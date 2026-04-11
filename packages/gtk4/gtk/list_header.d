@@ -46,8 +46,8 @@ class ListHeader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.list_header.ListHeader]
-  Returns: New builder object
+      Get builder for [gtk.list_header.ListHeader]
+      Returns: New builder object
   */
   static ListHeaderGidBuilder builder()
   {
@@ -195,6 +195,7 @@ class ListHeader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.list_header.ListHeader]
 class ListHeaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -213,6 +214,10 @@ class ListHeaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.list_header.ListHeader]
 final class ListHeaderGidBuilder : ListHeaderGidBuilderImpl!ListHeaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListHeader build()
   {
     return new ListHeader(cast(void*)createGObject(ListHeader._getGType), No.Take);

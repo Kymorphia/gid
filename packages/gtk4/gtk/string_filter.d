@@ -53,8 +53,8 @@ class StringFilter : gtk.filter.Filter
   }
 
   /**
-  Get builder for [gtk.string_filter.StringFilter]
-  Returns: New builder object
+      Get builder for [gtk.string_filter.StringFilter]
+      Returns: New builder object
   */
   static StringFilterGidBuilder builder()
   {
@@ -252,6 +252,7 @@ class StringFilter : gtk.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gtk.string_filter.StringFilter]
 class StringFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
 {
 
@@ -303,6 +304,10 @@ class StringFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gtk.string_filter.StringFilter]
 final class StringFilterGidBuilder : StringFilterGidBuilderImpl!StringFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StringFilter build()
   {
     return new StringFilter(cast(void*)createGObject(StringFilter._getGType), Yes.Take);

@@ -47,8 +47,8 @@ class Coverage : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [pango.coverage.Coverage]
-  Returns: New builder object
+      Get builder for [pango.coverage.Coverage]
+      Returns: New builder object
   */
   static CoverageGidBuilder builder()
   {
@@ -167,6 +167,7 @@ class Coverage : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [pango.coverage.Coverage]
 class CoverageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -174,6 +175,10 @@ class CoverageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [pango.coverage.Coverage]
 final class CoverageGidBuilder : CoverageGidBuilderImpl!CoverageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Coverage build()
   {
     return new Coverage(cast(void*)createGObject(Coverage._getGType), Yes.Take);

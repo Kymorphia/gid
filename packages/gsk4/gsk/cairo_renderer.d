@@ -43,8 +43,8 @@ class CairoRenderer : gsk.renderer.Renderer
   }
 
   /**
-  Get builder for [gsk.cairo_renderer.CairoRenderer]
-  Returns: New builder object
+      Get builder for [gsk.cairo_renderer.CairoRenderer]
+      Returns: New builder object
   */
   static CairoRendererGidBuilder builder()
   {
@@ -70,6 +70,7 @@ class CairoRenderer : gsk.renderer.Renderer
   }
 }
 
+/// Fluent builder implementation template for [gsk.cairo_renderer.CairoRenderer]
 class CairoRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 {
 }
@@ -77,6 +78,10 @@ class CairoRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 /// Fluent builder for [gsk.cairo_renderer.CairoRenderer]
 final class CairoRendererGidBuilder : CairoRendererGidBuilderImpl!CairoRendererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CairoRenderer build()
   {
     return new CairoRenderer(cast(void*)createGObject(CairoRenderer._getGType), Yes.Take);

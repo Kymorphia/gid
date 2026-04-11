@@ -85,8 +85,8 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-  Get builder for [gtk.places_sidebar.PlacesSidebar]
-  Returns: New builder object
+      Get builder for [gtk.places_sidebar.PlacesSidebar]
+      Returns: New builder object
   */
   static PlacesSidebarGidBuilder builder()
   {
@@ -1294,6 +1294,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 }
 
+/// Fluent builder implementation template for [gtk.places_sidebar.PlacesSidebar]
 class PlacesSidebarGidBuilderImpl(T) : gtk.scrolled_window.ScrolledWindowGidBuilderImpl!T
 {
 
@@ -1374,6 +1375,10 @@ class PlacesSidebarGidBuilderImpl(T) : gtk.scrolled_window.ScrolledWindowGidBuil
 /// Fluent builder for [gtk.places_sidebar.PlacesSidebar]
 final class PlacesSidebarGidBuilder : PlacesSidebarGidBuilderImpl!PlacesSidebarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PlacesSidebar build()
   {
     return new PlacesSidebar(cast(void*)createGObject(PlacesSidebar._getGType), No.Take);

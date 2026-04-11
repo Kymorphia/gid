@@ -43,8 +43,8 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 
   /**
-  Get builder for [gda.handler_time.HandlerTime]
-  Returns: New builder object
+      Get builder for [gda.handler_time.HandlerTime]
+      Returns: New builder object
   */
   static HandlerTimeGidBuilder builder()
   {
@@ -145,6 +145,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 }
 
+/// Fluent builder implementation template for [gda.handler_time.HandlerTime]
 class HandlerTimeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
 {
 
@@ -154,6 +155,10 @@ class HandlerTimeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [gda.handler_time.HandlerTime]
 final class HandlerTimeGidBuilder : HandlerTimeGidBuilderImpl!HandlerTimeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HandlerTime build()
   {
     return new HandlerTime(cast(void*)createGObject(HandlerTime._getGType), No.Take);

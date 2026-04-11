@@ -48,8 +48,8 @@ class ATContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.atcontext.ATContext]
-  Returns: New builder object
+      Get builder for [gtk.atcontext.ATContext]
+      Returns: New builder object
   */
   static ATContextGidBuilder builder()
   {
@@ -193,6 +193,7 @@ class ATContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.atcontext.ATContext]
 class ATContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -236,6 +237,10 @@ class ATContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.atcontext.ATContext]
 final class ATContextGidBuilder : ATContextGidBuilderImpl!ATContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ATContext build()
   {
     return new ATContext(cast(void*)createGObject(ATContext._getGType), No.Take);

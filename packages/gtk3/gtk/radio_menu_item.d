@@ -84,8 +84,8 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 
   /**
-  Get builder for [gtk.radio_menu_item.RadioMenuItem]
-  Returns: New builder object
+      Get builder for [gtk.radio_menu_item.RadioMenuItem]
+      Returns: New builder object
   */
   static RadioMenuItemGidBuilder builder()
   {
@@ -314,6 +314,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
   }
 }
 
+/// Fluent builder implementation template for [gtk.radio_menu_item.RadioMenuItem]
 class RadioMenuItemGidBuilderImpl(T) : gtk.check_menu_item.CheckMenuItemGidBuilderImpl!T
 {
 
@@ -333,6 +334,10 @@ class RadioMenuItemGidBuilderImpl(T) : gtk.check_menu_item.CheckMenuItemGidBuild
 /// Fluent builder for [gtk.radio_menu_item.RadioMenuItem]
 final class RadioMenuItemGidBuilder : RadioMenuItemGidBuilderImpl!RadioMenuItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RadioMenuItem build()
   {
     return new RadioMenuItem(cast(void*)createGObject(RadioMenuItem._getGType), No.Take);

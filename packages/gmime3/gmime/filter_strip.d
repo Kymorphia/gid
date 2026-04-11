@@ -40,8 +40,8 @@ class FilterStrip : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_strip.FilterStrip]
-  Returns: New builder object
+      Get builder for [gmime.filter_strip.FilterStrip]
+      Returns: New builder object
   */
   static FilterStripGidBuilder builder()
   {
@@ -61,6 +61,7 @@ class FilterStrip : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_strip.FilterStrip]
 class FilterStripGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -68,6 +69,10 @@ class FilterStripGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_strip.FilterStrip]
 final class FilterStripGidBuilder : FilterStripGidBuilderImpl!FilterStripGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterStrip build()
   {
     return new FilterStrip(cast(void*)createGObject(FilterStrip._getGType), Yes.Take);

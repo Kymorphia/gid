@@ -40,8 +40,8 @@ class Stream : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.stream.Stream]
-  Returns: New builder object
+      Get builder for [gmime.stream.Stream]
+      Returns: New builder object
   */
   static StreamGidBuilder builder()
   {
@@ -305,6 +305,7 @@ class Stream : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.stream.Stream]
 class StreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -312,6 +313,10 @@ class StreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.stream.Stream]
 final class StreamGidBuilder : StreamGidBuilderImpl!StreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Stream build()
   {
     return new Stream(cast(void*)createGObject(Stream._getGType), No.Take);

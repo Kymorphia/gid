@@ -38,8 +38,8 @@ class ExecuteNodeOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.execute_node_options.ExecuteNodeOptions]
-  Returns: New builder object
+      Get builder for [arrow.execute_node_options.ExecuteNodeOptions]
+      Returns: New builder object
   */
   static ExecuteNodeOptionsGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class ExecuteNodeOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.execute_node_options.ExecuteNodeOptions]
 class ExecuteNodeOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -60,6 +61,10 @@ class ExecuteNodeOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [arrow.execute_node_options.ExecuteNodeOptions]
 final class ExecuteNodeOptionsGidBuilder : ExecuteNodeOptionsGidBuilderImpl!ExecuteNodeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExecuteNodeOptions build()
   {
     return new ExecuteNodeOptions(cast(void*)createGObject(ExecuteNodeOptions._getGType), No.Take);

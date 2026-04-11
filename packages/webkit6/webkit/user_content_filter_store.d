@@ -60,8 +60,8 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.user_content_filter_store.UserContentFilterStore]
-  Returns: New builder object
+      Get builder for [webkit.user_content_filter_store.UserContentFilterStore]
+      Returns: New builder object
   */
   static UserContentFilterStoreGidBuilder builder()
   {
@@ -363,6 +363,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.user_content_filter_store.UserContentFilterStore]
 class UserContentFilterStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -382,6 +383,10 @@ class UserContentFilterStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
 /// Fluent builder for [webkit.user_content_filter_store.UserContentFilterStore]
 final class UserContentFilterStoreGidBuilder : UserContentFilterStoreGidBuilderImpl!UserContentFilterStoreGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UserContentFilterStore build()
   {
     return new UserContentFilterStore(cast(void*)createGObject(UserContentFilterStore._getGType), Yes.Take);

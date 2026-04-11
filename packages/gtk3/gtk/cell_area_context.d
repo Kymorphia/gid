@@ -50,8 +50,8 @@ class CellAreaContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.cell_area_context.CellAreaContext]
-  Returns: New builder object
+      Get builder for [gtk.cell_area_context.CellAreaContext]
+      Returns: New builder object
   */
   static CellAreaContextGidBuilder builder()
   {
@@ -315,6 +315,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_area_context.CellAreaContext]
 class CellAreaContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -333,6 +334,10 @@ class CellAreaContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.cell_area_context.CellAreaContext]
 final class CellAreaContextGidBuilder : CellAreaContextGidBuilderImpl!CellAreaContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellAreaContext build()
   {
     return new CellAreaContext(cast(void*)createGObject(CellAreaContext._getGType), No.Take);

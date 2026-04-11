@@ -40,8 +40,8 @@ class HandlerNumerical : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 
   /**
-  Get builder for [gda.handler_numerical.HandlerNumerical]
-  Returns: New builder object
+      Get builder for [gda.handler_numerical.HandlerNumerical]
+      Returns: New builder object
   */
   static HandlerNumericalGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class HandlerNumerical : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 }
 
+/// Fluent builder implementation template for [gda.handler_numerical.HandlerNumerical]
 class HandlerNumericalGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
 {
 
@@ -72,6 +73,10 @@ class HandlerNumericalGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gda.handler_numerical.HandlerNumerical]
 final class HandlerNumericalGidBuilder : HandlerNumericalGidBuilderImpl!HandlerNumericalGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HandlerNumerical build()
   {
     return new HandlerNumerical(cast(void*)createGObject(HandlerNumerical._getGType), No.Take);

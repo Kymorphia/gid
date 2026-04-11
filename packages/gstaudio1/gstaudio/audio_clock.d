@@ -46,8 +46,8 @@ class AudioClock : gst.system_clock.SystemClock
   }
 
   /**
-  Get builder for [gstaudio.audio_clock.AudioClock]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_clock.AudioClock]
+      Returns: New builder object
   */
   static AudioClockGidBuilder builder()
   {
@@ -139,6 +139,7 @@ class AudioClock : gst.system_clock.SystemClock
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_clock.AudioClock]
 class AudioClockGidBuilderImpl(T) : gst.system_clock.SystemClockGidBuilderImpl!T
 {
 }
@@ -146,6 +147,10 @@ class AudioClockGidBuilderImpl(T) : gst.system_clock.SystemClockGidBuilderImpl!T
 /// Fluent builder for [gstaudio.audio_clock.AudioClock]
 final class AudioClockGidBuilder : AudioClockGidBuilderImpl!AudioClockGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioClock build()
   {
     return new AudioClock(cast(void*)createGObject(AudioClock._getGType), Yes.Take);

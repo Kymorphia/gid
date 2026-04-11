@@ -97,8 +97,8 @@ class AccelMap : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.accel_map.AccelMap]
-  Returns: New builder object
+      Get builder for [gtk.accel_map.AccelMap]
+      Returns: New builder object
   */
   static AccelMapGidBuilder builder()
   {
@@ -425,6 +425,7 @@ class AccelMap : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.accel_map.AccelMap]
 class AccelMapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -432,6 +433,10 @@ class AccelMapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.accel_map.AccelMap]
 final class AccelMapGidBuilder : AccelMapGidBuilderImpl!AccelMapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AccelMap build()
   {
     return new AccelMap(cast(void*)createGObject(AccelMap._getGType), No.Take);

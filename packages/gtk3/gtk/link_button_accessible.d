@@ -46,8 +46,8 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
   }
 
   /**
-  Get builder for [gtk.link_button_accessible.LinkButtonAccessible]
-  Returns: New builder object
+      Get builder for [gtk.link_button_accessible.LinkButtonAccessible]
+      Returns: New builder object
   */
   static LinkButtonAccessibleGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
   mixin HyperlinkImplT!();
 }
 
+/// Fluent builder implementation template for [gtk.link_button_accessible.LinkButtonAccessible]
 class LinkButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAccessibleGidBuilderImpl!T, atk.hyperlink_impl.HyperlinkImplGidBuilderImpl!T
 {
 
@@ -66,6 +67,10 @@ class LinkButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAccess
 /// Fluent builder for [gtk.link_button_accessible.LinkButtonAccessible]
 final class LinkButtonAccessibleGidBuilder : LinkButtonAccessibleGidBuilderImpl!LinkButtonAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LinkButtonAccessible build()
   {
     return new LinkButtonAccessible(cast(void*)createGObject(LinkButtonAccessible._getGType), No.Take);

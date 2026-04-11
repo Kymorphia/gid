@@ -42,8 +42,8 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
   }
 
   /**
-  Get builder for [gmime.internet_address_group.InternetAddressGroup]
-  Returns: New builder object
+      Get builder for [gmime.internet_address_group.InternetAddressGroup]
+      Returns: New builder object
   */
   static InternetAddressGroupGidBuilder builder()
   {
@@ -108,6 +108,7 @@ class InternetAddressGroup : gmime.internet_address.InternetAddress
   }
 }
 
+/// Fluent builder implementation template for [gmime.internet_address_group.InternetAddressGroup]
 class InternetAddressGroupGidBuilderImpl(T) : gmime.internet_address.InternetAddressGidBuilderImpl!T
 {
 }
@@ -115,6 +116,10 @@ class InternetAddressGroupGidBuilderImpl(T) : gmime.internet_address.InternetAdd
 /// Fluent builder for [gmime.internet_address_group.InternetAddressGroup]
 final class InternetAddressGroupGidBuilder : InternetAddressGroupGidBuilderImpl!InternetAddressGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InternetAddressGroup build()
   {
     return new InternetAddressGroup(cast(void*)createGObject(InternetAddressGroup._getGType), Yes.Take);

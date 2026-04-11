@@ -92,8 +92,8 @@ class TabView : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.tab_view.TabView]
-  Returns: New builder object
+      Get builder for [adw.tab_view.TabView]
+      Returns: New builder object
   */
   static TabViewGidBuilder builder()
   {
@@ -1266,6 +1266,7 @@ class TabView : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.tab_view.TabView]
 class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -1341,6 +1342,10 @@ class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.tab_view.TabView]
 final class TabViewGidBuilder : TabViewGidBuilderImpl!TabViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TabView build()
   {
     return new TabView(cast(void*)createGObject(TabView._getGType), No.Take);

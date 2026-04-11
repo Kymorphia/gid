@@ -75,8 +75,8 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   }
 
   /**
-  Get builder for [gtk.css_provider.CssProvider]
-  Returns: New builder object
+      Get builder for [gtk.css_provider.CssProvider]
+      Returns: New builder object
   */
   static CssProviderGidBuilder builder()
   {
@@ -285,6 +285,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   }
 }
 
+/// Fluent builder implementation template for [gtk.css_provider.CssProvider]
 class CssProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.style_provider.StyleProviderGidBuilderImpl!T
 {
 
@@ -294,6 +295,10 @@ class CssProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [gtk.css_provider.CssProvider]
 final class CssProviderGidBuilder : CssProviderGidBuilderImpl!CssProviderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CssProvider build()
   {
     return new CssProvider(cast(void*)createGObject(CssProvider._getGType), Yes.Take);

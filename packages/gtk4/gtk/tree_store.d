@@ -85,8 +85,8 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   }
 
   /**
-  Get builder for [gtk.tree_store.TreeStore]
-  Returns: New builder object
+      Get builder for [gtk.tree_store.TreeStore]
+      Returns: New builder object
   */
   static TreeStoreGidBuilder builder()
   {
@@ -506,6 +506,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_store.TreeStore]
 class TreeStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T, gtk.tree_drag_dest.TreeDragDestGidBuilderImpl!T, gtk.tree_drag_source.TreeDragSourceGidBuilderImpl!T, gtk.tree_model.TreeModelGidBuilderImpl!T, gtk.tree_sortable.TreeSortableGidBuilderImpl!T
 {
 
@@ -519,6 +520,10 @@ class TreeStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
 /// Fluent builder for [gtk.tree_store.TreeStore]
 final class TreeStoreGidBuilder : TreeStoreGidBuilderImpl!TreeStoreGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeStore build()
   {
     return new TreeStore(cast(void*)createGObject(TreeStore._getGType), Yes.Take);

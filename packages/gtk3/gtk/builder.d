@@ -227,8 +227,8 @@ class Builder : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.builder.Builder]
-  Returns: New builder object
+      Get builder for [gtk.builder.Builder]
+      Returns: New builder object
   */
   static BuilderGidBuilder builder()
   {
@@ -828,6 +828,7 @@ class Builder : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.builder.Builder]
 class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -849,6 +850,10 @@ class BuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.builder.Builder]
 final class BuilderGidBuilder : BuilderGidBuilderImpl!BuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Builder build()
   {
     return new Builder(cast(void*)createGObject(Builder._getGType), Yes.Take);

@@ -46,8 +46,8 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   }
 
   /**
-  Get builder for [gio.dbus_object_proxy.DBusObjectProxy]
-  Returns: New builder object
+      Get builder for [gio.dbus_object_proxy.DBusObjectProxy]
+      Returns: New builder object
   */
   static DBusObjectProxyGidBuilder builder()
   {
@@ -105,6 +105,7 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_object_proxy.DBusObjectProxy]
 class DBusObjectProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.dbus_object.DBusObjectGidBuilderImpl!T
 {
 
@@ -136,6 +137,10 @@ class DBusObjectProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gio.dbus_object_proxy.DBusObjectProxy]
 final class DBusObjectProxyGidBuilder : DBusObjectProxyGidBuilderImpl!DBusObjectProxyGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusObjectProxy build()
   {
     return new DBusObjectProxy(cast(void*)createGObject(DBusObjectProxy._getGType), Yes.Take);

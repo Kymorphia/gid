@@ -79,8 +79,8 @@ class RTPBaseDepayload : gst.element.Element
   }
 
   /**
-  Get builder for [gstrtp.rtpbase_depayload.RTPBaseDepayload]
-  Returns: New builder object
+      Get builder for [gstrtp.rtpbase_depayload.RTPBaseDepayload]
+      Returns: New builder object
   */
   static RTPBaseDepayloadGidBuilder builder()
   {
@@ -460,6 +460,7 @@ class RTPBaseDepayload : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstrtp.rtpbase_depayload.RTPBaseDepayload]
 class RTPBaseDepayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
@@ -506,6 +507,10 @@ class RTPBaseDepayloadGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstrtp.rtpbase_depayload.RTPBaseDepayload]
 final class RTPBaseDepayloadGidBuilder : RTPBaseDepayloadGidBuilderImpl!RTPBaseDepayloadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RTPBaseDepayload build()
   {
     return new RTPBaseDepayload(cast(void*)createGObject(RTPBaseDepayload._getGType), No.Take);

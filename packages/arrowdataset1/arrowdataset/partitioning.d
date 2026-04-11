@@ -38,8 +38,8 @@ class Partitioning : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.partitioning.Partitioning]
-  Returns: New builder object
+      Get builder for [arrowdataset.partitioning.Partitioning]
+      Returns: New builder object
   */
   static PartitioningGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class Partitioning : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.partitioning.Partitioning]
 class PartitioningGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -78,6 +79,10 @@ class PartitioningGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowdataset.partitioning.Partitioning]
 final class PartitioningGidBuilder : PartitioningGidBuilderImpl!PartitioningGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Partitioning build()
   {
     return new Partitioning(cast(void*)createGObject(Partitioning._getGType), No.Take);

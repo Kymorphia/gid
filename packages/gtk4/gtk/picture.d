@@ -95,8 +95,8 @@ class Picture : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.picture.Picture]
-  Returns: New builder object
+      Get builder for [gtk.picture.Picture]
+      Returns: New builder object
   */
   static PictureGidBuilder builder()
   {
@@ -565,6 +565,7 @@ class Picture : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.picture.Picture]
 class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -642,6 +643,10 @@ class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.picture.Picture]
 final class PictureGidBuilder : PictureGidBuilderImpl!PictureGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Picture build()
   {
     return new Picture(cast(void*)createGObject(Picture._getGType), No.Take);

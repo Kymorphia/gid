@@ -84,8 +84,8 @@ class Parser : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [json.parser.Parser]
-  Returns: New builder object
+      Get builder for [json.parser.Parser]
+      Returns: New builder object
   */
   static ParserGidBuilder builder()
   {
@@ -754,6 +754,7 @@ class Parser : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [json.parser.Parser]
 class ParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -776,6 +777,10 @@ class ParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [json.parser.Parser]
 final class ParserGidBuilder : ParserGidBuilderImpl!ParserGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Parser build()
   {
     return new Parser(cast(void*)createGObject(Parser._getGType), Yes.Take);

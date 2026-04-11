@@ -40,8 +40,8 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
   }
 
   /**
-  Get builder for [gmime.internet_address_mailbox.InternetAddressMailbox]
-  Returns: New builder object
+      Get builder for [gmime.internet_address_mailbox.InternetAddressMailbox]
+      Returns: New builder object
   */
   static InternetAddressMailboxGidBuilder builder()
   {
@@ -105,6 +105,7 @@ class InternetAddressMailbox : gmime.internet_address.InternetAddress
   }
 }
 
+/// Fluent builder implementation template for [gmime.internet_address_mailbox.InternetAddressMailbox]
 class InternetAddressMailboxGidBuilderImpl(T) : gmime.internet_address.InternetAddressGidBuilderImpl!T
 {
 }
@@ -112,6 +113,10 @@ class InternetAddressMailboxGidBuilderImpl(T) : gmime.internet_address.InternetA
 /// Fluent builder for [gmime.internet_address_mailbox.InternetAddressMailbox]
 final class InternetAddressMailboxGidBuilder : InternetAddressMailboxGidBuilderImpl!InternetAddressMailboxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InternetAddressMailbox build()
   {
     return new InternetAddressMailbox(cast(void*)createGObject(InternetAddressMailbox._getGType), Yes.Take);

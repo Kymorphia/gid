@@ -121,6 +121,7 @@ template TableCellT()
   }
 }
 
+/// Fluent builder implementation template for [atk.table_cell.TableCell]
 template TableCellGidBuilderT()
 {
 }

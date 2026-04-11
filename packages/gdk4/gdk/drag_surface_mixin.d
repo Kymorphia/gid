@@ -87,6 +87,7 @@ template DragSurfaceT()
   }
 }
 
+/// Fluent builder implementation template for [gdk.drag_surface.DragSurface]
 template DragSurfaceGidBuilderT()
 {
 }

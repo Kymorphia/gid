@@ -164,6 +164,7 @@ template UndoManagerT()
   }
 }
 
+/// Fluent builder implementation template for [gtksource.undo_manager.UndoManager]
 template UndoManagerGidBuilderT()
 {
 }

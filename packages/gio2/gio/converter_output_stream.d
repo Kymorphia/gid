@@ -49,8 +49,8 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   }
 
   /**
-  Get builder for [gio.converter_output_stream.ConverterOutputStream]
-  Returns: New builder object
+      Get builder for [gio.converter_output_stream.ConverterOutputStream]
+      Returns: New builder object
   */
   static ConverterOutputStreamGidBuilder builder()
   {
@@ -96,6 +96,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   }
 }
 
+/// Fluent builder implementation template for [gio.converter_output_stream.ConverterOutputStream]
 class ConverterOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOutputStreamGidBuilderImpl!T, gio.pollable_output_stream.PollableOutputStreamGidBuilderImpl!T
 {
 
@@ -116,6 +117,10 @@ class ConverterOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOu
 /// Fluent builder for [gio.converter_output_stream.ConverterOutputStream]
 final class ConverterOutputStreamGidBuilder : ConverterOutputStreamGidBuilderImpl!ConverterOutputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ConverterOutputStream build()
   {
     return new ConverterOutputStream(cast(void*)createGObject(ConverterOutputStream._getGType), Yes.Take);

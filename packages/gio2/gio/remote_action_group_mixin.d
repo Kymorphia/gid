@@ -80,6 +80,7 @@ template RemoteActionGroupT()
   }
 }
 
+/// Fluent builder implementation template for [gio.remote_action_group.RemoteActionGroup]
 template RemoteActionGroupGidBuilderT()
 {
 }

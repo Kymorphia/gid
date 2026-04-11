@@ -42,8 +42,8 @@ class PrintCompositor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.print_compositor.PrintCompositor]
-  Returns: New builder object
+      Get builder for [gtksource.print_compositor.PrintCompositor]
+      Returns: New builder object
   */
   static PrintCompositorGidBuilder builder()
   {
@@ -1041,6 +1041,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.print_compositor.PrintCompositor]
 class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -1228,6 +1229,10 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtksource.print_compositor.PrintCompositor]
 final class PrintCompositorGidBuilder : PrintCompositorGidBuilderImpl!PrintCompositorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PrintCompositor build()
   {
     return new PrintCompositor(cast(void*)createGObject(PrintCompositor._getGType), Yes.Take);

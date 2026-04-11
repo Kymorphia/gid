@@ -45,8 +45,8 @@ class MultipartSigned : gmime.multipart.Multipart
   }
 
   /**
-  Get builder for [gmime.multipart_signed.MultipartSigned]
-  Returns: New builder object
+      Get builder for [gmime.multipart_signed.MultipartSigned]
+      Returns: New builder object
   */
   static MultipartSignedGidBuilder builder()
   {
@@ -114,6 +114,7 @@ class MultipartSigned : gmime.multipart.Multipart
   }
 }
 
+/// Fluent builder implementation template for [gmime.multipart_signed.MultipartSigned]
 class MultipartSignedGidBuilderImpl(T) : gmime.multipart.MultipartGidBuilderImpl!T
 {
 }
@@ -121,6 +122,10 @@ class MultipartSignedGidBuilderImpl(T) : gmime.multipart.MultipartGidBuilderImpl
 /// Fluent builder for [gmime.multipart_signed.MultipartSigned]
 final class MultipartSignedGidBuilder : MultipartSignedGidBuilderImpl!MultipartSignedGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MultipartSigned build()
   {
     return new MultipartSigned(cast(void*)createGObject(MultipartSigned._getGType), Yes.Take);

@@ -41,8 +41,8 @@ class LargeListArray : arrow.array.Array
   }
 
   /**
-  Get builder for [arrow.large_list_array.LargeListArray]
-  Returns: New builder object
+      Get builder for [arrow.large_list_array.LargeListArray]
+      Returns: New builder object
   */
   static LargeListArrayGidBuilder builder()
   {
@@ -124,6 +124,7 @@ class LargeListArray : arrow.array.Array
   }
 }
 
+/// Fluent builder implementation template for [arrow.large_list_array.LargeListArray]
 class LargeListArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 
@@ -137,6 +138,10 @@ class LargeListArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 /// Fluent builder for [arrow.large_list_array.LargeListArray]
 final class LargeListArrayGidBuilder : LargeListArrayGidBuilderImpl!LargeListArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LargeListArray build()
   {
     return new LargeListArray(cast(void*)createGObject(LargeListArray._getGType), Yes.Take);

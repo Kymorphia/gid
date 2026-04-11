@@ -164,6 +164,7 @@ template RTSPExtensionT()
   }
 }
 
+/// Fluent builder implementation template for [gstrtsp.rtspextension.RTSPExtension]
 template RTSPExtensionGidBuilderT()
 {
 }

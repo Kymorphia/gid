@@ -975,6 +975,7 @@ class ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gobject.object.ObjectWrap]
 class ObjectWrapGidBuilderImpl(T) : gobject.gid_builder.GidBuilder!T
 {
 }
@@ -982,6 +983,10 @@ class ObjectWrapGidBuilderImpl(T) : gobject.gid_builder.GidBuilder!T
 /// Fluent builder for [gobject.object.ObjectWrap]
 final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ObjectWrap build()
   {
     return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), Yes.Take);

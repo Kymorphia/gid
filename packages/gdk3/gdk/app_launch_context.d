@@ -63,8 +63,8 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   }
 
   /**
-  Get builder for [gdk.app_launch_context.AppLaunchContext]
-  Returns: New builder object
+      Get builder for [gdk.app_launch_context.AppLaunchContext]
+      Returns: New builder object
   */
   static AppLaunchContextGidBuilder builder()
   {
@@ -195,6 +195,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   }
 }
 
+/// Fluent builder implementation template for [gdk.app_launch_context.AppLaunchContext]
 class AppLaunchContextGidBuilderImpl(T) : gio.app_launch_context.AppLaunchContextGidBuilderImpl!T
 {
 
@@ -208,6 +209,10 @@ class AppLaunchContextGidBuilderImpl(T) : gio.app_launch_context.AppLaunchContex
 /// Fluent builder for [gdk.app_launch_context.AppLaunchContext]
 final class AppLaunchContextGidBuilder : AppLaunchContextGidBuilderImpl!AppLaunchContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AppLaunchContext build()
   {
     return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), Yes.Take);

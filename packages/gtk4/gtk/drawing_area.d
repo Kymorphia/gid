@@ -128,8 +128,8 @@ class DrawingArea : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.drawing_area.DrawingArea]
-  Returns: New builder object
+      Get builder for [gtk.drawing_area.DrawingArea]
+      Returns: New builder object
   */
   static DrawingAreaGidBuilder builder()
   {
@@ -331,6 +331,7 @@ class DrawingArea : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.drawing_area.DrawingArea]
 class DrawingAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -361,6 +362,10 @@ class DrawingAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.drawing_area.DrawingArea]
 final class DrawingAreaGidBuilder : DrawingAreaGidBuilderImpl!DrawingAreaGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DrawingArea build()
   {
     return new DrawingArea(cast(void*)createGObject(DrawingArea._getGType), No.Take);

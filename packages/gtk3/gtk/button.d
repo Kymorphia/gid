@@ -73,8 +73,8 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   }
 
   /**
-  Get builder for [gtk.button.Button]
-  Returns: New builder object
+      Get builder for [gtk.button.Button]
+      Returns: New builder object
   */
   static ButtonGidBuilder builder()
   {
@@ -905,6 +905,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   }
 }
 
+/// Fluent builder implementation template for [gtk.button.Button]
 class ButtonGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T
 {
 
@@ -1008,6 +1009,10 @@ class ButtonGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Acti
 /// Fluent builder for [gtk.button.Button]
 final class ButtonGidBuilder : ButtonGidBuilderImpl!ButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Button build()
   {
     return new Button(cast(void*)createGObject(Button._getGType), No.Take);

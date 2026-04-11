@@ -69,6 +69,7 @@ interface StreamVolume
   void setVolume(gstaudio.types.StreamVolumeFormat format, double val);
 }
 
+/// Fluent builder implementation template for [gstaudio.stream_volume.StreamVolume]
 interface StreamVolumeGidBuilderImpl(T)
 {
 

@@ -204,8 +204,8 @@ class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
   }
 
   /**
-  Get builder for [gtk.file_chooser_dialog.FileChooserDialog]
-  Returns: New builder object
+      Get builder for [gtk.file_chooser_dialog.FileChooserDialog]
+      Returns: New builder object
   */
   static FileChooserDialogGidBuilder builder()
   {
@@ -215,6 +215,7 @@ class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
   mixin FileChooserT!();
 }
 
+/// Fluent builder implementation template for [gtk.file_chooser_dialog.FileChooserDialog]
 class FileChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk.file_chooser.FileChooserGidBuilderImpl!T
 {
 
@@ -224,6 +225,10 @@ class FileChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gt
 /// Fluent builder for [gtk.file_chooser_dialog.FileChooserDialog]
 final class FileChooserDialogGidBuilder : FileChooserDialogGidBuilderImpl!FileChooserDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileChooserDialog build()
   {
     return new FileChooserDialog(cast(void*)createGObject(FileChooserDialog._getGType), No.Take);

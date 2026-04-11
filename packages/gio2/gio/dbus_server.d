@@ -66,8 +66,8 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /**
-  Get builder for [gio.dbus_server.DBusServer]
-  Returns: New builder object
+      Get builder for [gio.dbus_server.DBusServer]
+      Returns: New builder object
   */
   static DBusServerGidBuilder builder()
   {
@@ -313,6 +313,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_server.DBusServer]
 class DBusServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -368,6 +369,10 @@ class DBusServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [gio.dbus_server.DBusServer]
 final class DBusServerGidBuilder : DBusServerGidBuilderImpl!DBusServerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusServer build()
   {
     return new DBusServer(cast(void*)createGObject(DBusServer._getGType), No.Take);

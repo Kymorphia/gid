@@ -39,8 +39,8 @@ class LocalFileSystem : arrow.file_system.FileSystem
   }
 
   /**
-  Get builder for [arrow.local_file_system.LocalFileSystem]
-  Returns: New builder object
+      Get builder for [arrow.local_file_system.LocalFileSystem]
+      Returns: New builder object
   */
   static LocalFileSystemGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class LocalFileSystem : arrow.file_system.FileSystem
   }
 }
 
+/// Fluent builder implementation template for [arrow.local_file_system.LocalFileSystem]
 class LocalFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class LocalFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderI
 /// Fluent builder for [arrow.local_file_system.LocalFileSystem]
 final class LocalFileSystemGidBuilder : LocalFileSystemGidBuilderImpl!LocalFileSystemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LocalFileSystem build()
   {
     return new LocalFileSystem(cast(void*)createGObject(LocalFileSystem._getGType), Yes.Take);

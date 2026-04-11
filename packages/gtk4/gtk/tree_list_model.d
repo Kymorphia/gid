@@ -44,8 +44,8 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-  Get builder for [gtk.tree_list_model.TreeListModel]
-  Returns: New builder object
+      Get builder for [gtk.tree_list_model.TreeListModel]
+      Returns: New builder object
   */
   static TreeListModelGidBuilder builder()
   {
@@ -260,6 +260,7 @@ class TreeListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_list_model.TreeListModel]
 class TreeListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
 {
 
@@ -295,6 +296,10 @@ class TreeListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.tree_list_model.TreeListModel]
 final class TreeListModelGidBuilder : TreeListModelGidBuilderImpl!TreeListModelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeListModel build()
   {
     return new TreeListModel(cast(void*)createGObject(TreeListModel._getGType), Yes.Take);

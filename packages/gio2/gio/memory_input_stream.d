@@ -50,8 +50,8 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   }
 
   /**
-  Get builder for [gio.memory_input_stream.MemoryInputStream]
-  Returns: New builder object
+      Get builder for [gio.memory_input_stream.MemoryInputStream]
+      Returns: New builder object
   */
   static MemoryInputStreamGidBuilder builder()
   {
@@ -99,6 +99,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   }
 }
 
+/// Fluent builder implementation template for [gio.memory_input_stream.MemoryInputStream]
 class MemoryInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilderImpl!T, gio.pollable_input_stream.PollableInputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
 {
 
@@ -109,6 +110,10 @@ class MemoryInputStreamGidBuilderImpl(T) : gio.input_stream.InputStreamGidBuilde
 /// Fluent builder for [gio.memory_input_stream.MemoryInputStream]
 final class MemoryInputStreamGidBuilder : MemoryInputStreamGidBuilderImpl!MemoryInputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MemoryInputStream build()
   {
     return new MemoryInputStream(cast(void*)createGObject(MemoryInputStream._getGType), Yes.Take);

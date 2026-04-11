@@ -63,8 +63,8 @@ class OffscreenWindow : gtk.window.Window
   }
 
   /**
-  Get builder for [gtk.offscreen_window.OffscreenWindow]
-  Returns: New builder object
+      Get builder for [gtk.offscreen_window.OffscreenWindow]
+      Returns: New builder object
   */
   static OffscreenWindowGidBuilder builder()
   {
@@ -114,6 +114,7 @@ class OffscreenWindow : gtk.window.Window
   }
 }
 
+/// Fluent builder implementation template for [gtk.offscreen_window.OffscreenWindow]
 class OffscreenWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 {
 
@@ -122,6 +123,10 @@ class OffscreenWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 /// Fluent builder for [gtk.offscreen_window.OffscreenWindow]
 final class OffscreenWindowGidBuilder : OffscreenWindowGidBuilderImpl!OffscreenWindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   OffscreenWindow build()
   {
     return new OffscreenWindow(cast(void*)createGObject(OffscreenWindow._getGType), No.Take);

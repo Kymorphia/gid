@@ -156,6 +156,7 @@ interface FontMap
   void setResolution(double dpi);
 }
 
+/// Fluent builder implementation template for [pangocairo.font_map.FontMap]
 interface FontMapGidBuilderImpl(T)
 {
 }

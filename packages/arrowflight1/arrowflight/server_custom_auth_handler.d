@@ -43,8 +43,8 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
   }
 
   /**
-  Get builder for [arrowflight.server_custom_auth_handler.ServerCustomAuthHandler]
-  Returns: New builder object
+      Get builder for [arrowflight.server_custom_auth_handler.ServerCustomAuthHandler]
+      Returns: New builder object
   */
   static ServerCustomAuthHandlerGidBuilder builder()
   {
@@ -92,6 +92,7 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.server_custom_auth_handler.ServerCustomAuthHandler]
 class ServerCustomAuthHandlerGidBuilderImpl(T) : arrowflight.server_auth_handler.ServerAuthHandlerGidBuilderImpl!T
 {
 }
@@ -99,6 +100,10 @@ class ServerCustomAuthHandlerGidBuilderImpl(T) : arrowflight.server_auth_handler
 /// Fluent builder for [arrowflight.server_custom_auth_handler.ServerCustomAuthHandler]
 final class ServerCustomAuthHandlerGidBuilder : ServerCustomAuthHandlerGidBuilderImpl!ServerCustomAuthHandlerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ServerCustomAuthHandler build()
   {
     return new ServerCustomAuthHandler(cast(void*)createGObject(ServerCustomAuthHandler._getGType), No.Take);

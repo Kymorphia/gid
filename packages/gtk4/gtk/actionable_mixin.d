@@ -145,6 +145,7 @@ template ActionableT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.actionable.Actionable]
 template ActionableGidBuilderT()
 {
 

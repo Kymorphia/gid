@@ -55,8 +55,8 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.dbus_method_invocation.DBusMethodInvocation]
-  Returns: New builder object
+      Get builder for [gio.dbus_method_invocation.DBusMethodInvocation]
+      Returns: New builder object
   */
   static DBusMethodInvocationGidBuilder builder()
   {
@@ -312,6 +312,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_method_invocation.DBusMethodInvocation]
 class DBusMethodInvocationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -319,6 +320,10 @@ class DBusMethodInvocationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
 /// Fluent builder for [gio.dbus_method_invocation.DBusMethodInvocation]
 final class DBusMethodInvocationGidBuilder : DBusMethodInvocationGidBuilderImpl!DBusMethodInvocationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusMethodInvocation build()
   {
     return new DBusMethodInvocation(cast(void*)createGObject(DBusMethodInvocation._getGType), No.Take);

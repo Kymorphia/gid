@@ -54,8 +54,8 @@ class GridLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-  Get builder for [gtk.grid_layout.GridLayout]
-  Returns: New builder object
+      Get builder for [gtk.grid_layout.GridLayout]
+      Returns: New builder object
   */
   static GridLayoutGidBuilder builder()
   {
@@ -318,6 +318,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   }
 }
 
+/// Fluent builder implementation template for [gtk.grid_layout.GridLayout]
 class GridLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T
 {
 
@@ -381,6 +382,10 @@ class GridLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderIm
 /// Fluent builder for [gtk.grid_layout.GridLayout]
 final class GridLayoutGidBuilder : GridLayoutGidBuilderImpl!GridLayoutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GridLayout build()
   {
     return new GridLayout(cast(void*)createGObject(GridLayout._getGType), Yes.Take);

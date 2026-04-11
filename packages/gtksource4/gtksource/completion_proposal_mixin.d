@@ -193,6 +193,7 @@ template CompletionProposalT()
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion_proposal.CompletionProposal]
 template CompletionProposalGidBuilderT()
 {
 }

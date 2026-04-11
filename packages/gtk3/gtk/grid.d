@@ -63,8 +63,8 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.grid.Grid]
-  Returns: New builder object
+      Get builder for [gtk.grid.Grid]
+      Returns: New builder object
   */
   static GridGidBuilder builder()
   {
@@ -428,6 +428,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.grid.Grid]
 class GridGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -467,6 +468,10 @@ class GridGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orien
 /// Fluent builder for [gtk.grid.Grid]
 final class GridGidBuilder : GridGidBuilderImpl!GridGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Grid build()
   {
     return new Grid(cast(void*)createGObject(Grid._getGType), No.Take);

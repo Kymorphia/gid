@@ -41,8 +41,8 @@ class DragContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.drag_context.DragContext]
-  Returns: New builder object
+      Get builder for [gdk.drag_context.DragContext]
+      Returns: New builder object
   */
   static DragContextGidBuilder builder()
   {
@@ -394,6 +394,7 @@ class DragContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.drag_context.DragContext]
 class DragContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -401,6 +402,10 @@ class DragContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.drag_context.DragContext]
 final class DragContextGidBuilder : DragContextGidBuilderImpl!DragContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DragContext build()
   {
     return new DragContext(cast(void*)createGObject(DragContext._getGType), No.Take);

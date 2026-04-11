@@ -38,8 +38,8 @@ class DataStream : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.data_stream.DataStream]
-  Returns: New builder object
+      Get builder for [arrowflight.data_stream.DataStream]
+      Returns: New builder object
   */
   static DataStreamGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class DataStream : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.data_stream.DataStream]
 class DataStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -60,6 +61,10 @@ class DataStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.data_stream.DataStream]
 final class DataStreamGidBuilder : DataStreamGidBuilderImpl!DataStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataStream build()
   {
     return new DataStream(cast(void*)createGObject(DataStream._getGType), No.Take);

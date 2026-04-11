@@ -48,6 +48,7 @@ interface StyleProvider
   gulong connectGtkPrivateChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.style_provider.StyleProvider]
 interface StyleProviderGidBuilderImpl(T)
 {
 }

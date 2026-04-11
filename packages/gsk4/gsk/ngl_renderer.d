@@ -38,8 +38,8 @@ class NglRenderer : gsk.renderer.Renderer
   }
 
   /**
-  Get builder for [gsk.ngl_renderer.NglRenderer]
-  Returns: New builder object
+      Get builder for [gsk.ngl_renderer.NglRenderer]
+      Returns: New builder object
   */
   static NglRendererGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class NglRenderer : gsk.renderer.Renderer
   }
 }
 
+/// Fluent builder implementation template for [gsk.ngl_renderer.NglRenderer]
 class NglRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class NglRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 /// Fluent builder for [gsk.ngl_renderer.NglRenderer]
 final class NglRendererGidBuilder : NglRendererGidBuilderImpl!NglRendererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NglRenderer build()
   {
     return new NglRenderer(cast(void*)createGObject(NglRenderer._getGType), Yes.Take);

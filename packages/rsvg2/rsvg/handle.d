@@ -205,8 +205,8 @@ class Handle : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [rsvg.handle.Handle]
-  Returns: New builder object
+      Get builder for [rsvg.handle.Handle]
+      Returns: New builder object
   */
   static HandleGidBuilder builder()
   {
@@ -1468,6 +1468,7 @@ class Handle : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [rsvg.handle.Handle]
 class HandleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -1520,6 +1521,10 @@ class HandleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [rsvg.handle.Handle]
 final class HandleGidBuilder : HandleGidBuilderImpl!HandleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Handle build()
   {
     return new Handle(cast(void*)createGObject(Handle._getGType), Yes.Take);

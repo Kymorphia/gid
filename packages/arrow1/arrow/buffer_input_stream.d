@@ -44,8 +44,8 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
   }
 
   /**
-  Get builder for [arrow.buffer_input_stream.BufferInputStream]
-  Returns: New builder object
+      Get builder for [arrow.buffer_input_stream.BufferInputStream]
+      Returns: New builder object
   */
   static BufferInputStreamGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
   }
 }
 
+/// Fluent builder implementation template for [arrow.buffer_input_stream.BufferInputStream]
 class BufferInputStreamGidBuilderImpl(T) : arrow.seekable_input_stream.SeekableInputStreamGidBuilderImpl!T
 {
 
@@ -90,6 +91,10 @@ class BufferInputStreamGidBuilderImpl(T) : arrow.seekable_input_stream.SeekableI
 /// Fluent builder for [arrow.buffer_input_stream.BufferInputStream]
 final class BufferInputStreamGidBuilder : BufferInputStreamGidBuilderImpl!BufferInputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BufferInputStream build()
   {
     return new BufferInputStream(cast(void*)createGObject(BufferInputStream._getGType), Yes.Take);

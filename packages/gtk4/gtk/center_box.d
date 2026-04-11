@@ -82,8 +82,8 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.center_box.CenterBox]
-  Returns: New builder object
+      Get builder for [gtk.center_box.CenterBox]
+      Returns: New builder object
   */
   static CenterBoxGidBuilder builder()
   {
@@ -362,6 +362,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.center_box.CenterBox]
 class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -441,6 +442,10 @@ class CenterBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orient
 /// Fluent builder for [gtk.center_box.CenterBox]
 final class CenterBoxGidBuilder : CenterBoxGidBuilderImpl!CenterBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CenterBox build()
   {
     return new CenterBox(cast(void*)createGObject(CenterBox._getGType), No.Take);

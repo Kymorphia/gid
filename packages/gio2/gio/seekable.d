@@ -106,6 +106,7 @@ interface Seekable
   bool truncate(long offset, gio.cancellable.Cancellable cancellable = null);
 }
 
+/// Fluent builder implementation template for [gio.seekable.Seekable]
 interface SeekableGidBuilderImpl(T)
 {
 }

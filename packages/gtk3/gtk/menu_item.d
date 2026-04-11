@@ -99,8 +99,8 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-  Get builder for [gtk.menu_item.MenuItem]
-  Returns: New builder object
+      Get builder for [gtk.menu_item.MenuItem]
+      Returns: New builder object
   */
   static MenuItemGidBuilder builder()
   {
@@ -730,6 +730,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 }
 
+/// Fluent builder implementation template for [gtk.menu_item.MenuItem]
 class MenuItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T
 {
 
@@ -798,6 +799,10 @@ class MenuItemGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T, gtk.actionable.Ac
 /// Fluent builder for [gtk.menu_item.MenuItem]
 final class MenuItemGidBuilder : MenuItemGidBuilderImpl!MenuItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuItem build()
   {
     return new MenuItem(cast(void*)createGObject(MenuItem._getGType), No.Take);

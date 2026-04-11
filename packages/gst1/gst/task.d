@@ -81,8 +81,8 @@ class Task : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.task.Task]
-  Returns: New builder object
+      Get builder for [gst.task.Task]
+      Returns: New builder object
   */
   static TaskGidBuilder builder()
   {
@@ -325,6 +325,7 @@ class Task : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.task.Task]
 class TaskGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -332,6 +333,10 @@ class TaskGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.task.Task]
 final class TaskGidBuilder : TaskGidBuilderImpl!TaskGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Task build()
   {
     return new Task(cast(void*)createGObject(Task._getGType), Yes.Take);

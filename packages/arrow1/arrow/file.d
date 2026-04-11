@@ -33,6 +33,7 @@ interface File
   long tell();
 }
 
+/// Fluent builder implementation template for [arrow.file.File]
 interface FileGidBuilderImpl(T)
 {
 }

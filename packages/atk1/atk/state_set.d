@@ -44,8 +44,8 @@ class StateSet : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [atk.state_set.StateSet]
-  Returns: New builder object
+      Get builder for [atk.state_set.StateSet]
+      Returns: New builder object
   */
   static StateSetGidBuilder builder()
   {
@@ -228,6 +228,7 @@ class StateSet : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [atk.state_set.StateSet]
 class StateSetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -235,6 +236,10 @@ class StateSetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [atk.state_set.StateSet]
 final class StateSetGidBuilder : StateSetGidBuilderImpl!StateSetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StateSet build()
   {
     return new StateSet(cast(void*)createGObject(StateSet._getGType), Yes.Take);

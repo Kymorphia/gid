@@ -58,8 +58,8 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.socket_address_enumerator.SocketAddressEnumerator]
-  Returns: New builder object
+      Get builder for [gio.socket_address_enumerator.SocketAddressEnumerator]
+      Returns: New builder object
   */
   static SocketAddressEnumeratorGidBuilder builder()
   {
@@ -150,6 +150,7 @@ class SocketAddressEnumerator : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.socket_address_enumerator.SocketAddressEnumerator]
 class SocketAddressEnumeratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -157,6 +158,10 @@ class SocketAddressEnumeratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBui
 /// Fluent builder for [gio.socket_address_enumerator.SocketAddressEnumerator]
 final class SocketAddressEnumeratorGidBuilder : SocketAddressEnumeratorGidBuilderImpl!SocketAddressEnumeratorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SocketAddressEnumerator build()
   {
     return new SocketAddressEnumerator(cast(void*)createGObject(SocketAddressEnumerator._getGType), No.Take);

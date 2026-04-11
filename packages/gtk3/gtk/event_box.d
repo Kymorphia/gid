@@ -46,8 +46,8 @@ class EventBox : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.event_box.EventBox]
-  Returns: New builder object
+      Get builder for [gtk.event_box.EventBox]
+      Returns: New builder object
   */
   static EventBoxGidBuilder builder()
   {
@@ -176,6 +176,7 @@ class EventBox : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.event_box.EventBox]
 class EventBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -196,6 +197,10 @@ class EventBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.event_box.EventBox]
 final class EventBoxGidBuilder : EventBoxGidBuilderImpl!EventBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EventBox build()
   {
     return new EventBox(cast(void*)createGObject(EventBox._getGType), No.Take);

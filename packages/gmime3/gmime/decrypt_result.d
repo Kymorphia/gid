@@ -42,8 +42,8 @@ class DecryptResult : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.decrypt_result.DecryptResult]
-  Returns: New builder object
+      Get builder for [gmime.decrypt_result.DecryptResult]
+      Returns: New builder object
   */
   static DecryptResultGidBuilder builder()
   {
@@ -180,6 +180,7 @@ class DecryptResult : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.decrypt_result.DecryptResult]
 class DecryptResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -187,6 +188,10 @@ class DecryptResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.decrypt_result.DecryptResult]
 final class DecryptResultGidBuilder : DecryptResultGidBuilderImpl!DecryptResultGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DecryptResult build()
   {
     return new DecryptResult(cast(void*)createGObject(DecryptResult._getGType), Yes.Take);

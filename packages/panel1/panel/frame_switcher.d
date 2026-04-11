@@ -52,8 +52,8 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
   }
 
   /**
-  Get builder for [panel.frame_switcher.FrameSwitcher]
-  Returns: New builder object
+      Get builder for [panel.frame_switcher.FrameSwitcher]
+      Returns: New builder object
   */
   static FrameSwitcherGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_
   }
 }
 
+/// Fluent builder implementation template for [panel.frame_switcher.FrameSwitcher]
 class FrameSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T, panel.frame_header.FrameHeaderGidBuilderImpl!T
 {
 
@@ -85,6 +86,10 @@ class FrameSwitcherGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.or
 /// Fluent builder for [panel.frame_switcher.FrameSwitcher]
 final class FrameSwitcherGidBuilder : FrameSwitcherGidBuilderImpl!FrameSwitcherGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FrameSwitcher build()
   {
     return new FrameSwitcher(cast(void*)createGObject(FrameSwitcher._getGType), No.Take);

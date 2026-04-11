@@ -46,8 +46,8 @@ class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
   }
 
   /**
-  Get builder for [gtk.tree_view_accessible.TreeViewAccessible]
-  Returns: New builder object
+      Get builder for [gtk.tree_view_accessible.TreeViewAccessible]
+      Returns: New builder object
   */
   static TreeViewAccessibleGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
   mixin CellAccessibleParentT!();
 }
 
+/// Fluent builder implementation template for [gtk.tree_view_accessible.TreeViewAccessible]
 class TreeViewAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T, atk.table.TableGidBuilderImpl!T, gtk.cell_accessible_parent.CellAccessibleParentGidBuilderImpl!T
 {
 
@@ -70,6 +71,10 @@ class TreeViewAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAc
 /// Fluent builder for [gtk.tree_view_accessible.TreeViewAccessible]
 final class TreeViewAccessibleGidBuilder : TreeViewAccessibleGidBuilderImpl!TreeViewAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeViewAccessible build()
   {
     return new TreeViewAccessible(cast(void*)createGObject(TreeViewAccessible._getGType), No.Take);

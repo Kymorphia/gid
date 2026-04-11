@@ -46,8 +46,8 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   }
 
   /**
-  Get builder for [gio.charset_converter.CharsetConverter]
-  Returns: New builder object
+      Get builder for [gio.charset_converter.CharsetConverter]
+      Returns: New builder object
   */
   static CharsetConverterGidBuilder builder()
   {
@@ -149,6 +149,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   }
 }
 
+/// Fluent builder implementation template for [gio.charset_converter.CharsetConverter]
 class CharsetConverterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.converter.ConverterGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -192,6 +193,10 @@ class CharsetConverterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gio.charset_converter.CharsetConverter]
 final class CharsetConverterGidBuilder : CharsetConverterGidBuilderImpl!CharsetConverterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CharsetConverter build()
   {
     return new CharsetConverter(cast(void*)createGObject(CharsetConverter._getGType), Yes.Take);

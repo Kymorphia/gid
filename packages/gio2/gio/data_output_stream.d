@@ -46,8 +46,8 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 
   /**
-  Get builder for [gio.data_output_stream.DataOutputStream]
-  Returns: New builder object
+      Get builder for [gio.data_output_stream.DataOutputStream]
+      Returns: New builder object
   */
   static DataOutputStreamGidBuilder builder()
   {
@@ -268,6 +268,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   }
 }
 
+/// Fluent builder implementation template for [gio.data_output_stream.DataOutputStream]
 class DataOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOutputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
 {
 
@@ -289,6 +290,10 @@ class DataOutputStreamGidBuilderImpl(T) : gio.filter_output_stream.FilterOutputS
 /// Fluent builder for [gio.data_output_stream.DataOutputStream]
 final class DataOutputStreamGidBuilder : DataOutputStreamGidBuilderImpl!DataOutputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataOutputStream build()
   {
     return new DataOutputStream(cast(void*)createGObject(DataOutputStream._getGType), Yes.Take);

@@ -48,8 +48,8 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   }
 
   /**
-  Get builder for [gio.emblemed_icon.EmblemedIcon]
-  Returns: New builder object
+      Get builder for [gio.emblemed_icon.EmblemedIcon]
+      Returns: New builder object
   */
   static EmblemedIconGidBuilder builder()
   {
@@ -127,6 +127,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   }
 }
 
+/// Fluent builder implementation template for [gio.emblemed_icon.EmblemedIcon]
 class EmblemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T
 {
 
@@ -147,6 +148,10 @@ class EmblemedIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
 /// Fluent builder for [gio.emblemed_icon.EmblemedIcon]
 final class EmblemedIconGidBuilder : EmblemedIconGidBuilderImpl!EmblemedIconGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EmblemedIcon build()
   {
     return new EmblemedIcon(cast(void*)createGObject(EmblemedIcon._getGType), Yes.Take);

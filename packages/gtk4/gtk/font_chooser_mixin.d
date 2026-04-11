@@ -583,6 +583,7 @@ template FontChooserT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.font_chooser.FontChooser]
 template FontChooserGidBuilderT()
 {
 

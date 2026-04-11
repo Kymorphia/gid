@@ -61,8 +61,8 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /**
-  Get builder for [gtk.inscription.Inscription]
-  Returns: New builder object
+      Get builder for [gtk.inscription.Inscription]
+      Returns: New builder object
   */
   static InscriptionGidBuilder builder()
   {
@@ -642,6 +642,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 }
 
+/// Fluent builder implementation template for [gtk.inscription.Inscription]
 class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_text.AccessibleTextGidBuilderImpl!T
 {
 
@@ -819,6 +820,10 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
 /// Fluent builder for [gtk.inscription.Inscription]
 final class InscriptionGidBuilder : InscriptionGidBuilderImpl!InscriptionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Inscription build()
   {
     return new Inscription(cast(void*)createGObject(Inscription._getGType), No.Take);

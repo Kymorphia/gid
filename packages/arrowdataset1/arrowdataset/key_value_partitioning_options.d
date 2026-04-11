@@ -38,8 +38,8 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions]
-  Returns: New builder object
+      Get builder for [arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions]
+      Returns: New builder object
   */
   static KeyValuePartitioningOptionsGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class KeyValuePartitioningOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions]
 class KeyValuePartitioningOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -95,6 +96,10 @@ class KeyValuePartitioningOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGi
 /// Fluent builder for [arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions]
 final class KeyValuePartitioningOptionsGidBuilder : KeyValuePartitioningOptionsGidBuilderImpl!KeyValuePartitioningOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   KeyValuePartitioningOptions build()
   {
     return new KeyValuePartitioningOptions(cast(void*)createGObject(KeyValuePartitioningOptions._getGType), Yes.Take);

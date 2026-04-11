@@ -68,6 +68,7 @@ interface ActionMap
   void removeAction(string actionName);
 }
 
+/// Fluent builder implementation template for [gio.action_map.ActionMap]
 interface ActionMapGidBuilderImpl(T)
 {
 }

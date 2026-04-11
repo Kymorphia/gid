@@ -83,6 +83,7 @@ interface Hypertext
   gulong connectLinkSelected(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [atk.hypertext.Hypertext]
 interface HypertextGidBuilderImpl(T)
 {
 }

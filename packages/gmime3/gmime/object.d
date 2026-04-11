@@ -50,8 +50,8 @@ class ObjectWrap : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.object.ObjectWrap]
-  Returns: New builder object
+      Get builder for [gmime.object.ObjectWrap]
+      Returns: New builder object
   */
   static ObjectWrapGidBuilder builder()
   {
@@ -535,6 +535,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.object.ObjectWrap]
 class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -542,6 +543,10 @@ class ObjectWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.object.ObjectWrap]
 final class ObjectWrapGidBuilder : ObjectWrapGidBuilderImpl!ObjectWrapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ObjectWrap build()
   {
     return new ObjectWrap(cast(void*)createGObject(ObjectWrap._getGType), Yes.Take);

@@ -148,6 +148,7 @@ template DataHandlerT()
   }
 }
 
+/// Fluent builder implementation template for [gda.data_handler.DataHandler]
 template DataHandlerGidBuilderT()
 {
 }

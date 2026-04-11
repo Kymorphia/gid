@@ -41,8 +41,8 @@ class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStream
   }
 
   /**
-  Get builder for [arrow.record_batch_file_writer.RecordBatchFileWriter]
-  Returns: New builder object
+      Get builder for [arrow.record_batch_file_writer.RecordBatchFileWriter]
+      Returns: New builder object
   */
   static RecordBatchFileWriterGidBuilder builder()
   {
@@ -61,6 +61,7 @@ class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStream
   }
 }
 
+/// Fluent builder implementation template for [arrow.record_batch_file_writer.RecordBatchFileWriter]
 class RecordBatchFileWriterGidBuilderImpl(T) : arrow.record_batch_stream_writer.RecordBatchStreamWriterGidBuilderImpl!T
 {
 }
@@ -68,6 +69,10 @@ class RecordBatchFileWriterGidBuilderImpl(T) : arrow.record_batch_stream_writer.
 /// Fluent builder for [arrow.record_batch_file_writer.RecordBatchFileWriter]
 final class RecordBatchFileWriterGidBuilder : RecordBatchFileWriterGidBuilderImpl!RecordBatchFileWriterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecordBatchFileWriter build()
   {
     return new RecordBatchFileWriter(cast(void*)createGObject(RecordBatchFileWriter._getGType), Yes.Take);

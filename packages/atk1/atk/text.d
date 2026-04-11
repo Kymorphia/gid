@@ -515,6 +515,7 @@ interface Text
   gulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [atk.text.Text]
 interface TextGidBuilderImpl(T)
 {
 }

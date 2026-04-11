@@ -53,8 +53,8 @@ class Mark : gtk.text_mark.TextMark
   }
 
   /**
-  Get builder for [gtksource.mark.Mark]
-  Returns: New builder object
+      Get builder for [gtksource.mark.Mark]
+      Returns: New builder object
   */
   static MarkGidBuilder builder()
   {
@@ -152,6 +152,7 @@ class Mark : gtk.text_mark.TextMark
   }
 }
 
+/// Fluent builder implementation template for [gtksource.mark.Mark]
 class MarkGidBuilderImpl(T) : gtk.text_mark.TextMarkGidBuilderImpl!T
 {
 
@@ -171,6 +172,10 @@ class MarkGidBuilderImpl(T) : gtk.text_mark.TextMarkGidBuilderImpl!T
 /// Fluent builder for [gtksource.mark.Mark]
 final class MarkGidBuilder : MarkGidBuilderImpl!MarkGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Mark build()
   {
     return new Mark(cast(void*)createGObject(Mark._getGType), Yes.Take);

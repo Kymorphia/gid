@@ -48,8 +48,8 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-  Get builder for [pango.font_family.FontFamily]
-  Returns: New builder object
+      Get builder for [pango.font_family.FontFamily]
+      Returns: New builder object
   */
   static FontFamilyGidBuilder builder()
   {
@@ -189,6 +189,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 }
 
+/// Fluent builder implementation template for [pango.font_family.FontFamily]
 class FontFamilyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
 {
 
@@ -198,6 +199,10 @@ class FontFamilyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [pango.font_family.FontFamily]
 final class FontFamilyGidBuilder : FontFamilyGidBuilderImpl!FontFamilyGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontFamily build()
   {
     return new FontFamily(cast(void*)createGObject(FontFamily._getGType), No.Take);

@@ -39,8 +39,8 @@ class WriteOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.write_options.WriteOptions]
-  Returns: New builder object
+      Get builder for [arrow.write_options.WriteOptions]
+      Returns: New builder object
   */
   static WriteOptionsGidBuilder builder()
   {
@@ -184,6 +184,7 @@ class WriteOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.write_options.WriteOptions]
 class WriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -264,6 +265,10 @@ class WriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.write_options.WriteOptions]
 final class WriteOptionsGidBuilder : WriteOptionsGidBuilderImpl!WriteOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WriteOptions build()
   {
     return new WriteOptions(cast(void*)createGObject(WriteOptions._getGType), Yes.Take);

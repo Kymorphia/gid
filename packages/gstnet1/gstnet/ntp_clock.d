@@ -39,8 +39,8 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
   }
 
   /**
-  Get builder for [gstnet.ntp_clock.NtpClock]
-  Returns: New builder object
+      Get builder for [gstnet.ntp_clock.NtpClock]
+      Returns: New builder object
   */
   static NtpClockGidBuilder builder()
   {
@@ -69,6 +69,7 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
   }
 }
 
+/// Fluent builder implementation template for [gstnet.ntp_clock.NtpClock]
 class NtpClockGidBuilderImpl(T) : gstnet.net_client_clock.NetClientClockGidBuilderImpl!T
 {
 }
@@ -76,6 +77,10 @@ class NtpClockGidBuilderImpl(T) : gstnet.net_client_clock.NetClientClockGidBuild
 /// Fluent builder for [gstnet.ntp_clock.NtpClock]
 final class NtpClockGidBuilder : NtpClockGidBuilderImpl!NtpClockGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NtpClock build()
   {
     return new NtpClock(cast(void*)createGObject(NtpClock._getGType), Yes.Take);

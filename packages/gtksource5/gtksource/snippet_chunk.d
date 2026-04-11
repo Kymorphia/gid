@@ -47,8 +47,8 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-  Get builder for [gtksource.snippet_chunk.SnippetChunk]
-  Returns: New builder object
+      Get builder for [gtksource.snippet_chunk.SnippetChunk]
+      Returns: New builder object
   */
   static SnippetChunkGidBuilder builder()
   {
@@ -317,6 +317,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 }
 
+/// Fluent builder implementation template for [gtksource.snippet_chunk.SnippetChunk]
 class SnippetChunkGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
 {
 
@@ -360,6 +361,10 @@ class SnippetChunkGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnowned
 /// Fluent builder for [gtksource.snippet_chunk.SnippetChunk]
 final class SnippetChunkGidBuilder : SnippetChunkGidBuilderImpl!SnippetChunkGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SnippetChunk build()
   {
     return new SnippetChunk(cast(void*)createGObject(SnippetChunk._getGType), No.Take);

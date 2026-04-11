@@ -218,6 +218,7 @@ interface NetworkMonitor
   gulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gio.network_monitor.NetworkMonitor]
 interface NetworkMonitorGidBuilderImpl(T)
 {
 }

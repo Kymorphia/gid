@@ -221,6 +221,7 @@ template RetrievableT()
   }
 }
 
+/// Fluent builder implementation template for [secret.retrievable.Retrievable]
 template RetrievableGidBuilderT()
 {
 

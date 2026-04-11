@@ -38,8 +38,8 @@ class StringViewDataType : arrow.binary_view_data_type.BinaryViewDataType
   }
 
   /**
-  Get builder for [arrow.string_view_data_type.StringViewDataType]
-  Returns: New builder object
+      Get builder for [arrow.string_view_data_type.StringViewDataType]
+      Returns: New builder object
   */
   static StringViewDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class StringViewDataType : arrow.binary_view_data_type.BinaryViewDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.string_view_data_type.StringViewDataType]
 class StringViewDataTypeGidBuilderImpl(T) : arrow.binary_view_data_type.BinaryViewDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class StringViewDataTypeGidBuilderImpl(T) : arrow.binary_view_data_type.BinaryVi
 /// Fluent builder for [arrow.string_view_data_type.StringViewDataType]
 final class StringViewDataTypeGidBuilder : StringViewDataTypeGidBuilderImpl!StringViewDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StringViewDataType build()
   {
     return new StringViewDataType(cast(void*)createGObject(StringViewDataType._getGType), Yes.Take);

@@ -42,8 +42,8 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
   }
 
   /**
-  Get builder for [gstglwayland.gldisplay_wayland.GLDisplayWayland]
-  Returns: New builder object
+      Get builder for [gstglwayland.gldisplay_wayland.GLDisplayWayland]
+      Returns: New builder object
   */
   static GLDisplayWaylandGidBuilder builder()
   {
@@ -82,6 +82,7 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
   }
 }
 
+/// Fluent builder implementation template for [gstglwayland.gldisplay_wayland.GLDisplayWayland]
 class GLDisplayWaylandGidBuilderImpl(T) : gstgl.gldisplay.GLDisplayGidBuilderImpl!T
 {
 }
@@ -89,6 +90,10 @@ class GLDisplayWaylandGidBuilderImpl(T) : gstgl.gldisplay.GLDisplayGidBuilderImp
 /// Fluent builder for [gstglwayland.gldisplay_wayland.GLDisplayWayland]
 final class GLDisplayWaylandGidBuilder : GLDisplayWaylandGidBuilderImpl!GLDisplayWaylandGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLDisplayWayland build()
   {
     return new GLDisplayWayland(cast(void*)createGObject(GLDisplayWayland._getGType), Yes.Take);

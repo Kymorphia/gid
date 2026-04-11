@@ -57,8 +57,8 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
   }
 
   /**
-  Get builder for [gtk.builder_cscope.BuilderCScope]
-  Returns: New builder object
+      Get builder for [gtk.builder_cscope.BuilderCScope]
+      Returns: New builder object
   */
   static BuilderCScopeGidBuilder builder()
   {
@@ -83,6 +83,7 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
   }
 }
 
+/// Fluent builder implementation template for [gtk.builder_cscope.BuilderCScope]
 class BuilderCScopeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.builder_scope.BuilderScopeGidBuilderImpl!T
 {
 
@@ -92,6 +93,10 @@ class BuilderCScopeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.builder_cscope.BuilderCScope]
 final class BuilderCScopeGidBuilder : BuilderCScopeGidBuilderImpl!BuilderCScopeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BuilderCScope build()
   {
     return new BuilderCScope(cast(void*)createGObject(BuilderCScope._getGType), Yes.Take);

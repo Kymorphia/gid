@@ -40,8 +40,8 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.month_day_nano_interval_scalar.MonthDayNanoIntervalScalar]
-  Returns: New builder object
+      Get builder for [arrow.month_day_nano_interval_scalar.MonthDayNanoIntervalScalar]
+      Returns: New builder object
   */
   static MonthDayNanoIntervalScalarGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.month_day_nano_interval_scalar.MonthDayNanoIntervalScalar]
 class MonthDayNanoIntervalScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -73,6 +74,10 @@ class MonthDayNanoIntervalScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilde
 /// Fluent builder for [arrow.month_day_nano_interval_scalar.MonthDayNanoIntervalScalar]
 final class MonthDayNanoIntervalScalarGidBuilder : MonthDayNanoIntervalScalarGidBuilderImpl!MonthDayNanoIntervalScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MonthDayNanoIntervalScalar build()
   {
     return new MonthDayNanoIntervalScalar(cast(void*)createGObject(MonthDayNanoIntervalScalar._getGType), Yes.Take);

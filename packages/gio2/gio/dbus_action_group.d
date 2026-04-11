@@ -49,8 +49,8 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
   }
 
   /**
-  Get builder for [gio.dbus_action_group.DBusActionGroup]
-  Returns: New builder object
+      Get builder for [gio.dbus_action_group.DBusActionGroup]
+      Returns: New builder object
   */
   static DBusActionGroupGidBuilder builder()
   {
@@ -93,6 +93,7 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_action_group.DBusActionGroup]
 class DBusActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T, gio.remote_action_group.RemoteActionGroupGidBuilderImpl!T
 {
 
@@ -103,6 +104,10 @@ class DBusActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gio.dbus_action_group.DBusActionGroup]
 final class DBusActionGroupGidBuilder : DBusActionGroupGidBuilderImpl!DBusActionGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusActionGroup build()
   {
     return new DBusActionGroup(cast(void*)createGObject(DBusActionGroup._getGType), No.Take);

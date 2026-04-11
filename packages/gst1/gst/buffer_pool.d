@@ -78,8 +78,8 @@ class BufferPool : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.buffer_pool.BufferPool]
-  Returns: New builder object
+      Get builder for [gst.buffer_pool.BufferPool]
+      Returns: New builder object
   */
   static BufferPoolGidBuilder builder()
   {
@@ -432,6 +432,7 @@ class BufferPool : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.buffer_pool.BufferPool]
 class BufferPoolGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -439,6 +440,10 @@ class BufferPoolGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.buffer_pool.BufferPool]
 final class BufferPoolGidBuilder : BufferPoolGidBuilderImpl!BufferPoolGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BufferPool build()
   {
     return new BufferPool(cast(void*)createGObject(BufferPool._getGType), Yes.Take);

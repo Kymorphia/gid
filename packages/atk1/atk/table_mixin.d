@@ -803,6 +803,7 @@ template TableT()
   }
 }
 
+/// Fluent builder implementation template for [atk.table.Table]
 template TableGidBuilderT()
 {
 }

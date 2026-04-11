@@ -86,8 +86,8 @@ class ToastOverlay : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.toast_overlay.ToastOverlay]
-  Returns: New builder object
+      Get builder for [adw.toast_overlay.ToastOverlay]
+      Returns: New builder object
   */
   static ToastOverlayGidBuilder builder()
   {
@@ -168,6 +168,7 @@ class ToastOverlay : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.toast_overlay.ToastOverlay]
 class ToastOverlayGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -187,6 +188,10 @@ class ToastOverlayGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.toast_overlay.ToastOverlay]
 final class ToastOverlayGidBuilder : ToastOverlayGidBuilderImpl!ToastOverlayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToastOverlay build()
   {
     return new ToastOverlay(cast(void*)createGObject(ToastOverlay._getGType), No.Take);

@@ -88,6 +88,7 @@ interface EditableText
   void setTextContents(string string_);
 }
 
+/// Fluent builder implementation template for [atk.editable_text.EditableText]
 interface EditableTextGidBuilderImpl(T)
 {
 }

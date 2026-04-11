@@ -39,8 +39,8 @@ class QuantileOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.quantile_options.QuantileOptions]
-  Returns: New builder object
+      Get builder for [arrow.quantile_options.QuantileOptions]
+      Returns: New builder object
   */
   static QuantileOptionsGidBuilder builder()
   {
@@ -149,6 +149,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.quantile_options.QuantileOptions]
 class QuantileOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -191,6 +192,10 @@ class QuantileOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsG
 /// Fluent builder for [arrow.quantile_options.QuantileOptions]
 final class QuantileOptionsGidBuilder : QuantileOptionsGidBuilderImpl!QuantileOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   QuantileOptions build()
   {
     return new QuantileOptions(cast(void*)createGObject(QuantileOptions._getGType), Yes.Take);

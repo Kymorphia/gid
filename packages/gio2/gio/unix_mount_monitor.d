@@ -41,8 +41,8 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.unix_mount_monitor.UnixMountMonitor]
-  Returns: New builder object
+      Get builder for [gio.unix_mount_monitor.UnixMountMonitor]
+      Returns: New builder object
   */
   static UnixMountMonitorGidBuilder builder()
   {
@@ -180,6 +180,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.unix_mount_monitor.UnixMountMonitor]
 class UnixMountMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -187,6 +188,10 @@ class UnixMountMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gio.unix_mount_monitor.UnixMountMonitor]
 final class UnixMountMonitorGidBuilder : UnixMountMonitorGidBuilderImpl!UnixMountMonitorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnixMountMonitor build()
   {
     return new UnixMountMonitor(cast(void*)createGObject(UnixMountMonitor._getGType), Yes.Take);

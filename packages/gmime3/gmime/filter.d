@@ -40,8 +40,8 @@ class Filter : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.filter.Filter]
-  Returns: New builder object
+      Get builder for [gmime.filter.Filter]
+      Returns: New builder object
   */
   static FilterGidBuilder builder()
   {
@@ -144,6 +144,7 @@ class Filter : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter.Filter]
 class FilterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -151,6 +152,10 @@ class FilterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.filter.Filter]
 final class FilterGidBuilder : FilterGidBuilderImpl!FilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Filter build()
   {
     return new Filter(cast(void*)createGObject(Filter._getGType), No.Take);

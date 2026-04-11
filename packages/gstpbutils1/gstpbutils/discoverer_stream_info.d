@@ -58,8 +58,8 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstpbutils.discoverer_stream_info.DiscovererStreamInfo]
-  Returns: New builder object
+      Get builder for [gstpbutils.discoverer_stream_info.DiscovererStreamInfo]
+      Returns: New builder object
   */
   static DiscovererStreamInfoGidBuilder builder()
   {
@@ -161,6 +161,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.discoverer_stream_info.DiscovererStreamInfo]
 class DiscovererStreamInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -168,6 +169,10 @@ class DiscovererStreamInfoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
 /// Fluent builder for [gstpbutils.discoverer_stream_info.DiscovererStreamInfo]
 final class DiscovererStreamInfoGidBuilder : DiscovererStreamInfoGidBuilderImpl!DiscovererStreamInfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DiscovererStreamInfo build()
   {
     return new DiscovererStreamInfo(cast(void*)createGObject(DiscovererStreamInfo._getGType), No.Take);

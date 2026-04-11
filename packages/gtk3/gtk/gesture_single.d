@@ -52,8 +52,8 @@ class GestureSingle : gtk.gesture.Gesture
   }
 
   /**
-  Get builder for [gtk.gesture_single.GestureSingle]
-  Returns: New builder object
+      Get builder for [gtk.gesture_single.GestureSingle]
+      Returns: New builder object
   */
   static GestureSingleGidBuilder builder()
   {
@@ -220,6 +220,7 @@ class GestureSingle : gtk.gesture.Gesture
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture_single.GestureSingle]
 class GestureSingleGidBuilderImpl(T) : gtk.gesture.GestureGidBuilderImpl!T
 {
 
@@ -261,6 +262,10 @@ class GestureSingleGidBuilderImpl(T) : gtk.gesture.GestureGidBuilderImpl!T
 /// Fluent builder for [gtk.gesture_single.GestureSingle]
 final class GestureSingleGidBuilder : GestureSingleGidBuilderImpl!GestureSingleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GestureSingle build()
   {
     return new GestureSingle(cast(void*)createGObject(GestureSingle._getGType), No.Take);

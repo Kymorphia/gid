@@ -184,6 +184,7 @@ template DtlsClientConnectionT()
   }
 }
 
+/// Fluent builder implementation template for [gio.dtls_client_connection.DtlsClientConnection]
 template DtlsClientConnectionGidBuilderT()
 {
 

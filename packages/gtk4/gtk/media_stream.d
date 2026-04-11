@@ -60,8 +60,8 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   }
 
   /**
-  Get builder for [gtk.media_stream.MediaStream]
-  Returns: New builder object
+      Get builder for [gtk.media_stream.MediaStream]
+      Returns: New builder object
   */
   static MediaStreamGidBuilder builder()
   {
@@ -623,6 +623,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   }
 }
 
+/// Fluent builder implementation template for [gtk.media_stream.MediaStream]
 class MediaStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.paintable.PaintableGidBuilderImpl!T
 {
 
@@ -676,6 +677,10 @@ class MediaStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [gtk.media_stream.MediaStream]
 final class MediaStreamGidBuilder : MediaStreamGidBuilderImpl!MediaStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MediaStream build()
   {
     return new MediaStream(cast(void*)createGObject(MediaStream._getGType), No.Take);

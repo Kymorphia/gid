@@ -38,8 +38,8 @@ class DayMillisecond : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.day_millisecond.DayMillisecond]
-  Returns: New builder object
+      Get builder for [arrow.day_millisecond.DayMillisecond]
+      Returns: New builder object
   */
   static DayMillisecondGidBuilder builder()
   {
@@ -109,6 +109,7 @@ class DayMillisecond : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.day_millisecond.DayMillisecond]
 class DayMillisecondGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -138,6 +139,10 @@ class DayMillisecondGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [arrow.day_millisecond.DayMillisecond]
 final class DayMillisecondGidBuilder : DayMillisecondGidBuilderImpl!DayMillisecondGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DayMillisecond build()
   {
     return new DayMillisecond(cast(void*)createGObject(DayMillisecond._getGType), Yes.Take);

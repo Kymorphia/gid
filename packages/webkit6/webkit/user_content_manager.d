@@ -58,8 +58,8 @@ class UserContentManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.user_content_manager.UserContentManager]
-  Returns: New builder object
+      Get builder for [webkit.user_content_manager.UserContentManager]
+      Returns: New builder object
   */
   static UserContentManagerGidBuilder builder()
   {
@@ -410,6 +410,7 @@ class UserContentManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.user_content_manager.UserContentManager]
 class UserContentManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -417,6 +418,10 @@ class UserContentManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [webkit.user_content_manager.UserContentManager]
 final class UserContentManagerGidBuilder : UserContentManagerGidBuilderImpl!UserContentManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UserContentManager build()
   {
     return new UserContentManager(cast(void*)createGObject(UserContentManager._getGType), Yes.Take);

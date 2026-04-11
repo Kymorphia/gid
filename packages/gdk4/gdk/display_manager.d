@@ -83,8 +83,8 @@ class DisplayManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.display_manager.DisplayManager]
-  Returns: New builder object
+      Get builder for [gdk.display_manager.DisplayManager]
+      Returns: New builder object
   */
   static DisplayManagerGidBuilder builder()
   {
@@ -227,6 +227,7 @@ class DisplayManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.display_manager.DisplayManager]
 class DisplayManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -245,6 +246,10 @@ class DisplayManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gdk.display_manager.DisplayManager]
 final class DisplayManagerGidBuilder : DisplayManagerGidBuilderImpl!DisplayManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DisplayManager build()
   {
     return new DisplayManager(cast(void*)createGObject(DisplayManager._getGType), No.Take);

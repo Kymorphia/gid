@@ -42,8 +42,8 @@ class Dataset : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.dataset.Dataset]
-  Returns: New builder object
+      Get builder for [arrowdataset.dataset.Dataset]
+      Returns: New builder object
   */
   static DatasetGidBuilder builder()
   {
@@ -96,6 +96,7 @@ class Dataset : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.dataset.Dataset]
 class DatasetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -109,6 +110,10 @@ class DatasetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowdataset.dataset.Dataset]
 final class DatasetGidBuilder : DatasetGidBuilderImpl!DatasetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Dataset build()
   {
     return new Dataset(cast(void*)createGObject(Dataset._getGType), No.Take);

@@ -38,8 +38,8 @@ class Int32Statistics : parquet.statistics.Statistics
   }
 
   /**
-  Get builder for [parquet.int32_statistics.Int32Statistics]
-  Returns: New builder object
+      Get builder for [parquet.int32_statistics.Int32Statistics]
+      Returns: New builder object
   */
   static Int32StatisticsGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class Int32Statistics : parquet.statistics.Statistics
   }
 }
 
+/// Fluent builder implementation template for [parquet.int32_statistics.Int32Statistics]
 class Int32StatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class Int32StatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilder
 /// Fluent builder for [parquet.int32_statistics.Int32Statistics]
 final class Int32StatisticsGidBuilder : Int32StatisticsGidBuilderImpl!Int32StatisticsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Int32Statistics build()
   {
     return new Int32Statistics(cast(void*)createGObject(Int32Statistics._getGType), No.Take);

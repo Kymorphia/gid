@@ -117,6 +117,7 @@ interface TlsBackend
   bool supportsTls();
 }
 
+/// Fluent builder implementation template for [gio.tls_backend.TlsBackend]
 interface TlsBackendGidBuilderImpl(T)
 {
 }

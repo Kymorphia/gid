@@ -42,8 +42,8 @@ class DictionaryArray : arrow.array.Array
   }
 
   /**
-  Get builder for [arrow.dictionary_array.DictionaryArray]
-  Returns: New builder object
+      Get builder for [arrow.dictionary_array.DictionaryArray]
+      Returns: New builder object
   */
   static DictionaryArrayGidBuilder builder()
   {
@@ -101,6 +101,7 @@ class DictionaryArray : arrow.array.Array
   }
 }
 
+/// Fluent builder implementation template for [arrow.dictionary_array.DictionaryArray]
 class DictionaryArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 
@@ -120,6 +121,10 @@ class DictionaryArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 /// Fluent builder for [arrow.dictionary_array.DictionaryArray]
 final class DictionaryArrayGidBuilder : DictionaryArrayGidBuilderImpl!DictionaryArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DictionaryArray build()
   {
     return new DictionaryArray(cast(void*)createGObject(DictionaryArray._getGType), Yes.Take);

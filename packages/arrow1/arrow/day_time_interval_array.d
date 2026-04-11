@@ -41,8 +41,8 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
   }
 
   /**
-  Get builder for [arrow.day_time_interval_array.DayTimeIntervalArray]
-  Returns: New builder object
+      Get builder for [arrow.day_time_interval_array.DayTimeIntervalArray]
+      Returns: New builder object
   */
   static DayTimeIntervalArrayGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.day_time_interval_array.DayTimeIntervalArray]
 class DayTimeIntervalArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBuilderImpl!T
 {
 }
@@ -83,6 +84,10 @@ class DayTimeIntervalArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArr
 /// Fluent builder for [arrow.day_time_interval_array.DayTimeIntervalArray]
 final class DayTimeIntervalArrayGidBuilder : DayTimeIntervalArrayGidBuilderImpl!DayTimeIntervalArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DayTimeIntervalArray build()
   {
     return new DayTimeIntervalArray(cast(void*)createGObject(DayTimeIntervalArray._getGType), Yes.Take);

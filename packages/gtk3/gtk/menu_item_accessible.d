@@ -45,8 +45,8 @@ class MenuItemAccessible : gtk.container_accessible.ContainerAccessible, atk.act
   }
 
   /**
-  Get builder for [gtk.menu_item_accessible.MenuItemAccessible]
-  Returns: New builder object
+      Get builder for [gtk.menu_item_accessible.MenuItemAccessible]
+      Returns: New builder object
   */
   static MenuItemAccessibleGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class MenuItemAccessible : gtk.container_accessible.ContainerAccessible, atk.act
   alias setDescription = atk.object.ObjectWrap.setDescription;
 }
 
+/// Fluent builder implementation template for [gtk.menu_item_accessible.MenuItemAccessible]
 class MenuItemAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
 {
 
@@ -70,6 +71,10 @@ class MenuItemAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAc
 /// Fluent builder for [gtk.menu_item_accessible.MenuItemAccessible]
 final class MenuItemAccessibleGidBuilder : MenuItemAccessibleGidBuilderImpl!MenuItemAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuItemAccessible build()
   {
     return new MenuItemAccessible(cast(void*)createGObject(MenuItemAccessible._getGType), No.Take);

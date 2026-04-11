@@ -51,8 +51,8 @@ class HPaned : gtk.paned.Paned
   }
 
   /**
-  Get builder for [gtk.hpaned.HPaned]
-  Returns: New builder object
+      Get builder for [gtk.hpaned.HPaned]
+      Returns: New builder object
   */
   static HPanedGidBuilder builder()
   {
@@ -73,6 +73,7 @@ class HPaned : gtk.paned.Paned
   }
 }
 
+/// Fluent builder implementation template for [gtk.hpaned.HPaned]
 class HPanedGidBuilderImpl(T) : gtk.paned.PanedGidBuilderImpl!T
 {
 
@@ -81,6 +82,10 @@ class HPanedGidBuilderImpl(T) : gtk.paned.PanedGidBuilderImpl!T
 /// Fluent builder for [gtk.hpaned.HPaned]
 final class HPanedGidBuilder : HPanedGidBuilderImpl!HPanedGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HPaned build()
   {
     return new HPaned(cast(void*)createGObject(HPaned._getGType), No.Take);

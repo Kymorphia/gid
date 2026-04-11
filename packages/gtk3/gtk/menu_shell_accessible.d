@@ -42,8 +42,8 @@ class MenuShellAccessible : gtk.container_accessible.ContainerAccessible, atk.se
   }
 
   /**
-  Get builder for [gtk.menu_shell_accessible.MenuShellAccessible]
-  Returns: New builder object
+      Get builder for [gtk.menu_shell_accessible.MenuShellAccessible]
+      Returns: New builder object
   */
   static MenuShellAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class MenuShellAccessible : gtk.container_accessible.ContainerAccessible, atk.se
   mixin SelectionT!();
 }
 
+/// Fluent builder implementation template for [gtk.menu_shell_accessible.MenuShellAccessible]
 class MenuShellAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class MenuShellAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerA
 /// Fluent builder for [gtk.menu_shell_accessible.MenuShellAccessible]
 final class MenuShellAccessibleGidBuilder : MenuShellAccessibleGidBuilderImpl!MenuShellAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuShellAccessible build()
   {
     return new MenuShellAccessible(cast(void*)createGObject(MenuShellAccessible._getGType), No.Take);

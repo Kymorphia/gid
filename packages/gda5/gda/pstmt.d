@@ -39,8 +39,8 @@ class PStmt : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.pstmt.PStmt]
-  Returns: New builder object
+      Get builder for [gda.pstmt.PStmt]
+      Returns: New builder object
   */
   static PStmtGidBuilder builder()
   {
@@ -85,6 +85,7 @@ class PStmt : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.pstmt.PStmt]
 class PStmtGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -92,6 +93,10 @@ class PStmtGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.pstmt.PStmt]
 final class PStmtGidBuilder : PStmtGidBuilderImpl!PStmtGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PStmt build()
   {
     return new PStmt(cast(void*)createGObject(PStmt._getGType), No.Take);

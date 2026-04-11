@@ -41,8 +41,8 @@ class CertificateList : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.certificate_list.CertificateList]
-  Returns: New builder object
+      Get builder for [gmime.certificate_list.CertificateList]
+      Returns: New builder object
   */
   static CertificateListGidBuilder builder()
   {
@@ -198,6 +198,7 @@ class CertificateList : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.certificate_list.CertificateList]
 class CertificateListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -205,6 +206,10 @@ class CertificateListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gmime.certificate_list.CertificateList]
 final class CertificateListGidBuilder : CertificateListGidBuilderImpl!CertificateListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CertificateList build()
   {
     return new CertificateList(cast(void*)createGObject(CertificateList._getGType), Yes.Take);

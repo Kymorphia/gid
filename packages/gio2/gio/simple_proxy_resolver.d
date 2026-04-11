@@ -49,8 +49,8 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   }
 
   /**
-  Get builder for [gio.simple_proxy_resolver.SimpleProxyResolver]
-  Returns: New builder object
+      Get builder for [gio.simple_proxy_resolver.SimpleProxyResolver]
+      Returns: New builder object
   */
   static SimpleProxyResolverGidBuilder builder()
   {
@@ -179,6 +179,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   }
 }
 
+/// Fluent builder implementation template for [gio.simple_proxy_resolver.SimpleProxyResolver]
 class SimpleProxyResolverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.proxy_resolver.ProxyResolverGidBuilderImpl!T
 {
 
@@ -205,6 +206,10 @@ class SimpleProxyResolverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [gio.simple_proxy_resolver.SimpleProxyResolver]
 final class SimpleProxyResolverGidBuilder : SimpleProxyResolverGidBuilderImpl!SimpleProxyResolverGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SimpleProxyResolver build()
   {
     return new SimpleProxyResolver(cast(void*)createGObject(SimpleProxyResolver._getGType), No.Take);

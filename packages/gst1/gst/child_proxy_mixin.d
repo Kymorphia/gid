@@ -281,6 +281,7 @@ template ChildProxyT()
   }
 }
 
+/// Fluent builder implementation template for [gst.child_proxy.ChildProxy]
 template ChildProxyGidBuilderT()
 {
 }

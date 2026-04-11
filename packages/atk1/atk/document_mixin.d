@@ -365,6 +365,7 @@ template DocumentT()
   }
 }
 
+/// Fluent builder implementation template for [atk.document.Document]
 template DocumentGidBuilderT()
 {
 }

@@ -76,8 +76,8 @@ class IMContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.imcontext.IMContext]
-  Returns: New builder object
+      Get builder for [gtk.imcontext.IMContext]
+      Returns: New builder object
   */
   static IMContextGidBuilder builder()
   {
@@ -715,6 +715,7 @@ class IMContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.imcontext.IMContext]
 class IMContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -748,6 +749,10 @@ class IMContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.imcontext.IMContext]
 final class IMContextGidBuilder : IMContextGidBuilderImpl!IMContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IMContext build()
   {
     return new IMContext(cast(void*)createGObject(IMContext._getGType), No.Take);

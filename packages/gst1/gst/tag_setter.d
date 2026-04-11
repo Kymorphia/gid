@@ -115,6 +115,7 @@ interface TagSetter
   void setTagMergeMode(gst.types.TagMergeMode mode);
 }
 
+/// Fluent builder implementation template for [gst.tag_setter.TagSetter]
 interface TagSetterGidBuilderImpl(T)
 {
 }

@@ -43,8 +43,8 @@ class Misc : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [atk.misc.Misc]
-  Returns: New builder object
+      Get builder for [atk.misc.Misc]
+      Returns: New builder object
   */
   static MiscGidBuilder builder()
   {
@@ -97,6 +97,7 @@ class Misc : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [atk.misc.Misc]
 class MiscGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -104,6 +105,10 @@ class MiscGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [atk.misc.Misc]
 final class MiscGidBuilder : MiscGidBuilderImpl!MiscGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Misc build()
   {
     return new Misc(cast(void*)createGObject(Misc._getGType), No.Take);

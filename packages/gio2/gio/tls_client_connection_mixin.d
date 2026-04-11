@@ -283,6 +283,7 @@ template TlsClientConnectionT()
   }
 }
 
+/// Fluent builder implementation template for [gio.tls_client_connection.TlsClientConnection]
 template TlsClientConnectionGidBuilderT()
 {
 

@@ -42,8 +42,8 @@ class Scalar : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.scalar.Scalar]
-  Returns: New builder object
+      Get builder for [arrow.scalar.Scalar]
+      Returns: New builder object
   */
   static ScalarGidBuilder builder()
   {
@@ -122,6 +122,7 @@ class Scalar : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.scalar.Scalar]
 class ScalarGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -146,6 +147,10 @@ class ScalarGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.scalar.Scalar]
 final class ScalarGidBuilder : ScalarGidBuilderImpl!ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Scalar build()
   {
     return new Scalar(cast(void*)createGObject(Scalar._getGType), No.Take);

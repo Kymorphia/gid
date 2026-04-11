@@ -51,6 +51,7 @@ interface TreeDragDest
   bool rowDropPossible(gtk.tree_path.TreePath destPath, gtk.selection_data.SelectionData selectionData);
 }
 
+/// Fluent builder implementation template for [gtk.tree_drag_dest.TreeDragDest]
 interface TreeDragDestGidBuilderImpl(T)
 {
 }

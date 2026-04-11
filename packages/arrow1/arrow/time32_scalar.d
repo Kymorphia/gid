@@ -39,8 +39,8 @@ class Time32Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.time32_scalar.Time32Scalar]
-  Returns: New builder object
+      Get builder for [arrow.time32_scalar.Time32Scalar]
+      Returns: New builder object
   */
   static Time32ScalarGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class Time32Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.time32_scalar.Time32Scalar]
 class Time32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -71,6 +72,10 @@ class Time32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.time32_scalar.Time32Scalar]
 final class Time32ScalarGidBuilder : Time32ScalarGidBuilderImpl!Time32ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Time32Scalar build()
   {
     return new Time32Scalar(cast(void*)createGObject(Time32Scalar._getGType), Yes.Take);

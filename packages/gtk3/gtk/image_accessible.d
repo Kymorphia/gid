@@ -42,8 +42,8 @@ class ImageAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
   }
 
   /**
-  Get builder for [gtk.image_accessible.ImageAccessible]
-  Returns: New builder object
+      Get builder for [gtk.image_accessible.ImageAccessible]
+      Returns: New builder object
   */
   static ImageAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class ImageAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
   mixin ImageT!();
 }
 
+/// Fluent builder implementation template for [gtk.image_accessible.ImageAccessible]
 class ImageAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class ImageAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleG
 /// Fluent builder for [gtk.image_accessible.ImageAccessible]
 final class ImageAccessibleGidBuilder : ImageAccessibleGidBuilderImpl!ImageAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ImageAccessible build()
   {
     return new ImageAccessible(cast(void*)createGObject(ImageAccessible._getGType), No.Take);

@@ -50,8 +50,8 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   }
 
   /**
-  Get builder for [arrowflight.server.Server]
-  Returns: New builder object
+      Get builder for [arrowflight.server.Server]
+      Returns: New builder object
   */
   static ServerGidBuilder builder()
   {
@@ -163,6 +163,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.server.Server]
 class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, arrowflight.servable.ServableGidBuilderImpl!T
 {
 
@@ -172,6 +173,10 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, arrow
 /// Fluent builder for [arrowflight.server.Server]
 final class ServerGidBuilder : ServerGidBuilderImpl!ServerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Server build()
   {
     return new Server(cast(void*)createGObject(Server._getGType), No.Take);

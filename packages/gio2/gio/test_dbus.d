@@ -118,8 +118,8 @@ class TestDBus : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.test_dbus.TestDBus]
-  Returns: New builder object
+      Get builder for [gio.test_dbus.TestDBus]
+      Returns: New builder object
   */
   static TestDBusGidBuilder builder()
   {
@@ -242,6 +242,7 @@ class TestDBus : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.test_dbus.TestDBus]
 class TestDBusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -260,6 +261,10 @@ class TestDBusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.test_dbus.TestDBus]
 final class TestDBusGidBuilder : TestDBusGidBuilderImpl!TestDBusGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TestDBus build()
   {
     return new TestDBus(cast(void*)createGObject(TestDBus._getGType), Yes.Take);

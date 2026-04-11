@@ -49,8 +49,8 @@ class EventControllerFocus : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.event_controller_focus.EventControllerFocus]
-  Returns: New builder object
+      Get builder for [gtk.event_controller_focus.EventControllerFocus]
+      Returns: New builder object
   */
   static EventControllerFocusGidBuilder builder()
   {
@@ -182,6 +182,7 @@ class EventControllerFocus : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.event_controller_focus.EventControllerFocus]
 class EventControllerFocusGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 }
@@ -189,6 +190,10 @@ class EventControllerFocusGidBuilderImpl(T) : gtk.event_controller.EventControll
 /// Fluent builder for [gtk.event_controller_focus.EventControllerFocus]
 final class EventControllerFocusGidBuilder : EventControllerFocusGidBuilderImpl!EventControllerFocusGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EventControllerFocus build()
   {
     return new EventControllerFocus(cast(void*)createGObject(EventControllerFocus._getGType), Yes.Take);

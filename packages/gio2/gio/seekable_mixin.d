@@ -130,6 +130,7 @@ template SeekableT()
   }
 }
 
+/// Fluent builder implementation template for [gio.seekable.Seekable]
 template SeekableGidBuilderT()
 {
 }

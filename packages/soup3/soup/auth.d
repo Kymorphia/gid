@@ -50,8 +50,8 @@ class Auth : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [soup.auth.Auth]
-  Returns: New builder object
+      Get builder for [soup.auth.Auth]
+      Returns: New builder object
   */
   static AuthGidBuilder builder()
   {
@@ -339,6 +339,7 @@ class Auth : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [soup.auth.Auth]
 class AuthGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -368,6 +369,10 @@ class AuthGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [soup.auth.Auth]
 final class AuthGidBuilder : AuthGidBuilderImpl!AuthGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Auth build()
   {
     return new Auth(cast(void*)createGObject(Auth._getGType), Yes.Take);

@@ -151,6 +151,7 @@ interface ColorChooser
   gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtk.color_chooser.ColorChooser]
 interface ColorChooserGidBuilderImpl(T)
 {
 

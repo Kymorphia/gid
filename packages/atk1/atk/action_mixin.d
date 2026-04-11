@@ -178,6 +178,7 @@ template ActionT()
   }
 }
 
+/// Fluent builder implementation template for [atk.action.Action]
 template ActionGidBuilderT()
 {
 }

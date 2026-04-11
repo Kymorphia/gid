@@ -107,6 +107,7 @@ template ImageT()
   }
 }
 
+/// Fluent builder implementation template for [atk.image.Image]
 template ImageGidBuilderT()
 {
 }

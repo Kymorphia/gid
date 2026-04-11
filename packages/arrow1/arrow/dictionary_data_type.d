@@ -40,8 +40,8 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /**
-  Get builder for [arrow.dictionary_data_type.DictionaryDataType]
-  Returns: New builder object
+      Get builder for [arrow.dictionary_data_type.DictionaryDataType]
+      Returns: New builder object
   */
   static DictionaryDataTypeGidBuilder builder()
   {
@@ -83,6 +83,7 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.dictionary_data_type.DictionaryDataType]
 class DictionaryDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
 {
 }
@@ -90,6 +91,10 @@ class DictionaryDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWid
 /// Fluent builder for [arrow.dictionary_data_type.DictionaryDataType]
 final class DictionaryDataTypeGidBuilder : DictionaryDataTypeGidBuilderImpl!DictionaryDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DictionaryDataType build()
   {
     return new DictionaryDataType(cast(void*)createGObject(DictionaryDataType._getGType), Yes.Take);

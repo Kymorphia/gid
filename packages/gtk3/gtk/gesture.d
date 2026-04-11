@@ -141,8 +141,8 @@ class Gesture : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.gesture.Gesture]
-  Returns: New builder object
+      Get builder for [gtk.gesture.Gesture]
+      Returns: New builder object
   */
   static GestureGidBuilder builder()
   {
@@ -759,6 +759,7 @@ class Gesture : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture.Gesture]
 class GestureGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 
@@ -789,6 +790,10 @@ class GestureGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderI
 /// Fluent builder for [gtk.gesture.Gesture]
 final class GestureGidBuilder : GestureGidBuilderImpl!GestureGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Gesture build()
   {
     return new Gesture(cast(void*)createGObject(Gesture._getGType), No.Take);

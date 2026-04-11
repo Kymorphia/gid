@@ -53,8 +53,8 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   }
 
   /**
-  Get builder for [gtk.constraint_guide.ConstraintGuide]
-  Returns: New builder object
+      Get builder for [gtk.constraint_guide.ConstraintGuide]
+      Returns: New builder object
   */
   static ConstraintGuideGidBuilder builder()
   {
@@ -360,6 +360,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   }
 }
 
+/// Fluent builder implementation template for [gtk.constraint_guide.ConstraintGuide]
 class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.constraint_target.ConstraintTargetGidBuilderImpl!T
 {
 
@@ -458,6 +459,10 @@ class ConstraintGuideGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.constraint_guide.ConstraintGuide]
 final class ConstraintGuideGidBuilder : ConstraintGuideGidBuilderImpl!ConstraintGuideGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ConstraintGuide build()
   {
     return new ConstraintGuide(cast(void*)createGObject(ConstraintGuide._getGType), Yes.Take);

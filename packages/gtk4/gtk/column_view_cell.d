@@ -56,8 +56,8 @@ class ColumnViewCell : gtk.list_item.ListItem
   }
 
   /**
-  Get builder for [gtk.column_view_cell.ColumnViewCell]
-  Returns: New builder object
+      Get builder for [gtk.column_view_cell.ColumnViewCell]
+      Returns: New builder object
   */
   static ColumnViewCellGidBuilder builder()
   {
@@ -230,6 +230,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   }
 }
 
+/// Fluent builder implementation template for [gtk.column_view_cell.ColumnViewCell]
 class ColumnViewCellGidBuilderImpl(T) : gtk.list_item.ListItemGidBuilderImpl!T
 {
 
@@ -259,6 +260,10 @@ class ColumnViewCellGidBuilderImpl(T) : gtk.list_item.ListItemGidBuilderImpl!T
 /// Fluent builder for [gtk.column_view_cell.ColumnViewCell]
 final class ColumnViewCellGidBuilder : ColumnViewCellGidBuilderImpl!ColumnViewCellGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColumnViewCell build()
   {
     return new ColumnViewCell(cast(void*)createGObject(ColumnViewCell._getGType), No.Take);

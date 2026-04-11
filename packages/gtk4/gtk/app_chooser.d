@@ -79,6 +79,7 @@ interface AppChooser
   void refresh();
 }
 
+/// Fluent builder implementation template for [gtk.app_chooser.AppChooser]
 interface AppChooserGidBuilderImpl(T)
 {
 

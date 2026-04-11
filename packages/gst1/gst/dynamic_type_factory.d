@@ -59,8 +59,8 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
   }
 
   /**
-  Get builder for [gst.dynamic_type_factory.DynamicTypeFactory]
-  Returns: New builder object
+      Get builder for [gst.dynamic_type_factory.DynamicTypeFactory]
+      Returns: New builder object
   */
   static DynamicTypeFactoryGidBuilder builder()
   {
@@ -77,6 +77,7 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
   }
 }
 
+/// Fluent builder implementation template for [gst.dynamic_type_factory.DynamicTypeFactory]
 class DynamicTypeFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
 {
 }
@@ -84,6 +85,10 @@ class DynamicTypeFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidB
 /// Fluent builder for [gst.dynamic_type_factory.DynamicTypeFactory]
 final class DynamicTypeFactoryGidBuilder : DynamicTypeFactoryGidBuilderImpl!DynamicTypeFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DynamicTypeFactory build()
   {
     return new DynamicTypeFactory(cast(void*)createGObject(DynamicTypeFactory._getGType), No.Take);

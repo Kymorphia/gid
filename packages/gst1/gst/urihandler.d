@@ -66,6 +66,7 @@ interface URIHandler
   bool setUri(string uri);
 }
 
+/// Fluent builder implementation template for [gst.urihandler.URIHandler]
 interface URIHandlerGidBuilderImpl(T)
 {
 }

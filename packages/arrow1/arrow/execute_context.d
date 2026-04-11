@@ -38,8 +38,8 @@ class ExecuteContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.execute_context.ExecuteContext]
-  Returns: New builder object
+      Get builder for [arrow.execute_context.ExecuteContext]
+      Returns: New builder object
   */
   static ExecuteContextGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class ExecuteContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.execute_context.ExecuteContext]
 class ExecuteContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class ExecuteContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [arrow.execute_context.ExecuteContext]
 final class ExecuteContextGidBuilder : ExecuteContextGidBuilderImpl!ExecuteContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExecuteContext build()
   {
     return new ExecuteContext(cast(void*)createGObject(ExecuteContext._getGType), Yes.Take);

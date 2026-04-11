@@ -51,8 +51,8 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
-  Get builder for [gtk.cell_renderer_accel.CellRendererAccel]
-  Returns: New builder object
+      Get builder for [gtk.cell_renderer_accel.CellRendererAccel]
+      Returns: New builder object
   */
   static CellRendererAccelGidBuilder builder()
   {
@@ -261,6 +261,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_renderer_accel.CellRendererAccel]
 class CellRendererAccelGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTextGidBuilderImpl!T
 {
 
@@ -317,6 +318,10 @@ class CellRendererAccelGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTe
 /// Fluent builder for [gtk.cell_renderer_accel.CellRendererAccel]
 final class CellRendererAccelGidBuilder : CellRendererAccelGidBuilderImpl!CellRendererAccelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellRendererAccel build()
   {
     return new CellRendererAccel(cast(void*)createGObject(CellRendererAccel._getGType), No.Take);

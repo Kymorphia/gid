@@ -148,8 +148,8 @@ class ModelButton : gtk.button.Button
   }
 
   /**
-  Get builder for [gtk.model_button.ModelButton]
-  Returns: New builder object
+      Get builder for [gtk.model_button.ModelButton]
+      Returns: New builder object
   */
   static ModelButtonGidBuilder builder()
   {
@@ -363,6 +363,7 @@ class ModelButton : gtk.button.Button
   }
 }
 
+/// Fluent builder implementation template for [gtk.model_button.ModelButton]
 class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
 {
 
@@ -482,6 +483,10 @@ class ModelButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
 /// Fluent builder for [gtk.model_button.ModelButton]
 final class ModelButtonGidBuilder : ModelButtonGidBuilderImpl!ModelButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ModelButton build()
   {
     return new ModelButton(cast(void*)createGObject(ModelButton._getGType), No.Take);

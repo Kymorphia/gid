@@ -41,8 +41,8 @@ class SpaceDrawer : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.space_drawer.SpaceDrawer]
-  Returns: New builder object
+      Get builder for [gtksource.space_drawer.SpaceDrawer]
+      Returns: New builder object
   */
   static SpaceDrawerGidBuilder builder()
   {
@@ -234,6 +234,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.space_drawer.SpaceDrawer]
 class SpaceDrawerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -275,6 +276,10 @@ class SpaceDrawerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.space_drawer.SpaceDrawer]
 final class SpaceDrawerGidBuilder : SpaceDrawerGidBuilderImpl!SpaceDrawerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SpaceDrawer build()
   {
     return new SpaceDrawer(cast(void*)createGObject(SpaceDrawer._getGType), Yes.Take);

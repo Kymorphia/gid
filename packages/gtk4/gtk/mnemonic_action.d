@@ -41,8 +41,8 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
   }
 
   /**
-  Get builder for [gtk.mnemonic_action.MnemonicAction]
-  Returns: New builder object
+      Get builder for [gtk.mnemonic_action.MnemonicAction]
+      Returns: New builder object
   */
   static MnemonicActionGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
   }
 }
 
+/// Fluent builder implementation template for [gtk.mnemonic_action.MnemonicAction]
 class MnemonicActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class MnemonicActionGidBuilderImpl(T) : gtk.shortcut_action.ShortcutActionGidBui
 /// Fluent builder for [gtk.mnemonic_action.MnemonicAction]
 final class MnemonicActionGidBuilder : MnemonicActionGidBuilderImpl!MnemonicActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MnemonicAction build()
   {
     return new MnemonicAction(cast(void*)createGObject(MnemonicAction._getGType), No.Take);

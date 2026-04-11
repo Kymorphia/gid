@@ -60,8 +60,8 @@ class WindowHandle : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.window_handle.WindowHandle]
-  Returns: New builder object
+      Get builder for [gtk.window_handle.WindowHandle]
+      Returns: New builder object
   */
   static WindowHandleGidBuilder builder()
   {
@@ -122,6 +122,7 @@ class WindowHandle : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.window_handle.WindowHandle]
 class WindowHandleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -141,6 +142,10 @@ class WindowHandleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.window_handle.WindowHandle]
 final class WindowHandleGidBuilder : WindowHandleGidBuilderImpl!WindowHandleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WindowHandle build()
   {
     return new WindowHandle(cast(void*)createGObject(WindowHandle._getGType), No.Take);

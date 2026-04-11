@@ -54,8 +54,8 @@ class FileMonitor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.file_monitor.FileMonitor]
-  Returns: New builder object
+      Get builder for [gio.file_monitor.FileMonitor]
+      Returns: New builder object
   */
   static FileMonitorGidBuilder builder()
   {
@@ -227,6 +227,7 @@ class FileMonitor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.file_monitor.FileMonitor]
 class FileMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -245,6 +246,10 @@ class FileMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.file_monitor.FileMonitor]
 final class FileMonitorGidBuilder : FileMonitorGidBuilderImpl!FileMonitorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileMonitor build()
   {
     return new FileMonitor(cast(void*)createGObject(FileMonitor._getGType), No.Take);

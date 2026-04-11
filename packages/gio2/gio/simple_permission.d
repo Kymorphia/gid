@@ -45,8 +45,8 @@ class SimplePermission : gio.permission.Permission
   }
 
   /**
-  Get builder for [gio.simple_permission.SimplePermission]
-  Returns: New builder object
+      Get builder for [gio.simple_permission.SimplePermission]
+      Returns: New builder object
   */
   static SimplePermissionGidBuilder builder()
   {
@@ -69,6 +69,7 @@ class SimplePermission : gio.permission.Permission
   }
 }
 
+/// Fluent builder implementation template for [gio.simple_permission.SimplePermission]
 class SimplePermissionGidBuilderImpl(T) : gio.permission.PermissionGidBuilderImpl!T
 {
 }
@@ -76,6 +77,10 @@ class SimplePermissionGidBuilderImpl(T) : gio.permission.PermissionGidBuilderImp
 /// Fluent builder for [gio.simple_permission.SimplePermission]
 final class SimplePermissionGidBuilder : SimplePermissionGidBuilderImpl!SimplePermissionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SimplePermission build()
   {
     return new SimplePermission(cast(void*)createGObject(SimplePermission._getGType), Yes.Take);

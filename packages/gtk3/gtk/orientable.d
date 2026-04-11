@@ -56,6 +56,7 @@ interface Orientable
   void setOrientation(gtk.types.Orientation orientation);
 }
 
+/// Fluent builder implementation template for [gtk.orientable.Orientable]
 interface OrientableGidBuilderImpl(T)
 {
 

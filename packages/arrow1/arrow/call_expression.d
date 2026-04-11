@@ -39,8 +39,8 @@ class CallExpression : arrow.expression.Expression
   }
 
   /**
-  Get builder for [arrow.call_expression.CallExpression]
-  Returns: New builder object
+      Get builder for [arrow.call_expression.CallExpression]
+      Returns: New builder object
   */
   static CallExpressionGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class CallExpression : arrow.expression.Expression
   }
 }
 
+/// Fluent builder implementation template for [arrow.call_expression.CallExpression]
 class CallExpressionGidBuilderImpl(T) : arrow.expression.ExpressionGidBuilderImpl!T
 {
 }
@@ -66,6 +67,10 @@ class CallExpressionGidBuilderImpl(T) : arrow.expression.ExpressionGidBuilderImp
 /// Fluent builder for [arrow.call_expression.CallExpression]
 final class CallExpressionGidBuilder : CallExpressionGidBuilderImpl!CallExpressionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CallExpression build()
   {
     return new CallExpression(cast(void*)createGObject(CallExpression._getGType), Yes.Take);

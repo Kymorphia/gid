@@ -109,8 +109,8 @@ class ToggleButton : gtk.button.Button
   }
 
   /**
-  Get builder for [gtk.toggle_button.ToggleButton]
-  Returns: New builder object
+      Get builder for [gtk.toggle_button.ToggleButton]
+      Returns: New builder object
   */
   static ToggleButtonGidBuilder builder()
   {
@@ -337,6 +337,7 @@ class ToggleButton : gtk.button.Button
   }
 }
 
+/// Fluent builder implementation template for [gtk.toggle_button.ToggleButton]
 class ToggleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
 {
 
@@ -363,6 +364,10 @@ class ToggleButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T
 /// Fluent builder for [gtk.toggle_button.ToggleButton]
 final class ToggleButtonGidBuilder : ToggleButtonGidBuilderImpl!ToggleButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToggleButton build()
   {
     return new ToggleButton(cast(void*)createGObject(ToggleButton._getGType), No.Take);

@@ -110,6 +110,7 @@ interface Popup
   bool present(int width, int height, gdk.popup_layout.PopupLayout layout);
 }
 
+/// Fluent builder implementation template for [gdk.popup.Popup]
 interface PopupGidBuilderImpl(T)
 {
 

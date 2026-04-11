@@ -48,8 +48,8 @@ class Menu : gio.menu_model.MenuModel
   }
 
   /**
-  Get builder for [gio.menu.Menu]
-  Returns: New builder object
+      Get builder for [gio.menu.Menu]
+      Returns: New builder object
   */
   static MenuGidBuilder builder()
   {
@@ -308,6 +308,7 @@ class Menu : gio.menu_model.MenuModel
   }
 }
 
+/// Fluent builder implementation template for [gio.menu.Menu]
 class MenuGidBuilderImpl(T) : gio.menu_model.MenuModelGidBuilderImpl!T
 {
 }
@@ -315,6 +316,10 @@ class MenuGidBuilderImpl(T) : gio.menu_model.MenuModelGidBuilderImpl!T
 /// Fluent builder for [gio.menu.Menu]
 final class MenuGidBuilder : MenuGidBuilderImpl!MenuGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Menu build()
   {
     return new Menu(cast(void*)createGObject(Menu._getGType), Yes.Take);

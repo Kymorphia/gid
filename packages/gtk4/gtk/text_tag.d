@@ -61,8 +61,8 @@ class TextTag : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.text_tag.TextTag]
-  Returns: New builder object
+      Get builder for [gtk.text_tag.TextTag]
+      Returns: New builder object
   */
   static TextTagGidBuilder builder()
   {
@@ -1615,6 +1615,7 @@ class TextTag : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.text_tag.TextTag]
 class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -2458,6 +2459,10 @@ class TextTagGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.text_tag.TextTag]
 final class TextTagGidBuilder : TextTagGidBuilderImpl!TextTagGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextTag build()
   {
     return new TextTag(cast(void*)createGObject(TextTag._getGType), Yes.Take);

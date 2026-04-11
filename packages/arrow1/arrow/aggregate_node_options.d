@@ -40,8 +40,8 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /**
-  Get builder for [arrow.aggregate_node_options.AggregateNodeOptions]
-  Returns: New builder object
+      Get builder for [arrow.aggregate_node_options.AggregateNodeOptions]
+      Returns: New builder object
   */
   static AggregateNodeOptionsGidBuilder builder()
   {
@@ -71,6 +71,7 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.aggregate_node_options.AggregateNodeOptions]
 class AggregateNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
 {
 }
@@ -78,6 +79,10 @@ class AggregateNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.Execute
 /// Fluent builder for [arrow.aggregate_node_options.AggregateNodeOptions]
 final class AggregateNodeOptionsGidBuilder : AggregateNodeOptionsGidBuilderImpl!AggregateNodeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AggregateNodeOptions build()
   {
     return new AggregateNodeOptions(cast(void*)createGObject(AggregateNodeOptions._getGType), Yes.Take);

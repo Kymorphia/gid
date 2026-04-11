@@ -90,8 +90,8 @@ class AudioAggregator : gstbase.aggregator.Aggregator
   }
 
   /**
-  Get builder for [gstaudio.audio_aggregator.AudioAggregator]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_aggregator.AudioAggregator]
+      Returns: New builder object
   */
   static AudioAggregatorGidBuilder builder()
   {
@@ -186,6 +186,7 @@ class AudioAggregator : gstbase.aggregator.Aggregator
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_aggregator.AudioAggregator]
 class AudioAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilderImpl!T
 {
 
@@ -243,6 +244,10 @@ class AudioAggregatorGidBuilderImpl(T) : gstbase.aggregator.AggregatorGidBuilder
 /// Fluent builder for [gstaudio.audio_aggregator.AudioAggregator]
 final class AudioAggregatorGidBuilder : AudioAggregatorGidBuilderImpl!AudioAggregatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioAggregator build()
   {
     return new AudioAggregator(cast(void*)createGObject(AudioAggregator._getGType), No.Take);

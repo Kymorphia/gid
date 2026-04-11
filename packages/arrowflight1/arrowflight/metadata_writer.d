@@ -40,8 +40,8 @@ class MetadataWriter : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.metadata_writer.MetadataWriter]
-  Returns: New builder object
+      Get builder for [arrowflight.metadata_writer.MetadataWriter]
+      Returns: New builder object
   */
   static MetadataWriterGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class MetadataWriter : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.metadata_writer.MetadataWriter]
 class MetadataWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -80,6 +81,10 @@ class MetadataWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [arrowflight.metadata_writer.MetadataWriter]
 final class MetadataWriterGidBuilder : MetadataWriterGidBuilderImpl!MetadataWriterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MetadataWriter build()
   {
     return new MetadataWriter(cast(void*)createGObject(MetadataWriter._getGType), No.Take);

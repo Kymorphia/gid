@@ -54,8 +54,8 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   }
 
   /**
-  Get builder for [gtk.numerable_icon.NumerableIcon]
-  Returns: New builder object
+      Get builder for [gtk.numerable_icon.NumerableIcon]
+      Returns: New builder object
   */
   static NumerableIconGidBuilder builder()
   {
@@ -313,6 +313,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   }
 }
 
+/// Fluent builder implementation template for [gtk.numerable_icon.NumerableIcon]
 class NumerableIconGidBuilderImpl(T) : gio.emblemed_icon.EmblemedIconGidBuilderImpl!T
 {
 
@@ -351,6 +352,10 @@ class NumerableIconGidBuilderImpl(T) : gio.emblemed_icon.EmblemedIconGidBuilderI
 /// Fluent builder for [gtk.numerable_icon.NumerableIcon]
 final class NumerableIconGidBuilder : NumerableIconGidBuilderImpl!NumerableIconGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NumerableIcon build()
   {
     return new NumerableIcon(cast(void*)createGObject(NumerableIcon._getGType), No.Take);

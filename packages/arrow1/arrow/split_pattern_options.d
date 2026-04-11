@@ -39,8 +39,8 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.split_pattern_options.SplitPatternOptions]
-  Returns: New builder object
+      Get builder for [arrow.split_pattern_options.SplitPatternOptions]
+      Returns: New builder object
   */
   static SplitPatternOptionsGidBuilder builder()
   {
@@ -108,6 +108,7 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.split_pattern_options.SplitPatternOptions]
 class SplitPatternOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -144,6 +145,10 @@ class SplitPatternOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOpti
 /// Fluent builder for [arrow.split_pattern_options.SplitPatternOptions]
 final class SplitPatternOptionsGidBuilder : SplitPatternOptionsGidBuilderImpl!SplitPatternOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SplitPatternOptions build()
   {
     return new SplitPatternOptions(cast(void*)createGObject(SplitPatternOptions._getGType), Yes.Take);

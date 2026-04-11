@@ -38,8 +38,8 @@ class UInt32Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.uint32_scalar.UInt32Scalar]
-  Returns: New builder object
+      Get builder for [arrow.uint32_scalar.UInt32Scalar]
+      Returns: New builder object
   */
   static UInt32ScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class UInt32Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.uint32_scalar.UInt32Scalar]
 class UInt32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class UInt32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.uint32_scalar.UInt32Scalar]
 final class UInt32ScalarGidBuilder : UInt32ScalarGidBuilderImpl!UInt32ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UInt32Scalar build()
   {
     return new UInt32Scalar(cast(void*)createGObject(UInt32Scalar._getGType), Yes.Take);

@@ -41,8 +41,8 @@ class RepetitiveStatement : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.repetitive_statement.RepetitiveStatement]
-  Returns: New builder object
+      Get builder for [gda.repetitive_statement.RepetitiveStatement]
+      Returns: New builder object
   */
   static RepetitiveStatementGidBuilder builder()
   {
@@ -123,6 +123,7 @@ class RepetitiveStatement : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.repetitive_statement.RepetitiveStatement]
 class RepetitiveStatementGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -136,6 +137,10 @@ class RepetitiveStatementGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [gda.repetitive_statement.RepetitiveStatement]
 final class RepetitiveStatementGidBuilder : RepetitiveStatementGidBuilderImpl!RepetitiveStatementGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RepetitiveStatement build()
   {
     return new RepetitiveStatement(cast(void*)createGObject(RepetitiveStatement._getGType), Yes.Take);

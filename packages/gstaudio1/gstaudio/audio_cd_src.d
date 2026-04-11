@@ -86,8 +86,8 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
   }
 
   /**
-  Get builder for [gstaudio.audio_cd_src.AudioCdSrc]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_cd_src.AudioCdSrc]
+      Returns: New builder object
   */
   static AudioCdSrcGidBuilder builder()
   {
@@ -150,6 +150,7 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_cd_src.AudioCdSrc]
 class AudioCdSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T, gst.urihandler.URIHandlerGidBuilderImpl!T
 {
 
@@ -177,6 +178,10 @@ class AudioCdSrcGidBuilderImpl(T) : gstbase.push_src.PushSrcGidBuilderImpl!T, gs
 /// Fluent builder for [gstaudio.audio_cd_src.AudioCdSrc]
 final class AudioCdSrcGidBuilder : AudioCdSrcGidBuilderImpl!AudioCdSrcGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioCdSrc build()
   {
     return new AudioCdSrc(cast(void*)createGObject(AudioCdSrc._getGType), No.Take);

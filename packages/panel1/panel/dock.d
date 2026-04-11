@@ -61,8 +61,8 @@ class Dock : gtk.widget.Widget
   }
 
   /**
-  Get builder for [panel.dock.Dock]
-  Returns: New builder object
+      Get builder for [panel.dock.Dock]
+      Returns: New builder object
   */
   static DockGidBuilder builder()
   {
@@ -638,6 +638,7 @@ class Dock : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [panel.dock.Dock]
 class DockGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -694,6 +695,10 @@ class DockGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [panel.dock.Dock]
 final class DockGidBuilder : DockGidBuilderImpl!DockGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Dock build()
   {
     return new Dock(cast(void*)createGObject(Dock._getGType), No.Take);

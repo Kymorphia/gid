@@ -77,8 +77,8 @@ class PreferencesGroup : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.preferences_group.PreferencesGroup]
-  Returns: New builder object
+      Get builder for [adw.preferences_group.PreferencesGroup]
+      Returns: New builder object
   */
   static PreferencesGroupGidBuilder builder()
   {
@@ -261,6 +261,7 @@ class PreferencesGroup : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.preferences_group.PreferencesGroup]
 class PreferencesGroupGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -307,6 +308,10 @@ class PreferencesGroupGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.preferences_group.PreferencesGroup]
 final class PreferencesGroupGidBuilder : PreferencesGroupGidBuilderImpl!PreferencesGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PreferencesGroup build()
   {
     return new PreferencesGroup(cast(void*)createGObject(PreferencesGroup._getGType), No.Take);

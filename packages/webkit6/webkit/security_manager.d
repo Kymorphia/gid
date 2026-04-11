@@ -46,8 +46,8 @@ class SecurityManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.security_manager.SecurityManager]
-  Returns: New builder object
+      Get builder for [webkit.security_manager.SecurityManager]
+      Returns: New builder object
   */
   static SecurityManagerGidBuilder builder()
   {
@@ -248,6 +248,7 @@ class SecurityManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.security_manager.SecurityManager]
 class SecurityManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -255,6 +256,10 @@ class SecurityManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [webkit.security_manager.SecurityManager]
 final class SecurityManagerGidBuilder : SecurityManagerGidBuilderImpl!SecurityManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SecurityManager build()
   {
     return new SecurityManager(cast(void*)createGObject(SecurityManager._getGType), No.Take);

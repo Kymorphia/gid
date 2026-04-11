@@ -47,8 +47,8 @@ class ServerProvider : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.server_provider.ServerProvider]
-  Returns: New builder object
+      Get builder for [gda.server_provider.ServerProvider]
+      Returns: New builder object
   */
   static ServerProviderGidBuilder builder()
   {
@@ -486,6 +486,7 @@ class ServerProvider : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.server_provider.ServerProvider]
 class ServerProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -493,6 +494,10 @@ class ServerProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gda.server_provider.ServerProvider]
 final class ServerProviderGidBuilder : ServerProviderGidBuilderImpl!ServerProviderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ServerProvider build()
   {
     return new ServerProvider(cast(void*)createGObject(ServerProvider._getGType), No.Take);

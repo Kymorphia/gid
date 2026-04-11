@@ -57,8 +57,8 @@ class Permission : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.permission.Permission]
-  Returns: New builder object
+      Get builder for [gio.permission.Permission]
+      Returns: New builder object
   */
   static PermissionGidBuilder builder()
   {
@@ -308,6 +308,7 @@ class Permission : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.permission.Permission]
 class PermissionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -315,6 +316,10 @@ class PermissionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.permission.Permission]
 final class PermissionGidBuilder : PermissionGidBuilderImpl!PermissionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Permission build()
   {
     return new Permission(cast(void*)createGObject(Permission._getGType), No.Take);

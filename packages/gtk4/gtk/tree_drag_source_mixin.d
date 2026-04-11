@@ -79,6 +79,7 @@ template TreeDragSourceT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_drag_source.TreeDragSource]
 template TreeDragSourceGidBuilderT()
 {
 }

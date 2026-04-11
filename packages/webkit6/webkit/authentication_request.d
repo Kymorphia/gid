@@ -57,8 +57,8 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.authentication_request.AuthenticationRequest]
-  Returns: New builder object
+      Get builder for [webkit.authentication_request.AuthenticationRequest]
+      Returns: New builder object
   */
   static AuthenticationRequestGidBuilder builder()
   {
@@ -343,6 +343,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.authentication_request.AuthenticationRequest]
 class AuthenticationRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -350,6 +351,10 @@ class AuthenticationRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuild
 /// Fluent builder for [webkit.authentication_request.AuthenticationRequest]
 final class AuthenticationRequestGidBuilder : AuthenticationRequestGidBuilderImpl!AuthenticationRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AuthenticationRequest build()
   {
     return new AuthenticationRequest(cast(void*)createGObject(AuthenticationRequest._getGType), No.Take);

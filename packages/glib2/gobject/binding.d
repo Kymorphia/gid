@@ -114,8 +114,8 @@ class Binding : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gobject.binding.Binding]
-  Returns: New builder object
+      Get builder for [gobject.binding.Binding]
+      Returns: New builder object
   */
   static BindingGidBuilder builder()
   {
@@ -314,6 +314,7 @@ class Binding : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gobject.binding.Binding]
 class BindingGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -384,6 +385,10 @@ class BindingGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gobject.binding.Binding]
 final class BindingGidBuilder : BindingGidBuilderImpl!BindingGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Binding build()
   {
     return new Binding(cast(void*)createGObject(Binding._getGType), No.Take);

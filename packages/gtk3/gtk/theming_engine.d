@@ -54,8 +54,8 @@ class ThemingEngine : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.theming_engine.ThemingEngine]
-  Returns: New builder object
+      Get builder for [gtk.theming_engine.ThemingEngine]
+      Returns: New builder object
   */
   static ThemingEngineGidBuilder builder()
   {
@@ -362,6 +362,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.theming_engine.ThemingEngine]
 class ThemingEngineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -386,6 +387,10 @@ class ThemingEngineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.theming_engine.ThemingEngine]
 final class ThemingEngineGidBuilder : ThemingEngineGidBuilderImpl!ThemingEngineGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ThemingEngine build()
   {
     return new ThemingEngine(cast(void*)createGObject(ThemingEngine._getGType), No.Take);

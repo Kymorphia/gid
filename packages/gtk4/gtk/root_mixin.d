@@ -78,6 +78,7 @@ template RootT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.root.Root]
 template RootGidBuilderT()
 {
 }

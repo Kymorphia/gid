@@ -44,8 +44,8 @@ class SqlBuilder : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.sql_builder.SqlBuilder]
-  Returns: New builder object
+      Get builder for [gda.sql_builder.SqlBuilder]
+      Returns: New builder object
   */
   static SqlBuilderGidBuilder builder()
   {
@@ -545,6 +545,7 @@ class SqlBuilder : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.sql_builder.SqlBuilder]
 class SqlBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -552,6 +553,10 @@ class SqlBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.sql_builder.SqlBuilder]
 final class SqlBuilderGidBuilder : SqlBuilderGidBuilderImpl!SqlBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SqlBuilder build()
   {
     return new SqlBuilder(cast(void*)createGObject(SqlBuilder._getGType), Yes.Take);

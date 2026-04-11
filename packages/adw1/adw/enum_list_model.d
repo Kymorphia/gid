@@ -45,8 +45,8 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-  Get builder for [adw.enum_list_model.EnumListModel]
-  Returns: New builder object
+      Get builder for [adw.enum_list_model.EnumListModel]
+      Returns: New builder object
   */
   static EnumListModelGidBuilder builder()
   {
@@ -106,6 +106,7 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 }
 
+/// Fluent builder implementation template for [adw.enum_list_model.EnumListModel]
 class EnumListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
 {
 
@@ -126,6 +127,10 @@ class EnumListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [adw.enum_list_model.EnumListModel]
 final class EnumListModelGidBuilder : EnumListModelGidBuilderImpl!EnumListModelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EnumListModel build()
   {
     return new EnumListModel(cast(void*)createGObject(EnumListModel._getGType), Yes.Take);

@@ -71,8 +71,8 @@ class ShortcutAction : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.shortcut_action.ShortcutAction]
-  Returns: New builder object
+      Get builder for [gtk.shortcut_action.ShortcutAction]
+      Returns: New builder object
   */
   static ShortcutActionGidBuilder builder()
   {
@@ -162,6 +162,7 @@ class ShortcutAction : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.shortcut_action.ShortcutAction]
 class ShortcutActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -169,6 +170,10 @@ class ShortcutActionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtk.shortcut_action.ShortcutAction]
 final class ShortcutActionGidBuilder : ShortcutActionGidBuilderImpl!ShortcutActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ShortcutAction build()
   {
     return new ShortcutAction(cast(void*)createGObject(ShortcutAction._getGType), No.Take);

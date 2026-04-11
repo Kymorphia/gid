@@ -57,8 +57,8 @@ class PrintDialog : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.print_dialog.PrintDialog]
-  Returns: New builder object
+      Get builder for [gtk.print_dialog.PrintDialog]
+      Returns: New builder object
   */
   static PrintDialogGidBuilder builder()
   {
@@ -466,6 +466,7 @@ class PrintDialog : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.print_dialog.PrintDialog]
 class PrintDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -530,6 +531,10 @@ class PrintDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.print_dialog.PrintDialog]
 final class PrintDialogGidBuilder : PrintDialogGidBuilderImpl!PrintDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PrintDialog build()
   {
     return new PrintDialog(cast(void*)createGObject(PrintDialog._getGType), Yes.Take);

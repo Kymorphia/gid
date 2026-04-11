@@ -85,6 +85,7 @@ interface StreamableContent
   string getUri(string mimeType);
 }
 
+/// Fluent builder implementation template for [atk.streamable_content.StreamableContent]
 interface StreamableContentGidBuilderImpl(T)
 {
 }

@@ -44,8 +44,8 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstpbutils.encoding_profile.EncodingProfile]
-  Returns: New builder object
+      Get builder for [gstpbutils.encoding_profile.EncodingProfile]
+      Returns: New builder object
   */
   static EncodingProfileGidBuilder builder()
   {
@@ -447,6 +447,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.encoding_profile.EncodingProfile]
 class EncodingProfileGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -478,6 +479,10 @@ class EncodingProfileGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gstpbutils.encoding_profile.EncodingProfile]
 final class EncodingProfileGidBuilder : EncodingProfileGidBuilderImpl!EncodingProfileGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EncodingProfile build()
   {
     return new EncodingProfile(cast(void*)createGObject(EncodingProfile._getGType), No.Take);

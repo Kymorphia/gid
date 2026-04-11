@@ -44,8 +44,8 @@ class ArrowFileReader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [parquet.arrow_file_reader.ArrowFileReader]
-  Returns: New builder object
+      Get builder for [parquet.arrow_file_reader.ArrowFileReader]
+      Returns: New builder object
   */
   static ArrowFileReaderGidBuilder builder()
   {
@@ -162,6 +162,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [parquet.arrow_file_reader.ArrowFileReader]
 class ArrowFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -175,6 +176,10 @@ class ArrowFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [parquet.arrow_file_reader.ArrowFileReader]
 final class ArrowFileReaderGidBuilder : ArrowFileReaderGidBuilderImpl!ArrowFileReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ArrowFileReader build()
   {
     return new ArrowFileReader(cast(void*)createGObject(ArrowFileReader._getGType), No.Take);

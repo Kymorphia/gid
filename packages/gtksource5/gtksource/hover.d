@@ -53,8 +53,8 @@ class Hover : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.hover.Hover]
-  Returns: New builder object
+      Get builder for [gtksource.hover.Hover]
+      Returns: New builder object
   */
   static HoverGidBuilder builder()
   {
@@ -93,6 +93,7 @@ class Hover : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.hover.Hover]
 class HoverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -111,6 +112,10 @@ class HoverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.hover.Hover]
 final class HoverGidBuilder : HoverGidBuilderImpl!HoverGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Hover build()
   {
     return new Hover(cast(void*)createGObject(Hover._getGType), No.Take);

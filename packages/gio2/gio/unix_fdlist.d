@@ -54,8 +54,8 @@ class UnixFDList : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.unix_fdlist.UnixFDList]
-  Returns: New builder object
+      Get builder for [gio.unix_fdlist.UnixFDList]
+      Returns: New builder object
   */
   static UnixFDListGidBuilder builder()
   {
@@ -240,6 +240,7 @@ class UnixFDList : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.unix_fdlist.UnixFDList]
 class UnixFDListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -247,6 +248,10 @@ class UnixFDListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.unix_fdlist.UnixFDList]
 final class UnixFDListGidBuilder : UnixFDListGidBuilderImpl!UnixFDListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnixFDList build()
   {
     return new UnixFDList(cast(void*)createGObject(UnixFDList._getGType), Yes.Take);

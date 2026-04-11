@@ -38,8 +38,8 @@ class BooleanStatistics : parquet.statistics.Statistics
   }
 
   /**
-  Get builder for [parquet.boolean_statistics.BooleanStatistics]
-  Returns: New builder object
+      Get builder for [parquet.boolean_statistics.BooleanStatistics]
+      Returns: New builder object
   */
   static BooleanStatisticsGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class BooleanStatistics : parquet.statistics.Statistics
   }
 }
 
+/// Fluent builder implementation template for [parquet.boolean_statistics.BooleanStatistics]
 class BooleanStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class BooleanStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuild
 /// Fluent builder for [parquet.boolean_statistics.BooleanStatistics]
 final class BooleanStatisticsGidBuilder : BooleanStatisticsGidBuilderImpl!BooleanStatisticsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BooleanStatistics build()
   {
     return new BooleanStatistics(cast(void*)createGObject(BooleanStatistics._getGType), No.Take);

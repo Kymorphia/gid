@@ -43,8 +43,8 @@ class BufferOutputStream : arrow.output_stream.OutputStream
   }
 
   /**
-  Get builder for [arrow.buffer_output_stream.BufferOutputStream]
-  Returns: New builder object
+      Get builder for [arrow.buffer_output_stream.BufferOutputStream]
+      Returns: New builder object
   */
   static BufferOutputStreamGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class BufferOutputStream : arrow.output_stream.OutputStream
   }
 }
 
+/// Fluent builder implementation template for [arrow.buffer_output_stream.BufferOutputStream]
 class BufferOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidBuilderImpl!T
 {
 
@@ -68,6 +69,10 @@ class BufferOutputStreamGidBuilderImpl(T) : arrow.output_stream.OutputStreamGidB
 /// Fluent builder for [arrow.buffer_output_stream.BufferOutputStream]
 final class BufferOutputStreamGidBuilder : BufferOutputStreamGidBuilderImpl!BufferOutputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BufferOutputStream build()
   {
     return new BufferOutputStream(cast(void*)createGObject(BufferOutputStream._getGType), Yes.Take);

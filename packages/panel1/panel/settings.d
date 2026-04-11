@@ -45,8 +45,8 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /**
-  Get builder for [panel.settings.Settings]
-  Returns: New builder object
+      Get builder for [panel.settings.Settings]
+      Returns: New builder object
   */
   static SettingsGidBuilder builder()
   {
@@ -379,6 +379,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 }
 
+/// Fluent builder implementation template for [panel.settings.Settings]
 class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T
 {
 
@@ -431,6 +432,10 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio
 /// Fluent builder for [panel.settings.Settings]
 final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Settings build()
   {
     return new Settings(cast(void*)createGObject(Settings._getGType), Yes.Take);

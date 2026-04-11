@@ -47,8 +47,8 @@ class OptionMenu : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.option_menu.OptionMenu]
-  Returns: New builder object
+      Get builder for [webkit.option_menu.OptionMenu]
+      Returns: New builder object
   */
   static OptionMenuGidBuilder builder()
   {
@@ -181,6 +181,7 @@ class OptionMenu : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.option_menu.OptionMenu]
 class OptionMenuGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -188,6 +189,10 @@ class OptionMenuGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.option_menu.OptionMenu]
 final class OptionMenuGidBuilder : OptionMenuGidBuilderImpl!OptionMenuGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   OptionMenu build()
   {
     return new OptionMenu(cast(void*)createGObject(OptionMenu._getGType), No.Take);

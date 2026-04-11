@@ -40,8 +40,8 @@ class UnionDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.union_data_type.UnionDataType]
-  Returns: New builder object
+      Get builder for [arrow.union_data_type.UnionDataType]
+      Returns: New builder object
   */
   static UnionDataTypeGidBuilder builder()
   {
@@ -91,6 +91,7 @@ class UnionDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.union_data_type.UnionDataType]
 class UnionDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -98,6 +99,10 @@ class UnionDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 /// Fluent builder for [arrow.union_data_type.UnionDataType]
 final class UnionDataTypeGidBuilder : UnionDataTypeGidBuilderImpl!UnionDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnionDataType build()
   {
     return new UnionDataType(cast(void*)createGObject(UnionDataType._getGType), No.Take);

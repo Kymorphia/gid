@@ -44,8 +44,8 @@ class StreamDecoder : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.stream_decoder.StreamDecoder]
-  Returns: New builder object
+      Get builder for [arrow.stream_decoder.StreamDecoder]
+      Returns: New builder object
   */
   static StreamDecoderGidBuilder builder()
   {
@@ -206,6 +206,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.stream_decoder.StreamDecoder]
 class StreamDecoderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -230,6 +231,10 @@ class StreamDecoderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.stream_decoder.StreamDecoder]
 final class StreamDecoderGidBuilder : StreamDecoderGidBuilderImpl!StreamDecoderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamDecoder build()
   {
     return new StreamDecoder(cast(void*)createGObject(StreamDecoder._getGType), Yes.Take);

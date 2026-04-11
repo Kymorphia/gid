@@ -39,8 +39,8 @@ class Location : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.location.Location]
-  Returns: New builder object
+      Get builder for [arrowflight.location.Location]
+      Returns: New builder object
   */
   static LocationGidBuilder builder()
   {
@@ -86,6 +86,7 @@ class Location : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.location.Location]
 class LocationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -93,6 +94,10 @@ class LocationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.location.Location]
 final class LocationGidBuilder : LocationGidBuilderImpl!LocationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Location build()
   {
     return new Location(cast(void*)createGObject(Location._getGType), Yes.Take);

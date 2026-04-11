@@ -38,8 +38,8 @@ class S3GlobalOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.s3_global_options.S3GlobalOptions]
-  Returns: New builder object
+      Get builder for [arrow.s3_global_options.S3GlobalOptions]
+      Returns: New builder object
   */
   static S3GlobalOptionsGidBuilder builder()
   {
@@ -74,6 +74,7 @@ class S3GlobalOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.s3_global_options.S3GlobalOptions]
 class S3GlobalOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -92,6 +93,10 @@ class S3GlobalOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [arrow.s3_global_options.S3GlobalOptions]
 final class S3GlobalOptionsGidBuilder : S3GlobalOptionsGidBuilderImpl!S3GlobalOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   S3GlobalOptions build()
   {
     return new S3GlobalOptions(cast(void*)createGObject(S3GlobalOptions._getGType), Yes.Take);

@@ -66,8 +66,8 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.calendar.Calendar]
-  Returns: New builder object
+      Get builder for [gtk.calendar.Calendar]
+      Returns: New builder object
   */
   static CalendarGidBuilder builder()
   {
@@ -741,6 +741,7 @@ class Calendar : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.calendar.Calendar]
 class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -867,6 +868,10 @@ class CalendarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.calendar.Calendar]
 final class CalendarGidBuilder : CalendarGidBuilderImpl!CalendarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Calendar build()
   {
     return new Calendar(cast(void*)createGObject(Calendar._getGType), No.Take);

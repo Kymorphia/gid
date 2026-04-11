@@ -572,8 +572,8 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   }
 
   /**
-  Get builder for [gio.task.Task]
-  Returns: New builder object
+      Get builder for [gio.task.Task]
+      Returns: New builder object
   */
   static TaskGidBuilder builder()
   {
@@ -1299,6 +1299,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   }
 }
 
+/// Fluent builder implementation template for [gio.task.Task]
 class TaskGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_result.AsyncResultGidBuilderImpl!T
 {
 
@@ -1308,6 +1309,10 @@ class TaskGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.asy
 /// Fluent builder for [gio.task.Task]
 final class TaskGidBuilder : TaskGidBuilderImpl!TaskGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Task build()
   {
     return new Task(cast(void*)createGObject(Task._getGType), Yes.Take);

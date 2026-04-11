@@ -61,8 +61,8 @@ class ServerMessage : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [soup.server_message.ServerMessage]
-  Returns: New builder object
+      Get builder for [soup.server_message.ServerMessage]
+      Returns: New builder object
   */
   static ServerMessageGidBuilder builder()
   {
@@ -905,6 +905,7 @@ class ServerMessage : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [soup.server_message.ServerMessage]
 class ServerMessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -912,6 +913,10 @@ class ServerMessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [soup.server_message.ServerMessage]
 final class ServerMessageGidBuilder : ServerMessageGidBuilderImpl!ServerMessageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ServerMessage build()
   {
     return new ServerMessage(cast(void*)createGObject(ServerMessage._getGType), No.Take);

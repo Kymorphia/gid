@@ -254,6 +254,7 @@ template ActionT()
   }
 }
 
+/// Fluent builder implementation template for [gio.action.Action]
 template ActionGidBuilderT()
 {
 }

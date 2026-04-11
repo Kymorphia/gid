@@ -42,8 +42,8 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /**
-  Get builder for [arrow.source_node_options.SourceNodeOptions]
-  Returns: New builder object
+      Get builder for [arrow.source_node_options.SourceNodeOptions]
+      Returns: New builder object
   */
   static SourceNodeOptionsGidBuilder builder()
   {
@@ -90,6 +90,7 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.source_node_options.SourceNodeOptions]
 class SourceNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
 {
 
@@ -109,6 +110,10 @@ class SourceNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNod
 /// Fluent builder for [arrow.source_node_options.SourceNodeOptions]
 final class SourceNodeOptionsGidBuilder : SourceNodeOptionsGidBuilderImpl!SourceNodeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SourceNodeOptions build()
   {
     return new SourceNodeOptions(cast(void*)createGObject(SourceNodeOptions._getGType), No.Take);

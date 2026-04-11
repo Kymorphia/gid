@@ -39,8 +39,8 @@ class Int16ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.int16_array_builder.Int16ArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.int16_array_builder.Int16ArrayBuilder]
+      Returns: New builder object
   */
   static Int16ArrayBuilderGidBuilder builder()
   {
@@ -111,6 +111,7 @@ class Int16ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.int16_array_builder.Int16ArrayBuilder]
 class Int16ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -118,6 +119,10 @@ class Int16ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBu
 /// Fluent builder for [arrow.int16_array_builder.Int16ArrayBuilder]
 final class Int16ArrayBuilderGidBuilder : Int16ArrayBuilderGidBuilderImpl!Int16ArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Int16ArrayBuilder build()
   {
     return new Int16ArrayBuilder(cast(void*)createGObject(Int16ArrayBuilder._getGType), Yes.Take);

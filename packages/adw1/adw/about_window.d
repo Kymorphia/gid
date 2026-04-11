@@ -225,8 +225,8 @@ class AboutWindow : adw.window.Window
   }
 
   /**
-  Get builder for [adw.about_window.AboutWindow]
-  Returns: New builder object
+      Get builder for [adw.about_window.AboutWindow]
+      Returns: New builder object
   */
   static AboutWindowGidBuilder builder()
   {
@@ -1811,6 +1811,7 @@ class AboutWindow : adw.window.Window
   }
 }
 
+/// Fluent builder implementation template for [adw.about_window.AboutWindow]
 class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
 {
 
@@ -2137,6 +2138,10 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
 /// Fluent builder for [adw.about_window.AboutWindow]
 final class AboutWindowGidBuilder : AboutWindowGidBuilderImpl!AboutWindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AboutWindow build()
   {
     return new AboutWindow(cast(void*)createGObject(AboutWindow._getGType), No.Take);

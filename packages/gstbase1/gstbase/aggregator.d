@@ -115,8 +115,8 @@ class Aggregator : gst.element.Element
   }
 
   /**
-  Get builder for [gstbase.aggregator.Aggregator]
-  Returns: New builder object
+      Get builder for [gstbase.aggregator.Aggregator]
+      Returns: New builder object
   */
   static AggregatorGidBuilder builder()
   {
@@ -515,6 +515,7 @@ class Aggregator : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstbase.aggregator.Aggregator]
 class AggregatorGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
@@ -566,6 +567,10 @@ class AggregatorGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstbase.aggregator.Aggregator]
 final class AggregatorGidBuilder : AggregatorGidBuilderImpl!AggregatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Aggregator build()
   {
     return new Aggregator(cast(void*)createGObject(Aggregator._getGType), No.Take);

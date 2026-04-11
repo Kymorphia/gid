@@ -41,8 +41,8 @@ class TextPart : gmime.part.Part
   }
 
   /**
-  Get builder for [gmime.text_part.TextPart]
-  Returns: New builder object
+      Get builder for [gmime.text_part.TextPart]
+      Returns: New builder object
   */
   static TextPartGidBuilder builder()
   {
@@ -127,6 +127,7 @@ class TextPart : gmime.part.Part
   }
 }
 
+/// Fluent builder implementation template for [gmime.text_part.TextPart]
 class TextPartGidBuilderImpl(T) : gmime.part.PartGidBuilderImpl!T
 {
 }
@@ -134,6 +135,10 @@ class TextPartGidBuilderImpl(T) : gmime.part.PartGidBuilderImpl!T
 /// Fluent builder for [gmime.text_part.TextPart]
 final class TextPartGidBuilder : TextPartGidBuilderImpl!TextPartGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextPart build()
   {
     return new TextPart(cast(void*)createGObject(TextPart._getGType), Yes.Take);

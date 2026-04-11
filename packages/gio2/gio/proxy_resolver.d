@@ -106,6 +106,7 @@ interface ProxyResolver
   string[] lookupFinish(gio.async_result.AsyncResult result);
 }
 
+/// Fluent builder implementation template for [gio.proxy_resolver.ProxyResolver]
 interface ProxyResolverGidBuilderImpl(T)
 {
 }

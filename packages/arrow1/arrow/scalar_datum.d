@@ -40,8 +40,8 @@ class ScalarDatum : arrow.datum.Datum
   }
 
   /**
-  Get builder for [arrow.scalar_datum.ScalarDatum]
-  Returns: New builder object
+      Get builder for [arrow.scalar_datum.ScalarDatum]
+      Returns: New builder object
   */
   static ScalarDatumGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class ScalarDatum : arrow.datum.Datum
   }
 }
 
+/// Fluent builder implementation template for [arrow.scalar_datum.ScalarDatum]
 class ScalarDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class ScalarDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 /// Fluent builder for [arrow.scalar_datum.ScalarDatum]
 final class ScalarDatumGidBuilder : ScalarDatumGidBuilderImpl!ScalarDatumGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ScalarDatum build()
   {
     return new ScalarDatum(cast(void*)createGObject(ScalarDatum._getGType), Yes.Take);

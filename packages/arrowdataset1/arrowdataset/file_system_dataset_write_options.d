@@ -41,8 +41,8 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.file_system_dataset_write_options.FileSystemDatasetWriteOptions]
-  Returns: New builder object
+      Get builder for [arrowdataset.file_system_dataset_write_options.FileSystemDatasetWriteOptions]
+      Returns: New builder object
   */
   static FileSystemDatasetWriteOptionsGidBuilder builder()
   {
@@ -153,6 +153,7 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.file_system_dataset_write_options.FileSystemDatasetWriteOptions]
 class FileSystemDatasetWriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -212,6 +213,10 @@ class FileSystemDatasetWriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrap
 /// Fluent builder for [arrowdataset.file_system_dataset_write_options.FileSystemDatasetWriteOptions]
 final class FileSystemDatasetWriteOptionsGidBuilder : FileSystemDatasetWriteOptionsGidBuilderImpl!FileSystemDatasetWriteOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileSystemDatasetWriteOptions build()
   {
     return new FileSystemDatasetWriteOptions(cast(void*)createGObject(FileSystemDatasetWriteOptions._getGType), Yes.Take);

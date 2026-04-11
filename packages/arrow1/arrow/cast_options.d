@@ -40,8 +40,8 @@ class CastOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.cast_options.CastOptions]
-  Returns: New builder object
+      Get builder for [arrow.cast_options.CastOptions]
+      Returns: New builder object
   */
   static CastOptionsGidBuilder builder()
   {
@@ -190,6 +190,7 @@ class CastOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.cast_options.CastOptions]
 class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -274,6 +275,10 @@ class CastOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
 /// Fluent builder for [arrow.cast_options.CastOptions]
 final class CastOptionsGidBuilder : CastOptionsGidBuilderImpl!CastOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CastOptions build()
   {
     return new CastOptions(cast(void*)createGObject(CastOptions._getGType), Yes.Take);

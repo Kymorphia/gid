@@ -40,8 +40,8 @@ class StackAccessible : gtk.container_accessible.ContainerAccessible
   }
 
   /**
-  Get builder for [gtk.stack_accessible.StackAccessible]
-  Returns: New builder object
+      Get builder for [gtk.stack_accessible.StackAccessible]
+      Returns: New builder object
   */
   static StackAccessibleGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class StackAccessible : gtk.container_accessible.ContainerAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.stack_accessible.StackAccessible]
 class StackAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
 {
 
@@ -57,6 +58,10 @@ class StackAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAcces
 /// Fluent builder for [gtk.stack_accessible.StackAccessible]
 final class StackAccessibleGidBuilder : StackAccessibleGidBuilderImpl!StackAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StackAccessible build()
   {
     return new StackAccessible(cast(void*)createGObject(StackAccessible._getGType), No.Take);

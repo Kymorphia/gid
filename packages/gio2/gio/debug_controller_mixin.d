@@ -73,6 +73,7 @@ template DebugControllerT()
   }
 }
 
+/// Fluent builder implementation template for [gio.debug_controller.DebugController]
 template DebugControllerGidBuilderT()
 {
 

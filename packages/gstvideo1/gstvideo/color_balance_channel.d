@@ -43,8 +43,8 @@ class ColorBalanceChannel : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstvideo.color_balance_channel.ColorBalanceChannel]
-  Returns: New builder object
+      Get builder for [gstvideo.color_balance_channel.ColorBalanceChannel]
+      Returns: New builder object
   */
   static ColorBalanceChannelGidBuilder builder()
   {
@@ -95,6 +95,7 @@ class ColorBalanceChannel : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.color_balance_channel.ColorBalanceChannel]
 class ColorBalanceChannelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -102,6 +103,10 @@ class ColorBalanceChannelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [gstvideo.color_balance_channel.ColorBalanceChannel]
 final class ColorBalanceChannelGidBuilder : ColorBalanceChannelGidBuilderImpl!ColorBalanceChannelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColorBalanceChannel build()
   {
     return new ColorBalanceChannel(cast(void*)createGObject(ColorBalanceChannel._getGType), No.Take);

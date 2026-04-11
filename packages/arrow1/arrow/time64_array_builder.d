@@ -40,8 +40,8 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.time64_array_builder.Time64ArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.time64_array_builder.Time64ArrayBuilder]
+      Returns: New builder object
   */
   static Time64ArrayBuilderGidBuilder builder()
   {
@@ -113,6 +113,7 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.time64_array_builder.Time64ArrayBuilder]
 class Time64ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -120,6 +121,10 @@ class Time64ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidB
 /// Fluent builder for [arrow.time64_array_builder.Time64ArrayBuilder]
 final class Time64ArrayBuilderGidBuilder : Time64ArrayBuilderGidBuilderImpl!Time64ArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Time64ArrayBuilder build()
   {
     return new Time64ArrayBuilder(cast(void*)createGObject(Time64ArrayBuilder._getGType), Yes.Take);

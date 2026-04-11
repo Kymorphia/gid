@@ -62,8 +62,8 @@ class SettingsBackend : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.settings_backend.SettingsBackend]
-  Returns: New builder object
+      Get builder for [gio.settings_backend.SettingsBackend]
+      Returns: New builder object
   */
   static SettingsBackendGidBuilder builder()
   {
@@ -227,6 +227,7 @@ class SettingsBackend : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.settings_backend.SettingsBackend]
 class SettingsBackendGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -234,6 +235,10 @@ class SettingsBackendGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gio.settings_backend.SettingsBackend]
 final class SettingsBackendGidBuilder : SettingsBackendGidBuilderImpl!SettingsBackendGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SettingsBackend build()
   {
     return new SettingsBackend(cast(void*)createGObject(SettingsBackend._getGType), No.Take);

@@ -33,6 +33,7 @@ template FileDescriptorBasedT()
   }
 }
 
+/// Fluent builder implementation template for [gio.file_descriptor_based.FileDescriptorBased]
 template FileDescriptorBasedGidBuilderT()
 {
 }

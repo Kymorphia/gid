@@ -38,8 +38,8 @@ class Int8DataType : arrow.integer_data_type.IntegerDataType
   }
 
   /**
-  Get builder for [arrow.int8_data_type.Int8DataType]
-  Returns: New builder object
+      Get builder for [arrow.int8_data_type.Int8DataType]
+      Returns: New builder object
   */
   static Int8DataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class Int8DataType : arrow.integer_data_type.IntegerDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.int8_data_type.Int8DataType]
 class Int8DataTypeGidBuilderImpl(T) : arrow.integer_data_type.IntegerDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class Int8DataTypeGidBuilderImpl(T) : arrow.integer_data_type.IntegerDataTypeGid
 /// Fluent builder for [arrow.int8_data_type.Int8DataType]
 final class Int8DataTypeGidBuilder : Int8DataTypeGidBuilderImpl!Int8DataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Int8DataType build()
   {
     return new Int8DataType(cast(void*)createGObject(Int8DataType._getGType), Yes.Take);

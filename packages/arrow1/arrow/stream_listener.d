@@ -41,8 +41,8 @@ class StreamListener : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.stream_listener.StreamListener]
-  Returns: New builder object
+      Get builder for [arrow.stream_listener.StreamListener]
+      Returns: New builder object
   */
   static StreamListenerGidBuilder builder()
   {
@@ -105,6 +105,7 @@ class StreamListener : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.stream_listener.StreamListener]
 class StreamListenerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -112,6 +113,10 @@ class StreamListenerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [arrow.stream_listener.StreamListener]
 final class StreamListenerGidBuilder : StreamListenerGidBuilderImpl!StreamListenerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamListener build()
   {
     return new StreamListener(cast(void*)createGObject(StreamListener._getGType), No.Take);

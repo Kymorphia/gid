@@ -47,8 +47,8 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-  Get builder for [gio.list_store.ListStore]
-  Returns: New builder object
+      Get builder for [gio.list_store.ListStore]
+      Returns: New builder object
   */
   static ListStoreGidBuilder builder()
   {
@@ -288,6 +288,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 }
 
+/// Fluent builder implementation template for [gio.list_store.ListStore]
 class ListStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
 {
 
@@ -309,6 +310,10 @@ class ListStoreGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
 /// Fluent builder for [gio.list_store.ListStore]
 final class ListStoreGidBuilder : ListStoreGidBuilderImpl!ListStoreGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListStore build()
   {
     return new ListStore(cast(void*)createGObject(ListStore._getGType), Yes.Take);

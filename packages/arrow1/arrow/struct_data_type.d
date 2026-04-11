@@ -40,8 +40,8 @@ class StructDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.struct_data_type.StructDataType]
-  Returns: New builder object
+      Get builder for [arrow.struct_data_type.StructDataType]
+      Returns: New builder object
   */
   static StructDataTypeGidBuilder builder()
   {
@@ -104,6 +104,7 @@ class StructDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.struct_data_type.StructDataType]
 class StructDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -111,6 +112,10 @@ class StructDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 /// Fluent builder for [arrow.struct_data_type.StructDataType]
 final class StructDataTypeGidBuilder : StructDataTypeGidBuilderImpl!StructDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StructDataType build()
   {
     return new StructDataType(cast(void*)createGObject(StructDataType._getGType), Yes.Take);

@@ -330,6 +330,7 @@ template ComponentT()
   }
 }
 
+/// Fluent builder implementation template for [atk.component.Component]
 template ComponentGidBuilderT()
 {
 }

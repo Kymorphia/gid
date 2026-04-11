@@ -43,8 +43,8 @@ class Application : adw.application.Application
   }
 
   /**
-  Get builder for [panel.application.Application]
-  Returns: New builder object
+      Get builder for [panel.application.Application]
+      Returns: New builder object
   */
   static ApplicationGidBuilder builder()
   {
@@ -61,6 +61,7 @@ class Application : adw.application.Application
   }
 }
 
+/// Fluent builder implementation template for [panel.application.Application]
 class ApplicationGidBuilderImpl(T) : adw.application.ApplicationGidBuilderImpl!T
 {
 
@@ -69,6 +70,10 @@ class ApplicationGidBuilderImpl(T) : adw.application.ApplicationGidBuilderImpl!T
 /// Fluent builder for [panel.application.Application]
 final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Application build()
   {
     return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);

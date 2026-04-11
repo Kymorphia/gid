@@ -38,8 +38,8 @@ class MonthDayNano : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.month_day_nano.MonthDayNano]
-  Returns: New builder object
+      Get builder for [arrow.month_day_nano.MonthDayNano]
+      Returns: New builder object
   */
   static MonthDayNanoGidBuilder builder()
   {
@@ -120,6 +120,7 @@ class MonthDayNano : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.month_day_nano.MonthDayNano]
 class MonthDayNanoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -160,6 +161,10 @@ class MonthDayNanoGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.month_day_nano.MonthDayNano]
 final class MonthDayNanoGidBuilder : MonthDayNanoGidBuilderImpl!MonthDayNanoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MonthDayNano build()
   {
     return new MonthDayNano(cast(void*)createGObject(MonthDayNano._getGType), Yes.Take);

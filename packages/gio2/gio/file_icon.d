@@ -48,8 +48,8 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
   }
 
   /**
-  Get builder for [gio.file_icon.FileIcon]
-  Returns: New builder object
+      Get builder for [gio.file_icon.FileIcon]
+      Returns: New builder object
   */
   static FileIconGidBuilder builder()
   {
@@ -96,6 +96,7 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
   }
 }
 
+/// Fluent builder implementation template for [gio.file_icon.FileIcon]
 class FileIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T, gio.loadable_icon.LoadableIconGidBuilderImpl!T
 {
 
@@ -117,6 +118,10 @@ class FileIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio
 /// Fluent builder for [gio.file_icon.FileIcon]
 final class FileIconGidBuilder : FileIconGidBuilderImpl!FileIconGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileIcon build()
   {
     return new FileIcon(cast(void*)createGObject(FileIcon._getGType), Yes.Take);

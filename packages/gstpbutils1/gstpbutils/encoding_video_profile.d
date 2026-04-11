@@ -41,8 +41,8 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 
   /**
-  Get builder for [gstpbutils.encoding_video_profile.EncodingVideoProfile]
-  Returns: New builder object
+      Get builder for [gstpbutils.encoding_video_profile.EncodingVideoProfile]
+      Returns: New builder object
   */
   static EncodingVideoProfileGidBuilder builder()
   {
@@ -130,6 +130,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.encoding_video_profile.EncodingVideoProfile]
 class EncodingVideoProfileGidBuilderImpl(T) : gstpbutils.encoding_profile.EncodingProfileGidBuilderImpl!T
 {
 }
@@ -137,6 +138,10 @@ class EncodingVideoProfileGidBuilderImpl(T) : gstpbutils.encoding_profile.Encodi
 /// Fluent builder for [gstpbutils.encoding_video_profile.EncodingVideoProfile]
 final class EncodingVideoProfileGidBuilder : EncodingVideoProfileGidBuilderImpl!EncodingVideoProfileGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EncodingVideoProfile build()
   {
     return new EncodingVideoProfile(cast(void*)createGObject(EncodingVideoProfile._getGType), Yes.Take);

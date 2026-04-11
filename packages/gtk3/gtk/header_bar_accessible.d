@@ -40,8 +40,8 @@ class HeaderBarAccessible : gtk.container_accessible.ContainerAccessible
   }
 
   /**
-  Get builder for [gtk.header_bar_accessible.HeaderBarAccessible]
-  Returns: New builder object
+      Get builder for [gtk.header_bar_accessible.HeaderBarAccessible]
+      Returns: New builder object
   */
   static HeaderBarAccessibleGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class HeaderBarAccessible : gtk.container_accessible.ContainerAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.header_bar_accessible.HeaderBarAccessible]
 class HeaderBarAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
 {
 
@@ -57,6 +58,10 @@ class HeaderBarAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerA
 /// Fluent builder for [gtk.header_bar_accessible.HeaderBarAccessible]
 final class HeaderBarAccessibleGidBuilder : HeaderBarAccessibleGidBuilderImpl!HeaderBarAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HeaderBarAccessible build()
   {
     return new HeaderBarAccessible(cast(void*)createGObject(HeaderBarAccessible._getGType), No.Take);

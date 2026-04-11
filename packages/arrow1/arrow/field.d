@@ -40,8 +40,8 @@ class Field : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.field.Field]
-  Returns: New builder object
+      Get builder for [arrow.field.Field]
+      Returns: New builder object
   */
   static FieldGidBuilder builder()
   {
@@ -190,6 +190,7 @@ class Field : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.field.Field]
 class FieldGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -209,6 +210,10 @@ class FieldGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.field.Field]
 final class FieldGidBuilder : FieldGidBuilderImpl!FieldGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Field build()
   {
     return new Field(cast(void*)createGObject(Field._getGType), Yes.Take);

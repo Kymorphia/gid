@@ -238,6 +238,7 @@ template ColorChooserT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.color_chooser.ColorChooser]
 template ColorChooserGidBuilderT()
 {
 

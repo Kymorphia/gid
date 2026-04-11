@@ -42,8 +42,8 @@ class Visual : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.visual.Visual]
-  Returns: New builder object
+      Get builder for [gdk.visual.Visual]
+      Returns: New builder object
   */
   static VisualGidBuilder builder()
   {
@@ -313,6 +313,7 @@ class Visual : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.visual.Visual]
 class VisualGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -320,6 +321,10 @@ class VisualGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.visual.Visual]
 final class VisualGidBuilder : VisualGidBuilderImpl!VisualGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Visual build()
   {
     return new Visual(cast(void*)createGObject(Visual._getGType), No.Take);

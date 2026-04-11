@@ -41,8 +41,8 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
   }
 
   /**
-  Get builder for [gstcontroller.proxy_control_binding.ProxyControlBinding]
-  Returns: New builder object
+      Get builder for [gstcontroller.proxy_control_binding.ProxyControlBinding]
+      Returns: New builder object
   */
   static ProxyControlBindingGidBuilder builder()
   {
@@ -73,6 +73,7 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
   }
 }
 
+/// Fluent builder implementation template for [gstcontroller.proxy_control_binding.ProxyControlBinding]
 class ProxyControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBindingGidBuilderImpl!T
 {
 }
@@ -80,6 +81,10 @@ class ProxyControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBindingG
 /// Fluent builder for [gstcontroller.proxy_control_binding.ProxyControlBinding]
 final class ProxyControlBindingGidBuilder : ProxyControlBindingGidBuilderImpl!ProxyControlBindingGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ProxyControlBinding build()
   {
     return new ProxyControlBinding(cast(void*)createGObject(ProxyControlBinding._getGType), No.Take);

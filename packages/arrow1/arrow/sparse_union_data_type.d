@@ -39,8 +39,8 @@ class SparseUnionDataType : arrow.union_data_type.UnionDataType
   }
 
   /**
-  Get builder for [arrow.sparse_union_data_type.SparseUnionDataType]
-  Returns: New builder object
+      Get builder for [arrow.sparse_union_data_type.SparseUnionDataType]
+      Returns: New builder object
   */
   static SparseUnionDataTypeGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class SparseUnionDataType : arrow.union_data_type.UnionDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.sparse_union_data_type.SparseUnionDataType]
 class SparseUnionDataTypeGidBuilderImpl(T) : arrow.union_data_type.UnionDataTypeGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class SparseUnionDataTypeGidBuilderImpl(T) : arrow.union_data_type.UnionDataType
 /// Fluent builder for [arrow.sparse_union_data_type.SparseUnionDataType]
 final class SparseUnionDataTypeGidBuilder : SparseUnionDataTypeGidBuilderImpl!SparseUnionDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SparseUnionDataType build()
   {
     return new SparseUnionDataType(cast(void*)createGObject(SparseUnionDataType._getGType), Yes.Take);

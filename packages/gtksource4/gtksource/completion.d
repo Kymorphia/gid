@@ -48,8 +48,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
-  Get builder for [gtksource.completion.Completion]
-  Returns: New builder object
+      Get builder for [gtksource.completion.Completion]
+      Returns: New builder object
   */
   static CompletionGidBuilder builder()
   {
@@ -706,6 +706,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion.Completion]
 class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -830,6 +831,10 @@ class CompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [gtksource.completion.Completion]
 final class CompletionGidBuilder : CompletionGidBuilderImpl!CompletionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Completion build()
   {
     return new Completion(cast(void*)createGObject(Completion._getGType), No.Take);

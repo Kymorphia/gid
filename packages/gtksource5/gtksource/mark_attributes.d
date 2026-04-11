@@ -79,8 +79,8 @@ class MarkAttributes : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.mark_attributes.MarkAttributes]
-  Returns: New builder object
+      Get builder for [gtksource.mark_attributes.MarkAttributes]
+      Returns: New builder object
   */
   static MarkAttributesGidBuilder builder()
   {
@@ -438,6 +438,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.mark_attributes.MarkAttributes]
 class MarkAttributesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -489,6 +490,10 @@ class MarkAttributesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtksource.mark_attributes.MarkAttributes]
 final class MarkAttributesGidBuilder : MarkAttributesGidBuilderImpl!MarkAttributesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MarkAttributes build()
   {
     return new MarkAttributes(cast(void*)createGObject(MarkAttributes._getGType), Yes.Take);

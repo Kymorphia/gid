@@ -142,8 +142,8 @@ class Adapter : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstbase.adapter.Adapter]
-  Returns: New builder object
+      Get builder for [gstbase.adapter.Adapter]
+      Returns: New builder object
   */
   static AdapterGidBuilder builder()
   {
@@ -698,6 +698,7 @@ class Adapter : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstbase.adapter.Adapter]
 class AdapterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -705,6 +706,10 @@ class AdapterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstbase.adapter.Adapter]
 final class AdapterGidBuilder : AdapterGidBuilderImpl!AdapterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Adapter build()
   {
     return new Adapter(cast(void*)createGObject(Adapter._getGType), Yes.Take);

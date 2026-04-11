@@ -41,8 +41,8 @@ class FilterBest : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_best.FilterBest]
-  Returns: New builder object
+      Get builder for [gmime.filter_best.FilterBest]
+      Returns: New builder object
   */
   static FilterBestGidBuilder builder()
   {
@@ -105,6 +105,7 @@ class FilterBest : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_best.FilterBest]
 class FilterBestGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -112,6 +113,10 @@ class FilterBestGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_best.FilterBest]
 final class FilterBestGidBuilder : FilterBestGidBuilderImpl!FilterBestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterBest build()
   {
     return new FilterBest(cast(void*)createGObject(FilterBest._getGType), Yes.Take);

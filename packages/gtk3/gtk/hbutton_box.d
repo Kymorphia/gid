@@ -44,8 +44,8 @@ class HButtonBox : gtk.button_box.ButtonBox
   }
 
   /**
-  Get builder for [gtk.hbutton_box.HButtonBox]
-  Returns: New builder object
+      Get builder for [gtk.hbutton_box.HButtonBox]
+      Returns: New builder object
   */
   static HButtonBoxGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class HButtonBox : gtk.button_box.ButtonBox
   }
 }
 
+/// Fluent builder implementation template for [gtk.hbutton_box.HButtonBox]
 class HButtonBoxGidBuilderImpl(T) : gtk.button_box.ButtonBoxGidBuilderImpl!T
 {
 
@@ -74,6 +75,10 @@ class HButtonBoxGidBuilderImpl(T) : gtk.button_box.ButtonBoxGidBuilderImpl!T
 /// Fluent builder for [gtk.hbutton_box.HButtonBox]
 final class HButtonBoxGidBuilder : HButtonBoxGidBuilderImpl!HButtonBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HButtonBox build()
   {
     return new HButtonBox(cast(void*)createGObject(HButtonBox._getGType), No.Take);

@@ -63,8 +63,8 @@ class PreferencesPage : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.preferences_page.PreferencesPage]
-  Returns: New builder object
+      Get builder for [adw.preferences_page.PreferencesPage]
+      Returns: New builder object
   */
   static PreferencesPageGidBuilder builder()
   {
@@ -328,6 +328,7 @@ class PreferencesPage : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.preferences_page.PreferencesPage]
 class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -391,6 +392,10 @@ class PreferencesPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.preferences_page.PreferencesPage]
 final class PreferencesPageGidBuilder : PreferencesPageGidBuilderImpl!PreferencesPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PreferencesPage build()
   {
     return new PreferencesPage(cast(void*)createGObject(PreferencesPage._getGType), No.Take);

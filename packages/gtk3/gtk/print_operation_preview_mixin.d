@@ -160,6 +160,7 @@ template PrintOperationPreviewT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.print_operation_preview.PrintOperationPreview]
 template PrintOperationPreviewGidBuilderT()
 {
 }

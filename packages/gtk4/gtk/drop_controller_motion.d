@@ -50,8 +50,8 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.drop_controller_motion.DropControllerMotion]
-  Returns: New builder object
+      Get builder for [gtk.drop_controller_motion.DropControllerMotion]
+      Returns: New builder object
   */
   static DropControllerMotionGidBuilder builder()
   {
@@ -264,6 +264,7 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.drop_controller_motion.DropControllerMotion]
 class DropControllerMotionGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 }
@@ -271,6 +272,10 @@ class DropControllerMotionGidBuilderImpl(T) : gtk.event_controller.EventControll
 /// Fluent builder for [gtk.drop_controller_motion.DropControllerMotion]
 final class DropControllerMotionGidBuilder : DropControllerMotionGidBuilderImpl!DropControllerMotionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DropControllerMotion build()
   {
     return new DropControllerMotion(cast(void*)createGObject(DropControllerMotion._getGType), Yes.Take);

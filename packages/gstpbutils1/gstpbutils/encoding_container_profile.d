@@ -41,8 +41,8 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 
   /**
-  Get builder for [gstpbutils.encoding_container_profile.EncodingContainerProfile]
-  Returns: New builder object
+      Get builder for [gstpbutils.encoding_container_profile.EncodingContainerProfile]
+      Returns: New builder object
   */
   static EncodingContainerProfileGidBuilder builder()
   {
@@ -113,6 +113,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.encoding_container_profile.EncodingContainerProfile]
 class EncodingContainerProfileGidBuilderImpl(T) : gstpbutils.encoding_profile.EncodingProfileGidBuilderImpl!T
 {
 }
@@ -120,6 +121,10 @@ class EncodingContainerProfileGidBuilderImpl(T) : gstpbutils.encoding_profile.En
 /// Fluent builder for [gstpbutils.encoding_container_profile.EncodingContainerProfile]
 final class EncodingContainerProfileGidBuilder : EncodingContainerProfileGidBuilderImpl!EncodingContainerProfileGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EncodingContainerProfile build()
   {
     return new EncodingContainerProfile(cast(void*)createGObject(EncodingContainerProfile._getGType), Yes.Take);

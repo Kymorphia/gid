@@ -41,8 +41,8 @@ class RecordBatchReader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.record_batch_reader.RecordBatchReader]
-  Returns: New builder object
+      Get builder for [arrowflight.record_batch_reader.RecordBatchReader]
+      Returns: New builder object
   */
   static RecordBatchReaderGidBuilder builder()
   {
@@ -74,6 +74,7 @@ class RecordBatchReader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.record_batch_reader.RecordBatchReader]
 class RecordBatchReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -93,6 +94,10 @@ class RecordBatchReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [arrowflight.record_batch_reader.RecordBatchReader]
 final class RecordBatchReaderGidBuilder : RecordBatchReaderGidBuilderImpl!RecordBatchReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecordBatchReader build()
   {
     return new RecordBatchReader(cast(void*)createGObject(RecordBatchReader._getGType), No.Take);

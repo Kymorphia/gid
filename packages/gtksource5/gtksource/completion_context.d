@@ -64,8 +64,8 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-  Get builder for [gtksource.completion_context.CompletionContext]
-  Returns: New builder object
+      Get builder for [gtksource.completion_context.CompletionContext]
+      Returns: New builder object
   */
   static CompletionContextGidBuilder builder()
   {
@@ -334,6 +334,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion_context.CompletionContext]
 class CompletionContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
 {
 
@@ -354,6 +355,10 @@ class CompletionContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [gtksource.completion_context.CompletionContext]
 final class CompletionContextGidBuilder : CompletionContextGidBuilderImpl!CompletionContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CompletionContext build()
   {
     return new CompletionContext(cast(void*)createGObject(CompletionContext._getGType), No.Take);

@@ -56,8 +56,8 @@ class GhostPad : gst.proxy_pad.ProxyPad
   }
 
   /**
-  Get builder for [gst.ghost_pad.GhostPad]
-  Returns: New builder object
+      Get builder for [gst.ghost_pad.GhostPad]
+      Returns: New builder object
   */
   static GhostPadGidBuilder builder()
   {
@@ -233,6 +233,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   }
 }
 
+/// Fluent builder implementation template for [gst.ghost_pad.GhostPad]
 class GhostPadGidBuilderImpl(T) : gst.proxy_pad.ProxyPadGidBuilderImpl!T
 {
 }
@@ -240,6 +241,10 @@ class GhostPadGidBuilderImpl(T) : gst.proxy_pad.ProxyPadGidBuilderImpl!T
 /// Fluent builder for [gst.ghost_pad.GhostPad]
 final class GhostPadGidBuilder : GhostPadGidBuilderImpl!GhostPadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GhostPad build()
   {
     return new GhostPad(cast(void*)createGObject(GhostPad._getGType), No.Take);

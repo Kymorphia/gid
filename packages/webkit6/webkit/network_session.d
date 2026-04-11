@@ -52,8 +52,8 @@ class NetworkSession : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.network_session.NetworkSession]
-  Returns: New builder object
+      Get builder for [webkit.network_session.NetworkSession]
+      Returns: New builder object
   */
   static NetworkSessionGidBuilder builder()
   {
@@ -410,6 +410,7 @@ class NetworkSession : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.network_session.NetworkSession]
 class NetworkSessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -439,6 +440,10 @@ class NetworkSessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [webkit.network_session.NetworkSession]
 final class NetworkSessionGidBuilder : NetworkSessionGidBuilderImpl!NetworkSessionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NetworkSession build()
   {
     return new NetworkSession(cast(void*)createGObject(NetworkSession._getGType), Yes.Take);

@@ -51,8 +51,8 @@ class SnippetManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.snippet_manager.SnippetManager]
-  Returns: New builder object
+      Get builder for [gtksource.snippet_manager.SnippetManager]
+      Returns: New builder object
   */
   static SnippetManagerGidBuilder builder()
   {
@@ -216,6 +216,7 @@ class SnippetManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.snippet_manager.SnippetManager]
 class SnippetManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -223,6 +224,10 @@ class SnippetManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtksource.snippet_manager.SnippetManager]
 final class SnippetManagerGidBuilder : SnippetManagerGidBuilderImpl!SnippetManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SnippetManager build()
   {
     return new SnippetManager(cast(void*)createGObject(SnippetManager._getGType), No.Take);

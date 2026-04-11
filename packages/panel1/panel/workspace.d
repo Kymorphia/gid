@@ -60,8 +60,8 @@ class Workspace : adw.application_window.ApplicationWindow
   }
 
   /**
-  Get builder for [panel.workspace.Workspace]
-  Returns: New builder object
+      Get builder for [panel.workspace.Workspace]
+      Returns: New builder object
   */
   static WorkspaceGidBuilder builder()
   {
@@ -167,6 +167,7 @@ class Workspace : adw.application_window.ApplicationWindow
   }
 }
 
+/// Fluent builder implementation template for [panel.workspace.Workspace]
 class WorkspaceGidBuilderImpl(T) : adw.application_window.ApplicationWindowGidBuilderImpl!T
 {
 
@@ -189,6 +190,10 @@ class WorkspaceGidBuilderImpl(T) : adw.application_window.ApplicationWindowGidBu
 /// Fluent builder for [panel.workspace.Workspace]
 final class WorkspaceGidBuilder : WorkspaceGidBuilderImpl!WorkspaceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Workspace build()
   {
     return new Workspace(cast(void*)createGObject(Workspace._getGType), No.Take);

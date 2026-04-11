@@ -719,6 +719,7 @@ template MountT()
   }
 }
 
+/// Fluent builder implementation template for [gio.mount.Mount]
 template MountGidBuilderT()
 {
 }

@@ -40,8 +40,8 @@ class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
   }
 
   /**
-  Get builder for [arrow.fixed_size_binary_scalar.FixedSizeBinaryScalar]
-  Returns: New builder object
+      Get builder for [arrow.fixed_size_binary_scalar.FixedSizeBinaryScalar]
+      Returns: New builder object
   */
   static FixedSizeBinaryScalarGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.fixed_size_binary_scalar.FixedSizeBinaryScalar]
 class FixedSizeBinaryScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinaryScalarGidBuilderImpl!T
 {
 }
@@ -64,6 +65,10 @@ class FixedSizeBinaryScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBina
 /// Fluent builder for [arrow.fixed_size_binary_scalar.FixedSizeBinaryScalar]
 final class FixedSizeBinaryScalarGidBuilder : FixedSizeBinaryScalarGidBuilderImpl!FixedSizeBinaryScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FixedSizeBinaryScalar build()
   {
     return new FixedSizeBinaryScalar(cast(void*)createGObject(FixedSizeBinaryScalar._getGType), Yes.Take);

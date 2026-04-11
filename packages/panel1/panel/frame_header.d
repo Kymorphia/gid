@@ -90,6 +90,7 @@ interface FrameHeader
   void setFrame(panel.frame.Frame frame = null);
 }
 
+/// Fluent builder implementation template for [panel.frame_header.FrameHeader]
 interface FrameHeaderGidBuilderImpl(T)
 {
 

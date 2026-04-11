@@ -101,8 +101,8 @@ class ComboBoxText : gtk.combo_box.ComboBox
   }
 
   /**
-  Get builder for [gtk.combo_box_text.ComboBoxText]
-  Returns: New builder object
+      Get builder for [gtk.combo_box_text.ComboBoxText]
+      Returns: New builder object
   */
   static ComboBoxTextGidBuilder builder()
   {
@@ -275,6 +275,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
   }
 }
 
+/// Fluent builder implementation template for [gtk.combo_box_text.ComboBoxText]
 class ComboBoxTextGidBuilderImpl(T) : gtk.combo_box.ComboBoxGidBuilderImpl!T
 {
 
@@ -283,6 +284,10 @@ class ComboBoxTextGidBuilderImpl(T) : gtk.combo_box.ComboBoxGidBuilderImpl!T
 /// Fluent builder for [gtk.combo_box_text.ComboBoxText]
 final class ComboBoxTextGidBuilder : ComboBoxTextGidBuilderImpl!ComboBoxTextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ComboBoxText build()
   {
     return new ComboBoxText(cast(void*)createGObject(ComboBoxText._getGType), No.Take);

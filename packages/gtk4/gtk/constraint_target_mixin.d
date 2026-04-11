@@ -18,6 +18,7 @@ template ConstraintTargetT()
 {
 }
 
+/// Fluent builder implementation template for [gtk.constraint_target.ConstraintTarget]
 template ConstraintTargetGidBuilderT()
 {
 }

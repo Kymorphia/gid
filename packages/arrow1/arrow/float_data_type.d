@@ -38,8 +38,8 @@ class FloatDataType : arrow.floating_point_data_type.FloatingPointDataType
   }
 
   /**
-  Get builder for [arrow.float_data_type.FloatDataType]
-  Returns: New builder object
+      Get builder for [arrow.float_data_type.FloatDataType]
+      Returns: New builder object
   */
   static FloatDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class FloatDataType : arrow.floating_point_data_type.FloatingPointDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.float_data_type.FloatDataType]
 class FloatDataTypeGidBuilderImpl(T) : arrow.floating_point_data_type.FloatingPointDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class FloatDataTypeGidBuilderImpl(T) : arrow.floating_point_data_type.FloatingPo
 /// Fluent builder for [arrow.float_data_type.FloatDataType]
 final class FloatDataTypeGidBuilder : FloatDataTypeGidBuilderImpl!FloatDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FloatDataType build()
   {
     return new FloatDataType(cast(void*)createGObject(FloatDataType._getGType), Yes.Take);

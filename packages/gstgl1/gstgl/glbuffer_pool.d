@@ -49,8 +49,8 @@ class GLBufferPool : gst.buffer_pool.BufferPool
   }
 
   /**
-  Get builder for [gstgl.glbuffer_pool.GLBufferPool]
-  Returns: New builder object
+      Get builder for [gstgl.glbuffer_pool.GLBufferPool]
+      Returns: New builder object
   */
   static GLBufferPoolGidBuilder builder()
   {
@@ -81,6 +81,7 @@ class GLBufferPool : gst.buffer_pool.BufferPool
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glbuffer_pool.GLBufferPool]
 class GLBufferPoolGidBuilderImpl(T) : gst.buffer_pool.BufferPoolGidBuilderImpl!T
 {
 }
@@ -88,6 +89,10 @@ class GLBufferPoolGidBuilderImpl(T) : gst.buffer_pool.BufferPoolGidBuilderImpl!T
 /// Fluent builder for [gstgl.glbuffer_pool.GLBufferPool]
 final class GLBufferPoolGidBuilder : GLBufferPoolGidBuilderImpl!GLBufferPoolGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLBufferPool build()
   {
     return new GLBufferPool(cast(void*)createGObject(GLBufferPool._getGType), No.Take);

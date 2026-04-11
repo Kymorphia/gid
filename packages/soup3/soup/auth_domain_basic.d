@@ -45,8 +45,8 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   }
 
   /**
-  Get builder for [soup.auth_domain_basic.AuthDomainBasic]
-  Returns: New builder object
+      Get builder for [soup.auth_domain_basic.AuthDomainBasic]
+      Returns: New builder object
   */
   static AuthDomainBasicGidBuilder builder()
   {
@@ -128,6 +128,7 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   }
 }
 
+/// Fluent builder implementation template for [soup.auth_domain_basic.AuthDomainBasic]
 class AuthDomainBasicGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderImpl!T
 {
 
@@ -157,6 +158,10 @@ class AuthDomainBasicGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderIm
 /// Fluent builder for [soup.auth_domain_basic.AuthDomainBasic]
 final class AuthDomainBasicGidBuilder : AuthDomainBasicGidBuilderImpl!AuthDomainBasicGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AuthDomainBasic build()
   {
     return new AuthDomainBasic(cast(void*)createGObject(AuthDomainBasic._getGType), Yes.Take);

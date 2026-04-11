@@ -39,8 +39,8 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   }
 
   /**
-  Get builder for [arrow.string_array_builder.StringArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.string_array_builder.StringArrayBuilder]
+      Returns: New builder object
   */
   static StringArrayBuilderGidBuilder builder()
   {
@@ -131,6 +131,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.string_array_builder.StringArrayBuilder]
 class StringArrayBuilderGidBuilderImpl(T) : arrow.binary_array_builder.BinaryArrayBuilderGidBuilderImpl!T
 {
 }
@@ -138,6 +139,10 @@ class StringArrayBuilderGidBuilderImpl(T) : arrow.binary_array_builder.BinaryArr
 /// Fluent builder for [arrow.string_array_builder.StringArrayBuilder]
 final class StringArrayBuilderGidBuilder : StringArrayBuilderGidBuilderImpl!StringArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StringArrayBuilder build()
   {
     return new StringArrayBuilder(cast(void*)createGObject(StringArrayBuilder._getGType), Yes.Take);

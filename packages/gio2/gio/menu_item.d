@@ -45,8 +45,8 @@ class MenuItem : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.menu_item.MenuItem]
-  Returns: New builder object
+      Get builder for [gio.menu_item.MenuItem]
+      Returns: New builder object
   */
   static MenuItemGidBuilder builder()
   {
@@ -425,6 +425,7 @@ class MenuItem : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.menu_item.MenuItem]
 class MenuItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -432,6 +433,10 @@ class MenuItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.menu_item.MenuItem]
 final class MenuItemGidBuilder : MenuItemGidBuilderImpl!MenuItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuItem build()
   {
     return new MenuItem(cast(void*)createGObject(MenuItem._getGType), Yes.Take);

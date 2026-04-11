@@ -44,8 +44,8 @@ class FileSystem : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.file_system.FileSystem]
-  Returns: New builder object
+      Get builder for [arrow.file_system.FileSystem]
+      Returns: New builder object
   */
   static FileSystemGidBuilder builder()
   {
@@ -407,6 +407,7 @@ class FileSystem : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.file_system.FileSystem]
 class FileSystemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -420,6 +421,10 @@ class FileSystemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.file_system.FileSystem]
 final class FileSystemGidBuilder : FileSystemGidBuilderImpl!FileSystemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileSystem build()
   {
     return new FileSystem(cast(void*)createGObject(FileSystem._getGType), No.Take);

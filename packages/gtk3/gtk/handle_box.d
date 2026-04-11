@@ -71,8 +71,8 @@ class HandleBox : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.handle_box.HandleBox]
-  Returns: New builder object
+      Get builder for [gtk.handle_box.HandleBox]
+      Returns: New builder object
   */
   static HandleBoxGidBuilder builder()
   {
@@ -357,6 +357,7 @@ class HandleBox : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.handle_box.HandleBox]
 class HandleBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -389,6 +390,10 @@ class HandleBoxGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.handle_box.HandleBox]
 final class HandleBoxGidBuilder : HandleBoxGidBuilderImpl!HandleBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HandleBox build()
   {
     return new HandleBox(cast(void*)createGObject(HandleBox._getGType), No.Take);

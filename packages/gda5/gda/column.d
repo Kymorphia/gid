@@ -42,8 +42,8 @@ class Column : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.column.Column]
-  Returns: New builder object
+      Get builder for [gda.column.Column]
+      Returns: New builder object
   */
   static ColumnGidBuilder builder()
   {
@@ -398,6 +398,7 @@ class Column : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.column.Column]
 class ColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -411,6 +412,10 @@ class ColumnGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.column.Column]
 final class ColumnGidBuilder : ColumnGidBuilderImpl!ColumnGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Column build()
   {
     return new Column(cast(void*)createGObject(Column._getGType), Yes.Take);

@@ -81,8 +81,8 @@ class AppInfoMonitor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.app_info_monitor.AppInfoMonitor]
-  Returns: New builder object
+      Get builder for [gio.app_info_monitor.AppInfoMonitor]
+      Returns: New builder object
   */
   static AppInfoMonitorGidBuilder builder()
   {
@@ -152,6 +152,7 @@ class AppInfoMonitor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.app_info_monitor.AppInfoMonitor]
 class AppInfoMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -159,6 +160,10 @@ class AppInfoMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.app_info_monitor.AppInfoMonitor]
 final class AppInfoMonitorGidBuilder : AppInfoMonitorGidBuilderImpl!AppInfoMonitorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AppInfoMonitor build()
   {
     return new AppInfoMonitor(cast(void*)createGObject(AppInfoMonitor._getGType), No.Take);

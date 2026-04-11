@@ -707,6 +707,7 @@ template RecentChooserT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.recent_chooser.RecentChooser]
 template RecentChooserGidBuilderT()
 {
 

@@ -76,8 +76,8 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   }
 
   /**
-  Get builder for [secret.item.Item]
-  Returns: New builder object
+      Get builder for [secret.item.Item]
+      Returns: New builder object
   */
   static ItemGidBuilder builder()
   {
@@ -796,6 +796,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   }
 }
 
+/// Fluent builder implementation template for [secret.item.Item]
 class ItemGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T, secret.retrievable.RetrievableGidBuilderImpl!T
 {
 
@@ -829,6 +830,10 @@ class ItemGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T, secret.r
 /// Fluent builder for [secret.item.Item]
 final class ItemGidBuilder : ItemGidBuilderImpl!ItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Item build()
   {
     return new Item(cast(void*)createGObject(Item._getGType), No.Take);

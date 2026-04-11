@@ -42,8 +42,8 @@ class SpinnerAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Imag
   }
 
   /**
-  Get builder for [gtk.spinner_accessible.SpinnerAccessible]
-  Returns: New builder object
+      Get builder for [gtk.spinner_accessible.SpinnerAccessible]
+      Returns: New builder object
   */
   static SpinnerAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class SpinnerAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Imag
   mixin ImageT!();
 }
 
+/// Fluent builder implementation template for [gtk.spinner_accessible.SpinnerAccessible]
 class SpinnerAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class SpinnerAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibl
 /// Fluent builder for [gtk.spinner_accessible.SpinnerAccessible]
 final class SpinnerAccessibleGidBuilder : SpinnerAccessibleGidBuilderImpl!SpinnerAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SpinnerAccessible build()
   {
     return new SpinnerAccessible(cast(void*)createGObject(SpinnerAccessible._getGType), No.Take);

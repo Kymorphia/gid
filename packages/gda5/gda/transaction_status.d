@@ -39,8 +39,8 @@ class TransactionStatus : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.transaction_status.TransactionStatus]
-  Returns: New builder object
+      Get builder for [gda.transaction_status.TransactionStatus]
+      Returns: New builder object
   */
   static TransactionStatusGidBuilder builder()
   {
@@ -97,6 +97,7 @@ class TransactionStatus : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.transaction_status.TransactionStatus]
 class TransactionStatusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -104,6 +105,10 @@ class TransactionStatusGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [gda.transaction_status.TransactionStatus]
 final class TransactionStatusGidBuilder : TransactionStatusGidBuilderImpl!TransactionStatusGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TransactionStatus build()
   {
     return new TransactionStatus(cast(void*)createGObject(TransactionStatus._getGType), Yes.Take);

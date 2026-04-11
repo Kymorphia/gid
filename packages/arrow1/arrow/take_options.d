@@ -38,8 +38,8 @@ class TakeOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.take_options.TakeOptions]
-  Returns: New builder object
+      Get builder for [arrow.take_options.TakeOptions]
+      Returns: New builder object
   */
   static TakeOptionsGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class TakeOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.take_options.TakeOptions]
 class TakeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class TakeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
 /// Fluent builder for [arrow.take_options.TakeOptions]
 final class TakeOptionsGidBuilder : TakeOptionsGidBuilderImpl!TakeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TakeOptions build()
   {
     return new TakeOptions(cast(void*)createGObject(TakeOptions._getGType), Yes.Take);

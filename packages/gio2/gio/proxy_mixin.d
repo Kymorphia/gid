@@ -112,6 +112,7 @@ template ProxyT()
   }
 }
 
+/// Fluent builder implementation template for [gio.proxy.Proxy]
 template ProxyGidBuilderT()
 {
 }

@@ -51,8 +51,8 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /**
-  Get builder for [gtk.slice_list_model.SliceListModel]
-  Returns: New builder object
+      Get builder for [gtk.slice_list_model.SliceListModel]
+      Returns: New builder object
   */
   static SliceListModelGidBuilder builder()
   {
@@ -233,6 +233,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 }
 
+/// Fluent builder implementation template for [gtk.slice_list_model.SliceListModel]
 class SliceListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
 {
 
@@ -276,6 +277,10 @@ class SliceListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtk.slice_list_model.SliceListModel]
 final class SliceListModelGidBuilder : SliceListModelGidBuilderImpl!SliceListModelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SliceListModel build()
   {
     return new SliceListModel(cast(void*)createGObject(SliceListModel._getGType), Yes.Take);

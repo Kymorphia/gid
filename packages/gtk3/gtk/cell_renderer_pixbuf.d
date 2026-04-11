@@ -55,8 +55,8 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
   }
 
   /**
-  Get builder for [gtk.cell_renderer_pixbuf.CellRendererPixbuf]
-  Returns: New builder object
+      Get builder for [gtk.cell_renderer_pixbuf.CellRendererPixbuf]
+      Returns: New builder object
   */
   static CellRendererPixbufGidBuilder builder()
   {
@@ -243,6 +243,7 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_renderer_pixbuf.CellRendererPixbuf]
 class CellRendererPixbufGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T
 {
 
@@ -337,6 +338,10 @@ class CellRendererPixbufGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBui
 /// Fluent builder for [gtk.cell_renderer_pixbuf.CellRendererPixbuf]
 final class CellRendererPixbufGidBuilder : CellRendererPixbufGidBuilderImpl!CellRendererPixbufGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellRendererPixbuf build()
   {
     return new CellRendererPixbuf(cast(void*)createGObject(CellRendererPixbuf._getGType), No.Take);

@@ -50,8 +50,8 @@ class Invisible : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.invisible.Invisible]
-  Returns: New builder object
+      Get builder for [gtk.invisible.Invisible]
+      Returns: New builder object
   */
   static InvisibleGidBuilder builder()
   {
@@ -121,6 +121,7 @@ class Invisible : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.invisible.Invisible]
 class InvisibleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -135,6 +136,10 @@ class InvisibleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.invisible.Invisible]
 final class InvisibleGidBuilder : InvisibleGidBuilderImpl!InvisibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Invisible build()
   {
     return new Invisible(cast(void*)createGObject(Invisible._getGType), No.Take);

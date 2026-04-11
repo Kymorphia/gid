@@ -57,8 +57,8 @@ class ContentProvider : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.content_provider.ContentProvider]
-  Returns: New builder object
+      Get builder for [gdk.content_provider.ContentProvider]
+      Returns: New builder object
   */
   static ContentProviderGidBuilder builder()
   {
@@ -275,6 +275,7 @@ class ContentProvider : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.content_provider.ContentProvider]
 class ContentProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -282,6 +283,10 @@ class ContentProviderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gdk.content_provider.ContentProvider]
 final class ContentProviderGidBuilder : ContentProviderGidBuilderImpl!ContentProviderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContentProvider build()
   {
     return new ContentProvider(cast(void*)createGObject(ContentProvider._getGType), No.Take);

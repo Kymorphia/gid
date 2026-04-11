@@ -50,8 +50,8 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
   }
 
   /**
-  Get builder for [gtk.multi_sorter.MultiSorter]
-  Returns: New builder object
+      Get builder for [gtk.multi_sorter.MultiSorter]
+      Returns: New builder object
   */
   static MultiSorterGidBuilder builder()
   {
@@ -124,6 +124,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
   }
 }
 
+/// Fluent builder implementation template for [gtk.multi_sorter.MultiSorter]
 class MultiSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -134,6 +135,10 @@ class MultiSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T, gio.list
 /// Fluent builder for [gtk.multi_sorter.MultiSorter]
 final class MultiSorterGidBuilder : MultiSorterGidBuilderImpl!MultiSorterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MultiSorter build()
   {
     return new MultiSorter(cast(void*)createGObject(MultiSorter._getGType), Yes.Take);

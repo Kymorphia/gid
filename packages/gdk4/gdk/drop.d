@@ -65,8 +65,8 @@ class Drop : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.drop.Drop]
-  Returns: New builder object
+      Get builder for [gdk.drop.Drop]
+      Returns: New builder object
   */
   static DropGidBuilder builder()
   {
@@ -370,6 +370,7 @@ class Drop : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.drop.Drop]
 class DropGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -432,6 +433,10 @@ class DropGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.drop.Drop]
 final class DropGidBuilder : DropGidBuilderImpl!DropGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Drop build()
   {
     return new Drop(cast(void*)createGObject(Drop._getGType), No.Take);

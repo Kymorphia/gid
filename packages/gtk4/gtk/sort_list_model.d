@@ -71,8 +71,8 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   }
 
   /**
-  Get builder for [gtk.sort_list_model.SortListModel]
-  Returns: New builder object
+      Get builder for [gtk.sort_list_model.SortListModel]
+      Returns: New builder object
   */
   static SortListModelGidBuilder builder()
   {
@@ -339,6 +339,7 @@ class SortListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.s
   }
 }
 
+/// Fluent builder implementation template for [gtk.sort_list_model.SortListModel]
 class SortListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
 {
 
@@ -393,6 +394,10 @@ class SortListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.sort_list_model.SortListModel]
 final class SortListModelGidBuilder : SortListModelGidBuilderImpl!SortListModelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SortListModel build()
   {
     return new SortListModel(cast(void*)createGObject(SortListModel._getGType), Yes.Take);

@@ -49,6 +49,7 @@ interface SymbolicPaintable
   void snapshotSymbolic(gdk.snapshot.Snapshot snapshot, double width, double height, gdk.rgba.RGBA[] colors);
 }
 
+/// Fluent builder implementation template for [gtk.symbolic_paintable.SymbolicPaintable]
 interface SymbolicPaintableGidBuilderImpl(T)
 {
 }

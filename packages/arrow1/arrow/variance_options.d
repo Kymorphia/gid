@@ -39,8 +39,8 @@ class VarianceOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.variance_options.VarianceOptions]
-  Returns: New builder object
+      Get builder for [arrow.variance_options.VarianceOptions]
+      Returns: New builder object
   */
   static VarianceOptionsGidBuilder builder()
   {
@@ -113,6 +113,7 @@ class VarianceOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.variance_options.VarianceOptions]
 class VarianceOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -153,6 +154,10 @@ class VarianceOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsG
 /// Fluent builder for [arrow.variance_options.VarianceOptions]
 final class VarianceOptionsGidBuilder : VarianceOptionsGidBuilderImpl!VarianceOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VarianceOptions build()
   {
     return new VarianceOptions(cast(void*)createGObject(VarianceOptions._getGType), Yes.Take);

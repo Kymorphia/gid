@@ -54,8 +54,8 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.shortcut_trigger.ShortcutTrigger]
-  Returns: New builder object
+      Get builder for [gtk.shortcut_trigger.ShortcutTrigger]
+      Returns: New builder object
   */
   static ShortcutTriggerGidBuilder builder()
   {
@@ -252,6 +252,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.shortcut_trigger.ShortcutTrigger]
 class ShortcutTriggerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -259,6 +260,10 @@ class ShortcutTriggerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.shortcut_trigger.ShortcutTrigger]
 final class ShortcutTriggerGidBuilder : ShortcutTriggerGidBuilderImpl!ShortcutTriggerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ShortcutTrigger build()
   {
     return new ShortcutTrigger(cast(void*)createGObject(ShortcutTrigger._getGType), No.Take);

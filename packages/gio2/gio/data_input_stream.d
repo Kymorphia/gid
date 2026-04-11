@@ -48,8 +48,8 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   }
 
   /**
-  Get builder for [gio.data_input_stream.DataInputStream]
-  Returns: New builder object
+      Get builder for [gio.data_input_stream.DataInputStream]
+      Returns: New builder object
   */
   static DataInputStreamGidBuilder builder()
   {
@@ -633,6 +633,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   }
 }
 
+/// Fluent builder implementation template for [gio.data_input_stream.DataInputStream]
 class DataInputStreamGidBuilderImpl(T) : gio.buffered_input_stream.BufferedInputStreamGidBuilderImpl!T
 {
 
@@ -666,6 +667,10 @@ class DataInputStreamGidBuilderImpl(T) : gio.buffered_input_stream.BufferedInput
 /// Fluent builder for [gio.data_input_stream.DataInputStream]
 final class DataInputStreamGidBuilder : DataInputStreamGidBuilderImpl!DataInputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataInputStream build()
   {
     return new DataInputStream(cast(void*)createGObject(DataInputStream._getGType), Yes.Take);

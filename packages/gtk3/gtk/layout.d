@@ -61,8 +61,8 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   }
 
   /**
-  Get builder for [gtk.layout.Layout]
-  Returns: New builder object
+      Get builder for [gtk.layout.Layout]
+      Returns: New builder object
   */
   static LayoutGidBuilder builder()
   {
@@ -248,6 +248,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   }
 }
 
+/// Fluent builder implementation template for [gtk.layout.Layout]
 class LayoutGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -269,6 +270,10 @@ class LayoutGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.scr
 /// Fluent builder for [gtk.layout.Layout]
 final class LayoutGidBuilder : LayoutGidBuilderImpl!LayoutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Layout build()
   {
     return new Layout(cast(void*)createGObject(Layout._getGType), No.Take);

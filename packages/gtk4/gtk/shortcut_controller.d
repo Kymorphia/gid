@@ -87,8 +87,8 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   }
 
   /**
-  Get builder for [gtk.shortcut_controller.ShortcutController]
-  Returns: New builder object
+      Get builder for [gtk.shortcut_controller.ShortcutController]
+      Returns: New builder object
   */
   static ShortcutControllerGidBuilder builder()
   {
@@ -282,6 +282,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   }
 }
 
+/// Fluent builder implementation template for [gtk.shortcut_controller.ShortcutController]
 class ShortcutControllerGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -325,6 +326,10 @@ class ShortcutControllerGidBuilderImpl(T) : gtk.event_controller.EventController
 /// Fluent builder for [gtk.shortcut_controller.ShortcutController]
 final class ShortcutControllerGidBuilder : ShortcutControllerGidBuilderImpl!ShortcutControllerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ShortcutController build()
   {
     return new ShortcutController(cast(void*)createGObject(ShortcutController._getGType), Yes.Take);

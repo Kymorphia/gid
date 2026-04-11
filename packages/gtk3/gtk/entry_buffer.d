@@ -51,8 +51,8 @@ class EntryBuffer : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.entry_buffer.EntryBuffer]
-  Returns: New builder object
+      Get builder for [gtk.entry_buffer.EntryBuffer]
+      Returns: New builder object
   */
   static EntryBufferGidBuilder builder()
   {
@@ -396,6 +396,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.entry_buffer.EntryBuffer]
 class EntryBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -425,6 +426,10 @@ class EntryBufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.entry_buffer.EntryBuffer]
 final class EntryBufferGidBuilder : EntryBufferGidBuilderImpl!EntryBufferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EntryBuffer build()
   {
     return new EntryBuffer(cast(void*)createGObject(EntryBuffer._getGType), Yes.Take);

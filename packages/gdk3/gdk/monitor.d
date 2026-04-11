@@ -50,8 +50,8 @@ class MonitorWrap : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.monitor.MonitorWrap]
-  Returns: New builder object
+      Get builder for [gdk.monitor.MonitorWrap]
+      Returns: New builder object
   */
   static MonitorWrapGidBuilder builder()
   {
@@ -311,6 +311,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.monitor.MonitorWrap]
 class MonitorWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -324,6 +325,10 @@ class MonitorWrapGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.monitor.MonitorWrap]
 final class MonitorWrapGidBuilder : MonitorWrapGidBuilderImpl!MonitorWrapGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MonitorWrap build()
   {
     return new MonitorWrap(cast(void*)createGObject(MonitorWrap._getGType), No.Take);

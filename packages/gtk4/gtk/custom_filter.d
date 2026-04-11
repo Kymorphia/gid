@@ -41,8 +41,8 @@ class CustomFilter : gtk.filter.Filter
   }
 
   /**
-  Get builder for [gtk.custom_filter.CustomFilter]
-  Returns: New builder object
+      Get builder for [gtk.custom_filter.CustomFilter]
+      Returns: New builder object
   */
   static CustomFilterGidBuilder builder()
   {
@@ -115,6 +115,7 @@ class CustomFilter : gtk.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gtk.custom_filter.CustomFilter]
 class CustomFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
 {
 }
@@ -122,6 +123,10 @@ class CustomFilterGidBuilderImpl(T) : gtk.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gtk.custom_filter.CustomFilter]
 final class CustomFilterGidBuilder : CustomFilterGidBuilderImpl!CustomFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CustomFilter build()
   {
     return new CustomFilter(cast(void*)createGObject(CustomFilter._getGType), Yes.Take);

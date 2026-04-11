@@ -41,8 +41,8 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.list_array_builder.ListArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.list_array_builder.ListArrayBuilder]
+      Returns: New builder object
   */
   static ListArrayBuilderGidBuilder builder()
   {
@@ -92,6 +92,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.list_array_builder.ListArrayBuilder]
 class ListArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -99,6 +100,10 @@ class ListArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBui
 /// Fluent builder for [arrow.list_array_builder.ListArrayBuilder]
 final class ListArrayBuilderGidBuilder : ListArrayBuilderGidBuilderImpl!ListArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListArrayBuilder build()
   {
     return new ListArrayBuilder(cast(void*)createGObject(ListArrayBuilder._getGType), Yes.Take);

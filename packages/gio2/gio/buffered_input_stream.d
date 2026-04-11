@@ -59,8 +59,8 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   }
 
   /**
-  Get builder for [gio.buffered_input_stream.BufferedInputStream]
-  Returns: New builder object
+      Get builder for [gio.buffered_input_stream.BufferedInputStream]
+      Returns: New builder object
   */
   static BufferedInputStreamGidBuilder builder()
   {
@@ -317,6 +317,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   }
 }
 
+/// Fluent builder implementation template for [gio.buffered_input_stream.BufferedInputStream]
 class BufferedInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInputStreamGidBuilderImpl!T, gio.seekable.SeekableGidBuilderImpl!T
 {
 
@@ -337,6 +338,10 @@ class BufferedInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInput
 /// Fluent builder for [gio.buffered_input_stream.BufferedInputStream]
 final class BufferedInputStreamGidBuilder : BufferedInputStreamGidBuilderImpl!BufferedInputStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BufferedInputStream build()
   {
     return new BufferedInputStream(cast(void*)createGObject(BufferedInputStream._getGType), Yes.Take);

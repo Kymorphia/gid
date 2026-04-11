@@ -55,8 +55,8 @@ class FileSaver : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.file_saver.FileSaver]
-  Returns: New builder object
+      Get builder for [gtksource.file_saver.FileSaver]
+      Returns: New builder object
   */
   static FileSaverGidBuilder builder()
   {
@@ -381,6 +381,7 @@ class FileSaver : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.file_saver.FileSaver]
 class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -468,6 +469,10 @@ class FileSaverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.file_saver.FileSaver]
 final class FileSaverGidBuilder : FileSaverGidBuilderImpl!FileSaverGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileSaver build()
   {
     return new FileSaver(cast(void*)createGObject(FileSaver._getGType), Yes.Take);

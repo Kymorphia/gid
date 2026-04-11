@@ -156,8 +156,8 @@ class DeviceManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.device_manager.DeviceManager]
-  Returns: New builder object
+      Get builder for [gdk.device_manager.DeviceManager]
+      Returns: New builder object
   */
   static DeviceManagerGidBuilder builder()
   {
@@ -369,6 +369,7 @@ class DeviceManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.device_manager.DeviceManager]
 class DeviceManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -382,6 +383,10 @@ class DeviceManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.device_manager.DeviceManager]
 final class DeviceManagerGidBuilder : DeviceManagerGidBuilderImpl!DeviceManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DeviceManager build()
   {
     return new DeviceManager(cast(void*)createGObject(DeviceManager._getGType), No.Take);

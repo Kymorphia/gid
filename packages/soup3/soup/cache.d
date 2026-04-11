@@ -42,8 +42,8 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 
   /**
-  Get builder for [soup.cache.Cache]
-  Returns: New builder object
+      Get builder for [soup.cache.Cache]
+      Returns: New builder object
   */
   static CacheGidBuilder builder()
   {
@@ -162,6 +162,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 }
 
+/// Fluent builder implementation template for [soup.cache.Cache]
 class CacheGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
 {
 
@@ -193,6 +194,10 @@ class CacheGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.s
 /// Fluent builder for [soup.cache.Cache]
 final class CacheGidBuilder : CacheGidBuilderImpl!CacheGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Cache build()
   {
     return new Cache(cast(void*)createGObject(Cache._getGType), Yes.Take);

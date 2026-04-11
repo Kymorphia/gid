@@ -40,8 +40,8 @@ class RunEndEncodeOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.run_end_encode_options.RunEndEncodeOptions]
-  Returns: New builder object
+      Get builder for [arrow.run_end_encode_options.RunEndEncodeOptions]
+      Returns: New builder object
   */
   static RunEndEncodeOptionsGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class RunEndEncodeOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.run_end_encode_options.RunEndEncodeOptions]
 class RunEndEncodeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -94,6 +95,10 @@ class RunEndEncodeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOpti
 /// Fluent builder for [arrow.run_end_encode_options.RunEndEncodeOptions]
 final class RunEndEncodeOptionsGidBuilder : RunEndEncodeOptionsGidBuilderImpl!RunEndEncodeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RunEndEncodeOptions build()
   {
     return new RunEndEncodeOptions(cast(void*)createGObject(RunEndEncodeOptions._getGType), Yes.Take);

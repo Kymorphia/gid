@@ -40,8 +40,8 @@ class BaseBinaryScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.base_binary_scalar.BaseBinaryScalar]
-  Returns: New builder object
+      Get builder for [arrow.base_binary_scalar.BaseBinaryScalar]
+      Returns: New builder object
   */
   static BaseBinaryScalarGidBuilder builder()
   {
@@ -58,6 +58,7 @@ class BaseBinaryScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.base_binary_scalar.BaseBinaryScalar]
 class BaseBinaryScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class BaseBinaryScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.base_binary_scalar.BaseBinaryScalar]
 final class BaseBinaryScalarGidBuilder : BaseBinaryScalarGidBuilderImpl!BaseBinaryScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BaseBinaryScalar build()
   {
     return new BaseBinaryScalar(cast(void*)createGObject(BaseBinaryScalar._getGType), No.Take);

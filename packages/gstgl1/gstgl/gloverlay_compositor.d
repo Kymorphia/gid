@@ -44,8 +44,8 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstgl.gloverlay_compositor.GLOverlayCompositor]
-  Returns: New builder object
+      Get builder for [gstgl.gloverlay_compositor.GLOverlayCompositor]
+      Returns: New builder object
   */
   static GLOverlayCompositorGidBuilder builder()
   {
@@ -100,6 +100,7 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstgl.gloverlay_compositor.GLOverlayCompositor]
 class GLOverlayCompositorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -113,6 +114,10 @@ class GLOverlayCompositorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gstgl.gloverlay_compositor.GLOverlayCompositor]
 final class GLOverlayCompositorGidBuilder : GLOverlayCompositorGidBuilderImpl!GLOverlayCompositorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLOverlayCompositor build()
   {
     return new GLOverlayCompositor(cast(void*)createGObject(GLOverlayCompositor._getGType), No.Take);

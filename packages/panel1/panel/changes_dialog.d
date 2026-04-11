@@ -51,8 +51,8 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   }
 
   /**
-  Get builder for [panel.changes_dialog.ChangesDialog]
-  Returns: New builder object
+      Get builder for [panel.changes_dialog.ChangesDialog]
+      Returns: New builder object
   */
   static ChangesDialogGidBuilder builder()
   {
@@ -136,6 +136,7 @@ class ChangesDialog : adw.alert_dialog.AlertDialog
   }
 }
 
+/// Fluent builder implementation template for [panel.changes_dialog.ChangesDialog]
 class ChangesDialogGidBuilderImpl(T) : adw.alert_dialog.AlertDialogGidBuilderImpl!T
 {
 
@@ -155,6 +156,10 @@ class ChangesDialogGidBuilderImpl(T) : adw.alert_dialog.AlertDialogGidBuilderImp
 /// Fluent builder for [panel.changes_dialog.ChangesDialog]
 final class ChangesDialogGidBuilder : ChangesDialogGidBuilderImpl!ChangesDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ChangesDialog build()
   {
     return new ChangesDialog(cast(void*)createGObject(ChangesDialog._getGType), No.Take);

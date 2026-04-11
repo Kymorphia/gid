@@ -42,8 +42,8 @@ class MessagePartial : gmime.part.Part
   }
 
   /**
-  Get builder for [gmime.message_partial.MessagePartial]
-  Returns: New builder object
+      Get builder for [gmime.message_partial.MessagePartial]
+      Returns: New builder object
   */
   static MessagePartialGidBuilder builder()
   {
@@ -130,6 +130,7 @@ class MessagePartial : gmime.part.Part
   }
 }
 
+/// Fluent builder implementation template for [gmime.message_partial.MessagePartial]
 class MessagePartialGidBuilderImpl(T) : gmime.part.PartGidBuilderImpl!T
 {
 }
@@ -137,6 +138,10 @@ class MessagePartialGidBuilderImpl(T) : gmime.part.PartGidBuilderImpl!T
 /// Fluent builder for [gmime.message_partial.MessagePartial]
 final class MessagePartialGidBuilder : MessagePartialGidBuilderImpl!MessagePartialGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MessagePartial build()
   {
     return new MessagePartial(cast(void*)createGObject(MessagePartial._getGType), Yes.Take);

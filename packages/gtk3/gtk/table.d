@@ -69,8 +69,8 @@ class Table : gtk.container.Container
   }
 
   /**
-  Get builder for [gtk.table.Table]
-  Returns: New builder object
+      Get builder for [gtk.table.Table]
+      Returns: New builder object
   */
   static TableGidBuilder builder()
   {
@@ -406,6 +406,7 @@ class Table : gtk.container.Container
   }
 }
 
+/// Fluent builder implementation template for [gtk.table.Table]
 class TableGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 {
 
@@ -444,6 +445,10 @@ class TableGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 /// Fluent builder for [gtk.table.Table]
 final class TableGidBuilder : TableGidBuilderImpl!TableGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Table build()
   {
     return new Table(cast(void*)createGObject(Table._getGType), No.Take);

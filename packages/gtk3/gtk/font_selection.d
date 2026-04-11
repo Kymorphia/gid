@@ -48,8 +48,8 @@ class FontSelection : gtk.box.Box
   }
 
   /**
-  Get builder for [gtk.font_selection.FontSelection]
-  Returns: New builder object
+      Get builder for [gtk.font_selection.FontSelection]
+      Returns: New builder object
   */
   static FontSelectionGidBuilder builder()
   {
@@ -291,6 +291,7 @@ class FontSelection : gtk.box.Box
   }
 }
 
+/// Fluent builder implementation template for [gtk.font_selection.FontSelection]
 class FontSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 {
 
@@ -311,6 +312,10 @@ class FontSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 /// Fluent builder for [gtk.font_selection.FontSelection]
 final class FontSelectionGidBuilder : FontSelectionGidBuilderImpl!FontSelectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontSelection build()
   {
     return new FontSelection(cast(void*)createGObject(FontSelection._getGType), No.Take);

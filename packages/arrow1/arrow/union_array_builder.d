@@ -39,8 +39,8 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.union_array_builder.UnionArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.union_array_builder.UnionArrayBuilder]
+      Returns: New builder object
   */
   static UnionArrayBuilderGidBuilder builder()
   {
@@ -84,6 +84,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.union_array_builder.UnionArrayBuilder]
 class UnionArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -91,6 +92,10 @@ class UnionArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBu
 /// Fluent builder for [arrow.union_array_builder.UnionArrayBuilder]
 final class UnionArrayBuilderGidBuilder : UnionArrayBuilderGidBuilderImpl!UnionArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnionArrayBuilder build()
   {
     return new UnionArrayBuilder(cast(void*)createGObject(UnionArrayBuilder._getGType), No.Take);

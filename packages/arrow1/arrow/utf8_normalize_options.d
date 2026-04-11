@@ -39,8 +39,8 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.utf8_normalize_options.UTF8NormalizeOptions]
-  Returns: New builder object
+      Get builder for [arrow.utf8_normalize_options.UTF8NormalizeOptions]
+      Returns: New builder object
   */
   static UTF8NormalizeOptionsGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.utf8_normalize_options.UTF8NormalizeOptions]
 class UTF8NormalizeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -93,6 +94,10 @@ class UTF8NormalizeOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOpt
 /// Fluent builder for [arrow.utf8_normalize_options.UTF8NormalizeOptions]
 final class UTF8NormalizeOptionsGidBuilder : UTF8NormalizeOptionsGidBuilderImpl!UTF8NormalizeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UTF8NormalizeOptions build()
   {
     return new UTF8NormalizeOptions(cast(void*)createGObject(UTF8NormalizeOptions._getGType), Yes.Take);

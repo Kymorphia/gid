@@ -218,8 +218,8 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /**
-  Get builder for [adw.navigation_view.NavigationView]
-  Returns: New builder object
+      Get builder for [adw.navigation_view.NavigationView]
+      Returns: New builder object
   */
   static NavigationViewGidBuilder builder()
   {
@@ -812,6 +812,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 }
 
+/// Fluent builder implementation template for [adw.navigation_view.NavigationView]
 class NavigationViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T
 {
 
@@ -848,6 +849,10 @@ class NavigationViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.s
 /// Fluent builder for [adw.navigation_view.NavigationView]
 final class NavigationViewGidBuilder : NavigationViewGidBuilderImpl!NavigationViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NavigationView build()
   {
     return new NavigationView(cast(void*)createGObject(NavigationView._getGType), No.Take);

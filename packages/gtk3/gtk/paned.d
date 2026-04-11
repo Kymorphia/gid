@@ -113,8 +113,8 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.paned.Paned]
-  Returns: New builder object
+      Get builder for [gtk.paned.Paned]
+      Returns: New builder object
   */
   static PanedGidBuilder builder()
   {
@@ -629,6 +629,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.paned.Paned]
 class PanedGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -663,6 +664,10 @@ class PanedGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orie
 /// Fluent builder for [gtk.paned.Paned]
 final class PanedGidBuilder : PanedGidBuilderImpl!PanedGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Paned build()
   {
     return new Paned(cast(void*)createGObject(Paned._getGType), No.Take);

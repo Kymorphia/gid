@@ -53,6 +53,7 @@ interface DBusInterface
   void setObject(gio.dbus_object.DBusObject object = null);
 }
 
+/// Fluent builder implementation template for [gio.dbus_interface.DBusInterface]
 interface DBusInterfaceGidBuilderImpl(T)
 {
 }

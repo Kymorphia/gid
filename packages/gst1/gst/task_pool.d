@@ -44,8 +44,8 @@ class TaskPool : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.task_pool.TaskPool]
-  Returns: New builder object
+      Get builder for [gst.task_pool.TaskPool]
+      Returns: New builder object
   */
   static TaskPoolGidBuilder builder()
   {
@@ -155,6 +155,7 @@ class TaskPool : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.task_pool.TaskPool]
 class TaskPoolGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -162,6 +163,10 @@ class TaskPoolGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.task_pool.TaskPool]
 final class TaskPoolGidBuilder : TaskPoolGidBuilderImpl!TaskPoolGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TaskPool build()
   {
     return new TaskPool(cast(void*)createGObject(TaskPool._getGType), Yes.Take);

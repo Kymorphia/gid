@@ -64,8 +64,8 @@ class TlsInteraction : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.tls_interaction.TlsInteraction]
-  Returns: New builder object
+      Get builder for [gio.tls_interaction.TlsInteraction]
+      Returns: New builder object
   */
   static TlsInteractionGidBuilder builder()
   {
@@ -340,6 +340,7 @@ class TlsInteraction : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.tls_interaction.TlsInteraction]
 class TlsInteractionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -347,6 +348,10 @@ class TlsInteractionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.tls_interaction.TlsInteraction]
 final class TlsInteractionGidBuilder : TlsInteractionGidBuilderImpl!TlsInteractionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TlsInteraction build()
   {
     return new TlsInteraction(cast(void*)createGObject(TlsInteraction._getGType), No.Take);

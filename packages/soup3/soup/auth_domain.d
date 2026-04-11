@@ -57,8 +57,8 @@ class AuthDomain : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [soup.auth_domain.AuthDomain]
-  Returns: New builder object
+      Get builder for [soup.auth_domain.AuthDomain]
+      Returns: New builder object
   */
   static AuthDomainGidBuilder builder()
   {
@@ -372,6 +372,7 @@ class AuthDomain : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [soup.auth_domain.AuthDomain]
 class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -445,6 +446,10 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [soup.auth_domain.AuthDomain]
 final class AuthDomainGidBuilder : AuthDomainGidBuilderImpl!AuthDomainGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AuthDomain build()
   {
     return new AuthDomain(cast(void*)createGObject(AuthDomain._getGType), No.Take);

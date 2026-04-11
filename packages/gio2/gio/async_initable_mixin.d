@@ -220,6 +220,7 @@ template AsyncInitableT()
   }
 }
 
+/// Fluent builder implementation template for [gio.async_initable.AsyncInitable]
 template AsyncInitableGidBuilderT()
 {
 }

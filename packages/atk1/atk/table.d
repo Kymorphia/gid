@@ -492,6 +492,7 @@ interface Table
   gulong connectRowReordered(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [atk.table.Table]
 interface TableGidBuilderImpl(T)
 {
 }

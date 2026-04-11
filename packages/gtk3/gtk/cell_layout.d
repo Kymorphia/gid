@@ -230,6 +230,7 @@ interface CellLayout
   void setCellDataFunc(gtk.cell_renderer.CellRenderer cell, gtk.types.CellLayoutDataFunc func = null);
 }
 
+/// Fluent builder implementation template for [gtk.cell_layout.CellLayout]
 interface CellLayoutGidBuilderImpl(T)
 {
 }

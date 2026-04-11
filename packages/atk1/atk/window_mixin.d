@@ -364,6 +364,7 @@ template WindowT()
   }
 }
 
+/// Fluent builder implementation template for [atk.window.Window]
 template WindowGidBuilderT()
 {
 }

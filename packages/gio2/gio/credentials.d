@@ -75,8 +75,8 @@ class Credentials : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.credentials.Credentials]
-  Returns: New builder object
+      Get builder for [gio.credentials.Credentials]
+      Returns: New builder object
   */
   static CredentialsGidBuilder builder()
   {
@@ -213,6 +213,7 @@ class Credentials : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.credentials.Credentials]
 class CredentialsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -220,6 +221,10 @@ class CredentialsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.credentials.Credentials]
 final class CredentialsGidBuilder : CredentialsGidBuilderImpl!CredentialsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Credentials build()
   {
     return new Credentials(cast(void*)createGObject(Credentials._getGType), Yes.Take);

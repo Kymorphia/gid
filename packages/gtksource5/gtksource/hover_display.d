@@ -53,8 +53,8 @@ class HoverDisplay : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtksource.hover_display.HoverDisplay]
-  Returns: New builder object
+      Get builder for [gtksource.hover_display.HoverDisplay]
+      Returns: New builder object
   */
   static HoverDisplayGidBuilder builder()
   {
@@ -86,6 +86,7 @@ class HoverDisplay : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtksource.hover_display.HoverDisplay]
 class HoverDisplayGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -94,6 +95,10 @@ class HoverDisplayGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtksource.hover_display.HoverDisplay]
 final class HoverDisplayGidBuilder : HoverDisplayGidBuilderImpl!HoverDisplayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HoverDisplay build()
   {
     return new HoverDisplay(cast(void*)createGObject(HoverDisplay._getGType), No.Take);

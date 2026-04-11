@@ -156,8 +156,8 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   }
 
   /**
-  Get builder for [gst.bin.Bin]
-  Returns: New builder object
+      Get builder for [gst.bin.Bin]
+      Returns: New builder object
   */
   static BinGidBuilder builder()
   {
@@ -754,6 +754,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   }
 }
 
+/// Fluent builder implementation template for [gst.bin.Bin]
 class BinGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.child_proxy.ChildProxyGidBuilderImpl!T
 {
 
@@ -793,6 +794,10 @@ class BinGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.child_prox
 /// Fluent builder for [gst.bin.Bin]
 final class BinGidBuilder : BinGidBuilderImpl!BinGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Bin build()
   {
     return new Bin(cast(void*)createGObject(Bin._getGType), No.Take);

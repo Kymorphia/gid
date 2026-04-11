@@ -47,8 +47,8 @@ class CustomLayout : gtk.layout_manager.LayoutManager
   }
 
   /**
-  Get builder for [gtk.custom_layout.CustomLayout]
-  Returns: New builder object
+      Get builder for [gtk.custom_layout.CustomLayout]
+      Returns: New builder object
   */
   static CustomLayoutGidBuilder builder()
   {
@@ -111,6 +111,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
   }
 }
 
+/// Fluent builder implementation template for [gtk.custom_layout.CustomLayout]
 class CustomLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilderImpl!T
 {
 }
@@ -118,6 +119,10 @@ class CustomLayoutGidBuilderImpl(T) : gtk.layout_manager.LayoutManagerGidBuilder
 /// Fluent builder for [gtk.custom_layout.CustomLayout]
 final class CustomLayoutGidBuilder : CustomLayoutGidBuilderImpl!CustomLayoutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CustomLayout build()
   {
     return new CustomLayout(cast(void*)createGObject(CustomLayout._getGType), Yes.Take);

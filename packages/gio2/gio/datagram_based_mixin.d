@@ -172,6 +172,7 @@ template DatagramBasedT()
   }
 }
 
+/// Fluent builder implementation template for [gio.datagram_based.DatagramBased]
 template DatagramBasedGidBuilderT()
 {
 }

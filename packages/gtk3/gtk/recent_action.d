@@ -53,8 +53,8 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   }
 
   /**
-  Get builder for [gtk.recent_action.RecentAction]
-  Returns: New builder object
+      Get builder for [gtk.recent_action.RecentAction]
+      Returns: New builder object
   */
   static RecentActionGidBuilder builder()
   {
@@ -161,6 +161,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.recent_action.RecentAction]
 class RecentActionGidBuilderImpl(T) : gtk.action.ActionGidBuilderImpl!T, gtk.recent_chooser.RecentChooserGidBuilderImpl!T
 {
 
@@ -181,6 +182,10 @@ class RecentActionGidBuilderImpl(T) : gtk.action.ActionGidBuilderImpl!T, gtk.rec
 /// Fluent builder for [gtk.recent_action.RecentAction]
 final class RecentActionGidBuilder : RecentActionGidBuilderImpl!RecentActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecentAction build()
   {
     return new RecentAction(cast(void*)createGObject(RecentAction._getGType), Yes.Take);

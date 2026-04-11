@@ -145,6 +145,7 @@ interface Action
   bool setDescription(int i, string desc);
 }
 
+/// Fluent builder implementation template for [atk.action.Action]
 interface ActionGidBuilderImpl(T)
 {
 }

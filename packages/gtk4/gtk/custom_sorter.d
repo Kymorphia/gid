@@ -41,8 +41,8 @@ class CustomSorter : gtk.sorter.Sorter
   }
 
   /**
-  Get builder for [gtk.custom_sorter.CustomSorter]
-  Returns: New builder object
+      Get builder for [gtk.custom_sorter.CustomSorter]
+      Returns: New builder object
   */
   static CustomSorterGidBuilder builder()
   {
@@ -109,6 +109,7 @@ class CustomSorter : gtk.sorter.Sorter
 
 }
 
+/// Fluent builder implementation template for [gtk.custom_sorter.CustomSorter]
 class CustomSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 {
 }
@@ -116,6 +117,10 @@ class CustomSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 /// Fluent builder for [gtk.custom_sorter.CustomSorter]
 final class CustomSorterGidBuilder : CustomSorterGidBuilderImpl!CustomSorterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CustomSorter build()
   {
     return new CustomSorter(cast(void*)createGObject(CustomSorter._getGType), Yes.Take);

@@ -129,8 +129,8 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   }
 
   /**
-  Get builder for [gtk.popover.Popover]
-  Returns: New builder object
+      Get builder for [gtk.popover.Popover]
+      Returns: New builder object
   */
   static PopoverGidBuilder builder()
   {
@@ -651,6 +651,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   }
 }
 
+/// Fluent builder implementation template for [gtk.popover.Popover]
 class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.NativeGidBuilderImpl!T, gtk.shortcut_manager.ShortcutManagerGidBuilderImpl!T
 {
 
@@ -751,6 +752,10 @@ class PopoverGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.N
 /// Fluent builder for [gtk.popover.Popover]
 final class PopoverGidBuilder : PopoverGidBuilderImpl!PopoverGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Popover build()
   {
     return new Popover(cast(void*)createGObject(Popover._getGType), No.Take);

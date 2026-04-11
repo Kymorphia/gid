@@ -367,6 +367,7 @@ template VideoOverlayT()
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_overlay.VideoOverlay]
 template VideoOverlayGidBuilderT()
 {
 }

@@ -46,8 +46,8 @@ class FontsetSimple : pango.fontset.Fontset
   }
 
   /**
-  Get builder for [pango.fontset_simple.FontsetSimple]
-  Returns: New builder object
+      Get builder for [pango.fontset_simple.FontsetSimple]
+      Returns: New builder object
   */
   static FontsetSimpleGidBuilder builder()
   {
@@ -93,6 +93,7 @@ class FontsetSimple : pango.fontset.Fontset
   }
 }
 
+/// Fluent builder implementation template for [pango.fontset_simple.FontsetSimple]
 class FontsetSimpleGidBuilderImpl(T) : pango.fontset.FontsetGidBuilderImpl!T
 {
 }
@@ -100,6 +101,10 @@ class FontsetSimpleGidBuilderImpl(T) : pango.fontset.FontsetGidBuilderImpl!T
 /// Fluent builder for [pango.fontset_simple.FontsetSimple]
 final class FontsetSimpleGidBuilder : FontsetSimpleGidBuilderImpl!FontsetSimpleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontsetSimple build()
   {
     return new FontsetSimple(cast(void*)createGObject(FontsetSimple._getGType), Yes.Take);

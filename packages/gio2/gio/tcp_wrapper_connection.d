@@ -48,8 +48,8 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   }
 
   /**
-  Get builder for [gio.tcp_wrapper_connection.TcpWrapperConnection]
-  Returns: New builder object
+      Get builder for [gio.tcp_wrapper_connection.TcpWrapperConnection]
+      Returns: New builder object
   */
   static TcpWrapperConnectionGidBuilder builder()
   {
@@ -93,6 +93,7 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   }
 }
 
+/// Fluent builder implementation template for [gio.tcp_wrapper_connection.TcpWrapperConnection]
 class TcpWrapperConnectionGidBuilderImpl(T) : gio.tcp_connection.TcpConnectionGidBuilderImpl!T
 {
 
@@ -111,6 +112,10 @@ class TcpWrapperConnectionGidBuilderImpl(T) : gio.tcp_connection.TcpConnectionGi
 /// Fluent builder for [gio.tcp_wrapper_connection.TcpWrapperConnection]
 final class TcpWrapperConnectionGidBuilder : TcpWrapperConnectionGidBuilderImpl!TcpWrapperConnectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TcpWrapperConnection build()
   {
     return new TcpWrapperConnection(cast(void*)createGObject(TcpWrapperConnection._getGType), Yes.Take);

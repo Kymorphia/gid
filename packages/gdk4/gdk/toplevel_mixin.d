@@ -571,6 +571,7 @@ template ToplevelT()
   }
 }
 
+/// Fluent builder implementation template for [gdk.toplevel.Toplevel]
 template ToplevelGidBuilderT()
 {
 

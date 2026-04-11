@@ -40,8 +40,8 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
   }
 
   /**
-  Get builder for [gtk.socket_accessible.SocketAccessible]
-  Returns: New builder object
+      Get builder for [gtk.socket_accessible.SocketAccessible]
+      Returns: New builder object
   */
   static SocketAccessibleGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.socket_accessible.SocketAccessible]
 class SocketAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
 {
 
@@ -64,6 +65,10 @@ class SocketAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAcce
 /// Fluent builder for [gtk.socket_accessible.SocketAccessible]
 final class SocketAccessibleGidBuilder : SocketAccessibleGidBuilderImpl!SocketAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SocketAccessible build()
   {
     return new SocketAccessible(cast(void*)createGObject(SocketAccessible._getGType), No.Take);

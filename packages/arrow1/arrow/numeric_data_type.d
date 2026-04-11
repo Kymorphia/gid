@@ -38,8 +38,8 @@ class NumericDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /**
-  Get builder for [arrow.numeric_data_type.NumericDataType]
-  Returns: New builder object
+      Get builder for [arrow.numeric_data_type.NumericDataType]
+      Returns: New builder object
   */
   static NumericDataTypeGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class NumericDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.numeric_data_type.NumericDataType]
 class NumericDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class NumericDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthD
 /// Fluent builder for [arrow.numeric_data_type.NumericDataType]
 final class NumericDataTypeGidBuilder : NumericDataTypeGidBuilderImpl!NumericDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NumericDataType build()
   {
     return new NumericDataType(cast(void*)createGObject(NumericDataType._getGType), No.Take);

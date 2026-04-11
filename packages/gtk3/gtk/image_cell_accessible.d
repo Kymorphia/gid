@@ -46,8 +46,8 @@ class ImageCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible,
   }
 
   /**
-  Get builder for [gtk.image_cell_accessible.ImageCellAccessible]
-  Returns: New builder object
+      Get builder for [gtk.image_cell_accessible.ImageCellAccessible]
+      Returns: New builder object
   */
   static ImageCellAccessibleGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class ImageCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible,
   mixin ImageT!();
 }
 
+/// Fluent builder implementation template for [gtk.image_cell_accessible.ImageCellAccessible]
 class ImageCellAccessibleGidBuilderImpl(T) : gtk.renderer_cell_accessible.RendererCellAccessibleGidBuilderImpl!T, atk.image.ImageGidBuilderImpl!T
 {
 
@@ -66,6 +67,10 @@ class ImageCellAccessibleGidBuilderImpl(T) : gtk.renderer_cell_accessible.Render
 /// Fluent builder for [gtk.image_cell_accessible.ImageCellAccessible]
 final class ImageCellAccessibleGidBuilder : ImageCellAccessibleGidBuilderImpl!ImageCellAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ImageCellAccessible build()
   {
     return new ImageCellAccessible(cast(void*)createGObject(ImageCellAccessible._getGType), No.Take);

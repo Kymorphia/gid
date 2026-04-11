@@ -24,6 +24,7 @@ interface WritableFile
   bool writeAt(long position, ubyte[] data);
 }
 
+/// Fluent builder implementation template for [arrow.writable_file.WritableFile]
 interface WritableFileGidBuilderImpl(T)
 {
 }

@@ -74,8 +74,8 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   }
 
   /**
-  Get builder for [gtk.toolbar.Toolbar]
-  Returns: New builder object
+      Get builder for [gtk.toolbar.Toolbar]
+      Returns: New builder object
   */
   static ToolbarGidBuilder builder()
   {
@@ -584,6 +584,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   }
 }
 
+/// Fluent builder implementation template for [gtk.toolbar.Toolbar]
 class ToolbarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T, gtk.tool_shell.ToolShellGidBuilderImpl!T
 {
 
@@ -634,6 +635,10 @@ class ToolbarGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.or
 /// Fluent builder for [gtk.toolbar.Toolbar]
 final class ToolbarGidBuilder : ToolbarGidBuilderImpl!ToolbarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Toolbar build()
   {
     return new Toolbar(cast(void*)createGObject(Toolbar._getGType), No.Take);

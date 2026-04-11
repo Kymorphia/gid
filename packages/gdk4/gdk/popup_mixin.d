@@ -147,6 +147,7 @@ template PopupT()
   }
 }
 
+/// Fluent builder implementation template for [gdk.popup.Popup]
 template PopupGidBuilderT()
 {
 

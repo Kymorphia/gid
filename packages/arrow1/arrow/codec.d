@@ -39,8 +39,8 @@ class Codec : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.codec.Codec]
-  Returns: New builder object
+      Get builder for [arrow.codec.Codec]
+      Returns: New builder object
   */
   static CodecGidBuilder builder()
   {
@@ -85,6 +85,7 @@ class Codec : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.codec.Codec]
 class CodecGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -98,6 +99,10 @@ class CodecGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.codec.Codec]
 final class CodecGidBuilder : CodecGidBuilderImpl!CodecGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Codec build()
   {
     return new Codec(cast(void*)createGObject(Codec._getGType), Yes.Take);

@@ -133,8 +133,8 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.header_bar.HeaderBar]
-  Returns: New builder object
+      Get builder for [adw.header_bar.HeaderBar]
+      Returns: New builder object
   */
   static HeaderBarGidBuilder builder()
   {
@@ -607,6 +607,7 @@ class HeaderBar : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.header_bar.HeaderBar]
 class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -735,6 +736,10 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.header_bar.HeaderBar]
 final class HeaderBarGidBuilder : HeaderBarGidBuilderImpl!HeaderBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HeaderBar build()
   {
     return new HeaderBar(cast(void*)createGObject(HeaderBar._getGType), No.Take);

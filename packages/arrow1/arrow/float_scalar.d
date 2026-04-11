@@ -38,8 +38,8 @@ class FloatScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.float_scalar.FloatScalar]
-  Returns: New builder object
+      Get builder for [arrow.float_scalar.FloatScalar]
+      Returns: New builder object
   */
   static FloatScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class FloatScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.float_scalar.FloatScalar]
 class FloatScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class FloatScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.float_scalar.FloatScalar]
 final class FloatScalarGidBuilder : FloatScalarGidBuilderImpl!FloatScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FloatScalar build()
   {
     return new FloatScalar(cast(void*)createGObject(FloatScalar._getGType), Yes.Take);

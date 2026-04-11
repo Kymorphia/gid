@@ -40,8 +40,8 @@ class StreamNull : gmime.stream.Stream
   }
 
   /**
-  Get builder for [gmime.stream_null.StreamNull]
-  Returns: New builder object
+      Get builder for [gmime.stream_null.StreamNull]
+      Returns: New builder object
   */
   static StreamNullGidBuilder builder()
   {
@@ -84,6 +84,7 @@ class StreamNull : gmime.stream.Stream
   }
 }
 
+/// Fluent builder implementation template for [gmime.stream_null.StreamNull]
 class StreamNullGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 {
 }
@@ -91,6 +92,10 @@ class StreamNullGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 /// Fluent builder for [gmime.stream_null.StreamNull]
 final class StreamNullGidBuilder : StreamNullGidBuilderImpl!StreamNullGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamNull build()
   {
     return new StreamNull(cast(void*)createGObject(StreamNull._getGType), Yes.Take);

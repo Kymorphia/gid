@@ -65,6 +65,7 @@ interface DragSurface
   gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gdk.drag_surface.DragSurface]
 interface DragSurfaceGidBuilderImpl(T)
 {
 }

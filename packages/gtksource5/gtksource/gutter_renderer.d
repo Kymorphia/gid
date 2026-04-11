@@ -86,8 +86,8 @@ class GutterRenderer : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtksource.gutter_renderer.GutterRenderer]
-  Returns: New builder object
+      Get builder for [gtksource.gutter_renderer.GutterRenderer]
+      Returns: New builder object
   */
   static GutterRendererGidBuilder builder()
   {
@@ -610,6 +610,7 @@ class GutterRenderer : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtksource.gutter_renderer.GutterRenderer]
 class GutterRendererGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -682,6 +683,10 @@ class GutterRendererGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtksource.gutter_renderer.GutterRenderer]
 final class GutterRendererGidBuilder : GutterRendererGidBuilderImpl!GutterRendererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GutterRenderer build()
   {
     return new GutterRenderer(cast(void*)createGObject(GutterRenderer._getGType), No.Take);

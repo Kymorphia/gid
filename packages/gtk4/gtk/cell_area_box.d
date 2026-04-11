@@ -68,8 +68,8 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.cell_area_box.CellAreaBox]
-  Returns: New builder object
+      Get builder for [gtk.cell_area_box.CellAreaBox]
+      Returns: New builder object
   */
   static CellAreaBoxGidBuilder builder()
   {
@@ -167,6 +167,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_area_box.CellAreaBox]
 class CellAreaBoxGidBuilderImpl(T) : gtk.cell_area.CellAreaGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -187,6 +188,10 @@ class CellAreaBoxGidBuilderImpl(T) : gtk.cell_area.CellAreaGidBuilderImpl!T, gtk
 /// Fluent builder for [gtk.cell_area_box.CellAreaBox]
 final class CellAreaBoxGidBuilder : CellAreaBoxGidBuilderImpl!CellAreaBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellAreaBox build()
   {
     return new CellAreaBox(cast(void*)createGObject(CellAreaBox._getGType), No.Take);

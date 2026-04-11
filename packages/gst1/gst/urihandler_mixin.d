@@ -96,6 +96,7 @@ template URIHandlerT()
   }
 }
 
+/// Fluent builder implementation template for [gst.urihandler.URIHandler]
 template URIHandlerGidBuilderT()
 {
 }

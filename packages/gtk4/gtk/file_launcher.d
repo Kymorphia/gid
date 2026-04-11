@@ -57,8 +57,8 @@ class FileLauncher : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.file_launcher.FileLauncher]
-  Returns: New builder object
+      Get builder for [gtk.file_launcher.FileLauncher]
+      Returns: New builder object
   */
   static FileLauncherGidBuilder builder()
   {
@@ -304,6 +304,7 @@ class FileLauncher : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.file_launcher.FileLauncher]
 class FileLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -345,6 +346,10 @@ class FileLauncherGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.file_launcher.FileLauncher]
 final class FileLauncherGidBuilder : FileLauncherGidBuilderImpl!FileLauncherGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileLauncher build()
   {
     return new FileLauncher(cast(void*)createGObject(FileLauncher._getGType), Yes.Take);

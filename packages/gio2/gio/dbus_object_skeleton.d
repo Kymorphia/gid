@@ -49,8 +49,8 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   }
 
   /**
-  Get builder for [gio.dbus_object_skeleton.DBusObjectSkeleton]
-  Returns: New builder object
+      Get builder for [gio.dbus_object_skeleton.DBusObjectSkeleton]
+      Returns: New builder object
   */
   static DBusObjectSkeletonGidBuilder builder()
   {
@@ -218,6 +218,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_object_skeleton.DBusObjectSkeleton]
 class DBusObjectSkeletonGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.dbus_object.DBusObjectGidBuilderImpl!T
 {
 
@@ -238,6 +239,10 @@ class DBusObjectSkeletonGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [gio.dbus_object_skeleton.DBusObjectSkeleton]
 final class DBusObjectSkeletonGidBuilder : DBusObjectSkeletonGidBuilderImpl!DBusObjectSkeletonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusObjectSkeleton build()
   {
     return new DBusObjectSkeleton(cast(void*)createGObject(DBusObjectSkeleton._getGType), Yes.Take);

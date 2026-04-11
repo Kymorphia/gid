@@ -59,8 +59,8 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [panel.frame.Frame]
-  Returns: New builder object
+      Get builder for [panel.frame.Frame]
+      Returns: New builder object
   */
   static FrameGidBuilder builder()
   {
@@ -421,6 +421,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [panel.frame.Frame]
 class FrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -442,6 +443,10 @@ class FrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable
 /// Fluent builder for [panel.frame.Frame]
 final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Frame build()
   {
     return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);

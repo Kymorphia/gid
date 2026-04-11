@@ -405,6 +405,7 @@ template EditableT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.editable.Editable]
 template EditableGidBuilderT()
 {
 }

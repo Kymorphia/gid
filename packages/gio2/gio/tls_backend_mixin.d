@@ -147,6 +147,7 @@ template TlsBackendT()
   }
 }
 
+/// Fluent builder implementation template for [gio.tls_backend.TlsBackend]
 template TlsBackendGidBuilderT()
 {
 }

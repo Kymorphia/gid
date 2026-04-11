@@ -64,8 +64,8 @@ class PreferencesDialog : adw.dialog.Dialog
   }
 
   /**
-  Get builder for [adw.preferences_dialog.PreferencesDialog]
-  Returns: New builder object
+      Get builder for [adw.preferences_dialog.PreferencesDialog]
+      Returns: New builder object
   */
   static PreferencesDialogGidBuilder builder()
   {
@@ -275,6 +275,7 @@ class PreferencesDialog : adw.dialog.Dialog
   }
 }
 
+/// Fluent builder implementation template for [adw.preferences_dialog.PreferencesDialog]
 class PreferencesDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
 {
 
@@ -318,6 +319,10 @@ class PreferencesDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
 /// Fluent builder for [adw.preferences_dialog.PreferencesDialog]
 final class PreferencesDialogGidBuilder : PreferencesDialogGidBuilderImpl!PreferencesDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PreferencesDialog build()
   {
     return new PreferencesDialog(cast(void*)createGObject(PreferencesDialog._getGType), No.Take);

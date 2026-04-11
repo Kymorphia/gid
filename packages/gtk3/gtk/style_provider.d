@@ -68,6 +68,7 @@ interface StyleProvider
   bool getStyleProperty(gtk.widget_path.WidgetPath path, gtk.types.StateFlags state, gobject.param_spec.ParamSpec pspec, out gobject.value.Value value);
 }
 
+/// Fluent builder implementation template for [gtk.style_provider.StyleProvider]
 interface StyleProviderGidBuilderImpl(T)
 {
 }

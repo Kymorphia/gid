@@ -40,8 +40,8 @@ class ListDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.list_data_type.ListDataType]
-  Returns: New builder object
+      Get builder for [arrow.list_data_type.ListDataType]
+      Returns: New builder object
   */
   static ListDataTypeGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class ListDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.list_data_type.ListDataType]
 class ListDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -82,6 +83,10 @@ class ListDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 /// Fluent builder for [arrow.list_data_type.ListDataType]
 final class ListDataTypeGidBuilder : ListDataTypeGidBuilderImpl!ListDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListDataType build()
   {
     return new ListDataType(cast(void*)createGObject(ListDataType._getGType), Yes.Take);

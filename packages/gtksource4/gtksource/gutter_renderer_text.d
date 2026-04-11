@@ -39,8 +39,8 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   }
 
   /**
-  Get builder for [gtksource.gutter_renderer_text.GutterRendererText]
-  Returns: New builder object
+      Get builder for [gtksource.gutter_renderer_text.GutterRendererText]
+      Returns: New builder object
   */
   static GutterRendererTextGidBuilder builder()
   {
@@ -139,6 +139,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   }
 }
 
+/// Fluent builder implementation template for [gtksource.gutter_renderer_text.GutterRendererText]
 class GutterRendererTextGidBuilderImpl(T) : gtksource.gutter_renderer.GutterRendererGidBuilderImpl!T
 {
 
@@ -158,6 +159,10 @@ class GutterRendererTextGidBuilderImpl(T) : gtksource.gutter_renderer.GutterRend
 /// Fluent builder for [gtksource.gutter_renderer_text.GutterRendererText]
 final class GutterRendererTextGidBuilder : GutterRendererTextGidBuilderImpl!GutterRendererTextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GutterRendererText build()
   {
     return new GutterRendererText(cast(void*)createGObject(GutterRendererText._getGType), Yes.Take);

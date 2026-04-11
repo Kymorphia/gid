@@ -279,6 +279,7 @@ template DBusObjectManagerT()
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_object_manager.DBusObjectManager]
 template DBusObjectManagerGidBuilderT()
 {
 }

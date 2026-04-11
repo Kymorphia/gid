@@ -47,8 +47,8 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.form_submission_request.FormSubmissionRequest]
-  Returns: New builder object
+      Get builder for [webkit.form_submission_request.FormSubmissionRequest]
+      Returns: New builder object
   */
   static FormSubmissionRequestGidBuilder builder()
   {
@@ -90,6 +90,7 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.form_submission_request.FormSubmissionRequest]
 class FormSubmissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -97,6 +98,10 @@ class FormSubmissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuild
 /// Fluent builder for [webkit.form_submission_request.FormSubmissionRequest]
 final class FormSubmissionRequestGidBuilder : FormSubmissionRequestGidBuilderImpl!FormSubmissionRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FormSubmissionRequest build()
   {
     return new FormSubmissionRequest(cast(void*)createGObject(FormSubmissionRequest._getGType), No.Take);

@@ -50,8 +50,8 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-  Get builder for [webkit.context_menu_item.ContextMenuItem]
-  Returns: New builder object
+      Get builder for [webkit.context_menu_item.ContextMenuItem]
+      Returns: New builder object
   */
   static ContextMenuItemGidBuilder builder()
   {
@@ -221,6 +221,7 @@ class ContextMenuItem : gobject.initially_unowned.InitiallyUnowned
   }
 }
 
+/// Fluent builder implementation template for [webkit.context_menu_item.ContextMenuItem]
 class ContextMenuItemGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
 {
 }
@@ -228,6 +229,10 @@ class ContextMenuItemGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnow
 /// Fluent builder for [webkit.context_menu_item.ContextMenuItem]
 final class ContextMenuItemGidBuilder : ContextMenuItemGidBuilderImpl!ContextMenuItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContextMenuItem build()
   {
     return new ContextMenuItem(cast(void*)createGObject(ContextMenuItem._getGType), No.Take);

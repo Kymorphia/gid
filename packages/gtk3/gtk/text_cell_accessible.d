@@ -46,8 +46,8 @@ class TextCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, 
   }
 
   /**
-  Get builder for [gtk.text_cell_accessible.TextCellAccessible]
-  Returns: New builder object
+      Get builder for [gtk.text_cell_accessible.TextCellAccessible]
+      Returns: New builder object
   */
   static TextCellAccessibleGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class TextCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, 
   mixin TextT!();
 }
 
+/// Fluent builder implementation template for [gtk.text_cell_accessible.TextCellAccessible]
 class TextCellAccessibleGidBuilderImpl(T) : gtk.renderer_cell_accessible.RendererCellAccessibleGidBuilderImpl!T, atk.text.TextGidBuilderImpl!T
 {
 
@@ -66,6 +67,10 @@ class TextCellAccessibleGidBuilderImpl(T) : gtk.renderer_cell_accessible.Rendere
 /// Fluent builder for [gtk.text_cell_accessible.TextCellAccessible]
 final class TextCellAccessibleGidBuilder : TextCellAccessibleGidBuilderImpl!TextCellAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextCellAccessible build()
   {
     return new TextCellAccessible(cast(void*)createGObject(TextCellAccessible._getGType), No.Take);

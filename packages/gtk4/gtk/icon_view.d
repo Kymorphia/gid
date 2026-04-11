@@ -86,8 +86,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   }
 
   /**
-  Get builder for [gtk.icon_view.IconView]
-  Returns: New builder object
+      Get builder for [gtk.icon_view.IconView]
+      Returns: New builder object
   */
   static IconViewGidBuilder builder()
   {
@@ -1862,6 +1862,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   }
 }
 
+/// Fluent builder implementation template for [gtk.icon_view.IconView]
 class IconViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -2064,6 +2065,10 @@ class IconViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
 /// Fluent builder for [gtk.icon_view.IconView]
 final class IconViewGidBuilder : IconViewGidBuilderImpl!IconViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IconView build()
   {
     return new IconView(cast(void*)createGObject(IconView._getGType), No.Take);

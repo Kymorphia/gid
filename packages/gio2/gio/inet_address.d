@@ -49,8 +49,8 @@ class InetAddress : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.inet_address.InetAddress]
-  Returns: New builder object
+      Get builder for [gio.inet_address.InetAddress]
+      Returns: New builder object
   */
   static InetAddressGidBuilder builder()
   {
@@ -415,6 +415,7 @@ class InetAddress : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.inet_address.InetAddress]
 class InetAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -444,6 +445,10 @@ class InetAddressGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.inet_address.InetAddress]
 final class InetAddressGidBuilder : InetAddressGidBuilderImpl!InetAddressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InetAddress build()
   {
     return new InetAddress(cast(void*)createGObject(InetAddress._getGType), No.Take);

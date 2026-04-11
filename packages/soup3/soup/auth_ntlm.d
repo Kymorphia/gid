@@ -44,8 +44,8 @@ class AuthNTLM : soup.auth.Auth
   }
 
   /**
-  Get builder for [soup.auth_ntlm.AuthNTLM]
-  Returns: New builder object
+      Get builder for [soup.auth_ntlm.AuthNTLM]
+      Returns: New builder object
   */
   static AuthNTLMGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class AuthNTLM : soup.auth.Auth
   }
 }
 
+/// Fluent builder implementation template for [soup.auth_ntlm.AuthNTLM]
 class AuthNTLMGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
 {
 }
@@ -60,6 +61,10 @@ class AuthNTLMGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
 /// Fluent builder for [soup.auth_ntlm.AuthNTLM]
 final class AuthNTLMGidBuilder : AuthNTLMGidBuilderImpl!AuthNTLMGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AuthNTLM build()
   {
     return new AuthNTLM(cast(void*)createGObject(AuthNTLM._getGType), No.Take);

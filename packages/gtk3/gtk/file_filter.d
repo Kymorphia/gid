@@ -83,8 +83,8 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   }
 
   /**
-  Get builder for [gtk.file_filter.FileFilter]
-  Returns: New builder object
+      Get builder for [gtk.file_filter.FileFilter]
+      Returns: New builder object
   */
   static FileFilterGidBuilder builder()
   {
@@ -274,6 +274,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   }
 }
 
+/// Fluent builder implementation template for [gtk.file_filter.FileFilter]
 class FileFilterGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -283,6 +284,10 @@ class FileFilterGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
 /// Fluent builder for [gtk.file_filter.FileFilter]
 final class FileFilterGidBuilder : FileFilterGidBuilderImpl!FileFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileFilter build()
   {
     return new FileFilter(cast(void*)createGObject(FileFilter._getGType), No.Take);

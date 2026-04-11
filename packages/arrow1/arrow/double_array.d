@@ -40,8 +40,8 @@ class DoubleArray : arrow.numeric_array.NumericArray
   }
 
   /**
-  Get builder for [arrow.double_array.DoubleArray]
-  Returns: New builder object
+      Get builder for [arrow.double_array.DoubleArray]
+      Returns: New builder object
   */
   static DoubleArrayGidBuilder builder()
   {
@@ -91,6 +91,7 @@ class DoubleArray : arrow.numeric_array.NumericArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.double_array.DoubleArray]
 class DoubleArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
 {
 }
@@ -98,6 +99,10 @@ class DoubleArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderI
 /// Fluent builder for [arrow.double_array.DoubleArray]
 final class DoubleArrayGidBuilder : DoubleArrayGidBuilderImpl!DoubleArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DoubleArray build()
   {
     return new DoubleArray(cast(void*)createGObject(DoubleArray._getGType), Yes.Take);

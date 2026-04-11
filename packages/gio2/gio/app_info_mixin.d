@@ -545,6 +545,7 @@ template AppInfoT()
   }
 }
 
+/// Fluent builder implementation template for [gio.app_info.AppInfo]
 template AppInfoGidBuilderT()
 {
 }

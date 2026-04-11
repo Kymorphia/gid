@@ -83,8 +83,8 @@ class Bus : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.bus.Bus]
-  Returns: New builder object
+      Get builder for [gst.bus.Bus]
+      Returns: New builder object
   */
   static BusGidBuilder builder()
   {
@@ -631,6 +631,7 @@ class Bus : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.bus.Bus]
 class BusGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -654,6 +655,10 @@ class BusGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.bus.Bus]
 final class BusGidBuilder : BusGidBuilderImpl!BusGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Bus build()
   {
     return new Bus(cast(void*)createGObject(Bus._getGType), Yes.Take);

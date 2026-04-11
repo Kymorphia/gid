@@ -54,8 +54,8 @@ class Widget : gtk.widget.Widget
   }
 
   /**
-  Get builder for [panel.widget.Widget]
-  Returns: New builder object
+      Get builder for [panel.widget.Widget]
+      Returns: New builder object
   */
   static WidgetGidBuilder builder()
   {
@@ -761,6 +761,7 @@ class Widget : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [panel.widget.Widget]
 class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -883,6 +884,10 @@ class WidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [panel.widget.Widget]
 final class WidgetGidBuilder : WidgetGidBuilderImpl!WidgetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Widget build()
   {
     return new Widget(cast(void*)createGObject(Widget._getGType), No.Take);

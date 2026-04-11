@@ -146,8 +146,8 @@ class ToolbarView : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.toolbar_view.ToolbarView]
-  Returns: New builder object
+      Get builder for [adw.toolbar_view.ToolbarView]
+      Returns: New builder object
   */
   static ToolbarViewGidBuilder builder()
   {
@@ -767,6 +767,7 @@ class ToolbarView : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.toolbar_view.ToolbarView]
 class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -925,6 +926,10 @@ class ToolbarViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.toolbar_view.ToolbarView]
 final class ToolbarViewGidBuilder : ToolbarViewGidBuilderImpl!ToolbarViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToolbarView build()
   {
     return new ToolbarView(cast(void*)createGObject(ToolbarView._getGType), No.Take);

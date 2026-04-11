@@ -40,8 +40,8 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
-  Returns: New builder object
+      Get builder for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
+      Returns: New builder object
   */
   static ExtensionDataTypeRegistryGidBuilder builder()
   {
@@ -106,6 +106,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
 class ExtensionDataTypeRegistryGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -119,6 +120,10 @@ class ExtensionDataTypeRegistryGidBuilderImpl(T) : gobject.object.ObjectWrapGidB
 /// Fluent builder for [arrow.extension_data_type_registry.ExtensionDataTypeRegistry]
 final class ExtensionDataTypeRegistryGidBuilder : ExtensionDataTypeRegistryGidBuilderImpl!ExtensionDataTypeRegistryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExtensionDataTypeRegistry build()
   {
     return new ExtensionDataTypeRegistry(cast(void*)createGObject(ExtensionDataTypeRegistry._getGType), No.Take);

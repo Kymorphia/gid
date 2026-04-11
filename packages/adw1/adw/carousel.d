@@ -68,8 +68,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   }
 
   /**
-  Get builder for [adw.carousel.Carousel]
-  Returns: New builder object
+      Get builder for [adw.carousel.Carousel]
+      Returns: New builder object
   */
   static CarouselGidBuilder builder()
   {
@@ -616,6 +616,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   }
 }
 
+/// Fluent builder implementation template for [adw.carousel.Carousel]
 class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -720,6 +721,10 @@ class CarouselGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeab
 /// Fluent builder for [adw.carousel.Carousel]
 final class CarouselGidBuilder : CarouselGidBuilderImpl!CarouselGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Carousel build()
   {
     return new Carousel(cast(void*)createGObject(Carousel._getGType), No.Take);

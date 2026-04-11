@@ -38,8 +38,8 @@ class Int64Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.int64_scalar.Int64Scalar]
-  Returns: New builder object
+      Get builder for [arrow.int64_scalar.Int64Scalar]
+      Returns: New builder object
   */
   static Int64ScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class Int64Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.int64_scalar.Int64Scalar]
 class Int64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class Int64ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.int64_scalar.Int64Scalar]
 final class Int64ScalarGidBuilder : Int64ScalarGidBuilderImpl!Int64ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Int64Scalar build()
   {
     return new Int64Scalar(cast(void*)createGObject(Int64Scalar._getGType), Yes.Take);

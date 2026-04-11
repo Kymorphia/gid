@@ -120,8 +120,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /**
-  Get builder for [gtk.column_view.ColumnView]
-  Returns: New builder object
+      Get builder for [gtk.column_view.ColumnView]
+      Returns: New builder object
   */
   static ColumnViewGidBuilder builder()
   {
@@ -731,6 +731,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 }
 
+/// Fluent builder implementation template for [gtk.column_view.ColumnView]
 class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -839,6 +840,10 @@ class ColumnViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.scrol
 /// Fluent builder for [gtk.column_view.ColumnView]
 final class ColumnViewGidBuilder : ColumnViewGidBuilderImpl!ColumnViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColumnView build()
   {
     return new ColumnView(cast(void*)createGObject(ColumnView._getGType), No.Take);

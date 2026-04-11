@@ -40,8 +40,8 @@ class GpgContext : gmime.crypto_context.CryptoContext
   }
 
   /**
-  Get builder for [gmime.gpg_context.GpgContext]
-  Returns: New builder object
+      Get builder for [gmime.gpg_context.GpgContext]
+      Returns: New builder object
   */
   static GpgContextGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class GpgContext : gmime.crypto_context.CryptoContext
   }
 }
 
+/// Fluent builder implementation template for [gmime.gpg_context.GpgContext]
 class GpgContextGidBuilderImpl(T) : gmime.crypto_context.CryptoContextGidBuilderImpl!T
 {
 }
@@ -67,6 +68,10 @@ class GpgContextGidBuilderImpl(T) : gmime.crypto_context.CryptoContextGidBuilder
 /// Fluent builder for [gmime.gpg_context.GpgContext]
 final class GpgContextGidBuilder : GpgContextGidBuilderImpl!GpgContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GpgContext build()
   {
     return new GpgContext(cast(void*)createGObject(GpgContext._getGType), Yes.Take);

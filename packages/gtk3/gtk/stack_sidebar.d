@@ -61,8 +61,8 @@ class StackSidebar : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.stack_sidebar.StackSidebar]
-  Returns: New builder object
+      Get builder for [gtk.stack_sidebar.StackSidebar]
+      Returns: New builder object
   */
   static StackSidebarGidBuilder builder()
   {
@@ -121,6 +121,7 @@ class StackSidebar : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.stack_sidebar.StackSidebar]
 class StackSidebarGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -135,6 +136,10 @@ class StackSidebarGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.stack_sidebar.StackSidebar]
 final class StackSidebarGidBuilder : StackSidebarGidBuilderImpl!StackSidebarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StackSidebar build()
   {
     return new StackSidebar(cast(void*)createGObject(StackSidebar._getGType), No.Take);

@@ -39,8 +39,8 @@ class Decimal64DataType : arrow.decimal_data_type.DecimalDataType
   }
 
   /**
-  Get builder for [arrow.decimal64_data_type.Decimal64DataType]
-  Returns: New builder object
+      Get builder for [arrow.decimal64_data_type.Decimal64DataType]
+      Returns: New builder object
   */
   static Decimal64DataTypeGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class Decimal64DataType : arrow.decimal_data_type.DecimalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal64_data_type.Decimal64DataType]
 class Decimal64DataTypeGidBuilderImpl(T) : arrow.decimal_data_type.DecimalDataTypeGidBuilderImpl!T
 {
 }
@@ -74,6 +75,10 @@ class Decimal64DataTypeGidBuilderImpl(T) : arrow.decimal_data_type.DecimalDataTy
 /// Fluent builder for [arrow.decimal64_data_type.Decimal64DataType]
 final class Decimal64DataTypeGidBuilder : Decimal64DataTypeGidBuilderImpl!Decimal64DataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal64DataType build()
   {
     return new Decimal64DataType(cast(void*)createGObject(Decimal64DataType._getGType), Yes.Take);

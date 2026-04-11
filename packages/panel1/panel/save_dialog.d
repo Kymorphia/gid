@@ -56,8 +56,8 @@ class SaveDialog : adw.message_dialog.MessageDialog
   }
 
   /**
-  Get builder for [panel.save_dialog.SaveDialog]
-  Returns: New builder object
+      Get builder for [panel.save_dialog.SaveDialog]
+      Returns: New builder object
   */
   static SaveDialogGidBuilder builder()
   {
@@ -145,6 +145,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
   }
 }
 
+/// Fluent builder implementation template for [panel.save_dialog.SaveDialog]
 class SaveDialogGidBuilderImpl(T) : adw.message_dialog.MessageDialogGidBuilderImpl!T
 {
 
@@ -166,6 +167,10 @@ class SaveDialogGidBuilderImpl(T) : adw.message_dialog.MessageDialogGidBuilderIm
 /// Fluent builder for [panel.save_dialog.SaveDialog]
 final class SaveDialogGidBuilder : SaveDialogGidBuilderImpl!SaveDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SaveDialog build()
   {
     return new SaveDialog(cast(void*)createGObject(SaveDialog._getGType), No.Take);

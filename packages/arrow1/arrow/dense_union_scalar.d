@@ -40,8 +40,8 @@ class DenseUnionScalar : arrow.union_scalar.UnionScalar
   }
 
   /**
-  Get builder for [arrow.dense_union_scalar.DenseUnionScalar]
-  Returns: New builder object
+      Get builder for [arrow.dense_union_scalar.DenseUnionScalar]
+      Returns: New builder object
   */
   static DenseUnionScalarGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class DenseUnionScalar : arrow.union_scalar.UnionScalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.dense_union_scalar.DenseUnionScalar]
 class DenseUnionScalarGidBuilderImpl(T) : arrow.union_scalar.UnionScalarGidBuilderImpl!T
 {
 }
@@ -64,6 +65,10 @@ class DenseUnionScalarGidBuilderImpl(T) : arrow.union_scalar.UnionScalarGidBuild
 /// Fluent builder for [arrow.dense_union_scalar.DenseUnionScalar]
 final class DenseUnionScalarGidBuilder : DenseUnionScalarGidBuilderImpl!DenseUnionScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DenseUnionScalar build()
   {
     return new DenseUnionScalar(cast(void*)createGObject(DenseUnionScalar._getGType), Yes.Take);

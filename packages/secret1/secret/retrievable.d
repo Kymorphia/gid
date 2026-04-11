@@ -158,6 +158,7 @@ interface Retrievable
   secret.value.Value retrieveSecretSync(gio.cancellable.Cancellable cancellable = null);
 }
 
+/// Fluent builder implementation template for [secret.retrievable.Retrievable]
 interface RetrievableGidBuilderImpl(T)
 {
 

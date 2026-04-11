@@ -44,8 +44,8 @@ class AuthBasic : soup.auth.Auth
   }
 
   /**
-  Get builder for [soup.auth_basic.AuthBasic]
-  Returns: New builder object
+      Get builder for [soup.auth_basic.AuthBasic]
+      Returns: New builder object
   */
   static AuthBasicGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class AuthBasic : soup.auth.Auth
   }
 }
 
+/// Fluent builder implementation template for [soup.auth_basic.AuthBasic]
 class AuthBasicGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
 {
 }
@@ -60,6 +61,10 @@ class AuthBasicGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
 /// Fluent builder for [soup.auth_basic.AuthBasic]
 final class AuthBasicGidBuilder : AuthBasicGidBuilderImpl!AuthBasicGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AuthBasic build()
   {
     return new AuthBasic(cast(void*)createGObject(AuthBasic._getGType), No.Take);

@@ -42,6 +42,7 @@ template BuildableT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.buildable.Buildable]
 template BuildableGidBuilderT()
 {
 }

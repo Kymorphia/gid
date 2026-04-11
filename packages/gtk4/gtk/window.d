@@ -117,8 +117,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /**
-  Get builder for [gtk.window.Window]
-  Returns: New builder object
+      Get builder for [gtk.window.Window]
+      Returns: New builder object
   */
   static WindowGidBuilder builder()
   {
@@ -1849,6 +1849,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 }
 
+/// Fluent builder implementation template for [gtk.window.Window]
 class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.NativeGidBuilderImpl!T, gtk.root.RootGidBuilderImpl!T, gtk.shortcut_manager.ShortcutManagerGidBuilderImpl!T
 {
 
@@ -2142,6 +2143,10 @@ class WindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.native.Na
 /// Fluent builder for [gtk.window.Window]
 final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Window build()
   {
     return new Window(cast(void*)createGObject(Window._getGType), No.Take);

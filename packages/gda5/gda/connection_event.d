@@ -38,8 +38,8 @@ class ConnectionEvent : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.connection_event.ConnectionEvent]
-  Returns: New builder object
+      Get builder for [gda.connection_event.ConnectionEvent]
+      Returns: New builder object
   */
   static ConnectionEventGidBuilder builder()
   {
@@ -207,6 +207,7 @@ class ConnectionEvent : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.connection_event.ConnectionEvent]
 class ConnectionEventGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -220,6 +221,10 @@ class ConnectionEventGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gda.connection_event.ConnectionEvent]
 final class ConnectionEventGidBuilder : ConnectionEventGidBuilderImpl!ConnectionEventGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ConnectionEvent build()
   {
     return new ConnectionEvent(cast(void*)createGObject(ConnectionEvent._getGType), No.Take);

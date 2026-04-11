@@ -26,6 +26,7 @@ template ShortcutManagerT()
 {
 }
 
+/// Fluent builder implementation template for [gtk.shortcut_manager.ShortcutManager]
 template ShortcutManagerGidBuilderT()
 {
 }

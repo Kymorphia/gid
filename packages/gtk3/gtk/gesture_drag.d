@@ -47,8 +47,8 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   }
 
   /**
-  Get builder for [gtk.gesture_drag.GestureDrag]
-  Returns: New builder object
+      Get builder for [gtk.gesture_drag.GestureDrag]
+      Returns: New builder object
   */
   static GestureDragGidBuilder builder()
   {
@@ -251,6 +251,7 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture_drag.GestureDrag]
 class GestureDragGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
 {
 }
@@ -258,6 +259,10 @@ class GestureDragGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderI
 /// Fluent builder for [gtk.gesture_drag.GestureDrag]
 final class GestureDragGidBuilder : GestureDragGidBuilderImpl!GestureDragGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GestureDrag build()
   {
     return new GestureDrag(cast(void*)createGObject(GestureDrag._getGType), Yes.Take);

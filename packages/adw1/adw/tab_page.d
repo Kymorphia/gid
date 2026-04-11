@@ -44,8 +44,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
-  Get builder for [adw.tab_page.TabPage]
-  Returns: New builder object
+      Get builder for [adw.tab_page.TabPage]
+      Returns: New builder object
   */
   static TabPageGidBuilder builder()
   {
@@ -932,6 +932,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 }
 
+/// Fluent builder implementation template for [adw.tab_page.TabPage]
 class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.accessible.AccessibleGidBuilderImpl!T
 {
 
@@ -1187,6 +1188,10 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
 /// Fluent builder for [adw.tab_page.TabPage]
 final class TabPageGidBuilder : TabPageGidBuilderImpl!TabPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TabPage build()
   {
     return new TabPage(cast(void*)createGObject(TabPage._getGType), No.Take);

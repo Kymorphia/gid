@@ -40,8 +40,8 @@ class LargeListDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.large_list_data_type.LargeListDataType]
-  Returns: New builder object
+      Get builder for [arrow.large_list_data_type.LargeListDataType]
+      Returns: New builder object
   */
   static LargeListDataTypeGidBuilder builder()
   {
@@ -66,6 +66,7 @@ class LargeListDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.large_list_data_type.LargeListDataType]
 class LargeListDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -73,6 +74,10 @@ class LargeListDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImp
 /// Fluent builder for [arrow.large_list_data_type.LargeListDataType]
 final class LargeListDataTypeGidBuilder : LargeListDataTypeGidBuilderImpl!LargeListDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LargeListDataType build()
   {
     return new LargeListDataType(cast(void*)createGObject(LargeListDataType._getGType), Yes.Take);

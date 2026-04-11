@@ -38,8 +38,8 @@ class LocalFileSystemOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.local_file_system_options.LocalFileSystemOptions]
-  Returns: New builder object
+      Get builder for [arrow.local_file_system_options.LocalFileSystemOptions]
+      Returns: New builder object
   */
   static LocalFileSystemOptionsGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class LocalFileSystemOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.local_file_system_options.LocalFileSystemOptions]
 class LocalFileSystemOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -95,6 +96,10 @@ class LocalFileSystemOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
 /// Fluent builder for [arrow.local_file_system_options.LocalFileSystemOptions]
 final class LocalFileSystemOptionsGidBuilder : LocalFileSystemOptionsGidBuilderImpl!LocalFileSystemOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LocalFileSystemOptions build()
   {
     return new LocalFileSystemOptions(cast(void*)createGObject(LocalFileSystemOptions._getGType), Yes.Take);

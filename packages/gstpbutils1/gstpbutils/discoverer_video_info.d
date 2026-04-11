@@ -40,8 +40,8 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /**
-  Get builder for [gstpbutils.discoverer_video_info.DiscovererVideoInfo]
-  Returns: New builder object
+      Get builder for [gstpbutils.discoverer_video_info.DiscovererVideoInfo]
+      Returns: New builder object
   */
   static DiscovererVideoInfoGidBuilder builder()
   {
@@ -137,6 +137,7 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.discoverer_video_info.DiscovererVideoInfo]
 class DiscovererVideoInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.DiscovererStreamInfoGidBuilderImpl!T
 {
 }
@@ -144,6 +145,10 @@ class DiscovererVideoInfoGidBuilderImpl(T) : gstpbutils.discoverer_stream_info.D
 /// Fluent builder for [gstpbutils.discoverer_video_info.DiscovererVideoInfo]
 final class DiscovererVideoInfoGidBuilder : DiscovererVideoInfoGidBuilderImpl!DiscovererVideoInfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DiscovererVideoInfo build()
   {
     return new DiscovererVideoInfo(cast(void*)createGObject(DiscovererVideoInfo._getGType), No.Take);

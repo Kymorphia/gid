@@ -45,8 +45,8 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [parquet.arrow_file_writer.ArrowFileWriter]
-  Returns: New builder object
+      Get builder for [parquet.arrow_file_writer.ArrowFileWriter]
+      Returns: New builder object
   */
   static ArrowFileWriterGidBuilder builder()
   {
@@ -190,6 +190,7 @@ class ArrowFileWriter : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [parquet.arrow_file_writer.ArrowFileWriter]
 class ArrowFileWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -203,6 +204,10 @@ class ArrowFileWriterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [parquet.arrow_file_writer.ArrowFileWriter]
 final class ArrowFileWriterGidBuilder : ArrowFileWriterGidBuilderImpl!ArrowFileWriterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ArrowFileWriter build()
   {
     return new ArrowFileWriter(cast(void*)createGObject(ArrowFileWriter._getGType), No.Take);

@@ -33,6 +33,7 @@ interface ShortcutManager
   }
 }
 
+/// Fluent builder implementation template for [gtk.shortcut_manager.ShortcutManager]
 interface ShortcutManagerGidBuilderImpl(T)
 {
 }

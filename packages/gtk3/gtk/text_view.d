@@ -85,8 +85,8 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   }
 
   /**
-  Get builder for [gtk.text_view.TextView]
-  Returns: New builder object
+      Get builder for [gtk.text_view.TextView]
+      Returns: New builder object
   */
   static TextViewGidBuilder builder()
   {
@@ -2430,6 +2430,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   }
 }
 
+/// Fluent builder implementation template for [gtk.text_view.TextView]
 class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -2641,6 +2642,10 @@ class TextViewGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T, gtk.s
 /// Fluent builder for [gtk.text_view.TextView]
 final class TextViewGidBuilder : TextViewGidBuilderImpl!TextViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextView build()
   {
     return new TextView(cast(void*)createGObject(TextView._getGType), No.Take);

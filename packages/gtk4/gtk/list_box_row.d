@@ -50,8 +50,8 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-  Get builder for [gtk.list_box_row.ListBoxRow]
-  Returns: New builder object
+      Get builder for [gtk.list_box_row.ListBoxRow]
+      Returns: New builder object
   */
   static ListBoxRowGidBuilder builder()
   {
@@ -320,6 +320,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
   }
 }
 
+/// Fluent builder implementation template for [gtk.list_box_row.ListBoxRow]
 class ListBoxRowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
 {
 
@@ -363,6 +364,10 @@ class ListBoxRowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actio
 /// Fluent builder for [gtk.list_box_row.ListBoxRow]
 final class ListBoxRowGidBuilder : ListBoxRowGidBuilderImpl!ListBoxRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListBoxRow build()
   {
     return new ListBoxRow(cast(void*)createGObject(ListBoxRow._getGType), No.Take);

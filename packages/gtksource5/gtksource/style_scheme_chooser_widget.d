@@ -57,8 +57,8 @@ class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_choos
   }
 
   /**
-  Get builder for [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
-  Returns: New builder object
+      Get builder for [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
+      Returns: New builder object
   */
   static StyleSchemeChooserWidgetGidBuilder builder()
   {
@@ -79,6 +79,7 @@ class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_choos
   }
 }
 
+/// Fluent builder implementation template for [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
 class StyleSchemeChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtksource.style_scheme_chooser.StyleSchemeChooserGidBuilderImpl!T
 {
 
@@ -88,6 +89,10 @@ class StyleSchemeChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImp
 /// Fluent builder for [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
 final class StyleSchemeChooserWidgetGidBuilder : StyleSchemeChooserWidgetGidBuilderImpl!StyleSchemeChooserWidgetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StyleSchemeChooserWidget build()
   {
     return new StyleSchemeChooserWidget(cast(void*)createGObject(StyleSchemeChooserWidget._getGType), No.Take);

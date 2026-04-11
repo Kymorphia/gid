@@ -60,8 +60,8 @@ class MenuManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [panel.menu_manager.MenuManager]
-  Returns: New builder object
+      Get builder for [panel.menu_manager.MenuManager]
+      Returns: New builder object
   */
   static MenuManagerGidBuilder builder()
   {
@@ -203,6 +203,7 @@ class MenuManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [panel.menu_manager.MenuManager]
 class MenuManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -210,6 +211,10 @@ class MenuManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [panel.menu_manager.MenuManager]
 final class MenuManagerGidBuilder : MenuManagerGidBuilderImpl!MenuManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuManager build()
   {
     return new MenuManager(cast(void*)createGObject(MenuManager._getGType), Yes.Take);

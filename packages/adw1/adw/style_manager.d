@@ -48,8 +48,8 @@ class StyleManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [adw.style_manager.StyleManager]
-  Returns: New builder object
+      Get builder for [adw.style_manager.StyleManager]
+      Returns: New builder object
   */
   static StyleManagerGidBuilder builder()
   {
@@ -333,6 +333,7 @@ class StyleManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [adw.style_manager.StyleManager]
 class StyleManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -395,6 +396,10 @@ class StyleManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [adw.style_manager.StyleManager]
 final class StyleManagerGidBuilder : StyleManagerGidBuilderImpl!StyleManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StyleManager build()
   {
     return new StyleManager(cast(void*)createGObject(StyleManager._getGType), No.Take);

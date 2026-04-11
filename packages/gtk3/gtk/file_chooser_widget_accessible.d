@@ -43,8 +43,8 @@ class FileChooserWidgetAccessible : gtk.container_accessible.ContainerAccessible
   }
 
   /**
-  Get builder for [gtk.file_chooser_widget_accessible.FileChooserWidgetAccessible]
-  Returns: New builder object
+      Get builder for [gtk.file_chooser_widget_accessible.FileChooserWidgetAccessible]
+      Returns: New builder object
   */
   static FileChooserWidgetAccessibleGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class FileChooserWidgetAccessible : gtk.container_accessible.ContainerAccessible
   alias setDescription = atk.object.ObjectWrap.setDescription;
 }
 
+/// Fluent builder implementation template for [gtk.file_chooser_widget_accessible.FileChooserWidgetAccessible]
 class FileChooserWidgetAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.action.ActionGidBuilderImpl!T
 {
 
@@ -66,6 +67,10 @@ class FileChooserWidgetAccessibleGidBuilderImpl(T) : gtk.container_accessible.Co
 /// Fluent builder for [gtk.file_chooser_widget_accessible.FileChooserWidgetAccessible]
 final class FileChooserWidgetAccessibleGidBuilder : FileChooserWidgetAccessibleGidBuilderImpl!FileChooserWidgetAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileChooserWidgetAccessible build()
   {
     return new FileChooserWidgetAccessible(cast(void*)createGObject(FileChooserWidgetAccessible._getGType), No.Take);

@@ -45,8 +45,8 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.chunked_array.ChunkedArray]
-  Returns: New builder object
+      Get builder for [arrow.chunked_array.ChunkedArray]
+      Returns: New builder object
   */
   static ChunkedArrayGidBuilder builder()
   {
@@ -248,6 +248,7 @@ class ChunkedArray : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.chunked_array.ChunkedArray]
 class ChunkedArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -267,6 +268,10 @@ class ChunkedArrayGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.chunked_array.ChunkedArray]
 final class ChunkedArrayGidBuilder : ChunkedArrayGidBuilderImpl!ChunkedArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ChunkedArray build()
   {
     return new ChunkedArray(cast(void*)createGObject(ChunkedArray._getGType), Yes.Take);

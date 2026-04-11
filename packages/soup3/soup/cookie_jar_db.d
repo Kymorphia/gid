@@ -50,8 +50,8 @@ class CookieJarDB : soup.cookie_jar.CookieJar
   }
 
   /**
-  Get builder for [soup.cookie_jar_db.CookieJarDB]
-  Returns: New builder object
+      Get builder for [soup.cookie_jar_db.CookieJarDB]
+      Returns: New builder object
   */
   static CookieJarDBGidBuilder builder()
   {
@@ -90,6 +90,7 @@ class CookieJarDB : soup.cookie_jar.CookieJar
   }
 }
 
+/// Fluent builder implementation template for [soup.cookie_jar_db.CookieJarDB]
 class CookieJarDBGidBuilderImpl(T) : soup.cookie_jar.CookieJarGidBuilderImpl!T
 {
 
@@ -109,6 +110,10 @@ class CookieJarDBGidBuilderImpl(T) : soup.cookie_jar.CookieJarGidBuilderImpl!T
 /// Fluent builder for [soup.cookie_jar_db.CookieJarDB]
 final class CookieJarDBGidBuilder : CookieJarDBGidBuilderImpl!CookieJarDBGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CookieJarDB build()
   {
     return new CookieJarDB(cast(void*)createGObject(CookieJarDB._getGType), Yes.Take);

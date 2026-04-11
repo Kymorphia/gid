@@ -42,8 +42,8 @@ class StructArray : arrow.array.Array
   }
 
   /**
-  Get builder for [arrow.struct_array.StructArray]
-  Returns: New builder object
+      Get builder for [arrow.struct_array.StructArray]
+      Returns: New builder object
   */
   static StructArrayGidBuilder builder()
   {
@@ -91,6 +91,7 @@ class StructArray : arrow.array.Array
   }
 }
 
+/// Fluent builder implementation template for [arrow.struct_array.StructArray]
 class StructArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 }
@@ -98,6 +99,10 @@ class StructArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 /// Fluent builder for [arrow.struct_array.StructArray]
 final class StructArrayGidBuilder : StructArrayGidBuilderImpl!StructArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StructArray build()
   {
     return new StructArray(cast(void*)createGObject(StructArray._getGType), Yes.Take);

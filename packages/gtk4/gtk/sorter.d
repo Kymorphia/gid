@@ -60,8 +60,8 @@ class Sorter : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.sorter.Sorter]
-  Returns: New builder object
+      Get builder for [gtk.sorter.Sorter]
+      Returns: New builder object
   */
   static SorterGidBuilder builder()
   {
@@ -191,6 +191,7 @@ class Sorter : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.sorter.Sorter]
 class SorterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -198,6 +199,10 @@ class SorterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.sorter.Sorter]
 final class SorterGidBuilder : SorterGidBuilderImpl!SorterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Sorter build()
   {
     return new Sorter(cast(void*)createGObject(Sorter._getGType), No.Take);

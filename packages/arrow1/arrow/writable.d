@@ -31,6 +31,7 @@ interface Writable
   bool write(ubyte[] data);
 }
 
+/// Fluent builder implementation template for [arrow.writable.Writable]
 interface WritableGidBuilderImpl(T)
 {
 }

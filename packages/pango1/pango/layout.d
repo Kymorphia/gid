@@ -85,8 +85,8 @@ class Layout : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [pango.layout.Layout]
-  Returns: New builder object
+      Get builder for [pango.layout.Layout]
+      Returns: New builder object
   */
   static LayoutGidBuilder builder()
   {
@@ -1350,6 +1350,7 @@ class Layout : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [pango.layout.Layout]
 class LayoutGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -1357,6 +1358,10 @@ class LayoutGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [pango.layout.Layout]
 final class LayoutGidBuilder : LayoutGidBuilderImpl!LayoutGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Layout build()
   {
     return new Layout(cast(void*)createGObject(Layout._getGType), Yes.Take);

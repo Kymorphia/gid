@@ -49,8 +49,8 @@ class AuthNegotiate : soup.auth.Auth
   }
 
   /**
-  Get builder for [soup.auth_negotiate.AuthNegotiate]
-  Returns: New builder object
+      Get builder for [soup.auth_negotiate.AuthNegotiate]
+      Returns: New builder object
   */
   static AuthNegotiateGidBuilder builder()
   {
@@ -73,6 +73,7 @@ class AuthNegotiate : soup.auth.Auth
   }
 }
 
+/// Fluent builder implementation template for [soup.auth_negotiate.AuthNegotiate]
 class AuthNegotiateGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
 {
 }
@@ -80,6 +81,10 @@ class AuthNegotiateGidBuilderImpl(T) : soup.auth.AuthGidBuilderImpl!T
 /// Fluent builder for [soup.auth_negotiate.AuthNegotiate]
 final class AuthNegotiateGidBuilder : AuthNegotiateGidBuilderImpl!AuthNegotiateGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AuthNegotiate build()
   {
     return new AuthNegotiate(cast(void*)createGObject(AuthNegotiate._getGType), No.Take);

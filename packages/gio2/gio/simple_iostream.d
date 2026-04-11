@@ -52,8 +52,8 @@ class SimpleIOStream : gio.iostream.IOStream
   }
 
   /**
-  Get builder for [gio.simple_iostream.SimpleIOStream]
-  Returns: New builder object
+      Get builder for [gio.simple_iostream.SimpleIOStream]
+      Returns: New builder object
   */
   static SimpleIOStreamGidBuilder builder()
   {
@@ -95,6 +95,7 @@ class SimpleIOStream : gio.iostream.IOStream
   }
 }
 
+/// Fluent builder implementation template for [gio.simple_iostream.SimpleIOStream]
 class SimpleIOStreamGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
 {
 
@@ -124,6 +125,10 @@ class SimpleIOStreamGidBuilderImpl(T) : gio.iostream.IOStreamGidBuilderImpl!T
 /// Fluent builder for [gio.simple_iostream.SimpleIOStream]
 final class SimpleIOStreamGidBuilder : SimpleIOStreamGidBuilderImpl!SimpleIOStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SimpleIOStream build()
   {
     return new SimpleIOStream(cast(void*)createGObject(SimpleIOStream._getGType), Yes.Take);

@@ -42,8 +42,8 @@ class ProgressBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.
   }
 
   /**
-  Get builder for [gtk.progress_bar_accessible.ProgressBarAccessible]
-  Returns: New builder object
+      Get builder for [gtk.progress_bar_accessible.ProgressBarAccessible]
+      Returns: New builder object
   */
   static ProgressBarAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class ProgressBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.
   mixin ValueT!();
 }
 
+/// Fluent builder implementation template for [gtk.progress_bar_accessible.ProgressBarAccessible]
 class ProgressBarAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class ProgressBarAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAcces
 /// Fluent builder for [gtk.progress_bar_accessible.ProgressBarAccessible]
 final class ProgressBarAccessibleGidBuilder : ProgressBarAccessibleGidBuilderImpl!ProgressBarAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ProgressBarAccessible build()
   {
     return new ProgressBarAccessible(cast(void*)createGObject(ProgressBarAccessible._getGType), No.Take);

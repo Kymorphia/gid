@@ -41,8 +41,8 @@ class FilterChecksum : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_checksum.FilterChecksum]
-  Returns: New builder object
+      Get builder for [gmime.filter_checksum.FilterChecksum]
+      Returns: New builder object
   */
   static FilterChecksumGidBuilder builder()
   {
@@ -95,6 +95,7 @@ class FilterChecksum : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_checksum.FilterChecksum]
 class FilterChecksumGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -102,6 +103,10 @@ class FilterChecksumGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_checksum.FilterChecksum]
 final class FilterChecksumGidBuilder : FilterChecksumGidBuilderImpl!FilterChecksumGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterChecksum build()
   {
     return new FilterChecksum(cast(void*)createGObject(FilterChecksum._getGType), Yes.Take);

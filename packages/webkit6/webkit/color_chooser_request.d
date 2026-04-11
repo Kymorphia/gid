@@ -57,8 +57,8 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.color_chooser_request.ColorChooserRequest]
-  Returns: New builder object
+      Get builder for [webkit.color_chooser_request.ColorChooserRequest]
+      Returns: New builder object
   */
   static ColorChooserRequestGidBuilder builder()
   {
@@ -185,6 +185,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.color_chooser_request.ColorChooserRequest]
 class ColorChooserRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -203,6 +204,10 @@ class ColorChooserRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [webkit.color_chooser_request.ColorChooserRequest]
 final class ColorChooserRequestGidBuilder : ColorChooserRequestGidBuilderImpl!ColorChooserRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColorChooserRequest build()
   {
     return new ColorChooserRequest(cast(void*)createGObject(ColorChooserRequest._getGType), No.Take);

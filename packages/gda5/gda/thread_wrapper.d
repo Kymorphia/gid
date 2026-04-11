@@ -42,8 +42,8 @@ class ThreadWrapper : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.thread_wrapper.ThreadWrapper]
-  Returns: New builder object
+      Get builder for [gda.thread_wrapper.ThreadWrapper]
+      Returns: New builder object
   */
   static ThreadWrapperGidBuilder builder()
   {
@@ -258,6 +258,7 @@ class ThreadWrapper : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.thread_wrapper.ThreadWrapper]
 class ThreadWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -265,6 +266,10 @@ class ThreadWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.thread_wrapper.ThreadWrapper]
 final class ThreadWrapperGidBuilder : ThreadWrapperGidBuilderImpl!ThreadWrapperGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ThreadWrapper build()
   {
     return new ThreadWrapper(cast(void*)createGObject(ThreadWrapper._getGType), Yes.Take);

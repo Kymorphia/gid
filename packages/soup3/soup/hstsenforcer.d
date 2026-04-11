@@ -65,8 +65,8 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   }
 
   /**
-  Get builder for [soup.hstsenforcer.HSTSEnforcer]
-  Returns: New builder object
+      Get builder for [soup.hstsenforcer.HSTSEnforcer]
+      Returns: New builder object
   */
   static HSTSEnforcerGidBuilder builder()
   {
@@ -245,6 +245,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   }
 }
 
+/// Fluent builder implementation template for [soup.hstsenforcer.HSTSEnforcer]
 class HSTSEnforcerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
 {
 
@@ -254,6 +255,10 @@ class HSTSEnforcerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
 /// Fluent builder for [soup.hstsenforcer.HSTSEnforcer]
 final class HSTSEnforcerGidBuilder : HSTSEnforcerGidBuilderImpl!HSTSEnforcerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HSTSEnforcer build()
   {
     return new HSTSEnforcer(cast(void*)createGObject(HSTSEnforcer._getGType), Yes.Take);

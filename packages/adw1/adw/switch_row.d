@@ -77,8 +77,8 @@ class SwitchRow : adw.action_row.ActionRow
   }
 
   /**
-  Get builder for [adw.switch_row.SwitchRow]
-  Returns: New builder object
+      Get builder for [adw.switch_row.SwitchRow]
+      Returns: New builder object
   */
   static SwitchRowGidBuilder builder()
   {
@@ -138,6 +138,7 @@ class SwitchRow : adw.action_row.ActionRow
   }
 }
 
+/// Fluent builder implementation template for [adw.switch_row.SwitchRow]
 class SwitchRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
 {
 
@@ -157,6 +158,10 @@ class SwitchRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
 /// Fluent builder for [adw.switch_row.SwitchRow]
 final class SwitchRowGidBuilder : SwitchRowGidBuilderImpl!SwitchRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SwitchRow build()
   {
     return new SwitchRow(cast(void*)createGObject(SwitchRow._getGType), No.Take);

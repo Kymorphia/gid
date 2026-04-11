@@ -60,8 +60,8 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
   }
 
   /**
-  Get builder for [soup.auth_manager.AuthManager]
-  Returns: New builder object
+      Get builder for [soup.auth_manager.AuthManager]
+      Returns: New builder object
   */
   static AuthManagerGidBuilder builder()
   {
@@ -100,6 +100,7 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
   }
 }
 
+/// Fluent builder implementation template for [soup.auth_manager.AuthManager]
 class AuthManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
 {
 
@@ -109,6 +110,10 @@ class AuthManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [soup.auth_manager.AuthManager]
 final class AuthManagerGidBuilder : AuthManagerGidBuilderImpl!AuthManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AuthManager build()
   {
     return new AuthManager(cast(void*)createGObject(AuthManager._getGType), No.Take);

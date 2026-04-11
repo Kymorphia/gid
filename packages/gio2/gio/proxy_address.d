@@ -44,8 +44,8 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
   }
 
   /**
-  Get builder for [gio.proxy_address.ProxyAddress]
-  Returns: New builder object
+      Get builder for [gio.proxy_address.ProxyAddress]
+      Returns: New builder object
   */
   static ProxyAddressGidBuilder builder()
   {
@@ -237,6 +237,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
   }
 }
 
+/// Fluent builder implementation template for [gio.proxy_address.ProxyAddress]
 class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressGidBuilderImpl!T
 {
 
@@ -324,6 +325,10 @@ class ProxyAddressGidBuilderImpl(T) : gio.inet_socket_address.InetSocketAddressG
 /// Fluent builder for [gio.proxy_address.ProxyAddress]
 final class ProxyAddressGidBuilder : ProxyAddressGidBuilderImpl!ProxyAddressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ProxyAddress build()
   {
     return new ProxyAddress(cast(void*)createGObject(ProxyAddress._getGType), Yes.Take);

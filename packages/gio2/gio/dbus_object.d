@@ -91,6 +91,7 @@ interface DBusObject
   gulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gio.dbus_object.DBusObject]
 interface DBusObjectGidBuilderImpl(T)
 {
 }

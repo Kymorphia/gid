@@ -279,6 +279,7 @@ interface Paintable
   gulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gdk.paintable.Paintable]
 interface PaintableGidBuilderImpl(T)
 {
 }

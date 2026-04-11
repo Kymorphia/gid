@@ -40,8 +40,8 @@ class HandlerBoolean : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 
   /**
-  Get builder for [gda.handler_boolean.HandlerBoolean]
-  Returns: New builder object
+      Get builder for [gda.handler_boolean.HandlerBoolean]
+      Returns: New builder object
   */
   static HandlerBooleanGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class HandlerBoolean : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 }
 
+/// Fluent builder implementation template for [gda.handler_boolean.HandlerBoolean]
 class HandlerBooleanGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
 {
 
@@ -72,6 +73,10 @@ class HandlerBooleanGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gda.handler_boolean.HandlerBoolean]
 final class HandlerBooleanGidBuilder : HandlerBooleanGidBuilderImpl!HandlerBooleanGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HandlerBoolean build()
   {
     return new HandlerBoolean(cast(void*)createGObject(HandlerBoolean._getGType), No.Take);

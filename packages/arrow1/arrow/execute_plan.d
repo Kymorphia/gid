@@ -47,8 +47,8 @@ class ExecutePlan : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.execute_plan.ExecutePlan]
-  Returns: New builder object
+      Get builder for [arrow.execute_plan.ExecutePlan]
+      Returns: New builder object
   */
   static ExecutePlanGidBuilder builder()
   {
@@ -265,6 +265,7 @@ class ExecutePlan : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.execute_plan.ExecutePlan]
 class ExecutePlanGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -278,6 +279,10 @@ class ExecutePlanGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.execute_plan.ExecutePlan]
 final class ExecutePlanGidBuilder : ExecutePlanGidBuilderImpl!ExecutePlanGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExecutePlan build()
   {
     return new ExecutePlan(cast(void*)createGObject(ExecutePlan._getGType), Yes.Take);

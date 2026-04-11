@@ -149,6 +149,7 @@ interface AsyncResult
   bool legacyPropagateError();
 }
 
+/// Fluent builder implementation template for [gio.async_result.AsyncResult]
 interface AsyncResultGidBuilderImpl(T)
 {
 }

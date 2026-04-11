@@ -55,8 +55,8 @@ class Spinner : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.spinner.Spinner]
-  Returns: New builder object
+      Get builder for [gtk.spinner.Spinner]
+      Returns: New builder object
   */
   static SpinnerGidBuilder builder()
   {
@@ -103,6 +103,7 @@ class Spinner : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.spinner.Spinner]
 class SpinnerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -117,6 +118,10 @@ class SpinnerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.spinner.Spinner]
 final class SpinnerGidBuilder : SpinnerGidBuilderImpl!SpinnerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Spinner build()
   {
     return new Spinner(cast(void*)createGObject(Spinner._getGType), No.Take);

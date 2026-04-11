@@ -44,8 +44,8 @@ class Tree : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.tree.Tree]
-  Returns: New builder object
+      Get builder for [gda.tree.Tree]
+      Returns: New builder object
   */
   static TreeGidBuilder builder()
   {
@@ -430,6 +430,7 @@ class Tree : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.tree.Tree]
 class TreeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -437,6 +438,10 @@ class TreeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.tree.Tree]
 final class TreeGidBuilder : TreeGidBuilderImpl!TreeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Tree build()
   {
     return new Tree(cast(void*)createGObject(Tree._getGType), Yes.Take);

@@ -38,8 +38,8 @@ class GLRenderer : gsk.renderer.Renderer
   }
 
   /**
-  Get builder for [gsk.glrenderer.GLRenderer]
-  Returns: New builder object
+      Get builder for [gsk.glrenderer.GLRenderer]
+      Returns: New builder object
   */
   static GLRendererGidBuilder builder()
   {
@@ -58,6 +58,7 @@ class GLRenderer : gsk.renderer.Renderer
   }
 }
 
+/// Fluent builder implementation template for [gsk.glrenderer.GLRenderer]
 class GLRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 {
 }
@@ -65,6 +66,10 @@ class GLRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 /// Fluent builder for [gsk.glrenderer.GLRenderer]
 final class GLRendererGidBuilder : GLRendererGidBuilderImpl!GLRendererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLRenderer build()
   {
     return new GLRenderer(cast(void*)createGObject(GLRenderer._getGType), Yes.Take);

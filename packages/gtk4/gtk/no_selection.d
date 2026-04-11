@@ -53,8 +53,8 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   }
 
   /**
-  Get builder for [gtk.no_selection.NoSelection]
-  Returns: New builder object
+      Get builder for [gtk.no_selection.NoSelection]
+      Returns: New builder object
   */
   static NoSelectionGidBuilder builder()
   {
@@ -142,6 +142,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   }
 }
 
+/// Fluent builder implementation template for [gtk.no_selection.NoSelection]
 class NoSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
 {
 
@@ -164,6 +165,10 @@ class NoSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [gtk.no_selection.NoSelection]
 final class NoSelectionGidBuilder : NoSelectionGidBuilderImpl!NoSelectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NoSelection build()
   {
     return new NoSelection(cast(void*)createGObject(NoSelection._getGType), Yes.Take);

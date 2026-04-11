@@ -66,8 +66,8 @@ class WebsocketConnection : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [soup.websocket_connection.WebsocketConnection]
-  Returns: New builder object
+      Get builder for [soup.websocket_connection.WebsocketConnection]
+      Returns: New builder object
   */
   static WebsocketConnectionGidBuilder builder()
   {
@@ -665,6 +665,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [soup.websocket_connection.WebsocketConnection]
 class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -772,6 +773,10 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [soup.websocket_connection.WebsocketConnection]
 final class WebsocketConnectionGidBuilder : WebsocketConnectionGidBuilderImpl!WebsocketConnectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebsocketConnection build()
   {
     return new WebsocketConnection(cast(void*)createGObject(WebsocketConnection._getGType), Yes.Take);

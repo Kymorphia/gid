@@ -39,8 +39,8 @@ class WriterProperties : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [parquet.writer_properties.WriterProperties]
-  Returns: New builder object
+      Get builder for [parquet.writer_properties.WriterProperties]
+      Returns: New builder object
   */
   static WriterPropertiesGidBuilder builder()
   {
@@ -152,6 +152,7 @@ class WriterProperties : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [parquet.writer_properties.WriterProperties]
 class WriterPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -159,6 +160,10 @@ class WriterPropertiesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [parquet.writer_properties.WriterProperties]
 final class WriterPropertiesGidBuilder : WriterPropertiesGidBuilderImpl!WriterPropertiesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WriterProperties build()
   {
     return new WriterProperties(cast(void*)createGObject(WriterProperties._getGType), Yes.Take);

@@ -165,6 +165,7 @@ template AsyncResultT()
   }
 }
 
+/// Fluent builder implementation template for [gio.async_result.AsyncResult]
 template AsyncResultGidBuilderT()
 {
 }

@@ -62,8 +62,8 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
   }
 
   /**
-  Get builder for [gtk.tearoff_menu_item.TearoffMenuItem]
-  Returns: New builder object
+      Get builder for [gtk.tearoff_menu_item.TearoffMenuItem]
+      Returns: New builder object
   */
   static TearoffMenuItemGidBuilder builder()
   {
@@ -85,6 +85,7 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
   }
 }
 
+/// Fluent builder implementation template for [gtk.tearoff_menu_item.TearoffMenuItem]
 class TearoffMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
 {
 
@@ -93,6 +94,10 @@ class TearoffMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
 /// Fluent builder for [gtk.tearoff_menu_item.TearoffMenuItem]
 final class TearoffMenuItemGidBuilder : TearoffMenuItemGidBuilderImpl!TearoffMenuItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TearoffMenuItem build()
   {
     return new TearoffMenuItem(cast(void*)createGObject(TearoffMenuItem._getGType), No.Take);

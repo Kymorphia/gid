@@ -38,8 +38,8 @@ class FloatStatistics : parquet.statistics.Statistics
   }
 
   /**
-  Get builder for [parquet.float_statistics.FloatStatistics]
-  Returns: New builder object
+      Get builder for [parquet.float_statistics.FloatStatistics]
+      Returns: New builder object
   */
   static FloatStatisticsGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class FloatStatistics : parquet.statistics.Statistics
   }
 }
 
+/// Fluent builder implementation template for [parquet.float_statistics.FloatStatistics]
 class FloatStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class FloatStatisticsGidBuilderImpl(T) : parquet.statistics.StatisticsGidBuilder
 /// Fluent builder for [parquet.float_statistics.FloatStatistics]
 final class FloatStatisticsGidBuilder : FloatStatisticsGidBuilderImpl!FloatStatisticsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FloatStatistics build()
   {
     return new FloatStatistics(cast(void*)createGObject(FloatStatistics._getGType), No.Take);

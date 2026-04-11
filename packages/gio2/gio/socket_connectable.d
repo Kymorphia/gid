@@ -110,6 +110,7 @@ interface SocketConnectable
   string toString_();
 }
 
+/// Fluent builder implementation template for [gio.socket_connectable.SocketConnectable]
 interface SocketConnectableGidBuilderImpl(T)
 {
 }

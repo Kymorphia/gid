@@ -53,8 +53,8 @@ class Allocator : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.allocator.Allocator]
-  Returns: New builder object
+      Get builder for [gst.allocator.Allocator]
+      Returns: New builder object
   */
   static AllocatorGidBuilder builder()
   {
@@ -131,6 +131,7 @@ class Allocator : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.allocator.Allocator]
 class AllocatorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -138,6 +139,10 @@ class AllocatorGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.allocator.Allocator]
 final class AllocatorGidBuilder : AllocatorGidBuilderImpl!AllocatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Allocator build()
   {
     return new Allocator(cast(void*)createGObject(Allocator._getGType), No.Take);

@@ -244,6 +244,7 @@ interface Component
   gulong connectBoundsChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [atk.component.Component]
 interface ComponentGidBuilderImpl(T)
 {
 }

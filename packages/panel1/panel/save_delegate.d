@@ -45,8 +45,8 @@ class SaveDelegate : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [panel.save_delegate.SaveDelegate]
-  Returns: New builder object
+      Get builder for [panel.save_delegate.SaveDelegate]
+      Returns: New builder object
   */
   static SaveDelegateGidBuilder builder()
   {
@@ -509,6 +509,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [panel.save_delegate.SaveDelegate]
 class SaveDelegateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -598,6 +599,10 @@ class SaveDelegateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [panel.save_delegate.SaveDelegate]
 final class SaveDelegateGidBuilder : SaveDelegateGidBuilderImpl!SaveDelegateGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SaveDelegate build()
   {
     return new SaveDelegate(cast(void*)createGObject(SaveDelegate._getGType), Yes.Take);

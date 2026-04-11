@@ -40,8 +40,8 @@ class GLMemoryPBOAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
   }
 
   /**
-  Get builder for [gstgl.glmemory_pboallocator.GLMemoryPBOAllocator]
-  Returns: New builder object
+      Get builder for [gstgl.glmemory_pboallocator.GLMemoryPBOAllocator]
+      Returns: New builder object
   */
   static GLMemoryPBOAllocatorGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class GLMemoryPBOAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glmemory_pboallocator.GLMemoryPBOAllocator]
 class GLMemoryPBOAllocatorGidBuilderImpl(T) : gstgl.glmemory_allocator.GLMemoryAllocatorGidBuilderImpl!T
 {
 }
@@ -56,6 +57,10 @@ class GLMemoryPBOAllocatorGidBuilderImpl(T) : gstgl.glmemory_allocator.GLMemoryA
 /// Fluent builder for [gstgl.glmemory_pboallocator.GLMemoryPBOAllocator]
 final class GLMemoryPBOAllocatorGidBuilder : GLMemoryPBOAllocatorGidBuilderImpl!GLMemoryPBOAllocatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLMemoryPBOAllocator build()
   {
     return new GLMemoryPBOAllocator(cast(void*)createGObject(GLMemoryPBOAllocator._getGType), No.Take);

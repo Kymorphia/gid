@@ -58,8 +58,8 @@ class WindowTitle : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.window_title.WindowTitle]
-  Returns: New builder object
+      Get builder for [adw.window_title.WindowTitle]
+      Returns: New builder object
   */
   static WindowTitleGidBuilder builder()
   {
@@ -185,6 +185,7 @@ class WindowTitle : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.window_title.WindowTitle]
 class WindowTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -220,6 +221,10 @@ class WindowTitleGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.window_title.WindowTitle]
 final class WindowTitleGidBuilder : WindowTitleGidBuilderImpl!WindowTitleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WindowTitle build()
   {
     return new WindowTitle(cast(void*)createGObject(WindowTitle._getGType), No.Take);

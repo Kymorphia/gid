@@ -111,8 +111,8 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   }
 
   /**
-  Get builder for [gio.dbus_connection.DBusConnection]
-  Returns: New builder object
+      Get builder for [gio.dbus_connection.DBusConnection]
+      Returns: New builder object
   */
   static DBusConnectionGidBuilder builder()
   {
@@ -1774,6 +1774,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_connection.DBusConnection]
 class DBusConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_initable.AsyncInitableGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -1884,6 +1885,10 @@ class DBusConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.dbus_connection.DBusConnection]
 final class DBusConnectionGidBuilder : DBusConnectionGidBuilderImpl!DBusConnectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusConnection build()
   {
     return new DBusConnection(cast(void*)createGObject(DBusConnection._getGType), No.Take);

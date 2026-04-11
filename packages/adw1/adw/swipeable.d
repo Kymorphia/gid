@@ -74,6 +74,7 @@ interface Swipeable
   void getSwipeArea(adw.types.NavigationDirection navigationDirection, bool isDrag, out gdk.rectangle.Rectangle rect);
 }
 
+/// Fluent builder implementation template for [adw.swipeable.Swipeable]
 interface SwipeableGidBuilderImpl(T)
 {
 }

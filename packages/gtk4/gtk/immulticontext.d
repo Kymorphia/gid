@@ -45,8 +45,8 @@ class IMMulticontext : gtk.imcontext.IMContext
   }
 
   /**
-  Get builder for [gtk.immulticontext.IMMulticontext]
-  Returns: New builder object
+      Get builder for [gtk.immulticontext.IMMulticontext]
+      Returns: New builder object
   */
   static IMMulticontextGidBuilder builder()
   {
@@ -96,6 +96,7 @@ class IMMulticontext : gtk.imcontext.IMContext
   }
 }
 
+/// Fluent builder implementation template for [gtk.immulticontext.IMMulticontext]
 class IMMulticontextGidBuilderImpl(T) : gtk.imcontext.IMContextGidBuilderImpl!T
 {
 }
@@ -103,6 +104,10 @@ class IMMulticontextGidBuilderImpl(T) : gtk.imcontext.IMContextGidBuilderImpl!T
 /// Fluent builder for [gtk.immulticontext.IMMulticontext]
 final class IMMulticontextGidBuilder : IMMulticontextGidBuilderImpl!IMMulticontextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IMMulticontext build()
   {
     return new IMMulticontext(cast(void*)createGObject(IMMulticontext._getGType), Yes.Take);

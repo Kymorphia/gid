@@ -57,6 +57,7 @@ template HoverProviderT()
   }
 }
 
+/// Fluent builder implementation template for [gtksource.hover_provider.HoverProvider]
 template HoverProviderGidBuilderT()
 {
 }

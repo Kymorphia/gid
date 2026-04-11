@@ -39,8 +39,8 @@ class LiteralExpression : arrow.expression.Expression
   }
 
   /**
-  Get builder for [arrow.literal_expression.LiteralExpression]
-  Returns: New builder object
+      Get builder for [arrow.literal_expression.LiteralExpression]
+      Returns: New builder object
   */
   static LiteralExpressionGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class LiteralExpression : arrow.expression.Expression
   }
 }
 
+/// Fluent builder implementation template for [arrow.literal_expression.LiteralExpression]
 class LiteralExpressionGidBuilderImpl(T) : arrow.expression.ExpressionGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class LiteralExpressionGidBuilderImpl(T) : arrow.expression.ExpressionGidBuilder
 /// Fluent builder for [arrow.literal_expression.LiteralExpression]
 final class LiteralExpressionGidBuilder : LiteralExpressionGidBuilderImpl!LiteralExpressionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LiteralExpression build()
   {
     return new LiteralExpression(cast(void*)createGObject(LiteralExpression._getGType), Yes.Take);

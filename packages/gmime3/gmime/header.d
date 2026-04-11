@@ -42,8 +42,8 @@ class Header : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.header.Header]
-  Returns: New builder object
+      Get builder for [gmime.header.Header]
+      Returns: New builder object
   */
   static HeaderGidBuilder builder()
   {
@@ -316,6 +316,7 @@ class Header : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.header.Header]
 class HeaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -323,6 +324,10 @@ class HeaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.header.Header]
 final class HeaderGidBuilder : HeaderGidBuilderImpl!HeaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Header build()
   {
     return new Header(cast(void*)createGObject(Header._getGType), No.Take);

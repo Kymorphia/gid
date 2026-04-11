@@ -54,8 +54,8 @@ class VolumeMonitor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.volume_monitor.VolumeMonitor]
-  Returns: New builder object
+      Get builder for [gio.volume_monitor.VolumeMonitor]
+      Returns: New builder object
   */
   static VolumeMonitorGidBuilder builder()
   {
@@ -723,6 +723,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.volume_monitor.VolumeMonitor]
 class VolumeMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -730,6 +731,10 @@ class VolumeMonitorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.volume_monitor.VolumeMonitor]
 final class VolumeMonitorGidBuilder : VolumeMonitorGidBuilderImpl!VolumeMonitorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VolumeMonitor build()
   {
     return new VolumeMonitor(cast(void*)createGObject(VolumeMonitor._getGType), No.Take);

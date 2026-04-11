@@ -41,8 +41,8 @@ class DataWrapper : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.data_wrapper.DataWrapper]
-  Returns: New builder object
+      Get builder for [gmime.data_wrapper.DataWrapper]
+      Returns: New builder object
   */
   static DataWrapperGidBuilder builder()
   {
@@ -144,6 +144,7 @@ class DataWrapper : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.data_wrapper.DataWrapper]
 class DataWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -151,6 +152,10 @@ class DataWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.data_wrapper.DataWrapper]
 final class DataWrapperGidBuilder : DataWrapperGidBuilderImpl!DataWrapperGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataWrapper build()
   {
     return new DataWrapper(cast(void*)createGObject(DataWrapper._getGType), Yes.Take);

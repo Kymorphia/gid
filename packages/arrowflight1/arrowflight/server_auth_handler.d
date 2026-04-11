@@ -38,8 +38,8 @@ class ServerAuthHandler : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.server_auth_handler.ServerAuthHandler]
-  Returns: New builder object
+      Get builder for [arrowflight.server_auth_handler.ServerAuthHandler]
+      Returns: New builder object
   */
   static ServerAuthHandlerGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class ServerAuthHandler : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.server_auth_handler.ServerAuthHandler]
 class ServerAuthHandlerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -60,6 +61,10 @@ class ServerAuthHandlerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [arrowflight.server_auth_handler.ServerAuthHandler]
 final class ServerAuthHandlerGidBuilder : ServerAuthHandlerGidBuilderImpl!ServerAuthHandlerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ServerAuthHandler build()
   {
     return new ServerAuthHandler(cast(void*)createGObject(ServerAuthHandler._getGType), No.Take);

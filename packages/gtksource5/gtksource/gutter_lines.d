@@ -52,8 +52,8 @@ class GutterLines : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.gutter_lines.GutterLines]
-  Returns: New builder object
+      Get builder for [gtksource.gutter_lines.GutterLines]
+      Returns: New builder object
   */
   static GutterLinesGidBuilder builder()
   {
@@ -302,6 +302,7 @@ class GutterLines : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.gutter_lines.GutterLines]
 class GutterLinesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -309,6 +310,10 @@ class GutterLinesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.gutter_lines.GutterLines]
 final class GutterLinesGidBuilder : GutterLinesGidBuilderImpl!GutterLinesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GutterLines build()
   {
     return new GutterLines(cast(void*)createGObject(GutterLines._getGType), No.Take);

@@ -35,6 +35,7 @@ template FontT()
   }
 }
 
+/// Fluent builder implementation template for [pangocairo.font.Font]
 template FontGidBuilderT()
 {
 }

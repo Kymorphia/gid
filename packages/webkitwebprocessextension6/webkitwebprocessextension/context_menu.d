@@ -55,8 +55,8 @@ class ContextMenu : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkitwebprocessextension.context_menu.ContextMenu]
-  Returns: New builder object
+      Get builder for [webkitwebprocessextension.context_menu.ContextMenu]
+      Returns: New builder object
   */
   static ContextMenuGidBuilder builder()
   {
@@ -303,6 +303,7 @@ class ContextMenu : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkitwebprocessextension.context_menu.ContextMenu]
 class ContextMenuGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -310,6 +311,10 @@ class ContextMenuGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkitwebprocessextension.context_menu.ContextMenu]
 final class ContextMenuGidBuilder : ContextMenuGidBuilderImpl!ContextMenuGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContextMenu build()
   {
     return new ContextMenu(cast(void*)createGObject(ContextMenu._getGType), Yes.Take);

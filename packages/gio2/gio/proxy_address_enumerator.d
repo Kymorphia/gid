@@ -52,8 +52,8 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
   }
 
   /**
-  Get builder for [gio.proxy_address_enumerator.ProxyAddressEnumerator]
-  Returns: New builder object
+      Get builder for [gio.proxy_address_enumerator.ProxyAddressEnumerator]
+      Returns: New builder object
   */
   static ProxyAddressEnumeratorGidBuilder builder()
   {
@@ -108,6 +108,7 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
   }
 }
 
+/// Fluent builder implementation template for [gio.proxy_address_enumerator.ProxyAddressEnumerator]
 class ProxyAddressEnumeratorGidBuilderImpl(T) : gio.socket_address_enumerator.SocketAddressEnumeratorGidBuilderImpl!T
 {
 
@@ -160,6 +161,10 @@ class ProxyAddressEnumeratorGidBuilderImpl(T) : gio.socket_address_enumerator.So
 /// Fluent builder for [gio.proxy_address_enumerator.ProxyAddressEnumerator]
 final class ProxyAddressEnumeratorGidBuilder : ProxyAddressEnumeratorGidBuilderImpl!ProxyAddressEnumeratorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ProxyAddressEnumerator build()
   {
     return new ProxyAddressEnumerator(cast(void*)createGObject(ProxyAddressEnumerator._getGType), No.Take);

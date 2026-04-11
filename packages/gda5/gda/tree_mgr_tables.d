@@ -41,8 +41,8 @@ class TreeMgrTables : gda.tree_manager.TreeManager
   }
 
   /**
-  Get builder for [gda.tree_mgr_tables.TreeMgrTables]
-  Returns: New builder object
+      Get builder for [gda.tree_mgr_tables.TreeMgrTables]
+      Returns: New builder object
   */
   static TreeMgrTablesGidBuilder builder()
   {
@@ -88,6 +88,7 @@ class TreeMgrTables : gda.tree_manager.TreeManager
   }
 }
 
+/// Fluent builder implementation template for [gda.tree_mgr_tables.TreeMgrTables]
 class TreeMgrTablesGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImpl!T
 {
 
@@ -133,6 +134,10 @@ class TreeMgrTablesGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImp
 /// Fluent builder for [gda.tree_mgr_tables.TreeMgrTables]
 final class TreeMgrTablesGidBuilder : TreeMgrTablesGidBuilderImpl!TreeMgrTablesGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeMgrTables build()
   {
     return new TreeMgrTables(cast(void*)createGObject(TreeMgrTables._getGType), Yes.Take);

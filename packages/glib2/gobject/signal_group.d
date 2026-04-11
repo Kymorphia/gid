@@ -62,8 +62,8 @@ class SignalGroup : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gobject.signal_group.SignalGroup]
-  Returns: New builder object
+      Get builder for [gobject.signal_group.SignalGroup]
+      Returns: New builder object
   */
   static SignalGroupGidBuilder builder()
   {
@@ -269,6 +269,7 @@ class SignalGroup : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gobject.signal_group.SignalGroup]
 class SignalGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -298,6 +299,10 @@ class SignalGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gobject.signal_group.SignalGroup]
 final class SignalGroupGidBuilder : SignalGroupGidBuilderImpl!SignalGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SignalGroup build()
   {
     return new SignalGroup(cast(void*)createGObject(SignalGroup._getGType), Yes.Take);

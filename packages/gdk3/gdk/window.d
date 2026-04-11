@@ -59,8 +59,8 @@ class Window : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.window.Window]
-  Returns: New builder object
+      Get builder for [gdk.window.Window]
+      Returns: New builder object
   */
   static WindowGidBuilder builder()
   {
@@ -3276,6 +3276,7 @@ class Window : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.window.Window]
 class WindowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -3295,6 +3296,10 @@ class WindowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.window.Window]
 final class WindowGidBuilder : WindowGidBuilderImpl!WindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Window build()
   {
     return new Window(cast(void*)createGObject(Window._getGType), Yes.Take);

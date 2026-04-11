@@ -113,8 +113,8 @@ class Clock : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.clock.Clock]
-  Returns: New builder object
+      Get builder for [gst.clock.Clock]
+      Returns: New builder object
   */
   static ClockGidBuilder builder()
   {
@@ -806,6 +806,7 @@ class Clock : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.clock.Clock]
 class ClockGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -831,6 +832,10 @@ class ClockGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.clock.Clock]
 final class ClockGidBuilder : ClockGidBuilderImpl!ClockGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Clock build()
   {
     return new Clock(cast(void*)createGObject(Clock._getGType), No.Take);

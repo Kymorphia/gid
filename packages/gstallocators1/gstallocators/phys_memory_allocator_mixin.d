@@ -13,6 +13,7 @@ template PhysMemoryAllocatorT()
 {
 }
 
+/// Fluent builder implementation template for [gstallocators.phys_memory_allocator.PhysMemoryAllocator]
 template PhysMemoryAllocatorGidBuilderT()
 {
 }

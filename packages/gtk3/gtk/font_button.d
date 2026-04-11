@@ -58,8 +58,8 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   }
 
   /**
-  Get builder for [gtk.font_button.FontButton]
-  Returns: New builder object
+      Get builder for [gtk.font_button.FontButton]
+      Returns: New builder object
   */
   static FontButtonGidBuilder builder()
   {
@@ -417,6 +417,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.font_button.FontButton]
 class FontButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.font_chooser.FontChooserGidBuilderImpl!T
 {
 
@@ -500,6 +501,10 @@ class FontButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtk.font_
 /// Fluent builder for [gtk.font_button.FontButton]
 final class FontButtonGidBuilder : FontButtonGidBuilderImpl!FontButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FontButton build()
   {
     return new FontButton(cast(void*)createGObject(FontButton._getGType), No.Take);

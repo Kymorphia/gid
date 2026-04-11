@@ -42,8 +42,8 @@ class TreeManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.tree_manager.TreeManager]
-  Returns: New builder object
+      Get builder for [gda.tree_manager.TreeManager]
+      Returns: New builder object
   */
   static TreeManagerGidBuilder builder()
   {
@@ -175,6 +175,7 @@ class TreeManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.tree_manager.TreeManager]
 class TreeManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -210,6 +211,10 @@ class TreeManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.tree_manager.TreeManager]
 final class TreeManagerGidBuilder : TreeManagerGidBuilderImpl!TreeManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeManager build()
   {
     return new TreeManager(cast(void*)createGObject(TreeManager._getGType), No.Take);

@@ -41,8 +41,8 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.csvread_options.CSVReadOptions]
-  Returns: New builder object
+      Get builder for [arrow.csvread_options.CSVReadOptions]
+      Returns: New builder object
   */
   static CSVReadOptionsGidBuilder builder()
   {
@@ -555,6 +555,7 @@ class CSVReadOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.csvread_options.CSVReadOptions]
 class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -718,6 +719,10 @@ class CSVReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [arrow.csvread_options.CSVReadOptions]
 final class CSVReadOptionsGidBuilder : CSVReadOptionsGidBuilderImpl!CSVReadOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CSVReadOptions build()
   {
     return new CSVReadOptions(cast(void*)createGObject(CSVReadOptions._getGType), Yes.Take);

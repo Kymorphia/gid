@@ -76,8 +76,8 @@ class PopoverMenuBar : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.popover_menu_bar.PopoverMenuBar]
-  Returns: New builder object
+      Get builder for [gtk.popover_menu_bar.PopoverMenuBar]
+      Returns: New builder object
   */
   static PopoverMenuBarGidBuilder builder()
   {
@@ -181,6 +181,7 @@ class PopoverMenuBar : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.popover_menu_bar.PopoverMenuBar]
 class PopoverMenuBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -202,6 +203,10 @@ class PopoverMenuBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.popover_menu_bar.PopoverMenuBar]
 final class PopoverMenuBarGidBuilder : PopoverMenuBarGidBuilderImpl!PopoverMenuBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PopoverMenuBar build()
   {
     return new PopoverMenuBar(cast(void*)createGObject(PopoverMenuBar._getGType), No.Take);

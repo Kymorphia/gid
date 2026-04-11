@@ -54,8 +54,8 @@ class HScale : gtk.scale.Scale
   }
 
   /**
-  Get builder for [gtk.hscale.HScale]
-  Returns: New builder object
+      Get builder for [gtk.hscale.HScale]
+      Returns: New builder object
   */
   static HScaleGidBuilder builder()
   {
@@ -106,6 +106,7 @@ class HScale : gtk.scale.Scale
   }
 }
 
+/// Fluent builder implementation template for [gtk.hscale.HScale]
 class HScaleGidBuilderImpl(T) : gtk.scale.ScaleGidBuilderImpl!T
 {
 
@@ -114,6 +115,10 @@ class HScaleGidBuilderImpl(T) : gtk.scale.ScaleGidBuilderImpl!T
 /// Fluent builder for [gtk.hscale.HScale]
 final class HScaleGidBuilder : HScaleGidBuilderImpl!HScaleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HScale build()
   {
     return new HScale(cast(void*)createGObject(HScale._getGType), No.Take);

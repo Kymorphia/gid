@@ -44,6 +44,7 @@ interface HoverProvider
   bool populateFinish(gio.async_result.AsyncResult result);
 }
 
+/// Fluent builder implementation template for [gtksource.hover_provider.HoverProvider]
 interface HoverProviderGidBuilderImpl(T)
 {
 }

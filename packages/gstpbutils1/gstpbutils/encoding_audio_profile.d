@@ -41,8 +41,8 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 
   /**
-  Get builder for [gstpbutils.encoding_audio_profile.EncodingAudioProfile]
-  Returns: New builder object
+      Get builder for [gstpbutils.encoding_audio_profile.EncodingAudioProfile]
+      Returns: New builder object
   */
   static EncodingAudioProfileGidBuilder builder()
   {
@@ -73,6 +73,7 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 }
 
+/// Fluent builder implementation template for [gstpbutils.encoding_audio_profile.EncodingAudioProfile]
 class EncodingAudioProfileGidBuilderImpl(T) : gstpbutils.encoding_profile.EncodingProfileGidBuilderImpl!T
 {
 }
@@ -80,6 +81,10 @@ class EncodingAudioProfileGidBuilderImpl(T) : gstpbutils.encoding_profile.Encodi
 /// Fluent builder for [gstpbutils.encoding_audio_profile.EncodingAudioProfile]
 final class EncodingAudioProfileGidBuilder : EncodingAudioProfileGidBuilderImpl!EncodingAudioProfileGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EncodingAudioProfile build()
   {
     return new EncodingAudioProfile(cast(void*)createGObject(EncodingAudioProfile._getGType), Yes.Take);

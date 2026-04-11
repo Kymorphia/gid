@@ -42,8 +42,8 @@ class CSVReader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.csvreader.CSVReader]
-  Returns: New builder object
+      Get builder for [arrow.csvreader.CSVReader]
+      Returns: New builder object
   */
   static CSVReaderGidBuilder builder()
   {
@@ -80,6 +80,7 @@ class CSVReader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.csvreader.CSVReader]
 class CSVReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -99,6 +100,10 @@ class CSVReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.csvreader.CSVReader]
 final class CSVReaderGidBuilder : CSVReaderGidBuilderImpl!CSVReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CSVReader build()
   {
     return new CSVReader(cast(void*)createGObject(CSVReader._getGType), Yes.Take);

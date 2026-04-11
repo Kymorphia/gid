@@ -42,8 +42,8 @@ class FilterWindows : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_windows.FilterWindows]
-  Returns: New builder object
+      Get builder for [gmime.filter_windows.FilterWindows]
+      Returns: New builder object
   */
   static FilterWindowsGidBuilder builder()
   {
@@ -95,6 +95,7 @@ class FilterWindows : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_windows.FilterWindows]
 class FilterWindowsGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -102,6 +103,10 @@ class FilterWindowsGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_windows.FilterWindows]
 final class FilterWindowsGidBuilder : FilterWindowsGidBuilderImpl!FilterWindowsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterWindows build()
   {
     return new FilterWindows(cast(void*)createGObject(FilterWindows._getGType), Yes.Take);

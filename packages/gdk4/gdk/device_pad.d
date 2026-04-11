@@ -78,6 +78,7 @@ interface DevicePad
   int getNGroups();
 }
 
+/// Fluent builder implementation template for [gdk.device_pad.DevicePad]
 interface DevicePadGidBuilderImpl(T)
 {
 }

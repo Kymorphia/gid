@@ -49,8 +49,8 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   }
 
   /**
-  Get builder for [gtk.cell_renderer_progress.CellRendererProgress]
-  Returns: New builder object
+      Get builder for [gtk.cell_renderer_progress.CellRendererProgress]
+      Returns: New builder object
   */
   static CellRendererProgressGidBuilder builder()
   {
@@ -212,6 +212,7 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_renderer_progress.CellRendererProgress]
 class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -299,6 +300,10 @@ class CellRendererProgressGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidB
 /// Fluent builder for [gtk.cell_renderer_progress.CellRendererProgress]
 final class CellRendererProgressGidBuilder : CellRendererProgressGidBuilderImpl!CellRendererProgressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellRendererProgress build()
   {
     return new CellRendererProgress(cast(void*)createGObject(CellRendererProgress._getGType), No.Take);

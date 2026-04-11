@@ -61,8 +61,8 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-  Get builder for [panel.omni_bar.OmniBar]
-  Returns: New builder object
+      Get builder for [panel.omni_bar.OmniBar]
+      Returns: New builder object
   */
   static OmniBarGidBuilder builder()
   {
@@ -279,6 +279,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   }
 }
 
+/// Fluent builder implementation template for [panel.omni_bar.OmniBar]
 class OmniBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
 {
 
@@ -343,6 +344,10 @@ class OmniBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionab
 /// Fluent builder for [panel.omni_bar.OmniBar]
 final class OmniBarGidBuilder : OmniBarGidBuilderImpl!OmniBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   OmniBar build()
   {
     return new OmniBar(cast(void*)createGObject(OmniBar._getGType), No.Take);

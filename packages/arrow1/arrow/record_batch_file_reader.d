@@ -42,8 +42,8 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.record_batch_file_reader.RecordBatchFileReader]
-  Returns: New builder object
+      Get builder for [arrow.record_batch_file_reader.RecordBatchFileReader]
+      Returns: New builder object
   */
   static RecordBatchFileReaderGidBuilder builder()
   {
@@ -112,6 +112,7 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.record_batch_file_reader.RecordBatchFileReader]
 class RecordBatchFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -125,6 +126,10 @@ class RecordBatchFileReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuild
 /// Fluent builder for [arrow.record_batch_file_reader.RecordBatchFileReader]
 final class RecordBatchFileReaderGidBuilder : RecordBatchFileReaderGidBuilderImpl!RecordBatchFileReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecordBatchFileReader build()
   {
     return new RecordBatchFileReader(cast(void*)createGObject(RecordBatchFileReader._getGType), Yes.Take);

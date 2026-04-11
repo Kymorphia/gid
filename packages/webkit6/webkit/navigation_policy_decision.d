@@ -45,8 +45,8 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
   }
 
   /**
-  Get builder for [webkit.navigation_policy_decision.NavigationPolicyDecision]
-  Returns: New builder object
+      Get builder for [webkit.navigation_policy_decision.NavigationPolicyDecision]
+      Returns: New builder object
   */
   static NavigationPolicyDecisionGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
   }
 }
 
+/// Fluent builder implementation template for [webkit.navigation_policy_decision.NavigationPolicyDecision]
 class NavigationPolicyDecisionGidBuilderImpl(T) : webkit.policy_decision.PolicyDecisionGidBuilderImpl!T
 {
 }
@@ -82,6 +83,10 @@ class NavigationPolicyDecisionGidBuilderImpl(T) : webkit.policy_decision.PolicyD
 /// Fluent builder for [webkit.navigation_policy_decision.NavigationPolicyDecision]
 final class NavigationPolicyDecisionGidBuilder : NavigationPolicyDecisionGidBuilderImpl!NavigationPolicyDecisionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NavigationPolicyDecision build()
   {
     return new NavigationPolicyDecision(cast(void*)createGObject(NavigationPolicyDecision._getGType), No.Take);

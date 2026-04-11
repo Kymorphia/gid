@@ -13,6 +13,7 @@ template ServableT()
 {
 }
 
+/// Fluent builder implementation template for [arrowflight.servable.Servable]
 template ServableGidBuilderT()
 {
 }

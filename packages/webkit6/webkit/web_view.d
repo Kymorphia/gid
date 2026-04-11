@@ -102,8 +102,8 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
-  Get builder for [webkit.web_view.WebView]
-  Returns: New builder object
+      Get builder for [webkit.web_view.WebView]
+      Returns: New builder object
   */
   static WebViewGidBuilder builder()
   {
@@ -3523,6 +3523,7 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 }
 
+/// Fluent builder implementation template for [webkit.web_view.WebView]
 class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!T
 {
 
@@ -3749,6 +3750,10 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
 /// Fluent builder for [webkit.web_view.WebView]
 final class WebViewGidBuilder : WebViewGidBuilderImpl!WebViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebView build()
   {
     return new WebView(cast(void*)createGObject(WebView._getGType), No.Take);

@@ -41,8 +41,8 @@ class FilterEnriched : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_enriched.FilterEnriched]
-  Returns: New builder object
+      Get builder for [gmime.filter_enriched.FilterEnriched]
+      Returns: New builder object
   */
   static FilterEnrichedGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class FilterEnriched : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_enriched.FilterEnriched]
 class FilterEnrichedGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -71,6 +72,10 @@ class FilterEnrichedGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_enriched.FilterEnriched]
 final class FilterEnrichedGidBuilder : FilterEnrichedGidBuilderImpl!FilterEnrichedGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterEnriched build()
   {
     return new FilterEnriched(cast(void*)createGObject(FilterEnriched._getGType), Yes.Take);

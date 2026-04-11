@@ -82,6 +82,7 @@ interface RTSPExtension
   gulong connectSend(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gstrtsp.rtspextension.RTSPExtension]
 interface RTSPExtensionGidBuilderImpl(T)
 {
 }

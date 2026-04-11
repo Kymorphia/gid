@@ -60,8 +60,8 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
   }
 
   /**
-  Get builder for [gtk.file_chooser_widget.FileChooserWidget]
-  Returns: New builder object
+      Get builder for [gtk.file_chooser_widget.FileChooserWidget]
+      Returns: New builder object
   */
   static FileChooserWidgetGidBuilder builder()
   {
@@ -670,6 +670,7 @@ class FileChooserWidget : gtk.widget.Widget, gtk.file_chooser.FileChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.file_chooser_widget.FileChooserWidget]
 class FileChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.file_chooser.FileChooserGidBuilderImpl!T
 {
 
@@ -685,6 +686,10 @@ class FileChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gt
 /// Fluent builder for [gtk.file_chooser_widget.FileChooserWidget]
 final class FileChooserWidgetGidBuilder : FileChooserWidgetGidBuilderImpl!FileChooserWidgetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileChooserWidget build()
   {
     return new FileChooserWidget(cast(void*)createGObject(FileChooserWidget._getGType), No.Take);

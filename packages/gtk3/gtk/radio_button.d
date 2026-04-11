@@ -133,8 +133,8 @@ class RadioButton : gtk.check_button.CheckButton
   }
 
   /**
-  Get builder for [gtk.radio_button.RadioButton]
-  Returns: New builder object
+      Get builder for [gtk.radio_button.RadioButton]
+      Returns: New builder object
   */
   static RadioButtonGidBuilder builder()
   {
@@ -372,6 +372,7 @@ class RadioButton : gtk.check_button.CheckButton
   }
 }
 
+/// Fluent builder implementation template for [gtk.radio_button.RadioButton]
 class RadioButtonGidBuilderImpl(T) : gtk.check_button.CheckButtonGidBuilderImpl!T
 {
 
@@ -391,6 +392,10 @@ class RadioButtonGidBuilderImpl(T) : gtk.check_button.CheckButtonGidBuilderImpl!
 /// Fluent builder for [gtk.radio_button.RadioButton]
 final class RadioButtonGidBuilder : RadioButtonGidBuilderImpl!RadioButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RadioButton build()
   {
     return new RadioButton(cast(void*)createGObject(RadioButton._getGType), No.Take);

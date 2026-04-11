@@ -42,8 +42,8 @@ class MenuLinkIter : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.menu_link_iter.MenuLinkIter]
-  Returns: New builder object
+      Get builder for [gio.menu_link_iter.MenuLinkIter]
+      Returns: New builder object
   */
   static MenuLinkIterGidBuilder builder()
   {
@@ -129,6 +129,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.menu_link_iter.MenuLinkIter]
 class MenuLinkIterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -136,6 +137,10 @@ class MenuLinkIterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.menu_link_iter.MenuLinkIter]
 final class MenuLinkIterGidBuilder : MenuLinkIterGidBuilderImpl!MenuLinkIterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuLinkIter build()
   {
     return new MenuLinkIter(cast(void*)createGObject(MenuLinkIter._getGType), No.Take);

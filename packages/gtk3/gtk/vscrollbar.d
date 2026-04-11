@@ -54,8 +54,8 @@ class VScrollbar : gtk.scrollbar.Scrollbar
   }
 
   /**
-  Get builder for [gtk.vscrollbar.VScrollbar]
-  Returns: New builder object
+      Get builder for [gtk.vscrollbar.VScrollbar]
+      Returns: New builder object
   */
   static VScrollbarGidBuilder builder()
   {
@@ -79,6 +79,7 @@ class VScrollbar : gtk.scrollbar.Scrollbar
   }
 }
 
+/// Fluent builder implementation template for [gtk.vscrollbar.VScrollbar]
 class VScrollbarGidBuilderImpl(T) : gtk.scrollbar.ScrollbarGidBuilderImpl!T
 {
 
@@ -87,6 +88,10 @@ class VScrollbarGidBuilderImpl(T) : gtk.scrollbar.ScrollbarGidBuilderImpl!T
 /// Fluent builder for [gtk.vscrollbar.VScrollbar]
 final class VScrollbarGidBuilder : VScrollbarGidBuilderImpl!VScrollbarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VScrollbar build()
   {
     return new VScrollbar(cast(void*)createGObject(VScrollbar._getGType), No.Take);

@@ -44,8 +44,8 @@ class InternetAddressList : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.internet_address_list.InternetAddressList]
-  Returns: New builder object
+      Get builder for [gmime.internet_address_list.InternetAddressList]
+      Returns: New builder object
   */
   static InternetAddressListGidBuilder builder()
   {
@@ -286,6 +286,7 @@ class InternetAddressList : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.internet_address_list.InternetAddressList]
 class InternetAddressListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -293,6 +294,10 @@ class InternetAddressListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [gmime.internet_address_list.InternetAddressList]
 final class InternetAddressListGidBuilder : InternetAddressListGidBuilderImpl!InternetAddressListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InternetAddressList build()
   {
     return new InternetAddressList(cast(void*)createGObject(InternetAddressList._getGType), Yes.Take);

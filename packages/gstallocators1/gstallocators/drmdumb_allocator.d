@@ -42,8 +42,8 @@ class DRMDumbAllocator : gst.allocator.Allocator
   }
 
   /**
-  Get builder for [gstallocators.drmdumb_allocator.DRMDumbAllocator]
-  Returns: New builder object
+      Get builder for [gstallocators.drmdumb_allocator.DRMDumbAllocator]
+      Returns: New builder object
   */
   static DRMDumbAllocatorGidBuilder builder()
   {
@@ -135,6 +135,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
   }
 }
 
+/// Fluent builder implementation template for [gstallocators.drmdumb_allocator.DRMDumbAllocator]
 class DRMDumbAllocatorGidBuilderImpl(T) : gst.allocator.AllocatorGidBuilderImpl!T
 {
 
@@ -154,6 +155,10 @@ class DRMDumbAllocatorGidBuilderImpl(T) : gst.allocator.AllocatorGidBuilderImpl!
 /// Fluent builder for [gstallocators.drmdumb_allocator.DRMDumbAllocator]
 final class DRMDumbAllocatorGidBuilder : DRMDumbAllocatorGidBuilderImpl!DRMDumbAllocatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DRMDumbAllocator build()
   {
     return new DRMDumbAllocator(cast(void*)createGObject(DRMDumbAllocator._getGType), No.Take);

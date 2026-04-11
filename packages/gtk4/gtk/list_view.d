@@ -151,8 +151,8 @@ class ListView : gtk.list_base.ListBase
   }
 
   /**
-  Get builder for [gtk.list_view.ListView]
-  Returns: New builder object
+      Get builder for [gtk.list_view.ListView]
+      Returns: New builder object
   */
   static ListViewGidBuilder builder()
   {
@@ -549,6 +549,7 @@ class ListView : gtk.list_base.ListBase
   }
 }
 
+/// Fluent builder implementation template for [gtk.list_view.ListView]
 class ListViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
 {
 
@@ -634,6 +635,10 @@ class ListViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
 /// Fluent builder for [gtk.list_view.ListView]
 final class ListViewGidBuilder : ListViewGidBuilderImpl!ListViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListView build()
   {
     return new ListView(cast(void*)createGObject(ListView._getGType), No.Take);

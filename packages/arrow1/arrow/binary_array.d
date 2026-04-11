@@ -41,8 +41,8 @@ class BinaryArray : arrow.array.Array
   }
 
   /**
-  Get builder for [arrow.binary_array.BinaryArray]
-  Returns: New builder object
+      Get builder for [arrow.binary_array.BinaryArray]
+      Returns: New builder object
   */
   static BinaryArrayGidBuilder builder()
   {
@@ -94,6 +94,7 @@ class BinaryArray : arrow.array.Array
   }
 }
 
+/// Fluent builder implementation template for [arrow.binary_array.BinaryArray]
 class BinaryArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 }
@@ -101,6 +102,10 @@ class BinaryArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 /// Fluent builder for [arrow.binary_array.BinaryArray]
 final class BinaryArrayGidBuilder : BinaryArrayGidBuilderImpl!BinaryArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BinaryArray build()
   {
     return new BinaryArray(cast(void*)createGObject(BinaryArray._getGType), Yes.Take);

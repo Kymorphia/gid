@@ -99,6 +99,7 @@ template IndenterT()
   }
 }
 
+/// Fluent builder implementation template for [gtksource.indenter.Indenter]
 template IndenterGidBuilderT()
 {
 }

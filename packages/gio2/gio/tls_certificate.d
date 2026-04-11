@@ -49,8 +49,8 @@ class TlsCertificate : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.tls_certificate.TlsCertificate]
-  Returns: New builder object
+      Get builder for [gio.tls_certificate.TlsCertificate]
+      Returns: New builder object
   */
   static TlsCertificateGidBuilder builder()
   {
@@ -580,6 +580,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.tls_certificate.TlsCertificate]
 class TlsCertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -692,6 +693,10 @@ class TlsCertificateGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.tls_certificate.TlsCertificate]
 final class TlsCertificateGidBuilder : TlsCertificateGidBuilderImpl!TlsCertificateGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TlsCertificate build()
   {
     return new TlsCertificate(cast(void*)createGObject(TlsCertificate._getGType), No.Take);

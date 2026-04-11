@@ -43,8 +43,8 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-  Get builder for [webkit.back_forward_list_item.BackForwardListItem]
-  Returns: New builder object
+      Get builder for [webkit.back_forward_list_item.BackForwardListItem]
+      Returns: New builder object
   */
   static BackForwardListItemGidBuilder builder()
   {
@@ -97,6 +97,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   }
 }
 
+/// Fluent builder implementation template for [webkit.back_forward_list_item.BackForwardListItem]
 class BackForwardListItemGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
 {
 }
@@ -104,6 +105,10 @@ class BackForwardListItemGidBuilderImpl(T) : gobject.initially_unowned.Initially
 /// Fluent builder for [webkit.back_forward_list_item.BackForwardListItem]
 final class BackForwardListItemGidBuilder : BackForwardListItemGidBuilderImpl!BackForwardListItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BackForwardListItem build()
   {
     return new BackForwardListItem(cast(void*)createGObject(BackForwardListItem._getGType), No.Take);

@@ -41,8 +41,8 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   }
 
   /**
-  Get builder for [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf]
-  Returns: New builder object
+      Get builder for [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf]
+      Returns: New builder object
   */
   static GutterRendererPixbufGidBuilder builder()
   {
@@ -149,6 +149,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   }
 }
 
+/// Fluent builder implementation template for [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf]
 class GutterRendererPixbufGidBuilderImpl(T) : gtksource.gutter_renderer.GutterRendererGidBuilderImpl!T
 {
 
@@ -174,6 +175,10 @@ class GutterRendererPixbufGidBuilderImpl(T) : gtksource.gutter_renderer.GutterRe
 /// Fluent builder for [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf]
 final class GutterRendererPixbufGidBuilder : GutterRendererPixbufGidBuilderImpl!GutterRendererPixbufGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GutterRendererPixbuf build()
   {
     return new GutterRendererPixbuf(cast(void*)createGObject(GutterRendererPixbuf._getGType), Yes.Take);

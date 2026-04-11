@@ -75,8 +75,8 @@ class MenuShell : gtk.container.Container
   }
 
   /**
-  Get builder for [gtk.menu_shell.MenuShell]
-  Returns: New builder object
+      Get builder for [gtk.menu_shell.MenuShell]
+      Returns: New builder object
   */
   static MenuShellGidBuilder builder()
   {
@@ -683,6 +683,7 @@ class MenuShell : gtk.container.Container
   }
 }
 
+/// Fluent builder implementation template for [gtk.menu_shell.MenuShell]
 class MenuShellGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 {
 
@@ -704,6 +705,10 @@ class MenuShellGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 /// Fluent builder for [gtk.menu_shell.MenuShell]
 final class MenuShellGidBuilder : MenuShellGidBuilderImpl!MenuShellGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuShell build()
   {
     return new MenuShell(cast(void*)createGObject(MenuShell._getGType), No.Take);

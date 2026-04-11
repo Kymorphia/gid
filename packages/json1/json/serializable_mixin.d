@@ -219,6 +219,7 @@ template SerializableT()
   }
 }
 
+/// Fluent builder implementation template for [json.serializable.Serializable]
 template SerializableGidBuilderT()
 {
 }

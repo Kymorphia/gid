@@ -65,8 +65,8 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   }
 
   /**
-  Get builder for [gtk.builder_list_item_factory.BuilderListItemFactory]
-  Returns: New builder object
+      Get builder for [gtk.builder_list_item_factory.BuilderListItemFactory]
+      Returns: New builder object
   */
   static BuilderListItemFactoryGidBuilder builder()
   {
@@ -173,6 +173,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   }
 }
 
+/// Fluent builder implementation template for [gtk.builder_list_item_factory.BuilderListItemFactory]
 class BuilderListItemFactoryGidBuilderImpl(T) : gtk.list_item_factory.ListItemFactoryGidBuilderImpl!T
 {
 
@@ -213,6 +214,10 @@ class BuilderListItemFactoryGidBuilderImpl(T) : gtk.list_item_factory.ListItemFa
 /// Fluent builder for [gtk.builder_list_item_factory.BuilderListItemFactory]
 final class BuilderListItemFactoryGidBuilder : BuilderListItemFactoryGidBuilderImpl!BuilderListItemFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BuilderListItemFactory build()
   {
     return new BuilderListItemFactory(cast(void*)createGObject(BuilderListItemFactory._getGType), No.Take);

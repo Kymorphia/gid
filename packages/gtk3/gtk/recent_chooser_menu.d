@@ -67,8 +67,8 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   }
 
   /**
-  Get builder for [gtk.recent_chooser_menu.RecentChooserMenu]
-  Returns: New builder object
+      Get builder for [gtk.recent_chooser_menu.RecentChooserMenu]
+      Returns: New builder object
   */
   static RecentChooserMenuGidBuilder builder()
   {
@@ -168,6 +168,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   }
 }
 
+/// Fluent builder implementation template for [gtk.recent_chooser_menu.RecentChooserMenu]
 class RecentChooserMenuGidBuilderImpl(T) : gtk.menu.MenuGidBuilderImpl!T, gtk.activatable.ActivatableGidBuilderImpl!T, gtk.recent_chooser.RecentChooserGidBuilderImpl!T
 {
 
@@ -190,6 +191,10 @@ class RecentChooserMenuGidBuilderImpl(T) : gtk.menu.MenuGidBuilderImpl!T, gtk.ac
 /// Fluent builder for [gtk.recent_chooser_menu.RecentChooserMenu]
 final class RecentChooserMenuGidBuilder : RecentChooserMenuGidBuilderImpl!RecentChooserMenuGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecentChooserMenu build()
   {
     return new RecentChooserMenu(cast(void*)createGObject(RecentChooserMenu._getGType), No.Take);

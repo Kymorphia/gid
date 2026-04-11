@@ -45,8 +45,8 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   }
 
   /**
-  Get builder for [gtk.cell_renderer_toggle.CellRendererToggle]
-  Returns: New builder object
+      Get builder for [gtk.cell_renderer_toggle.CellRendererToggle]
+      Returns: New builder object
   */
   static CellRendererToggleGidBuilder builder()
   {
@@ -253,6 +253,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_renderer_toggle.CellRendererToggle]
 class CellRendererToggleGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBuilderImpl!T
 {
 
@@ -290,6 +291,10 @@ class CellRendererToggleGidBuilderImpl(T) : gtk.cell_renderer.CellRendererGidBui
 /// Fluent builder for [gtk.cell_renderer_toggle.CellRendererToggle]
 final class CellRendererToggleGidBuilder : CellRendererToggleGidBuilderImpl!CellRendererToggleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellRendererToggle build()
   {
     return new CellRendererToggle(cast(void*)createGObject(CellRendererToggle._getGType), No.Take);

@@ -149,8 +149,8 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /**
-  Get builder for [gstaudio.audio_encoder.AudioEncoder]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_encoder.AudioEncoder]
+      Returns: New builder object
   */
   static AudioEncoderGidBuilder builder()
   {
@@ -624,6 +624,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_encoder.AudioEncoder]
 class AudioEncoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.preset.PresetGidBuilderImpl!T
 {
 
@@ -651,6 +652,10 @@ class AudioEncoderGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.p
 /// Fluent builder for [gstaudio.audio_encoder.AudioEncoder]
 final class AudioEncoderGidBuilder : AudioEncoderGidBuilderImpl!AudioEncoderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioEncoder build()
   {
     return new AudioEncoder(cast(void*)createGObject(AudioEncoder._getGType), No.Take);

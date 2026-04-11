@@ -130,8 +130,8 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   }
 
   /**
-  Get builder for [gtk.application_window.ApplicationWindow]
-  Returns: New builder object
+      Get builder for [gtk.application_window.ApplicationWindow]
+      Returns: New builder object
   */
   static ApplicationWindowGidBuilder builder()
   {
@@ -257,6 +257,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   }
 }
 
+/// Fluent builder implementation template for [gtk.application_window.ApplicationWindow]
 class ApplicationWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T, gio.action_map.ActionMapGidBuilderImpl!T
 {
 
@@ -284,6 +285,10 @@ class ApplicationWindowGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T, gi
 /// Fluent builder for [gtk.application_window.ApplicationWindow]
 final class ApplicationWindowGidBuilder : ApplicationWindowGidBuilderImpl!ApplicationWindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ApplicationWindow build()
   {
     return new ApplicationWindow(cast(void*)createGObject(ApplicationWindow._getGType), No.Take);

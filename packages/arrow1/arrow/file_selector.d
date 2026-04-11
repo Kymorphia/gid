@@ -38,8 +38,8 @@ class FileSelector : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.file_selector.FileSelector]
-  Returns: New builder object
+      Get builder for [arrow.file_selector.FileSelector]
+      Returns: New builder object
   */
   static FileSelectorGidBuilder builder()
   {
@@ -129,6 +129,7 @@ class FileSelector : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.file_selector.FileSelector]
 class FileSelectorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -183,6 +184,10 @@ class FileSelectorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.file_selector.FileSelector]
 final class FileSelectorGidBuilder : FileSelectorGidBuilderImpl!FileSelectorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileSelector build()
   {
     return new FileSelector(cast(void*)createGObject(FileSelector._getGType), No.Take);

@@ -39,8 +39,8 @@ class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.half_float_array_builder.HalfFloatArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.half_float_array_builder.HalfFloatArrayBuilder]
+      Returns: New builder object
   */
   static HalfFloatArrayBuilderGidBuilder builder()
   {
@@ -100,6 +100,7 @@ class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.half_float_array_builder.HalfFloatArrayBuilder]
 class HalfFloatArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -107,6 +108,10 @@ class HalfFloatArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderG
 /// Fluent builder for [arrow.half_float_array_builder.HalfFloatArrayBuilder]
 final class HalfFloatArrayBuilderGidBuilder : HalfFloatArrayBuilderGidBuilderImpl!HalfFloatArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HalfFloatArrayBuilder build()
   {
     return new HalfFloatArrayBuilder(cast(void*)createGObject(HalfFloatArrayBuilder._getGType), Yes.Take);

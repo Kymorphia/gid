@@ -39,8 +39,8 @@ class BlobOp : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.blob_op.BlobOp]
-  Returns: New builder object
+      Get builder for [gda.blob_op.BlobOp]
+      Returns: New builder object
   */
   static BlobOpGidBuilder builder()
   {
@@ -122,6 +122,7 @@ class BlobOp : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.blob_op.BlobOp]
 class BlobOpGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -129,6 +130,10 @@ class BlobOpGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.blob_op.BlobOp]
 final class BlobOpGidBuilder : BlobOpGidBuilderImpl!BlobOpGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BlobOp build()
   {
     return new BlobOp(cast(void*)createGObject(BlobOp._getGType), No.Take);

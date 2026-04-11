@@ -65,6 +65,7 @@ template PowerProfileMonitorT()
   }
 }
 
+/// Fluent builder implementation template for [gio.power_profile_monitor.PowerProfileMonitor]
 template PowerProfileMonitorGidBuilderT()
 {
 }

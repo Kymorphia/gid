@@ -50,8 +50,8 @@ class AutomationSession : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.automation_session.AutomationSession]
-  Returns: New builder object
+      Get builder for [webkit.automation_session.AutomationSession]
+      Returns: New builder object
   */
   static AutomationSessionGidBuilder builder()
   {
@@ -202,6 +202,7 @@ class AutomationSession : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.automation_session.AutomationSession]
 class AutomationSessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -220,6 +221,10 @@ class AutomationSessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [webkit.automation_session.AutomationSession]
 final class AutomationSessionGidBuilder : AutomationSessionGidBuilderImpl!AutomationSessionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AutomationSession build()
   {
     return new AutomationSession(cast(void*)createGObject(AutomationSession._getGType), No.Take);

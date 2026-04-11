@@ -38,8 +38,8 @@ class EqualOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.equal_options.EqualOptions]
-  Returns: New builder object
+      Get builder for [arrow.equal_options.EqualOptions]
+      Returns: New builder object
   */
   static EqualOptionsGidBuilder builder()
   {
@@ -122,6 +122,7 @@ class EqualOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.equal_options.EqualOptions]
 class EqualOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -163,6 +164,10 @@ class EqualOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.equal_options.EqualOptions]
 final class EqualOptionsGidBuilder : EqualOptionsGidBuilderImpl!EqualOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EqualOptions build()
   {
     return new EqualOptions(cast(void*)createGObject(EqualOptions._getGType), Yes.Take);

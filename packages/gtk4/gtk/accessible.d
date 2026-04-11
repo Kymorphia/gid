@@ -246,6 +246,7 @@ interface Accessible
   void updateState(gtk.types.AccessibleState[] states, gobject.value.Value[] values);
 }
 
+/// Fluent builder implementation template for [gtk.accessible.Accessible]
 interface AccessibleGidBuilderImpl(T)
 {
 

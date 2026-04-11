@@ -40,8 +40,8 @@ class ColumnChunkMetadata : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [parquet.column_chunk_metadata.ColumnChunkMetadata]
-  Returns: New builder object
+      Get builder for [parquet.column_chunk_metadata.ColumnChunkMetadata]
+      Returns: New builder object
   */
   static ColumnChunkMetadataGidBuilder builder()
   {
@@ -98,6 +98,7 @@ class ColumnChunkMetadata : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [parquet.column_chunk_metadata.ColumnChunkMetadata]
 class ColumnChunkMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -117,6 +118,10 @@ class ColumnChunkMetadataGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [parquet.column_chunk_metadata.ColumnChunkMetadata]
 final class ColumnChunkMetadataGidBuilder : ColumnChunkMetadataGidBuilderImpl!ColumnChunkMetadataGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColumnChunkMetadata build()
   {
     return new ColumnChunkMetadata(cast(void*)createGObject(ColumnChunkMetadata._getGType), No.Take);

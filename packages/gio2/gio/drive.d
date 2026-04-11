@@ -390,6 +390,7 @@ interface Drive
   gulong connectStopButton(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gio.drive.Drive]
 interface DriveGidBuilderImpl(T)
 {
 }

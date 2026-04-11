@@ -92,8 +92,8 @@ class IOStream : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.iostream.IOStream]
-  Returns: New builder object
+      Get builder for [gio.iostream.IOStream]
+      Returns: New builder object
   */
   static IOStreamGidBuilder builder()
   {
@@ -352,6 +352,7 @@ class IOStream : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.iostream.IOStream]
 class IOStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -359,6 +360,10 @@ class IOStreamGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.iostream.IOStream]
 final class IOStreamGidBuilder : IOStreamGidBuilderImpl!IOStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IOStream build()
   {
     return new IOStream(cast(void*)createGObject(IOStream._getGType), No.Take);

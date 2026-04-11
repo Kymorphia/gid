@@ -44,8 +44,8 @@ class ToggleAction : gtk.action.Action
   }
 
   /**
-  Get builder for [gtk.toggle_action.ToggleAction]
-  Returns: New builder object
+      Get builder for [gtk.toggle_action.ToggleAction]
+      Returns: New builder object
   */
   static ToggleActionGidBuilder builder()
   {
@@ -213,6 +213,7 @@ class ToggleAction : gtk.action.Action
   }
 }
 
+/// Fluent builder implementation template for [gtk.toggle_action.ToggleAction]
 class ToggleActionGidBuilderImpl(T) : gtk.action.ActionGidBuilderImpl!T
 {
 
@@ -246,6 +247,10 @@ class ToggleActionGidBuilderImpl(T) : gtk.action.ActionGidBuilderImpl!T
 /// Fluent builder for [gtk.toggle_action.ToggleAction]
 final class ToggleActionGidBuilder : ToggleActionGidBuilderImpl!ToggleActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToggleAction build()
   {
     return new ToggleAction(cast(void*)createGObject(ToggleAction._getGType), Yes.Take);

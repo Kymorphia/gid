@@ -43,8 +43,8 @@ class VideoFilter : gstbase.base_transform.BaseTransform
   }
 
   /**
-  Get builder for [gstvideo.video_filter.VideoFilter]
-  Returns: New builder object
+      Get builder for [gstvideo.video_filter.VideoFilter]
+      Returns: New builder object
   */
   static VideoFilterGidBuilder builder()
   {
@@ -52,6 +52,7 @@ class VideoFilter : gstbase.base_transform.BaseTransform
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_filter.VideoFilter]
 class VideoFilterGidBuilderImpl(T) : gstbase.base_transform.BaseTransformGidBuilderImpl!T
 {
 }
@@ -59,6 +60,10 @@ class VideoFilterGidBuilderImpl(T) : gstbase.base_transform.BaseTransformGidBuil
 /// Fluent builder for [gstvideo.video_filter.VideoFilter]
 final class VideoFilterGidBuilder : VideoFilterGidBuilderImpl!VideoFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VideoFilter build()
   {
     return new VideoFilter(cast(void*)createGObject(VideoFilter._getGType), No.Take);

@@ -256,6 +256,7 @@ template ListModelT()
   }
 }
 
+/// Fluent builder implementation template for [gio.list_model.ListModel]
 template ListModelGidBuilderT()
 {
 }

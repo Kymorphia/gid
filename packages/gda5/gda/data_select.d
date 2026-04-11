@@ -46,8 +46,8 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 
   /**
-  Get builder for [gda.data_select.DataSelect]
-  Returns: New builder object
+      Get builder for [gda.data_select.DataSelect]
+      Returns: New builder object
   */
   static DataSelectGidBuilder builder()
   {
@@ -428,6 +428,7 @@ class DataSelect : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 }
 
+/// Fluent builder implementation template for [gda.data_select.DataSelect]
 class DataSelectGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
 {
 
@@ -502,6 +503,10 @@ class DataSelectGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [gda.data_select.DataSelect]
 final class DataSelectGidBuilder : DataSelectGidBuilderImpl!DataSelectGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataSelect build()
   {
     return new DataSelect(cast(void*)createGObject(DataSelect._getGType), No.Take);

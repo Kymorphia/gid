@@ -41,8 +41,8 @@ class Notification : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.notification.Notification]
-  Returns: New builder object
+      Get builder for [webkit.notification.Notification]
+      Returns: New builder object
   */
   static NotificationGidBuilder builder()
   {
@@ -229,6 +229,7 @@ class Notification : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.notification.Notification]
 class NotificationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -236,6 +237,10 @@ class NotificationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.notification.Notification]
 final class NotificationGidBuilder : NotificationGidBuilderImpl!NotificationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Notification build()
   {
     return new Notification(cast(void*)createGObject(Notification._getGType), No.Take);

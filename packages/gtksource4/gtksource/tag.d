@@ -39,8 +39,8 @@ class Tag : gtk.text_tag.TextTag
   }
 
   /**
-  Get builder for [gtksource.tag.Tag]
-  Returns: New builder object
+      Get builder for [gtksource.tag.Tag]
+      Returns: New builder object
   */
   static TagGidBuilder builder()
   {
@@ -117,6 +117,7 @@ class Tag : gtk.text_tag.TextTag
   }
 }
 
+/// Fluent builder implementation template for [gtksource.tag.Tag]
 class TagGidBuilderImpl(T) : gtk.text_tag.TextTagGidBuilderImpl!T
 {
 
@@ -152,6 +153,10 @@ class TagGidBuilderImpl(T) : gtk.text_tag.TextTagGidBuilderImpl!T
 /// Fluent builder for [gtksource.tag.Tag]
 final class TagGidBuilder : TagGidBuilderImpl!TagGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Tag build()
   {
     return new Tag(cast(void*)createGObject(Tag._getGType), Yes.Take);

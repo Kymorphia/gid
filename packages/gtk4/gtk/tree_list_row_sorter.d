@@ -53,8 +53,8 @@ class TreeListRowSorter : gtk.sorter.Sorter
   }
 
   /**
-  Get builder for [gtk.tree_list_row_sorter.TreeListRowSorter]
-  Returns: New builder object
+      Get builder for [gtk.tree_list_row_sorter.TreeListRowSorter]
+      Returns: New builder object
   */
   static TreeListRowSorterGidBuilder builder()
   {
@@ -125,6 +125,7 @@ class TreeListRowSorter : gtk.sorter.Sorter
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_list_row_sorter.TreeListRowSorter]
 class TreeListRowSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 {
 
@@ -143,6 +144,10 @@ class TreeListRowSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 /// Fluent builder for [gtk.tree_list_row_sorter.TreeListRowSorter]
 final class TreeListRowSorterGidBuilder : TreeListRowSorterGidBuilderImpl!TreeListRowSorterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeListRowSorter build()
   {
     return new TreeListRowSorter(cast(void*)createGObject(TreeListRowSorter._getGType), Yes.Take);

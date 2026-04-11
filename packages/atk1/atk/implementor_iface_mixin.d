@@ -17,6 +17,7 @@ template ImplementorIfaceT()
 {
 }
 
+/// Fluent builder implementation template for [atk.implementor_iface.ImplementorIface]
 template ImplementorIfaceGidBuilderT()
 {
 }

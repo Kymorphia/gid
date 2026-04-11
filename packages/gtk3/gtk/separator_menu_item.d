@@ -54,8 +54,8 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
   }
 
   /**
-  Get builder for [gtk.separator_menu_item.SeparatorMenuItem]
-  Returns: New builder object
+      Get builder for [gtk.separator_menu_item.SeparatorMenuItem]
+      Returns: New builder object
   */
   static SeparatorMenuItemGidBuilder builder()
   {
@@ -74,6 +74,7 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
   }
 }
 
+/// Fluent builder implementation template for [gtk.separator_menu_item.SeparatorMenuItem]
 class SeparatorMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
 {
 
@@ -82,6 +83,10 @@ class SeparatorMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!
 /// Fluent builder for [gtk.separator_menu_item.SeparatorMenuItem]
 final class SeparatorMenuItemGidBuilder : SeparatorMenuItemGidBuilderImpl!SeparatorMenuItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SeparatorMenuItem build()
   {
     return new SeparatorMenuItem(cast(void*)createGObject(SeparatorMenuItem._getGType), No.Take);

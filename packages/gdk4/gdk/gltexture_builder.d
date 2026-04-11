@@ -54,8 +54,8 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.gltexture_builder.GLTextureBuilder]
-  Returns: New builder object
+      Get builder for [gdk.gltexture_builder.GLTextureBuilder]
+      Returns: New builder object
   */
   static GLTextureBuilderGidBuilder builder()
   {
@@ -539,6 +539,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.gltexture_builder.GLTextureBuilder]
 class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -647,6 +648,10 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gdk.gltexture_builder.GLTextureBuilder]
 final class GLTextureBuilderGidBuilder : GLTextureBuilderGidBuilderImpl!GLTextureBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLTextureBuilder build()
   {
     return new GLTextureBuilder(cast(void*)createGObject(GLTextureBuilder._getGType), Yes.Take);

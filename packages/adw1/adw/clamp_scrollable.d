@@ -59,8 +59,8 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   }
 
   /**
-  Get builder for [adw.clamp_scrollable.ClampScrollable]
-  Returns: New builder object
+      Get builder for [adw.clamp_scrollable.ClampScrollable]
+      Returns: New builder object
   */
   static ClampScrollableGidBuilder builder()
   {
@@ -299,6 +299,7 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   }
 }
 
+/// Fluent builder implementation template for [adw.clamp_scrollable.ClampScrollable]
 class ClampScrollableGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T, gtk.scrollable.ScrollableGidBuilderImpl!T
 {
 
@@ -370,6 +371,10 @@ class ClampScrollableGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.
 /// Fluent builder for [adw.clamp_scrollable.ClampScrollable]
 final class ClampScrollableGidBuilder : ClampScrollableGidBuilderImpl!ClampScrollableGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ClampScrollable build()
   {
     return new ClampScrollable(cast(void*)createGObject(ClampScrollable._getGType), No.Take);

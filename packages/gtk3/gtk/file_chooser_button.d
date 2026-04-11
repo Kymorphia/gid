@@ -84,8 +84,8 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 
   /**
-  Get builder for [gtk.file_chooser_button.FileChooserButton]
-  Returns: New builder object
+      Get builder for [gtk.file_chooser_button.FileChooserButton]
+      Returns: New builder object
   */
   static FileChooserButtonGidBuilder builder()
   {
@@ -291,6 +291,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.file_chooser_button.FileChooserButton]
 class FileChooserButtonGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.file_chooser.FileChooserGidBuilderImpl!T
 {
 
@@ -333,6 +334,10 @@ class FileChooserButtonGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.file
 /// Fluent builder for [gtk.file_chooser_button.FileChooserButton]
 final class FileChooserButtonGidBuilder : FileChooserButtonGidBuilderImpl!FileChooserButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileChooserButton build()
   {
     return new FileChooserButton(cast(void*)createGObject(FileChooserButton._getGType), No.Take);

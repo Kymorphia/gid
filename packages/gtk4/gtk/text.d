@@ -118,8 +118,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /**
-  Get builder for [gtk.text.Text]
-  Returns: New builder object
+      Get builder for [gtk.text.Text]
+      Returns: New builder object
   */
   static TextGidBuilder builder()
   {
@@ -1542,6 +1542,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 }
 
+/// Fluent builder implementation template for [gtk.text.Text]
 class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_text.AccessibleTextGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
 {
 
@@ -1762,6 +1763,10 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
 /// Fluent builder for [gtk.text.Text]
 final class TextGidBuilder : TextGidBuilderImpl!TextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Text build()
   {
     return new Text(cast(void*)createGObject(Text._getGType), No.Take);

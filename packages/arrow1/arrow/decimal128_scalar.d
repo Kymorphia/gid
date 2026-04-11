@@ -41,8 +41,8 @@ class Decimal128Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.decimal128_scalar.Decimal128Scalar]
-  Returns: New builder object
+      Get builder for [arrow.decimal128_scalar.Decimal128Scalar]
+      Returns: New builder object
   */
   static Decimal128ScalarGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class Decimal128Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal128_scalar.Decimal128Scalar]
 class Decimal128ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 
@@ -85,6 +86,10 @@ class Decimal128ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.decimal128_scalar.Decimal128Scalar]
 final class Decimal128ScalarGidBuilder : Decimal128ScalarGidBuilderImpl!Decimal128ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal128Scalar build()
   {
     return new Decimal128Scalar(cast(void*)createGObject(Decimal128Scalar._getGType), Yes.Take);

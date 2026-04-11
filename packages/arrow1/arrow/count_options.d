@@ -39,8 +39,8 @@ class CountOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.count_options.CountOptions]
-  Returns: New builder object
+      Get builder for [arrow.count_options.CountOptions]
+      Returns: New builder object
   */
   static CountOptionsGidBuilder builder()
   {
@@ -68,6 +68,7 @@ class CountOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.count_options.CountOptions]
 class CountOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -81,6 +82,10 @@ class CountOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidB
 /// Fluent builder for [arrow.count_options.CountOptions]
 final class CountOptionsGidBuilder : CountOptionsGidBuilderImpl!CountOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CountOptions build()
   {
     return new CountOptions(cast(void*)createGObject(CountOptions._getGType), Yes.Take);

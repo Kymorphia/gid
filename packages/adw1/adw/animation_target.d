@@ -40,8 +40,8 @@ class AnimationTarget : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [adw.animation_target.AnimationTarget]
-  Returns: New builder object
+      Get builder for [adw.animation_target.AnimationTarget]
+      Returns: New builder object
   */
   static AnimationTargetGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class AnimationTarget : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [adw.animation_target.AnimationTarget]
 class AnimationTargetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -56,6 +57,10 @@ class AnimationTargetGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [adw.animation_target.AnimationTarget]
 final class AnimationTargetGidBuilder : AnimationTargetGidBuilderImpl!AnimationTargetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AnimationTarget build()
   {
     return new AnimationTarget(cast(void*)createGObject(AnimationTarget._getGType), No.Take);

@@ -43,8 +43,8 @@ class GLSLStage : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstgl.glslstage.GLSLStage]
-  Returns: New builder object
+      Get builder for [gstgl.glslstage.GLSLStage]
+      Returns: New builder object
   */
   static GLSLStageGidBuilder builder()
   {
@@ -176,6 +176,7 @@ class GLSLStage : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glslstage.GLSLStage]
 class GLSLStageGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -183,6 +184,10 @@ class GLSLStageGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstgl.glslstage.GLSLStage]
 final class GLSLStageGidBuilder : GLSLStageGidBuilderImpl!GLSLStageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLSLStage build()
   {
     return new GLSLStage(cast(void*)createGObject(GLSLStage._getGType), No.Take);

@@ -41,8 +41,8 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
   }
 
   /**
-  Get builder for [arrowflight.record_batch_stream.RecordBatchStream]
-  Returns: New builder object
+      Get builder for [arrowflight.record_batch_stream.RecordBatchStream]
+      Returns: New builder object
   */
   static RecordBatchStreamGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.record_batch_stream.RecordBatchStream]
 class RecordBatchStreamGidBuilderImpl(T) : arrowflight.data_stream.DataStreamGidBuilderImpl!T
 {
 
@@ -85,6 +86,10 @@ class RecordBatchStreamGidBuilderImpl(T) : arrowflight.data_stream.DataStreamGid
 /// Fluent builder for [arrowflight.record_batch_stream.RecordBatchStream]
 final class RecordBatchStreamGidBuilder : RecordBatchStreamGidBuilderImpl!RecordBatchStreamGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecordBatchStream build()
   {
     return new RecordBatchStream(cast(void*)createGObject(RecordBatchStream._getGType), Yes.Take);

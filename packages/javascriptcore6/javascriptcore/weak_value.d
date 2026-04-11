@@ -44,8 +44,8 @@ class WeakValue : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [javascriptcore.weak_value.WeakValue]
-  Returns: New builder object
+      Get builder for [javascriptcore.weak_value.WeakValue]
+      Returns: New builder object
   */
   static WeakValueGidBuilder builder()
   {
@@ -116,6 +116,7 @@ class WeakValue : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [javascriptcore.weak_value.WeakValue]
 class WeakValueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -134,6 +135,10 @@ class WeakValueGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [javascriptcore.weak_value.WeakValue]
 final class WeakValueGidBuilder : WeakValueGidBuilderImpl!WeakValueGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WeakValue build()
   {
     return new WeakValue(cast(void*)createGObject(WeakValue._getGType), Yes.Take);

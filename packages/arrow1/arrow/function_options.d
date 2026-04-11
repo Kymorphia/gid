@@ -38,8 +38,8 @@ class FunctionOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.function_options.FunctionOptions]
-  Returns: New builder object
+      Get builder for [arrow.function_options.FunctionOptions]
+      Returns: New builder object
   */
   static FunctionOptionsGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class FunctionOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.function_options.FunctionOptions]
 class FunctionOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -71,6 +72,10 @@ class FunctionOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [arrow.function_options.FunctionOptions]
 final class FunctionOptionsGidBuilder : FunctionOptionsGidBuilderImpl!FunctionOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FunctionOptions build()
   {
     return new FunctionOptions(cast(void*)createGObject(FunctionOptions._getGType), No.Take);

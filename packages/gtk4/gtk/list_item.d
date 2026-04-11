@@ -55,8 +55,8 @@ class ListItem : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.list_item.ListItem]
-  Returns: New builder object
+      Get builder for [gtk.list_item.ListItem]
+      Returns: New builder object
   */
   static ListItemGidBuilder builder()
   {
@@ -422,6 +422,7 @@ class ListItem : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.list_item.ListItem]
 class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -495,6 +496,10 @@ class ListItemGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.list_item.ListItem]
 final class ListItemGidBuilder : ListItemGidBuilderImpl!ListItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListItem build()
   {
     return new ListItem(cast(void*)createGObject(ListItem._getGType), No.Take);

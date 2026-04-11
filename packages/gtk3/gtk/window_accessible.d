@@ -42,8 +42,8 @@ class WindowAccessible : gtk.container_accessible.ContainerAccessible, atk.windo
   }
 
   /**
-  Get builder for [gtk.window_accessible.WindowAccessible]
-  Returns: New builder object
+      Get builder for [gtk.window_accessible.WindowAccessible]
+      Returns: New builder object
   */
   static WindowAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class WindowAccessible : gtk.container_accessible.ContainerAccessible, atk.windo
   mixin WindowT!();
 }
 
+/// Fluent builder implementation template for [gtk.window_accessible.WindowAccessible]
 class WindowAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.window.WindowGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class WindowAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAcce
 /// Fluent builder for [gtk.window_accessible.WindowAccessible]
 final class WindowAccessibleGidBuilder : WindowAccessibleGidBuilderImpl!WindowAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WindowAccessible build()
   {
     return new WindowAccessible(cast(void*)createGObject(WindowAccessible._getGType), No.Take);

@@ -315,6 +315,7 @@ template SelectionModelT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.selection_model.SelectionModel]
 template SelectionModelGidBuilderT()
 {
 }

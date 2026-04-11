@@ -43,8 +43,8 @@ class FlowBoxChild : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.flow_box_child.FlowBoxChild]
-  Returns: New builder object
+      Get builder for [gtk.flow_box_child.FlowBoxChild]
+      Returns: New builder object
   */
   static FlowBoxChildGidBuilder builder()
   {
@@ -154,6 +154,7 @@ class FlowBoxChild : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.flow_box_child.FlowBoxChild]
 class FlowBoxChildGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -162,6 +163,10 @@ class FlowBoxChildGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.flow_box_child.FlowBoxChild]
 final class FlowBoxChildGidBuilder : FlowBoxChildGidBuilderImpl!FlowBoxChildGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FlowBoxChild build()
   {
     return new FlowBoxChild(cast(void*)createGObject(FlowBoxChild._getGType), No.Take);

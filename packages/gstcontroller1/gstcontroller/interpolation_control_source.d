@@ -48,8 +48,8 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
   }
 
   /**
-  Get builder for [gstcontroller.interpolation_control_source.InterpolationControlSource]
-  Returns: New builder object
+      Get builder for [gstcontroller.interpolation_control_source.InterpolationControlSource]
+      Returns: New builder object
   */
   static InterpolationControlSourceGidBuilder builder()
   {
@@ -80,6 +80,7 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
   }
 }
 
+/// Fluent builder implementation template for [gstcontroller.interpolation_control_source.InterpolationControlSource]
 class InterpolationControlSourceGidBuilderImpl(T) : gstcontroller.timed_value_control_source.TimedValueControlSourceGidBuilderImpl!T
 {
 
@@ -93,6 +94,10 @@ class InterpolationControlSourceGidBuilderImpl(T) : gstcontroller.timed_value_co
 /// Fluent builder for [gstcontroller.interpolation_control_source.InterpolationControlSource]
 final class InterpolationControlSourceGidBuilder : InterpolationControlSourceGidBuilderImpl!InterpolationControlSourceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   InterpolationControlSource build()
   {
     return new InterpolationControlSource(cast(void*)createGObject(InterpolationControlSource._getGType), Yes.Take);

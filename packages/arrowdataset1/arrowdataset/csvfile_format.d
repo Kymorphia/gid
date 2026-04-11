@@ -38,8 +38,8 @@ class CSVFileFormat : arrowdataset.file_format.FileFormat
   }
 
   /**
-  Get builder for [arrowdataset.csvfile_format.CSVFileFormat]
-  Returns: New builder object
+      Get builder for [arrowdataset.csvfile_format.CSVFileFormat]
+      Returns: New builder object
   */
   static CSVFileFormatGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class CSVFileFormat : arrowdataset.file_format.FileFormat
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.csvfile_format.CSVFileFormat]
 class CSVFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class CSVFileFormatGidBuilderImpl(T) : arrowdataset.file_format.FileFormatGidBui
 /// Fluent builder for [arrowdataset.csvfile_format.CSVFileFormat]
 final class CSVFileFormatGidBuilder : CSVFileFormatGidBuilderImpl!CSVFileFormatGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CSVFileFormat build()
   {
     return new CSVFileFormat(cast(void*)createGObject(CSVFileFormat._getGType), Yes.Take);

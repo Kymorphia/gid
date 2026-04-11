@@ -103,6 +103,7 @@ template CellAccessibleParentT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_accessible_parent.CellAccessibleParent]
 template CellAccessibleParentGidBuilderT()
 {
 }

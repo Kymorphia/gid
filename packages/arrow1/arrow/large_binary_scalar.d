@@ -39,8 +39,8 @@ class LargeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
   }
 
   /**
-  Get builder for [arrow.large_binary_scalar.LargeBinaryScalar]
-  Returns: New builder object
+      Get builder for [arrow.large_binary_scalar.LargeBinaryScalar]
+      Returns: New builder object
   */
   static LargeBinaryScalarGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class LargeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.large_binary_scalar.LargeBinaryScalar]
 class LargeBinaryScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinaryScalarGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class LargeBinaryScalarGidBuilderImpl(T) : arrow.base_binary_scalar.BaseBinarySc
 /// Fluent builder for [arrow.large_binary_scalar.LargeBinaryScalar]
 final class LargeBinaryScalarGidBuilder : LargeBinaryScalarGidBuilderImpl!LargeBinaryScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LargeBinaryScalar build()
   {
     return new LargeBinaryScalar(cast(void*)createGObject(LargeBinaryScalar._getGType), Yes.Take);

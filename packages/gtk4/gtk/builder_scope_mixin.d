@@ -32,6 +32,7 @@ template BuilderScopeT()
 {
 }
 
+/// Fluent builder implementation template for [gtk.builder_scope.BuilderScope]
 template BuilderScopeGidBuilderT()
 {
 }

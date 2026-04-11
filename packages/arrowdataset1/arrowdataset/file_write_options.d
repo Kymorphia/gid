@@ -38,8 +38,8 @@ class FileWriteOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.file_write_options.FileWriteOptions]
-  Returns: New builder object
+      Get builder for [arrowdataset.file_write_options.FileWriteOptions]
+      Returns: New builder object
   */
   static FileWriteOptionsGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class FileWriteOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.file_write_options.FileWriteOptions]
 class FileWriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -60,6 +61,10 @@ class FileWriteOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [arrowdataset.file_write_options.FileWriteOptions]
 final class FileWriteOptionsGidBuilder : FileWriteOptionsGidBuilderImpl!FileWriteOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileWriteOptions build()
   {
     return new FileWriteOptions(cast(void*)createGObject(FileWriteOptions._getGType), No.Take);

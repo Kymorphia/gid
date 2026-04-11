@@ -39,8 +39,8 @@ class MonthIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.month_interval_array_builder.MonthIntervalArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.month_interval_array_builder.MonthIntervalArrayBuilder]
+      Returns: New builder object
   */
   static MonthIntervalArrayBuilderGidBuilder builder()
   {
@@ -100,6 +100,7 @@ class MonthIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.month_interval_array_builder.MonthIntervalArrayBuilder]
 class MonthIntervalArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -107,6 +108,10 @@ class MonthIntervalArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuil
 /// Fluent builder for [arrow.month_interval_array_builder.MonthIntervalArrayBuilder]
 final class MonthIntervalArrayBuilderGidBuilder : MonthIntervalArrayBuilderGidBuilderImpl!MonthIntervalArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MonthIntervalArrayBuilder build()
   {
     return new MonthIntervalArrayBuilder(cast(void*)createGObject(MonthIntervalArrayBuilder._getGType), Yes.Take);

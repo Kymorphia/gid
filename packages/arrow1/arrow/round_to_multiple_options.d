@@ -40,8 +40,8 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.round_to_multiple_options.RoundToMultipleOptions]
-  Returns: New builder object
+      Get builder for [arrow.round_to_multiple_options.RoundToMultipleOptions]
+      Returns: New builder object
   */
   static RoundToMultipleOptionsGidBuilder builder()
   {
@@ -105,6 +105,7 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.round_to_multiple_options.RoundToMultipleOptions]
 class RoundToMultipleOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -139,6 +140,10 @@ class RoundToMultipleOptionsGidBuilderImpl(T) : arrow.function_options.FunctionO
 /// Fluent builder for [arrow.round_to_multiple_options.RoundToMultipleOptions]
 final class RoundToMultipleOptionsGidBuilder : RoundToMultipleOptionsGidBuilderImpl!RoundToMultipleOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RoundToMultipleOptions build()
   {
     return new RoundToMultipleOptions(cast(void*)createGObject(RoundToMultipleOptions._getGType), Yes.Take);

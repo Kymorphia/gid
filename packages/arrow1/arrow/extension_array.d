@@ -39,8 +39,8 @@ class ExtensionArray : arrow.array.Array
   }
 
   /**
-  Get builder for [arrow.extension_array.ExtensionArray]
-  Returns: New builder object
+      Get builder for [arrow.extension_array.ExtensionArray]
+      Returns: New builder object
   */
   static ExtensionArrayGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class ExtensionArray : arrow.array.Array
   }
 }
 
+/// Fluent builder implementation template for [arrow.extension_array.ExtensionArray]
 class ExtensionArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class ExtensionArrayGidBuilderImpl(T) : arrow.array.ArrayGidBuilderImpl!T
 /// Fluent builder for [arrow.extension_array.ExtensionArray]
 final class ExtensionArrayGidBuilder : ExtensionArrayGidBuilderImpl!ExtensionArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExtensionArray build()
   {
     return new ExtensionArray(cast(void*)createGObject(ExtensionArray._getGType), No.Take);

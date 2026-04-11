@@ -39,8 +39,8 @@ class FilterOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.filter_options.FilterOptions]
-  Returns: New builder object
+      Get builder for [arrow.filter_options.FilterOptions]
+      Returns: New builder object
   */
   static FilterOptionsGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class FilterOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.filter_options.FilterOptions]
 class FilterOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -93,6 +94,10 @@ class FilterOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGid
 /// Fluent builder for [arrow.filter_options.FilterOptions]
 final class FilterOptionsGidBuilder : FilterOptionsGidBuilderImpl!FilterOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterOptions build()
   {
     return new FilterOptions(cast(void*)createGObject(FilterOptions._getGType), Yes.Take);

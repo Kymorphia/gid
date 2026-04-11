@@ -163,8 +163,8 @@ class BaseTransform : gst.element.Element
   }
 
   /**
-  Get builder for [gstbase.base_transform.BaseTransform]
-  Returns: New builder object
+      Get builder for [gstbase.base_transform.BaseTransform]
+      Returns: New builder object
   */
   static BaseTransformGidBuilder builder()
   {
@@ -420,6 +420,7 @@ class BaseTransform : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstbase.base_transform.BaseTransform]
 class BaseTransformGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
@@ -433,6 +434,10 @@ class BaseTransformGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstbase.base_transform.BaseTransform]
 final class BaseTransformGidBuilder : BaseTransformGidBuilderImpl!BaseTransformGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BaseTransform build()
   {
     return new BaseTransform(cast(void*)createGObject(BaseTransform._getGType), No.Take);

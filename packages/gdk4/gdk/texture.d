@@ -64,8 +64,8 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   }
 
   /**
-  Get builder for [gdk.texture.Texture]
-  Returns: New builder object
+      Get builder for [gdk.texture.Texture]
+      Returns: New builder object
   */
   static TextureGidBuilder builder()
   {
@@ -355,6 +355,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   }
 }
 
+/// Fluent builder implementation template for [gdk.texture.Texture]
 class TextureGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.paintable.PaintableGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T, gio.loadable_icon.LoadableIconGidBuilderImpl!T
 {
 
@@ -388,6 +389,10 @@ class TextureGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.
 /// Fluent builder for [gdk.texture.Texture]
 final class TextureGidBuilder : TextureGidBuilderImpl!TextureGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Texture build()
   {
     return new Texture(cast(void*)createGObject(Texture._getGType), No.Take);

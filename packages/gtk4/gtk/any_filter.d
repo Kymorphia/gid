@@ -46,8 +46,8 @@ class AnyFilter : gtk.multi_filter.MultiFilter
   }
 
   /**
-  Get builder for [gtk.any_filter.AnyFilter]
-  Returns: New builder object
+      Get builder for [gtk.any_filter.AnyFilter]
+      Returns: New builder object
   */
   static AnyFilterGidBuilder builder()
   {
@@ -72,6 +72,7 @@ class AnyFilter : gtk.multi_filter.MultiFilter
   }
 }
 
+/// Fluent builder implementation template for [gtk.any_filter.AnyFilter]
 class AnyFilterGidBuilderImpl(T) : gtk.multi_filter.MultiFilterGidBuilderImpl!T
 {
 
@@ -80,6 +81,10 @@ class AnyFilterGidBuilderImpl(T) : gtk.multi_filter.MultiFilterGidBuilderImpl!T
 /// Fluent builder for [gtk.any_filter.AnyFilter]
 final class AnyFilterGidBuilder : AnyFilterGidBuilderImpl!AnyFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AnyFilter build()
   {
     return new AnyFilter(cast(void*)createGObject(AnyFilter._getGType), Yes.Take);

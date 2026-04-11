@@ -42,8 +42,8 @@ class NotebookAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
   }
 
   /**
-  Get builder for [gtk.notebook_accessible.NotebookAccessible]
-  Returns: New builder object
+      Get builder for [gtk.notebook_accessible.NotebookAccessible]
+      Returns: New builder object
   */
   static NotebookAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class NotebookAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
   mixin SelectionT!();
 }
 
+/// Fluent builder implementation template for [gtk.notebook_accessible.NotebookAccessible]
 class NotebookAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class NotebookAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAc
 /// Fluent builder for [gtk.notebook_accessible.NotebookAccessible]
 final class NotebookAccessibleGidBuilder : NotebookAccessibleGidBuilderImpl!NotebookAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NotebookAccessible build()
   {
     return new NotebookAccessible(cast(void*)createGObject(NotebookAccessible._getGType), No.Take);

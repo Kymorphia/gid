@@ -43,8 +43,8 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
   }
 
   /**
-  Get builder for [gtk.password_entry_buffer.PasswordEntryBuffer]
-  Returns: New builder object
+      Get builder for [gtk.password_entry_buffer.PasswordEntryBuffer]
+      Returns: New builder object
   */
   static PasswordEntryBufferGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
   }
 }
 
+/// Fluent builder implementation template for [gtk.password_entry_buffer.PasswordEntryBuffer]
 class PasswordEntryBufferGidBuilderImpl(T) : gtk.entry_buffer.EntryBufferGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class PasswordEntryBufferGidBuilderImpl(T) : gtk.entry_buffer.EntryBufferGidBuil
 /// Fluent builder for [gtk.password_entry_buffer.PasswordEntryBuffer]
 final class PasswordEntryBufferGidBuilder : PasswordEntryBufferGidBuilderImpl!PasswordEntryBufferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PasswordEntryBuffer build()
   {
     return new PasswordEntryBuffer(cast(void*)createGObject(PasswordEntryBuffer._getGType), Yes.Take);

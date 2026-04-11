@@ -373,6 +373,7 @@ interface VideoOverlay
   void setWindowHandle(size_t handle);
 }
 
+/// Fluent builder implementation template for [gstvideo.video_overlay.VideoOverlay]
 interface VideoOverlayGidBuilderImpl(T)
 {
 }

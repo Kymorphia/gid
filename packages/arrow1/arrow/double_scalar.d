@@ -38,8 +38,8 @@ class DoubleScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.double_scalar.DoubleScalar]
-  Returns: New builder object
+      Get builder for [arrow.double_scalar.DoubleScalar]
+      Returns: New builder object
   */
   static DoubleScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class DoubleScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.double_scalar.DoubleScalar]
 class DoubleScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class DoubleScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.double_scalar.DoubleScalar]
 final class DoubleScalarGidBuilder : DoubleScalarGidBuilderImpl!DoubleScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DoubleScalar build()
   {
     return new DoubleScalar(cast(void*)createGObject(DoubleScalar._getGType), Yes.Take);

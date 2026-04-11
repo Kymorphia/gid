@@ -87,8 +87,8 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   }
 
   /**
-  Get builder for [adw.entry_row.EntryRow]
-  Returns: New builder object
+      Get builder for [adw.entry_row.EntryRow]
+      Returns: New builder object
   */
   static EntryRowGidBuilder builder()
   {
@@ -557,6 +557,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   }
 }
 
+/// Fluent builder implementation template for [adw.entry_row.EntryRow]
 class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
 {
 
@@ -651,6 +652,10 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
 /// Fluent builder for [adw.entry_row.EntryRow]
 final class EntryRowGidBuilder : EntryRowGidBuilderImpl!EntryRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EntryRow build()
   {
     return new EntryRow(cast(void*)createGObject(EntryRow._getGType), No.Take);

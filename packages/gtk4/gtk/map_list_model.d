@@ -73,8 +73,8 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
   }
 
   /**
-  Get builder for [gtk.map_list_model.MapListModel]
-  Returns: New builder object
+      Get builder for [gtk.map_list_model.MapListModel]
+      Returns: New builder object
   */
   static MapListModelGidBuilder builder()
   {
@@ -212,6 +212,7 @@ class MapListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.se
   }
 }
 
+/// Fluent builder implementation template for [gtk.map_list_model.MapListModel]
 class MapListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
 {
 
@@ -233,6 +234,10 @@ class MapListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
 /// Fluent builder for [gtk.map_list_model.MapListModel]
 final class MapListModelGidBuilder : MapListModelGidBuilderImpl!MapListModelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MapListModel build()
   {
     return new MapListModel(cast(void*)createGObject(MapListModel._getGType), Yes.Take);

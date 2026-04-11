@@ -71,8 +71,8 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   }
 
   /**
-  Get builder for [gtk.string_list.StringList]
-  Returns: New builder object
+      Get builder for [gtk.string_list.StringList]
+      Returns: New builder object
   */
   static StringListGidBuilder builder()
   {
@@ -220,6 +220,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   }
 }
 
+/// Fluent builder implementation template for [gtk.string_list.StringList]
 class StringListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -230,6 +231,10 @@ class StringListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, g
 /// Fluent builder for [gtk.string_list.StringList]
 final class StringListGidBuilder : StringListGidBuilderImpl!StringListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StringList build()
   {
     return new StringList(cast(void*)createGObject(StringList._getGType), Yes.Take);

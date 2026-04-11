@@ -38,8 +38,8 @@ class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
   }
 
   /**
-  Get builder for [gio.native_volume_monitor.NativeVolumeMonitor]
-  Returns: New builder object
+      Get builder for [gio.native_volume_monitor.NativeVolumeMonitor]
+      Returns: New builder object
   */
   static NativeVolumeMonitorGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
   }
 }
 
+/// Fluent builder implementation template for [gio.native_volume_monitor.NativeVolumeMonitor]
 class NativeVolumeMonitorGidBuilderImpl(T) : gio.volume_monitor.VolumeMonitorGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class NativeVolumeMonitorGidBuilderImpl(T) : gio.volume_monitor.VolumeMonitorGid
 /// Fluent builder for [gio.native_volume_monitor.NativeVolumeMonitor]
 final class NativeVolumeMonitorGidBuilder : NativeVolumeMonitorGidBuilderImpl!NativeVolumeMonitorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NativeVolumeMonitor build()
   {
     return new NativeVolumeMonitor(cast(void*)createGObject(NativeVolumeMonitor._getGType), No.Take);

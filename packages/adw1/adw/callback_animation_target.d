@@ -41,8 +41,8 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
   }
 
   /**
-  Get builder for [adw.callback_animation_target.CallbackAnimationTarget]
-  Returns: New builder object
+      Get builder for [adw.callback_animation_target.CallbackAnimationTarget]
+      Returns: New builder object
   */
   static CallbackAnimationTargetGidBuilder builder()
   {
@@ -74,6 +74,7 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
   }
 }
 
+/// Fluent builder implementation template for [adw.callback_animation_target.CallbackAnimationTarget]
 class CallbackAnimationTargetGidBuilderImpl(T) : adw.animation_target.AnimationTargetGidBuilderImpl!T
 {
 }
@@ -81,6 +82,10 @@ class CallbackAnimationTargetGidBuilderImpl(T) : adw.animation_target.AnimationT
 /// Fluent builder for [adw.callback_animation_target.CallbackAnimationTarget]
 final class CallbackAnimationTargetGidBuilder : CallbackAnimationTargetGidBuilderImpl!CallbackAnimationTargetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CallbackAnimationTarget build()
   {
     return new CallbackAnimationTarget(cast(void*)createGObject(CallbackAnimationTarget._getGType), Yes.Take);

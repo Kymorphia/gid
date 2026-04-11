@@ -48,8 +48,8 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
   }
 
   /**
-  Get builder for [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton]
-  Returns: New builder object
+      Get builder for [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton]
+      Returns: New builder object
   */
   static StyleSchemeChooserButtonGidBuilder builder()
   {
@@ -70,6 +70,7 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
   }
 }
 
+/// Fluent builder implementation template for [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton]
 class StyleSchemeChooserButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImpl!T, gtksource.style_scheme_chooser.StyleSchemeChooserGidBuilderImpl!T
 {
 
@@ -79,6 +80,10 @@ class StyleSchemeChooserButtonGidBuilderImpl(T) : gtk.button.ButtonGidBuilderImp
 /// Fluent builder for [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton]
 final class StyleSchemeChooserButtonGidBuilder : StyleSchemeChooserButtonGidBuilderImpl!StyleSchemeChooserButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StyleSchemeChooserButton build()
   {
     return new StyleSchemeChooserButton(cast(void*)createGObject(StyleSchemeChooserButton._getGType), No.Take);

@@ -50,6 +50,7 @@ template SymbolicPaintableT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.symbolic_paintable.SymbolicPaintable]
 template SymbolicPaintableGidBuilderT()
 {
 }

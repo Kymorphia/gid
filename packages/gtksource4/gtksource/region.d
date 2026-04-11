@@ -41,8 +41,8 @@ class Region : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.region.Region]
-  Returns: New builder object
+      Get builder for [gtksource.region.Region]
+      Returns: New builder object
   */
   static RegionGidBuilder builder()
   {
@@ -223,6 +223,7 @@ class Region : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.region.Region]
 class RegionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -242,6 +243,10 @@ class RegionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.region.Region]
 final class RegionGidBuilder : RegionGidBuilderImpl!RegionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Region build()
   {
     return new Region(cast(void*)createGObject(Region._getGType), Yes.Take);

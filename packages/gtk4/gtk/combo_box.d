@@ -116,8 +116,8 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   }
 
   /**
-  Get builder for [gtk.combo_box.ComboBox]
-  Returns: New builder object
+      Get builder for [gtk.combo_box.ComboBox]
+      Returns: New builder object
   */
   static ComboBoxGidBuilder builder()
   {
@@ -1101,6 +1101,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   }
 }
 
+/// Fluent builder implementation template for [gtk.combo_box.ComboBox]
 class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_editable.CellEditableGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T
 {
 
@@ -1232,6 +1233,10 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
 /// Fluent builder for [gtk.combo_box.ComboBox]
 final class ComboBoxGidBuilder : ComboBoxGidBuilderImpl!ComboBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ComboBox build()
   {
     return new ComboBox(cast(void*)createGObject(ComboBox._getGType), No.Take);

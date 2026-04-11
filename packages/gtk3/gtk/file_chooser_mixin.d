@@ -1730,6 +1730,7 @@ template FileChooserT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.file_chooser.FileChooser]
 template FileChooserGidBuilderT()
 {
 

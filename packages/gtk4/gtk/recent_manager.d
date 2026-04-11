@@ -99,8 +99,8 @@ class RecentManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.recent_manager.RecentManager]
-  Returns: New builder object
+      Get builder for [gtk.recent_manager.RecentManager]
+      Returns: New builder object
   */
   static RecentManagerGidBuilder builder()
   {
@@ -379,6 +379,7 @@ class RecentManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.recent_manager.RecentManager]
 class RecentManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -398,6 +399,10 @@ class RecentManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.recent_manager.RecentManager]
 final class RecentManagerGidBuilder : RecentManagerGidBuilderImpl!RecentManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecentManager build()
   {
     return new RecentManager(cast(void*)createGObject(RecentManager._getGType), Yes.Take);

@@ -98,6 +98,7 @@ template SwipeableT()
   }
 }
 
+/// Fluent builder implementation template for [adw.swipeable.Swipeable]
 template SwipeableGidBuilderT()
 {
 }

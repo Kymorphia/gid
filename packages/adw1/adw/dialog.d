@@ -101,8 +101,8 @@ class Dialog : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.dialog.Dialog]
-  Returns: New builder object
+      Get builder for [adw.dialog.Dialog]
+      Returns: New builder object
   */
   static DialogGidBuilder builder()
   {
@@ -747,6 +747,7 @@ class Dialog : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.dialog.Dialog]
 class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -885,6 +886,10 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.dialog.Dialog]
 final class DialogGidBuilder : DialogGidBuilderImpl!DialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Dialog build()
   {
     return new Dialog(cast(void*)createGObject(Dialog._getGType), No.Take);

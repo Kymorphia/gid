@@ -48,6 +48,7 @@ interface DesktopAppInfoLookup
   gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme);
 }
 
+/// Fluent builder implementation template for [gio.desktop_app_info_lookup.DesktopAppInfoLookup]
 interface DesktopAppInfoLookupGidBuilderImpl(T)
 {
 }

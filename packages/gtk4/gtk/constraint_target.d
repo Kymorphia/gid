@@ -25,6 +25,7 @@ interface ConstraintTarget
   }
 }
 
+/// Fluent builder implementation template for [gtk.constraint_target.ConstraintTarget]
 interface ConstraintTargetGidBuilderImpl(T)
 {
 }

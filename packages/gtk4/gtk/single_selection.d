@@ -53,8 +53,8 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   }
 
   /**
-  Get builder for [gtk.single_selection.SingleSelection]
-  Returns: New builder object
+      Get builder for [gtk.single_selection.SingleSelection]
+      Returns: New builder object
   */
   static SingleSelectionGidBuilder builder()
   {
@@ -308,6 +308,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   }
 }
 
+/// Fluent builder implementation template for [gtk.single_selection.SingleSelection]
 class SingleSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T, gtk.selection_model.SelectionModelGidBuilderImpl!T
 {
 
@@ -363,6 +364,10 @@ class SingleSelectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.single_selection.SingleSelection]
 final class SingleSelectionGidBuilder : SingleSelectionGidBuilderImpl!SingleSelectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SingleSelection build()
   {
     return new SingleSelection(cast(void*)createGObject(SingleSelection._getGType), Yes.Take);

@@ -72,8 +72,8 @@ class TabBar : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.tab_bar.TabBar]
-  Returns: New builder object
+      Get builder for [adw.tab_bar.TabBar]
+      Returns: New builder object
   */
   static TabBarGidBuilder builder()
   {
@@ -639,6 +639,7 @@ class TabBar : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.tab_bar.TabBar]
 class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -737,6 +738,10 @@ class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.tab_bar.TabBar]
 final class TabBarGidBuilder : TabBarGidBuilderImpl!TabBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TabBar build()
   {
     return new TabBar(cast(void*)createGObject(TabBar._getGType), No.Take);

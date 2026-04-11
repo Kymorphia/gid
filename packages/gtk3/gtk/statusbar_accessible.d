@@ -40,8 +40,8 @@ class StatusbarAccessible : gtk.container_accessible.ContainerAccessible
   }
 
   /**
-  Get builder for [gtk.statusbar_accessible.StatusbarAccessible]
-  Returns: New builder object
+      Get builder for [gtk.statusbar_accessible.StatusbarAccessible]
+      Returns: New builder object
   */
   static StatusbarAccessibleGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class StatusbarAccessible : gtk.container_accessible.ContainerAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.statusbar_accessible.StatusbarAccessible]
 class StatusbarAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
 {
 
@@ -57,6 +58,10 @@ class StatusbarAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerA
 /// Fluent builder for [gtk.statusbar_accessible.StatusbarAccessible]
 final class StatusbarAccessibleGidBuilder : StatusbarAccessibleGidBuilderImpl!StatusbarAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StatusbarAccessible build()
   {
     return new StatusbarAccessible(cast(void*)createGObject(StatusbarAccessible._getGType), No.Take);

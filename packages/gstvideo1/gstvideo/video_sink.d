@@ -45,8 +45,8 @@ class VideoSink : gstbase.base_sink.BaseSink
   }
 
   /**
-  Get builder for [gstvideo.video_sink.VideoSink]
-  Returns: New builder object
+      Get builder for [gstvideo.video_sink.VideoSink]
+      Returns: New builder object
   */
   static VideoSinkGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class VideoSink : gstbase.base_sink.BaseSink
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_sink.VideoSink]
 class VideoSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T
 {
 
@@ -94,6 +95,10 @@ class VideoSinkGidBuilderImpl(T) : gstbase.base_sink.BaseSinkGidBuilderImpl!T
 /// Fluent builder for [gstvideo.video_sink.VideoSink]
 final class VideoSinkGidBuilder : VideoSinkGidBuilderImpl!VideoSinkGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VideoSink build()
   {
     return new VideoSink(cast(void*)createGObject(VideoSink._getGType), No.Take);

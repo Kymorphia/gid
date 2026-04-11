@@ -47,8 +47,8 @@ class MemoryTexture : gdk.texture.Texture
   }
 
   /**
-  Get builder for [gdk.memory_texture.MemoryTexture]
-  Returns: New builder object
+      Get builder for [gdk.memory_texture.MemoryTexture]
+      Returns: New builder object
   */
   static MemoryTextureGidBuilder builder()
   {
@@ -77,6 +77,7 @@ class MemoryTexture : gdk.texture.Texture
   }
 }
 
+/// Fluent builder implementation template for [gdk.memory_texture.MemoryTexture]
 class MemoryTextureGidBuilderImpl(T) : gdk.texture.TextureGidBuilderImpl!T
 {
 
@@ -85,6 +86,10 @@ class MemoryTextureGidBuilderImpl(T) : gdk.texture.TextureGidBuilderImpl!T
 /// Fluent builder for [gdk.memory_texture.MemoryTexture]
 final class MemoryTextureGidBuilder : MemoryTextureGidBuilderImpl!MemoryTextureGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MemoryTexture build()
   {
     return new MemoryTexture(cast(void*)createGObject(MemoryTexture._getGType), Yes.Take);

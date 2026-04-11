@@ -52,8 +52,8 @@ class MenuBar : gtk.menu_shell.MenuShell
   }
 
   /**
-  Get builder for [gtk.menu_bar.MenuBar]
-  Returns: New builder object
+      Get builder for [gtk.menu_bar.MenuBar]
+      Returns: New builder object
   */
   static MenuBarGidBuilder builder()
   {
@@ -183,6 +183,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   }
 }
 
+/// Fluent builder implementation template for [gtk.menu_bar.MenuBar]
 class MenuBarGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
 {
 
@@ -215,6 +216,10 @@ class MenuBarGidBuilderImpl(T) : gtk.menu_shell.MenuShellGidBuilderImpl!T
 /// Fluent builder for [gtk.menu_bar.MenuBar]
 final class MenuBarGidBuilder : MenuBarGidBuilderImpl!MenuBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuBar build()
   {
     return new MenuBar(cast(void*)createGObject(MenuBar._getGType), No.Take);

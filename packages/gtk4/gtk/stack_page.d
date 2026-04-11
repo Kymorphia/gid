@@ -43,8 +43,8 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
-  Get builder for [gtk.stack_page.StackPage]
-  Returns: New builder object
+      Get builder for [gtk.stack_page.StackPage]
+      Returns: New builder object
   */
   static StackPageGidBuilder builder()
   {
@@ -339,6 +339,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.stack_page.StackPage]
 class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.accessible.AccessibleGidBuilderImpl!T
 {
 
@@ -429,6 +430,10 @@ class StackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
 /// Fluent builder for [gtk.stack_page.StackPage]
 final class StackPageGidBuilder : StackPageGidBuilderImpl!StackPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StackPage build()
   {
     return new StackPage(cast(void*)createGObject(StackPage._getGType), No.Take);

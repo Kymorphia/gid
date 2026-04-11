@@ -44,8 +44,8 @@ class AudioAggregatorConvertPad : gstaudio.audio_aggregator_pad.AudioAggregatorP
   }
 
   /**
-  Get builder for [gstaudio.audio_aggregator_convert_pad.AudioAggregatorConvertPad]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_aggregator_convert_pad.AudioAggregatorConvertPad]
+      Returns: New builder object
   */
   static AudioAggregatorConvertPadGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class AudioAggregatorConvertPad : gstaudio.audio_aggregator_pad.AudioAggregatorP
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_aggregator_convert_pad.AudioAggregatorConvertPad]
 class AudioAggregatorConvertPadGidBuilderImpl(T) : gstaudio.audio_aggregator_pad.AudioAggregatorPadGidBuilderImpl!T
 {
 
@@ -78,6 +79,10 @@ class AudioAggregatorConvertPadGidBuilderImpl(T) : gstaudio.audio_aggregator_pad
 /// Fluent builder for [gstaudio.audio_aggregator_convert_pad.AudioAggregatorConvertPad]
 final class AudioAggregatorConvertPadGidBuilder : AudioAggregatorConvertPadGidBuilderImpl!AudioAggregatorConvertPadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioAggregatorConvertPad build()
   {
     return new AudioAggregatorConvertPad(cast(void*)createGObject(AudioAggregatorConvertPad._getGType), No.Take);

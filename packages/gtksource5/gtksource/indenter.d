@@ -98,6 +98,7 @@ interface Indenter
   bool isTrigger(gtksource.view.View view, gtk.text_iter.TextIter location, gdk.types.ModifierType state, uint keyval);
 }
 
+/// Fluent builder implementation template for [gtksource.indenter.Indenter]
 interface IndenterGidBuilderImpl(T)
 {
 }

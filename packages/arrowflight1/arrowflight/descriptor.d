@@ -38,8 +38,8 @@ class Descriptor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowflight.descriptor.Descriptor]
-  Returns: New builder object
+      Get builder for [arrowflight.descriptor.Descriptor]
+      Returns: New builder object
   */
   static DescriptorGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class Descriptor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.descriptor.Descriptor]
 class DescriptorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -77,6 +78,10 @@ class DescriptorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowflight.descriptor.Descriptor]
 final class DescriptorGidBuilder : DescriptorGidBuilderImpl!DescriptorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Descriptor build()
   {
     return new Descriptor(cast(void*)createGObject(Descriptor._getGType), No.Take);

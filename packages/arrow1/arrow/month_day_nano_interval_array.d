@@ -41,8 +41,8 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
   }
 
   /**
-  Get builder for [arrow.month_day_nano_interval_array.MonthDayNanoIntervalArray]
-  Returns: New builder object
+      Get builder for [arrow.month_day_nano_interval_array.MonthDayNanoIntervalArray]
+      Returns: New builder object
   */
   static MonthDayNanoIntervalArrayGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.month_day_nano_interval_array.MonthDayNanoIntervalArray]
 class MonthDayNanoIntervalArrayGidBuilderImpl(T) : arrow.primitive_array.PrimitiveArrayGidBuilderImpl!T
 {
 }
@@ -83,6 +84,10 @@ class MonthDayNanoIntervalArrayGidBuilderImpl(T) : arrow.primitive_array.Primiti
 /// Fluent builder for [arrow.month_day_nano_interval_array.MonthDayNanoIntervalArray]
 final class MonthDayNanoIntervalArrayGidBuilder : MonthDayNanoIntervalArrayGidBuilderImpl!MonthDayNanoIntervalArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MonthDayNanoIntervalArray build()
   {
     return new MonthDayNanoIntervalArray(cast(void*)createGObject(MonthDayNanoIntervalArray._getGType), Yes.Take);

@@ -20,6 +20,7 @@ interface PhysMemoryAllocator
   }
 }
 
+/// Fluent builder implementation template for [gstallocators.phys_memory_allocator.PhysMemoryAllocator]
 interface PhysMemoryAllocatorGidBuilderImpl(T)
 {
 }

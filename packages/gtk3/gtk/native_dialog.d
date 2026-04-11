@@ -56,8 +56,8 @@ class NativeDialog : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.native_dialog.NativeDialog]
-  Returns: New builder object
+      Get builder for [gtk.native_dialog.NativeDialog]
+      Returns: New builder object
   */
   static NativeDialogGidBuilder builder()
   {
@@ -364,6 +364,7 @@ class NativeDialog : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.native_dialog.NativeDialog]
 class NativeDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -415,6 +416,10 @@ class NativeDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.native_dialog.NativeDialog]
 final class NativeDialogGidBuilder : NativeDialogGidBuilderImpl!NativeDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NativeDialog build()
   {
     return new NativeDialog(cast(void*)createGObject(NativeDialog._getGType), No.Take);

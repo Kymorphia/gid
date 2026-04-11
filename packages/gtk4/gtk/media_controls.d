@@ -52,8 +52,8 @@ class MediaControls : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.media_controls.MediaControls]
-  Returns: New builder object
+      Get builder for [gtk.media_controls.MediaControls]
+      Returns: New builder object
   */
   static MediaControlsGidBuilder builder()
   {
@@ -117,6 +117,7 @@ class MediaControls : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.media_controls.MediaControls]
 class MediaControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -136,6 +137,10 @@ class MediaControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.media_controls.MediaControls]
 final class MediaControlsGidBuilder : MediaControlsGidBuilderImpl!MediaControlsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MediaControls build()
   {
     return new MediaControls(cast(void*)createGObject(MediaControls._getGType), No.Take);

@@ -49,8 +49,8 @@ class SystemClock : gst.clock.Clock
   }
 
   /**
-  Get builder for [gst.system_clock.SystemClock]
-  Returns: New builder object
+      Get builder for [gst.system_clock.SystemClock]
+      Returns: New builder object
   */
   static SystemClockGidBuilder builder()
   {
@@ -104,6 +104,7 @@ class SystemClock : gst.clock.Clock
   }
 }
 
+/// Fluent builder implementation template for [gst.system_clock.SystemClock]
 class SystemClockGidBuilderImpl(T) : gst.clock.ClockGidBuilderImpl!T
 {
 
@@ -117,6 +118,10 @@ class SystemClockGidBuilderImpl(T) : gst.clock.ClockGidBuilderImpl!T
 /// Fluent builder for [gst.system_clock.SystemClock]
 final class SystemClockGidBuilder : SystemClockGidBuilderImpl!SystemClockGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SystemClock build()
   {
     return new SystemClock(cast(void*)createGObject(SystemClock._getGType), No.Take);

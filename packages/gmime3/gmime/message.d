@@ -46,8 +46,8 @@ class Message : gmime.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.message.Message]
-  Returns: New builder object
+      Get builder for [gmime.message.Message]
+      Returns: New builder object
   */
   static MessageGidBuilder builder()
   {
@@ -503,6 +503,7 @@ class Message : gmime.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.message.Message]
 class MessageGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -510,6 +511,10 @@ class MessageGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.message.Message]
 final class MessageGidBuilder : MessageGidBuilderImpl!MessageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Message build()
   {
     return new Message(cast(void*)createGObject(Message._getGType), Yes.Take);

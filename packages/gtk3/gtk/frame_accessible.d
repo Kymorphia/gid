@@ -40,8 +40,8 @@ class FrameAccessible : gtk.container_accessible.ContainerAccessible
   }
 
   /**
-  Get builder for [gtk.frame_accessible.FrameAccessible]
-  Returns: New builder object
+      Get builder for [gtk.frame_accessible.FrameAccessible]
+      Returns: New builder object
   */
   static FrameAccessibleGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class FrameAccessible : gtk.container_accessible.ContainerAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.frame_accessible.FrameAccessible]
 class FrameAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
 {
 
@@ -57,6 +58,10 @@ class FrameAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAcces
 /// Fluent builder for [gtk.frame_accessible.FrameAccessible]
 final class FrameAccessibleGidBuilder : FrameAccessibleGidBuilderImpl!FrameAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FrameAccessible build()
   {
     return new FrameAccessible(cast(void*)createGObject(FrameAccessible._getGType), No.Take);

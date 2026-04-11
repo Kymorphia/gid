@@ -58,8 +58,8 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   }
 
   /**
-  Get builder for [gdk.content_deserializer.ContentDeserializer]
-  Returns: New builder object
+      Get builder for [gdk.content_deserializer.ContentDeserializer]
+      Returns: New builder object
   */
   static ContentDeserializerGidBuilder builder()
   {
@@ -208,6 +208,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   }
 }
 
+/// Fluent builder implementation template for [gdk.content_deserializer.ContentDeserializer]
 class ContentDeserializerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_result.AsyncResultGidBuilderImpl!T
 {
 
@@ -217,6 +218,10 @@ class ContentDeserializerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [gdk.content_deserializer.ContentDeserializer]
 final class ContentDeserializerGidBuilder : ContentDeserializerGidBuilderImpl!ContentDeserializerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContentDeserializer build()
   {
     return new ContentDeserializer(cast(void*)createGObject(ContentDeserializer._getGType), No.Take);

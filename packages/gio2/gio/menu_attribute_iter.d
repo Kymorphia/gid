@@ -42,8 +42,8 @@ class MenuAttributeIter : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.menu_attribute_iter.MenuAttributeIter]
-  Returns: New builder object
+      Get builder for [gio.menu_attribute_iter.MenuAttributeIter]
+      Returns: New builder object
   */
   static MenuAttributeIterGidBuilder builder()
   {
@@ -133,6 +133,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.menu_attribute_iter.MenuAttributeIter]
 class MenuAttributeIterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -140,6 +141,10 @@ class MenuAttributeIterGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [gio.menu_attribute_iter.MenuAttributeIter]
 final class MenuAttributeIterGidBuilder : MenuAttributeIterGidBuilderImpl!MenuAttributeIterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MenuAttributeIter build()
   {
     return new MenuAttributeIter(cast(void*)createGObject(MenuAttributeIter._getGType), No.Take);

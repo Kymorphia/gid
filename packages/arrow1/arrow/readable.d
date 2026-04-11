@@ -30,6 +30,7 @@ interface Readable
   glib.bytes.Bytes readBytes(long nBytes);
 }
 
+/// Fluent builder implementation template for [arrow.readable.Readable]
 interface ReadableGidBuilderImpl(T)
 {
 }

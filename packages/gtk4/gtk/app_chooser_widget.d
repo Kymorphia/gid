@@ -76,8 +76,8 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   }
 
   /**
-  Get builder for [gtk.app_chooser_widget.AppChooserWidget]
-  Returns: New builder object
+      Get builder for [gtk.app_chooser_widget.AppChooserWidget]
+      Returns: New builder object
   */
   static AppChooserWidgetGidBuilder builder()
   {
@@ -511,6 +511,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.app_chooser_widget.AppChooserWidget]
 class AppChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.app_chooser.AppChooserGidBuilderImpl!T
 {
 
@@ -602,6 +603,10 @@ class AppChooserWidgetGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk
 /// Fluent builder for [gtk.app_chooser_widget.AppChooserWidget]
 final class AppChooserWidgetGidBuilder : AppChooserWidgetGidBuilderImpl!AppChooserWidgetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AppChooserWidget build()
   {
     return new AppChooserWidget(cast(void*)createGObject(AppChooserWidget._getGType), No.Take);

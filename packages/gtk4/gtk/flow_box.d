@@ -98,8 +98,8 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-  Get builder for [gtk.flow_box.FlowBox]
-  Returns: New builder object
+      Get builder for [gtk.flow_box.FlowBox]
+      Returns: New builder object
   */
   static FlowBoxGidBuilder builder()
   {
@@ -1137,6 +1137,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 }
 
+/// Fluent builder implementation template for [gtk.flow_box.FlowBox]
 class FlowBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -1237,6 +1238,10 @@ class FlowBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.orientab
 /// Fluent builder for [gtk.flow_box.FlowBox]
 final class FlowBoxGidBuilder : FlowBoxGidBuilderImpl!FlowBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FlowBox build()
   {
     return new FlowBox(cast(void*)createGObject(FlowBox._getGType), No.Take);

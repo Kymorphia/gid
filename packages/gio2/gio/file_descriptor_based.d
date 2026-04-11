@@ -35,6 +35,7 @@ interface FileDescriptorBased
   int getFd();
 }
 
+/// Fluent builder implementation template for [gio.file_descriptor_based.FileDescriptorBased]
 interface FileDescriptorBasedGidBuilderImpl(T)
 {
 }

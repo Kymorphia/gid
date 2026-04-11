@@ -57,8 +57,8 @@ class WindowGroup : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.window_group.WindowGroup]
-  Returns: New builder object
+      Get builder for [gtk.window_group.WindowGroup]
+      Returns: New builder object
   */
   static WindowGroupGidBuilder builder()
   {
@@ -141,6 +141,7 @@ class WindowGroup : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.window_group.WindowGroup]
 class WindowGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -148,6 +149,10 @@ class WindowGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.window_group.WindowGroup]
 final class WindowGroupGidBuilder : WindowGroupGidBuilderImpl!WindowGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WindowGroup build()
   {
     return new WindowGroup(cast(void*)createGObject(WindowGroup._getGType), Yes.Take);

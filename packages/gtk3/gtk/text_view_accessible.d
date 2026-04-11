@@ -46,8 +46,8 @@ class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.edi
   }
 
   /**
-  Get builder for [gtk.text_view_accessible.TextViewAccessible]
-  Returns: New builder object
+      Get builder for [gtk.text_view_accessible.TextViewAccessible]
+      Returns: New builder object
   */
   static TextViewAccessibleGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.edi
   mixin TextT!();
 }
 
+/// Fluent builder implementation template for [gtk.text_view_accessible.TextViewAccessible]
 class TextViewAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.editable_text.EditableTextGidBuilderImpl!T, atk.streamable_content.StreamableContentGidBuilderImpl!T, atk.text.TextGidBuilderImpl!T
 {
 
@@ -70,6 +71,10 @@ class TextViewAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAc
 /// Fluent builder for [gtk.text_view_accessible.TextViewAccessible]
 final class TextViewAccessibleGidBuilder : TextViewAccessibleGidBuilderImpl!TextViewAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TextViewAccessible build()
   {
     return new TextViewAccessible(cast(void*)createGObject(TextViewAccessible._getGType), No.Take);

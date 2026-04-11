@@ -41,8 +41,8 @@ class Session : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [panel.session.Session]
-  Returns: New builder object
+      Get builder for [panel.session.Session]
+      Returns: New builder object
   */
   static SessionGidBuilder builder()
   {
@@ -167,6 +167,7 @@ class Session : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [panel.session.Session]
 class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -174,6 +175,10 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [panel.session.Session]
 final class SessionGidBuilder : SessionGidBuilderImpl!SessionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Session build()
   {
     return new Session(cast(void*)createGObject(Session._getGType), Yes.Take);

@@ -56,8 +56,8 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   }
 
   /**
-  Get builder for [adw.preferences_row.PreferencesRow]
-  Returns: New builder object
+      Get builder for [adw.preferences_row.PreferencesRow]
+      Returns: New builder object
   */
   static PreferencesRowGidBuilder builder()
   {
@@ -269,6 +269,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   }
 }
 
+/// Fluent builder implementation template for [adw.preferences_row.PreferencesRow]
 class PreferencesRowGidBuilderImpl(T) : gtk.list_box_row.ListBoxRowGidBuilderImpl!T
 {
 
@@ -330,6 +331,10 @@ class PreferencesRowGidBuilderImpl(T) : gtk.list_box_row.ListBoxRowGidBuilderImp
 /// Fluent builder for [adw.preferences_row.PreferencesRow]
 final class PreferencesRowGidBuilder : PreferencesRowGidBuilderImpl!PreferencesRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PreferencesRow build()
   {
     return new PreferencesRow(cast(void*)createGObject(PreferencesRow._getGType), No.Take);

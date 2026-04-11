@@ -42,8 +42,8 @@ class Snapshot : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.snapshot.Snapshot]
-  Returns: New builder object
+      Get builder for [gdk.snapshot.Snapshot]
+      Returns: New builder object
   */
   static SnapshotGidBuilder builder()
   {
@@ -51,6 +51,7 @@ class Snapshot : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.snapshot.Snapshot]
 class SnapshotGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -58,6 +59,10 @@ class SnapshotGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.snapshot.Snapshot]
 final class SnapshotGidBuilder : SnapshotGidBuilderImpl!SnapshotGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Snapshot build()
   {
     return new Snapshot(cast(void*)createGObject(Snapshot._getGType), No.Take);

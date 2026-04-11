@@ -132,8 +132,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   }
 
   /**
-  Get builder for [gio.dbus_object_manager_client.DBusObjectManagerClient]
-  Returns: New builder object
+      Get builder for [gio.dbus_object_manager_client.DBusObjectManagerClient]
+      Returns: New builder object
   */
   static DBusObjectManagerClientGidBuilder builder()
   {
@@ -660,6 +660,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_object_manager_client.DBusObjectManagerClient]
 class DBusObjectManagerClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.async_initable.AsyncInitableGidBuilderImpl!T, gio.dbus_object_manager.DBusObjectManagerGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -763,6 +764,10 @@ class DBusObjectManagerClientGidBuilderImpl(T) : gobject.object.ObjectWrapGidBui
 /// Fluent builder for [gio.dbus_object_manager_client.DBusObjectManagerClient]
 final class DBusObjectManagerClientGidBuilder : DBusObjectManagerClientGidBuilderImpl!DBusObjectManagerClientGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusObjectManagerClient build()
   {
     return new DBusObjectManagerClient(cast(void*)createGObject(DBusObjectManagerClient._getGType), No.Take);

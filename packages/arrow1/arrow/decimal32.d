@@ -40,8 +40,8 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.decimal32.Decimal32]
-  Returns: New builder object
+      Get builder for [arrow.decimal32.Decimal32]
+      Returns: New builder object
   */
   static Decimal32GidBuilder builder()
   {
@@ -232,6 +232,7 @@ class Decimal32 : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal32.Decimal32]
 class Decimal32GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -245,6 +246,10 @@ class Decimal32GidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.decimal32.Decimal32]
 final class Decimal32GidBuilder : Decimal32GidBuilderImpl!Decimal32GidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal32 build()
   {
     return new Decimal32(cast(void*)createGObject(Decimal32._getGType), No.Take);

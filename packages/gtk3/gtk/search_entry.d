@@ -73,8 +73,8 @@ class SearchEntry : gtk.entry.Entry
   }
 
   /**
-  Get builder for [gtk.search_entry.SearchEntry]
-  Returns: New builder object
+      Get builder for [gtk.search_entry.SearchEntry]
+      Returns: New builder object
   */
   static SearchEntryGidBuilder builder()
   {
@@ -289,6 +289,7 @@ class SearchEntry : gtk.entry.Entry
   }
 }
 
+/// Fluent builder implementation template for [gtk.search_entry.SearchEntry]
 class SearchEntryGidBuilderImpl(T) : gtk.entry.EntryGidBuilderImpl!T
 {
 
@@ -297,6 +298,10 @@ class SearchEntryGidBuilderImpl(T) : gtk.entry.EntryGidBuilderImpl!T
 /// Fluent builder for [gtk.search_entry.SearchEntry]
 final class SearchEntryGidBuilder : SearchEntryGidBuilderImpl!SearchEntryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SearchEntry build()
   {
     return new SearchEntry(cast(void*)createGObject(SearchEntry._getGType), No.Take);

@@ -39,8 +39,8 @@ class DataType : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.data_type.DataType]
-  Returns: New builder object
+      Get builder for [arrow.data_type.DataType]
+      Returns: New builder object
   */
   static DataTypeGidBuilder builder()
   {
@@ -105,6 +105,7 @@ class DataType : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.data_type.DataType]
 class DataTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -118,6 +119,10 @@ class DataTypeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.data_type.DataType]
 final class DataTypeGidBuilder : DataTypeGidBuilderImpl!DataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataType build()
   {
     return new DataType(cast(void*)createGObject(DataType._getGType), No.Take);

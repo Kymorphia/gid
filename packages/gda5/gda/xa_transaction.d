@@ -41,8 +41,8 @@ class XaTransaction : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.xa_transaction.XaTransaction]
-  Returns: New builder object
+      Get builder for [gda.xa_transaction.XaTransaction]
+      Returns: New builder object
   */
   static XaTransactionGidBuilder builder()
   {
@@ -207,6 +207,7 @@ class XaTransaction : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.xa_transaction.XaTransaction]
 class XaTransactionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -226,6 +227,10 @@ class XaTransactionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.xa_transaction.XaTransaction]
 final class XaTransactionGidBuilder : XaTransactionGidBuilderImpl!XaTransactionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   XaTransaction build()
   {
     return new XaTransaction(cast(void*)createGObject(XaTransaction._getGType), Yes.Take);

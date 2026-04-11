@@ -48,8 +48,8 @@ class Relation : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [atk.relation.Relation]
-  Returns: New builder object
+      Get builder for [atk.relation.Relation]
+      Returns: New builder object
   */
   static RelationGidBuilder builder()
   {
@@ -158,6 +158,7 @@ class Relation : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [atk.relation.Relation]
 class RelationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -177,6 +178,10 @@ class RelationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [atk.relation.Relation]
 final class RelationGidBuilder : RelationGidBuilderImpl!RelationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Relation build()
   {
     return new Relation(cast(void*)createGObject(Relation._getGType), Yes.Take);

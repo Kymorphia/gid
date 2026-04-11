@@ -42,8 +42,8 @@ class VulkanRenderer : gsk.renderer.Renderer
   }
 
   /**
-  Get builder for [gsk.vulkan_renderer.VulkanRenderer]
-  Returns: New builder object
+      Get builder for [gsk.vulkan_renderer.VulkanRenderer]
+      Returns: New builder object
   */
   static VulkanRendererGidBuilder builder()
   {
@@ -59,6 +59,7 @@ class VulkanRenderer : gsk.renderer.Renderer
   }
 }
 
+/// Fluent builder implementation template for [gsk.vulkan_renderer.VulkanRenderer]
 class VulkanRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 {
 }
@@ -66,6 +67,10 @@ class VulkanRendererGidBuilderImpl(T) : gsk.renderer.RendererGidBuilderImpl!T
 /// Fluent builder for [gsk.vulkan_renderer.VulkanRenderer]
 final class VulkanRendererGidBuilder : VulkanRendererGidBuilderImpl!VulkanRendererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VulkanRenderer build()
   {
     return new VulkanRenderer(cast(void*)createGObject(VulkanRenderer._getGType), Yes.Take);

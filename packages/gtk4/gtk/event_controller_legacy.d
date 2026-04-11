@@ -46,8 +46,8 @@ class EventControllerLegacy : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.event_controller_legacy.EventControllerLegacy]
-  Returns: New builder object
+      Get builder for [gtk.event_controller_legacy.EventControllerLegacy]
+      Returns: New builder object
   */
   static EventControllerLegacyGidBuilder builder()
   {
@@ -113,6 +113,7 @@ class EventControllerLegacy : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.event_controller_legacy.EventControllerLegacy]
 class EventControllerLegacyGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 }
@@ -120,6 +121,10 @@ class EventControllerLegacyGidBuilderImpl(T) : gtk.event_controller.EventControl
 /// Fluent builder for [gtk.event_controller_legacy.EventControllerLegacy]
 final class EventControllerLegacyGidBuilder : EventControllerLegacyGidBuilderImpl!EventControllerLegacyGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EventControllerLegacy build()
   {
     return new EventControllerLegacy(cast(void*)createGObject(EventControllerLegacy._getGType), Yes.Take);

@@ -70,8 +70,8 @@ class PreferencesWindow : adw.window.Window
   }
 
   /**
-  Get builder for [adw.preferences_window.PreferencesWindow]
-  Returns: New builder object
+      Get builder for [adw.preferences_window.PreferencesWindow]
+      Returns: New builder object
   */
   static PreferencesWindowGidBuilder builder()
   {
@@ -405,6 +405,7 @@ class PreferencesWindow : adw.window.Window
   }
 }
 
+/// Fluent builder implementation template for [adw.preferences_window.PreferencesWindow]
 class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
 {
 
@@ -477,6 +478,10 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
 /// Fluent builder for [adw.preferences_window.PreferencesWindow]
 final class PreferencesWindowGidBuilder : PreferencesWindowGidBuilderImpl!PreferencesWindowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PreferencesWindow build()
   {
     return new PreferencesWindow(cast(void*)createGObject(PreferencesWindow._getGType), No.Take);

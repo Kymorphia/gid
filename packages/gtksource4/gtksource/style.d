@@ -40,8 +40,8 @@ class Style : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.style.Style]
-  Returns: New builder object
+      Get builder for [gtksource.style.Style]
+      Returns: New builder object
   */
   static StyleGidBuilder builder()
   {
@@ -188,6 +188,7 @@ class Style : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.style.Style]
 class StyleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -303,6 +304,10 @@ class StyleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtksource.style.Style]
 final class StyleGidBuilder : StyleGidBuilderImpl!StyleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Style build()
   {
     return new Style(cast(void*)createGObject(Style._getGType), No.Take);

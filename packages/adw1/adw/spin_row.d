@@ -88,8 +88,8 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   }
 
   /**
-  Get builder for [adw.spin_row.SpinRow]
-  Returns: New builder object
+      Get builder for [adw.spin_row.SpinRow]
+      Returns: New builder object
   */
   static SpinRowGidBuilder builder()
   {
@@ -657,6 +657,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   }
 }
 
+/// Fluent builder implementation template for [adw.spin_row.SpinRow]
 class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
 {
 
@@ -756,6 +757,10 @@ class SpinRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T, gtk.e
 /// Fluent builder for [adw.spin_row.SpinRow]
 final class SpinRowGidBuilder : SpinRowGidBuilderImpl!SpinRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SpinRow build()
   {
     return new SpinRow(cast(void*)createGObject(SpinRow._getGType), No.Take);

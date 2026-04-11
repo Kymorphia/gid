@@ -235,6 +235,7 @@ template CompletionProviderT()
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion_provider.CompletionProvider]
 template CompletionProviderGidBuilderT()
 {
 }

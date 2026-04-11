@@ -40,8 +40,8 @@ class Buffer : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.buffer.Buffer]
-  Returns: New builder object
+      Get builder for [arrow.buffer.Buffer]
+      Returns: New builder object
   */
   static BufferGidBuilder builder()
   {
@@ -167,6 +167,7 @@ class Buffer : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.buffer.Buffer]
 class BufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -192,6 +193,10 @@ class BufferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.buffer.Buffer]
 final class BufferGidBuilder : BufferGidBuilderImpl!BufferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Buffer build()
   {
     return new Buffer(cast(void*)createGObject(Buffer._getGType), Yes.Take);

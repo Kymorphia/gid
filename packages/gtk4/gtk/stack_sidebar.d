@@ -62,8 +62,8 @@ class StackSidebar : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.stack_sidebar.StackSidebar]
-  Returns: New builder object
+      Get builder for [gtk.stack_sidebar.StackSidebar]
+      Returns: New builder object
   */
   static StackSidebarGidBuilder builder()
   {
@@ -128,6 +128,7 @@ class StackSidebar : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.stack_sidebar.StackSidebar]
 class StackSidebarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -147,6 +148,10 @@ class StackSidebarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.stack_sidebar.StackSidebar]
 final class StackSidebarGidBuilder : StackSidebarGidBuilderImpl!StackSidebarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StackSidebar build()
   {
     return new StackSidebar(cast(void*)createGObject(StackSidebar._getGType), No.Take);

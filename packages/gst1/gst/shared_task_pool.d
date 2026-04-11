@@ -40,8 +40,8 @@ class SharedTaskPool : gst.task_pool.TaskPool
   }
 
   /**
-  Get builder for [gst.shared_task_pool.SharedTaskPool]
-  Returns: New builder object
+      Get builder for [gst.shared_task_pool.SharedTaskPool]
+      Returns: New builder object
   */
   static SharedTaskPoolGidBuilder builder()
   {
@@ -88,6 +88,7 @@ class SharedTaskPool : gst.task_pool.TaskPool
   }
 }
 
+/// Fluent builder implementation template for [gst.shared_task_pool.SharedTaskPool]
 class SharedTaskPoolGidBuilderImpl(T) : gst.task_pool.TaskPoolGidBuilderImpl!T
 {
 }
@@ -95,6 +96,10 @@ class SharedTaskPoolGidBuilderImpl(T) : gst.task_pool.TaskPoolGidBuilderImpl!T
 /// Fluent builder for [gst.shared_task_pool.SharedTaskPool]
 final class SharedTaskPoolGidBuilder : SharedTaskPoolGidBuilderImpl!SharedTaskPoolGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SharedTaskPool build()
   {
     return new SharedTaskPool(cast(void*)createGObject(SharedTaskPool._getGType), Yes.Take);

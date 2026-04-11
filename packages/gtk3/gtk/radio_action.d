@@ -46,8 +46,8 @@ class RadioAction : gtk.toggle_action.ToggleAction
   }
 
   /**
-  Get builder for [gtk.radio_action.RadioAction]
-  Returns: New builder object
+      Get builder for [gtk.radio_action.RadioAction]
+      Returns: New builder object
   */
   static RadioActionGidBuilder builder()
   {
@@ -279,6 +279,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
   }
 }
 
+/// Fluent builder implementation template for [gtk.radio_action.RadioAction]
 class RadioActionGidBuilderImpl(T) : gtk.toggle_action.ToggleActionGidBuilderImpl!T
 {
 
@@ -325,6 +326,10 @@ class RadioActionGidBuilderImpl(T) : gtk.toggle_action.ToggleActionGidBuilderImp
 /// Fluent builder for [gtk.radio_action.RadioAction]
 final class RadioActionGidBuilder : RadioActionGidBuilderImpl!RadioActionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RadioAction build()
   {
     return new RadioAction(cast(void*)createGObject(RadioAction._getGType), Yes.Take);

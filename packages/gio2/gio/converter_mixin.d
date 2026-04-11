@@ -152,6 +152,7 @@ template ConverterT()
   }
 }
 
+/// Fluent builder implementation template for [gio.converter.Converter]
 template ConverterGidBuilderT()
 {
 }

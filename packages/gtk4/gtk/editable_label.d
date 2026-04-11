@@ -76,8 +76,8 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /**
-  Get builder for [gtk.editable_label.EditableLabel]
-  Returns: New builder object
+      Get builder for [gtk.editable_label.EditableLabel]
+      Returns: New builder object
   */
   static EditableLabelGidBuilder builder()
   {
@@ -156,6 +156,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   }
 }
 
+/// Fluent builder implementation template for [gtk.editable_label.EditableLabel]
 class EditableLabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
 {
 
@@ -176,6 +177,10 @@ class EditableLabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.ed
 /// Fluent builder for [gtk.editable_label.EditableLabel]
 final class EditableLabelGidBuilder : EditableLabelGidBuilderImpl!EditableLabelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EditableLabel build()
   {
     return new EditableLabel(cast(void*)createGObject(EditableLabel._getGType), No.Take);

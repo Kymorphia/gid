@@ -81,8 +81,8 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   }
 
   /**
-  Get builder for [gtk.signal_list_item_factory.SignalListItemFactory]
-  Returns: New builder object
+      Get builder for [gtk.signal_list_item_factory.SignalListItemFactory]
+      Returns: New builder object
   */
   static SignalListItemFactoryGidBuilder builder()
   {
@@ -299,6 +299,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   }
 }
 
+/// Fluent builder implementation template for [gtk.signal_list_item_factory.SignalListItemFactory]
 class SignalListItemFactoryGidBuilderImpl(T) : gtk.list_item_factory.ListItemFactoryGidBuilderImpl!T
 {
 }
@@ -306,6 +307,10 @@ class SignalListItemFactoryGidBuilderImpl(T) : gtk.list_item_factory.ListItemFac
 /// Fluent builder for [gtk.signal_list_item_factory.SignalListItemFactory]
 final class SignalListItemFactoryGidBuilder : SignalListItemFactoryGidBuilderImpl!SignalListItemFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SignalListItemFactory build()
   {
     return new SignalListItemFactory(cast(void*)createGObject(SignalListItemFactory._getGType), Yes.Take);

@@ -45,8 +45,8 @@ class Frame : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkitwebprocessextension.frame.Frame]
-  Returns: New builder object
+      Get builder for [webkitwebprocessextension.frame.Frame]
+      Returns: New builder object
   */
   static FrameGidBuilder builder()
   {
@@ -119,6 +119,7 @@ class Frame : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkitwebprocessextension.frame.Frame]
 class FrameGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -126,6 +127,10 @@ class FrameGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkitwebprocessextension.frame.Frame]
 final class FrameGidBuilder : FrameGidBuilderImpl!FrameGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Frame build()
   {
     return new Frame(cast(void*)createGObject(Frame._getGType), No.Take);

@@ -75,8 +75,8 @@ class IconTheme : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.icon_theme.IconTheme]
-  Returns: New builder object
+      Get builder for [gtk.icon_theme.IconTheme]
+      Returns: New builder object
   */
   static IconThemeGidBuilder builder()
   {
@@ -552,6 +552,7 @@ class IconTheme : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.icon_theme.IconTheme]
 class IconThemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -585,6 +586,10 @@ class IconThemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.icon_theme.IconTheme]
 final class IconThemeGidBuilder : IconThemeGidBuilderImpl!IconThemeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IconTheme build()
   {
     return new IconTheme(cast(void*)createGObject(IconTheme._getGType), Yes.Take);

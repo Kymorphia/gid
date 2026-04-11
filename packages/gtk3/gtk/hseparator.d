@@ -55,8 +55,8 @@ class HSeparator : gtk.separator.Separator
   }
 
   /**
-  Get builder for [gtk.hseparator.HSeparator]
-  Returns: New builder object
+      Get builder for [gtk.hseparator.HSeparator]
+      Returns: New builder object
   */
   static HSeparatorGidBuilder builder()
   {
@@ -77,6 +77,7 @@ class HSeparator : gtk.separator.Separator
   }
 }
 
+/// Fluent builder implementation template for [gtk.hseparator.HSeparator]
 class HSeparatorGidBuilderImpl(T) : gtk.separator.SeparatorGidBuilderImpl!T
 {
 
@@ -85,6 +86,10 @@ class HSeparatorGidBuilderImpl(T) : gtk.separator.SeparatorGidBuilderImpl!T
 /// Fluent builder for [gtk.hseparator.HSeparator]
 final class HSeparatorGidBuilder : HSeparatorGidBuilderImpl!HSeparatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HSeparator build()
   {
     return new HSeparator(cast(void*)createGObject(HSeparator._getGType), No.Take);

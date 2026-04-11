@@ -121,6 +121,7 @@ template SocketConnectableT()
   }
 }
 
+/// Fluent builder implementation template for [gio.socket_connectable.SocketConnectable]
 template SocketConnectableGidBuilderT()
 {
 }

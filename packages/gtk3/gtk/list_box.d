@@ -87,8 +87,8 @@ class ListBox : gtk.container.Container
   }
 
   /**
-  Get builder for [gtk.list_box.ListBox]
-  Returns: New builder object
+      Get builder for [gtk.list_box.ListBox]
+      Returns: New builder object
   */
   static ListBoxGidBuilder builder()
   {
@@ -903,6 +903,7 @@ class ListBox : gtk.container.Container
   }
 }
 
+/// Fluent builder implementation template for [gtk.list_box.ListBox]
 class ListBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 {
 
@@ -923,6 +924,10 @@ class ListBoxGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 /// Fluent builder for [gtk.list_box.ListBox]
 final class ListBoxGidBuilder : ListBoxGidBuilderImpl!ListBoxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListBox build()
   {
     return new ListBox(cast(void*)createGObject(ListBox._getGType), No.Take);

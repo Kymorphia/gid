@@ -38,8 +38,8 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
   }
 
   /**
-  Get builder for [arrow.iso8601_timestamp_parser.ISO8601TimestampParser]
-  Returns: New builder object
+      Get builder for [arrow.iso8601_timestamp_parser.ISO8601TimestampParser]
+      Returns: New builder object
   */
   static ISO8601TimestampParserGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class ISO8601TimestampParser : arrow.timestamp_parser.TimestampParser
   }
 }
 
+/// Fluent builder implementation template for [arrow.iso8601_timestamp_parser.ISO8601TimestampParser]
 class ISO8601TimestampParserGidBuilderImpl(T) : arrow.timestamp_parser.TimestampParserGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class ISO8601TimestampParserGidBuilderImpl(T) : arrow.timestamp_parser.Timestamp
 /// Fluent builder for [arrow.iso8601_timestamp_parser.ISO8601TimestampParser]
 final class ISO8601TimestampParserGidBuilder : ISO8601TimestampParserGidBuilderImpl!ISO8601TimestampParserGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ISO8601TimestampParser build()
   {
     return new ISO8601TimestampParser(cast(void*)createGObject(ISO8601TimestampParser._getGType), Yes.Take);

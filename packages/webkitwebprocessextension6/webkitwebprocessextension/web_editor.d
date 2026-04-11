@@ -46,8 +46,8 @@ class WebEditor : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkitwebprocessextension.web_editor.WebEditor]
-  Returns: New builder object
+      Get builder for [webkitwebprocessextension.web_editor.WebEditor]
+      Returns: New builder object
   */
   static WebEditorGidBuilder builder()
   {
@@ -106,6 +106,7 @@ class WebEditor : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkitwebprocessextension.web_editor.WebEditor]
 class WebEditorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -113,6 +114,10 @@ class WebEditorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkitwebprocessextension.web_editor.WebEditor]
 final class WebEditorGidBuilder : WebEditorGidBuilderImpl!WebEditorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebEditor build()
   {
     return new WebEditor(cast(void*)createGObject(WebEditor._getGType), No.Take);

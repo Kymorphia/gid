@@ -51,8 +51,8 @@ class TreeListRow : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.tree_list_row.TreeListRow]
-  Returns: New builder object
+      Get builder for [gtk.tree_list_row.TreeListRow]
+      Returns: New builder object
   */
   static TreeListRowGidBuilder builder()
   {
@@ -260,6 +260,7 @@ class TreeListRow : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_list_row.TreeListRow]
 class TreeListRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -278,6 +279,10 @@ class TreeListRowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.tree_list_row.TreeListRow]
 final class TreeListRowGidBuilder : TreeListRowGidBuilderImpl!TreeListRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeListRow build()
   {
     return new TreeListRow(cast(void*)createGObject(TreeListRow._getGType), No.Take);

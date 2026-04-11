@@ -90,6 +90,7 @@ interface Image
   bool setImageDescription(string description);
 }
 
+/// Fluent builder implementation template for [atk.image.Image]
 interface ImageGidBuilderImpl(T)
 {
 }

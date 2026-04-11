@@ -42,8 +42,8 @@ class ExtensionDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.extension_data_type.ExtensionDataType]
-  Returns: New builder object
+      Get builder for [arrow.extension_data_type.ExtensionDataType]
+      Returns: New builder object
   */
   static ExtensionDataTypeGidBuilder builder()
   {
@@ -84,6 +84,7 @@ class ExtensionDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.extension_data_type.ExtensionDataType]
 class ExtensionDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 
@@ -97,6 +98,10 @@ class ExtensionDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImp
 /// Fluent builder for [arrow.extension_data_type.ExtensionDataType]
 final class ExtensionDataTypeGidBuilder : ExtensionDataTypeGidBuilderImpl!ExtensionDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExtensionDataType build()
   {
     return new ExtensionDataType(cast(void*)createGObject(ExtensionDataType._getGType), No.Take);

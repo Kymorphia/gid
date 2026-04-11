@@ -41,8 +41,8 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /**
-  Get builder for [arrow.sink_node_options.SinkNodeOptions]
-  Returns: New builder object
+      Get builder for [arrow.sink_node_options.SinkNodeOptions]
+      Returns: New builder object
   */
   static SinkNodeOptionsGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.sink_node_options.SinkNodeOptions]
 class SinkNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
 {
 }
@@ -74,6 +75,10 @@ class SinkNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeO
 /// Fluent builder for [arrow.sink_node_options.SinkNodeOptions]
 final class SinkNodeOptionsGidBuilder : SinkNodeOptionsGidBuilderImpl!SinkNodeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SinkNodeOptions build()
   {
     return new SinkNodeOptions(cast(void*)createGObject(SinkNodeOptions._getGType), Yes.Take);

@@ -43,8 +43,8 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /**
-  Get builder for [gtk.mnemonic_trigger.MnemonicTrigger]
-  Returns: New builder object
+      Get builder for [gtk.mnemonic_trigger.MnemonicTrigger]
+      Returns: New builder object
   */
   static MnemonicTriggerGidBuilder builder()
   {
@@ -90,6 +90,7 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 }
 
+/// Fluent builder implementation template for [gtk.mnemonic_trigger.MnemonicTrigger]
 class MnemonicTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGidBuilderImpl!T
 {
 
@@ -108,6 +109,10 @@ class MnemonicTriggerGidBuilderImpl(T) : gtk.shortcut_trigger.ShortcutTriggerGid
 /// Fluent builder for [gtk.mnemonic_trigger.MnemonicTrigger]
 final class MnemonicTriggerGidBuilder : MnemonicTriggerGidBuilderImpl!MnemonicTriggerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MnemonicTrigger build()
   {
     return new MnemonicTrigger(cast(void*)createGObject(MnemonicTrigger._getGType), Yes.Take);

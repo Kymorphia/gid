@@ -41,8 +41,8 @@ class Signature : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.signature.Signature]
-  Returns: New builder object
+      Get builder for [gmime.signature.Signature]
+      Returns: New builder object
   */
   static SignatureGidBuilder builder()
   {
@@ -176,6 +176,7 @@ class Signature : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.signature.Signature]
 class SignatureGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -183,6 +184,10 @@ class SignatureGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.signature.Signature]
 final class SignatureGidBuilder : SignatureGidBuilderImpl!SignatureGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Signature build()
   {
     return new Signature(cast(void*)createGObject(Signature._getGType), Yes.Take);

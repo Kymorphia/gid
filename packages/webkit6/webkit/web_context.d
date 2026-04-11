@@ -74,8 +74,8 @@ class WebContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.web_context.WebContext]
-  Returns: New builder object
+      Get builder for [webkit.web_context.WebContext]
+      Returns: New builder object
   */
   static WebContextGidBuilder builder()
   {
@@ -697,6 +697,7 @@ class WebContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.web_context.WebContext]
 class WebContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -733,6 +734,10 @@ class WebContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.web_context.WebContext]
 final class WebContextGidBuilder : WebContextGidBuilderImpl!WebContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebContext build()
   {
     return new WebContext(cast(void*)createGObject(WebContext._getGType), Yes.Take);

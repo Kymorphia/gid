@@ -40,8 +40,8 @@ class Int32Array : arrow.numeric_array.NumericArray
   }
 
   /**
-  Get builder for [arrow.int32_array.Int32Array]
-  Returns: New builder object
+      Get builder for [arrow.int32_array.Int32Array]
+      Returns: New builder object
   */
   static Int32ArrayGidBuilder builder()
   {
@@ -91,6 +91,7 @@ class Int32Array : arrow.numeric_array.NumericArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.int32_array.Int32Array]
 class Int32ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderImpl!T
 {
 }
@@ -98,6 +99,10 @@ class Int32ArrayGidBuilderImpl(T) : arrow.numeric_array.NumericArrayGidBuilderIm
 /// Fluent builder for [arrow.int32_array.Int32Array]
 final class Int32ArrayGidBuilder : Int32ArrayGidBuilderImpl!Int32ArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Int32Array build()
   {
     return new Int32Array(cast(void*)createGObject(Int32Array._getGType), Yes.Take);

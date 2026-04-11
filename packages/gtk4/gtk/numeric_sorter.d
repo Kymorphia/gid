@@ -44,8 +44,8 @@ class NumericSorter : gtk.sorter.Sorter
   }
 
   /**
-  Get builder for [gtk.numeric_sorter.NumericSorter]
-  Returns: New builder object
+      Get builder for [gtk.numeric_sorter.NumericSorter]
+      Returns: New builder object
   */
   static NumericSorterGidBuilder builder()
   {
@@ -160,6 +160,7 @@ class NumericSorter : gtk.sorter.Sorter
   }
 }
 
+/// Fluent builder implementation template for [gtk.numeric_sorter.NumericSorter]
 class NumericSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 {
 
@@ -189,6 +190,10 @@ class NumericSorterGidBuilderImpl(T) : gtk.sorter.SorterGidBuilderImpl!T
 /// Fluent builder for [gtk.numeric_sorter.NumericSorter]
 final class NumericSorterGidBuilder : NumericSorterGidBuilderImpl!NumericSorterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NumericSorter build()
   {
     return new NumericSorter(cast(void*)createGObject(NumericSorter._getGType), Yes.Take);

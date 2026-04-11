@@ -45,8 +45,8 @@ class ApplicationPkcs7Mime : gmime.part.Part
   }
 
   /**
-  Get builder for [gmime.application_pkcs7_mime.ApplicationPkcs7Mime]
-  Returns: New builder object
+      Get builder for [gmime.application_pkcs7_mime.ApplicationPkcs7Mime]
+      Returns: New builder object
   */
   static ApplicationPkcs7MimeGidBuilder builder()
   {
@@ -190,6 +190,7 @@ class ApplicationPkcs7Mime : gmime.part.Part
   }
 }
 
+/// Fluent builder implementation template for [gmime.application_pkcs7_mime.ApplicationPkcs7Mime]
 class ApplicationPkcs7MimeGidBuilderImpl(T) : gmime.part.PartGidBuilderImpl!T
 {
 }
@@ -197,6 +198,10 @@ class ApplicationPkcs7MimeGidBuilderImpl(T) : gmime.part.PartGidBuilderImpl!T
 /// Fluent builder for [gmime.application_pkcs7_mime.ApplicationPkcs7Mime]
 final class ApplicationPkcs7MimeGidBuilder : ApplicationPkcs7MimeGidBuilderImpl!ApplicationPkcs7MimeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ApplicationPkcs7Mime build()
   {
     return new ApplicationPkcs7Mime(cast(void*)createGObject(ApplicationPkcs7Mime._getGType), Yes.Take);

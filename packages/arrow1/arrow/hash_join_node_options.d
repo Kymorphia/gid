@@ -39,8 +39,8 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /**
-  Get builder for [arrow.hash_join_node_options.HashJoinNodeOptions]
-  Returns: New builder object
+      Get builder for [arrow.hash_join_node_options.HashJoinNodeOptions]
+      Returns: New builder object
   */
   static HashJoinNodeOptionsGidBuilder builder()
   {
@@ -117,6 +117,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.hash_join_node_options.HashJoinNodeOptions]
 class HashJoinNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
 {
 }
@@ -124,6 +125,10 @@ class HashJoinNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteN
 /// Fluent builder for [arrow.hash_join_node_options.HashJoinNodeOptions]
 final class HashJoinNodeOptionsGidBuilder : HashJoinNodeOptionsGidBuilderImpl!HashJoinNodeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HashJoinNodeOptions build()
   {
     return new HashJoinNodeOptions(cast(void*)createGObject(HashJoinNodeOptions._getGType), Yes.Take);

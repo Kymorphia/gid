@@ -100,8 +100,8 @@ class Reader : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [json.reader.Reader]
-  Returns: New builder object
+      Get builder for [json.reader.Reader]
+      Returns: New builder object
   */
   static ReaderGidBuilder builder()
   {
@@ -510,6 +510,7 @@ class Reader : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [json.reader.Reader]
 class ReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -528,6 +529,10 @@ class ReaderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [json.reader.Reader]
 final class ReaderGidBuilder : ReaderGidBuilderImpl!ReaderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Reader build()
   {
     return new Reader(cast(void*)createGObject(Reader._getGType), Yes.Take);

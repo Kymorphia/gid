@@ -57,8 +57,8 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-  Get builder for [gtk.toggle_tool_button.ToggleToolButton]
-  Returns: New builder object
+      Get builder for [gtk.toggle_tool_button.ToggleToolButton]
+      Returns: New builder object
   */
   static ToggleToolButtonGidBuilder builder()
   {
@@ -180,6 +180,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   }
 }
 
+/// Fluent builder implementation template for [gtk.toggle_tool_button.ToggleToolButton]
 class ToggleToolButtonGidBuilderImpl(T) : gtk.tool_button.ToolButtonGidBuilderImpl!T
 {
 
@@ -199,6 +200,10 @@ class ToggleToolButtonGidBuilderImpl(T) : gtk.tool_button.ToolButtonGidBuilderIm
 /// Fluent builder for [gtk.toggle_tool_button.ToggleToolButton]
 final class ToggleToolButtonGidBuilder : ToggleToolButtonGidBuilderImpl!ToggleToolButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToggleToolButton build()
   {
     return new ToggleToolButton(cast(void*)createGObject(ToggleToolButton._getGType), No.Take);

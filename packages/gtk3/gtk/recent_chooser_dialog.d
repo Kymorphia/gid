@@ -86,8 +86,8 @@ class RecentChooserDialog : gtk.dialog.Dialog, gtk.recent_chooser.RecentChooser
   }
 
   /**
-  Get builder for [gtk.recent_chooser_dialog.RecentChooserDialog]
-  Returns: New builder object
+      Get builder for [gtk.recent_chooser_dialog.RecentChooserDialog]
+      Returns: New builder object
   */
   static RecentChooserDialogGidBuilder builder()
   {
@@ -97,6 +97,7 @@ class RecentChooserDialog : gtk.dialog.Dialog, gtk.recent_chooser.RecentChooser
   mixin RecentChooserT!();
 }
 
+/// Fluent builder implementation template for [gtk.recent_chooser_dialog.RecentChooserDialog]
 class RecentChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, gtk.recent_chooser.RecentChooserGidBuilderImpl!T
 {
 
@@ -106,6 +107,10 @@ class RecentChooserDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T, 
 /// Fluent builder for [gtk.recent_chooser_dialog.RecentChooserDialog]
 final class RecentChooserDialogGidBuilder : RecentChooserDialogGidBuilderImpl!RecentChooserDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecentChooserDialog build()
   {
     return new RecentChooserDialog(cast(void*)createGObject(RecentChooserDialog._getGType), No.Take);

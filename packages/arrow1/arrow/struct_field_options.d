@@ -40,8 +40,8 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.struct_field_options.StructFieldOptions]
-  Returns: New builder object
+      Get builder for [arrow.struct_field_options.StructFieldOptions]
+      Returns: New builder object
   */
   static StructFieldOptionsGidBuilder builder()
   {
@@ -73,6 +73,7 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.struct_field_options.StructFieldOptions]
 class StructFieldOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 }
@@ -80,6 +81,10 @@ class StructFieldOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptio
 /// Fluent builder for [arrow.struct_field_options.StructFieldOptions]
 final class StructFieldOptionsGidBuilder : StructFieldOptionsGidBuilderImpl!StructFieldOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StructFieldOptions build()
   {
     return new StructFieldOptions(cast(void*)createGObject(StructFieldOptions._getGType), Yes.Take);

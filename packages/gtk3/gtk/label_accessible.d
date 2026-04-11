@@ -44,8 +44,8 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
   }
 
   /**
-  Get builder for [gtk.label_accessible.LabelAccessible]
-  Returns: New builder object
+      Get builder for [gtk.label_accessible.LabelAccessible]
+      Returns: New builder object
   */
   static LabelAccessibleGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
   mixin TextT!();
 }
 
+/// Fluent builder implementation template for [gtk.label_accessible.LabelAccessible]
 class LabelAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.hypertext.HypertextGidBuilderImpl!T, atk.text.TextGidBuilderImpl!T
 {
 
@@ -66,6 +67,10 @@ class LabelAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleG
 /// Fluent builder for [gtk.label_accessible.LabelAccessible]
 final class LabelAccessibleGidBuilder : LabelAccessibleGidBuilderImpl!LabelAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LabelAccessible build()
   {
     return new LabelAccessible(cast(void*)createGObject(LabelAccessible._getGType), No.Take);

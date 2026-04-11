@@ -39,8 +39,8 @@ class ToplevelAccessible : atk.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.toplevel_accessible.ToplevelAccessible]
-  Returns: New builder object
+      Get builder for [gtk.toplevel_accessible.ToplevelAccessible]
+      Returns: New builder object
   */
   static ToplevelAccessibleGidBuilder builder()
   {
@@ -57,6 +57,7 @@ class ToplevelAccessible : atk.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.toplevel_accessible.ToplevelAccessible]
 class ToplevelAccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -64,6 +65,10 @@ class ToplevelAccessibleGidBuilderImpl(T) : atk.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gtk.toplevel_accessible.ToplevelAccessible]
 final class ToplevelAccessibleGidBuilder : ToplevelAccessibleGidBuilderImpl!ToplevelAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ToplevelAccessible build()
   {
     return new ToplevelAccessible(cast(void*)createGObject(ToplevelAccessible._getGType), No.Take);

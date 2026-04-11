@@ -121,8 +121,8 @@ class DragSource : gtk.gesture_single.GestureSingle
   }
 
   /**
-  Get builder for [gtk.drag_source.DragSource]
-  Returns: New builder object
+      Get builder for [gtk.drag_source.DragSource]
+      Returns: New builder object
   */
   static DragSourceGidBuilder builder()
   {
@@ -504,6 +504,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   }
 }
 
+/// Fluent builder implementation template for [gtk.drag_source.DragSource]
 class DragSourceGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderImpl!T
 {
 
@@ -536,6 +537,10 @@ class DragSourceGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderIm
 /// Fluent builder for [gtk.drag_source.DragSource]
 final class DragSourceGidBuilder : DragSourceGidBuilderImpl!DragSourceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DragSource build()
   {
     return new DragSource(cast(void*)createGObject(DragSource._getGType), Yes.Take);

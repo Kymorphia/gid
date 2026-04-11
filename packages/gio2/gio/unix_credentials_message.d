@@ -60,8 +60,8 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   }
 
   /**
-  Get builder for [gio.unix_credentials_message.UnixCredentialsMessage]
-  Returns: New builder object
+      Get builder for [gio.unix_credentials_message.UnixCredentialsMessage]
+      Returns: New builder object
   */
   static UnixCredentialsMessageGidBuilder builder()
   {
@@ -127,6 +127,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   }
 }
 
+/// Fluent builder implementation template for [gio.unix_credentials_message.UnixCredentialsMessage]
 class UnixCredentialsMessageGidBuilderImpl(T) : gio.socket_control_message.SocketControlMessageGidBuilderImpl!T
 {
 
@@ -145,6 +146,10 @@ class UnixCredentialsMessageGidBuilderImpl(T) : gio.socket_control_message.Socke
 /// Fluent builder for [gio.unix_credentials_message.UnixCredentialsMessage]
 final class UnixCredentialsMessageGidBuilder : UnixCredentialsMessageGidBuilderImpl!UnixCredentialsMessageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnixCredentialsMessage build()
   {
     return new UnixCredentialsMessage(cast(void*)createGObject(UnixCredentialsMessage._getGType), Yes.Take);

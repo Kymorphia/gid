@@ -75,6 +75,7 @@ template ActionMapT()
   }
 }
 
+/// Fluent builder implementation template for [gio.action_map.ActionMap]
 template ActionMapGidBuilderT()
 {
 }

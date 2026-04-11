@@ -52,8 +52,8 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
   }
 
   /**
-  Get builder for [gstnet.net_time_provider.NetTimeProvider]
-  Returns: New builder object
+      Get builder for [gstnet.net_time_provider.NetTimeProvider]
+      Returns: New builder object
   */
   static NetTimeProviderGidBuilder builder()
   {
@@ -123,6 +123,7 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
   }
 }
 
+/// Fluent builder implementation template for [gstnet.net_time_provider.NetTimeProvider]
 class NetTimeProviderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T, gio.initable.InitableGidBuilderImpl!T
 {
 
@@ -162,6 +163,10 @@ class NetTimeProviderGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [gstnet.net_time_provider.NetTimeProvider]
 final class NetTimeProviderGidBuilder : NetTimeProviderGidBuilderImpl!NetTimeProviderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NetTimeProvider build()
   {
     return new NetTimeProvider(cast(void*)createGObject(NetTimeProvider._getGType), Yes.Take);

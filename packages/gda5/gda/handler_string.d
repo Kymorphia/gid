@@ -42,8 +42,8 @@ class HandlerString : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 
   /**
-  Get builder for [gda.handler_string.HandlerString]
-  Returns: New builder object
+      Get builder for [gda.handler_string.HandlerString]
+      Returns: New builder object
   */
   static HandlerStringGidBuilder builder()
   {
@@ -82,6 +82,7 @@ class HandlerString : gobject.object.ObjectWrap, gda.data_handler.DataHandler
   }
 }
 
+/// Fluent builder implementation template for [gda.handler_string.HandlerString]
 class HandlerStringGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_handler.DataHandlerGidBuilderImpl!T
 {
 
@@ -91,6 +92,10 @@ class HandlerStringGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.handler_string.HandlerString]
 final class HandlerStringGidBuilder : HandlerStringGidBuilderImpl!HandlerStringGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HandlerString build()
   {
     return new HandlerString(cast(void*)createGObject(HandlerString._getGType), No.Take);

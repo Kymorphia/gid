@@ -39,8 +39,8 @@ class UnionScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.union_scalar.UnionScalar]
-  Returns: New builder object
+      Get builder for [arrow.union_scalar.UnionScalar]
+      Returns: New builder object
   */
   static UnionScalarGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class UnionScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.union_scalar.UnionScalar]
 class UnionScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 
@@ -83,6 +84,10 @@ class UnionScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.union_scalar.UnionScalar]
 final class UnionScalarGidBuilder : UnionScalarGidBuilderImpl!UnionScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnionScalar build()
   {
     return new UnionScalar(cast(void*)createGObject(UnionScalar._getGType), No.Take);

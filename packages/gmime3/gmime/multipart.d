@@ -41,8 +41,8 @@ class Multipart : gmime.object.ObjectWrap
   }
 
   /**
-  Get builder for [gmime.multipart.Multipart]
-  Returns: New builder object
+      Get builder for [gmime.multipart.Multipart]
+      Returns: New builder object
   */
   static MultipartGidBuilder builder()
   {
@@ -328,6 +328,7 @@ class Multipart : gmime.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gmime.multipart.Multipart]
 class MultipartGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -335,6 +336,10 @@ class MultipartGidBuilderImpl(T) : gmime.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gmime.multipart.Multipart]
 final class MultipartGidBuilder : MultipartGidBuilderImpl!MultipartGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Multipart build()
   {
     return new Multipart(cast(void*)createGObject(Multipart._getGType), Yes.Take);

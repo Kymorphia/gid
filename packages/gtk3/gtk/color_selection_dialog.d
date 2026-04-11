@@ -44,8 +44,8 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   }
 
   /**
-  Get builder for [gtk.color_selection_dialog.ColorSelectionDialog]
-  Returns: New builder object
+      Get builder for [gtk.color_selection_dialog.ColorSelectionDialog]
+      Returns: New builder object
   */
   static ColorSelectionDialogGidBuilder builder()
   {
@@ -104,6 +104,7 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   }
 }
 
+/// Fluent builder implementation template for [gtk.color_selection_dialog.ColorSelectionDialog]
 class ColorSelectionDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 {
 
@@ -112,6 +113,10 @@ class ColorSelectionDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 /// Fluent builder for [gtk.color_selection_dialog.ColorSelectionDialog]
 final class ColorSelectionDialogGidBuilder : ColorSelectionDialogGidBuilderImpl!ColorSelectionDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColorSelectionDialog build()
   {
     return new ColorSelectionDialog(cast(void*)createGObject(ColorSelectionDialog._getGType), No.Take);

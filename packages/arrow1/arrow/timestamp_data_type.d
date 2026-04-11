@@ -40,8 +40,8 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
   }
 
   /**
-  Get builder for [arrow.timestamp_data_type.TimestampDataType]
-  Returns: New builder object
+      Get builder for [arrow.timestamp_data_type.TimestampDataType]
+      Returns: New builder object
   */
   static TimestampDataTypeGidBuilder builder()
   {
@@ -75,6 +75,7 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.timestamp_data_type.TimestampDataType]
 class TimestampDataTypeGidBuilderImpl(T) : arrow.temporal_data_type.TemporalDataTypeGidBuilderImpl!T
 {
 
@@ -93,6 +94,10 @@ class TimestampDataTypeGidBuilderImpl(T) : arrow.temporal_data_type.TemporalData
 /// Fluent builder for [arrow.timestamp_data_type.TimestampDataType]
 final class TimestampDataTypeGidBuilder : TimestampDataTypeGidBuilderImpl!TimestampDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TimestampDataType build()
   {
     return new TimestampDataType(cast(void*)createGObject(TimestampDataType._getGType), Yes.Take);

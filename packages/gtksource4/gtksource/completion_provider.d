@@ -181,6 +181,7 @@ interface CompletionProvider
   void updateInfo(gtksource.completion_proposal.CompletionProposal proposal, gtksource.completion_info.CompletionInfo info);
 }
 
+/// Fluent builder implementation template for [gtksource.completion_provider.CompletionProvider]
 interface CompletionProviderGidBuilderImpl(T)
 {
 }

@@ -117,8 +117,8 @@ class WebProcessExtension : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkitwebprocessextension.web_process_extension.WebProcessExtension]
-  Returns: New builder object
+      Get builder for [webkitwebprocessextension.web_process_extension.WebProcessExtension]
+      Returns: New builder object
   */
   static WebProcessExtensionGidBuilder builder()
   {
@@ -277,6 +277,7 @@ class WebProcessExtension : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkitwebprocessextension.web_process_extension.WebProcessExtension]
 class WebProcessExtensionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -284,6 +285,10 @@ class WebProcessExtensionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
 /// Fluent builder for [webkitwebprocessextension.web_process_extension.WebProcessExtension]
 final class WebProcessExtensionGidBuilder : WebProcessExtensionGidBuilderImpl!WebProcessExtensionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebProcessExtension build()
   {
     return new WebProcessExtension(cast(void*)createGObject(WebProcessExtension._getGType), No.Take);

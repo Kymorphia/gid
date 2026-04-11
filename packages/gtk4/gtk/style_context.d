@@ -84,8 +84,8 @@ class StyleContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.style_context.StyleContext]
-  Returns: New builder object
+      Get builder for [gtk.style_context.StyleContext]
+      Returns: New builder object
   */
   static StyleContextGidBuilder builder()
   {
@@ -460,6 +460,7 @@ class StyleContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.style_context.StyleContext]
 class StyleContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -473,6 +474,10 @@ class StyleContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.style_context.StyleContext]
 final class StyleContextGidBuilder : StyleContextGidBuilderImpl!StyleContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StyleContext build()
   {
     return new StyleContext(cast(void*)createGObject(StyleContext._getGType), No.Take);

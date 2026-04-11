@@ -73,8 +73,8 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   }
 
   /**
-  Get builder for [gtk.cell_view.CellView]
-  Returns: New builder object
+      Get builder for [gtk.cell_view.CellView]
+      Returns: New builder object
   */
   static CellViewGidBuilder builder()
   {
@@ -498,6 +498,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_view.CellView]
 class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_layout.CellLayoutGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -626,6 +627,10 @@ class CellViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_la
 /// Fluent builder for [gtk.cell_view.CellView]
 final class CellViewGidBuilder : CellViewGidBuilderImpl!CellViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellView build()
   {
     return new CellView(cast(void*)createGObject(CellView._getGType), No.Take);

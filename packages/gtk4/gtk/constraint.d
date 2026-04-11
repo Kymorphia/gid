@@ -55,8 +55,8 @@ class Constraint : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.constraint.Constraint]
-  Returns: New builder object
+      Get builder for [gtk.constraint.Constraint]
+      Returns: New builder object
   */
   static ConstraintGidBuilder builder()
   {
@@ -330,6 +330,7 @@ class Constraint : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.constraint.Constraint]
 class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -439,6 +440,10 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.constraint.Constraint]
 final class ConstraintGidBuilder : ConstraintGidBuilderImpl!ConstraintGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Constraint build()
   {
     return new Constraint(cast(void*)createGObject(Constraint._getGType), Yes.Take);

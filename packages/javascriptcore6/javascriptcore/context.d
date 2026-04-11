@@ -51,8 +51,8 @@ class Context : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [javascriptcore.context.Context]
-  Returns: New builder object
+      Get builder for [javascriptcore.context.Context]
+      Returns: New builder object
   */
   static ContextGidBuilder builder()
   {
@@ -398,6 +398,7 @@ class Context : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [javascriptcore.context.Context]
 class ContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -416,6 +417,10 @@ class ContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [javascriptcore.context.Context]
 final class ContextGidBuilder : ContextGidBuilderImpl!ContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Context build()
   {
     return new Context(cast(void*)createGObject(Context._getGType), Yes.Take);

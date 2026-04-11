@@ -40,8 +40,8 @@ class IndexOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.index_options.IndexOptions]
-  Returns: New builder object
+      Get builder for [arrow.index_options.IndexOptions]
+      Returns: New builder object
   */
   static IndexOptionsGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class IndexOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.index_options.IndexOptions]
 class IndexOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -94,6 +95,10 @@ class IndexOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidB
 /// Fluent builder for [arrow.index_options.IndexOptions]
 final class IndexOptionsGidBuilder : IndexOptionsGidBuilderImpl!IndexOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IndexOptions build()
   {
     return new IndexOptions(cast(void*)createGObject(IndexOptions._getGType), Yes.Take);

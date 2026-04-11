@@ -116,8 +116,8 @@ class Application : gio.application.Application
   }
 
   /**
-  Get builder for [gtk.application.Application]
-  Returns: New builder object
+      Get builder for [gtk.application.Application]
+      Returns: New builder object
   */
   static ApplicationGidBuilder builder()
   {
@@ -705,6 +705,7 @@ class Application : gio.application.Application
   }
 }
 
+/// Fluent builder implementation template for [gtk.application.Application]
 class ApplicationGidBuilderImpl(T) : gio.application.ApplicationGidBuilderImpl!T
 {
 
@@ -738,6 +739,10 @@ class ApplicationGidBuilderImpl(T) : gio.application.ApplicationGidBuilderImpl!T
 /// Fluent builder for [gtk.application.Application]
 final class ApplicationGidBuilder : ApplicationGidBuilderImpl!ApplicationGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Application build()
   {
     return new Application(cast(void*)createGObject(Application._getGType), Yes.Take);

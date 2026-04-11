@@ -38,8 +38,8 @@ class IntegerDataType : arrow.numeric_data_type.NumericDataType
   }
 
   /**
-  Get builder for [arrow.integer_data_type.IntegerDataType]
-  Returns: New builder object
+      Get builder for [arrow.integer_data_type.IntegerDataType]
+      Returns: New builder object
   */
   static IntegerDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class IntegerDataType : arrow.numeric_data_type.NumericDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.integer_data_type.IntegerDataType]
 class IntegerDataTypeGidBuilderImpl(T) : arrow.numeric_data_type.NumericDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class IntegerDataTypeGidBuilderImpl(T) : arrow.numeric_data_type.NumericDataType
 /// Fluent builder for [arrow.integer_data_type.IntegerDataType]
 final class IntegerDataTypeGidBuilder : IntegerDataTypeGidBuilderImpl!IntegerDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   IntegerDataType build()
   {
     return new IntegerDataType(cast(void*)createGObject(IntegerDataType._getGType), No.Take);

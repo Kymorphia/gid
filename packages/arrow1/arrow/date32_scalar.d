@@ -38,8 +38,8 @@ class Date32Scalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.date32_scalar.Date32Scalar]
-  Returns: New builder object
+      Get builder for [arrow.date32_scalar.Date32Scalar]
+      Returns: New builder object
   */
   static Date32ScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class Date32Scalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.date32_scalar.Date32Scalar]
 class Date32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class Date32ScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.date32_scalar.Date32Scalar]
 final class Date32ScalarGidBuilder : Date32ScalarGidBuilderImpl!Date32ScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Date32Scalar build()
   {
     return new Date32Scalar(cast(void*)createGObject(Date32Scalar._getGType), Yes.Take);

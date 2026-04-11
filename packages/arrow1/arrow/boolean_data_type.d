@@ -38,8 +38,8 @@ class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /**
-  Get builder for [arrow.boolean_data_type.BooleanDataType]
-  Returns: New builder object
+      Get builder for [arrow.boolean_data_type.BooleanDataType]
+      Returns: New builder object
   */
   static BooleanDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.boolean_data_type.BooleanDataType]
 class BooleanDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class BooleanDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthD
 /// Fluent builder for [arrow.boolean_data_type.BooleanDataType]
 final class BooleanDataTypeGidBuilder : BooleanDataTypeGidBuilderImpl!BooleanDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BooleanDataType build()
   {
     return new BooleanDataType(cast(void*)createGObject(BooleanDataType._getGType), Yes.Take);

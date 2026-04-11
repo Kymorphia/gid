@@ -43,8 +43,8 @@ class Batch : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.batch.Batch]
-  Returns: New builder object
+      Get builder for [gda.batch.Batch]
+      Returns: New builder object
   */
   static BatchGidBuilder builder()
   {
@@ -198,6 +198,7 @@ class Batch : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.batch.Batch]
 class BatchGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -205,6 +206,10 @@ class BatchGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.batch.Batch]
 final class BatchGidBuilder : BatchGidBuilderImpl!BatchGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Batch build()
   {
     return new Batch(cast(void*)createGObject(Batch._getGType), Yes.Take);

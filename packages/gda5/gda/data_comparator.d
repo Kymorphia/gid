@@ -43,8 +43,8 @@ class DataComparator : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.data_comparator.DataComparator]
-  Returns: New builder object
+      Get builder for [gda.data_comparator.DataComparator]
+      Returns: New builder object
   */
   static DataComparatorGidBuilder builder()
   {
@@ -209,6 +209,7 @@ class DataComparator : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.data_comparator.DataComparator]
 class DataComparatorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -228,6 +229,10 @@ class DataComparatorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gda.data_comparator.DataComparator]
 final class DataComparatorGidBuilder : DataComparatorGidBuilderImpl!DataComparatorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataComparator build()
   {
     return new DataComparator(cast(void*)createGObject(DataComparator._getGType), Yes.Take);

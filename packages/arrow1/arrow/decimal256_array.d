@@ -40,8 +40,8 @@ class Decimal256Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   }
 
   /**
-  Get builder for [arrow.decimal256_array.Decimal256Array]
-  Returns: New builder object
+      Get builder for [arrow.decimal256_array.Decimal256Array]
+      Returns: New builder object
   */
   static Decimal256ArrayGidBuilder builder()
   {
@@ -69,6 +69,7 @@ class Decimal256Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.decimal256_array.Decimal256Array]
 class Decimal256ArrayGidBuilderImpl(T) : arrow.fixed_size_binary_array.FixedSizeBinaryArrayGidBuilderImpl!T
 {
 }
@@ -76,6 +77,10 @@ class Decimal256ArrayGidBuilderImpl(T) : arrow.fixed_size_binary_array.FixedSize
 /// Fluent builder for [arrow.decimal256_array.Decimal256Array]
 final class Decimal256ArrayGidBuilder : Decimal256ArrayGidBuilderImpl!Decimal256ArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Decimal256Array build()
   {
     return new Decimal256Array(cast(void*)createGObject(Decimal256Array._getGType), No.Take);

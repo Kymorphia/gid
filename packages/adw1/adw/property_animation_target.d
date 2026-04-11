@@ -43,8 +43,8 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
   }
 
   /**
-  Get builder for [adw.property_animation_target.PropertyAnimationTarget]
-  Returns: New builder object
+      Get builder for [adw.property_animation_target.PropertyAnimationTarget]
+      Returns: New builder object
   */
   static PropertyAnimationTargetGidBuilder builder()
   {
@@ -136,6 +136,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
   }
 }
 
+/// Fluent builder implementation template for [adw.property_animation_target.PropertyAnimationTarget]
 class PropertyAnimationTargetGidBuilderImpl(T) : adw.animation_target.AnimationTargetGidBuilderImpl!T
 {
 
@@ -169,6 +170,10 @@ class PropertyAnimationTargetGidBuilderImpl(T) : adw.animation_target.AnimationT
 /// Fluent builder for [adw.property_animation_target.PropertyAnimationTarget]
 final class PropertyAnimationTargetGidBuilder : PropertyAnimationTargetGidBuilderImpl!PropertyAnimationTargetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PropertyAnimationTarget build()
   {
     return new PropertyAnimationTarget(cast(void*)createGObject(PropertyAnimationTarget._getGType), Yes.Take);

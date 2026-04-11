@@ -45,8 +45,8 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
   }
 
   /**
-  Get builder for [arrowdataset.file_system_dataset.FileSystemDataset]
-  Returns: New builder object
+      Get builder for [arrowdataset.file_system_dataset.FileSystemDataset]
+      Returns: New builder object
   */
   static FileSystemDatasetGidBuilder builder()
   {
@@ -92,6 +92,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.file_system_dataset.FileSystemDataset]
 class FileSystemDatasetGidBuilderImpl(T) : arrowdataset.dataset.DatasetGidBuilderImpl!T
 {
 
@@ -132,6 +133,10 @@ class FileSystemDatasetGidBuilderImpl(T) : arrowdataset.dataset.DatasetGidBuilde
 /// Fluent builder for [arrowdataset.file_system_dataset.FileSystemDataset]
 final class FileSystemDatasetGidBuilder : FileSystemDatasetGidBuilderImpl!FileSystemDatasetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileSystemDataset build()
   {
     return new FileSystemDataset(cast(void*)createGObject(FileSystemDataset._getGType), No.Take);

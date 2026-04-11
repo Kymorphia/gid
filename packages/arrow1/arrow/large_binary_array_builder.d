@@ -40,8 +40,8 @@ class LargeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.large_binary_array_builder.LargeBinaryArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.large_binary_array_builder.LargeBinaryArrayBuilder]
+      Returns: New builder object
   */
   static LargeBinaryArrayBuilderGidBuilder builder()
   {
@@ -121,6 +121,7 @@ class LargeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.large_binary_array_builder.LargeBinaryArrayBuilder]
 class LargeBinaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -128,6 +129,10 @@ class LargeBinaryArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilde
 /// Fluent builder for [arrow.large_binary_array_builder.LargeBinaryArrayBuilder]
 final class LargeBinaryArrayBuilderGidBuilder : LargeBinaryArrayBuilderGidBuilderImpl!LargeBinaryArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LargeBinaryArrayBuilder build()
   {
     return new LargeBinaryArrayBuilder(cast(void*)createGObject(LargeBinaryArrayBuilder._getGType), Yes.Take);

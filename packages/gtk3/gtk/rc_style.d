@@ -43,8 +43,8 @@ class RcStyle : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.rc_style.RcStyle]
-  Returns: New builder object
+      Get builder for [gtk.rc_style.RcStyle]
+      Returns: New builder object
   */
   static RcStyleGidBuilder builder()
   {
@@ -82,6 +82,7 @@ class RcStyle : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.rc_style.RcStyle]
 class RcStyleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -89,6 +90,10 @@ class RcStyleGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.rc_style.RcStyle]
 final class RcStyleGidBuilder : RcStyleGidBuilderImpl!RcStyleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RcStyle build()
   {
     return new RcStyle(cast(void*)createGObject(RcStyle._getGType), Yes.Take);

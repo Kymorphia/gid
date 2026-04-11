@@ -41,8 +41,8 @@ class StreamFilter : gmime.stream.Stream
   }
 
   /**
-  Get builder for [gmime.stream_filter.StreamFilter]
-  Returns: New builder object
+      Get builder for [gmime.stream_filter.StreamFilter]
+      Returns: New builder object
   */
   static StreamFilterGidBuilder builder()
   {
@@ -118,6 +118,7 @@ class StreamFilter : gmime.stream.Stream
   }
 }
 
+/// Fluent builder implementation template for [gmime.stream_filter.StreamFilter]
 class StreamFilterGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 {
 }
@@ -125,6 +126,10 @@ class StreamFilterGidBuilderImpl(T) : gmime.stream.StreamGidBuilderImpl!T
 /// Fluent builder for [gmime.stream_filter.StreamFilter]
 final class StreamFilterGidBuilder : StreamFilterGidBuilderImpl!StreamFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StreamFilter build()
   {
     return new StreamFilter(cast(void*)createGObject(StreamFilter._getGType), Yes.Take);

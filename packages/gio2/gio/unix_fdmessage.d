@@ -55,8 +55,8 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   }
 
   /**
-  Get builder for [gio.unix_fdmessage.UnixFDMessage]
-  Returns: New builder object
+      Get builder for [gio.unix_fdmessage.UnixFDMessage]
+      Returns: New builder object
   */
   static UnixFDMessageGidBuilder builder()
   {
@@ -175,6 +175,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   }
 }
 
+/// Fluent builder implementation template for [gio.unix_fdmessage.UnixFDMessage]
 class UnixFDMessageGidBuilderImpl(T) : gio.socket_control_message.SocketControlMessageGidBuilderImpl!T
 {
 
@@ -193,6 +194,10 @@ class UnixFDMessageGidBuilderImpl(T) : gio.socket_control_message.SocketControlM
 /// Fluent builder for [gio.unix_fdmessage.UnixFDMessage]
 final class UnixFDMessageGidBuilder : UnixFDMessageGidBuilderImpl!UnixFDMessageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnixFDMessage build()
   {
     return new UnixFDMessage(cast(void*)createGObject(UnixFDMessage._getGType), Yes.Take);

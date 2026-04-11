@@ -46,8 +46,8 @@ class Tracer : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.tracer.Tracer]
-  Returns: New builder object
+      Get builder for [gst.tracer.Tracer]
+      Returns: New builder object
   */
   static TracerGidBuilder builder()
   {
@@ -85,6 +85,7 @@ class Tracer : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.tracer.Tracer]
 class TracerGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -98,6 +99,10 @@ class TracerGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.tracer.Tracer]
 final class TracerGidBuilder : TracerGidBuilderImpl!TracerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Tracer build()
   {
     return new Tracer(cast(void*)createGObject(Tracer._getGType), No.Take);

@@ -60,8 +60,8 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   }
 
   /**
-  Get builder for [gtk.radio_tool_button.RadioToolButton]
-  Returns: New builder object
+      Get builder for [gtk.radio_tool_button.RadioToolButton]
+      Returns: New builder object
   */
   static RadioToolButtonGidBuilder builder()
   {
@@ -181,6 +181,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   }
 }
 
+/// Fluent builder implementation template for [gtk.radio_tool_button.RadioToolButton]
 class RadioToolButtonGidBuilderImpl(T) : gtk.toggle_tool_button.ToggleToolButtonGidBuilderImpl!T
 {
 
@@ -200,6 +201,10 @@ class RadioToolButtonGidBuilderImpl(T) : gtk.toggle_tool_button.ToggleToolButton
 /// Fluent builder for [gtk.radio_tool_button.RadioToolButton]
 final class RadioToolButtonGidBuilder : RadioToolButtonGidBuilderImpl!RadioToolButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RadioToolButton build()
   {
     return new RadioToolButton(cast(void*)createGObject(RadioToolButton._getGType), No.Take);

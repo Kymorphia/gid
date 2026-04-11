@@ -62,8 +62,8 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
   }
 
   /**
-  Get builder for [gtk.widget_paintable.WidgetPaintable]
-  Returns: New builder object
+      Get builder for [gtk.widget_paintable.WidgetPaintable]
+      Returns: New builder object
   */
   static WidgetPaintableGidBuilder builder()
   {
@@ -129,6 +129,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
   }
 }
 
+/// Fluent builder implementation template for [gtk.widget_paintable.WidgetPaintable]
 class WidgetPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gdk.paintable.PaintableGidBuilderImpl!T
 {
 
@@ -149,6 +150,10 @@ class WidgetPaintableGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtk.widget_paintable.WidgetPaintable]
 final class WidgetPaintableGidBuilder : WidgetPaintableGidBuilderImpl!WidgetPaintableGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WidgetPaintable build()
   {
     return new WidgetPaintable(cast(void*)createGObject(WidgetPaintable._getGType), Yes.Take);

@@ -57,8 +57,8 @@ class FileDialog : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.file_dialog.FileDialog]
-  Returns: New builder object
+      Get builder for [gtk.file_dialog.FileDialog]
+      Returns: New builder object
   */
   static FileDialogGidBuilder builder()
   {
@@ -727,6 +727,7 @@ class FileDialog : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.file_dialog.FileDialog]
 class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -838,6 +839,10 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.file_dialog.FileDialog]
 final class FileDialogGidBuilder : FileDialogGidBuilderImpl!FileDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileDialog build()
   {
     return new FileDialog(cast(void*)createGObject(FileDialog._getGType), Yes.Take);

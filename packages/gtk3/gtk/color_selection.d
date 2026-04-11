@@ -48,8 +48,8 @@ class ColorSelection : gtk.box.Box
   }
 
   /**
-  Get builder for [gtk.color_selection.ColorSelection]
-  Returns: New builder object
+      Get builder for [gtk.color_selection.ColorSelection]
+      Returns: New builder object
   */
   static ColorSelectionGidBuilder builder()
   {
@@ -446,6 +446,7 @@ class ColorSelection : gtk.box.Box
   }
 }
 
+/// Fluent builder implementation template for [gtk.color_selection.ColorSelection]
 class ColorSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 {
 
@@ -496,6 +497,10 @@ class ColorSelectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 /// Fluent builder for [gtk.color_selection.ColorSelection]
 final class ColorSelectionGidBuilder : ColorSelectionGidBuilderImpl!ColorSelectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ColorSelection build()
   {
     return new ColorSelection(cast(void*)createGObject(ColorSelection._getGType), No.Take);

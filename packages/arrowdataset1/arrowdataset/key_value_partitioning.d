@@ -38,8 +38,8 @@ class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
   }
 
   /**
-  Get builder for [arrowdataset.key_value_partitioning.KeyValuePartitioning]
-  Returns: New builder object
+      Get builder for [arrowdataset.key_value_partitioning.KeyValuePartitioning]
+      Returns: New builder object
   */
   static KeyValuePartitioningGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.key_value_partitioning.KeyValuePartitioning]
 class KeyValuePartitioningGidBuilderImpl(T) : arrowdataset.partitioning.PartitioningGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class KeyValuePartitioningGidBuilderImpl(T) : arrowdataset.partitioning.Partitio
 /// Fluent builder for [arrowdataset.key_value_partitioning.KeyValuePartitioning]
 final class KeyValuePartitioningGidBuilder : KeyValuePartitioningGidBuilderImpl!KeyValuePartitioningGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   KeyValuePartitioning build()
   {
     return new KeyValuePartitioning(cast(void*)createGObject(KeyValuePartitioning._getGType), No.Take);

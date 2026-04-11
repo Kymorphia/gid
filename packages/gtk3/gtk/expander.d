@@ -128,8 +128,8 @@ class Expander : gtk.bin.Bin
   }
 
   /**
-  Get builder for [gtk.expander.Expander]
-  Returns: New builder object
+      Get builder for [gtk.expander.Expander]
+      Returns: New builder object
   */
   static ExpanderGidBuilder builder()
   {
@@ -562,6 +562,7 @@ class Expander : gtk.bin.Bin
   }
 }
 
+/// Fluent builder implementation template for [gtk.expander.Expander]
 class ExpanderGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 {
 
@@ -640,6 +641,10 @@ class ExpanderGidBuilderImpl(T) : gtk.bin.BinGidBuilderImpl!T
 /// Fluent builder for [gtk.expander.Expander]
 final class ExpanderGidBuilder : ExpanderGidBuilderImpl!ExpanderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Expander build()
   {
     return new Expander(cast(void*)createGObject(Expander._getGType), No.Take);

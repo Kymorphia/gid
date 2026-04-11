@@ -91,6 +91,7 @@ template DevicePadT()
   }
 }
 
+/// Fluent builder implementation template for [gdk.device_pad.DevicePad]
 template DevicePadGidBuilderT()
 {
 }

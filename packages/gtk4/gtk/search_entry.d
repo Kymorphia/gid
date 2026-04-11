@@ -93,8 +93,8 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /**
-  Get builder for [gtk.search_entry.SearchEntry]
-  Returns: New builder object
+      Get builder for [gtk.search_entry.SearchEntry]
+      Returns: New builder object
   */
   static SearchEntryGidBuilder builder()
   {
@@ -600,6 +600,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 }
 
+/// Fluent builder implementation template for [gtk.search_entry.SearchEntry]
 class SearchEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.editable.EditableGidBuilderImpl!T
 {
 
@@ -668,6 +669,10 @@ class SearchEntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.edit
 /// Fluent builder for [gtk.search_entry.SearchEntry]
 final class SearchEntryGidBuilder : SearchEntryGidBuilderImpl!SearchEntryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SearchEntry build()
   {
     return new SearchEntry(cast(void*)createGObject(SearchEntry._getGType), No.Take);

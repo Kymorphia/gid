@@ -61,6 +61,7 @@ template DBusInterfaceT()
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_interface.DBusInterface]
 template DBusInterfaceGidBuilderT()
 {
 }

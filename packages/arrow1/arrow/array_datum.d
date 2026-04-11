@@ -40,8 +40,8 @@ class ArrayDatum : arrow.datum.Datum
   }
 
   /**
-  Get builder for [arrow.array_datum.ArrayDatum]
-  Returns: New builder object
+      Get builder for [arrow.array_datum.ArrayDatum]
+      Returns: New builder object
   */
   static ArrayDatumGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class ArrayDatum : arrow.datum.Datum
   }
 }
 
+/// Fluent builder implementation template for [arrow.array_datum.ArrayDatum]
 class ArrayDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class ArrayDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 /// Fluent builder for [arrow.array_datum.ArrayDatum]
 final class ArrayDatumGidBuilder : ArrayDatumGidBuilderImpl!ArrayDatumGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ArrayDatum build()
   {
     return new ArrayDatum(cast(void*)createGObject(ArrayDatum._getGType), Yes.Take);

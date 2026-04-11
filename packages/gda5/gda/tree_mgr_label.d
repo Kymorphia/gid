@@ -38,8 +38,8 @@ class TreeMgrLabel : gda.tree_manager.TreeManager
   }
 
   /**
-  Get builder for [gda.tree_mgr_label.TreeMgrLabel]
-  Returns: New builder object
+      Get builder for [gda.tree_mgr_label.TreeMgrLabel]
+      Returns: New builder object
   */
   static TreeMgrLabelGidBuilder builder()
   {
@@ -62,6 +62,7 @@ class TreeMgrLabel : gda.tree_manager.TreeManager
   }
 }
 
+/// Fluent builder implementation template for [gda.tree_mgr_label.TreeMgrLabel]
 class TreeMgrLabelGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImpl!T
 {
 
@@ -75,6 +76,10 @@ class TreeMgrLabelGidBuilderImpl(T) : gda.tree_manager.TreeManagerGidBuilderImpl
 /// Fluent builder for [gda.tree_mgr_label.TreeMgrLabel]
 final class TreeMgrLabelGidBuilder : TreeMgrLabelGidBuilderImpl!TreeMgrLabelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TreeMgrLabel build()
   {
     return new TreeMgrLabel(cast(void*)createGObject(TreeMgrLabel._getGType), Yes.Take);

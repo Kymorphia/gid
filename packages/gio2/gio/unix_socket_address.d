@@ -61,8 +61,8 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   }
 
   /**
-  Get builder for [gio.unix_socket_address.UnixSocketAddress]
-  Returns: New builder object
+      Get builder for [gio.unix_socket_address.UnixSocketAddress]
+      Returns: New builder object
   */
   static UnixSocketAddressGidBuilder builder()
   {
@@ -259,6 +259,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   }
 }
 
+/// Fluent builder implementation template for [gio.unix_socket_address.UnixSocketAddress]
 class UnixSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBuilderImpl!T
 {
 
@@ -304,6 +305,10 @@ class UnixSocketAddressGidBuilderImpl(T) : gio.socket_address.SocketAddressGidBu
 /// Fluent builder for [gio.unix_socket_address.UnixSocketAddress]
 final class UnixSocketAddressGidBuilder : UnixSocketAddressGidBuilderImpl!UnixSocketAddressGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnixSocketAddress build()
   {
     return new UnixSocketAddress(cast(void*)createGObject(UnixSocketAddress._getGType), Yes.Take);

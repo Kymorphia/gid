@@ -66,8 +66,8 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-  Get builder for [gtk.directory_list.DirectoryList]
-  Returns: New builder object
+      Get builder for [gtk.directory_list.DirectoryList]
+      Returns: New builder object
   */
   static DirectoryListGidBuilder builder()
   {
@@ -359,6 +359,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 }
 
+/// Fluent builder implementation template for [gtk.directory_list.DirectoryList]
 class DirectoryListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
 {
 
@@ -412,6 +413,10 @@ class DirectoryListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.directory_list.DirectoryList]
 final class DirectoryListGidBuilder : DirectoryListGidBuilderImpl!DirectoryListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DirectoryList build()
   {
     return new DirectoryList(cast(void*)createGObject(DirectoryList._getGType), Yes.Take);

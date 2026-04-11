@@ -879,6 +879,7 @@ template TreeModelT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_model.TreeModel]
 template TreeModelGidBuilderT()
 {
 }

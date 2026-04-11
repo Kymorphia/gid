@@ -49,8 +49,8 @@ class DeviceInfoPermissionRequest : gobject.object.ObjectWrap, webkit.permission
   }
 
   /**
-  Get builder for [webkit.device_info_permission_request.DeviceInfoPermissionRequest]
-  Returns: New builder object
+      Get builder for [webkit.device_info_permission_request.DeviceInfoPermissionRequest]
+      Returns: New builder object
   */
   static DeviceInfoPermissionRequestGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class DeviceInfoPermissionRequest : gobject.object.ObjectWrap, webkit.permission
   mixin PermissionRequestT!();
 }
 
+/// Fluent builder implementation template for [webkit.device_info_permission_request.DeviceInfoPermissionRequest]
 class DeviceInfoPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
 {
 
@@ -69,6 +70,10 @@ class DeviceInfoPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGi
 /// Fluent builder for [webkit.device_info_permission_request.DeviceInfoPermissionRequest]
 final class DeviceInfoPermissionRequestGidBuilder : DeviceInfoPermissionRequestGidBuilderImpl!DeviceInfoPermissionRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DeviceInfoPermissionRequest build()
   {
     return new DeviceInfoPermissionRequest(cast(void*)createGObject(DeviceInfoPermissionRequest._getGType), No.Take);

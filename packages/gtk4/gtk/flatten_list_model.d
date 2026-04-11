@@ -48,8 +48,8 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   }
 
   /**
-  Get builder for [gtk.flatten_list_model.FlattenListModel]
-  Returns: New builder object
+      Get builder for [gtk.flatten_list_model.FlattenListModel]
+      Returns: New builder object
   */
   static FlattenListModelGidBuilder builder()
   {
@@ -149,6 +149,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   }
 }
 
+/// Fluent builder implementation template for [gtk.flatten_list_model.FlattenListModel]
 class FlattenListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T, gtk.section_model.SectionModelGidBuilderImpl!T
 {
 
@@ -170,6 +171,10 @@ class FlattenListModelGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gtk.flatten_list_model.FlattenListModel]
 final class FlattenListModelGidBuilder : FlattenListModelGidBuilderImpl!FlattenListModelGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FlattenListModel build()
   {
     return new FlattenListModel(cast(void*)createGObject(FlattenListModel._getGType), Yes.Take);

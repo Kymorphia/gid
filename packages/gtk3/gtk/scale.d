@@ -121,8 +121,8 @@ class Scale : gtk.range.Range
   }
 
   /**
-  Get builder for [gtk.scale.Scale]
-  Returns: New builder object
+      Get builder for [gtk.scale.Scale]
+      Returns: New builder object
   */
   static ScaleGidBuilder builder()
   {
@@ -453,6 +453,7 @@ class Scale : gtk.range.Range
   }
 }
 
+/// Fluent builder implementation template for [gtk.scale.Scale]
 class ScaleGidBuilderImpl(T) : gtk.range.RangeGidBuilderImpl!T
 {
 
@@ -485,6 +486,10 @@ class ScaleGidBuilderImpl(T) : gtk.range.RangeGidBuilderImpl!T
 /// Fluent builder for [gtk.scale.Scale]
 final class ScaleGidBuilder : ScaleGidBuilderImpl!ScaleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Scale build()
   {
     return new Scale(cast(void*)createGObject(Scale._getGType), No.Take);

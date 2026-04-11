@@ -90,8 +90,8 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   }
 
   /**
-  Get builder for [gst.type_find_factory.TypeFindFactory]
-  Returns: New builder object
+      Get builder for [gst.type_find_factory.TypeFindFactory]
+      Returns: New builder object
   */
   static TypeFindFactoryGidBuilder builder()
   {
@@ -180,6 +180,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   }
 }
 
+/// Fluent builder implementation template for [gst.type_find_factory.TypeFindFactory]
 class TypeFindFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuilderImpl!T
 {
 }
@@ -187,6 +188,10 @@ class TypeFindFactoryGidBuilderImpl(T) : gst.plugin_feature.PluginFeatureGidBuil
 /// Fluent builder for [gst.type_find_factory.TypeFindFactory]
 final class TypeFindFactoryGidBuilder : TypeFindFactoryGidBuilderImpl!TypeFindFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TypeFindFactory build()
   {
     return new TypeFindFactory(cast(void*)createGObject(TypeFindFactory._getGType), No.Take);

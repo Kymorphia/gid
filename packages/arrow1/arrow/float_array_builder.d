@@ -39,8 +39,8 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.float_array_builder.FloatArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.float_array_builder.FloatArrayBuilder]
+      Returns: New builder object
   */
   static FloatArrayBuilderGidBuilder builder()
   {
@@ -111,6 +111,7 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.float_array_builder.FloatArrayBuilder]
 class FloatArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -118,6 +119,10 @@ class FloatArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBu
 /// Fluent builder for [arrow.float_array_builder.FloatArrayBuilder]
 final class FloatArrayBuilderGidBuilder : FloatArrayBuilderGidBuilderImpl!FloatArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FloatArrayBuilder build()
   {
     return new FloatArrayBuilder(cast(void*)createGObject(FloatArrayBuilder._getGType), Yes.Take);

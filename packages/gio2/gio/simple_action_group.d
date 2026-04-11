@@ -47,8 +47,8 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   }
 
   /**
-  Get builder for [gio.simple_action_group.SimpleActionGroup]
-  Returns: New builder object
+      Get builder for [gio.simple_action_group.SimpleActionGroup]
+      Returns: New builder object
   */
   static SimpleActionGroupGidBuilder builder()
   {
@@ -124,6 +124,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   }
 }
 
+/// Fluent builder implementation template for [gio.simple_action_group.SimpleActionGroup]
 class SimpleActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T, gio.action_map.ActionMapGidBuilderImpl!T
 {
 
@@ -134,6 +135,10 @@ class SimpleActionGroupGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [gio.simple_action_group.SimpleActionGroup]
 final class SimpleActionGroupGidBuilder : SimpleActionGroupGidBuilderImpl!SimpleActionGroupGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SimpleActionGroup build()
   {
     return new SimpleActionGroup(cast(void*)createGObject(SimpleActionGroup._getGType), Yes.Take);

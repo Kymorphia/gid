@@ -39,6 +39,7 @@ interface PermissionRequest
   void deny();
 }
 
+/// Fluent builder implementation template for [webkit.permission_request.PermissionRequest]
 interface PermissionRequestGidBuilderImpl(T)
 {
 }

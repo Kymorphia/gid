@@ -39,8 +39,8 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
   }
 
   /**
-  Get builder for [arrow.sub_tree_file_system.SubTreeFileSystem]
-  Returns: New builder object
+      Get builder for [arrow.sub_tree_file_system.SubTreeFileSystem]
+      Returns: New builder object
   */
   static SubTreeFileSystemGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
   }
 }
 
+/// Fluent builder implementation template for [arrow.sub_tree_file_system.SubTreeFileSystem]
 class SubTreeFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class SubTreeFileSystemGidBuilderImpl(T) : arrow.file_system.FileSystemGidBuilde
 /// Fluent builder for [arrow.sub_tree_file_system.SubTreeFileSystem]
 final class SubTreeFileSystemGidBuilder : SubTreeFileSystemGidBuilderImpl!SubTreeFileSystemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SubTreeFileSystem build()
   {
     return new SubTreeFileSystem(cast(void*)createGObject(SubTreeFileSystem._getGType), Yes.Take);

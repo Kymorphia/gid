@@ -46,8 +46,8 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
   }
 
   /**
-  Get builder for [gio.bytes_icon.BytesIcon]
-  Returns: New builder object
+      Get builder for [gio.bytes_icon.BytesIcon]
+      Returns: New builder object
   */
   static BytesIconGidBuilder builder()
   {
@@ -97,6 +97,7 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
   }
 }
 
+/// Fluent builder implementation template for [gio.bytes_icon.BytesIcon]
 class BytesIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.icon.IconGidBuilderImpl!T, gio.loadable_icon.LoadableIconGidBuilderImpl!T
 {
 
@@ -118,6 +119,10 @@ class BytesIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
 /// Fluent builder for [gio.bytes_icon.BytesIcon]
 final class BytesIconGidBuilder : BytesIconGidBuilderImpl!BytesIconGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BytesIcon build()
   {
     return new BytesIcon(cast(void*)createGObject(BytesIcon._getGType), Yes.Take);

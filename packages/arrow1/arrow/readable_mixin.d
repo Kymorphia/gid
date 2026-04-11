@@ -41,6 +41,7 @@ template ReadableT()
   }
 }
 
+/// Fluent builder implementation template for [arrow.readable.Readable]
 template ReadableGidBuilderT()
 {
 }

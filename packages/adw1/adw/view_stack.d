@@ -102,8 +102,8 @@ class ViewStack : gtk.widget.Widget
   }
 
   /**
-  Get builder for [adw.view_stack.ViewStack]
-  Returns: New builder object
+      Get builder for [adw.view_stack.ViewStack]
+      Returns: New builder object
   */
   static ViewStackGidBuilder builder()
   {
@@ -482,6 +482,7 @@ class ViewStack : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [adw.view_stack.ViewStack]
 class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -548,6 +549,10 @@ class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [adw.view_stack.ViewStack]
 final class ViewStackGidBuilder : ViewStackGidBuilderImpl!ViewStackGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ViewStack build()
   {
     return new ViewStack(cast(void*)createGObject(ViewStack._getGType), No.Take);

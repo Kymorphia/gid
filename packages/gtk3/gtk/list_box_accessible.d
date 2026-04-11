@@ -42,8 +42,8 @@ class ListBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
   }
 
   /**
-  Get builder for [gtk.list_box_accessible.ListBoxAccessible]
-  Returns: New builder object
+      Get builder for [gtk.list_box_accessible.ListBoxAccessible]
+      Returns: New builder object
   */
   static ListBoxAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class ListBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
   mixin SelectionT!();
 }
 
+/// Fluent builder implementation template for [gtk.list_box_accessible.ListBoxAccessible]
 class ListBoxAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T, atk.selection.SelectionGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class ListBoxAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAcc
 /// Fluent builder for [gtk.list_box_accessible.ListBoxAccessible]
 final class ListBoxAccessibleGidBuilder : ListBoxAccessibleGidBuilderImpl!ListBoxAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ListBoxAccessible build()
   {
     return new ListBoxAccessible(cast(void*)createGObject(ListBoxAccessible._getGType), No.Take);

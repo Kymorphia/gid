@@ -40,8 +40,8 @@ class Pkcs7Context : gmime.crypto_context.CryptoContext
   }
 
   /**
-  Get builder for [gmime.pkcs7_context.Pkcs7Context]
-  Returns: New builder object
+      Get builder for [gmime.pkcs7_context.Pkcs7Context]
+      Returns: New builder object
   */
   static Pkcs7ContextGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class Pkcs7Context : gmime.crypto_context.CryptoContext
   }
 }
 
+/// Fluent builder implementation template for [gmime.pkcs7_context.Pkcs7Context]
 class Pkcs7ContextGidBuilderImpl(T) : gmime.crypto_context.CryptoContextGidBuilderImpl!T
 {
 }
@@ -67,6 +68,10 @@ class Pkcs7ContextGidBuilderImpl(T) : gmime.crypto_context.CryptoContextGidBuild
 /// Fluent builder for [gmime.pkcs7_context.Pkcs7Context]
 final class Pkcs7ContextGidBuilder : Pkcs7ContextGidBuilderImpl!Pkcs7ContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Pkcs7Context build()
   {
     return new Pkcs7Context(cast(void*)createGObject(Pkcs7Context._getGType), Yes.Take);

@@ -39,8 +39,8 @@ class Date32ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.date32_array_builder.Date32ArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.date32_array_builder.Date32ArrayBuilder]
+      Returns: New builder object
   */
   static Date32ArrayBuilderGidBuilder builder()
   {
@@ -112,6 +112,7 @@ class Date32ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.date32_array_builder.Date32ArrayBuilder]
 class Date32ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -119,6 +120,10 @@ class Date32ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidB
 /// Fluent builder for [arrow.date32_array_builder.Date32ArrayBuilder]
 final class Date32ArrayBuilderGidBuilder : Date32ArrayBuilderGidBuilderImpl!Date32ArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Date32ArrayBuilder build()
   {
     return new Date32ArrayBuilder(cast(void*)createGObject(Date32ArrayBuilder._getGType), Yes.Take);

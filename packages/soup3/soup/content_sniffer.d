@@ -51,8 +51,8 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
   }
 
   /**
-  Get builder for [soup.content_sniffer.ContentSniffer]
-  Returns: New builder object
+      Get builder for [soup.content_sniffer.ContentSniffer]
+      Returns: New builder object
   */
   static ContentSnifferGidBuilder builder()
   {
@@ -97,6 +97,7 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
   }
 }
 
+/// Fluent builder implementation template for [soup.content_sniffer.ContentSniffer]
 class ContentSnifferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.session_feature.SessionFeatureGidBuilderImpl!T
 {
 
@@ -106,6 +107,10 @@ class ContentSnifferGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [soup.content_sniffer.ContentSniffer]
 final class ContentSnifferGidBuilder : ContentSnifferGidBuilderImpl!ContentSnifferGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ContentSniffer build()
   {
     return new ContentSniffer(cast(void*)createGObject(ContentSniffer._getGType), Yes.Take);

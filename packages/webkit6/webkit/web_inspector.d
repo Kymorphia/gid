@@ -64,8 +64,8 @@ class WebInspector : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.web_inspector.WebInspector]
-  Returns: New builder object
+      Get builder for [webkit.web_inspector.WebInspector]
+      Returns: New builder object
   */
   static WebInspectorGidBuilder builder()
   {
@@ -448,6 +448,7 @@ class WebInspector : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.web_inspector.WebInspector]
 class WebInspectorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -455,6 +456,10 @@ class WebInspectorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.web_inspector.WebInspector]
 final class WebInspectorGidBuilder : WebInspectorGidBuilderImpl!WebInspectorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebInspector build()
   {
     return new WebInspector(cast(void*)createGObject(WebInspector._getGType), No.Take);

@@ -60,8 +60,8 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.aspect_frame.AspectFrame]
-  Returns: New builder object
+      Get builder for [gtk.aspect_frame.AspectFrame]
+      Returns: New builder object
   */
   static AspectFrameGidBuilder builder()
   {
@@ -309,6 +309,7 @@ class AspectFrame : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.aspect_frame.AspectFrame]
 class AspectFrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -375,6 +376,10 @@ class AspectFrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.aspect_frame.AspectFrame]
 final class AspectFrameGidBuilder : AspectFrameGidBuilderImpl!AspectFrameGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AspectFrame build()
   {
     return new AspectFrame(cast(void*)createGObject(AspectFrame._getGType), No.Take);

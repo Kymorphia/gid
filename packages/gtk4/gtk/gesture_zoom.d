@@ -45,8 +45,8 @@ class GestureZoom : gtk.gesture.Gesture
   }
 
   /**
-  Get builder for [gtk.gesture_zoom.GestureZoom]
-  Returns: New builder object
+      Get builder for [gtk.gesture_zoom.GestureZoom]
+      Returns: New builder object
   */
   static GestureZoomGidBuilder builder()
   {
@@ -125,6 +125,7 @@ class GestureZoom : gtk.gesture.Gesture
   }
 }
 
+/// Fluent builder implementation template for [gtk.gesture_zoom.GestureZoom]
 class GestureZoomGidBuilderImpl(T) : gtk.gesture.GestureGidBuilderImpl!T
 {
 }
@@ -132,6 +133,10 @@ class GestureZoomGidBuilderImpl(T) : gtk.gesture.GestureGidBuilderImpl!T
 /// Fluent builder for [gtk.gesture_zoom.GestureZoom]
 final class GestureZoomGidBuilder : GestureZoomGidBuilderImpl!GestureZoomGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GestureZoom build()
   {
     return new GestureZoom(cast(void*)createGObject(GestureZoom._getGType), Yes.Take);

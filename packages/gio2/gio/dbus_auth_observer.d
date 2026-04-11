@@ -105,8 +105,8 @@ class DBusAuthObserver : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.dbus_auth_observer.DBusAuthObserver]
-  Returns: New builder object
+      Get builder for [gio.dbus_auth_observer.DBusAuthObserver]
+      Returns: New builder object
   */
   static DBusAuthObserverGidBuilder builder()
   {
@@ -254,6 +254,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.dbus_auth_observer.DBusAuthObserver]
 class DBusAuthObserverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -261,6 +262,10 @@ class DBusAuthObserverGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gio.dbus_auth_observer.DBusAuthObserver]
 final class DBusAuthObserverGidBuilder : DBusAuthObserverGidBuilderImpl!DBusAuthObserverGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DBusAuthObserver build()
   {
     return new DBusAuthObserver(cast(void*)createGObject(DBusAuthObserver._getGType), Yes.Take);

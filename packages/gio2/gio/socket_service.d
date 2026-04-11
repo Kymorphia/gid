@@ -68,8 +68,8 @@ class SocketService : gio.socket_listener.SocketListener
   }
 
   /**
-  Get builder for [gio.socket_service.SocketService]
-  Returns: New builder object
+      Get builder for [gio.socket_service.SocketService]
+      Returns: New builder object
   */
   static SocketServiceGidBuilder builder()
   {
@@ -222,6 +222,7 @@ class SocketService : gio.socket_listener.SocketListener
   }
 }
 
+/// Fluent builder implementation template for [gio.socket_service.SocketService]
 class SocketServiceGidBuilderImpl(T) : gio.socket_listener.SocketListenerGidBuilderImpl!T
 {
 
@@ -240,6 +241,10 @@ class SocketServiceGidBuilderImpl(T) : gio.socket_listener.SocketListenerGidBuil
 /// Fluent builder for [gio.socket_service.SocketService]
 final class SocketServiceGidBuilder : SocketServiceGidBuilderImpl!SocketServiceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SocketService build()
   {
     return new SocketService(cast(void*)createGObject(SocketService._getGType), Yes.Take);

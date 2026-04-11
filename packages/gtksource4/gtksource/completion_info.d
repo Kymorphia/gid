@@ -44,8 +44,8 @@ class CompletionInfo : gtk.window.Window
   }
 
   /**
-  Get builder for [gtksource.completion_info.CompletionInfo]
-  Returns: New builder object
+      Get builder for [gtksource.completion_info.CompletionInfo]
+      Returns: New builder object
   */
   static CompletionInfoGidBuilder builder()
   {
@@ -76,6 +76,7 @@ class CompletionInfo : gtk.window.Window
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion_info.CompletionInfo]
 class CompletionInfoGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 {
 
@@ -84,6 +85,10 @@ class CompletionInfoGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
 /// Fluent builder for [gtksource.completion_info.CompletionInfo]
 final class CompletionInfoGidBuilder : CompletionInfoGidBuilderImpl!CompletionInfoGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CompletionInfo build()
   {
     return new CompletionInfo(cast(void*)createGObject(CompletionInfo._getGType), No.Take);

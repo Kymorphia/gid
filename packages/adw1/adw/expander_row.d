@@ -76,8 +76,8 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   }
 
   /**
-  Get builder for [adw.expander_row.ExpanderRow]
-  Returns: New builder object
+      Get builder for [adw.expander_row.ExpanderRow]
+      Returns: New builder object
   */
   static ExpanderRowGidBuilder builder()
   {
@@ -483,6 +483,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   }
 }
 
+/// Fluent builder implementation template for [adw.expander_row.ExpanderRow]
 class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderImpl!T
 {
 
@@ -578,6 +579,10 @@ class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilde
 /// Fluent builder for [adw.expander_row.ExpanderRow]
 final class ExpanderRowGidBuilder : ExpanderRowGidBuilderImpl!ExpanderRowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ExpanderRow build()
   {
     return new ExpanderRow(cast(void*)createGObject(ExpanderRow._getGType), No.Take);

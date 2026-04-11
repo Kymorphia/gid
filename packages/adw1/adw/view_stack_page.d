@@ -43,8 +43,8 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
-  Get builder for [adw.view_stack_page.ViewStackPage]
-  Returns: New builder object
+      Get builder for [adw.view_stack_page.ViewStackPage]
+      Returns: New builder object
   */
   static ViewStackPageGidBuilder builder()
   {
@@ -401,6 +401,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 }
 
+/// Fluent builder implementation template for [adw.view_stack_page.ViewStackPage]
 class ViewStackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.accessible.AccessibleGidBuilderImpl!T
 {
 
@@ -508,6 +509,10 @@ class ViewStackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [adw.view_stack_page.ViewStackPage]
 final class ViewStackPageGidBuilder : ViewStackPageGidBuilderImpl!ViewStackPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ViewStackPage build()
   {
     return new ViewStackPage(cast(void*)createGObject(ViewStackPage._getGType), No.Take);

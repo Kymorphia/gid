@@ -57,8 +57,8 @@ class TagMux : gst.element.Element, gst.tag_setter.TagSetter
   }
 
   /**
-  Get builder for [gsttag.tag_mux.TagMux]
-  Returns: New builder object
+      Get builder for [gsttag.tag_mux.TagMux]
+      Returns: New builder object
   */
   static TagMuxGidBuilder builder()
   {
@@ -68,6 +68,7 @@ class TagMux : gst.element.Element, gst.tag_setter.TagSetter
   mixin TagSetterT!();
 }
 
+/// Fluent builder implementation template for [gsttag.tag_mux.TagMux]
 class TagMuxGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.tag_setter.TagSetterGidBuilderImpl!T
 {
 
@@ -77,6 +78,10 @@ class TagMuxGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T, gst.tag_set
 /// Fluent builder for [gsttag.tag_mux.TagMux]
 final class TagMuxGidBuilder : TagMuxGidBuilderImpl!TagMuxGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TagMux build()
   {
     return new TagMux(cast(void*)createGObject(TagMux._getGType), No.Take);

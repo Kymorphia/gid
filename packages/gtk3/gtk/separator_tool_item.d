@@ -59,8 +59,8 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   }
 
   /**
-  Get builder for [gtk.separator_tool_item.SeparatorToolItem]
-  Returns: New builder object
+      Get builder for [gtk.separator_tool_item.SeparatorToolItem]
+      Returns: New builder object
   */
   static SeparatorToolItemGidBuilder builder()
   {
@@ -120,6 +120,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   }
 }
 
+/// Fluent builder implementation template for [gtk.separator_tool_item.SeparatorToolItem]
 class SeparatorToolItemGidBuilderImpl(T) : gtk.tool_item.ToolItemGidBuilderImpl!T
 {
 
@@ -134,6 +135,10 @@ class SeparatorToolItemGidBuilderImpl(T) : gtk.tool_item.ToolItemGidBuilderImpl!
 /// Fluent builder for [gtk.separator_tool_item.SeparatorToolItem]
 final class SeparatorToolItemGidBuilder : SeparatorToolItemGidBuilderImpl!SeparatorToolItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SeparatorToolItem build()
   {
     return new SeparatorToolItem(cast(void*)createGObject(SeparatorToolItem._getGType), No.Take);

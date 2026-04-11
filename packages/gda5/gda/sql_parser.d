@@ -44,8 +44,8 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 
   /**
-  Get builder for [gda.sql_parser.SqlParser]
-  Returns: New builder object
+      Get builder for [gda.sql_parser.SqlParser]
+      Returns: New builder object
   */
   static SqlParserGidBuilder builder()
   {
@@ -209,6 +209,7 @@ class SqlParser : gobject.object.ObjectWrap, gda.lockable.Lockable
   }
 }
 
+/// Fluent builder implementation template for [gda.sql_parser.SqlParser]
 class SqlParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.lockable.LockableGidBuilderImpl!T
 {
 
@@ -230,6 +231,10 @@ class SqlParserGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gd
 /// Fluent builder for [gda.sql_parser.SqlParser]
 final class SqlParserGidBuilder : SqlParserGidBuilderImpl!SqlParserGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SqlParser build()
   {
     return new SqlParser(cast(void*)createGObject(SqlParser._getGType), Yes.Take);

@@ -62,8 +62,8 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-  Get builder for [gtk.range.Range]
-  Returns: New builder object
+      Get builder for [gtk.range.Range]
+      Returns: New builder object
   */
   static RangeGidBuilder builder()
   {
@@ -707,6 +707,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 }
 
+/// Fluent builder implementation template for [gtk.range.Range]
 class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_range.AccessibleRangeGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -788,6 +789,10 @@ class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
 /// Fluent builder for [gtk.range.Range]
 final class RangeGidBuilder : RangeGidBuilderImpl!RangeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Range build()
   {
     return new Range(cast(void*)createGObject(Range._getGType), No.Take);

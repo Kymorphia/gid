@@ -90,8 +90,8 @@ class VimIMContext : gtk.imcontext.IMContext
   }
 
   /**
-  Get builder for [gtksource.vim_imcontext.VimIMContext]
-  Returns: New builder object
+      Get builder for [gtksource.vim_imcontext.VimIMContext]
+      Returns: New builder object
   */
   static VimIMContextGidBuilder builder()
   {
@@ -363,6 +363,7 @@ class VimIMContext : gtk.imcontext.IMContext
   }
 }
 
+/// Fluent builder implementation template for [gtksource.vim_imcontext.VimIMContext]
 class VimIMContextGidBuilderImpl(T) : gtk.imcontext.IMContextGidBuilderImpl!T
 {
 }
@@ -370,6 +371,10 @@ class VimIMContextGidBuilderImpl(T) : gtk.imcontext.IMContextGidBuilderImpl!T
 /// Fluent builder for [gtksource.vim_imcontext.VimIMContext]
 final class VimIMContextGidBuilder : VimIMContextGidBuilderImpl!VimIMContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VimIMContext build()
   {
     return new VimIMContext(cast(void*)createGObject(VimIMContext._getGType), Yes.Take);

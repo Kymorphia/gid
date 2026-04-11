@@ -51,8 +51,8 @@ class PolicyDecision : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.policy_decision.PolicyDecision]
-  Returns: New builder object
+      Get builder for [webkit.policy_decision.PolicyDecision]
+      Returns: New builder object
   */
   static PolicyDecisionGidBuilder builder()
   {
@@ -106,6 +106,7 @@ class PolicyDecision : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.policy_decision.PolicyDecision]
 class PolicyDecisionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -113,6 +114,10 @@ class PolicyDecisionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [webkit.policy_decision.PolicyDecision]
 final class PolicyDecisionGidBuilder : PolicyDecisionGidBuilderImpl!PolicyDecisionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PolicyDecision build()
   {
     return new PolicyDecision(cast(void*)createGObject(PolicyDecision._getGType), No.Take);

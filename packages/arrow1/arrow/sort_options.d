@@ -39,8 +39,8 @@ class SortOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.sort_options.SortOptions]
-  Returns: New builder object
+      Get builder for [arrow.sort_options.SortOptions]
+      Returns: New builder object
   */
   static SortOptionsGidBuilder builder()
   {
@@ -101,6 +101,7 @@ class SortOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.sort_options.SortOptions]
 class SortOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 }
@@ -108,6 +109,10 @@ class SortOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBu
 /// Fluent builder for [arrow.sort_options.SortOptions]
 final class SortOptionsGidBuilder : SortOptionsGidBuilderImpl!SortOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SortOptions build()
   {
     return new SortOptions(cast(void*)createGObject(SortOptions._getGType), Yes.Take);

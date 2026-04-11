@@ -47,8 +47,8 @@ class Generator : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [json.generator.Generator]
-  Returns: New builder object
+      Get builder for [json.generator.Generator]
+      Returns: New builder object
   */
   static GeneratorGidBuilder builder()
   {
@@ -331,6 +331,7 @@ class Generator : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [json.generator.Generator]
 class GeneratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -387,6 +388,10 @@ class GeneratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [json.generator.Generator]
 final class GeneratorGidBuilder : GeneratorGidBuilderImpl!GeneratorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Generator build()
   {
     return new Generator(cast(void*)createGObject(Generator._getGType), Yes.Take);

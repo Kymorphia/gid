@@ -48,8 +48,8 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   }
 
   /**
-  Get builder for [gstcontroller.direct_control_binding.DirectControlBinding]
-  Returns: New builder object
+      Get builder for [gstcontroller.direct_control_binding.DirectControlBinding]
+      Returns: New builder object
   */
   static DirectControlBindingGidBuilder builder()
   {
@@ -114,6 +114,7 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   }
 }
 
+/// Fluent builder implementation template for [gstcontroller.direct_control_binding.DirectControlBinding]
 class DirectControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBindingGidBuilderImpl!T
 {
 
@@ -133,6 +134,10 @@ class DirectControlBindingGidBuilderImpl(T) : gst.control_binding.ControlBinding
 /// Fluent builder for [gstcontroller.direct_control_binding.DirectControlBinding]
 final class DirectControlBindingGidBuilder : DirectControlBindingGidBuilderImpl!DirectControlBindingGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DirectControlBinding build()
   {
     return new DirectControlBinding(cast(void*)createGObject(DirectControlBinding._getGType), No.Take);

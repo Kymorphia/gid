@@ -51,8 +51,8 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-  Get builder for [gtk.adjustment.Adjustment]
-  Returns: New builder object
+      Get builder for [gtk.adjustment.Adjustment]
+      Returns: New builder object
   */
   static AdjustmentGidBuilder builder()
   {
@@ -509,6 +509,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   }
 }
 
+/// Fluent builder implementation template for [gtk.adjustment.Adjustment]
 class AdjustmentGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
 {
 
@@ -589,6 +590,10 @@ class AdjustmentGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGi
 /// Fluent builder for [gtk.adjustment.Adjustment]
 final class AdjustmentGidBuilder : AdjustmentGidBuilderImpl!AdjustmentGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Adjustment build()
   {
     return new Adjustment(cast(void*)createGObject(Adjustment._getGType), No.Take);

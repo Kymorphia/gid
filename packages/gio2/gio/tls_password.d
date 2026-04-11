@@ -42,8 +42,8 @@ class TlsPassword : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.tls_password.TlsPassword]
-  Returns: New builder object
+      Get builder for [gio.tls_password.TlsPassword]
+      Returns: New builder object
   */
   static TlsPasswordGidBuilder builder()
   {
@@ -276,6 +276,7 @@ class TlsPassword : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.tls_password.TlsPassword]
 class TlsPasswordGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -316,6 +317,10 @@ class TlsPasswordGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gio.tls_password.TlsPassword]
 final class TlsPasswordGidBuilder : TlsPasswordGidBuilderImpl!TlsPasswordGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TlsPassword build()
   {
     return new TlsPassword(cast(void*)createGObject(TlsPassword._getGType), Yes.Take);

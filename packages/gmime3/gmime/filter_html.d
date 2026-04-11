@@ -40,8 +40,8 @@ class FilterHTML : gmime.filter.Filter
   }
 
   /**
-  Get builder for [gmime.filter_html.FilterHTML]
-  Returns: New builder object
+      Get builder for [gmime.filter_html.FilterHTML]
+      Returns: New builder object
   */
   static FilterHTMLGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class FilterHTML : gmime.filter.Filter
   }
 }
 
+/// Fluent builder implementation template for [gmime.filter_html.FilterHTML]
 class FilterHTMLGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class FilterHTMLGidBuilderImpl(T) : gmime.filter.FilterGidBuilderImpl!T
 /// Fluent builder for [gmime.filter_html.FilterHTML]
 final class FilterHTMLGidBuilder : FilterHTMLGidBuilderImpl!FilterHTMLGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FilterHTML build()
   {
     return new FilterHTML(cast(void*)createGObject(FilterHTML._getGType), Yes.Take);

@@ -53,8 +53,8 @@ class GLColorConvert : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gstgl.glcolor_convert.GLColorConvert]
-  Returns: New builder object
+      Get builder for [gstgl.glcolor_convert.GLColorConvert]
+      Returns: New builder object
   */
   static GLColorConvertGidBuilder builder()
   {
@@ -182,6 +182,7 @@ class GLColorConvert : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glcolor_convert.GLColorConvert]
 class GLColorConvertGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -189,6 +190,10 @@ class GLColorConvertGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gstgl.glcolor_convert.GLColorConvert]
 final class GLColorConvertGidBuilder : GLColorConvertGidBuilderImpl!GLColorConvertGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLColorConvert build()
   {
     return new GLColorConvert(cast(void*)createGObject(GLColorConvert._getGType), Yes.Take);

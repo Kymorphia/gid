@@ -40,8 +40,8 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /**
-  Get builder for [panel.action_muxer.ActionMuxer]
-  Returns: New builder object
+      Get builder for [panel.action_muxer.ActionMuxer]
+      Returns: New builder object
   */
   static ActionMuxerGidBuilder builder()
   {
@@ -121,6 +121,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 }
 
+/// Fluent builder implementation template for [panel.action_muxer.ActionMuxer]
 class ActionMuxerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.action_group.ActionGroupGidBuilderImpl!T
 {
 
@@ -130,6 +131,10 @@ class ActionMuxerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, 
 /// Fluent builder for [panel.action_muxer.ActionMuxer]
 final class ActionMuxerGidBuilder : ActionMuxerGidBuilderImpl!ActionMuxerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ActionMuxer build()
   {
     return new ActionMuxer(cast(void*)createGObject(ActionMuxer._getGType), Yes.Take);

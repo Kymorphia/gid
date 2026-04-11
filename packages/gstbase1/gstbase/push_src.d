@@ -58,8 +58,8 @@ class PushSrc : gstbase.base_src.BaseSrc
   }
 
   /**
-  Get builder for [gstbase.push_src.PushSrc]
-  Returns: New builder object
+      Get builder for [gstbase.push_src.PushSrc]
+      Returns: New builder object
   */
   static PushSrcGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class PushSrc : gstbase.base_src.BaseSrc
   }
 }
 
+/// Fluent builder implementation template for [gstbase.push_src.PushSrc]
 class PushSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T
 {
 }
@@ -74,6 +75,10 @@ class PushSrcGidBuilderImpl(T) : gstbase.base_src.BaseSrcGidBuilderImpl!T
 /// Fluent builder for [gstbase.push_src.PushSrc]
 final class PushSrcGidBuilder : PushSrcGidBuilderImpl!PushSrcGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PushSrc build()
   {
     return new PushSrc(cast(void*)createGObject(PushSrc._getGType), No.Take);

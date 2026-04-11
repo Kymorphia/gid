@@ -42,8 +42,8 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
   }
 
   /**
-  Get builder for [gtk.level_bar_accessible.LevelBarAccessible]
-  Returns: New builder object
+      Get builder for [gtk.level_bar_accessible.LevelBarAccessible]
+      Returns: New builder object
   */
   static LevelBarAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
   mixin ValueT!();
 }
 
+/// Fluent builder implementation template for [gtk.level_bar_accessible.LevelBarAccessible]
 class LevelBarAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessibleGidBuilderImpl!T, atk.value.ValueGidBuilderImpl!T
 {
 
@@ -62,6 +63,10 @@ class LevelBarAccessibleGidBuilderImpl(T) : gtk.widget_accessible.WidgetAccessib
 /// Fluent builder for [gtk.level_bar_accessible.LevelBarAccessible]
 final class LevelBarAccessibleGidBuilder : LevelBarAccessibleGidBuilderImpl!LevelBarAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LevelBarAccessible build()
   {
     return new LevelBarAccessible(cast(void*)createGObject(LevelBarAccessible._getGType), No.Take);

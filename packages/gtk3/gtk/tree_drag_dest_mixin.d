@@ -54,6 +54,7 @@ template TreeDragDestT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.tree_drag_dest.TreeDragDest]
 template TreeDragDestGidBuilderT()
 {
 }

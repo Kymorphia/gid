@@ -409,6 +409,7 @@ template ActivatableT()
   }
 }
 
+/// Fluent builder implementation template for [gtk.activatable.Activatable]
 template ActivatableGidBuilderT()
 {
 

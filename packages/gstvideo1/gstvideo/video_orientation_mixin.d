@@ -134,6 +134,7 @@ template VideoOrientationT()
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.video_orientation.VideoOrientation]
 template VideoOrientationGidBuilderT()
 {
 }

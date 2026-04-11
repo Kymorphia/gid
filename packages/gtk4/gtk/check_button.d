@@ -106,8 +106,8 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-  Get builder for [gtk.check_button.CheckButton]
-  Returns: New builder object
+      Get builder for [gtk.check_button.CheckButton]
+      Returns: New builder object
   */
   static CheckButtonGidBuilder builder()
   {
@@ -524,6 +524,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 }
 
+/// Fluent builder implementation template for [gtk.check_button.CheckButton]
 class CheckButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionable.ActionableGidBuilderImpl!T
 {
 
@@ -606,6 +607,10 @@ class CheckButtonGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acti
 /// Fluent builder for [gtk.check_button.CheckButton]
 final class CheckButtonGidBuilder : CheckButtonGidBuilderImpl!CheckButtonGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CheckButton build()
   {
     return new CheckButton(cast(void*)createGObject(CheckButton._getGType), No.Take);

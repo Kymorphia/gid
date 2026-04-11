@@ -58,8 +58,8 @@ class WebResource : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.web_resource.WebResource]
-  Returns: New builder object
+      Get builder for [webkit.web_resource.WebResource]
+      Returns: New builder object
   */
   static WebResourceGidBuilder builder()
   {
@@ -381,6 +381,7 @@ class WebResource : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.web_resource.WebResource]
 class WebResourceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -388,6 +389,10 @@ class WebResourceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.web_resource.WebResource]
 final class WebResourceGidBuilder : WebResourceGidBuilderImpl!WebResourceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebResource build()
   {
     return new WebResource(cast(void*)createGObject(WebResource._getGType), No.Take);

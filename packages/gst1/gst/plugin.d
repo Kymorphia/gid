@@ -61,8 +61,8 @@ class Plugin : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.plugin.Plugin]
-  Returns: New builder object
+      Get builder for [gst.plugin.Plugin]
+      Returns: New builder object
   */
   static PluginGidBuilder builder()
   {
@@ -558,6 +558,7 @@ class Plugin : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.plugin.Plugin]
 class PluginGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -565,6 +566,10 @@ class PluginGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.plugin.Plugin]
 final class PluginGidBuilder : PluginGidBuilderImpl!PluginGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Plugin build()
   {
     return new Plugin(cast(void*)createGObject(Plugin._getGType), No.Take);

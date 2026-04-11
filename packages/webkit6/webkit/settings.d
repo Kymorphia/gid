@@ -55,8 +55,8 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.settings.Settings]
-  Returns: New builder object
+      Get builder for [webkit.settings.Settings]
+      Returns: New builder object
   */
   static SettingsGidBuilder builder()
   {
@@ -2876,6 +2876,7 @@ class Settings : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.settings.Settings]
 class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -3642,6 +3643,10 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.settings.Settings]
 final class SettingsGidBuilder : SettingsGidBuilderImpl!SettingsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Settings build()
   {
     return new Settings(cast(void*)createGObject(Settings._getGType), Yes.Take);

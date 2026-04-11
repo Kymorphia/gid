@@ -40,8 +40,8 @@ class PopoverAccessible : gtk.container_accessible.ContainerAccessible
   }
 
   /**
-  Get builder for [gtk.popover_accessible.PopoverAccessible]
-  Returns: New builder object
+      Get builder for [gtk.popover_accessible.PopoverAccessible]
+      Returns: New builder object
   */
   static PopoverAccessibleGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class PopoverAccessible : gtk.container_accessible.ContainerAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.popover_accessible.PopoverAccessible]
 class PopoverAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
 {
 
@@ -57,6 +58,10 @@ class PopoverAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAcc
 /// Fluent builder for [gtk.popover_accessible.PopoverAccessible]
 final class PopoverAccessibleGidBuilder : PopoverAccessibleGidBuilderImpl!PopoverAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   PopoverAccessible build()
   {
     return new PopoverAccessible(cast(void*)createGObject(PopoverAccessible._getGType), No.Take);

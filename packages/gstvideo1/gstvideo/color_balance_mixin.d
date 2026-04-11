@@ -148,6 +148,7 @@ template ColorBalanceT()
   }
 }
 
+/// Fluent builder implementation template for [gstvideo.color_balance.ColorBalance]
 template ColorBalanceGidBuilderT()
 {
 }

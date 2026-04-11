@@ -49,8 +49,8 @@ class NotificationPermissionRequest : gobject.object.ObjectWrap, webkit.permissi
   }
 
   /**
-  Get builder for [webkit.notification_permission_request.NotificationPermissionRequest]
-  Returns: New builder object
+      Get builder for [webkit.notification_permission_request.NotificationPermissionRequest]
+      Returns: New builder object
   */
   static NotificationPermissionRequestGidBuilder builder()
   {
@@ -60,6 +60,7 @@ class NotificationPermissionRequest : gobject.object.ObjectWrap, webkit.permissi
   mixin PermissionRequestT!();
 }
 
+/// Fluent builder implementation template for [webkit.notification_permission_request.NotificationPermissionRequest]
 class NotificationPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, webkit.permission_request.PermissionRequestGidBuilderImpl!T
 {
 
@@ -69,6 +70,10 @@ class NotificationPermissionRequestGidBuilderImpl(T) : gobject.object.ObjectWrap
 /// Fluent builder for [webkit.notification_permission_request.NotificationPermissionRequest]
 final class NotificationPermissionRequestGidBuilder : NotificationPermissionRequestGidBuilderImpl!NotificationPermissionRequestGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NotificationPermissionRequest build()
   {
     return new NotificationPermissionRequest(cast(void*)createGObject(NotificationPermissionRequest._getGType), No.Take);

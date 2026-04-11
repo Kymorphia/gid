@@ -43,8 +43,8 @@ class SparseUnionArray : arrow.union_array.UnionArray
   }
 
   /**
-  Get builder for [arrow.sparse_union_array.SparseUnionArray]
-  Returns: New builder object
+      Get builder for [arrow.sparse_union_array.SparseUnionArray]
+      Returns: New builder object
   */
   static SparseUnionArrayGidBuilder builder()
   {
@@ -79,6 +79,7 @@ class SparseUnionArray : arrow.union_array.UnionArray
   }
 }
 
+/// Fluent builder implementation template for [arrow.sparse_union_array.SparseUnionArray]
 class SparseUnionArrayGidBuilderImpl(T) : arrow.union_array.UnionArrayGidBuilderImpl!T
 {
 }
@@ -86,6 +87,10 @@ class SparseUnionArrayGidBuilderImpl(T) : arrow.union_array.UnionArrayGidBuilder
 /// Fluent builder for [arrow.sparse_union_array.SparseUnionArray]
 final class SparseUnionArrayGidBuilder : SparseUnionArrayGidBuilderImpl!SparseUnionArrayGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SparseUnionArray build()
   {
     return new SparseUnionArray(cast(void*)createGObject(SparseUnionArray._getGType), Yes.Take);

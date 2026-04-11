@@ -58,8 +58,8 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   }
 
   /**
-  Get builder for [gtk.recent_chooser_widget.RecentChooserWidget]
-  Returns: New builder object
+      Get builder for [gtk.recent_chooser_widget.RecentChooserWidget]
+      Returns: New builder object
   */
   static RecentChooserWidgetGidBuilder builder()
   {
@@ -99,6 +99,7 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   }
 }
 
+/// Fluent builder implementation template for [gtk.recent_chooser_widget.RecentChooserWidget]
 class RecentChooserWidgetGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.recent_chooser.RecentChooserGidBuilderImpl!T
 {
 
@@ -108,6 +109,10 @@ class RecentChooserWidgetGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T, gtk.re
 /// Fluent builder for [gtk.recent_chooser_widget.RecentChooserWidget]
 final class RecentChooserWidgetGidBuilder : RecentChooserWidgetGidBuilderImpl!RecentChooserWidgetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecentChooserWidget build()
   {
     return new RecentChooserWidget(cast(void*)createGObject(RecentChooserWidget._getGType), No.Take);

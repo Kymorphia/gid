@@ -45,8 +45,8 @@ class AggregatorPad : gst.pad.Pad
   }
 
   /**
-  Get builder for [gstbase.aggregator_pad.AggregatorPad]
-  Returns: New builder object
+      Get builder for [gstbase.aggregator_pad.AggregatorPad]
+      Returns: New builder object
   */
   static AggregatorPadGidBuilder builder()
   {
@@ -182,6 +182,7 @@ class AggregatorPad : gst.pad.Pad
   }
 }
 
+/// Fluent builder implementation template for [gstbase.aggregator_pad.AggregatorPad]
 class AggregatorPadGidBuilderImpl(T) : gst.pad.PadGidBuilderImpl!T
 {
 
@@ -200,6 +201,10 @@ class AggregatorPadGidBuilderImpl(T) : gst.pad.PadGidBuilderImpl!T
 /// Fluent builder for [gstbase.aggregator_pad.AggregatorPad]
 final class AggregatorPadGidBuilder : AggregatorPadGidBuilderImpl!AggregatorPadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AggregatorPad build()
   {
     return new AggregatorPad(cast(void*)createGObject(AggregatorPad._getGType), No.Take);

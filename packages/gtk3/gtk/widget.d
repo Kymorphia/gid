@@ -487,8 +487,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   }
 
   /**
-  Get builder for [gtk.widget.Widget]
-  Returns: New builder object
+      Get builder for [gtk.widget.Widget]
+      Returns: New builder object
   */
   static WidgetGidBuilder builder()
   {
@@ -9586,6 +9586,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   }
 }
 
+/// Fluent builder implementation template for [gtk.widget.Widget]
 class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, atk.implementor_iface.ImplementorIfaceGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -9970,6 +9971,10 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
 /// Fluent builder for [gtk.widget.Widget]
 final class WidgetGidBuilder : WidgetGidBuilderImpl!WidgetGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Widget build()
   {
     return new Widget(cast(void*)createGObject(Widget._getGType), No.Take);

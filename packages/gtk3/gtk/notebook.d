@@ -127,8 +127,8 @@ class Notebook : gtk.container.Container
   }
 
   /**
-  Get builder for [gtk.notebook.Notebook]
-  Returns: New builder object
+      Get builder for [gtk.notebook.Notebook]
+      Returns: New builder object
   */
   static NotebookGidBuilder builder()
   {
@@ -1426,6 +1426,7 @@ class Notebook : gtk.container.Container
   }
 }
 
+/// Fluent builder implementation template for [gtk.notebook.Notebook]
 class NotebookGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 {
 
@@ -1481,6 +1482,10 @@ class NotebookGidBuilderImpl(T) : gtk.container.ContainerGidBuilderImpl!T
 /// Fluent builder for [gtk.notebook.Notebook]
 final class NotebookGidBuilder : NotebookGidBuilderImpl!NotebookGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Notebook build()
   {
     return new Notebook(cast(void*)createGObject(Notebook._getGType), No.Take);

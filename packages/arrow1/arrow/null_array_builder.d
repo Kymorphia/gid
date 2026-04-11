@@ -38,8 +38,8 @@ class NullArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.null_array_builder.NullArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.null_array_builder.NullArrayBuilder]
+      Returns: New builder object
   */
   static NullArrayBuilderGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class NullArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.null_array_builder.NullArrayBuilder]
 class NullArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class NullArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBui
 /// Fluent builder for [arrow.null_array_builder.NullArrayBuilder]
 final class NullArrayBuilderGidBuilder : NullArrayBuilderGidBuilderImpl!NullArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NullArrayBuilder build()
   {
     return new NullArrayBuilder(cast(void*)createGObject(NullArrayBuilder._getGType), Yes.Take);

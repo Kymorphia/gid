@@ -111,8 +111,8 @@ class Pad : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.pad.Pad]
-  Returns: New builder object
+      Get builder for [gst.pad.Pad]
+      Returns: New builder object
   */
   static PadGidBuilder builder()
   {
@@ -1683,6 +1683,7 @@ class Pad : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.pad.Pad]
 class PadGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -1713,6 +1714,10 @@ class PadGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.pad.Pad]
 final class PadGidBuilder : PadGidBuilderImpl!PadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Pad build()
   {
     return new Pad(cast(void*)createGObject(Pad._getGType), No.Take);

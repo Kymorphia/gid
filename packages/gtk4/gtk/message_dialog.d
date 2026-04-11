@@ -111,8 +111,8 @@ class MessageDialog : gtk.dialog.Dialog
   }
 
   /**
-  Get builder for [gtk.message_dialog.MessageDialog]
-  Returns: New builder object
+      Get builder for [gtk.message_dialog.MessageDialog]
+      Returns: New builder object
   */
   static MessageDialogGidBuilder builder()
   {
@@ -273,6 +273,7 @@ class MessageDialog : gtk.dialog.Dialog
   }
 }
 
+/// Fluent builder implementation template for [gtk.message_dialog.MessageDialog]
 class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 {
 
@@ -348,6 +349,10 @@ class MessageDialogGidBuilderImpl(T) : gtk.dialog.DialogGidBuilderImpl!T
 /// Fluent builder for [gtk.message_dialog.MessageDialog]
 final class MessageDialogGidBuilder : MessageDialogGidBuilderImpl!MessageDialogGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MessageDialog build()
   {
     return new MessageDialog(cast(void*)createGObject(MessageDialog._getGType), No.Take);

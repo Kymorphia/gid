@@ -39,8 +39,8 @@ class SortKey : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.sort_key.SortKey]
-  Returns: New builder object
+      Get builder for [arrow.sort_key.SortKey]
+      Returns: New builder object
   */
   static SortKeyGidBuilder builder()
   {
@@ -90,6 +90,7 @@ class SortKey : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.sort_key.SortKey]
 class SortKeyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -108,6 +109,10 @@ class SortKeyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.sort_key.SortKey]
 final class SortKeyGidBuilder : SortKeyGidBuilderImpl!SortKeyGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SortKey build()
   {
     return new SortKey(cast(void*)createGObject(SortKey._getGType), Yes.Take);

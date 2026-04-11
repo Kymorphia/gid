@@ -38,8 +38,8 @@ class ReadOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.read_options.ReadOptions]
-  Returns: New builder object
+      Get builder for [arrow.read_options.ReadOptions]
+      Returns: New builder object
   */
   static ReadOptionsGidBuilder builder()
   {
@@ -120,6 +120,7 @@ class ReadOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.read_options.ReadOptions]
 class ReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -149,6 +150,10 @@ class ReadOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.read_options.ReadOptions]
 final class ReadOptionsGidBuilder : ReadOptionsGidBuilderImpl!ReadOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ReadOptions build()
   {
     return new ReadOptions(cast(void*)createGObject(ReadOptions._getGType), Yes.Take);

@@ -38,8 +38,8 @@ class BooleanScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.boolean_scalar.BooleanScalar]
-  Returns: New builder object
+      Get builder for [arrow.boolean_scalar.BooleanScalar]
+      Returns: New builder object
   */
   static BooleanScalarGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class BooleanScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.boolean_scalar.BooleanScalar]
 class BooleanScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class BooleanScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.boolean_scalar.BooleanScalar]
 final class BooleanScalarGidBuilder : BooleanScalarGidBuilderImpl!BooleanScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BooleanScalar build()
   {
     return new BooleanScalar(cast(void*)createGObject(BooleanScalar._getGType), Yes.Take);

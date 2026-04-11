@@ -40,8 +40,8 @@ class RecordBatchDatum : arrow.datum.Datum
   }
 
   /**
-  Get builder for [arrow.record_batch_datum.RecordBatchDatum]
-  Returns: New builder object
+      Get builder for [arrow.record_batch_datum.RecordBatchDatum]
+      Returns: New builder object
   */
   static RecordBatchDatumGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class RecordBatchDatum : arrow.datum.Datum
   }
 }
 
+/// Fluent builder implementation template for [arrow.record_batch_datum.RecordBatchDatum]
 class RecordBatchDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 {
 
@@ -76,6 +77,10 @@ class RecordBatchDatumGidBuilderImpl(T) : arrow.datum.DatumGidBuilderImpl!T
 /// Fluent builder for [arrow.record_batch_datum.RecordBatchDatum]
 final class RecordBatchDatumGidBuilder : RecordBatchDatumGidBuilderImpl!RecordBatchDatumGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecordBatchDatum build()
   {
     return new RecordBatchDatum(cast(void*)createGObject(RecordBatchDatum._getGType), Yes.Take);

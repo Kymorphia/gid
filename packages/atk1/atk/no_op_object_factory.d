@@ -44,8 +44,8 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
   }
 
   /**
-  Get builder for [atk.no_op_object_factory.NoOpObjectFactory]
-  Returns: New builder object
+      Get builder for [atk.no_op_object_factory.NoOpObjectFactory]
+      Returns: New builder object
   */
   static NoOpObjectFactoryGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
   }
 }
 
+/// Fluent builder implementation template for [atk.no_op_object_factory.NoOpObjectFactory]
 class NoOpObjectFactoryGidBuilderImpl(T) : atk.object_factory.ObjectFactoryGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class NoOpObjectFactoryGidBuilderImpl(T) : atk.object_factory.ObjectFactoryGidBu
 /// Fluent builder for [atk.no_op_object_factory.NoOpObjectFactory]
 final class NoOpObjectFactoryGidBuilder : NoOpObjectFactoryGidBuilderImpl!NoOpObjectFactoryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NoOpObjectFactory build()
   {
     return new NoOpObjectFactory(cast(void*)createGObject(NoOpObjectFactory._getGType), Yes.Take);

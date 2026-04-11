@@ -91,8 +91,8 @@ class SearchBar : gtk.widget.Widget
   }
 
   /**
-  Get builder for [gtk.search_bar.SearchBar]
-  Returns: New builder object
+      Get builder for [gtk.search_bar.SearchBar]
+      Returns: New builder object
   */
   static SearchBarGidBuilder builder()
   {
@@ -311,6 +311,7 @@ class SearchBar : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [gtk.search_bar.SearchBar]
 class SearchBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -363,6 +364,10 @@ class SearchBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [gtk.search_bar.SearchBar]
 final class SearchBarGidBuilder : SearchBarGidBuilderImpl!SearchBarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   SearchBar build()
   {
     return new SearchBar(cast(void*)createGObject(SearchBar._getGType), No.Take);

@@ -40,8 +40,8 @@ class DataAccessWrapper : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 
   /**
-  Get builder for [gda.data_access_wrapper.DataAccessWrapper]
-  Returns: New builder object
+      Get builder for [gda.data_access_wrapper.DataAccessWrapper]
+      Returns: New builder object
   */
   static DataAccessWrapperGidBuilder builder()
   {
@@ -108,6 +108,7 @@ class DataAccessWrapper : gobject.object.ObjectWrap, gda.data_model.DataModel
   }
 }
 
+/// Fluent builder implementation template for [gda.data_access_wrapper.DataAccessWrapper]
 class DataAccessWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gda.data_model.DataModelGidBuilderImpl!T
 {
 
@@ -123,6 +124,10 @@ class DataAccessWrapperGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderIm
 /// Fluent builder for [gda.data_access_wrapper.DataAccessWrapper]
 final class DataAccessWrapperGidBuilder : DataAccessWrapperGidBuilderImpl!DataAccessWrapperGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DataAccessWrapper build()
   {
     return new DataAccessWrapper(cast(void*)createGObject(DataAccessWrapper._getGType), No.Take);

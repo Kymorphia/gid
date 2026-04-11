@@ -81,8 +81,8 @@ class Statusbar : gtk.box.Box
   }
 
   /**
-  Get builder for [gtk.statusbar.Statusbar]
-  Returns: New builder object
+      Get builder for [gtk.statusbar.Statusbar]
+      Returns: New builder object
   */
   static StatusbarGidBuilder builder()
   {
@@ -290,6 +290,7 @@ class Statusbar : gtk.box.Box
   }
 }
 
+/// Fluent builder implementation template for [gtk.statusbar.Statusbar]
 class StatusbarGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 {
 
@@ -298,6 +299,10 @@ class StatusbarGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
 /// Fluent builder for [gtk.statusbar.Statusbar]
 final class StatusbarGidBuilder : StatusbarGidBuilderImpl!StatusbarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Statusbar build()
   {
     return new Statusbar(cast(void*)createGObject(Statusbar._getGType), No.Take);

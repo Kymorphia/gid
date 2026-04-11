@@ -39,8 +39,8 @@ class TimestampScalar : arrow.scalar.Scalar
   }
 
   /**
-  Get builder for [arrow.timestamp_scalar.TimestampScalar]
-  Returns: New builder object
+      Get builder for [arrow.timestamp_scalar.TimestampScalar]
+      Returns: New builder object
   */
   static TimestampScalarGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class TimestampScalar : arrow.scalar.Scalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.timestamp_scalar.TimestampScalar]
 class TimestampScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 {
 }
@@ -71,6 +72,10 @@ class TimestampScalarGidBuilderImpl(T) : arrow.scalar.ScalarGidBuilderImpl!T
 /// Fluent builder for [arrow.timestamp_scalar.TimestampScalar]
 final class TimestampScalarGidBuilder : TimestampScalarGidBuilderImpl!TimestampScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   TimestampScalar build()
   {
     return new TimestampScalar(cast(void*)createGObject(TimestampScalar._getGType), Yes.Take);

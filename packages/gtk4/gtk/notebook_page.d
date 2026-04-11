@@ -41,8 +41,8 @@ class NotebookPage : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.notebook_page.NotebookPage]
-  Returns: New builder object
+      Get builder for [gtk.notebook_page.NotebookPage]
+      Returns: New builder object
   */
   static NotebookPageGidBuilder builder()
   {
@@ -222,6 +222,7 @@ class NotebookPage : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.notebook_page.NotebookPage]
 class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -339,6 +340,10 @@ class NotebookPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.notebook_page.NotebookPage]
 final class NotebookPageGidBuilder : NotebookPageGidBuilderImpl!NotebookPageGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NotebookPage build()
   {
     return new NotebookPage(cast(void*)createGObject(NotebookPage._getGType), No.Take);

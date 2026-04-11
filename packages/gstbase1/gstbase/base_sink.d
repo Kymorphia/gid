@@ -157,8 +157,8 @@ class BaseSink : gst.element.Element
   }
 
   /**
-  Get builder for [gstbase.base_sink.BaseSink]
-  Returns: New builder object
+      Get builder for [gstbase.base_sink.BaseSink]
+      Returns: New builder object
   */
   static BaseSinkGidBuilder builder()
   {
@@ -907,6 +907,7 @@ class BaseSink : gst.element.Element
   }
 }
 
+/// Fluent builder implementation template for [gstbase.base_sink.BaseSink]
 class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 {
 
@@ -1036,6 +1037,10 @@ class BaseSinkGidBuilderImpl(T) : gst.element.ElementGidBuilderImpl!T
 /// Fluent builder for [gstbase.base_sink.BaseSink]
 final class BaseSinkGidBuilder : BaseSinkGidBuilderImpl!BaseSinkGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BaseSink build()
   {
     return new BaseSink(cast(void*)createGObject(BaseSink._getGType), No.Take);

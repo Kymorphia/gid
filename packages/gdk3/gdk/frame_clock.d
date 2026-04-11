@@ -74,8 +74,8 @@ class FrameClock : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.frame_clock.FrameClock]
-  Returns: New builder object
+      Get builder for [gdk.frame_clock.FrameClock]
+      Returns: New builder object
   */
   static FrameClockGidBuilder builder()
   {
@@ -507,6 +507,7 @@ class FrameClock : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.frame_clock.FrameClock]
 class FrameClockGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -514,6 +515,10 @@ class FrameClockGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.frame_clock.FrameClock]
 final class FrameClockGidBuilder : FrameClockGidBuilderImpl!FrameClockGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FrameClock build()
   {
     return new FrameClock(cast(void*)createGObject(FrameClock._getGType), No.Take);

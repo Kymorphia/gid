@@ -64,8 +64,8 @@ class Arrow : gtk.misc.Misc
   }
 
   /**
-  Get builder for [gtk.arrow.Arrow]
-  Returns: New builder object
+      Get builder for [gtk.arrow.Arrow]
+      Returns: New builder object
   */
   static ArrowGidBuilder builder()
   {
@@ -128,6 +128,7 @@ class Arrow : gtk.misc.Misc
   }
 }
 
+/// Fluent builder implementation template for [gtk.arrow.Arrow]
 class ArrowGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
 {
 
@@ -148,6 +149,10 @@ class ArrowGidBuilderImpl(T) : gtk.misc.MiscGidBuilderImpl!T
 /// Fluent builder for [gtk.arrow.Arrow]
 final class ArrowGidBuilder : ArrowGidBuilderImpl!ArrowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Arrow build()
   {
     return new Arrow(cast(void*)createGObject(Arrow._getGType), No.Take);

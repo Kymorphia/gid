@@ -39,8 +39,8 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /**
-  Get builder for [arrow.project_node_options.ProjectNodeOptions]
-  Returns: New builder object
+      Get builder for [arrow.project_node_options.ProjectNodeOptions]
+      Returns: New builder object
   */
   static ProjectNodeOptionsGidBuilder builder()
   {
@@ -67,6 +67,7 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.project_node_options.ProjectNodeOptions]
 class ProjectNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNodeOptionsGidBuilderImpl!T
 {
 }
@@ -74,6 +75,10 @@ class ProjectNodeOptionsGidBuilderImpl(T) : arrow.execute_node_options.ExecuteNo
 /// Fluent builder for [arrow.project_node_options.ProjectNodeOptions]
 final class ProjectNodeOptionsGidBuilder : ProjectNodeOptionsGidBuilderImpl!ProjectNodeOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ProjectNodeOptions build()
   {
     return new ProjectNodeOptions(cast(void*)createGObject(ProjectNodeOptions._getGType), Yes.Take);

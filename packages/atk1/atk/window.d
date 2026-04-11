@@ -191,6 +191,7 @@ interface Window
   gulong connectRestore(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [atk.window.Window]
 interface WindowGidBuilderImpl(T)
 {
 }

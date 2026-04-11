@@ -179,6 +179,7 @@ template SelectionT()
   }
 }
 
+/// Fluent builder implementation template for [atk.selection.Selection]
 template SelectionGidBuilderT()
 {
 }

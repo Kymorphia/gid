@@ -50,8 +50,8 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /**
-  Get builder for [gtk.bookmark_list.BookmarkList]
-  Returns: New builder object
+      Get builder for [gtk.bookmark_list.BookmarkList]
+      Returns: New builder object
   */
   static BookmarkListGidBuilder builder()
   {
@@ -231,6 +231,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 }
 
+/// Fluent builder implementation template for [gtk.bookmark_list.BookmarkList]
 class BookmarkListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gio.list_model.ListModelGidBuilderImpl!T
 {
 
@@ -273,6 +274,10 @@ class BookmarkListGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T,
 /// Fluent builder for [gtk.bookmark_list.BookmarkList]
 final class BookmarkListGidBuilder : BookmarkListGidBuilderImpl!BookmarkListGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BookmarkList build()
   {
     return new BookmarkList(cast(void*)createGObject(BookmarkList._getGType), Yes.Take);

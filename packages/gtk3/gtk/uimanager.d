@@ -276,8 +276,8 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /**
-  Get builder for [gtk.uimanager.UIManager]
-  Returns: New builder object
+      Get builder for [gtk.uimanager.UIManager]
+      Returns: New builder object
   */
   static UIManagerGidBuilder builder()
   {
@@ -930,6 +930,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 }
 
+/// Fluent builder implementation template for [gtk.uimanager.UIManager]
 class UIManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -957,6 +958,10 @@ class UIManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gt
 /// Fluent builder for [gtk.uimanager.UIManager]
 final class UIManagerGidBuilder : UIManagerGidBuilderImpl!UIManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UIManager build()
   {
     return new UIManager(cast(void*)createGObject(UIManager._getGType), Yes.Take);

@@ -70,8 +70,8 @@ class FileEnumerator : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.file_enumerator.FileEnumerator]
-  Returns: New builder object
+      Get builder for [gio.file_enumerator.FileEnumerator]
+      Returns: New builder object
   */
   static FileEnumeratorGidBuilder builder()
   {
@@ -430,6 +430,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.file_enumerator.FileEnumerator]
 class FileEnumeratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -448,6 +449,10 @@ class FileEnumeratorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [gio.file_enumerator.FileEnumerator]
 final class FileEnumeratorGidBuilder : FileEnumeratorGidBuilderImpl!FileEnumeratorGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileEnumerator build()
   {
     return new FileEnumerator(cast(void*)createGObject(FileEnumerator._getGType), No.Take);

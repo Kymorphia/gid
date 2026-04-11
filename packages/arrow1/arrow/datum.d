@@ -38,8 +38,8 @@ class Datum : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrow.datum.Datum]
-  Returns: New builder object
+      Get builder for [arrow.datum.Datum]
+      Returns: New builder object
   */
   static DatumGidBuilder builder()
   {
@@ -96,6 +96,7 @@ class Datum : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrow.datum.Datum]
 class DatumGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -109,6 +110,10 @@ class DatumGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrow.datum.Datum]
 final class DatumGidBuilder : DatumGidBuilderImpl!DatumGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Datum build()
   {
     return new Datum(cast(void*)createGObject(Datum._getGType), No.Take);

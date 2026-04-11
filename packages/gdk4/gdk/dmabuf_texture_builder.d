@@ -105,8 +105,8 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.dmabuf_texture_builder.DmabufTextureBuilder]
-  Returns: New builder object
+      Get builder for [gdk.dmabuf_texture_builder.DmabufTextureBuilder]
+      Returns: New builder object
   */
   static DmabufTextureBuilderGidBuilder builder()
   {
@@ -667,6 +667,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.dmabuf_texture_builder.DmabufTextureBuilder]
 class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -778,6 +779,10 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
 /// Fluent builder for [gdk.dmabuf_texture_builder.DmabufTextureBuilder]
 final class DmabufTextureBuilderGidBuilder : DmabufTextureBuilderGidBuilderImpl!DmabufTextureBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   DmabufTextureBuilder build()
   {
     return new DmabufTextureBuilder(cast(void*)createGObject(DmabufTextureBuilder._getGType), Yes.Take);

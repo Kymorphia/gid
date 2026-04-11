@@ -55,8 +55,8 @@ class AudioSrc : gstaudio.audio_base_src.AudioBaseSrc
   }
 
   /**
-  Get builder for [gstaudio.audio_src.AudioSrc]
-  Returns: New builder object
+      Get builder for [gstaudio.audio_src.AudioSrc]
+      Returns: New builder object
   */
   static AudioSrcGidBuilder builder()
   {
@@ -64,6 +64,7 @@ class AudioSrc : gstaudio.audio_base_src.AudioBaseSrc
   }
 }
 
+/// Fluent builder implementation template for [gstaudio.audio_src.AudioSrc]
 class AudioSrcGidBuilderImpl(T) : gstaudio.audio_base_src.AudioBaseSrcGidBuilderImpl!T
 {
 }
@@ -71,6 +72,10 @@ class AudioSrcGidBuilderImpl(T) : gstaudio.audio_base_src.AudioBaseSrcGidBuilder
 /// Fluent builder for [gstaudio.audio_src.AudioSrc]
 final class AudioSrcGidBuilder : AudioSrcGidBuilderImpl!AudioSrcGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AudioSrc build()
   {
     return new AudioSrc(cast(void*)createGObject(AudioSrc._getGType), No.Take);

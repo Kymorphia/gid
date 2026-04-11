@@ -56,8 +56,8 @@ class UnixConnection : gio.socket_connection.SocketConnection
   }
 
   /**
-  Get builder for [gio.unix_connection.UnixConnection]
-  Returns: New builder object
+      Get builder for [gio.unix_connection.UnixConnection]
+      Returns: New builder object
   */
   static UnixConnectionGidBuilder builder()
   {
@@ -287,6 +287,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
   }
 }
 
+/// Fluent builder implementation template for [gio.unix_connection.UnixConnection]
 class UnixConnectionGidBuilderImpl(T) : gio.socket_connection.SocketConnectionGidBuilderImpl!T
 {
 }
@@ -294,6 +295,10 @@ class UnixConnectionGidBuilderImpl(T) : gio.socket_connection.SocketConnectionGi
 /// Fluent builder for [gio.unix_connection.UnixConnection]
 final class UnixConnectionGidBuilder : UnixConnectionGidBuilderImpl!UnixConnectionGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   UnixConnection build()
   {
     return new UnixConnection(cast(void*)createGObject(UnixConnection._getGType), No.Take);

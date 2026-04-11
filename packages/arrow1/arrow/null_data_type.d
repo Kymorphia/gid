@@ -38,8 +38,8 @@ class NullDataType : arrow.data_type.DataType
   }
 
   /**
-  Get builder for [arrow.null_data_type.NullDataType]
-  Returns: New builder object
+      Get builder for [arrow.null_data_type.NullDataType]
+      Returns: New builder object
   */
   static NullDataTypeGidBuilder builder()
   {
@@ -55,6 +55,7 @@ class NullDataType : arrow.data_type.DataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.null_data_type.NullDataType]
 class NullDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 {
 }
@@ -62,6 +63,10 @@ class NullDataTypeGidBuilderImpl(T) : arrow.data_type.DataTypeGidBuilderImpl!T
 /// Fluent builder for [arrow.null_data_type.NullDataType]
 final class NullDataTypeGidBuilder : NullDataTypeGidBuilderImpl!NullDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   NullDataType build()
   {
     return new NullDataType(cast(void*)createGObject(NullDataType._getGType), Yes.Take);

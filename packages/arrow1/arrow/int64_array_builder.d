@@ -39,8 +39,8 @@ class Int64ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /**
-  Get builder for [arrow.int64_array_builder.Int64ArrayBuilder]
-  Returns: New builder object
+      Get builder for [arrow.int64_array_builder.Int64ArrayBuilder]
+      Returns: New builder object
   */
   static Int64ArrayBuilderGidBuilder builder()
   {
@@ -111,6 +111,7 @@ class Int64ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 }
 
+/// Fluent builder implementation template for [arrow.int64_array_builder.Int64ArrayBuilder]
 class Int64ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBuilderImpl!T
 {
 }
@@ -118,6 +119,10 @@ class Int64ArrayBuilderGidBuilderImpl(T) : arrow.array_builder.ArrayBuilderGidBu
 /// Fluent builder for [arrow.int64_array_builder.Int64ArrayBuilder]
 final class Int64ArrayBuilderGidBuilder : Int64ArrayBuilderGidBuilderImpl!Int64ArrayBuilderGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Int64ArrayBuilder build()
   {
     return new Int64ArrayBuilder(cast(void*)createGObject(Int64ArrayBuilder._getGType), Yes.Take);

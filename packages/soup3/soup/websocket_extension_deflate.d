@@ -44,8 +44,8 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
   }
 
   /**
-  Get builder for [soup.websocket_extension_deflate.WebsocketExtensionDeflate]
-  Returns: New builder object
+      Get builder for [soup.websocket_extension_deflate.WebsocketExtensionDeflate]
+      Returns: New builder object
   */
   static WebsocketExtensionDeflateGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
   }
 }
 
+/// Fluent builder implementation template for [soup.websocket_extension_deflate.WebsocketExtensionDeflate]
 class WebsocketExtensionDeflateGidBuilderImpl(T) : soup.websocket_extension.WebsocketExtensionGidBuilderImpl!T
 {
 }
@@ -60,6 +61,10 @@ class WebsocketExtensionDeflateGidBuilderImpl(T) : soup.websocket_extension.Webs
 /// Fluent builder for [soup.websocket_extension_deflate.WebsocketExtensionDeflate]
 final class WebsocketExtensionDeflateGidBuilder : WebsocketExtensionDeflateGidBuilderImpl!WebsocketExtensionDeflateGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   WebsocketExtensionDeflate build()
   {
     return new WebsocketExtensionDeflate(cast(void*)createGObject(WebsocketExtensionDeflate._getGType), No.Take);

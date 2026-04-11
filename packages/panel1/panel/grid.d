@@ -56,8 +56,8 @@ class Grid : gtk.widget.Widget
   }
 
   /**
-  Get builder for [panel.grid.Grid]
-  Returns: New builder object
+      Get builder for [panel.grid.Grid]
+      Returns: New builder object
   */
   static GridGidBuilder builder()
   {
@@ -243,6 +243,7 @@ class Grid : gtk.widget.Widget
   }
 }
 
+/// Fluent builder implementation template for [panel.grid.Grid]
 class GridGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 {
 
@@ -251,6 +252,10 @@ class GridGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
 /// Fluent builder for [panel.grid.Grid]
 final class GridGidBuilder : GridGidBuilderImpl!GridGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Grid build()
   {
     return new Grid(cast(void*)createGObject(Grid._getGType), No.Take);

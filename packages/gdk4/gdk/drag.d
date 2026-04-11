@@ -55,8 +55,8 @@ class Drag : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.drag.Drag]
-  Returns: New builder object
+      Get builder for [gdk.drag.Drag]
+      Returns: New builder object
   */
   static DragGidBuilder builder()
   {
@@ -437,6 +437,7 @@ class Drag : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.drag.Drag]
 class DragGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -510,6 +511,10 @@ class DragGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.drag.Drag]
 final class DragGidBuilder : DragGidBuilderImpl!DragGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Drag build()
   {
     return new Drag(cast(void*)createGObject(Drag._getGType), No.Take);

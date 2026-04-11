@@ -125,6 +125,7 @@ interface CompletionProposal
   gulong connectChanged(T)(T callback, Flag!"After" after = No.After);
 }
 
+/// Fluent builder implementation template for [gtksource.completion_proposal.CompletionProposal]
 interface CompletionProposalGidBuilderImpl(T)
 {
 }

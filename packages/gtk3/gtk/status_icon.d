@@ -81,8 +81,8 @@ class StatusIcon : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtk.status_icon.StatusIcon]
-  Returns: New builder object
+      Get builder for [gtk.status_icon.StatusIcon]
+      Returns: New builder object
   */
   static StatusIconGidBuilder builder()
   {
@@ -1407,6 +1407,7 @@ class StatusIcon : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtk.status_icon.StatusIcon]
 class StatusIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -1542,6 +1543,10 @@ class StatusIconGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gtk.status_icon.StatusIcon]
 final class StatusIconGidBuilder : StatusIconGidBuilderImpl!StatusIconGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StatusIcon build()
   {
     return new StatusIcon(cast(void*)createGObject(StatusIcon._getGType), Yes.Take);

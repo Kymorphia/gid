@@ -38,8 +38,8 @@ class Fragment : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.fragment.Fragment]
-  Returns: New builder object
+      Get builder for [arrowdataset.fragment.Fragment]
+      Returns: New builder object
   */
   static FragmentGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class Fragment : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.fragment.Fragment]
 class FragmentGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -60,6 +61,10 @@ class FragmentGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowdataset.fragment.Fragment]
 final class FragmentGidBuilder : FragmentGidBuilderImpl!FragmentGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Fragment build()
   {
     return new Fragment(cast(void*)createGObject(Fragment._getGType), No.Take);

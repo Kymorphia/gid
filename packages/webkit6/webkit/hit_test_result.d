@@ -59,8 +59,8 @@ class HitTestResult : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [webkit.hit_test_result.HitTestResult]
-  Returns: New builder object
+      Get builder for [webkit.hit_test_result.HitTestResult]
+      Returns: New builder object
   */
   static HitTestResultGidBuilder builder()
   {
@@ -284,6 +284,7 @@ class HitTestResult : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [webkit.hit_test_result.HitTestResult]
 class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -363,6 +364,10 @@ class HitTestResultGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [webkit.hit_test_result.HitTestResult]
 final class HitTestResultGidBuilder : HitTestResultGidBuilderImpl!HitTestResultGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   HitTestResult build()
   {
     return new HitTestResult(cast(void*)createGObject(HitTestResult._getGType), No.Take);

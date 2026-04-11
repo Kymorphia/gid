@@ -43,8 +43,8 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   }
 
   /**
-  Get builder for [arrowflight.record_batch_writer.RecordBatchWriter]
-  Returns: New builder object
+      Get builder for [arrowflight.record_batch_writer.RecordBatchWriter]
+      Returns: New builder object
   */
   static RecordBatchWriterGidBuilder builder()
   {
@@ -111,6 +111,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   }
 }
 
+/// Fluent builder implementation template for [arrowflight.record_batch_writer.RecordBatchWriter]
 class RecordBatchWriterGidBuilderImpl(T) : arrow.record_batch_writer.RecordBatchWriterGidBuilderImpl!T
 {
 }
@@ -118,6 +119,10 @@ class RecordBatchWriterGidBuilderImpl(T) : arrow.record_batch_writer.RecordBatch
 /// Fluent builder for [arrowflight.record_batch_writer.RecordBatchWriter]
 final class RecordBatchWriterGidBuilder : RecordBatchWriterGidBuilderImpl!RecordBatchWriterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecordBatchWriter build()
   {
     return new RecordBatchWriter(cast(void*)createGObject(RecordBatchWriter._getGType), No.Take);

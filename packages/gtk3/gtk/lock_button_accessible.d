@@ -44,8 +44,8 @@ class LockButtonAccessible : gtk.button_accessible.ButtonAccessible
   }
 
   /**
-  Get builder for [gtk.lock_button_accessible.LockButtonAccessible]
-  Returns: New builder object
+      Get builder for [gtk.lock_button_accessible.LockButtonAccessible]
+      Returns: New builder object
   */
   static LockButtonAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class LockButtonAccessible : gtk.button_accessible.ButtonAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.lock_button_accessible.LockButtonAccessible]
 class LockButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAccessibleGidBuilderImpl!T
 {
 
@@ -61,6 +62,10 @@ class LockButtonAccessibleGidBuilderImpl(T) : gtk.button_accessible.ButtonAccess
 /// Fluent builder for [gtk.lock_button_accessible.LockButtonAccessible]
 final class LockButtonAccessibleGidBuilder : LockButtonAccessibleGidBuilderImpl!LockButtonAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   LockButtonAccessible build()
   {
     return new LockButtonAccessible(cast(void*)createGObject(LockButtonAccessible._getGType), No.Take);

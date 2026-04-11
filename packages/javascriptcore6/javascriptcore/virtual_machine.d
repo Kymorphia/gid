@@ -45,8 +45,8 @@ class VirtualMachine : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [javascriptcore.virtual_machine.VirtualMachine]
-  Returns: New builder object
+      Get builder for [javascriptcore.virtual_machine.VirtualMachine]
+      Returns: New builder object
   */
   static VirtualMachineGidBuilder builder()
   {
@@ -65,6 +65,7 @@ class VirtualMachine : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [javascriptcore.virtual_machine.VirtualMachine]
 class VirtualMachineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -72,6 +73,10 @@ class VirtualMachineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
 /// Fluent builder for [javascriptcore.virtual_machine.VirtualMachine]
 final class VirtualMachineGidBuilder : VirtualMachineGidBuilderImpl!VirtualMachineGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   VirtualMachine build()
   {
     return new VirtualMachine(cast(void*)createGObject(VirtualMachine._getGType), Yes.Take);

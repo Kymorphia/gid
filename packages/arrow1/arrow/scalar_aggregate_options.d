@@ -39,8 +39,8 @@ class ScalarAggregateOptions : arrow.function_options.FunctionOptions
   }
 
   /**
-  Get builder for [arrow.scalar_aggregate_options.ScalarAggregateOptions]
-  Returns: New builder object
+      Get builder for [arrow.scalar_aggregate_options.ScalarAggregateOptions]
+      Returns: New builder object
   */
   static ScalarAggregateOptionsGidBuilder builder()
   {
@@ -94,6 +94,7 @@ class ScalarAggregateOptions : arrow.function_options.FunctionOptions
   }
 }
 
+/// Fluent builder implementation template for [arrow.scalar_aggregate_options.ScalarAggregateOptions]
 class ScalarAggregateOptionsGidBuilderImpl(T) : arrow.function_options.FunctionOptionsGidBuilderImpl!T
 {
 
@@ -123,6 +124,10 @@ class ScalarAggregateOptionsGidBuilderImpl(T) : arrow.function_options.FunctionO
 /// Fluent builder for [arrow.scalar_aggregate_options.ScalarAggregateOptions]
 final class ScalarAggregateOptionsGidBuilder : ScalarAggregateOptionsGidBuilderImpl!ScalarAggregateOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ScalarAggregateOptions build()
   {
     return new ScalarAggregateOptions(cast(void*)createGObject(ScalarAggregateOptions._getGType), Yes.Take);

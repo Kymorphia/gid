@@ -38,8 +38,8 @@ class GLBaseMixerPad : gstvideo.video_aggregator_pad.VideoAggregatorPad
   }
 
   /**
-  Get builder for [gstgl.glbase_mixer_pad.GLBaseMixerPad]
-  Returns: New builder object
+      Get builder for [gstgl.glbase_mixer_pad.GLBaseMixerPad]
+      Returns: New builder object
   */
   static GLBaseMixerPadGidBuilder builder()
   {
@@ -47,6 +47,7 @@ class GLBaseMixerPad : gstvideo.video_aggregator_pad.VideoAggregatorPad
   }
 }
 
+/// Fluent builder implementation template for [gstgl.glbase_mixer_pad.GLBaseMixerPad]
 class GLBaseMixerPadGidBuilderImpl(T) : gstvideo.video_aggregator_pad.VideoAggregatorPadGidBuilderImpl!T
 {
 }
@@ -54,6 +55,10 @@ class GLBaseMixerPadGidBuilderImpl(T) : gstvideo.video_aggregator_pad.VideoAggre
 /// Fluent builder for [gstgl.glbase_mixer_pad.GLBaseMixerPad]
 final class GLBaseMixerPadGidBuilder : GLBaseMixerPadGidBuilderImpl!GLBaseMixerPadGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GLBaseMixerPad build()
   {
     return new GLBaseMixerPad(cast(void*)createGObject(GLBaseMixerPad._getGType), No.Take);

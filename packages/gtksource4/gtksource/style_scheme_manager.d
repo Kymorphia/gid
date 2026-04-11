@@ -39,8 +39,8 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gtksource.style_scheme_manager.StyleSchemeManager]
-  Returns: New builder object
+      Get builder for [gtksource.style_scheme_manager.StyleSchemeManager]
+      Returns: New builder object
   */
   static StyleSchemeManagerGidBuilder builder()
   {
@@ -197,6 +197,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gtksource.style_scheme_manager.StyleSchemeManager]
 class StyleSchemeManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -204,6 +205,10 @@ class StyleSchemeManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [gtksource.style_scheme_manager.StyleSchemeManager]
 final class StyleSchemeManagerGidBuilder : StyleSchemeManagerGidBuilderImpl!StyleSchemeManagerGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   StyleSchemeManager build()
   {
     return new StyleSchemeManager(cast(void*)createGObject(StyleSchemeManager._getGType), Yes.Take);

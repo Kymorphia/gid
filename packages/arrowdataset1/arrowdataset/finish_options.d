@@ -39,8 +39,8 @@ class FinishOptions : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.finish_options.FinishOptions]
-  Returns: New builder object
+      Get builder for [arrowdataset.finish_options.FinishOptions]
+      Returns: New builder object
   */
   static FinishOptionsGidBuilder builder()
   {
@@ -113,6 +113,7 @@ class FinishOptions : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.finish_options.FinishOptions]
 class FinishOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -159,6 +160,10 @@ class FinishOptionsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowdataset.finish_options.FinishOptions]
 final class FinishOptionsGidBuilder : FinishOptionsGidBuilderImpl!FinishOptionsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FinishOptions build()
   {
     return new FinishOptions(cast(void*)createGObject(FinishOptions._getGType), Yes.Take);

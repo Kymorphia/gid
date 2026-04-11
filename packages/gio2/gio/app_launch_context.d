@@ -46,8 +46,8 @@ class AppLaunchContext : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gio.app_launch_context.AppLaunchContext]
-  Returns: New builder object
+      Get builder for [gio.app_launch_context.AppLaunchContext]
+      Returns: New builder object
   */
   static AppLaunchContextGidBuilder builder()
   {
@@ -368,6 +368,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gio.app_launch_context.AppLaunchContext]
 class AppLaunchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -375,6 +376,10 @@ class AppLaunchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
 /// Fluent builder for [gio.app_launch_context.AppLaunchContext]
 final class AppLaunchContextGidBuilder : AppLaunchContextGidBuilderImpl!AppLaunchContextGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   AppLaunchContext build()
   {
     return new AppLaunchContext(cast(void*)createGObject(AppLaunchContext._getGType), Yes.Take);

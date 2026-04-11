@@ -50,8 +50,8 @@ class Device : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gdk.device.Device]
-  Returns: New builder object
+      Get builder for [gdk.device.Device]
+      Returns: New builder object
   */
   static DeviceGidBuilder builder()
   {
@@ -570,6 +570,7 @@ class Device : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gdk.device.Device]
 class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -672,6 +673,10 @@ class DeviceGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gdk.device.Device]
 final class DeviceGidBuilder : DeviceGidBuilderImpl!DeviceGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Device build()
   {
     return new Device(cast(void*)createGObject(Device._getGType), No.Take);

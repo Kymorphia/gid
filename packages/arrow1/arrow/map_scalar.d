@@ -39,8 +39,8 @@ class MapScalar : arrow.base_list_scalar.BaseListScalar
   }
 
   /**
-  Get builder for [arrow.map_scalar.MapScalar]
-  Returns: New builder object
+      Get builder for [arrow.map_scalar.MapScalar]
+      Returns: New builder object
   */
   static MapScalarGidBuilder builder()
   {
@@ -56,6 +56,7 @@ class MapScalar : arrow.base_list_scalar.BaseListScalar
   }
 }
 
+/// Fluent builder implementation template for [arrow.map_scalar.MapScalar]
 class MapScalarGidBuilderImpl(T) : arrow.base_list_scalar.BaseListScalarGidBuilderImpl!T
 {
 }
@@ -63,6 +64,10 @@ class MapScalarGidBuilderImpl(T) : arrow.base_list_scalar.BaseListScalarGidBuild
 /// Fluent builder for [arrow.map_scalar.MapScalar]
 final class MapScalarGidBuilder : MapScalarGidBuilderImpl!MapScalarGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   MapScalar build()
   {
     return new MapScalar(cast(void*)createGObject(MapScalar._getGType), Yes.Take);

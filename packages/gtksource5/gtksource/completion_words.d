@@ -47,8 +47,8 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   }
 
   /**
-  Get builder for [gtksource.completion_words.CompletionWords]
-  Returns: New builder object
+      Get builder for [gtksource.completion_words.CompletionWords]
+      Returns: New builder object
   */
   static CompletionWordsGidBuilder builder()
   {
@@ -149,6 +149,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion_words.CompletionWords]
 class CompletionWordsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtksource.completion_provider.CompletionProviderGidBuilderImpl!T
 {
 
@@ -188,6 +189,10 @@ class CompletionWordsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
 /// Fluent builder for [gtksource.completion_words.CompletionWords]
 final class CompletionWordsGidBuilder : CompletionWordsGidBuilderImpl!CompletionWordsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CompletionWords build()
   {
     return new CompletionWords(cast(void*)createGObject(CompletionWords._getGType), Yes.Take);

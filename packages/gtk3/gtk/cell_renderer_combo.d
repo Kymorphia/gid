@@ -55,8 +55,8 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
-  Get builder for [gtk.cell_renderer_combo.CellRendererCombo]
-  Returns: New builder object
+      Get builder for [gtk.cell_renderer_combo.CellRendererCombo]
+      Returns: New builder object
   */
   static CellRendererComboGidBuilder builder()
   {
@@ -219,6 +219,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
   }
 }
 
+/// Fluent builder implementation template for [gtk.cell_renderer_combo.CellRendererCombo]
 class CellRendererComboGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTextGidBuilderImpl!T
 {
 
@@ -269,6 +270,10 @@ class CellRendererComboGidBuilderImpl(T) : gtk.cell_renderer_text.CellRendererTe
 /// Fluent builder for [gtk.cell_renderer_combo.CellRendererCombo]
 final class CellRendererComboGidBuilder : CellRendererComboGidBuilderImpl!CellRendererComboGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CellRendererCombo build()
   {
     return new CellRendererCombo(cast(void*)createGObject(CellRendererCombo._getGType), No.Take);

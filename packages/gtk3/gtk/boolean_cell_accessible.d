@@ -44,8 +44,8 @@ class BooleanCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessibl
   }
 
   /**
-  Get builder for [gtk.boolean_cell_accessible.BooleanCellAccessible]
-  Returns: New builder object
+      Get builder for [gtk.boolean_cell_accessible.BooleanCellAccessible]
+      Returns: New builder object
   */
   static BooleanCellAccessibleGidBuilder builder()
   {
@@ -53,6 +53,7 @@ class BooleanCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessibl
   }
 }
 
+/// Fluent builder implementation template for [gtk.boolean_cell_accessible.BooleanCellAccessible]
 class BooleanCellAccessibleGidBuilderImpl(T) : gtk.renderer_cell_accessible.RendererCellAccessibleGidBuilderImpl!T
 {
 
@@ -61,6 +62,10 @@ class BooleanCellAccessibleGidBuilderImpl(T) : gtk.renderer_cell_accessible.Rend
 /// Fluent builder for [gtk.boolean_cell_accessible.BooleanCellAccessible]
 final class BooleanCellAccessibleGidBuilder : BooleanCellAccessibleGidBuilderImpl!BooleanCellAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   BooleanCellAccessible build()
   {
     return new BooleanCellAccessible(cast(void*)createGObject(BooleanCellAccessible._getGType), No.Take);

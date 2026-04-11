@@ -38,8 +38,8 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /**
-  Get builder for [arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType]
-  Returns: New builder object
+      Get builder for [arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType]
+      Returns: New builder object
   */
   static FixedSizeBinaryDataTypeGidBuilder builder()
   {
@@ -63,6 +63,7 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 }
 
+/// Fluent builder implementation template for [arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType]
 class FixedSizeBinaryDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.FixedWidthDataTypeGidBuilderImpl!T
 {
 }
@@ -70,6 +71,10 @@ class FixedSizeBinaryDataTypeGidBuilderImpl(T) : arrow.fixed_width_data_type.Fix
 /// Fluent builder for [arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType]
 final class FixedSizeBinaryDataTypeGidBuilder : FixedSizeBinaryDataTypeGidBuilderImpl!FixedSizeBinaryDataTypeGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FixedSizeBinaryDataType build()
   {
     return new FixedSizeBinaryDataType(cast(void*)createGObject(FixedSizeBinaryDataType._getGType), Yes.Take);

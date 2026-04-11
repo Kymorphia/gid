@@ -106,8 +106,8 @@ class Registry : gst.object.ObjectWrap
   }
 
   /**
-  Get builder for [gst.registry.Registry]
-  Returns: New builder object
+      Get builder for [gst.registry.Registry]
+      Returns: New builder object
   */
   static RegistryGidBuilder builder()
   {
@@ -559,6 +559,7 @@ class Registry : gst.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gst.registry.Registry]
 class RegistryGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 {
 }
@@ -566,6 +567,10 @@ class RegistryGidBuilderImpl(T) : gst.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gst.registry.Registry]
 final class RegistryGidBuilder : RegistryGidBuilderImpl!RegistryGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Registry build()
   {
     return new Registry(cast(void*)createGObject(Registry._getGType), No.Take);

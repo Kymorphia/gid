@@ -90,8 +90,8 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   }
 
   /**
-  Get builder for [gtk.recent_filter.RecentFilter]
-  Returns: New builder object
+      Get builder for [gtk.recent_filter.RecentFilter]
+      Returns: New builder object
   */
   static RecentFilterGidBuilder builder()
   {
@@ -293,6 +293,7 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
   }
 }
 
+/// Fluent builder implementation template for [gtk.recent_filter.RecentFilter]
 class RecentFilterGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T, gtk.buildable.BuildableGidBuilderImpl!T
 {
 
@@ -302,6 +303,10 @@ class RecentFilterGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnowned
 /// Fluent builder for [gtk.recent_filter.RecentFilter]
 final class RecentFilterGidBuilder : RecentFilterGidBuilderImpl!RecentFilterGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   RecentFilter build()
   {
     return new RecentFilter(cast(void*)createGObject(RecentFilter._getGType), No.Take);

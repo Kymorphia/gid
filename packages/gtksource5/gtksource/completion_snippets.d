@@ -46,8 +46,8 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
   }
 
   /**
-  Get builder for [gtksource.completion_snippets.CompletionSnippets]
-  Returns: New builder object
+      Get builder for [gtksource.completion_snippets.CompletionSnippets]
+      Returns: New builder object
   */
   static CompletionSnippetsGidBuilder builder()
   {
@@ -89,6 +89,7 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
   }
 }
 
+/// Fluent builder implementation template for [gtksource.completion_snippets.CompletionSnippets]
 class CompletionSnippetsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtksource.completion_provider.CompletionProviderGidBuilderImpl!T
 {
 
@@ -110,6 +111,10 @@ class CompletionSnippetsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderI
 /// Fluent builder for [gtksource.completion_snippets.CompletionSnippets]
 final class CompletionSnippetsGidBuilder : CompletionSnippetsGidBuilderImpl!CompletionSnippetsGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CompletionSnippets build()
   {
     return new CompletionSnippets(cast(void*)createGObject(CompletionSnippets._getGType), Yes.Take);

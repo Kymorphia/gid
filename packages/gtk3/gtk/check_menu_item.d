@@ -67,8 +67,8 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   }
 
   /**
-  Get builder for [gtk.check_menu_item.CheckMenuItem]
-  Returns: New builder object
+      Get builder for [gtk.check_menu_item.CheckMenuItem]
+      Returns: New builder object
   */
   static CheckMenuItemGidBuilder builder()
   {
@@ -280,6 +280,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   }
 }
 
+/// Fluent builder implementation template for [gtk.check_menu_item.CheckMenuItem]
 class CheckMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
 {
 
@@ -306,6 +307,10 @@ class CheckMenuItemGidBuilderImpl(T) : gtk.menu_item.MenuItemGidBuilderImpl!T
 /// Fluent builder for [gtk.check_menu_item.CheckMenuItem]
 final class CheckMenuItemGidBuilder : CheckMenuItemGidBuilderImpl!CheckMenuItemGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   CheckMenuItem build()
   {
     return new CheckMenuItem(cast(void*)createGObject(CheckMenuItem._getGType), No.Take);

@@ -86,8 +86,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   }
 
   /**
-  Get builder for [adw.leaflet.Leaflet]
-  Returns: New builder object
+      Get builder for [adw.leaflet.Leaflet]
+      Returns: New builder object
   */
   static LeafletGidBuilder builder()
   {
@@ -1053,6 +1053,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   }
 }
 
+/// Fluent builder implementation template for [adw.leaflet.Leaflet]
 class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T, gtk.orientable.OrientableGidBuilderImpl!T
 {
 
@@ -1256,6 +1257,10 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
 /// Fluent builder for [adw.leaflet.Leaflet]
 final class LeafletGidBuilder : LeafletGidBuilderImpl!LeafletGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Leaflet build()
   {
     return new Leaflet(cast(void*)createGObject(Leaflet._getGType), No.Take);

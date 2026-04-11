@@ -182,8 +182,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /**
-  Get builder for [adw.overlay_split_view.OverlaySplitView]
-  Returns: New builder object
+      Get builder for [adw.overlay_split_view.OverlaySplitView]
+      Returns: New builder object
   */
   static OverlaySplitViewGidBuilder builder()
   {
@@ -806,6 +806,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 }
 
+/// Fluent builder implementation template for [adw.overlay_split_view.OverlaySplitView]
 class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.SwipeableGidBuilderImpl!T
 {
 
@@ -983,6 +984,10 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
 /// Fluent builder for [adw.overlay_split_view.OverlaySplitView]
 final class OverlaySplitViewGidBuilder : OverlaySplitViewGidBuilderImpl!OverlaySplitViewGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   OverlaySplitView build()
   {
     return new OverlaySplitView(cast(void*)createGObject(OverlaySplitView._getGType), No.Take);

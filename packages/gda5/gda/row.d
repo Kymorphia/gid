@@ -40,8 +40,8 @@ class Row : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [gda.row.Row]
-  Returns: New builder object
+      Get builder for [gda.row.Row]
+      Returns: New builder object
   */
   static RowGidBuilder builder()
   {
@@ -156,6 +156,7 @@ class Row : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [gda.row.Row]
 class RowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -169,6 +170,10 @@ class RowGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [gda.row.Row]
 final class RowGidBuilder : RowGidBuilderImpl!RowGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   Row build()
   {
     return new Row(cast(void*)createGObject(Row._getGType), Yes.Take);

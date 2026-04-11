@@ -48,8 +48,8 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-  Get builder for [gtksource.gutter_renderer.GutterRenderer]
-  Returns: New builder object
+      Get builder for [gtksource.gutter_renderer.GutterRenderer]
+      Returns: New builder object
   */
   static GutterRendererGidBuilder builder()
   {
@@ -838,6 +838,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   }
 }
 
+/// Fluent builder implementation template for [gtksource.gutter_renderer.GutterRenderer]
 class GutterRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBuilderImpl!T
 {
 
@@ -936,6 +937,10 @@ class GutterRendererGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnown
 /// Fluent builder for [gtksource.gutter_renderer.GutterRenderer]
 final class GutterRendererGidBuilder : GutterRendererGidBuilderImpl!GutterRendererGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   GutterRenderer build()
   {
     return new GutterRenderer(cast(void*)createGObject(GutterRenderer._getGType), No.Take);

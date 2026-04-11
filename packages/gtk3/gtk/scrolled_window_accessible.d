@@ -40,8 +40,8 @@ class ScrolledWindowAccessible : gtk.container_accessible.ContainerAccessible
   }
 
   /**
-  Get builder for [gtk.scrolled_window_accessible.ScrolledWindowAccessible]
-  Returns: New builder object
+      Get builder for [gtk.scrolled_window_accessible.ScrolledWindowAccessible]
+      Returns: New builder object
   */
   static ScrolledWindowAccessibleGidBuilder builder()
   {
@@ -49,6 +49,7 @@ class ScrolledWindowAccessible : gtk.container_accessible.ContainerAccessible
   }
 }
 
+/// Fluent builder implementation template for [gtk.scrolled_window_accessible.ScrolledWindowAccessible]
 class ScrolledWindowAccessibleGidBuilderImpl(T) : gtk.container_accessible.ContainerAccessibleGidBuilderImpl!T
 {
 
@@ -57,6 +58,10 @@ class ScrolledWindowAccessibleGidBuilderImpl(T) : gtk.container_accessible.Conta
 /// Fluent builder for [gtk.scrolled_window_accessible.ScrolledWindowAccessible]
 final class ScrolledWindowAccessibleGidBuilder : ScrolledWindowAccessibleGidBuilderImpl!ScrolledWindowAccessibleGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   ScrolledWindowAccessible build()
   {
     return new ScrolledWindowAccessible(cast(void*)createGObject(ScrolledWindowAccessible._getGType), No.Take);

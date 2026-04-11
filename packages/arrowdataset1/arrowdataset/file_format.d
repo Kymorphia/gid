@@ -44,8 +44,8 @@ class FileFormat : gobject.object.ObjectWrap
   }
 
   /**
-  Get builder for [arrowdataset.file_format.FileFormat]
-  Returns: New builder object
+      Get builder for [arrowdataset.file_format.FileFormat]
+      Returns: New builder object
   */
   static FileFormatGidBuilder builder()
   {
@@ -92,6 +92,7 @@ class FileFormat : gobject.object.ObjectWrap
   }
 }
 
+/// Fluent builder implementation template for [arrowdataset.file_format.FileFormat]
 class FileFormatGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 {
 
@@ -105,6 +106,10 @@ class FileFormatGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
 /// Fluent builder for [arrowdataset.file_format.FileFormat]
 final class FileFormatGidBuilder : FileFormatGidBuilderImpl!FileFormatGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   FileFormat build()
   {
     return new FileFormat(cast(void*)createGObject(FileFormat._getGType), No.Take);

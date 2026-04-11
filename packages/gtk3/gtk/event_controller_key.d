@@ -48,8 +48,8 @@ class EventControllerKey : gtk.event_controller.EventController
   }
 
   /**
-  Get builder for [gtk.event_controller_key.EventControllerKey]
-  Returns: New builder object
+      Get builder for [gtk.event_controller_key.EventControllerKey]
+      Returns: New builder object
   */
   static EventControllerKeyGidBuilder builder()
   {
@@ -369,6 +369,7 @@ class EventControllerKey : gtk.event_controller.EventController
   }
 }
 
+/// Fluent builder implementation template for [gtk.event_controller_key.EventControllerKey]
 class EventControllerKeyGidBuilderImpl(T) : gtk.event_controller.EventControllerGidBuilderImpl!T
 {
 }
@@ -376,6 +377,10 @@ class EventControllerKeyGidBuilderImpl(T) : gtk.event_controller.EventController
 /// Fluent builder for [gtk.event_controller_key.EventControllerKey]
 final class EventControllerKeyGidBuilder : EventControllerKeyGidBuilderImpl!EventControllerKeyGidBuilder
 {
+  /**
+      Create object from builder.
+      Returns: New object
+  */
   EventControllerKey build()
   {
     return new EventControllerKey(cast(void*)createGObject(EventControllerKey._getGType), Yes.Take);
