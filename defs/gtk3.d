@@ -1,7 +1,7 @@
 //!gir Gtk-3.0
 //!info description "D binding for the Gtk3 library - Gtk3 graphics toolkit library"
 //!info homepage https://gtk.org
-//!info docs https://www.kymorphia.com/gid-old/gtk.html
+//!info docs https://www.kymorphia.com/gid-gtk3/gtk.html
 //!info capi https://docs.gtk.org/gtk3/
 
 //!kind RequestedSize StructAlias
