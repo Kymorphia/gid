@@ -97,7 +97,7 @@ extern(C) void thawDelegate(void* dlg)
 char* toCString(string dstr, Flag!"Alloc" alloc)
 {
   if (dstr is null)
-    return null;
+    dstr = "";
 
   if (alloc)
   {
