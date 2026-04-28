@@ -303,7 +303,7 @@ class PixbufLoader : gobject.object.ObjectWrap
     if (buf)
       _count = cast(size_t)buf.length;
 
-    auto _buf = cast(const(ubyte)*)buf.ptr;
+    auto _buf = buf.ptr ? cast(const(ubyte)*)buf.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = cast(bool)gdk_pixbuf_loader_write(cast(GdkPixbufLoader*)this._cPtr, _buf, _count, &_err);
     if (_err)

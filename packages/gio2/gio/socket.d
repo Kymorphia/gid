@@ -1362,7 +1362,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (vectors)
       _numVectors = cast(int)vectors.length;
 
-    auto _vectors = cast(GInputVector*)vectors.ptr;
+    auto _vectors = vectors.ptr ? cast(GInputVector*)vectors.ptr : [GInputVector.init].ptr;
     int _numMessages;
     GSocketControlMessage** _messages;
     GError *_err;
@@ -1433,7 +1433,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (buffer)
       _size = cast(size_t)buffer.length;
 
-    auto _buffer = cast(const(ubyte)*)buffer.ptr;
+    auto _buffer = buffer.ptr ? cast(const(ubyte)*)buffer.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = g_socket_send(cast(GSocket*)this._cPtr, _buffer, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1504,7 +1504,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (vectors)
       _numVectors = cast(int)vectors.length;
 
-    auto _vectors = cast(GOutputVector*)vectors.ptr;
+    auto _vectors = vectors.ptr ? cast(GOutputVector*)vectors.ptr : [GOutputVector.init].ptr;
     int _numMessages;
     if (messages)
       _numMessages = cast(int)messages.length;
@@ -1552,7 +1552,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (vectors)
       _numVectors = cast(int)vectors.length;
 
-    auto _vectors = cast(const(GOutputVector)*)vectors.ptr;
+    auto _vectors = vectors.ptr ? cast(const(GOutputVector)*)vectors.ptr : [GOutputVector.init].ptr;
     int _numMessages;
     if (messages)
       _numMessages = cast(int)messages.length;
@@ -1593,7 +1593,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (buffer)
       _size = cast(size_t)buffer.length;
 
-    auto _buffer = cast(const(ubyte)*)buffer.ptr;
+    auto _buffer = buffer.ptr ? cast(const(ubyte)*)buffer.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = g_socket_send_to(cast(GSocket*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, _buffer, _size, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -1622,7 +1622,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
     if (buffer)
       _size = cast(size_t)buffer.length;
 
-    auto _buffer = cast(const(ubyte)*)buffer.ptr;
+    auto _buffer = buffer.ptr ? cast(const(ubyte)*)buffer.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = g_socket_send_with_blocking(cast(GSocket*)this._cPtr, _buffer, _size, blocking, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)

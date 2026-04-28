@@ -82,7 +82,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   bool getAxes(gdk.types.AxisUse[] axes, out double[] values)
   {
     bool _retval;
-    auto _axes = cast(GdkAxisUse*)(axes ~ GdkAxisUse.init).ptr;
+    auto _axes = axes.ptr ? cast(GdkAxisUse*)(axes ~ GdkAxisUse.init).ptr : [GdkAxisUse.init].ptr;
     double* _values;
     _retval = cast(bool)gtk_gesture_stylus_get_axes(cast(GtkGestureStylus*)this._cPtr, _axes, &_values);
     values.length = axes.length;

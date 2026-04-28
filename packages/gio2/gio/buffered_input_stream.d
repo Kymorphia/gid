@@ -248,7 +248,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     if (buffer)
       _count = cast(size_t)buffer.length;
 
-    auto _buffer = cast(void*)buffer.ptr;
+    auto _buffer = buffer.ptr ? cast(void*)buffer.ptr : [ubyte.init].ptr;
     _retval = g_buffered_input_stream_peek(cast(GBufferedInputStream*)this._cPtr, _buffer, offset, _count);
     return _retval;
   }

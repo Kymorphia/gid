@@ -2942,7 +2942,7 @@ template FileT()
     if (contents)
       _length = cast(size_t)contents.length;
 
-    auto _contents = cast(const(ubyte)*)contents.ptr;
+    auto _contents = contents.ptr ? cast(const(ubyte)*)contents.ptr : [ubyte.init].ptr;
     const(char)* _etag = etag.toCString(No.Alloc);
     char* _newEtag;
     GError *_err;
@@ -2996,7 +2996,7 @@ template FileT()
     if (contents)
       _length = cast(size_t)contents.length;
 
-    auto _contents = cast(const(ubyte)*)contents.ptr;
+    auto _contents = contents.ptr ? cast(const(ubyte)*)contents.ptr : [ubyte.init].ptr;
     const(char)* _etag = etag.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_file_replace_contents_async(cast(GFile*)this._cPtr, _contents, _length, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);

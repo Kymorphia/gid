@@ -142,7 +142,7 @@ gstvideo.video_caption_meta.VideoCaptionMeta bufferAddVideoCaptionMeta(gst.buffe
   if (data)
     _size = cast(size_t)data.length;
 
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = gst_buffer_add_video_caption_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, captionType, _data, _size);
   auto _retval = _cretval ? new gstvideo.video_caption_meta.VideoCaptionMeta(cast(GstVideoCaptionMeta*)_cretval, No.Take) : null;
   return _retval;
@@ -206,9 +206,9 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, g
 {
   GstVideoMeta* _cretval;
   assert(!offset || offset.length == 4);
-  auto _offset = cast(const(size_t)*)offset.ptr;
+  auto _offset = offset.ptr ? cast(const(size_t)*)offset.ptr : [size_t.init].ptr;
   assert(!stride || stride.length == 4);
-  auto _stride = cast(const(int)*)stride.ptr;
+  auto _stride = stride.ptr ? cast(const(int)*)stride.ptr : [int.init].ptr;
   _cretval = gst_buffer_add_video_meta_full(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, format, width, height, nPlanes, _offset, _stride);
   auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval, No.Take) : null;
   return _retval;
@@ -289,12 +289,12 @@ gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta b
 {
   GstVideoSEIUserDataUnregisteredMeta* _cretval;
   assert(!uuid || uuid.length == 16);
-  auto _uuid = cast(ubyte*)uuid.ptr;
+  auto _uuid = uuid.ptr ? cast(ubyte*)uuid.ptr : [ubyte.init].ptr;
   size_t _size;
   if (data)
     _size = cast(size_t)data.length;
 
-  auto _data = cast(ubyte*)data.ptr;
+  auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
   _cretval = gst_buffer_add_video_sei_user_data_unregistered_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _uuid, _data, _size);
   auto _retval = _cretval ? new gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta(cast(GstVideoSEIUserDataUnregisteredMeta*)_cretval, No.Take) : null;
   return _retval;
@@ -1048,7 +1048,7 @@ gst.caps.Caps videoMakeRawCaps(gstvideo.types.VideoFormat[] formats = null)
   if (formats)
     _len = cast(uint)formats.length;
 
-  auto _formats = cast(const(GstVideoFormat)*)formats.ptr;
+  auto _formats = formats.ptr ? cast(const(GstVideoFormat)*)formats.ptr : [GstVideoFormat.init].ptr;
   _cretval = gst_video_make_raw_caps(_formats, _len);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -1072,7 +1072,7 @@ gst.caps.Caps videoMakeRawCapsWithFeatures(gstvideo.types.VideoFormat[] formats 
   if (formats)
     _len = cast(uint)formats.length;
 
-  auto _formats = cast(const(GstVideoFormat)*)formats.ptr;
+  auto _formats = formats.ptr ? cast(const(GstVideoFormat)*)formats.ptr : [GstVideoFormat.init].ptr;
   _cretval = gst_video_make_raw_caps_with_features(_formats, _len, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;

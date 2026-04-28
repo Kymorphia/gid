@@ -761,7 +761,7 @@ interface Navigation
     if (cmds)
       _nCmds = cast(int)cmds.length;
 
-    auto _cmds = cast(GstNavigationCommand*)cmds.ptr;
+    auto _cmds = cmds.ptr ? cast(GstNavigationCommand*)cmds.ptr : [GstNavigationCommand.init].ptr;
     gst_navigation_query_set_commandsv(query ? cast(GstQuery*)query._cPtr(No.Dup) : null, _nCmds, _cmds);
   }
 

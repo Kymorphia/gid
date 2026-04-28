@@ -358,7 +358,7 @@ class ServerMessage : gobject.object.ObjectWrap
     if (respBody)
       _respLength = cast(size_t)respBody.length;
 
-    auto _respBody = cast(const(ubyte)*)respBody.ptr;
+    auto _respBody = respBody.ptr ? cast(const(ubyte)*)respBody.ptr : [ubyte.init].ptr;
     soup_server_message_set_response(cast(SoupServerMessage*)this._cPtr, _contentType, respUse, _respBody, _respLength);
   }
 

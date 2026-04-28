@@ -144,7 +144,7 @@ class Quad : gobject.boxed.Boxed
   {
     graphene_quad_t* _cretval;
     assert(!points || points.length == 4);
-    auto _points = cast(const(graphene_point_t)*)points.ptr;
+    auto _points = points.ptr ? cast(const(graphene_point_t)*)points.ptr : [graphene_point_t.init].ptr;
     _cretval = graphene_quad_init_from_points(cast(graphene_quad_t*)this._cPtr, _points);
     auto _retval = _cretval ? new graphene.quad.Quad(cast(void*)_cretval, No.Take) : null;
     return _retval;

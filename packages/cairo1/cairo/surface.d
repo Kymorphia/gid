@@ -635,7 +635,7 @@ class Surface : gobject.boxed.Boxed
     if (data)
       _length = cast(gulong)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     auto _destroy = destroy ? freezeDelegate(cast(void*)&destroy) : null;
     _cretval = cairo_surface_set_mime_data(cast(cairo_surface_t*)this._cPtr, _mimeType, _data, _length, _destroyCB, _destroy);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;

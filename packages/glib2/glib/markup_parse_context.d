@@ -171,7 +171,7 @@ class MarkupParseContext : gobject.boxed.Boxed
     if (text)
       _textLen = cast(ptrdiff_t)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     GError *_err;
     _retval = cast(bool)g_markup_parse_context_parse(cast(GMarkupParseContext*)this._cPtr, _text, _textLen, &_err);
     if (_err)

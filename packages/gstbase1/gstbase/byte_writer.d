@@ -198,7 +198,7 @@ class ByteWriter
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(ubyte*)data.ptr;
+    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
     gst_byte_writer_init_with_data(cast(GstByteWriter*)this._cPtr, _data, _size, initialized);
   }
 
@@ -244,7 +244,7 @@ class ByteWriter
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     _retval = cast(bool)gst_byte_writer_put_data(cast(GstByteWriter*)this._cPtr, _data, _size);
     return _retval;
   }
@@ -441,7 +441,7 @@ class ByteWriter
   bool putStringUtf16(ushort[] data)
   {
     bool _retval;
-    auto _data = cast(const(ushort)*)(data ~ ushort.init).ptr;
+    auto _data = data.ptr ? cast(const(ushort)*)(data ~ ushort.init).ptr : [ushort.init].ptr;
     _retval = cast(bool)gst_byte_writer_put_string_utf16(cast(GstByteWriter*)this._cPtr, _data);
     return _retval;
   }
@@ -456,7 +456,7 @@ class ByteWriter
   bool putStringUtf32(uint[] data)
   {
     bool _retval;
-    auto _data = cast(const(uint)*)(data ~ uint.init).ptr;
+    auto _data = data.ptr ? cast(const(uint)*)(data ~ uint.init).ptr : [uint.init].ptr;
     _retval = cast(bool)gst_byte_writer_put_string_utf32(cast(GstByteWriter*)this._cPtr, _data);
     return _retval;
   }

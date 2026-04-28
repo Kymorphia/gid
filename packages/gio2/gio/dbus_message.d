@@ -91,7 +91,7 @@ class DBusMessage : gobject.object.ObjectWrap
     if (blob)
       _blobLen = cast(size_t)blob.length;
 
-    auto _blob = cast(ubyte*)blob.ptr;
+    auto _blob = blob.ptr ? cast(ubyte*)blob.ptr : [ubyte.init].ptr;
     GError *_err;
     _cretval = g_dbus_message_new_from_blob(_blob, _blobLen, capabilities, &_err);
     if (_err)
@@ -160,7 +160,7 @@ class DBusMessage : gobject.object.ObjectWrap
     if (blob)
       _blobLen = cast(size_t)blob.length;
 
-    auto _blob = cast(ubyte*)blob.ptr;
+    auto _blob = blob.ptr ? cast(ubyte*)blob.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = g_dbus_message_bytes_needed(_blob, _blobLen, &_err);
     if (_err)

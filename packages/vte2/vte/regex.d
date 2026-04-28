@@ -68,7 +68,7 @@ class Regex : gobject.boxed.Boxed
     if (pattern)
       _patternLength = cast(ptrdiff_t)pattern.length;
 
-    auto _pattern = cast(const(char)*)pattern.ptr;
+    auto _pattern = pattern.ptr ? cast(const(char)*)pattern.ptr : [char.init].ptr;
     GError *_err;
     _cretval = vte_regex_new_for_match(_pattern, _patternLength, flags, &_err);
     if (_err)
@@ -107,7 +107,7 @@ class Regex : gobject.boxed.Boxed
     if (pattern)
       _patternLength = cast(ptrdiff_t)pattern.length;
 
-    auto _pattern = cast(const(char)*)pattern.ptr;
+    auto _pattern = pattern.ptr ? cast(const(char)*)pattern.ptr : [char.init].ptr;
     GError *_err;
     _cretval = vte_regex_new_for_match_full(_pattern, _patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
     if (_err)
@@ -140,7 +140,7 @@ class Regex : gobject.boxed.Boxed
     if (pattern)
       _patternLength = cast(ptrdiff_t)pattern.length;
 
-    auto _pattern = cast(const(char)*)pattern.ptr;
+    auto _pattern = pattern.ptr ? cast(const(char)*)pattern.ptr : [char.init].ptr;
     GError *_err;
     _cretval = vte_regex_new_for_search(_pattern, _patternLength, flags, &_err);
     if (_err)
@@ -178,7 +178,7 @@ class Regex : gobject.boxed.Boxed
     if (pattern)
       _patternLength = cast(ptrdiff_t)pattern.length;
 
-    auto _pattern = cast(const(char)*)pattern.ptr;
+    auto _pattern = pattern.ptr ? cast(const(char)*)pattern.ptr : [char.init].ptr;
     GError *_err;
     _cretval = vte_regex_new_for_search_full(_pattern, _patternLength, flags, extraFlags, cast(size_t*)&errorOffset, &_err);
     if (_err)

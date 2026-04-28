@@ -707,7 +707,7 @@ class BookmarkFile : gobject.boxed.Boxed
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = cast(bool)g_bookmark_file_load_from_data(cast(GBookmarkFile*)this._cPtr, _data, _length, &_err);
     if (_err)

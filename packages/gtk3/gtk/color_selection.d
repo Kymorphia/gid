@@ -182,7 +182,7 @@ class ColorSelection : gtk.box.Box
     if (colors)
       _nColors = cast(int)colors.length;
 
-    auto _colors = cast(const(GdkColor)*)colors.ptr;
+    auto _colors = colors.ptr ? cast(const(GdkColor)*)colors.ptr : [GdkColor.init].ptr;
     _cretval = gtk_color_selection_palette_to_string(_colors, _nColors);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;

@@ -95,11 +95,11 @@ class SqlBuilder : gobject.object.ObjectWrap
     if (whenArray)
       _argsSize = cast(int)whenArray.length;
 
-    auto _whenArray = cast(const(GdaSqlBuilderId)*)whenArray.ptr;
+    auto _whenArray = whenArray.ptr ? cast(const(GdaSqlBuilderId)*)whenArray.ptr : [GdaSqlBuilderId.init].ptr;
     if (thenArray)
       _argsSize = cast(int)thenArray.length;
 
-    auto _thenArray = cast(const(GdaSqlBuilderId)*)thenArray.ptr;
+    auto _thenArray = thenArray.ptr ? cast(const(GdaSqlBuilderId)*)thenArray.ptr : [GdaSqlBuilderId.init].ptr;
     _retval = gda_sql_builder_add_case_v(cast(GdaSqlBuilder*)this._cPtr, testExpr, elseExpr, _whenArray, _thenArray, _argsSize);
     return _retval;
   }
@@ -140,7 +140,7 @@ class SqlBuilder : gobject.object.ObjectWrap
     if (opIds)
       _opIdsSize = cast(int)opIds.length;
 
-    auto _opIds = cast(const(GdaSqlBuilderId)*)opIds.ptr;
+    auto _opIds = opIds.ptr ? cast(const(GdaSqlBuilderId)*)opIds.ptr : [GdaSqlBuilderId.init].ptr;
     _retval = gda_sql_builder_add_cond_v(cast(GdaSqlBuilder*)this._cPtr, op, _opIds, _opIdsSize);
     return _retval;
   }
@@ -247,7 +247,7 @@ class SqlBuilder : gobject.object.ObjectWrap
     if (args)
       _argsSize = cast(int)args.length;
 
-    auto _args = cast(const(GdaSqlBuilderId)*)args.ptr;
+    auto _args = args.ptr ? cast(const(GdaSqlBuilderId)*)args.ptr : [GdaSqlBuilderId.init].ptr;
     _retval = gda_sql_builder_add_function_v(cast(GdaSqlBuilder*)this._cPtr, _funcName, _args, _argsSize);
     return _retval;
   }

@@ -243,7 +243,7 @@ class AudioInfo : gobject.boxed.Boxed
   void setFormat(gstaudio.types.AudioFormat format, int rate, int channels, gstaudio.types.AudioChannelPosition[] position = null)
   {
     assert(!position || position.length == 64);
-    auto _position = cast(const(GstAudioChannelPosition)*)position.ptr;
+    auto _position = position.ptr ? cast(const(GstAudioChannelPosition)*)position.ptr : [GstAudioChannelPosition.init].ptr;
     gst_audio_info_set_format(cast(GstAudioInfo*)this._cPtr, format, rate, channels, _position);
   }
 

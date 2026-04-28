@@ -166,7 +166,7 @@ gst.caps.Caps typeFindHelperForData(gst.object.ObjectWrap obj, ubyte[] data, out
   if (data)
     _size = cast(size_t)data.length;
 
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = gst_type_find_helper_for_data(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, _data, _size, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -200,7 +200,7 @@ gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectWrap obj, ubyte[] d
   if (data)
     _size = cast(size_t)data.length;
 
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = gst_type_find_helper_for_data_with_caps(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, _data, _size, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -243,7 +243,7 @@ gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectWrap obj, ubyt
   if (data)
     _size = cast(size_t)data.length;
 
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   const(char)* _extension = extension.toCString(No.Alloc);
   _cretval = gst_type_find_helper_for_data_with_extension(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, _data, _size, _extension, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;

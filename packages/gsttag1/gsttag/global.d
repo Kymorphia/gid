@@ -53,7 +53,7 @@ string tagFreeformStringToUtf8(string data, string[] envVars)
   if (data)
     _size = cast(int)data.length;
 
-  auto _data = cast(const(char)*)data.ptr;
+  auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
   char*[] _tmpenvVars;
   foreach (s; envVars)
     _tmpenvVars ~= s.toCString(No.Alloc);
@@ -464,7 +464,7 @@ gst.sample.Sample tagImageDataToImageSample(ubyte[] imageData, gsttag.types.TagI
   if (imageData)
     _imageDataLen = cast(uint)imageData.length;
 
-  auto _imageData = cast(const(ubyte)*)imageData.ptr;
+  auto _imageData = imageData.ptr ? cast(const(ubyte)*)imageData.ptr : [ubyte.init].ptr;
   _cretval = gst_tag_image_data_to_image_sample(_imageData, _imageDataLen, imageType);
   auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -489,7 +489,7 @@ bool tagListAddId3Image(gst.tag_list.TagList tagList, ubyte[] imageData, uint id
   if (imageData)
     _imageDataLen = cast(uint)imageData.length;
 
-  auto _imageData = cast(const(ubyte)*)imageData.ptr;
+  auto _imageData = imageData.ptr ? cast(const(ubyte)*)imageData.ptr : [ubyte.init].ptr;
   _retval = cast(bool)gst_tag_list_add_id3_image(tagList ? cast(GstTagList*)tagList._cPtr(No.Dup) : null, _imageData, _imageDataLen, id3PictureType);
   return _retval;
 }
@@ -565,12 +565,12 @@ gst.tag_list.TagList tagListFromVorbiscomment(ubyte[] data, ubyte[] idData, out 
   if (data)
     _size = cast(size_t)data.length;
 
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   uint _idDataLength;
   if (idData)
     _idDataLength = cast(uint)idData.length;
 
-  auto _idData = cast(const(ubyte)*)idData.ptr;
+  auto _idData = idData.ptr ? cast(const(ubyte)*)idData.ptr : [ubyte.init].ptr;
   char* _vendorString;
   _cretval = gst_tag_list_from_vorbiscomment(_data, _size, _idData, _idDataLength, &_vendorString);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
@@ -597,7 +597,7 @@ gst.tag_list.TagList tagListFromVorbiscommentBuffer(gst.buffer.Buffer buffer, ub
   if (idData)
     _idDataLength = cast(uint)idData.length;
 
-  auto _idData = cast(const(ubyte)*)idData.ptr;
+  auto _idData = idData.ptr ? cast(const(ubyte)*)idData.ptr : [ubyte.init].ptr;
   char* _vendorString;
   _cretval = gst_tag_list_from_vorbiscomment_buffer(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _idData, _idDataLength, &_vendorString);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
@@ -632,7 +632,7 @@ gst.tag_list.TagList tagListNewFromId3v1(ubyte[] data)
 {
   GstTagList* _cretval;
   assert(!data || data.length == 128);
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = gst_tag_list_new_from_id3v1(_data);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -689,7 +689,7 @@ gst.buffer.Buffer tagListToVorbiscommentBuffer(gst.tag_list.TagList list, ubyte[
   if (idData)
     _idDataLength = cast(uint)idData.length;
 
-  auto _idData = cast(const(ubyte)*)idData.ptr;
+  auto _idData = idData.ptr ? cast(const(ubyte)*)idData.ptr : [ubyte.init].ptr;
   const(char)* _vendorString = vendorString.toCString(No.Alloc);
   _cretval = gst_tag_list_to_vorbiscomment_buffer(list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _idData, _idDataLength, _vendorString);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;

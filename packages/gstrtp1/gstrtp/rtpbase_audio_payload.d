@@ -142,7 +142,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
     if (data)
       _payloadLen = cast(uint)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     _cretval = gst_rtp_base_audio_payload_push(cast(GstRTPBaseAudioPayload*)this._cPtr, _data, _payloadLen, timestamp);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;

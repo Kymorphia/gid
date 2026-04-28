@@ -286,11 +286,11 @@ class Triangle : gobject.boxed.Boxed
   {
     graphene_triangle_t* _cretval;
     assert(!a || a.length == 3);
-    auto _a = cast(const(float)*)a.ptr;
+    auto _a = a.ptr ? cast(const(float)*)a.ptr : [float.init].ptr;
     assert(!b || b.length == 3);
-    auto _b = cast(const(float)*)b.ptr;
+    auto _b = b.ptr ? cast(const(float)*)b.ptr : [float.init].ptr;
     assert(!c || c.length == 3);
-    auto _c = cast(const(float)*)c.ptr;
+    auto _c = c.ptr ? cast(const(float)*)c.ptr : [float.init].ptr;
     _cretval = graphene_triangle_init_from_float(cast(graphene_triangle_t*)this._cPtr, _a, _b, _c);
     auto _retval = _cretval ? new graphene.triangle.Triangle(cast(void*)_cretval, No.Take) : null;
     return _retval;

@@ -96,7 +96,7 @@ class RTPBuffer
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(const(void)*)data.ptr;
+    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
     _retval = cast(bool)gst_rtp_buffer_add_extension_onebyte_header(cast(GstRTPBuffer*)this._cPtr, id, _data, _size);
     return _retval;
   }
@@ -123,7 +123,7 @@ class RTPBuffer
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(const(void)*)data.ptr;
+    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
     _retval = cast(bool)gst_rtp_buffer_add_extension_twobytes_header(cast(GstRTPBuffer*)this._cPtr, appbits, id, _data, _size);
     return _retval;
   }
@@ -777,7 +777,7 @@ class RTPBuffer
     if (data)
       _len = cast(size_t)data.length;
 
-    auto _data = cast(const(void)*)data.ptr;
+    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
     _cretval = gst_rtp_buffer_new_copy_data(_data, _len);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

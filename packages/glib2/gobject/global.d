@@ -1551,7 +1551,7 @@ uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.Sign
   if (paramTypes)
     _nParams = cast(uint)paramTypes.length;
 
-  auto _paramTypes = cast(GType*)paramTypes.ptr;
+  auto _paramTypes = paramTypes.ptr ? cast(GType*)paramTypes.ptr : [GType.init].ptr;
   _retval = g_signal_newv(_signalName, itype, signalFlags, classClosure ? cast(GClosure*)classClosure._cPtr(No.Dup) : null, _accumulatorCB, _accumulator, _cMarshallerCB, returnType, _nParams, _paramTypes);
   return _retval;
 }

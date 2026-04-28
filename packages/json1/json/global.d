@@ -183,7 +183,7 @@ gobject.object.ObjectWrap gobjectFromData(gobject.types.GType gtype, string data
   if (data)
     _length = cast(ptrdiff_t)data.length;
 
-  auto _data = cast(const(char)*)data.ptr;
+  auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
   GError *_err;
   _cretval = json_gobject_from_data(gtype, _data, _length, &_err);
   if (_err)
@@ -301,7 +301,7 @@ glib.variant.Variant gvariantDeserializeData(string json, string signature = nul
   if (json)
     _length = cast(ptrdiff_t)json.length;
 
-  auto _json = cast(const(char)*)json.ptr;
+  auto _json = json.ptr ? cast(const(char)*)json.ptr : [char.init].ptr;
   const(char)* _signature = signature.toCString(No.Alloc);
   GError *_err;
   _cretval = json_gvariant_deserialize_data(_json, _length, _signature, &_err);

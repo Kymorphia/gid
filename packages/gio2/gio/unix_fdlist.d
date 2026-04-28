@@ -94,7 +94,7 @@ class UnixFDList : gobject.object.ObjectWrap
     if (fds)
       _nFds = cast(int)fds.length;
 
-    auto _fds = cast(const(int)*)fds.ptr;
+    auto _fds = fds.ptr ? cast(const(int)*)fds.ptr : [int.init].ptr;
     _cretval = g_unix_fd_list_new_from_array(_fds, _nFds);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, Yes.Take);
     return _retval;

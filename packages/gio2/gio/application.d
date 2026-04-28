@@ -534,7 +534,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void addMainOptionEntries(glib.types.OptionEntry[] entries)
   {
-    auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
+    auto _entries = entries.ptr ? cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr : [GOptionEntry.init].ptr;
     g_application_add_main_option_entries(cast(GApplication*)this._cPtr, _entries);
   }
 

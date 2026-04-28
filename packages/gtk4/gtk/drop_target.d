@@ -392,7 +392,7 @@ class DropTarget : gtk.event_controller.EventController
     if (types)
       _nTypes = cast(size_t)types.length;
 
-    auto _types = cast(GType*)types.ptr;
+    auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
     gtk_drop_target_set_gtypes(cast(GtkDropTarget*)this._cPtr, _types, _nTypes);
   }
 

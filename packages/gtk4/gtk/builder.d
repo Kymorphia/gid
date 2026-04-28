@@ -537,7 +537,7 @@ class Builder : gobject.object.ObjectWrap
     if (string_)
       _length = cast(ptrdiff_t)string_.length;
 
-    auto _string_ = cast(char*)string_.ptr;
+    auto _string_ = string_.ptr ? cast(char*)string_.ptr : [char.init].ptr;
     _cretval = gtk_builder_new_from_string(_string_, _length);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
@@ -641,7 +641,7 @@ class Builder : gobject.object.ObjectWrap
     if (buffer)
       _length = cast(ptrdiff_t)buffer.length;
 
-    auto _buffer = cast(const(char)*)buffer.ptr;
+    auto _buffer = buffer.ptr ? cast(const(char)*)buffer.ptr : [char.init].ptr;
     GError *_err;
     _retval = cast(bool)gtk_builder_add_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, &_err);
     if (_err)
@@ -746,7 +746,7 @@ class Builder : gobject.object.ObjectWrap
     if (buffer)
       _length = cast(ptrdiff_t)buffer.length;
 
-    auto _buffer = cast(const(char)*)buffer.ptr;
+    auto _buffer = buffer.ptr ? cast(const(char)*)buffer.ptr : [char.init].ptr;
     const(char)*[] _tmpobjectIds;
     foreach (s; objectIds)
       _tmpobjectIds ~= s.toCString(No.Alloc);
@@ -828,7 +828,7 @@ class Builder : gobject.object.ObjectWrap
     if (buffer)
       _length = cast(ptrdiff_t)buffer.length;
 
-    auto _buffer = cast(const(char)*)buffer.ptr;
+    auto _buffer = buffer.ptr ? cast(const(char)*)buffer.ptr : [char.init].ptr;
     GError *_err;
     _retval = cast(bool)gtk_builder_extend_with_template(cast(GtkBuilder*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, templateType, _buffer, _length, &_err);
     if (_err)

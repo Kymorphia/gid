@@ -237,7 +237,7 @@ string asciiStrdown(string str)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_ascii_strdown(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -497,7 +497,7 @@ string asciiStrup(string str)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_ascii_strup(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -1367,7 +1367,7 @@ string base64Encode(ubyte[] data = null)
   if (data)
     _len = cast(size_t)data.length;
 
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = g_base64_encode(_data, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -1925,7 +1925,7 @@ string computeChecksumForData(glib.types.ChecksumType checksumType, ubyte[] data
   if (data)
     _length = cast(size_t)data.length;
 
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = g_compute_checksum_for_data(checksumType, _data, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -1950,7 +1950,7 @@ string computeChecksumForString(glib.types.ChecksumType checksumType, string str
   if (str)
     _length = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_compute_checksum_for_string(checksumType, _str, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -1999,12 +1999,12 @@ string computeHmacForData(glib.types.ChecksumType digestType, ubyte[] key, ubyte
   if (key)
     _keyLen = cast(size_t)key.length;
 
-  auto _key = cast(const(ubyte)*)key.ptr;
+  auto _key = key.ptr ? cast(const(ubyte)*)key.ptr : [ubyte.init].ptr;
   size_t _length;
   if (data)
     _length = cast(size_t)data.length;
 
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   _cretval = g_compute_hmac_for_data(digestType, _key, _keyLen, _data, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -2030,12 +2030,12 @@ string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, str
   if (key)
     _keyLen = cast(size_t)key.length;
 
-  auto _key = cast(const(ubyte)*)key.ptr;
+  auto _key = key.ptr ? cast(const(ubyte)*)key.ptr : [ubyte.init].ptr;
   ptrdiff_t _length;
   if (str)
     _length = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_compute_hmac_for_string(digestType, _key, _keyLen, _str, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -2082,7 +2082,7 @@ ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t by
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(ubyte)*)str.ptr;
+  auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
   const(char)* _toCodeset = toCodeset.toCString(No.Alloc);
   const(char)* _fromCodeset = fromCodeset.toCString(No.Alloc);
   GError *_err;
@@ -2153,7 +2153,7 @@ ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, s
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(ubyte)*)str.ptr;
+  auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
   const(char)* _toCodeset = toCodeset.toCString(No.Alloc);
   const(char)* _fromCodeset = fromCodeset.toCString(No.Alloc);
   const(char)* _fallback = fallback.toCString(No.Alloc);
@@ -2731,7 +2731,7 @@ bool fileSetContents(string filename, ubyte[] contents)
   if (contents)
     _length = cast(ptrdiff_t)contents.length;
 
-  auto _contents = cast(const(ubyte)*)contents.ptr;
+  auto _contents = contents.ptr ? cast(const(ubyte)*)contents.ptr : [ubyte.init].ptr;
   GError *_err;
   _retval = cast(bool)g_file_set_contents(_filename, _contents, _length, &_err);
   if (_err)
@@ -2814,7 +2814,7 @@ bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetCo
   if (contents)
     _length = cast(ptrdiff_t)contents.length;
 
-  auto _contents = cast(const(ubyte)*)contents.ptr;
+  auto _contents = contents.ptr ? cast(const(ubyte)*)contents.ptr : [ubyte.init].ptr;
   GError *_err;
   _retval = cast(bool)g_file_set_contents_full(_filename, _contents, _length, flags, mode, &_err);
   if (_err)
@@ -3027,7 +3027,7 @@ ubyte[] filenameFromUtf8(ubyte[] utf8string, out size_t bytesRead)
   if (utf8string)
     _len = cast(ptrdiff_t)utf8string.length;
 
-  auto _utf8string = cast(const(ubyte)*)utf8string.ptr;
+  auto _utf8string = utf8string.ptr ? cast(const(ubyte)*)utf8string.ptr : [ubyte.init].ptr;
   GError *_err;
   _cretval = g_filename_from_utf8(_utf8string, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -3103,7 +3103,7 @@ string filenameToUtf8(ubyte[] opsysstring, out size_t bytesRead)
   if (opsysstring)
     _len = cast(ptrdiff_t)opsysstring.length;
 
-  auto _opsysstring = cast(const(ubyte)*)opsysstring.ptr;
+  auto _opsysstring = opsysstring.ptr ? cast(const(ubyte)*)opsysstring.ptr : [ubyte.init].ptr;
   GError *_err;
   _cretval = g_filename_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -4611,7 +4611,7 @@ ubyte[] localeFromUtf8(ubyte[] utf8string, out size_t bytesRead)
   if (utf8string)
     _len = cast(ptrdiff_t)utf8string.length;
 
-  auto _utf8string = cast(const(ubyte)*)utf8string.ptr;
+  auto _utf8string = utf8string.ptr ? cast(const(ubyte)*)utf8string.ptr : [ubyte.init].ptr;
   GError *_err;
   _cretval = g_locale_from_utf8(_utf8string, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -4662,7 +4662,7 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead)
   if (opsysstring)
     _len = cast(ptrdiff_t)opsysstring.length;
 
-  auto _opsysstring = cast(const(ubyte)*)opsysstring.ptr;
+  auto _opsysstring = opsysstring.ptr ? cast(const(ubyte)*)opsysstring.ptr : [ubyte.init].ptr;
   GError *_err;
   _cretval = g_locale_to_utf8(_opsysstring, _len, cast(size_t*)&bytesRead, &_cretlength, &_err);
   if (_err)
@@ -5285,7 +5285,7 @@ string markupEscapeText(string text)
   if (text)
     _length = cast(ptrdiff_t)text.length;
 
-  auto _text = cast(const(char)*)text.ptr;
+  auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
   _cretval = g_markup_escape_text(_text, _length);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -7262,11 +7262,11 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
   if (sourceFds)
     _nFds = cast(size_t)sourceFds.length;
 
-  auto _sourceFds = cast(const(int)*)sourceFds.ptr;
+  auto _sourceFds = sourceFds.ptr ? cast(const(int)*)sourceFds.ptr : [int.init].ptr;
   if (targetFds)
     _nFds = cast(size_t)targetFds.length;
 
-  auto _targetFds = cast(const(int)*)targetFds.ptr;
+  auto _targetFds = targetFds.ptr ? cast(const(int)*)targetFds.ptr : [int.init].ptr;
   GError *_err;
   _retval = cast(bool)g_spawn_async_with_pipes_and_fds(_workingDirectory, _argv, _envp, flags, _childSetupCB, _childSetup, stdinFd, stdoutFd, stderrFd, _sourceFds, _targetFds, _nFds, cast(GPid*)&childPidOut, cast(int*)&stdinPipeOut, cast(int*)&stdoutPipeOut, cast(int*)&stderrPipeOut, &_err);
   if (_err)
@@ -9583,7 +9583,7 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = cast(const(dchar)*)str.ptr;
+  auto _str = str.ptr ? cast(const(dchar)*)str.ptr : [dchar.init].ptr;
   GError *_err;
   _cretval = g_ucs4_to_utf16(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
@@ -9625,7 +9625,7 @@ string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = cast(const(dchar)*)str.ptr;
+  auto _str = str.ptr ? cast(const(dchar)*)str.ptr : [dchar.init].ptr;
   GError *_err;
   _cretval = g_ucs4_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
@@ -10262,7 +10262,7 @@ void unicodeCanonicalOrdering(dchar[] string_)
   if (string_)
     _len = cast(size_t)string_.length;
 
-  auto _string_ = cast(dchar*)string_.ptr;
+  auto _string_ = string_.ptr ? cast(dchar*)string_.ptr : [dchar.init].ptr;
   g_unicode_canonical_ordering(_string_, _len);
 }
 
@@ -10391,7 +10391,7 @@ bool unixOpenPipe(int[] fds, int flags)
 {
   bool _retval;
   assert(!fds || fds.length == 2);
-  auto _fds = cast(int*)fds.ptr;
+  auto _fds = fds.ptr ? cast(int*)fds.ptr : [int.init].ptr;
   GError *_err;
   _retval = cast(bool)g_unix_open_pipe(_fds, flags, &_err);
   if (_err)
@@ -10581,7 +10581,7 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = cast(const(ushort)*)str.ptr;
+  auto _str = str.ptr ? cast(const(ushort)*)str.ptr : [ushort.init].ptr;
   GError *_err;
   _cretval = g_utf16_to_ucs4(_str, _len, cast(glong*)&itemsRead, &_cretlength, &_err);
   if (_err)
@@ -10633,7 +10633,7 @@ string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = cast(const(ushort)*)str.ptr;
+  auto _str = str.ptr ? cast(const(ushort)*)str.ptr : [ushort.init].ptr;
   GError *_err;
   _cretval = g_utf16_to_utf8(_str, _len, cast(glong*)&itemsRead, cast(glong*)&itemsWritten, &_err);
   if (_err)
@@ -10667,7 +10667,7 @@ string utf8Casefold(string str)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_casefold(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -10723,7 +10723,7 @@ string utf8CollateKey(string str)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_collate_key(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -10754,7 +10754,7 @@ string utf8CollateKeyForFilename(string str)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_collate_key_for_filename(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -10858,7 +10858,7 @@ dchar utf8GetCharValidated(string p)
   if (p)
     _maxLen = cast(ptrdiff_t)p.length;
 
-  auto _p = cast(const(char)*)p.ptr;
+  auto _p = p.ptr ? cast(const(char)*)p.ptr : [char.init].ptr;
   _retval = g_utf8_get_char_validated(_p, _maxLen);
   return _retval;
 }
@@ -10885,7 +10885,7 @@ string utf8MakeValid(string str)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_make_valid(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -10932,7 +10932,7 @@ string utf8Normalize(string str, glib.types.NormalizeMode mode)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_normalize(_str, _len, mode);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -11028,7 +11028,7 @@ string utf8Strchr(string p, dchar c)
   if (p)
     _len = cast(ptrdiff_t)p.length;
 
-  auto _p = cast(const(char)*)p.ptr;
+  auto _p = p.ptr ? cast(const(char)*)p.ptr : [char.init].ptr;
   _cretval = g_utf8_strchr(_p, _len, c);
   string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
@@ -11052,7 +11052,7 @@ string utf8Strdown(string str)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_strdown(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -11124,7 +11124,7 @@ string utf8Strrchr(string p, dchar c)
   if (p)
     _len = cast(ptrdiff_t)p.length;
 
-  auto _p = cast(const(char)*)p.ptr;
+  auto _p = p.ptr ? cast(const(char)*)p.ptr : [char.init].ptr;
   _cretval = g_utf8_strrchr(_p, _len, c);
   string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
@@ -11156,7 +11156,7 @@ string utf8Strreverse(string str)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_strreverse(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -11181,7 +11181,7 @@ string utf8Strup(string str)
   if (str)
     _len = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _cretval = g_utf8_strup(_str, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -11270,7 +11270,7 @@ dchar[] utf8ToUcs4Fast(string str)
   if (str)
     _len = cast(glong)str.length;
 
-  auto _str = cast(const(char)*)(str ~ char.init).ptr;
+  auto _str = str.ptr ? cast(const(char)*)(str ~ char.init).ptr : [char.init].ptr;
   _cretval = g_utf8_to_ucs4_fast(_str, _len, &_cretlength);
   dchar[] _retval;
 
@@ -11368,7 +11368,7 @@ bool utf8Validate(ubyte[] str, out string end)
   if (str)
     _maxLen = cast(ptrdiff_t)str.length;
 
-  auto _str = cast(const(ubyte)*)str.ptr;
+  auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
   char* _end;
   _retval = cast(bool)g_utf8_validate(_str, _maxLen, &_end);
   end = _end.fromCString(No.Free);
@@ -11393,7 +11393,7 @@ bool utf8ValidateLen(ubyte[] str, out string end)
   if (str)
     _maxLen = cast(size_t)str.length;
 
-  auto _str = cast(const(ubyte)*)str.ptr;
+  auto _str = str.ptr ? cast(const(ubyte)*)str.ptr : [ubyte.init].ptr;
   char* _end;
   _retval = cast(bool)g_utf8_validate_len(_str, _maxLen, &_end);
   end = _end.fromCString(No.Free);

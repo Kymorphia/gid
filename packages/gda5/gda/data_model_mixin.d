@@ -123,7 +123,7 @@ template DataModelT()
     if (cols)
       _ncols = cast(int)cols.length;
 
-    auto _cols = cast(int*)cols.ptr;
+    auto _cols = cols.ptr ? cast(int*)cols.ptr : [int.init].ptr;
     GError *_err;
     _cretval = gda_data_model_array_copy_model_ext(cast(GdaDataModel*)this._cPtr, _ncols, _cols, &_err);
     if (_err)
@@ -283,12 +283,12 @@ template DataModelT()
     if (cols)
       _nbCols = cast(int)cols.length;
 
-    auto _cols = cast(const(int)*)cols.ptr;
+    auto _cols = cols.ptr ? cast(const(int)*)cols.ptr : [int.init].ptr;
     int _nbRows;
     if (rows)
       _nbRows = cast(int)rows.length;
 
-    auto _rows = cast(const(int)*)rows.ptr;
+    auto _rows = rows.ptr ? cast(const(int)*)rows.ptr : [int.init].ptr;
     GError *_err;
     _retval = cast(bool)gda_data_model_export_to_file(cast(GdaDataModel*)this._cPtr, format, _file, _cols, _nbCols, _rows, _nbRows, options ? cast(GdaSet*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -322,12 +322,12 @@ template DataModelT()
     if (cols)
       _nbCols = cast(int)cols.length;
 
-    auto _cols = cast(const(int)*)cols.ptr;
+    auto _cols = cols.ptr ? cast(const(int)*)cols.ptr : [int.init].ptr;
     int _nbRows;
     if (rows)
       _nbRows = cast(int)rows.length;
 
-    auto _rows = cast(const(int)*)rows.ptr;
+    auto _rows = rows.ptr ? cast(const(int)*)rows.ptr : [int.init].ptr;
     _cretval = gda_data_model_export_to_string(cast(GdaDataModel*)this._cPtr, format, _cols, _nbCols, _rows, _nbRows, options ? cast(GdaSet*)options._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;

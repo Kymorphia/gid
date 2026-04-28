@@ -509,7 +509,7 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
     if (data)
       _dataLength = cast(int)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     GError *_err;
     _cretval = gdk_pixbuf_new_from_inline(_dataLength, _data, copyPixels, &_err);
     if (_err)

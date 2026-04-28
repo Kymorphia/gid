@@ -107,7 +107,7 @@ template ColorChooserT()
     if (colors)
       _nColors = cast(int)colors.length;
 
-    auto _colors = cast(GdkRGBA*)colors.ptr;
+    auto _colors = colors.ptr ? cast(GdkRGBA*)colors.ptr : [GdkRGBA.init].ptr;
     gtk_color_chooser_add_palette(cast(GtkColorChooser*)this._cPtr, orientation, colorsPerLine, _nColors, _colors);
   }
 

@@ -41,7 +41,7 @@ class TestLogBuffer
     if (bytes)
       _nBytes = cast(uint)bytes.length;
 
-    auto _bytes = cast(const(ubyte)*)bytes.ptr;
+    auto _bytes = bytes.ptr ? cast(const(ubyte)*)bytes.ptr : [ubyte.init].ptr;
     g_test_log_buffer_push(cast(GTestLogBuffer*)this._cPtr, _nBytes, _bytes);
   }
 }

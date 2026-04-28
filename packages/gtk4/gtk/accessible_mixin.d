@@ -279,7 +279,7 @@ template AccessibleT()
     if (properties)
       _nProperties = cast(int)properties.length;
 
-    auto _properties = cast(GtkAccessibleProperty*)properties.ptr;
+    auto _properties = properties.ptr ? cast(GtkAccessibleProperty*)properties.ptr : [GtkAccessibleProperty.init].ptr;
     if (values)
       _nProperties = cast(int)values.length;
 
@@ -309,7 +309,7 @@ template AccessibleT()
     if (relations)
       _nRelations = cast(int)relations.length;
 
-    auto _relations = cast(GtkAccessibleRelation*)relations.ptr;
+    auto _relations = relations.ptr ? cast(GtkAccessibleRelation*)relations.ptr : [GtkAccessibleRelation.init].ptr;
     if (values)
       _nRelations = cast(int)values.length;
 
@@ -339,7 +339,7 @@ template AccessibleT()
     if (states)
       _nStates = cast(int)states.length;
 
-    auto _states = cast(GtkAccessibleState*)states.ptr;
+    auto _states = states.ptr ? cast(GtkAccessibleState*)states.ptr : [GtkAccessibleState.init].ptr;
     if (values)
       _nStates = cast(int)values.length;
 

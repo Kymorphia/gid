@@ -479,7 +479,7 @@ class RTSPMessage : gobject.boxed.Boxed
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     _cretval = gst_rtsp_message_set_body(cast(GstRTSPMessage*)this._cPtr, _data, _size);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;

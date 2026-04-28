@@ -406,7 +406,7 @@ class IMContext : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     gtk_im_context_set_surrounding(cast(GtkIMContext*)this._cPtr, _text, _len, cursorIndex);
   }
 
@@ -428,7 +428,7 @@ class IMContext : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     gtk_im_context_set_surrounding_with_selection(cast(GtkIMContext*)this._cPtr, _text, _len, cursorIndex, anchorIndex);
   }
 

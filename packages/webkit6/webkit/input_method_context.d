@@ -205,7 +205,7 @@ class InputMethodContext : gobject.object.ObjectWrap
     if (text)
       _length = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     webkit_input_method_context_notify_surrounding(cast(WebKitInputMethodContext*)this._cPtr, _text, _length, cursorIndex, selectionIndex);
   }
 

@@ -92,7 +92,7 @@ class ControlSource : gst.object.ObjectWrap
     if (values)
       _nValues = cast(uint)values.length;
 
-    auto _values = cast(double*)values.ptr;
+    auto _values = values.ptr ? cast(double*)values.ptr : [double.init].ptr;
     _retval = cast(bool)gst_control_source_get_value_array(cast(GstControlSource*)this._cPtr, timestamp, interval, _nValues, _values);
     return _retval;
   }

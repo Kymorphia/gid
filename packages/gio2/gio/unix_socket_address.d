@@ -135,7 +135,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
     if (path)
       _pathLen = cast(int)path.length;
 
-    auto _path = cast(const(char)*)path.ptr;
+    auto _path = path.ptr ? cast(const(char)*)path.ptr : [char.init].ptr;
     _cretval = g_unix_socket_address_new_abstract(_path, _pathLen);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
@@ -186,7 +186,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
     if (path)
       _pathLen = cast(int)path.length;
 
-    auto _path = cast(const(char)*)path.ptr;
+    auto _path = path.ptr ? cast(const(char)*)path.ptr : [char.init].ptr;
     _cretval = g_unix_socket_address_new_with_type(_path, _pathLen, type);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;

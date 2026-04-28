@@ -88,7 +88,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
     if (indices)
       _nIndices = cast(uint)indices.length;
 
-    auto _indices = cast(const(int)*)indices.ptr;
+    auto _indices = indices.ptr ? cast(const(int)*)indices.ptr : [int.init].ptr;
     GError *_err;
     _cretval = garrow_feather_file_reader_read_indices(cast(GArrowFeatherFileReader*)this._cPtr, _indices, _nIndices, &_err);
     if (_err)

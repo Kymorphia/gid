@@ -525,7 +525,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     if (stopChars)
       _stopCharsLen = cast(ptrdiff_t)stopChars.length;
 
-    auto _stopChars = cast(const(char)*)stopChars.ptr;
+    auto _stopChars = stopChars.ptr ? cast(const(char)*)stopChars.ptr : [char.init].ptr;
     GError *_err;
     _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)this._cPtr, _stopChars, _stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
@@ -570,7 +570,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     if (stopChars)
       _stopCharsLen = cast(ptrdiff_t)stopChars.length;
 
-    auto _stopChars = cast(const(char)*)stopChars.ptr;
+    auto _stopChars = stopChars.ptr ? cast(const(char)*)stopChars.ptr : [char.init].ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_data_input_stream_read_upto_async(cast(GDataInputStream*)this._cPtr, _stopChars, _stopCharsLen, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }

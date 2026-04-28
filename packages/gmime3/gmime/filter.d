@@ -61,7 +61,7 @@ class Filter : gobject.object.ObjectWrap
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     g_mime_filter_backup(cast(GMimeFilter*)this._cPtr, _data, _length);
   }
 
@@ -80,7 +80,7 @@ class Filter : gobject.object.ObjectWrap
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(ubyte*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(ubyte*)inbuf.ptr : [ubyte.init].ptr;
     size_t _outlen;
     ubyte* _outbuf;
     g_mime_filter_complete(cast(GMimeFilter*)this._cPtr, _inbuf, _inlen, prespace, &_outbuf, &_outlen, cast(size_t*)&outprespace);
@@ -115,7 +115,7 @@ class Filter : gobject.object.ObjectWrap
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(ubyte*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(ubyte*)inbuf.ptr : [ubyte.init].ptr;
     size_t _outlen;
     ubyte* _outbuf;
     g_mime_filter_filter(cast(GMimeFilter*)this._cPtr, _inbuf, _inlen, prespace, &_outbuf, &_outlen, cast(size_t*)&outprespace);

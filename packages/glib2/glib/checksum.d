@@ -142,7 +142,7 @@ class Checksum : gobject.boxed.Boxed
     if (data)
       _length = cast(ptrdiff_t)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     g_checksum_update(cast(GChecksum*)this._cPtr, _data, _length);
   }
 

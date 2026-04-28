@@ -440,7 +440,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = cast(bool)gtk_text_buffer_deserialize(cast(GtkTextBuffer*)this._cPtr, contentBuffer ? cast(GtkTextBuffer*)contentBuffer._cPtr(No.Dup) : null, format ? cast(GdkAtom)format._cPtr : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _data, _length, &_err);
     if (_err)
@@ -896,7 +896,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     gtk_text_buffer_insert(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _text, _len);
   }
 
@@ -913,7 +913,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     gtk_text_buffer_insert_at_cursor(cast(GtkTextBuffer*)this._cPtr, _text, _len);
   }
 
@@ -962,7 +962,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     _retval = cast(bool)gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _text, _len, defaultEditable);
     return _retval;
   }
@@ -987,7 +987,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     _retval = cast(bool)gtk_text_buffer_insert_interactive_at_cursor(cast(GtkTextBuffer*)this._cPtr, _text, _len, defaultEditable);
     return _retval;
   }
@@ -1009,7 +1009,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (markup)
       _len = cast(int)markup.length;
 
-    auto _markup = cast(const(char)*)markup.ptr;
+    auto _markup = markup.ptr ? cast(const(char)*)markup.ptr : [char.init].ptr;
     gtk_text_buffer_insert_markup(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _markup, _len);
   }
 
@@ -1399,7 +1399,7 @@ class TextBuffer : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     gtk_text_buffer_set_text(cast(GtkTextBuffer*)this._cPtr, _text, _len);
   }
 

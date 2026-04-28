@@ -47,7 +47,7 @@ struct AudioFormat
     if (dest)
       _length = cast(size_t)dest.length;
 
-    auto _dest = cast(void*)dest.ptr;
+    auto _dest = dest.ptr ? cast(void*)dest.ptr : [ubyte.init].ptr;
     gst_audio_format_fill_silence(info ? cast(const(GstAudioFormatInfo)*)info._cPtr : null, _dest, _length);
   }
 

@@ -95,7 +95,7 @@ class AudioConverter : gobject.boxed.Boxed
     if (in_)
       _inSize = cast(size_t)in_.length;
 
-    auto _in_ = cast(void*)in_.ptr;
+    auto _in_ = in_.ptr ? cast(void*)in_.ptr : [ubyte.init].ptr;
     size_t _outSize;
     void* _out_;
     _retval = cast(bool)gst_audio_converter_convert(cast(GstAudioConverter*)this._cPtr, flags, _in_, _inSize, &_out_, &_outSize);

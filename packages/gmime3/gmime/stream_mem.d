@@ -75,7 +75,7 @@ class StreamMem : gmime.stream.Stream
     if (buffer)
       _len = cast(size_t)buffer.length;
 
-    auto _buffer = cast(const(ubyte)*)buffer.ptr;
+    auto _buffer = buffer.ptr ? cast(const(ubyte)*)buffer.ptr : [ubyte.init].ptr;
     _cretval = g_mime_stream_mem_new_with_buffer(_buffer, _len);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gmime.stream_mem.StreamMem)(cast(GMimeStream*)_cretval, Yes.Take);
     return _retval;

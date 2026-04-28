@@ -58,7 +58,7 @@ class Scalar : gobject.object.ObjectWrap
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     GError *_err;
     _cretval = garrow_scalar_parse(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, _data, _size, &_err);
     if (_err)

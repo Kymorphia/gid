@@ -106,7 +106,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     if (types)
       _nColumns = cast(int)types.length;
 
-    auto _types = cast(GType*)types.ptr;
+    auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
     _cretval = gtk_tree_store_newv(_nColumns, _types);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_store.TreeStore)(cast(GtkTreeStore*)_cretval, Yes.Take);
     return _retval;
@@ -224,7 +224,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     if (columns)
       _nValues = cast(int)columns.length;
 
-    auto _columns = cast(int*)columns.ptr;
+    auto _columns = columns.ptr ? cast(int*)columns.ptr : [int.init].ptr;
     if (values)
       _nValues = cast(int)values.length;
 
@@ -364,7 +364,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     if (types)
       _nColumns = cast(int)types.length;
 
-    auto _types = cast(GType*)types.ptr;
+    auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
     gtk_tree_store_set_column_types(cast(GtkTreeStore*)this._cPtr, _nColumns, _types);
   }
 
@@ -400,7 +400,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
     if (columns)
       _nValues = cast(int)columns.length;
 
-    auto _columns = cast(int*)columns.ptr;
+    auto _columns = columns.ptr ? cast(int*)columns.ptr : [int.init].ptr;
     if (values)
       _nValues = cast(int)values.length;
 

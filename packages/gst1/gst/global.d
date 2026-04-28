@@ -693,7 +693,7 @@ glib.types.Quark flowToQuark(gst.types.FlowReturn ret)
 bool formatsContains(gst.types.Format[] formats, gst.types.Format format)
 {
   bool _retval;
-  auto _formats = cast(const(GstFormat)*)(formats ~ GstFormat.init).ptr;
+  auto _formats = formats.ptr ? cast(const(GstFormat)*)(formats ~ GstFormat.init).ptr : [GstFormat.init].ptr;
   _retval = cast(bool)gst_formats_contains(_formats, format);
   return _retval;
 }
@@ -1420,7 +1420,7 @@ void utilDumpMem(ubyte[] mem)
   if (mem)
     _size = cast(uint)mem.length;
 
-  auto _mem = cast(const(ubyte)*)mem.ptr;
+  auto _mem = mem.ptr ? cast(const(ubyte)*)mem.ptr : [ubyte.init].ptr;
   gst_util_dump_mem(_mem, _size);
 }
 

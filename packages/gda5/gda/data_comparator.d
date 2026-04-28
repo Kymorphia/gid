@@ -158,7 +158,7 @@ class DataComparator : gobject.object.ObjectWrap
     if (colNumbers)
       _nbCols = cast(int)colNumbers.length;
 
-    auto _colNumbers = cast(const(int)*)colNumbers.ptr;
+    auto _colNumbers = colNumbers.ptr ? cast(const(int)*)colNumbers.ptr : [int.init].ptr;
     gda_data_comparator_set_key_columns(cast(GdaDataComparator*)this._cPtr, _colNumbers, _nbCols);
   }
 

@@ -57,7 +57,7 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
     if (typeCodes)
       _nTypeCodes = cast(size_t)typeCodes.length;
 
-    auto _typeCodes = cast(byte*)typeCodes.ptr;
+    auto _typeCodes = typeCodes.ptr ? cast(byte*)typeCodes.ptr : [byte.init].ptr;
     _cretval = garrow_dense_union_data_type_new(_fields, _typeCodes, _nTypeCodes);
     this(_cretval, Yes.Take);
   }

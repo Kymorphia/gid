@@ -77,7 +77,7 @@ class Value : gobject.boxed.Boxed
     if (secret)
       _length = cast(ptrdiff_t)secret.length;
 
-    auto _secret = cast(const(char)*)secret.ptr;
+    auto _secret = secret.ptr ? cast(const(char)*)secret.ptr : [char.init].ptr;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = secret_value_new(_secret, _length, _contentType);
     this(_cretval, Yes.Take);
@@ -113,7 +113,7 @@ class Value : gobject.boxed.Boxed
     if (secretData)
       _length = cast(ptrdiff_t)secretData.length;
 
-    auto _secretData = cast(char*)secretData.ptr;
+    auto _secretData = secretData.ptr ? cast(char*)secretData.ptr : [char.init].ptr;
     const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = secret_value_new_full(_secretData, _length, _contentType, _destroyCB);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;

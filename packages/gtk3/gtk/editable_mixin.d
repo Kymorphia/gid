@@ -178,7 +178,7 @@ template EditableT()
     if (newText)
       _newTextLength = cast(int)newText.length;
 
-    auto _newText = cast(const(char)*)newText.ptr;
+    auto _newText = newText.ptr ? cast(const(char)*)newText.ptr : [char.init].ptr;
     gtk_editable_insert_text(cast(GtkEditable*)this._cPtr, _newText, _newTextLength, cast(int*)&position);
   }
 

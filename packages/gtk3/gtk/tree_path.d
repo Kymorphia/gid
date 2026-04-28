@@ -82,7 +82,7 @@ class TreePath : gobject.boxed.Boxed
     if (indices)
       _length = cast(size_t)indices.length;
 
-    auto _indices = cast(int*)indices.ptr;
+    auto _indices = indices.ptr ? cast(int*)indices.ptr : [int.init].ptr;
     _cretval = gtk_tree_path_new_from_indicesv(_indices, _length);
     auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;

@@ -1877,7 +1877,7 @@ void scriptWriteComment(cairo.device.Device script, string comment)
   if (comment)
     _len = cast(int)comment.length;
 
-  auto _comment = cast(const(char)*)comment.ptr;
+  auto _comment = comment.ptr ? cast(const(char)*)comment.ptr : [char.init].ptr;
   cairo_script_write_comment(script ? cast(cairo_device_t*)script._cPtr(No.Dup) : null, _comment, _len);
 }
 

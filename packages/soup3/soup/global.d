@@ -570,7 +570,7 @@ bool headersParse(string str, soup.message_headers.MessageHeaders dest)
   if (str)
     _len = cast(int)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   _retval = cast(bool)soup_headers_parse(_str, _len, dest ? cast(SoupMessageHeaders*)dest._cPtr(No.Dup) : null);
   return _retval;
 }
@@ -600,7 +600,7 @@ uint headersParseRequest(string str, soup.message_headers.MessageHeaders reqHead
   if (str)
     _len = cast(int)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   char* _reqMethod;
   char* _reqPath;
   _retval = soup_headers_parse_request(_str, _len, reqHeaders ? cast(SoupMessageHeaders*)reqHeaders._cPtr(No.Dup) : null, &_reqMethod, &_reqPath, &ver);
@@ -633,7 +633,7 @@ bool headersParseResponse(string str, soup.message_headers.MessageHeaders header
   if (str)
     _len = cast(int)str.length;
 
-  auto _str = cast(const(char)*)str.ptr;
+  auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
   char* _reasonPhrase;
   _retval = cast(bool)soup_headers_parse_response(_str, _len, headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, &ver, cast(uint*)&statusCode, &_reasonPhrase);
   reasonPhrase = _reasonPhrase.fromCString(Yes.Free);

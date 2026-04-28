@@ -534,7 +534,7 @@ class Uri : gobject.boxed.Boxed
     if (unescaped)
       _length = cast(size_t)unescaped.length;
 
-    auto _unescaped = cast(const(ubyte)*)unescaped.ptr;
+    auto _unescaped = unescaped.ptr ? cast(const(ubyte)*)unescaped.ptr : [ubyte.init].ptr;
     const(char)* _reservedCharsAllowed = reservedCharsAllowed.toCString(No.Alloc);
     _cretval = g_uri_escape_bytes(_unescaped, _length, _reservedCharsAllowed);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
@@ -779,7 +779,7 @@ class Uri : gobject.boxed.Boxed
     if (params)
       _length = cast(ptrdiff_t)params.length;
 
-    auto _params = cast(const(char)*)params.ptr;
+    auto _params = params.ptr ? cast(const(char)*)params.ptr : [char.init].ptr;
     const(char)* _separators = separators.toCString(No.Alloc);
     GError *_err;
     _cretval = g_uri_parse_params(_params, _length, _separators, flags, &_err);
@@ -1060,7 +1060,7 @@ class Uri : gobject.boxed.Boxed
     if (escapedString)
       _length = cast(ptrdiff_t)escapedString.length;
 
-    auto _escapedString = cast(const(char)*)escapedString.ptr;
+    auto _escapedString = escapedString.ptr ? cast(const(char)*)escapedString.ptr : [char.init].ptr;
     const(char)* _illegalCharacters = illegalCharacters.toCString(No.Alloc);
     GError *_err;
     _cretval = g_uri_unescape_bytes(_escapedString, _length, _illegalCharacters, &_err);

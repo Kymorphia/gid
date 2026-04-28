@@ -886,7 +886,7 @@ bool utilityCheckDataModel(gda.data_model.DataModel model, gobject.types.GType[]
   if (types)
     _nbcols = cast(int)types.length;
 
-  auto _types = cast(GType*)types.ptr;
+  auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
   _retval = cast(bool)gda_utility_check_data_model_v(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, _nbcols, _types);
   return _retval;
 }
@@ -914,12 +914,12 @@ bool utilityDataModelDumpDataToXml(gda.data_model.DataModel model, libxml2.types
   if (cols)
     _nbCols = cast(int)cols.length;
 
-  auto _cols = cast(const(int)*)cols.ptr;
+  auto _cols = cols.ptr ? cast(const(int)*)cols.ptr : [int.init].ptr;
   int _nbRows;
   if (rows)
     _nbRows = cast(int)rows.length;
 
-  auto _rows = cast(const(int)*)rows.ptr;
+  auto _rows = rows.ptr ? cast(const(int)*)rows.ptr : [int.init].ptr;
   _retval = cast(bool)gda_utility_data_model_dump_data_to_xml(model ? cast(GdaDataModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, parent, _cols, _nbCols, _rows, _nbRows, useColIds);
   return _retval;
 }

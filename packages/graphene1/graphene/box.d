@@ -324,7 +324,7 @@ class Box : gobject.boxed.Boxed
     if (points)
       _nPoints = cast(uint)points.length;
 
-    auto _points = cast(const(graphene_point3d_t)*)points.ptr;
+    auto _points = points.ptr ? cast(const(graphene_point3d_t)*)points.ptr : [graphene_point3d_t.init].ptr;
     _cretval = graphene_box_init_from_points(cast(graphene_box_t*)this._cPtr, _nPoints, _points);
     auto _retval = _cretval ? new graphene.box.Box(cast(void*)_cretval, No.Take) : null;
     return _retval;

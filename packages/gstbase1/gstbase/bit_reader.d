@@ -196,7 +196,7 @@ class BitReader
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     gst_bit_reader_init(cast(GstBitReader*)this._cPtr, _data, _size);
   }
 

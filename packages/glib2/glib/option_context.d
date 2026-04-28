@@ -65,7 +65,7 @@ class OptionContext
   */
   void addMainEntries(glib.types.OptionEntry[] entries, string translationDomain = null)
   {
-    auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
+    auto _entries = entries.ptr ? cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr : [GOptionEntry.init].ptr;
     const(char)* _translationDomain = translationDomain.toCString(No.Alloc);
     g_option_context_add_main_entries(cast(GOptionContext*)this._cPtr, _entries, _translationDomain);
   }

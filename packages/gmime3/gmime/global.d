@@ -194,7 +194,7 @@ gmime.types.ContentEncoding utilsBestEncoding(ubyte[] text)
   if (text)
     _len = cast(size_t)text.length;
 
-  auto _text = cast(const(ubyte)*)text.ptr;
+  auto _text = text.ptr ? cast(const(ubyte)*)text.ptr : [ubyte.init].ptr;
   _cretval = g_mime_utils_best_encoding(_text, _len);
   gmime.types.ContentEncoding _retval = cast(gmime.types.ContentEncoding)_cretval;
   return _retval;
@@ -220,7 +220,7 @@ string utilsDecode8bit(gmime.parser_options.ParserOptions options, ubyte[] text)
   if (text)
     _len = cast(size_t)text.length;
 
-  auto _text = cast(const(ubyte)*)text.ptr;
+  auto _text = text.ptr ? cast(const(ubyte)*)text.ptr : [ubyte.init].ptr;
   _cretval = g_mime_utils_decode_8bit(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, _text, _len);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -437,7 +437,7 @@ bool utilsTextIs8bit(ubyte[] text)
   if (text)
     _len = cast(size_t)text.length;
 
-  auto _text = cast(const(ubyte)*)text.ptr;
+  auto _text = text.ptr ? cast(const(ubyte)*)text.ptr : [ubyte.init].ptr;
   _retval = cast(bool)g_mime_utils_text_is_8bit(_text, _len);
   return _retval;
 }
@@ -498,7 +498,7 @@ size_t ydecodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pc
   if (inbuf)
     _inlen = cast(size_t)inbuf.length;
 
-  auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+  auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
   _retval = g_mime_ydecode_step(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&pcrc, cast(uint*)&crc);
   return _retval;
 }
@@ -528,7 +528,7 @@ size_t yencodeClose(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint p
   if (inbuf)
     _inlen = cast(size_t)inbuf.length;
 
-  auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+  auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
   _retval = g_mime_yencode_close(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&pcrc, cast(uint*)&crc);
   return _retval;
 }
@@ -559,7 +559,7 @@ size_t yencodeStep(ubyte[] inbuf, ref ubyte[] outbuf, ref int state, ref uint pc
   if (inbuf)
     _inlen = cast(size_t)inbuf.length;
 
-  auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+  auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
   _retval = g_mime_yencode_step(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&pcrc, cast(uint*)&crc);
   return _retval;
 }

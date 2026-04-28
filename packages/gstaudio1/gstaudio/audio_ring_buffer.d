@@ -220,7 +220,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
     if (data)
       _inSamples = cast(int)data.length;
 
-    auto _data = cast(ubyte*)data.ptr;
+    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
     _retval = gst_audio_ring_buffer_commit(cast(GstAudioRingBuffer*)this._cPtr, cast(ulong*)&sample, _data, _inSamples, outSamples, cast(int*)&accum);
     return _retval;
   }
@@ -409,7 +409,7 @@ class AudioRingBuffer : gst.object.ObjectWrap
     if (data)
       _len = cast(uint)data.length;
 
-    auto _data = cast(ubyte*)data.ptr;
+    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
     _retval = gst_audio_ring_buffer_read(cast(GstAudioRingBuffer*)this._cPtr, sample, _data, _len, cast(GstClockTime*)&timestamp);
     return _retval;
   }

@@ -342,7 +342,7 @@ class Buffer : gobject.boxed.Boxed
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = cast(const(void)*)data.ptr;
+    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
     _cretval = gst_buffer_new_memdup(_data, _size);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -397,7 +397,7 @@ class Buffer : gobject.boxed.Boxed
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = cast(void*)data.ptr;
+    auto _data = data.ptr ? cast(void*)data.ptr : [ubyte.init].ptr;
     auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
     _cretval = gst_buffer_new_wrapped_full(flags, _data, maxsize, offset, _size, _notify, _notifyCB);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
@@ -639,7 +639,7 @@ class Buffer : gobject.boxed.Boxed
     if (src)
       _size = cast(size_t)src.length;
 
-    auto _src = cast(const(void)*)src.ptr;
+    auto _src = src.ptr ? cast(const(void)*)src.ptr : [ubyte.init].ptr;
     _retval = gst_buffer_fill(cast(GstBuffer*)this._cPtr, offset, _src, _size);
     return _retval;
   }
@@ -1024,7 +1024,7 @@ class Buffer : gobject.boxed.Boxed
     if (mem)
       _size = cast(size_t)mem.length;
 
-    auto _mem = cast(const(void)*)mem.ptr;
+    auto _mem = mem.ptr ? cast(const(void)*)mem.ptr : [ubyte.init].ptr;
     _retval = gst_buffer_memcmp(cast(GstBuffer*)this._cPtr, offset, _mem, _size);
     return _retval;
   }

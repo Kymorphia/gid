@@ -374,12 +374,12 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     if (fds)
       _nFds = cast(int)fds.length;
 
-    auto _fds = cast(const(int)*)fds.ptr;
+    auto _fds = fds.ptr ? cast(const(int)*)fds.ptr : [int.init].ptr;
     int _nMapFds;
     if (mapFds)
       _nMapFds = cast(int)mapFds.length;
 
-    auto _mapFds = cast(const(int)*)mapFds.ptr;
+    auto _mapFds = mapFds.ptr ? cast(const(int)*)mapFds.ptr : [int.init].ptr;
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;

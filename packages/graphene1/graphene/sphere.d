@@ -187,7 +187,7 @@ class Sphere : gobject.boxed.Boxed
     if (points)
       _nPoints = cast(uint)points.length;
 
-    auto _points = cast(const(graphene_point3d_t)*)points.ptr;
+    auto _points = points.ptr ? cast(const(graphene_point3d_t)*)points.ptr : [graphene_point3d_t.init].ptr;
     _cretval = graphene_sphere_init_from_points(cast(graphene_sphere_t*)this._cPtr, _nPoints, _points, cast(const(graphene_point3d_t)*)&center);
     auto _retval = _cretval ? new graphene.sphere.Sphere(cast(void*)_cretval, No.Take) : null;
     return _retval;

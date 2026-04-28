@@ -427,7 +427,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
     if (buffer)
       _length = cast(ptrdiff_t)buffer.length;
 
-    auto _buffer = cast(const(char)*)buffer.ptr;
+    auto _buffer = buffer.ptr ? cast(const(char)*)buffer.ptr : [char.init].ptr;
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_string(cast(GtkUIManager*)this._cPtr, _buffer, _length, &_err);
     if (_err)

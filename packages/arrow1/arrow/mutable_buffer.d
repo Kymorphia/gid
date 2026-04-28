@@ -57,7 +57,7 @@ class MutableBuffer : arrow.buffer.Buffer
     if (data)
       _size = cast(long)data.length;
 
-    auto _data = cast(ubyte*)data.ptr;
+    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
     _cretval = garrow_mutable_buffer_new(_data, _size);
     this(_cretval, Yes.Take);
   }
@@ -81,7 +81,7 @@ class MutableBuffer : arrow.buffer.Buffer
     if (data)
       _size = cast(long)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = cast(bool)garrow_mutable_buffer_set_data(cast(GArrowMutableBuffer*)this._cPtr, offset, _data, _size, &_err);
     if (_err)

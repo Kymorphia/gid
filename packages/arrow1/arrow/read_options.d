@@ -115,7 +115,7 @@ class ReadOptions : gobject.object.ObjectWrap
     if (fields)
       _nFields = cast(size_t)fields.length;
 
-    auto _fields = cast(int*)fields.ptr;
+    auto _fields = fields.ptr ? cast(int*)fields.ptr : [int.init].ptr;
     garrow_read_options_set_included_fields(cast(GArrowReadOptions*)this._cPtr, _fields, _nFields);
   }
 }

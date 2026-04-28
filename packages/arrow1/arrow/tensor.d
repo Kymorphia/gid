@@ -62,12 +62,12 @@ class Tensor : gobject.object.ObjectWrap
     if (shape)
       _nDimensions = cast(size_t)shape.length;
 
-    auto _shape = cast(long*)shape.ptr;
+    auto _shape = shape.ptr ? cast(long*)shape.ptr : [long.init].ptr;
     size_t _nStrides;
     if (strides)
       _nStrides = cast(size_t)strides.length;
 
-    auto _strides = cast(long*)strides.ptr;
+    auto _strides = strides.ptr ? cast(long*)strides.ptr : [long.init].ptr;
     size_t _nDimensionNames;
     if (dimensionNames)
       _nDimensionNames = cast(size_t)dimensionNames.length;

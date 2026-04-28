@@ -653,7 +653,7 @@ template TreeModelT()
     if (newOrder)
       _length = cast(int)newOrder.length;
 
-    auto _newOrder = cast(int*)newOrder.ptr;
+    auto _newOrder = newOrder.ptr ? cast(int*)newOrder.ptr : [int.init].ptr;
     gtk_tree_model_rows_reordered_with_length(cast(GtkTreeModel*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, _newOrder, _length);
   }
 

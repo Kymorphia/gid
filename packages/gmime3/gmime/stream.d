@@ -67,7 +67,7 @@ class Stream : gobject.object.ObjectWrap
     if (buf)
       _max = cast(size_t)buf.length;
 
-    auto _buf = cast(ubyte*)buf.ptr;
+    auto _buf = buf.ptr ? cast(ubyte*)buf.ptr : [ubyte.init].ptr;
     _retval = g_mime_stream_buffer_gets(cast(GMimeStream*)this._cPtr, _buf, _max);
     return _retval;
   }
@@ -155,7 +155,7 @@ class Stream : gobject.object.ObjectWrap
     if (buf)
       _len = cast(size_t)buf.length;
 
-    auto _buf = cast(ubyte*)buf.ptr;
+    auto _buf = buf.ptr ? cast(ubyte*)buf.ptr : [ubyte.init].ptr;
     _retval = g_mime_stream_read(cast(GMimeStream*)this._cPtr, _buf, _len);
     return _retval;
   }
@@ -251,7 +251,7 @@ class Stream : gobject.object.ObjectWrap
     if (buf)
       _len = cast(size_t)buf.length;
 
-    auto _buf = cast(const(ubyte)*)buf.ptr;
+    auto _buf = buf.ptr ? cast(const(ubyte)*)buf.ptr : [ubyte.init].ptr;
     _retval = g_mime_stream_write(cast(GMimeStream*)this._cPtr, _buf, _len);
     return _retval;
   }
@@ -299,7 +299,7 @@ class Stream : gobject.object.ObjectWrap
     if (vector)
       _count = cast(size_t)vector.length;
 
-    auto _vector = cast(GMimeStreamIOVector*)vector.ptr;
+    auto _vector = vector.ptr ? cast(GMimeStreamIOVector*)vector.ptr : [GMimeStreamIOVector.init].ptr;
     _retval = g_mime_stream_writev(cast(GMimeStream*)this._cPtr, _vector, _count);
     return _retval;
   }

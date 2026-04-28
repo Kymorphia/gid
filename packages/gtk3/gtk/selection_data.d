@@ -224,7 +224,7 @@ class SelectionData : gobject.boxed.Boxed
     if (data)
       _length = cast(int)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     gtk_selection_data_set(cast(GtkSelectionData*)this._cPtr, type ? cast(GdkAtom)type._cPtr : null, format, _data, _length);
   }
 
@@ -262,7 +262,7 @@ class SelectionData : gobject.boxed.Boxed
     if (str)
       _len = cast(int)str.length;
 
-    auto _str = cast(const(char)*)str.ptr;
+    auto _str = str.ptr ? cast(const(char)*)str.ptr : [char.init].ptr;
     _retval = cast(bool)gtk_selection_data_set_text(cast(GtkSelectionData*)this._cPtr, _str, _len);
     return _retval;
   }

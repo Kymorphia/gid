@@ -42,9 +42,9 @@ class BorderNode : gsk.render_node.RenderNode
   {
     GskRenderNode* _cretval;
     assert(!borderWidth || borderWidth.length == 4);
-    auto _borderWidth = cast(const(float)*)borderWidth.ptr;
+    auto _borderWidth = borderWidth.ptr ? cast(const(float)*)borderWidth.ptr : [float.init].ptr;
     assert(!borderColor || borderColor.length == 4);
-    auto _borderColor = cast(const(GdkRGBA)*)borderColor.ptr;
+    auto _borderColor = borderColor.ptr ? cast(const(GdkRGBA)*)borderColor.ptr : [GdkRGBA.init].ptr;
     _cretval = gsk_border_node_new(outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, _borderWidth, _borderColor);
     this(_cretval, Yes.Take);
   }

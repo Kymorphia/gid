@@ -207,7 +207,7 @@ class InetAddress : gobject.object.ObjectWrap
   static gio.inet_address.InetAddress newFromBytes(ubyte[] bytes, gio.types.SocketFamily family)
   {
     GInetAddress* _cretval;
-    auto _bytes = cast(const(ubyte)*)(bytes ~ ubyte.init).ptr;
+    auto _bytes = bytes.ptr ? cast(const(ubyte)*)(bytes ~ ubyte.init).ptr : [ubyte.init].ptr;
     _cretval = g_inet_address_new_from_bytes(_bytes, family);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, Yes.Take);
     return _retval;

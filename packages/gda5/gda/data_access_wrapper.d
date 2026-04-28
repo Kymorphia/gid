@@ -102,7 +102,7 @@ class DataAccessWrapper : gobject.object.ObjectWrap, gda.data_model.DataModel
     if (mapping)
       _mappingSize = cast(int)mapping.length;
 
-    auto _mapping = cast(const(int)*)mapping.ptr;
+    auto _mapping = mapping.ptr ? cast(const(int)*)mapping.ptr : [int.init].ptr;
     _retval = cast(bool)gda_data_access_wrapper_set_mapping(cast(GdaDataAccessWrapper*)this._cPtr, _mapping, _mappingSize);
     return _retval;
   }

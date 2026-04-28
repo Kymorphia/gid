@@ -97,12 +97,12 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
     if (values)
       _valuesLength = cast(long)values.length;
 
-    auto _values = cast(const(float)*)values.ptr;
+    auto _values = values.ptr ? cast(const(float)*)values.ptr : [float.init].ptr;
     long _isValidsLength;
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(gboolean)*)isValids.ptr;
+    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
     GError *_err;
     _retval = cast(bool)garrow_float_array_builder_append_values(cast(GArrowFloatArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)

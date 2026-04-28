@@ -880,7 +880,7 @@ class PrintSettings : gobject.object.ObjectWrap
     if (pageRanges)
       _numRanges = cast(int)pageRanges.length;
 
-    auto _pageRanges = cast(GtkPageRange*)pageRanges.ptr;
+    auto _pageRanges = pageRanges.ptr ? cast(GtkPageRange*)pageRanges.ptr : [GtkPageRange.init].ptr;
     gtk_print_settings_set_page_ranges(cast(GtkPrintSettings*)this._cPtr, _pageRanges, _numRanges);
   }
 

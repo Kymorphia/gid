@@ -122,7 +122,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(gboolean)*)isValids.ptr;
+    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
     GError *_err;
     _retval = cast(bool)garrow_string_array_builder_append_strings(cast(GArrowStringArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)

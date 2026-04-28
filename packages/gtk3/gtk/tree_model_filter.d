@@ -274,7 +274,7 @@ class TreeModelFilter : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDrag
     if (types)
       _nColumns = cast(int)types.length;
 
-    auto _types = cast(GType*)types.ptr;
+    auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_tree_model_filter_set_modify_func(cast(GtkTreeModelFilter*)this._cPtr, _nColumns, _types, _funcCB, _func, _funcDestroyCB);

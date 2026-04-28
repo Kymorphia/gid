@@ -52,7 +52,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(char)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(char)*)inbuf.ptr : [char.init].ptr;
     _retval = g_mime_encoding_flush(cast(GMimeEncoding*)&this, _inbuf, _inlen, outbuf.ptr);
     return _retval;
   }
@@ -125,7 +125,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(char)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(char)*)inbuf.ptr : [char.init].ptr;
     _retval = g_mime_encoding_step(cast(GMimeEncoding*)&this, _inbuf, _inlen, outbuf.ptr);
     return _retval;
   }
@@ -148,7 +148,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
     _retval = g_mime_encoding_base64_decode_step(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }
@@ -172,7 +172,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
     _retval = g_mime_encoding_base64_encode_close(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }
@@ -197,7 +197,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
     _retval = g_mime_encoding_base64_encode_step(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }
@@ -220,7 +220,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
     _retval = g_mime_encoding_quoted_decode_step(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }
@@ -244,7 +244,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
     _retval = g_mime_encoding_quoted_encode_close(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }
@@ -268,7 +268,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
     _retval = g_mime_encoding_quoted_encode_step(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }
@@ -292,7 +292,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
     _retval = g_mime_encoding_uudecode_step(_inbuf, _inlen, outbuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }
@@ -316,7 +316,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
     _retval = g_mime_encoding_uuencode_close(_inbuf, _inlen, outbuf.ptr, uubuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }
@@ -342,7 +342,7 @@ struct Encoding
     if (inbuf)
       _inlen = cast(size_t)inbuf.length;
 
-    auto _inbuf = cast(const(ubyte)*)inbuf.ptr;
+    auto _inbuf = inbuf.ptr ? cast(const(ubyte)*)inbuf.ptr : [ubyte.init].ptr;
     _retval = g_mime_encoding_uuencode_step(_inbuf, _inlen, outbuf.ptr, uubuf.ptr, cast(int*)&state, cast(uint*)&save);
     return _retval;
   }

@@ -259,7 +259,7 @@ class Memory : gobject.boxed.Boxed
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = cast(void*)data.ptr;
+    auto _data = data.ptr ? cast(void*)data.ptr : [ubyte.init].ptr;
     auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
     _cretval = gst_memory_new_wrapped(flags, _data, maxsize, offset, _size, _notify, _notifyCB);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;

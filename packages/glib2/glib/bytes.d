@@ -83,7 +83,7 @@ class Bytes : gobject.boxed.Boxed
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = cast(const(void)*)data.ptr;
+    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
     _cretval = g_bytes_new(_data, _size);
     this(_cretval, Yes.Take);
   }

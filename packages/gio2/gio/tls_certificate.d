@@ -303,7 +303,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     if (data)
       _length = cast(ptrdiff_t)data.length;
 
-    auto _data = cast(const(char)*)data.ptr;
+    auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
     GError *_err;
     _cretval = g_tls_certificate_new_from_pem(_data, _length, &_err);
     if (_err)
@@ -389,7 +389,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     const(char)* _password = password.toCString(No.Alloc);
     GError *_err;
     _cretval = g_tls_certificate_new_from_pkcs12(_data, _length, _password, &_err);

@@ -89,7 +89,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
     if (data)
       _size = cast(size_t)data.length;
 
-    auto _data = cast(void*)data.ptr;
+    auto _data = data.ptr ? cast(void*)data.ptr : [ubyte.init].ptr;
     _cretval = g_socket_control_message_deserialize(level, type, _size, _data);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_control_message.SocketControlMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;

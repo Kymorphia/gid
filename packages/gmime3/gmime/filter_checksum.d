@@ -77,7 +77,7 @@ class FilterChecksum : gmime.filter.Filter
     if (digest)
       _len = cast(size_t)digest.length;
 
-    auto _digest = cast(ubyte*)digest.ptr;
+    auto _digest = digest.ptr ? cast(ubyte*)digest.ptr : [ubyte.init].ptr;
     _retval = g_mime_filter_checksum_get_digest(cast(GMimeFilterChecksum*)this._cPtr, _digest, _len);
     return _retval;
   }

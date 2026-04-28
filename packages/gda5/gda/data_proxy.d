@@ -431,7 +431,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
     if (colsIndex)
       _nCols = cast(int)colsIndex.length;
 
-    auto _colsIndex = cast(int*)colsIndex.ptr;
+    auto _colsIndex = colsIndex.ptr ? cast(int*)colsIndex.ptr : [int.init].ptr;
     _cretval = gda_data_proxy_get_values(cast(GdaDataProxy*)this._cPtr, proxyRow, _colsIndex, _nCols);
     auto _retval = gSListToD!(gobject.value.Value, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;

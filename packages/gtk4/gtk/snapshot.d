@@ -108,9 +108,9 @@ class Snapshot : gdk.snapshot.Snapshot
   void appendBorder(gsk.rounded_rect.RoundedRect outline, float[] borderWidth, gdk.rgba.RGBA[] borderColor)
   {
     assert(!borderWidth || borderWidth.length == 4);
-    auto _borderWidth = cast(const(float)*)borderWidth.ptr;
+    auto _borderWidth = borderWidth.ptr ? cast(const(float)*)borderWidth.ptr : [float.init].ptr;
     assert(!borderColor || borderColor.length == 4);
-    auto _borderColor = cast(const(GdkRGBA)*)borderColor.ptr;
+    auto _borderColor = borderColor.ptr ? cast(const(GdkRGBA)*)borderColor.ptr : [GdkRGBA.init].ptr;
     gtk_snapshot_append_border(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, _borderWidth, _borderColor);
   }
 

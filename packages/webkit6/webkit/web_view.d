@@ -543,7 +543,7 @@ class WebView : webkit.web_view_base.WebViewBase
     if (body_)
       _length = cast(ptrdiff_t)body_.length;
 
-    auto _body_ = cast(const(char)*)body_.ptr;
+    auto _body_ = body_.ptr ? cast(const(char)*)body_.ptr : [char.init].ptr;
     const(char)* _worldName = worldName.toCString(No.Alloc);
     const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
@@ -745,7 +745,7 @@ class WebView : webkit.web_view_base.WebViewBase
     if (script)
       _length = cast(ptrdiff_t)script.length;
 
-    auto _script = cast(const(char)*)script.ptr;
+    auto _script = script.ptr ? cast(const(char)*)script.ptr : [char.init].ptr;
     const(char)* _worldName = worldName.toCString(No.Alloc);
     const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;

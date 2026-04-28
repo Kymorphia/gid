@@ -224,7 +224,7 @@ class TlsPassword : gobject.object.ObjectWrap
     if (value)
       _length = cast(ptrdiff_t)value.length;
 
-    auto _value = cast(const(ubyte)*)value.ptr;
+    auto _value = value.ptr ? cast(const(ubyte)*)value.ptr : [ubyte.init].ptr;
     g_tls_password_set_value(cast(GTlsPassword*)this._cPtr, _value, _length);
   }
 
@@ -257,7 +257,7 @@ class TlsPassword : gobject.object.ObjectWrap
     if (value)
       _length = cast(ptrdiff_t)value.length;
 
-    auto _value = cast(ubyte*)value.ptr;
+    auto _value = value.ptr ? cast(ubyte*)value.ptr : [ubyte.init].ptr;
     g_tls_password_set_value_full(cast(GTlsPassword*)this._cPtr, _value, _length, _destroyCB);
   }
 

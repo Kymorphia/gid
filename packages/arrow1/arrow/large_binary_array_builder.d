@@ -64,7 +64,7 @@ class LargeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (value)
       _length = cast(long)value.length;
 
-    auto _value = cast(const(ubyte)*)value.ptr;
+    auto _value = value.ptr ? cast(const(ubyte)*)value.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = cast(bool)garrow_large_binary_array_builder_append_value(cast(GArrowLargeBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
     if (_err)
@@ -112,7 +112,7 @@ class LargeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     if (isValids)
       _isValidsLength = cast(long)isValids.length;
 
-    auto _isValids = cast(const(gboolean)*)isValids.ptr;
+    auto _isValids = isValids.ptr ? cast(const(gboolean)*)isValids.ptr : [gboolean.init].ptr;
     GError *_err;
     _retval = cast(bool)garrow_large_binary_array_builder_append_values(cast(GArrowLargeBinaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)

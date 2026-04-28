@@ -126,7 +126,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
     if (data)
       _length = cast(ptrdiff_t)data.length;
 
-    auto _data = cast(const(char)*)data.ptr;
+    auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
     gtk_css_provider_load_from_data(cast(GtkCssProvider*)this._cPtr, _data, _length);
   }
 

@@ -404,7 +404,7 @@ class Dialog : gtk.window.Window
     if (newOrder)
       _nParams = cast(int)newOrder.length;
 
-    auto _newOrder = cast(int*)newOrder.ptr;
+    auto _newOrder = newOrder.ptr ? cast(int*)newOrder.ptr : [int.init].ptr;
     gtk_dialog_set_alternative_button_order_from_array(cast(GtkDialog*)this._cPtr, _nParams, _newOrder);
   }
 

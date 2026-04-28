@@ -54,7 +54,7 @@ bool audioChannelPositionsFromMask(ulong channelMask, gstaudio.types.AudioChanne
   if (position)
     _channels = cast(int)position.length;
 
-  auto _position = cast(GstAudioChannelPosition*)position.ptr;
+  auto _position = position.ptr ? cast(GstAudioChannelPosition*)position.ptr : [GstAudioChannelPosition.init].ptr;
   _retval = cast(bool)gst_audio_channel_positions_from_mask(_channels, channelMask, _position);
   return _retval;
 }
@@ -78,7 +78,7 @@ bool audioChannelPositionsToMask(gstaudio.types.AudioChannelPosition[] position,
   if (position)
     _channels = cast(int)position.length;
 
-  auto _position = cast(const(GstAudioChannelPosition)*)position.ptr;
+  auto _position = position.ptr ? cast(const(GstAudioChannelPosition)*)position.ptr : [GstAudioChannelPosition.init].ptr;
   _retval = cast(bool)gst_audio_channel_positions_to_mask(_position, _channels, forceOrder, cast(ulong*)&channelMask);
   return _retval;
 }
@@ -100,7 +100,7 @@ string audioChannelPositionsToString(gstaudio.types.AudioChannelPosition[] posit
   if (position)
     _channels = cast(int)position.length;
 
-  auto _position = cast(const(GstAudioChannelPosition)*)position.ptr;
+  auto _position = position.ptr ? cast(const(GstAudioChannelPosition)*)position.ptr : [GstAudioChannelPosition.init].ptr;
   _cretval = gst_audio_channel_positions_to_string(_position, _channels);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -123,7 +123,7 @@ bool audioChannelPositionsToValidOrder(gstaudio.types.AudioChannelPosition[] pos
   if (position)
     _channels = cast(int)position.length;
 
-  auto _position = cast(GstAudioChannelPosition*)position.ptr;
+  auto _position = position.ptr ? cast(GstAudioChannelPosition*)position.ptr : [GstAudioChannelPosition.init].ptr;
   _retval = cast(bool)gst_audio_channel_positions_to_valid_order(_position, _channels);
   return _retval;
 }
@@ -146,7 +146,7 @@ bool audioCheckValidChannelPositions(gstaudio.types.AudioChannelPosition[] posit
   if (position)
     _channels = cast(int)position.length;
 
-  auto _position = cast(const(GstAudioChannelPosition)*)position.ptr;
+  auto _position = position.ptr ? cast(const(GstAudioChannelPosition)*)position.ptr : [GstAudioChannelPosition.init].ptr;
   _retval = cast(bool)gst_audio_check_valid_channel_positions(_position, _channels, forceOrder);
   return _retval;
 }
@@ -219,15 +219,15 @@ bool audioGetChannelReorderMap(gstaudio.types.AudioChannelPosition[] from, gstau
   if (from)
     _channels = cast(int)from.length;
 
-  auto _from = cast(const(GstAudioChannelPosition)*)from.ptr;
+  auto _from = from.ptr ? cast(const(GstAudioChannelPosition)*)from.ptr : [GstAudioChannelPosition.init].ptr;
   if (to)
     _channels = cast(int)to.length;
 
-  auto _to = cast(const(GstAudioChannelPosition)*)to.ptr;
+  auto _to = to.ptr ? cast(const(GstAudioChannelPosition)*)to.ptr : [GstAudioChannelPosition.init].ptr;
   if (reorderMap)
     _channels = cast(int)reorderMap.length;
 
-  auto _reorderMap = cast(int*)reorderMap.ptr;
+  auto _reorderMap = reorderMap.ptr ? cast(int*)reorderMap.ptr : [int.init].ptr;
   _retval = cast(bool)gst_audio_get_channel_reorder_map(_channels, _from, _to, _reorderMap);
   return _retval;
 }
@@ -269,12 +269,12 @@ bool audioIec61937Payload(ubyte[] src, ubyte[] dst, gstaudio.audio_ring_buffer_s
   if (src)
     _srcN = cast(uint)src.length;
 
-  auto _src = cast(const(ubyte)*)src.ptr;
+  auto _src = src.ptr ? cast(const(ubyte)*)src.ptr : [ubyte.init].ptr;
   uint _dstN;
   if (dst)
     _dstN = cast(uint)dst.length;
 
-  auto _dst = cast(ubyte*)dst.ptr;
+  auto _dst = dst.ptr ? cast(ubyte*)dst.ptr : [ubyte.init].ptr;
   _retval = cast(bool)gst_audio_iec61937_payload(_src, _srcN, _dst, _dstN, spec ? cast(const(GstAudioRingBufferSpec)*)spec._cPtr : null, endianness);
   return _retval;
 }
@@ -307,7 +307,7 @@ gst.caps.Caps audioMakeRawCaps(gstaudio.types.AudioFormat[] formats, gstaudio.ty
   if (formats)
     _len = cast(uint)formats.length;
 
-  auto _formats = cast(const(GstAudioFormat)*)formats.ptr;
+  auto _formats = formats.ptr ? cast(const(GstAudioFormat)*)formats.ptr : [GstAudioFormat.init].ptr;
   _cretval = gst_audio_make_raw_caps(_formats, _len, layout);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -343,16 +343,16 @@ bool audioReorderChannels(ubyte[] data, gstaudio.types.AudioFormat format, gstau
   if (data)
     _size = cast(size_t)data.length;
 
-  auto _data = cast(void*)data.ptr;
+  auto _data = data.ptr ? cast(void*)data.ptr : [ubyte.init].ptr;
   int _channels;
   if (from)
     _channels = cast(int)from.length;
 
-  auto _from = cast(const(GstAudioChannelPosition)*)from.ptr;
+  auto _from = from.ptr ? cast(const(GstAudioChannelPosition)*)from.ptr : [GstAudioChannelPosition.init].ptr;
   if (to)
     _channels = cast(int)to.length;
 
-  auto _to = cast(const(GstAudioChannelPosition)*)to.ptr;
+  auto _to = to.ptr ? cast(const(GstAudioChannelPosition)*)to.ptr : [GstAudioChannelPosition.init].ptr;
   _retval = cast(bool)gst_audio_reorder_channels(_data, _size, format, _channels, _from, _to);
   return _retval;
 }
@@ -409,7 +409,7 @@ gstaudio.audio_downmix_meta.AudioDownmixMeta bufferGetAudioDownmixMetaForChannel
   if (toPosition)
     _toChannels = cast(int)toPosition.length;
 
-  auto _toPosition = cast(const(GstAudioChannelPosition)*)toPosition.ptr;
+  auto _toPosition = toPosition.ptr ? cast(const(GstAudioChannelPosition)*)toPosition.ptr : [GstAudioChannelPosition.init].ptr;
   _cretval = gst_buffer_get_audio_downmix_meta_for_channels(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _toPosition, _toChannels);
   auto _retval = _cretval ? new gstaudio.audio_downmix_meta.AudioDownmixMeta(cast(GstAudioDownmixMeta*)_cretval, No.Take) : null;
   return _retval;

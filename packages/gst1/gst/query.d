@@ -1246,7 +1246,7 @@ class Query : gobject.boxed.Boxed
     if (formats)
       _nFormats = cast(int)formats.length;
 
-    auto _formats = cast(const(GstFormat)*)formats.ptr;
+    auto _formats = formats.ptr ? cast(const(GstFormat)*)formats.ptr : [GstFormat.init].ptr;
     gst_query_set_formatsv(cast(GstQuery*)this._cPtr, _nFormats, _formats);
   }
 

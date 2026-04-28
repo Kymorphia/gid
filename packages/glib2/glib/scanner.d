@@ -377,7 +377,7 @@ class Scanner
     if (text)
       _textLen = cast(uint)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     g_scanner_input_text(cast(GScanner*)this._cPtr, _text, _textLen);
   }
 

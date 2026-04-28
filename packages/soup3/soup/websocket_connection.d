@@ -372,7 +372,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = cast(const(void)*)data.ptr;
+    auto _data = data.ptr ? cast(const(void)*)data.ptr : [ubyte.init].ptr;
     soup_websocket_connection_send_binary(cast(SoupWebsocketConnection*)this._cPtr, _data, _length);
   }
 

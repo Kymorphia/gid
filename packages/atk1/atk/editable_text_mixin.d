@@ -77,7 +77,7 @@ template EditableTextT()
     if (string_)
       _length = cast(int)string_.length;
 
-    auto _string_ = cast(const(char)*)string_.ptr;
+    auto _string_ = string_.ptr ? cast(const(char)*)string_.ptr : [char.init].ptr;
     atk_editable_text_insert_text(cast(AtkEditableText*)this._cPtr, _string_, _length, cast(int*)&position);
   }
 

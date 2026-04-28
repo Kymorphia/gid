@@ -100,7 +100,7 @@ class StateSet : gobject.object.ObjectWrap
     if (types)
       _nTypes = cast(int)types.length;
 
-    auto _types = cast(AtkStateType*)types.ptr;
+    auto _types = types.ptr ? cast(AtkStateType*)types.ptr : [AtkStateType.init].ptr;
     atk_state_set_add_states(cast(AtkStateSet*)this._cPtr, _types, _nTypes);
   }
 
@@ -158,7 +158,7 @@ class StateSet : gobject.object.ObjectWrap
     if (types)
       _nTypes = cast(int)types.length;
 
-    auto _types = cast(AtkStateType*)types.ptr;
+    auto _types = types.ptr ? cast(AtkStateType*)types.ptr : [AtkStateType.init].ptr;
     _retval = cast(bool)atk_state_set_contains_states(cast(AtkStateSet*)this._cPtr, _types, _nTypes);
     return _retval;
   }

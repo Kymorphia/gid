@@ -127,7 +127,7 @@ bool rtpHdrextGetNtp56(ubyte[] data, out ulong ntptime)
   if (data)
     _size = cast(uint)data.length;
 
-  auto _data = cast(void*)data.ptr;
+  auto _data = data.ptr ? cast(void*)data.ptr : [ubyte.init].ptr;
   _retval = cast(bool)gst_rtp_hdrext_get_ntp_56(_data, _size, cast(ulong*)&ntptime);
   return _retval;
 }
@@ -148,7 +148,7 @@ bool rtpHdrextGetNtp64(ubyte[] data, out ulong ntptime)
   if (data)
     _size = cast(uint)data.length;
 
-  auto _data = cast(void*)data.ptr;
+  auto _data = data.ptr ? cast(void*)data.ptr : [ubyte.init].ptr;
   _retval = cast(bool)gst_rtp_hdrext_get_ntp_64(_data, _size, cast(ulong*)&ntptime);
   return _retval;
 }

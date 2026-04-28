@@ -121,7 +121,7 @@ class EntryBuffer : gobject.object.ObjectWrap
     if (initialChars)
       _nInitialChars = cast(int)initialChars.length;
 
-    auto _initialChars = cast(const(char)*)initialChars.ptr;
+    auto _initialChars = initialChars.ptr ? cast(const(char)*)initialChars.ptr : [char.init].ptr;
     _cretval = gtk_entry_buffer_new(_initialChars, _nInitialChars);
     this(_cretval, Yes.Take);
   }
@@ -176,7 +176,7 @@ class EntryBuffer : gobject.object.ObjectWrap
     if (chars)
       _nChars = cast(uint)chars.length;
 
-    auto _chars = cast(const(char)*)chars.ptr;
+    auto _chars = chars.ptr ? cast(const(char)*)chars.ptr : [char.init].ptr;
     gtk_entry_buffer_emit_inserted_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, _nChars);
   }
 
@@ -256,7 +256,7 @@ class EntryBuffer : gobject.object.ObjectWrap
     if (chars)
       _nChars = cast(int)chars.length;
 
-    auto _chars = cast(const(char)*)chars.ptr;
+    auto _chars = chars.ptr ? cast(const(char)*)chars.ptr : [char.init].ptr;
     _retval = gtk_entry_buffer_insert_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, _nChars);
     return _retval;
   }
@@ -295,7 +295,7 @@ class EntryBuffer : gobject.object.ObjectWrap
     if (chars)
       _nChars = cast(int)chars.length;
 
-    auto _chars = cast(const(char)*)chars.ptr;
+    auto _chars = chars.ptr ? cast(const(char)*)chars.ptr : [char.init].ptr;
     gtk_entry_buffer_set_text(cast(GtkEntryBuffer*)this._cPtr, _chars, _nChars);
   }
 

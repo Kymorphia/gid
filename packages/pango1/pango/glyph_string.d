@@ -178,7 +178,7 @@ class GlyphString : gobject.boxed.Boxed
     if (text)
       _length = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     pango_glyph_string_index_to_x(cast(PangoGlyphString*)this._cPtr, _text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, index, trailing, cast(int*)&xPos);
   }
 
@@ -205,7 +205,7 @@ class GlyphString : gobject.boxed.Boxed
     if (text)
       _length = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     pango_glyph_string_index_to_x_full(cast(PangoGlyphString*)this._cPtr, _text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, &attrs, index, trailing, cast(int*)&xPos);
   }
 
@@ -243,7 +243,7 @@ class GlyphString : gobject.boxed.Boxed
     if (text)
       _length = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     pango_glyph_string_x_to_index(cast(PangoGlyphString*)this._cPtr, _text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, xPos, cast(int*)&index, cast(int*)&trailing);
   }
 }

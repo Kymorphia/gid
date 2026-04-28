@@ -800,7 +800,7 @@ class KeyFile : gobject.boxed.Boxed
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = cast(const(char)*)data.ptr;
+    auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
     GError *_err;
     _retval = cast(bool)g_key_file_load_from_data(cast(GKeyFile*)this._cPtr, _data, _length, flags, &_err);
     if (_err)
@@ -1026,7 +1026,7 @@ class KeyFile : gobject.boxed.Boxed
     if (list)
       _length = cast(size_t)list.length;
 
-    auto _list = cast(gboolean*)list.ptr;
+    auto _list = list.ptr ? cast(gboolean*)list.ptr : [gboolean.init].ptr;
     g_key_file_set_boolean_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _list, _length);
   }
 
@@ -1093,7 +1093,7 @@ class KeyFile : gobject.boxed.Boxed
     if (list)
       _length = cast(size_t)list.length;
 
-    auto _list = cast(double*)list.ptr;
+    auto _list = list.ptr ? cast(double*)list.ptr : [double.init].ptr;
     g_key_file_set_double_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _list, _length);
   }
 
@@ -1146,7 +1146,7 @@ class KeyFile : gobject.boxed.Boxed
     if (list)
       _length = cast(size_t)list.length;
 
-    auto _list = cast(int*)list.ptr;
+    auto _list = list.ptr ? cast(int*)list.ptr : [int.init].ptr;
     g_key_file_set_integer_list(cast(GKeyFile*)this._cPtr, _groupName, _key, _list, _length);
   }
 

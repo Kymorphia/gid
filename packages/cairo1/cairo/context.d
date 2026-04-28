@@ -1431,7 +1431,7 @@ class Context : gobject.boxed.Boxed
     if (dashes)
       _numDashes = cast(int)dashes.length;
 
-    auto _dashes = cast(const(double)*)dashes.ptr;
+    auto _dashes = dashes.ptr ? cast(const(double)*)dashes.ptr : [double.init].ptr;
     cairo_set_dash(cast(cairo_t*)this._cPtr, _dashes, _numDashes, offset);
   }
 
@@ -1898,7 +1898,7 @@ class Context : gobject.boxed.Boxed
     if (utf8)
       _utf8Len = cast(int)utf8.length;
 
-    auto _utf8 = cast(const(char)*)utf8.ptr;
+    auto _utf8 = utf8.ptr ? cast(const(char)*)utf8.ptr : [char.init].ptr;
     cairo_show_text_glyphs(cast(cairo_t*)this._cPtr, _utf8, _utf8Len, cast(const(cairo_glyph_t)*)&glyphs, numGlyphs, cast(const(cairo_text_cluster_t)*)&clusters, numClusters, clusterFlags);
   }
 

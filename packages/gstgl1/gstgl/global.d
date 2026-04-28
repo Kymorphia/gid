@@ -256,9 +256,9 @@ bool glHandleSetContext(gst.element.Element element, gst.context.Context context
 void glMultiplyMatrix4(float[] a, float[] b, ref float[] result)
 {
   assert(!a || a.length == 16);
-  auto _a = cast(const(float)*)a.ptr;
+  auto _a = a.ptr ? cast(const(float)*)a.ptr : [float.init].ptr;
   assert(!b || b.length == 16);
-  auto _b = cast(const(float)*)b.ptr;
+  auto _b = b.ptr ? cast(const(float)*)b.ptr : [float.init].ptr;
   gst_gl_multiply_matrix4(_a, _b, result.ptr);
 }
 
@@ -273,7 +273,7 @@ void glMultiplyMatrix4(float[] a, float[] b, ref float[] result)
 void glSetAffineTransformationMetaFromNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, float[] matrix)
 {
   assert(!matrix || matrix.length == 16);
-  auto _matrix = cast(const(float)*)matrix.ptr;
+  auto _matrix = matrix.ptr ? cast(const(float)*)matrix.ptr : [float.init].ptr;
   gst_gl_set_affine_transformation_meta_from_ndc(meta ? cast(GstVideoAffineTransformationMeta*)meta._cPtr : null, _matrix);
 }
 
@@ -309,7 +309,7 @@ gobject.types.GType glStereoDownmixModeGetType()
 void glSwizzleInvert(int[] swizzle, ref int[] inversion)
 {
   assert(!swizzle || swizzle.length == 4);
-  auto _swizzle = cast(int*)swizzle.ptr;
+  auto _swizzle = swizzle.ptr ? cast(int*)swizzle.ptr : [int.init].ptr;
   gst_gl_swizzle_invert(_swizzle, inversion.ptr);
 }
 

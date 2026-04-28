@@ -1134,7 +1134,7 @@ class Layout : gobject.object.ObjectWrap
     if (markup)
       _length = cast(int)markup.length;
 
-    auto _markup = cast(const(char)*)markup.ptr;
+    auto _markup = markup.ptr ? cast(const(char)*)markup.ptr : [char.init].ptr;
     pango_layout_set_markup(cast(PangoLayout*)this._cPtr, _markup, _length);
   }
 
@@ -1165,7 +1165,7 @@ class Layout : gobject.object.ObjectWrap
     if (markup)
       _length = cast(int)markup.length;
 
-    auto _markup = cast(const(char)*)markup.ptr;
+    auto _markup = markup.ptr ? cast(const(char)*)markup.ptr : [char.init].ptr;
     pango_layout_set_markup_with_accel(cast(PangoLayout*)this._cPtr, _markup, _length, accelMarker, cast(dchar*)&accelChar);
   }
 
@@ -1257,7 +1257,7 @@ class Layout : gobject.object.ObjectWrap
     if (text)
       _length = cast(int)text.length;
 
-    auto _text = cast(char*)text.ptr;
+    auto _text = text.ptr ? cast(char*)text.ptr : [char.init].ptr;
     pango_layout_set_text(cast(PangoLayout*)this._cPtr, _text, _length);
   }
 

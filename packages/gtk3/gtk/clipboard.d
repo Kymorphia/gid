@@ -450,7 +450,7 @@ class Clipboard : gobject.object.ObjectWrap
     if (text)
       _len = cast(int)text.length;
 
-    auto _text = cast(const(char)*)text.ptr;
+    auto _text = text.ptr ? cast(const(char)*)text.ptr : [char.init].ptr;
     gtk_clipboard_set_text(cast(GtkClipboard*)this._cPtr, _text, _len);
   }
 

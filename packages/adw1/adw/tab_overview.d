@@ -687,7 +687,7 @@ class TabOverview : gtk.widget.Widget
     if (types)
       _nTypes = cast(size_t)types.length;
 
-    auto _types = cast(GType*)types.ptr;
+    auto _types = types.ptr ? cast(GType*)types.ptr : [GType.init].ptr;
     adw_tab_overview_setup_extra_drop_target(cast(AdwTabOverview*)this._cPtr, actions, _types, _nTypes);
   }
 

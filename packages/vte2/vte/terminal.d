@@ -1035,7 +1035,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (data)
       _length = cast(ptrdiff_t)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     vte_terminal_feed(cast(VteTerminal*)this._cPtr, _data, _length);
   }
 
@@ -1052,7 +1052,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (text)
       _length = cast(ptrdiff_t)text.length;
 
-    auto _text = cast(const(ubyte)*)text.ptr;
+    auto _text = text.ptr ? cast(const(ubyte)*)text.ptr : [ubyte.init].ptr;
     vte_terminal_feed_child(cast(VteTerminal*)this._cPtr, _text, _length);
   }
 
@@ -1071,7 +1071,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (data)
       _length = cast(size_t)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     vte_terminal_feed_child_binary(cast(VteTerminal*)this._cPtr, _data, _length);
   }
 
@@ -2248,7 +2248,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (palette)
       _paletteSize = cast(size_t)palette.length;
 
-    auto _palette = cast(const(GdkRGBA)*)palette.ptr;
+    auto _palette = palette.ptr ? cast(const(GdkRGBA)*)palette.ptr : [GdkRGBA.init].ptr;
     vte_terminal_set_colors(cast(VteTerminal*)this._cPtr, cast(const(GdkRGBA)*)&foreground, cast(const(GdkRGBA)*)&background, _palette, _paletteSize);
   }
 
@@ -2911,12 +2911,12 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     if (fds)
       _nFds = cast(int)fds.length;
 
-    auto _fds = cast(const(int)*)fds.ptr;
+    auto _fds = fds.ptr ? cast(const(int)*)fds.ptr : [int.init].ptr;
     int _nMapFds;
     if (mapFds)
       _nMapFds = cast(int)mapFds.length;
 
-    auto _mapFds = cast(const(int)*)mapFds.ptr;
+    auto _mapFds = mapFds.ptr ? cast(const(int)*)mapFds.ptr : [int.init].ptr;
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;

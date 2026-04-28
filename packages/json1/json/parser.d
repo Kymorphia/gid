@@ -224,7 +224,7 @@ class Parser : gobject.object.ObjectWrap
     if (data)
       _length = cast(ptrdiff_t)data.length;
 
-    auto _data = cast(const(char)*)data.ptr;
+    auto _data = data.ptr ? cast(const(char)*)data.ptr : [char.init].ptr;
     GError *_err;
     _retval = cast(bool)json_parser_load_from_data(cast(JsonParser*)this._cPtr, _data, _length, &_err);
     if (_err)

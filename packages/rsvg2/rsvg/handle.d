@@ -426,7 +426,7 @@ class Handle : gobject.object.ObjectWrap
     if (data)
       _dataLen = cast(size_t)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     GError *_err;
     _cretval = rsvg_handle_new_from_data(_data, _dataLen, &_err);
     if (_err)
@@ -1421,7 +1421,7 @@ class Handle : gobject.object.ObjectWrap
     if (css)
       _cssLen = cast(size_t)css.length;
 
-    auto _css = cast(const(ubyte)*)css.ptr;
+    auto _css = css.ptr ? cast(const(ubyte)*)css.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = cast(bool)rsvg_handle_set_stylesheet(cast(RsvgHandle*)this._cPtr, _css, _cssLen, &_err);
     if (_err)
@@ -1459,7 +1459,7 @@ class Handle : gobject.object.ObjectWrap
     if (buf)
       _count = cast(size_t)buf.length;
 
-    auto _buf = cast(const(ubyte)*)buf.ptr;
+    auto _buf = buf.ptr ? cast(const(ubyte)*)buf.ptr : [ubyte.init].ptr;
     GError *_err;
     _retval = cast(bool)rsvg_handle_write(cast(RsvgHandle*)this._cPtr, _buf, _count, &_err);
     if (_err)

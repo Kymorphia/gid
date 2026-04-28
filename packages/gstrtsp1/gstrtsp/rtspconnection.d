@@ -470,7 +470,7 @@ class RTSPConnection
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(ubyte*)data.ptr;
+    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
     _cretval = gst_rtsp_connection_read(cast(GstRTSPConnection*)this._cPtr, _data, _size, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -495,7 +495,7 @@ class RTSPConnection
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(ubyte*)data.ptr;
+    auto _data = data.ptr ? cast(ubyte*)data.ptr : [ubyte.init].ptr;
     _cretval = gst_rtsp_connection_read_usec(cast(GstRTSPConnection*)this._cPtr, _data, _size, timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -897,7 +897,7 @@ class RTSPConnection
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     _cretval = gst_rtsp_connection_write(cast(GstRTSPConnection*)this._cPtr, _data, _size, cast(GTimeVal*)&timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -922,7 +922,7 @@ class RTSPConnection
     if (data)
       _size = cast(uint)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     _cretval = gst_rtsp_connection_write_usec(cast(GstRTSPConnection*)this._cPtr, _data, _size, timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;

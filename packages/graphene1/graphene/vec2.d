@@ -184,7 +184,7 @@ class Vec2 : gobject.boxed.Boxed
   {
     graphene_vec2_t* _cretval;
     assert(!src || src.length == 2);
-    auto _src = cast(const(float)*)src.ptr;
+    auto _src = src.ptr ? cast(const(float)*)src.ptr : [float.init].ptr;
     _cretval = graphene_vec2_init_from_float(cast(graphene_vec2_t*)this._cPtr, _src);
     auto _retval = _cretval ? new graphene.vec2.Vec2(cast(void*)_cretval, No.Take) : null;
     return _retval;

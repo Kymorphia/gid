@@ -62,7 +62,7 @@ class Buffer : gobject.object.ObjectWrap
     if (data)
       _size = cast(long)data.length;
 
-    auto _data = cast(const(ubyte)*)data.ptr;
+    auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
     _cretval = garrow_buffer_new(_data, _size);
     this(_cretval, Yes.Take);
   }

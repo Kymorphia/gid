@@ -446,7 +446,7 @@ string contentTypeGuess(string filename, ubyte[] data, out bool resultUncertain)
   if (data)
     _dataSize = cast(size_t)data.length;
 
-  auto _data = cast(const(ubyte)*)data.ptr;
+  auto _data = data.ptr ? cast(const(ubyte)*)data.ptr : [ubyte.init].ptr;
   gboolean _resultUncertain;
   _cretval = g_content_type_guess(_filename, _data, _dataSize, &_resultUncertain);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
@@ -787,7 +787,7 @@ string dbusEscapeObjectPath(string s)
 string dbusEscapeObjectPathBytestring(ubyte[] bytes)
 {
   char* _cretval;
-  auto _bytes = cast(const(ubyte)*)(bytes ~ ubyte.init).ptr;
+  auto _bytes = bytes.ptr ? cast(const(ubyte)*)(bytes ~ ubyte.init).ptr : [ubyte.init].ptr;
   _cretval = g_dbus_escape_object_path_bytestring(_bytes);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
@@ -1394,7 +1394,7 @@ ptrdiff_t pollableStreamRead(gio.input_stream.InputStream stream, ubyte[] buffer
   if (buffer)
     _count = cast(size_t)buffer.length;
 
-  auto _buffer = cast(void*)buffer.ptr;
+  auto _buffer = buffer.ptr ? cast(void*)buffer.ptr : [ubyte.init].ptr;
   GError *_err;
   _retval = g_pollable_stream_read(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, _buffer, _count, blocking, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
@@ -1430,7 +1430,7 @@ ptrdiff_t pollableStreamWrite(gio.output_stream.OutputStream stream, ubyte[] buf
   if (buffer)
     _count = cast(size_t)buffer.length;
 
-  auto _buffer = cast(void*)buffer.ptr;
+  auto _buffer = buffer.ptr ? cast(void*)buffer.ptr : [ubyte.init].ptr;
   GError *_err;
   _retval = g_pollable_stream_write(stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _buffer, _count, blocking, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)
@@ -1476,7 +1476,7 @@ bool pollableStreamWriteAll(gio.output_stream.OutputStream stream, ubyte[] buffe
   if (buffer)
     _count = cast(size_t)buffer.length;
 
-  auto _buffer = cast(void*)buffer.ptr;
+  auto _buffer = buffer.ptr ? cast(void*)buffer.ptr : [ubyte.init].ptr;
   GError *_err;
   _retval = cast(bool)g_pollable_stream_write_all(stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _buffer, _count, blocking, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
   if (_err)

@@ -1693,7 +1693,7 @@ int textPropertyToUtf8ListForDisplay(gdk.display.Display display, gdk.atom.Atom 
   if (text)
     _length = cast(int)text.length;
 
-  auto _text = cast(const(ubyte)*)text.ptr;
+  auto _text = text.ptr ? cast(const(ubyte)*)text.ptr : [ubyte.init].ptr;
   char** _list;
   _retval = gdk_text_property_to_utf8_list_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, encoding ? cast(GdkAtom)encoding._cPtr : null, format, _text, _length, &_list);
   uint _lenlist;

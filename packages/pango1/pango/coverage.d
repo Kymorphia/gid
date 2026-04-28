@@ -86,7 +86,7 @@ class Coverage : gobject.object.ObjectWrap
     if (bytes)
       _nBytes = cast(int)bytes.length;
 
-    auto _bytes = cast(ubyte*)bytes.ptr;
+    auto _bytes = bytes.ptr ? cast(ubyte*)bytes.ptr : [ubyte.init].ptr;
     _cretval = pango_coverage_from_bytes(_bytes, _nBytes);
     auto _retval = gobject.object.ObjectWrap._getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;

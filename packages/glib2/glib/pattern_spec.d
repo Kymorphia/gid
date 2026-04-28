@@ -132,7 +132,7 @@ class PatternSpec : gobject.boxed.Boxed
     if (string_)
       _stringLength = cast(size_t)string_.length;
 
-    auto _string_ = cast(const(char)*)string_.ptr;
+    auto _string_ = string_.ptr ? cast(const(char)*)string_.ptr : [char.init].ptr;
     const(char)* _stringReversed = stringReversed.toCString(No.Alloc);
     _retval = cast(bool)g_pattern_spec_match(cast(GPatternSpec*)this._cPtr, _stringLength, _string_, _stringReversed);
     return _retval;

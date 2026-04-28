@@ -130,7 +130,7 @@ class Context : gobject.object.ObjectWrap
     if (code)
       _length = cast(ptrdiff_t)code.length;
 
-    auto _code = cast(const(char)*)code.ptr;
+    auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
     const(char)* _uri = uri.toCString(No.Alloc);
     JSCException* _exception;
     _cretval = jsc_context_check_syntax(cast(JSCContext*)this._cPtr, _code, _length, mode, _uri, lineNumber, &_exception);
@@ -161,7 +161,7 @@ class Context : gobject.object.ObjectWrap
     if (code)
       _length = cast(ptrdiff_t)code.length;
 
-    auto _code = cast(const(char)*)code.ptr;
+    auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
     _cretval = jsc_context_evaluate(cast(JSCContext*)this._cPtr, _code, _length);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
@@ -190,7 +190,7 @@ class Context : gobject.object.ObjectWrap
     if (code)
       _length = cast(ptrdiff_t)code.length;
 
-    auto _code = cast(const(char)*)code.ptr;
+    auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
     const(char)* _uri = uri.toCString(No.Alloc);
     JSCValue* _object;
     _cretval = jsc_context_evaluate_in_object(cast(JSCContext*)this._cPtr, _code, _length, objectInstance, objectClass ? cast(JSCClass*)objectClass._cPtr(No.Dup) : null, _uri, lineNumber, &_object);
@@ -217,7 +217,7 @@ class Context : gobject.object.ObjectWrap
     if (code)
       _length = cast(ptrdiff_t)code.length;
 
-    auto _code = cast(const(char)*)code.ptr;
+    auto _code = code.ptr ? cast(const(char)*)code.ptr : [char.init].ptr;
     const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = jsc_context_evaluate_with_source_uri(cast(JSCContext*)this._cPtr, _code, _length, _uri, lineNumber);
     auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
