@@ -1412,7 +1412,7 @@ class Label : gtk.misc.Misc
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.label.Label label))
+          `void callback(gtk.label.Label label)`
   
           `label` the instance the signal is connected to (optional)
   
@@ -1451,7 +1451,7 @@ class Label : gtk.misc.Misc
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(string uri, gtk.label.Label label))
+          `bool callback(string uri, gtk.label.Label label)`
   
           `uri` the URI that is activated (optional)
   
@@ -1501,7 +1501,7 @@ class Label : gtk.misc.Misc
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.label.Label label))
+          `void callback(gtk.label.Label label)`
   
           `label` the instance the signal is connected to (optional)
   
@@ -1547,16 +1547,14 @@ class Label : gtk.misc.Misc
         the variant with the Shift modifier extends the selection,
         the variant without the Shift modifer does not.
         There are too many key combinations to list them all here.
-        $(LIST
-          * Arrow keys move by individual characters/lines
-          * Ctrl-arrow key combinations move by words/paragraphs
-          * Home/End keys move to the ends of the buffer
-        )
+        - Arrow keys move by individual characters/lines
+        - Ctrl-arrow key combinations move by words/paragraphs
+        - Home/End keys move to the ends of the buffer
   
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.MovementStep step, int count, bool extendSelection, gtk.label.Label label))
+          `void callback(gtk.types.MovementStep step, int count, bool extendSelection, gtk.label.Label label)`
   
           `step` the granularity of the move, as a #GtkMovementStep (optional)
   
@@ -1616,7 +1614,7 @@ class Label : gtk.misc.Misc
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu.Menu menu, gtk.label.Label label))
+          `void callback(gtk.menu.Menu menu, gtk.label.Label label)`
   
           `menu` the menu that is being populated (optional)
   

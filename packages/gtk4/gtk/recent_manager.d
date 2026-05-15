@@ -349,7 +349,7 @@ class RecentManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.recent_manager.RecentManager recentManager))
+          `void callback(gtk.recent_manager.RecentManager recentManager)`
   
           `recentManager` the instance the signal is connected to (optional)
   

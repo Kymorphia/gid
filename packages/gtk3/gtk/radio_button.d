@@ -342,7 +342,7 @@ class RadioButton : gtk.check_button.CheckButton
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.radio_button.RadioButton radioButton))
+          `void callback(gtk.radio_button.RadioButton radioButton)`
   
           `radioButton` the instance the signal is connected to (optional)
   

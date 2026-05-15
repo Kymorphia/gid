@@ -418,13 +418,11 @@ class WebContext : gobject.object.ObjectWrap
       Set the list of preferred languages, sorted from most desirable
       to least desirable. The list will be used in the following ways:
       
-      $(LIST
-        * Determining how to build the `Accept-Language` HTTP header that will be
-          included in the network requests started by the #WebKitWebContext.
-        * Setting the values of `navigator.language` and `navigator.languages`.
-        * The first item in the list sets the default locale for JavaScript
-          `Intl` functions.
-      )
+      - Determining how to build the `Accept-Language` HTTP header that will be
+        included in the network requests started by the #WebKitWebContext.
+      - Setting the values of `navigator.language` and `navigator.languages`.
+      - The first item in the list sets the default locale for JavaScript
+        `Intl` functions.
   
       Params:
         languages = a null-terminated list of language identifiers
@@ -526,7 +524,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.automation_session.AutomationSession session, webkit.web_context.WebContext webContext))
+          `void callback(webkit.automation_session.AutomationSession session, webkit.web_context.WebContext webContext)`
   
           `session` the #WebKitAutomationSession associated with this event (optional)
   
@@ -576,7 +574,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.web_context.WebContext webContext))
+          `void callback(webkit.web_context.WebContext webContext)`
   
           `webContext` the instance the signal is connected to (optional)
   
@@ -616,7 +614,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.web_context.WebContext webContext))
+          `void callback(webkit.web_context.WebContext webContext)`
   
           `webContext` the instance the signal is connected to (optional)
   
@@ -658,7 +656,7 @@ class WebContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.user_message.UserMessage message, webkit.web_context.WebContext webContext))
+          `bool callback(webkit.user_message.UserMessage message, webkit.web_context.WebContext webContext)`
   
           `message` the #WebKitUserMessage received (optional)
   

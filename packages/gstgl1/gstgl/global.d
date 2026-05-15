@@ -172,11 +172,9 @@ bool glEnsureElementData(gst.element.Element element, gstgl.gldisplay.GLDisplay 
     NDC coordinates. if meta is NULL, an identity matrix is returned.
     
     NDC is a left-handed coordinate system
-    $(LIST
-      * x - [-1, 1] - +ve X moves right
-      * y - [-1, 1] - +ve Y moves up
-      * z - [-1, 1] - +ve Z moves into
-    )
+    - x - [-1, 1] - +ve X moves right
+    - y - [-1, 1] - +ve Y moves up
+    - z - [-1, 1] - +ve Z moves into
 
     Params:
       meta = a #GstVideoAffineTransformationMeta
@@ -297,10 +295,8 @@ gobject.types.GType glStereoDownmixModeGetType()
     Given swizzle, produce inversion such that:
     
     swizzle[inversion[i]] == identity[i] where:
-    $(LIST
-      * identity = {0, 1, 2,...}
-      * unset fields are marked by -1
-    )
+    - identity = {0, 1, 2,...}
+    - unset fields are marked by -1
 
     Params:
       swizzle = input swizzle

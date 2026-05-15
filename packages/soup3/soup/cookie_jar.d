@@ -371,7 +371,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.cookie.Cookie oldCookie, soup.cookie.Cookie newCookie, soup.cookie_jar.CookieJar cookieJar))
+          `void callback(soup.cookie.Cookie oldCookie, soup.cookie.Cookie newCookie, soup.cookie_jar.CookieJar cookieJar)`
   
           `oldCookie` the old #SoupCookie value (optional)
   

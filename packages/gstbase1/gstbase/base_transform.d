@@ -26,113 +26,99 @@ import gstbase.types;
     
     It provides for:
     
-    $(LIST
-      * one sinkpad and one srcpad
-      * Possible formats on sink and source pad implemented
-        with custom transform_caps function. By default uses
-        same format on sink and source.
-      
-      * Handles state changes
-      * Does flushing
-      * Push mode
-      * Pull mode if the sub-class transform can operate on arbitrary data
-    )
-      
+    * one sinkpad and one srcpad
+    * Possible formats on sink and source pad implemented
+      with custom transform_caps function. By default uses
+      same format on sink and source.
+    
+    * Handles state changes
+    * Does flushing
+    * Push mode
+    * Pull mode if the sub-class transform can operate on arbitrary data
+    
     # Use Cases
     
     ## Passthrough mode
     
-      $(LIST
-          * Element has no interest in modifying the buffer. It may want to inspect it,
-            in which case the element should have a transform_ip function. If there
-            is no transform_ip function in passthrough mode, the buffer is pushed
-            intact.
-        
-          * The #GstBaseTransformClass.passthrough_on_same_caps variable
-            will automatically set/unset passthrough based on whether the
-            element negotiates the same caps on both pads.
-        
-          * #GstBaseTransformClass.passthrough_on_same_caps on an element that
-            doesn't implement a transform_caps function is useful for elements that
-            only inspect data (such as level)
-        
-          * Example elements
-        
-            * Level
-            * Videoscale, audioconvert, videoconvert, audioresample in certain modes.
-      )
-        
+      * Element has no interest in modifying the buffer. It may want to inspect it,
+        in which case the element should have a transform_ip function. If there
+        is no transform_ip function in passthrough mode, the buffer is pushed
+        intact.
+    
+      * The #GstBaseTransformClass.passthrough_on_same_caps variable
+        will automatically set/unset passthrough based on whether the
+        element negotiates the same caps on both pads.
+    
+      * #GstBaseTransformClass.passthrough_on_same_caps on an element that
+        doesn't implement a transform_caps function is useful for elements that
+        only inspect data (such as level)
+    
+      * Example elements
+    
+        * Level
+        * Videoscale, audioconvert, videoconvert, audioresample in certain modes.
+    
     ## Modifications in-place - input buffer and output buffer are the same thing.
     
-    $(LIST
-      * The element must implement a transform_ip function.
-      * Output buffer size must <= input buffer size
-      * If the always_in_place flag is set, non-writable buffers will be copied
-        and passed to the transform_ip function, otherwise a new buffer will be
-        created and the transform function called.
-      
-      * Incoming writable buffers will be passed to the transform_ip function
-        immediately.
-      * only implementing transform_ip and not transform implies always_in_place = true
-      
-        * Example elements:
-          * Volume
-          * Audioconvert in certain modes (signed/unsigned conversion)
-          * videoconvert in certain modes (endianness swapping)
-    )
-      
+    * The element must implement a transform_ip function.
+    * Output buffer size must <= input buffer size
+    * If the always_in_place flag is set, non-writable buffers will be copied
+      and passed to the transform_ip function, otherwise a new buffer will be
+      created and the transform function called.
+    
+    * Incoming writable buffers will be passed to the transform_ip function
+      immediately.
+    * only implementing transform_ip and not transform implies always_in_place = true
+    
+      * Example elements:
+        * Volume
+        * Audioconvert in certain modes (signed/unsigned conversion)
+        * videoconvert in certain modes (endianness swapping)
+    
     ## Modifications only to the caps/metadata of a buffer
     
-    $(LIST
-      * The element does not require writable data, but non-writable buffers
-        should be subbuffered so that the meta-information can be replaced.
-      
-      * Elements wishing to operate in this mode should replace the
-        prepare_output_buffer method to create subbuffers of the input buffer
-        and set always_in_place to true
-      
-      * Example elements
-        * Capsfilter when setting caps on outgoing buffers that have
-          none.
-        * identity when it is going to re-timestamp buffers by
-          datarate.
-    )
-      
+    * The element does not require writable data, but non-writable buffers
+      should be subbuffered so that the meta-information can be replaced.
+    
+    * Elements wishing to operate in this mode should replace the
+      prepare_output_buffer method to create subbuffers of the input buffer
+      and set always_in_place to true
+    
+    * Example elements
+      * Capsfilter when setting caps on outgoing buffers that have
+        none.
+      * identity when it is going to re-timestamp buffers by
+        datarate.
+    
     ## Normal mode
-      $(LIST
-          * always_in_place flag is not set, or there is no transform_ip function
-          * Element will receive an input buffer and output buffer to operate on.
-          * Output buffer is allocated by calling the prepare_output_buffer function.
-          * Example elements:
-            * Videoscale, videoconvert, audioconvert when doing
-            scaling/conversions
-      )
-        
+      * always_in_place flag is not set, or there is no transform_ip function
+      * Element will receive an input buffer and output buffer to operate on.
+      * Output buffer is allocated by calling the prepare_output_buffer function.
+      * Example elements:
+        * Videoscale, videoconvert, audioconvert when doing
+        scaling/conversions
+    
     ## Special output buffer allocations
-      $(LIST
-          * Elements which need to do special allocation of their output buffers
-            beyond allocating output buffers via the negotiated allocator or
-            buffer pool should implement the prepare_output_buffer method.
-        
-          * Example elements:
-            * efence
-      )
-        
+      * Elements which need to do special allocation of their output buffers
+        beyond allocating output buffers via the negotiated allocator or
+        buffer pool should implement the prepare_output_buffer method.
+    
+      * Example elements:
+        * efence
+    
     # Sub-class settable flags on GstBaseTransform
     
-    $(LIST
-      * passthrough
-      
-        * Implies that in the current configuration, the sub-class is not interested in modifying the buffers.
-        * Elements which are always in passthrough mode whenever the same caps has been negotiated on both pads can set the class variable passthrough_on_same_caps to have this behaviour automatically.
-      
-      * always_in_place
-        * Determines whether a non-writable buffer will be copied before passing
-          to the transform_ip function.
-      
-        * Implied true if no transform function is implemented.
-        * Implied false if ONLY transform function is implemented.
-    )
+    * passthrough
+    
+      * Implies that in the current configuration, the sub-class is not interested in modifying the buffers.
+      * Elements which are always in passthrough mode whenever the same caps has been negotiated on both pads can set the class variable passthrough_on_same_caps to have this behaviour automatically.
+    
+    * always_in_place
+      * Determines whether a non-writable buffer will be copied before passing
+        to the transform_ip function.
+    
+      * Implied true if no transform function is implemented.
+      * Implied false if ONLY transform function is implemented.
 */
 class BaseTransform : gst.element.Element
 {
@@ -315,11 +301,9 @@ class BaseTransform : gst.element.Element
       Determines whether a non-writable buffer will be copied before passing
       to the transform_ip function.
       
-        $(LIST
-            * Always true if no transform function is implemented.
-            * Always false if ONLY transform function is implemented.
-        )
-          
+        * Always true if no transform function is implemented.
+        * Always false if ONLY transform function is implemented.
+      
       MT safe.
   
       Params:

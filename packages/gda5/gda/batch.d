@@ -162,7 +162,7 @@ class Batch : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectWrap changedStmt, gda.batch.Batch batch))
+          `void callback(gobject.object.ObjectWrap changedStmt, gda.batch.Batch batch)`
   
           `changedStmt` the statement which has been changed (optional)
   

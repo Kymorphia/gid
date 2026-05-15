@@ -17,17 +17,15 @@ import gstvideo.video_overlay_rectangle;
     
     This API serves two main purposes:
     
-    $(LIST
-      * it can be used to attach overlay information (subtitles or logos)
-        to non-raw video buffers such as GL/VAAPI/VDPAU surfaces. The actual
-        blending of the overlay can then be done by e.g. the video sink that
-        processes these non-raw buffers.
-      
-      * it can also be used to blend overlay rectangles on top of raw video
-        buffers, thus consolidating blending functionality for raw video in
-        one place.
-    )
-      
+    * it can be used to attach overlay information (subtitles or logos)
+      to non-raw video buffers such as GL/VAAPI/VDPAU surfaces. The actual
+      blending of the overlay can then be done by e.g. the video sink that
+      processes these non-raw buffers.
+    
+    * it can also be used to blend overlay rectangles on top of raw video
+      buffers, thus consolidating blending functionality for raw video in
+      one place.
+    
     Together, this allows existing overlay elements to easily handle raw
     and non-raw video as input in without major changes (once the overlays
     have been put into a #GstVideoOverlayComposition object anyway) - for raw

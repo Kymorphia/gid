@@ -107,15 +107,11 @@ import gtk.widget;
     [adw.navigation_split_view.NavigationSplitView] defines the same actions as [adw.navigation_view.NavigationView], but
     they can be used even when the split view is not collapsed:
     
-    $(LIST
-      * `navigation.push` takes a string parameter specifying the tag of the page
-    )
+    - `navigation.push` takes a string parameter specifying the tag of the page
     to push. If it matches the tag of the content widget, it sets
     `property@NavigationSplitView:show-content` to `TRUE`.
     
-    $(LIST
-      * `navigation.pop` doesn't take any parameters and sets
-    )
+    - `navigation.pop` doesn't take any parameters and sets
     `property@NavigationSplitView:show-content` to `FALSE`.
     
     ## [adw.navigation_split_view.NavigationSplitView] as [gtk.buildable.Buildable]

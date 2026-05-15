@@ -195,7 +195,7 @@ class Plug : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.plug.Plug plug))
+          `void callback(gtk.plug.Plug plug)`
   
           `plug` the instance the signal is connected to (optional)
   

@@ -1028,7 +1028,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text.Text text))
+          `void callback(gtk.text.Text text)`
   
           `text` the instance the signal is connected to (optional)
   
@@ -1070,7 +1070,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text.Text text))
+          `void callback(gtk.text.Text text)`
   
           `text` the instance the signal is connected to (optional)
   
@@ -1113,7 +1113,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text.Text text))
+          `void callback(gtk.text.Text text)`
   
           `text` the instance the signal is connected to (optional)
   
@@ -1156,7 +1156,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text.Text text))
+          `void callback(gtk.text.Text text)`
   
           `text` the instance the signal is connected to (optional)
   
@@ -1203,7 +1203,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.DeleteType type, int count, gtk.text.Text text))
+          `void callback(gtk.types.DeleteType type, int count, gtk.text.Text text)`
   
           `type` the granularity of the deletion, as a [gtk.types.DeleteType] (optional)
   
@@ -1257,7 +1257,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string string_, gtk.text.Text text))
+          `void callback(string string_, gtk.text.Text text)`
   
           `string_` the string to insert (optional)
   
@@ -1306,7 +1306,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text.Text text))
+          `void callback(gtk.text.Text text)`
   
           `text` the instance the signal is connected to (optional)
   
@@ -1354,17 +1354,15 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         selection, the variant without it does not.
         There are too many key combinations to list them all here.
         
-        $(LIST
-          * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
-            move by individual characters/lines
-          * <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
-          * <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
-        )
+        - <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+          move by individual characters/lines
+        - <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
+        - <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
   
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.MovementStep step, int count, bool extend, gtk.text.Text text))
+          `void callback(gtk.types.MovementStep step, int count, bool extend, gtk.text.Text text)`
   
           `step` the granularity of the move, as a [gtk.types.MovementStep] (optional)
   
@@ -1424,7 +1422,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text.Text text))
+          `void callback(gtk.text.Text text)`
   
           `text` the instance the signal is connected to (optional)
   
@@ -1465,7 +1463,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string preedit, gtk.text.Text text))
+          `void callback(string preedit, gtk.text.Text text)`
   
           `preedit` the current preedit string (optional)
   
@@ -1512,7 +1510,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text.Text text))
+          `void callback(gtk.text.Text text)`
   
           `text` the instance the signal is connected to (optional)
   

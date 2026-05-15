@@ -96,13 +96,11 @@ class Sorter : gobject.object.ObjectWrap
       
       Sorters implement a partial order:
       
-      $(LIST
-        * It is reflexive, ie a = a
-        * It is antisymmetric, ie if a < b and b < a, then a = b
-        * It is transitive, ie given any 3 items with a ≤ b and b ≤ c,
-          then a ≤ c
-      )
-        
+      * It is reflexive, ie a = a
+      * It is antisymmetric, ie if a < b and b < a, then a = b
+      * It is transitive, ie given any 3 items with a ≤ b and b ≤ c,
+        then a ≤ c
+      
       The sorter may signal it conforms to additional constraints
       via the return value of [gtk.sorter.Sorter.getOrder].
   
@@ -155,7 +153,7 @@ class Sorter : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.SorterChange change, gtk.sorter.Sorter sorter))
+          `void callback(gtk.types.SorterChange change, gtk.sorter.Sorter sorter)`
   
           `change` how the sorter changed (optional)
   

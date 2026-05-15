@@ -542,7 +542,7 @@ class PrintJob : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.print_job.PrintJob printJob))
+          `void callback(gtk.print_job.PrintJob printJob)`
   
           `printJob` the instance the signal is connected to (optional)
   

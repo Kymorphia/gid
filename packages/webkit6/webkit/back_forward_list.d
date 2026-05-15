@@ -200,7 +200,7 @@ class BackForwardList : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.back_forward_list_item.BackForwardListItem itemAdded, void* itemsRemoved, webkit.back_forward_list.BackForwardList backForwardList))
+          `void callback(webkit.back_forward_list_item.BackForwardListItem itemAdded, void* itemsRemoved, webkit.back_forward_list.BackForwardList backForwardList)`
   
           `itemAdded` the #WebKitBackForwardListItem added or null (optional)
   

@@ -22,23 +22,21 @@ import gtk.types;
     A [gtk.tree_model_filter.TreeModelFilter] is a tree model which wraps another tree model,
     and can do the following things:
     
-    $(LIST
-      * Filter specific rows, based on data from a “visible column”, a column
-        storing booleans indicating whether the row should be filtered or not,
-        or based on the return value of a “visible function”, which gets a
-        model, iter and user_data and returns a boolean indicating whether the
-        row should be filtered or not.
-      
-      * Modify the “appearance” of the model, using a modify function.
-        This is extremely powerful and allows for just changing some
-        values and also for creating a completely different model based
-        on the given child model.
-      
-      * Set a different root node, also known as a “virtual root”. You can pass
-        in a [gtk.tree_path.TreePath] indicating the root node for the filter at construction
-        time.
-    )
-      
+    - Filter specific rows, based on data from a “visible column”, a column
+      storing booleans indicating whether the row should be filtered or not,
+      or based on the return value of a “visible function”, which gets a
+      model, iter and user_data and returns a boolean indicating whether the
+      row should be filtered or not.
+    
+    - Modify the “appearance” of the model, using a modify function.
+      This is extremely powerful and allows for just changing some
+      values and also for creating a completely different model based
+      on the given child model.
+    
+    - Set a different root node, also known as a “virtual root”. You can pass
+      in a [gtk.tree_path.TreePath] indicating the root node for the filter at construction
+      time.
+    
     The basic API is similar to [gtk.tree_model_sort.TreeModelSort]. For an example on its usage,
     see the section on [gtk.tree_model_sort.TreeModelSort].
     

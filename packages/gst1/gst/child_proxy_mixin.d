@@ -190,7 +190,7 @@ template ChildProxyT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectWrap object, string name, gst.child_proxy.ChildProxy childProxy))
+          `void callback(gobject.object.ObjectWrap object, string name, gst.child_proxy.ChildProxy childProxy)`
   
           `object` the #GObject that was added (optional)
   
@@ -239,7 +239,7 @@ template ChildProxyT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectWrap object, string name, gst.child_proxy.ChildProxy childProxy))
+          `void callback(gobject.object.ObjectWrap object, string name, gst.child_proxy.ChildProxy childProxy)`
   
           `object` the #GObject that was removed (optional)
   

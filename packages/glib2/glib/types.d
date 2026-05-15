@@ -1669,17 +1669,15 @@ enum SYSDEF_MSG_PEEK = 2;
     when this option is used. The specific subdirectory paths in use are not
     guaranteed to be stable API — always use a getter function to retrieve them.
     
-     $(LIST
-        * [glib.global.getHomeDir]
-        * [glib.global.getUserCacheDir]
-        * [glib.global.getSystemConfigDirs]
-        * [glib.global.getUserConfigDir]
-        * [glib.global.getSystemDataDirs]
-        * [glib.global.getUserDataDir]
-        * [glib.global.getUserStateDir]
-        * [glib.global.getUserRuntimeDir]
-     )
-       
+     - [glib.global.getHomeDir]
+     - [glib.global.getUserCacheDir]
+     - [glib.global.getSystemConfigDirs]
+     - [glib.global.getUserConfigDir]
+     - [glib.global.getSystemDataDirs]
+     - [glib.global.getUserDataDir]
+     - [glib.global.getUserStateDir]
+     - [glib.global.getUserRuntimeDir]
+    
     The subdirectories may not be created by the test harness; as with normal
     calls to functions like [glib.global.getUserCacheDir], the caller must be prepared
     to create the directory if it doesn’t exist.

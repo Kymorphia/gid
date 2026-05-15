@@ -451,7 +451,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.websocket_connection.WebsocketConnection websocketConnection))
+          `void callback(soup.websocket_connection.WebsocketConnection websocketConnection)`
   
           `websocketConnection` the instance the signal is connected to (optional)
   
@@ -488,7 +488,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.websocket_connection.WebsocketConnection websocketConnection))
+          `void callback(soup.websocket_connection.WebsocketConnection websocketConnection)`
   
           `websocketConnection` the instance the signal is connected to (optional)
   
@@ -528,7 +528,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.error.ErrorWrap error, soup.websocket_connection.WebsocketConnection websocketConnection))
+          `void callback(glib.error.ErrorWrap error, soup.websocket_connection.WebsocketConnection websocketConnection)`
   
           `error` the error that occured (optional)
   
@@ -575,7 +575,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int type, glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection))
+          `void callback(int type, glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection)`
   
           `type` the type of message contents (optional)
   
@@ -629,7 +629,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection))
+          `void callback(glib.bytes.Bytes message, soup.websocket_connection.WebsocketConnection websocketConnection)`
   
           `message` the application data (if any) (optional)
   

@@ -104,12 +104,10 @@ class AutocryptHeader : gobject.object.ObjectWrap
       Compare two Autocrypt Headers.  This is useful for comparison, as well as for
       sorting headers by:
       
-       $(LIST
-          * address
-          * effective_date
-          * keydata
-          * prefer_encrypt
-       )
+       - address
+       - effective_date
+       - keydata
+       - prefer_encrypt
   
       Params:
         ah2 = a #GMimeAutocryptHeader object

@@ -13,18 +13,16 @@ public import gstvideo.types;
 /**
     The #GstVideoOverlay interface is used for 2 main purposes :
     
-    $(LIST
-      * To get a grab on the Window where the video sink element is going to render.
-        This is achieved by either being informed about the Window identifier that
-        the video sink element generated, or by forcing the video sink element to use
-        a specific Window identifier for rendering.
-      * To force a redrawing of the latest video frame the video sink element
-        displayed on the Window. Indeed if the #GstPipeline is in #GST_STATE_PAUSED
-        state, moving the Window around will damage its content. Application
-        developers will want to handle the Expose events themselves and force the
-        video sink element to refresh the Window's content.
-    )
-      
+    * To get a grab on the Window where the video sink element is going to render.
+      This is achieved by either being informed about the Window identifier that
+      the video sink element generated, or by forcing the video sink element to use
+      a specific Window identifier for rendering.
+    * To force a redrawing of the latest video frame the video sink element
+      displayed on the Window. Indeed if the #GstPipeline is in #GST_STATE_PAUSED
+      state, moving the Window around will damage its content. Application
+      developers will want to handle the Expose events themselves and force the
+      video sink element to refresh the Window's content.
+    
     Using the Window created by the video sink is probably the simplest scenario,
     in some cases, though, it might not be flexible enough for application
     developers if they need to catch events such as mouse moves and button

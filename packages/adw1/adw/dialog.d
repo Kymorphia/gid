@@ -680,7 +680,7 @@ class Dialog : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.dialog.Dialog dialog))
+          `void callback(adw.dialog.Dialog dialog)`
   
           `dialog` the instance the signal is connected to (optional)
   
@@ -717,7 +717,7 @@ class Dialog : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.dialog.Dialog dialog))
+          `void callback(adw.dialog.Dialog dialog)`
   
           `dialog` the instance the signal is connected to (optional)
   

@@ -631,7 +631,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string attName, gobject.value.Value attValue, gda.holder.Holder holder))
+          `void callback(string attName, gobject.value.Value attValue, gda.holder.Holder holder)`
   
           `attName` attribute's name (optional)
   
@@ -680,7 +680,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.holder.Holder holder))
+          `void callback(gda.holder.Holder holder)`
   
           `holder` the instance the signal is connected to (optional)
   
@@ -717,7 +717,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.holder.Holder holder))
+          `void callback(gda.holder.Holder holder)`
   
           `holder` the instance the signal is connected to (optional)
   
@@ -755,7 +755,7 @@ class Holder : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D glib.error.ErrorWrap callback(gobject.value.Value newValue, gda.holder.Holder holder))
+          `glib.error.ErrorWrap callback(gobject.value.Value newValue, gda.holder.Holder holder)`
   
           `newValue` the proposed new value for holder (optional)
   

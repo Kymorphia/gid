@@ -345,7 +345,7 @@ class MenuShell : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool forceHide, gtk.menu_shell.MenuShell menuShell))
+          `void callback(bool forceHide, gtk.menu_shell.MenuShell menuShell)`
   
           `forceHide` if true, hide the menu after activating the menu item (optional)
   
@@ -389,7 +389,7 @@ class MenuShell : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu_shell.MenuShell menuShell))
+          `void callback(gtk.menu_shell.MenuShell menuShell)`
   
           `menuShell` the instance the signal is connected to (optional)
   
@@ -427,7 +427,7 @@ class MenuShell : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.DirectionType direction, gtk.menu_shell.MenuShell menuShell))
+          `void callback(gtk.types.DirectionType direction, gtk.menu_shell.MenuShell menuShell)`
   
           `direction` the direction to cycle in (optional)
   
@@ -470,7 +470,7 @@ class MenuShell : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu_shell.MenuShell menuShell))
+          `void callback(gtk.menu_shell.MenuShell menuShell)`
   
           `menuShell` the instance the signal is connected to (optional)
   
@@ -512,7 +512,7 @@ class MenuShell : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget child, int position, gtk.menu_shell.MenuShell menuShell))
+          `void callback(gtk.widget.Widget child, int position, gtk.menu_shell.MenuShell menuShell)`
   
           `child` the #GtkMenuItem that is being inserted (optional)
   
@@ -562,7 +562,7 @@ class MenuShell : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.MenuDirectionType direction, gtk.menu_shell.MenuShell menuShell))
+          `void callback(gtk.types.MenuDirectionType direction, gtk.menu_shell.MenuShell menuShell)`
   
           `direction` the direction to move (optional)
   
@@ -606,7 +606,7 @@ class MenuShell : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(int distance, gtk.menu_shell.MenuShell menuShell))
+          `bool callback(int distance, gtk.menu_shell.MenuShell menuShell)`
   
           `distance` +1 to move to the next item, -1 to move to the previous (optional)
   
@@ -653,7 +653,7 @@ class MenuShell : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu_shell.MenuShell menuShell))
+          `void callback(gtk.menu_shell.MenuShell menuShell)`
   
           `menuShell` the instance the signal is connected to (optional)
   

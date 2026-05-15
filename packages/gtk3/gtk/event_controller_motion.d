@@ -76,7 +76,7 @@ class EventControllerMotion : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion))
+          `void callback(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion)`
   
           `x` the x coordinate (optional)
   
@@ -125,7 +125,7 @@ class EventControllerMotion : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.event_controller_motion.EventControllerMotion eventControllerMotion))
+          `void callback(gtk.event_controller_motion.EventControllerMotion eventControllerMotion)`
   
           `eventControllerMotion` the instance the signal is connected to (optional)
   
@@ -162,7 +162,7 @@ class EventControllerMotion : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion))
+          `void callback(double x, double y, gtk.event_controller_motion.EventControllerMotion eventControllerMotion)`
   
           `x` the x coordinate (optional)
   

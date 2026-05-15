@@ -195,11 +195,9 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Makes mikey message including:
-       $(LIST
-          * Security Policy Payload
-          * Key Data Transport Payload
-          * Key Data Sub-Payload
-       )
+       - Security Policy Payload
+       - Key Data Transport Payload
+       - Key Data Sub-Payload
   
       Params:
         caps = a #GstCaps, including SRTP parameters (srtp/srtcp cipher, authorization, key data)

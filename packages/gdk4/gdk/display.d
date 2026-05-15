@@ -26,11 +26,9 @@ import gobject.value;
     
     Their purpose are two-fold:
     
-    $(LIST
-      * To manage and provide information about input devices (pointers, keyboards, etc)
-      * To manage and provide information about output devices (monitors, projectors, etc)
-    )
-      
+    - To manage and provide information about input devices (pointers, keyboards, etc)
+    - To manage and provide information about output devices (monitors, projectors, etc)
+    
     Most of the input device handling has been factored out into separate
     [gdk.seat.Seat] objects. Every display has a one or more seats, which
     can be accessed with [gdk.display.Display.getDefaultSeat] and
@@ -679,7 +677,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool isError, gdk.display.Display display))
+          `void callback(bool isError, gdk.display.Display display)`
   
           `isError` true if the display was closed due to an error (optional)
   
@@ -722,7 +720,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.display.Display display))
+          `void callback(gdk.display.Display display)`
   
           `display` the instance the signal is connected to (optional)
   
@@ -759,7 +757,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.seat.Seat seat, gdk.display.Display display))
+          `void callback(gdk.seat.Seat seat, gdk.display.Display display)`
   
           `seat` the seat that was just added (optional)
   
@@ -802,7 +800,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.seat.Seat seat, gdk.display.Display display))
+          `void callback(gdk.seat.Seat seat, gdk.display.Display display)`
   
           `seat` the seat that was just removed (optional)
   
@@ -845,7 +843,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string setting, gdk.display.Display display))
+          `void callback(string setting, gdk.display.Display display)`
   
           `setting` the name of the setting that changed (optional)
   

@@ -793,7 +793,7 @@ class Container : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget object, gtk.container.Container container))
+          `void callback(gtk.widget.Widget object, gtk.container.Container container)`
   
           `object`  (optional)
   
@@ -836,7 +836,7 @@ class Container : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.container.Container container))
+          `void callback(gtk.container.Container container)`
   
           `container` the instance the signal is connected to (optional)
   
@@ -873,7 +873,7 @@ class Container : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget object, gtk.container.Container container))
+          `void callback(gtk.widget.Widget object, gtk.container.Container container)`
   
           `object`  (optional)
   
@@ -916,7 +916,7 @@ class Container : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget object, gtk.container.Container container))
+          `void callback(gtk.widget.Widget object, gtk.container.Container container)`
   
           `object`  (optional)
   

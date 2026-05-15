@@ -129,16 +129,14 @@ interface Icon
       The encoding of the returned string is proprietary to #GIcon except
       in the following two cases
       
-      $(LIST
-        * If icon is a #GFileIcon, the returned string is a native path
-          (such as `/path/to/my icon.png`) without escaping
-          if the #GFile for icon is a native file.  If the file is not
-          native, the returned string is the result of [gio.file.File.getUri]
-          (such as `sftp://path/to/my`20icon`.png`).
-        
-        * If icon is a #GThemedIcon with exactly one name and no fallbacks,
-          the encoding is simply the name (such as `network-server`).
-      )
+      - If icon is a #GFileIcon, the returned string is a native path
+        (such as `/path/to/my icon.png`) without escaping
+        if the #GFile for icon is a native file.  If the file is not
+        native, the returned string is the result of [gio.file.File.getUri]
+        (such as `sftp://path/to/my`20icon`.png`).
+      
+      - If icon is a #GThemedIcon with exactly one name and no fallbacks,
+        the encoding is simply the name (such as `network-server`).
       Returns: An allocated NUL-terminated UTF8 string or
         null if icon can't be serialized. Use [glib.global.gfree] to free.
   */

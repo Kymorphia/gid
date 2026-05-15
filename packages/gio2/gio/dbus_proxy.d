@@ -166,22 +166,20 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         said to be the "expected interface".
         
         The checks performed are:
-        $(LIST
-          * When completing a method call, if the type signature of
-            the reply message isn't what's expected, the reply is
-            discarded and the #GError is set to [gio.types.IOErrorEnum.InvalidArgument].
-          
-          * Received signals that have a type signature mismatch are dropped and
-            a warning is logged via g_warning().
-          
-          * Properties received via the initial `GetAll()` call or via the
-            `::PropertiesChanged` signal (on the
-            [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
-            interface) or set using [gio.dbus_proxy.DBusProxy.setCachedProperty]
-            with a type signature mismatch are ignored and a warning is
-            logged via g_warning().
-        )
-          
+        - When completing a method call, if the type signature of
+          the reply message isn't what's expected, the reply is
+          discarded and the #GError is set to [gio.types.IOErrorEnum.InvalidArgument].
+        
+        - Received signals that have a type signature mismatch are dropped and
+          a warning is logged via g_warning().
+        
+        - Properties received via the initial `GetAll()` call or via the
+          `::PropertiesChanged` signal (on the
+          [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
+          interface) or set using [gio.dbus_proxy.DBusProxy.setCachedProperty]
+          with a type signature mismatch are ignored and a warning is
+          logged via g_warning().
+        
         Note that these checks are never done on methods, signals and
         properties that are not referenced in the given
         #GDBusInterfaceInfo, since extending a D-Bus interface on the
@@ -201,22 +199,20 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
           said to be the "expected interface".
           
           The checks performed are:
-          $(LIST
-            * When completing a method call, if the type signature of
-              the reply message isn't what's expected, the reply is
-              discarded and the #GError is set to [gio.types.IOErrorEnum.InvalidArgument].
-            
-            * Received signals that have a type signature mismatch are dropped and
-              a warning is logged via g_warning().
-            
-            * Properties received via the initial `GetAll()` call or via the
-              `::PropertiesChanged` signal (on the
-              [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
-              interface) or set using [gio.dbus_proxy.DBusProxy.setCachedProperty]
-              with a type signature mismatch are ignored and a warning is
-              logged via g_warning().
-          )
-            
+          - When completing a method call, if the type signature of
+            the reply message isn't what's expected, the reply is
+            discarded and the #GError is set to [gio.types.IOErrorEnum.InvalidArgument].
+          
+          - Received signals that have a type signature mismatch are dropped and
+            a warning is logged via g_warning().
+          
+          - Properties received via the initial `GetAll()` call or via the
+            `::PropertiesChanged` signal (on the
+            [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
+            interface) or set using [gio.dbus_proxy.DBusProxy.setCachedProperty]
+            with a type signature mismatch are ignored and a warning is
+            logged via g_warning().
+          
           Note that these checks are never done on methods, signals and
           properties that are not referenced in the given
           #GDBusInterfaceInfo, since extending a D-Bus interface on the
@@ -967,7 +963,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.variant.Variant changedProperties, string[] invalidatedProperties, gio.dbus_proxy.DBusProxy dBusProxy))
+          `void callback(glib.variant.Variant changedProperties, string[] invalidatedProperties, gio.dbus_proxy.DBusProxy dBusProxy)`
   
           `changedProperties` A #GVariant containing the properties that changed (type: `a{sv}`) (optional)
   
@@ -1021,7 +1017,7 @@ class DBusProxy : gobject.object.ObjectWrap, gio.async_initable.AsyncInitable, g
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string senderName, string signalName, glib.variant.Variant parameters, gio.dbus_proxy.DBusProxy dBusProxy))
+          `void callback(string senderName, string signalName, glib.variant.Variant parameters, gio.dbus_proxy.DBusProxy dBusProxy)`
   
           `senderName` The sender of the signal or null if the connection is not a bus connection. (optional)
   
@@ -1140,22 +1136,20 @@ class DBusProxyGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gi
           said to be the "expected interface".
           
           The checks performed are:
-          $(LIST
-            * When completing a method call, if the type signature of
-              the reply message isn't what's expected, the reply is
-              discarded and the #GError is set to [gio.types.IOErrorEnum.InvalidArgument].
-            
-            * Received signals that have a type signature mismatch are dropped and
-              a warning is logged via g_warning().
-            
-            * Properties received via the initial `GetAll()` call or via the
-              `::PropertiesChanged` signal (on the
-              [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
-              interface) or set using [gio.dbus_proxy.DBusProxy.setCachedProperty]
-              with a type signature mismatch are ignored and a warning is
-              logged via g_warning().
-          )
-            
+          - When completing a method call, if the type signature of
+            the reply message isn't what's expected, the reply is
+            discarded and the #GError is set to [gio.types.IOErrorEnum.InvalidArgument].
+          
+          - Received signals that have a type signature mismatch are dropped and
+            a warning is logged via g_warning().
+          
+          - Properties received via the initial `GetAll()` call or via the
+            `::PropertiesChanged` signal (on the
+            [org.freedesktop.DBus.Properties](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties)
+            interface) or set using [gio.dbus_proxy.DBusProxy.setCachedProperty]
+            with a type signature mismatch are ignored and a warning is
+            logged via g_warning().
+          
           Note that these checks are never done on methods, signals and
           properties that are not referenced in the given
           #GDBusInterfaceInfo, since extending a D-Bus interface on the

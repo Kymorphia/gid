@@ -59,13 +59,11 @@ class FileAttributeMatcher : gobject.boxed.Boxed
       
       ## Examples of file attribute matcher strings and results
       
-      $(LIST
-        * `"*"`: matches all attributes.
-        * `"standard::is-hidden"`: matches only the key is-hidden in the
-          standard namespace.
-        * `"standard::type,unix::*"`: matches the type key in the standard
-          namespace and all keys in the unix namespace.
-      )
+      - `"*"`: matches all attributes.
+      - `"standard::is-hidden"`: matches only the key is-hidden in the
+        standard namespace.
+      - `"standard::type,unix::*"`: matches the type key in the standard
+        namespace and all keys in the unix namespace.
   
       Params:
         attributes = an attribute string to match.

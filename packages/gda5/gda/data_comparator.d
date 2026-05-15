@@ -170,7 +170,7 @@ class DataComparator : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(void* object, gda.data_comparator.DataComparator dataComparator))
+          `bool callback(void* object, gda.data_comparator.DataComparator dataComparator)`
   
           `object`  (optional)
   

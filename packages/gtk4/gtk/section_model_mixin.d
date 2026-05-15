@@ -70,7 +70,7 @@ template SectionModelT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, uint nItems, gtk.section_model.SectionModel sectionModel))
+          `void callback(uint position, uint nItems, gtk.section_model.SectionModel sectionModel)`
   
           `position` The first item that may have changed (optional)
   

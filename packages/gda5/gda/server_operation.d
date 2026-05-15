@@ -571,7 +571,7 @@ class ServerOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string seqPath, int itemIndex, gda.server_operation.ServerOperation serverOperation))
+          `void callback(string seqPath, int itemIndex, gda.server_operation.ServerOperation serverOperation)`
   
           `seqPath` the path to the new sequence item (optional)
   
@@ -620,7 +620,7 @@ class ServerOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string seqPath, int itemIndex, gda.server_operation.ServerOperation serverOperation))
+          `void callback(string seqPath, int itemIndex, gda.server_operation.ServerOperation serverOperation)`
   
           `seqPath` the path to the sequence item to be removed (optional)
   

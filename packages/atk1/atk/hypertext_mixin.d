@@ -80,7 +80,7 @@ template HypertextT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int arg1, atk.hypertext.Hypertext hypertext))
+          `void callback(int arg1, atk.hypertext.Hypertext hypertext)`
   
           `arg1` the index of the hyperlink which is selected (optional)
   

@@ -534,7 +534,7 @@ class TabBar : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar))
+          `bool callback(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar)`
   
           `page` the page matching the tab the content was dropped onto (optional)
   
@@ -594,7 +594,7 @@ class TabBar : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gdk.types.DragAction callback(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar))
+          `gdk.types.DragAction callback(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar)`
   
           `page` the page matching the tab the content was dropped onto (optional)
   

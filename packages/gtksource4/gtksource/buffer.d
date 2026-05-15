@@ -657,14 +657,12 @@ class Buffer : gtk.text_buffer.TextBuffer
       shows it as an empty line. This is generally not what the user expects.
       
       If implicit_trailing_newline is true (the default value):
-       $(LIST
-          * when a #GtkSourceFileLoader loads the content of a file into the buffer,
-            the trailing newline (if present in the file) is not inserted into the
-            buffer.
-          * when a #GtkSourceFileSaver saves the content of the buffer into a file, a
-            trailing newline is added to the file.
-       )
-         
+       - when a #GtkSourceFileLoader loads the content of a file into the buffer,
+         the trailing newline (if present in the file) is not inserted into the
+         buffer.
+       - when a #GtkSourceFileSaver saves the content of the buffer into a file, a
+         trailing newline is added to the file.
+      
       On the other hand, if implicit_trailing_newline is false, the file's
       content is not modified when loaded into the buffer, and the buffer's
       content is not modified when saved into a file.
@@ -787,7 +785,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter iter, gtksource.types.BracketMatchType state, gtksource.buffer.Buffer buffer))
+          `void callback(gtk.text_iter.TextIter iter, gtksource.types.BracketMatchType state, gtksource.buffer.Buffer buffer)`
   
           `iter` if found, the location of the matching bracket. (optional)
   
@@ -838,7 +836,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.buffer.Buffer buffer))
+          `void callback(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.buffer.Buffer buffer)`
   
           `start` the start of the updated region (optional)
   
@@ -887,7 +885,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.buffer.Buffer buffer))
+          `void callback(gtksource.buffer.Buffer buffer)`
   
           `buffer` the instance the signal is connected to (optional)
   
@@ -925,7 +923,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_mark.TextMark mark, gtksource.buffer.Buffer buffer))
+          `void callback(gtk.text_mark.TextMark mark, gtksource.buffer.Buffer buffer)`
   
           `mark` the #GtkSourceMark (optional)
   
@@ -969,7 +967,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.buffer.Buffer buffer))
+          `void callback(gtksource.buffer.Buffer buffer)`
   
           `buffer` the instance the signal is connected to (optional)
   

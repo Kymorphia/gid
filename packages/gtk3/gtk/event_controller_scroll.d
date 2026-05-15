@@ -152,7 +152,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double velX, double velY, gtk.event_controller_scroll.EventControllerScroll eventControllerScroll))
+          `void callback(double velX, double velY, gtk.event_controller_scroll.EventControllerScroll eventControllerScroll)`
   
           `velX` X velocity (optional)
   
@@ -202,7 +202,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double dx, double dy, gtk.event_controller_scroll.EventControllerScroll eventControllerScroll))
+          `void callback(double dx, double dy, gtk.event_controller_scroll.EventControllerScroll eventControllerScroll)`
   
           `dx` X delta (optional)
   
@@ -252,7 +252,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.event_controller_scroll.EventControllerScroll eventControllerScroll))
+          `void callback(gtk.event_controller_scroll.EventControllerScroll eventControllerScroll)`
   
           `eventControllerScroll` the instance the signal is connected to (optional)
   
@@ -290,7 +290,7 @@ class EventControllerScroll : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.event_controller_scroll.EventControllerScroll eventControllerScroll))
+          `void callback(gtk.event_controller_scroll.EventControllerScroll eventControllerScroll)`
   
           `eventControllerScroll` the instance the signal is connected to (optional)
   

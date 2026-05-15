@@ -718,7 +718,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.object.ObjectWrap arg1, atk.object.ObjectWrap objectWrap))
+          `void callback(atk.object.ObjectWrap arg1, atk.object.ObjectWrap objectWrap)`
   
           `arg1` the newly focused object. (optional)
   
@@ -764,7 +764,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string arg1, atk.object.ObjectWrap objectWrap))
+          `void callback(string arg1, atk.object.ObjectWrap objectWrap)`
   
           `arg1` the text to be announced. (optional)
   
@@ -808,7 +808,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string arg1, string arg2, atk.object.ObjectWrap objectWrap))
+          `void callback(string arg1, string arg2, atk.object.ObjectWrap objectWrap)`
   
           `arg1` the name of the attribute being modified, or null if not
                      available. (optional)
@@ -861,7 +861,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint arg1, atk.object.ObjectWrap arg2, atk.object.ObjectWrap objectWrap))
+          `void callback(uint arg1, atk.object.ObjectWrap arg2, atk.object.ObjectWrap objectWrap)`
   
           `arg1` The index of the added or removed child. The value can be
             -1. This is used if the value is not known by the implementor
@@ -916,7 +916,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool arg1, atk.object.ObjectWrap objectWrap))
+          `void callback(bool arg1, atk.object.ObjectWrap objectWrap)`
   
           `arg1` a boolean value which indicates whether the object gained
             or lost focus. (optional)
@@ -963,7 +963,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string arg1, int arg2, atk.object.ObjectWrap objectWrap))
+          `void callback(string arg1, int arg2, atk.object.ObjectWrap objectWrap)`
   
           `arg1` the text to be announced. (optional)
   
@@ -1026,7 +1026,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.property_values.PropertyValues arg1, atk.object.ObjectWrap objectWrap))
+          `void callback(atk.property_values.PropertyValues arg1, atk.object.ObjectWrap objectWrap)`
   
           `arg1` an #AtkPropertyValues containing the new
             value of the property which changed. (optional)
@@ -1073,7 +1073,7 @@ class ObjectWrap : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string arg1, bool arg2, atk.object.ObjectWrap objectWrap))
+          `void callback(string arg1, bool arg2, atk.object.ObjectWrap objectWrap)`
   
           `arg1` The name of the state which has changed (optional)
   
@@ -1123,7 +1123,7 @@ class ObjectWrap : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.object.ObjectWrap objectWrap))
+          `void callback(atk.object.ObjectWrap objectWrap)`
   
           `objectWrap` the instance the signal is connected to (optional)
   

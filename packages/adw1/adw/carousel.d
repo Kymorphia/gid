@@ -580,7 +580,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint index, adw.carousel.Carousel carousel))
+          `void callback(uint index, adw.carousel.Carousel carousel)`
   
           `index` current page (optional)
   

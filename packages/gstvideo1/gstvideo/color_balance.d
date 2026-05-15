@@ -90,7 +90,7 @@ interface ColorBalance
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value, gstvideo.color_balance.ColorBalance colorBalance))
+          `void callback(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value, gstvideo.color_balance.ColorBalance colorBalance)`
   
           `channel` The #GstColorBalanceChannel (optional)
   

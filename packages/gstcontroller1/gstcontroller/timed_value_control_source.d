@@ -164,7 +164,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource))
+          `void callback(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource)`
   
           `timedValue` The newly added #GstTimedValue (optional)
   
@@ -207,7 +207,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource))
+          `void callback(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource)`
   
           `timedValue` The #GstTimedValue where the value changed (optional)
   
@@ -250,7 +250,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource))
+          `void callback(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource)`
   
           `timedValue` The removed #GstTimedValue (optional)
   

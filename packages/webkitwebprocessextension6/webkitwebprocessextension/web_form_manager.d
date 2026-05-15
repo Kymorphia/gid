@@ -112,7 +112,7 @@ class WebFormManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkitwebprocessextension.frame.Frame frame, javascriptcore.value.Value[] elements, webkitwebprocessextension.web_form_manager.WebFormManager webFormManager))
+          `void callback(webkitwebprocessextension.frame.Frame frame, javascriptcore.value.Value[] elements, webkitwebprocessextension.web_form_manager.WebFormManager webFormManager)`
   
           `frame` a #WebKitFrame (optional)
   
@@ -173,7 +173,7 @@ class WebFormManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(javascriptcore.value.Value form, webkitwebprocessextension.frame.Frame sourceFrame, webkitwebprocessextension.frame.Frame targetFrame, webkitwebprocessextension.web_form_manager.WebFormManager webFormManager))
+          `void callback(javascriptcore.value.Value form, webkitwebprocessextension.frame.Frame sourceFrame, webkitwebprocessextension.frame.Frame targetFrame, webkitwebprocessextension.web_form_manager.WebFormManager webFormManager)`
   
           `form` the #JSCValue to be submitted, which will always correspond to an HTMLFormElement (optional)
   
@@ -233,7 +233,7 @@ class WebFormManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(javascriptcore.value.Value form, webkitwebprocessextension.frame.Frame sourceFrame, webkitwebprocessextension.frame.Frame targetFrame, webkitwebprocessextension.web_form_manager.WebFormManager webFormManager))
+          `void callback(javascriptcore.value.Value form, webkitwebprocessextension.frame.Frame sourceFrame, webkitwebprocessextension.frame.Frame targetFrame, webkitwebprocessextension.web_form_manager.WebFormManager webFormManager)`
   
           `form` the #JSCValue to be submitted, which will always correspond to an HTMLFormElement (optional)
   

@@ -1649,7 +1649,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_view.TextView textView))
+          `void callback(gtk.text_view.TextView textView)`
   
           `textView` the instance the signal is connected to (optional)
   
@@ -1691,7 +1691,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_view.TextView textView))
+          `void callback(gtk.text_view.TextView textView)`
   
           `textView` the instance the signal is connected to (optional)
   
@@ -1733,7 +1733,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_view.TextView textView))
+          `void callback(gtk.text_view.TextView textView)`
   
           `textView` the instance the signal is connected to (optional)
   
@@ -1781,7 +1781,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.DeleteType type, int count, gtk.text_view.TextView textView))
+          `void callback(gtk.types.DeleteType type, int count, gtk.text_view.TextView textView)`
   
           `type` the granularity of the deletion, as a #GtkDeleteType (optional)
   
@@ -1831,7 +1831,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.TextExtendSelection granularity, gtk.text_iter.TextIter location, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_view.TextView textView))
+          `bool callback(gtk.types.TextExtendSelection granularity, gtk.text_iter.TextIter location, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_view.TextView textView)`
   
           `granularity` the granularity type (optional)
   
@@ -1901,7 +1901,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string string_, gtk.text_view.TextView textView))
+          `void callback(string string_, gtk.text_view.TextView textView)`
   
           `string_` the string to insert (optional)
   
@@ -1948,7 +1948,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_view.TextView textView))
+          `void callback(gtk.text_view.TextView textView)`
   
           `textView` the instance the signal is connected to (optional)
   
@@ -1994,18 +1994,16 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
         the variant with the Shift modifier extends the selection,
         the variant without the Shift modifer does not.
         There are too many key combinations to list them all here.
-        $(LIST
-          * Arrow keys move by individual characters/lines
-          * Ctrl-arrow key combinations move by words/paragraphs
-          * Home/End keys move to the ends of the buffer
-          * PageUp/PageDown keys move vertically by pages
-          * Ctrl-PageUp/PageDown keys move horizontally by pages
-        )
+        - Arrow keys move by individual characters/lines
+        - Ctrl-arrow key combinations move by words/paragraphs
+        - Home/End keys move to the ends of the buffer
+        - PageUp/PageDown keys move vertically by pages
+        - Ctrl-PageUp/PageDown keys move horizontally by pages
   
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.MovementStep step, int count, bool extendSelection, gtk.text_view.TextView textView))
+          `void callback(gtk.types.MovementStep step, int count, bool extendSelection, gtk.text_view.TextView textView)`
   
           `step` the granularity of the move, as a #GtkMovementStep (optional)
   
@@ -2066,7 +2064,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.ScrollStep step, int count, gtk.text_view.TextView textView))
+          `void callback(gtk.types.ScrollStep step, int count, gtk.text_view.TextView textView)`
   
           `step` the granularity of the movement, as a #GtkScrollStep (optional)
   
@@ -2121,7 +2119,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_view.TextView textView))
+          `void callback(gtk.text_view.TextView textView)`
   
           `textView` the instance the signal is connected to (optional)
   
@@ -2171,7 +2169,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget popup, gtk.text_view.TextView textView))
+          `void callback(gtk.widget.Widget popup, gtk.text_view.TextView textView)`
   
           `popup` the container that is being populated (optional)
   
@@ -2219,7 +2217,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string preedit, gtk.text_view.TextView textView))
+          `void callback(string preedit, gtk.text_view.TextView textView)`
   
           `preedit` the current preedit string (optional)
   
@@ -2268,7 +2266,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool select, gtk.text_view.TextView textView))
+          `void callback(bool select, gtk.text_view.TextView textView)`
   
           `select` true to select, false to unselect (optional)
   
@@ -2317,7 +2315,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_view.TextView textView))
+          `void callback(gtk.text_view.TextView textView)`
   
           `textView` the instance the signal is connected to (optional)
   
@@ -2359,7 +2357,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_view.TextView textView))
+          `void callback(gtk.text_view.TextView textView)`
   
           `textView` the instance the signal is connected to (optional)
   
@@ -2400,7 +2398,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_view.TextView textView))
+          `void callback(gtk.text_view.TextView textView)`
   
           `textView` the instance the signal is connected to (optional)
   

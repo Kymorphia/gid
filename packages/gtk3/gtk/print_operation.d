@@ -1078,7 +1078,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation))
+          `void callback(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation)`
   
           `context` the #GtkPrintContext for the current operation (optional)
   
@@ -1130,7 +1130,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gobject.object.ObjectWrap callback(gtk.print_operation.PrintOperation printOperation))
+          `gobject.object.ObjectWrap callback(gtk.print_operation.PrintOperation printOperation)`
   
           `printOperation` the instance the signal is connected to (optional)
   
@@ -1175,7 +1175,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget, gtk.print_operation.PrintOperation printOperation))
+          `void callback(gtk.widget.Widget widget, gtk.print_operation.PrintOperation printOperation)`
   
           `widget` the custom widget added in create-custom-widget (optional)
   
@@ -1227,7 +1227,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.PrintOperationResult result, gtk.print_operation.PrintOperation printOperation))
+          `void callback(gtk.types.PrintOperationResult result, gtk.print_operation.PrintOperation printOperation)`
   
           `result` the result of the print operation (optional)
   
@@ -1317,7 +1317,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.print_context.PrintContext context, int pageNr, gtk.print_operation.PrintOperation printOperation))
+          `void callback(gtk.print_context.PrintContext context, int pageNr, gtk.print_operation.PrintOperation printOperation)`
   
           `context` the #GtkPrintContext for the current operation (optional)
   
@@ -1368,7 +1368,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation))
+          `void callback(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation)`
   
           `context` the #GtkPrintContext for the current operation (optional)
   
@@ -1423,7 +1423,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation))
+          `bool callback(gtk.print_context.PrintContext context, gtk.print_operation.PrintOperation printOperation)`
   
           `context` the #GtkPrintContext for the current operation (optional)
   
@@ -1484,7 +1484,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.print_operation_preview.PrintOperationPreview preview, gtk.print_context.PrintContext context, gtk.window.Window parent, gtk.print_operation.PrintOperation printOperation))
+          `bool callback(gtk.print_operation_preview.PrintOperationPreview preview, gtk.print_context.PrintContext context, gtk.window.Window parent, gtk.print_operation.PrintOperation printOperation)`
   
           `preview` the #GtkPrintOperationPreview for the current operation (optional)
   
@@ -1544,7 +1544,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.print_context.PrintContext context, int pageNr, gtk.page_setup.PageSetup setup, gtk.print_operation.PrintOperation printOperation))
+          `void callback(gtk.print_context.PrintContext context, int pageNr, gtk.page_setup.PageSetup setup, gtk.print_operation.PrintOperation printOperation)`
   
           `context` the #GtkPrintContext for the current operation (optional)
   
@@ -1602,7 +1602,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.print_operation.PrintOperation printOperation))
+          `void callback(gtk.print_operation.PrintOperation printOperation)`
   
           `printOperation` the instance the signal is connected to (optional)
   
@@ -1641,7 +1641,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget, gtk.page_setup.PageSetup setup, gtk.print_settings.PrintSettings settings, gtk.print_operation.PrintOperation printOperation))
+          `void callback(gtk.widget.Widget widget, gtk.page_setup.PageSetup setup, gtk.print_settings.PrintSettings settings, gtk.print_operation.PrintOperation printOperation)`
   
           `widget` the custom widget added in create-custom-widget (optional)
   

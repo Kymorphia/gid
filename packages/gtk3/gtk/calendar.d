@@ -488,7 +488,7 @@ class Calendar : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.calendar.Calendar calendar))
+          `void callback(gtk.calendar.Calendar calendar)`
   
           `calendar` the instance the signal is connected to (optional)
   
@@ -525,7 +525,7 @@ class Calendar : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.calendar.Calendar calendar))
+          `void callback(gtk.calendar.Calendar calendar)`
   
           `calendar` the instance the signal is connected to (optional)
   
@@ -563,7 +563,7 @@ class Calendar : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.calendar.Calendar calendar))
+          `void callback(gtk.calendar.Calendar calendar)`
   
           `calendar` the instance the signal is connected to (optional)
   
@@ -600,7 +600,7 @@ class Calendar : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.calendar.Calendar calendar))
+          `void callback(gtk.calendar.Calendar calendar)`
   
           `calendar` the instance the signal is connected to (optional)
   
@@ -637,7 +637,7 @@ class Calendar : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.calendar.Calendar calendar))
+          `void callback(gtk.calendar.Calendar calendar)`
   
           `calendar` the instance the signal is connected to (optional)
   
@@ -674,7 +674,7 @@ class Calendar : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.calendar.Calendar calendar))
+          `void callback(gtk.calendar.Calendar calendar)`
   
           `calendar` the instance the signal is connected to (optional)
   
@@ -711,7 +711,7 @@ class Calendar : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.calendar.Calendar calendar))
+          `void callback(gtk.calendar.Calendar calendar)`
   
           `calendar` the instance the signal is connected to (optional)
   

@@ -46,12 +46,10 @@ import gtk.types;
     
     The supported formatting options are:
     
-    $(LIST
-      * Paragraph (`<p>`)
-      * Ordered list (`<ol>`), with list items (`<li>`)
-      * Unordered list (`<ul>`), with list items (`<li>`)
-    )
-      
+    * Paragraph (`<p>`)
+    * Ordered list (`<ol>`), with list items (`<li>`)
+    * Unordered list (`<ul>`), with list items (`<li>`)
+    
     Within paragraphs and list items, emphasis (`<em>`) and inline code
     (`<code>`) text styles are supported. The emphasis is rendered in italic,
     while inline code is shown in a monospaced font.
@@ -82,11 +80,9 @@ import gtk.types;
     
     [adw.about_dialog.AboutDialog] displays the following two links on the main page:
     
-    $(LIST
-      * Support Questions, set with the `property@AboutDialog:support-url` property,
-      * Report an Issue, set with the `property@AboutDialog:issue-url` property.
-    )
-      
+    * Support Questions, set with the `property@AboutDialog:support-url` property,
+    * Report an Issue, set with the `property@AboutDialog:issue-url` property.
+    
     Additionally, applications can provide debugging information. It will be
     shown separately on the Troubleshooting page. Use the
     `property@AboutDialog:debug-info` property to specify it.
@@ -102,14 +98,12 @@ import gtk.types;
     
     The Credits page has the following default sections:
     
-    $(LIST
-      * Developers, set with the `property@AboutDialog:developers` property,
-      * Designers, set with the `property@AboutDialog:designers` property,
-      * Artists, set with the `property@AboutDialog:artists` property,
-      * Documenters, set with the `property@AboutDialog:documenters` property,
-      * Translators, set with the `property@AboutDialog:translator-credits` property.
-    )
-      
+    * Developers, set with the `property@AboutDialog:developers` property,
+    * Designers, set with the `property@AboutDialog:designers` property,
+    * Artists, set with the `property@AboutDialog:artists` property,
+    * Documenters, set with the `property@AboutDialog:documenters` property,
+    * Translators, set with the `property@AboutDialog:translator-credits` property.
+    
     When setting translator credits, use the strings `"translator-credits"` or
     `"translator_credits"` and mark them as translatable.
     
@@ -578,12 +572,10 @@ class AboutDialog : adw.dialog.Dialog
         
         The supported formatting options are:
         
-        $(LIST
-          * Paragraph (`<p>`)
-          * Ordered list (`<ol>`), with list items (`<li>`)
-          * Unordered list (`<ul>`), with list items (`<li>`)
-        )
-          
+        * Paragraph (`<p>`)
+        * Ordered list (`<ol>`), with list items (`<li>`)
+        * Unordered list (`<ul>`), with list items (`<li>`)
+        
         Within paragraphs and list items, emphasis (`<em>`) and inline code
         (`<code>`) text styles are supported. The emphasis is rendered in italic,
         while inline code is shown in a monospaced font.
@@ -613,12 +605,10 @@ class AboutDialog : adw.dialog.Dialog
           
           The supported formatting options are:
           
-          $(LIST
-            * Paragraph (`<p>`)
-            * Ordered list (`<ol>`), with list items (`<li>`)
-            * Unordered list (`<ul>`), with list items (`<li>`)
-          )
-            
+          * Paragraph (`<p>`)
+          * Ordered list (`<ol>`), with list items (`<li>`)
+          * Unordered list (`<ul>`), with list items (`<li>`)
+          
           Within paragraphs and list items, emphasis (`<em>`) and inline code
           (`<code>`) text styles are supported. The emphasis is rendered in italic,
           while inline code is shown in a monospaced font.
@@ -714,14 +704,12 @@ class AboutDialog : adw.dialog.Dialog
         
         See also:
         
-        $(LIST
-          * `property@AboutDialog:developers`
-          * `property@AboutDialog:designers`
-          * `property@AboutDialog:artists`
-          * `property@AboutDialog:documenters`
-          * [adw.about_dialog.AboutDialog.addCreditSection]
-          * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
-        )
+        * `property@AboutDialog:developers`
+        * `property@AboutDialog:designers`
+        * `property@AboutDialog:artists`
+        * `property@AboutDialog:documenters`
+        * [adw.about_dialog.AboutDialog.addCreditSection]
+        * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   */
   @property string translatorCredits()
   {
@@ -743,14 +731,12 @@ class AboutDialog : adw.dialog.Dialog
           
           See also:
           
-          $(LIST
-            * `property@AboutDialog:developers`
-            * `property@AboutDialog:designers`
-            * `property@AboutDialog:artists`
-            * `property@AboutDialog:documenters`
-            * [adw.about_dialog.AboutDialog.addCreditSection]
-            * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
-          )
+          * `property@AboutDialog:developers`
+          * `property@AboutDialog:designers`
+          * `property@AboutDialog:artists`
+          * `property@AboutDialog:documenters`
+          * [adw.about_dialog.AboutDialog.addCreditSection]
+          * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   */
   @property void translatorCredits(string propval)
   {
@@ -832,20 +818,18 @@ class AboutDialog : adw.dialog.Dialog
       This automatically sets the following properties with the following AppStream
       values:
       
-      $(LIST
-        * `propertyAboutDialog:application-icon` is set from the `<id>`
-        * `propertyAboutDialog:application-name` is set from the `<name>`
-        * `propertyAboutDialog:developer-name` is set from the `<name>` within
-             `<developer>`
-        * `propertyAboutDialog:version` is set from the version of the latest release
-        * `propertyAboutDialog:website` is set from the `<url type="homepage">`
-        * `propertyAboutDialog:support-url` is set from the `<url type="help">`
-        * `propertyAboutDialog:issue-url` is set from the `<url type="bugtracker">`
-        * `propertyAboutDialog:license-type` is set from the `<project_license>`.
-            If the license type retrieved from AppStream is not listed in
-            [gtk.types.License], it will be set to `GTK_LICENCE_CUSTOM`.
-      )
-        
+      * `propertyAboutDialog:application-icon` is set from the `<id>`
+      * `propertyAboutDialog:application-name` is set from the `<name>`
+      * `propertyAboutDialog:developer-name` is set from the `<name>` within
+           `<developer>`
+      * `propertyAboutDialog:version` is set from the version of the latest release
+      * `propertyAboutDialog:website` is set from the `<url type="homepage">`
+      * `propertyAboutDialog:support-url` is set from the `<url type="help">`
+      * `propertyAboutDialog:issue-url` is set from the `<url type="bugtracker">`
+      * `propertyAboutDialog:license-type` is set from the `<project_license>`.
+          If the license type retrieved from AppStream is not listed in
+          [gtk.types.License], it will be set to `GTK_LICENCE_CUSTOM`.
+      
       If release_notes_version is not `NULL`,
       `propertyAboutDialog:release-notes-version` is set to match it, while
       `propertyAboutDialog:release-notes` is set from the AppStream release
@@ -878,14 +862,12 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      $(LIST
-        * `propertyAboutDialog:developers`
-        * `propertyAboutDialog:designers`
-        * `propertyAboutDialog:artists`
-        * `propertyAboutDialog:documenters`
-        * `propertyAboutDialog:translator-credits`
-        * [adw.about_dialog.AboutDialog.addCreditSection]
-      )
+      * `propertyAboutDialog:developers`
+      * `propertyAboutDialog:designers`
+      * `propertyAboutDialog:artists`
+      * `propertyAboutDialog:documenters`
+      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.addCreditSection]
   
       Params:
         name = the section name
@@ -913,14 +895,12 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      $(LIST
-        * `propertyAboutDialog:developers`
-        * `propertyAboutDialog:designers`
-        * `propertyAboutDialog:artists`
-        * `propertyAboutDialog:documenters`
-        * `propertyAboutDialog:translator-credits`
-        * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
-      )
+      * `propertyAboutDialog:developers`
+      * `propertyAboutDialog:designers`
+      * `propertyAboutDialog:artists`
+      * `propertyAboutDialog:documenters`
+      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
       Params:
         name = the section name
@@ -1332,14 +1312,12 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      $(LIST
-        * `propertyAboutDialog:developers`
-        * `propertyAboutDialog:designers`
-        * `propertyAboutDialog:documenters`
-        * `propertyAboutDialog:translator-credits`
-        * [adw.about_dialog.AboutDialog.addCreditSection]
-        * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
-      )
+      * `propertyAboutDialog:developers`
+      * `propertyAboutDialog:designers`
+      * `propertyAboutDialog:documenters`
+      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.addCreditSection]
+      * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
       Params:
         artists = the list of artists
@@ -1442,14 +1420,12 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      $(LIST
-        * `propertyAboutDialog:developers`
-        * `propertyAboutDialog:artists`
-        * `propertyAboutDialog:documenters`
-        * `propertyAboutDialog:translator-credits`
-        * [adw.about_dialog.AboutDialog.addCreditSection]
-        * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
-      )
+      * `propertyAboutDialog:developers`
+      * `propertyAboutDialog:artists`
+      * `propertyAboutDialog:documenters`
+      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.addCreditSection]
+      * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
       Params:
         designers = the list of designers
@@ -1494,14 +1470,12 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      $(LIST
-        * `propertyAboutDialog:designers`
-        * `propertyAboutDialog:artists`
-        * `propertyAboutDialog:documenters`
-        * `propertyAboutDialog:translator-credits`
-        * [adw.about_dialog.AboutDialog.addCreditSection]
-        * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
-      )
+      * `propertyAboutDialog:designers`
+      * `propertyAboutDialog:artists`
+      * `propertyAboutDialog:documenters`
+      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.addCreditSection]
+      * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
       Params:
         developers = the list of developers
@@ -1527,14 +1501,12 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      $(LIST
-        * `propertyAboutDialog:developers`
-        * `propertyAboutDialog:designers`
-        * `propertyAboutDialog:artists`
-        * `propertyAboutDialog:translator-credits`
-        * [adw.about_dialog.AboutDialog.addCreditSection]
-        * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
-      )
+      * `propertyAboutDialog:developers`
+      * `propertyAboutDialog:designers`
+      * `propertyAboutDialog:artists`
+      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.addCreditSection]
+      * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
       Params:
         documenters = the list of documenters
@@ -1626,12 +1598,10 @@ class AboutDialog : adw.dialog.Dialog
       
       The supported formatting options are:
       
-      $(LIST
-        * Paragraph (`<p>`)
-        * Ordered list (`<ol>`), with list items (`<li>`)
-        * Unordered list (`<ul>`), with list items (`<li>`)
-      )
-        
+      * Paragraph (`<p>`)
+      * Ordered list (`<ol>`), with list items (`<li>`)
+      * Unordered list (`<ul>`), with list items (`<li>`)
+      
       Within paragraphs and list items, emphasis (`<em>`) and inline code
       (`<code>`) text styles are supported. The emphasis is rendered in italic,
       while inline code is shown in a monospaced font.
@@ -1703,14 +1673,12 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      $(LIST
-        * `propertyAboutDialog:developers`
-        * `propertyAboutDialog:designers`
-        * `propertyAboutDialog:artists`
-        * `propertyAboutDialog:documenters`
-        * [adw.about_dialog.AboutDialog.addCreditSection]
-        * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
-      )
+      * `propertyAboutDialog:developers`
+      * `propertyAboutDialog:designers`
+      * `propertyAboutDialog:artists`
+      * `propertyAboutDialog:documenters`
+      * [adw.about_dialog.AboutDialog.addCreditSection]
+      * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
       Params:
         translatorCredits = the translator credits
@@ -1766,7 +1734,7 @@ class AboutDialog : adw.dialog.Dialog
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(string uri, adw.about_dialog.AboutDialog aboutDialog))
+          `bool callback(string uri, adw.about_dialog.AboutDialog aboutDialog)`
   
           `uri` the URI to activate (optional)
   
@@ -2007,12 +1975,10 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           
           The supported formatting options are:
           
-          $(LIST
-            * Paragraph (`<p>`)
-            * Ordered list (`<ol>`), with list items (`<li>`)
-            * Unordered list (`<ul>`), with list items (`<li>`)
-          )
-            
+          * Paragraph (`<p>`)
+          * Ordered list (`<ol>`), with list items (`<li>`)
+          * Unordered list (`<ul>`), with list items (`<li>`)
+          
           Within paragraphs and list items, emphasis (`<em>`) and inline code
           (`<code>`) text styles are supported. The emphasis is rendered in italic,
           while inline code is shown in a monospaced font.
@@ -2081,14 +2047,12 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           
           See also:
           
-          $(LIST
-            * `property@AboutDialog:developers`
-            * `property@AboutDialog:designers`
-            * `property@AboutDialog:artists`
-            * `property@AboutDialog:documenters`
-            * [adw.about_dialog.AboutDialog.addCreditSection]
-            * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
-          )
+          * `property@AboutDialog:developers`
+          * `property@AboutDialog:designers`
+          * `property@AboutDialog:artists`
+          * `property@AboutDialog:documenters`
+          * [adw.about_dialog.AboutDialog.addCreditSection]
+          * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
   */
   T translatorCredits(string propval)

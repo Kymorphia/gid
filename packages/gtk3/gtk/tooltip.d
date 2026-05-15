@@ -21,37 +21,33 @@ import gtk.widget;
     image, or you want the tooltip to have different contents per #GtkTreeView
     row or cell, you will have to do a little more work:
     
-    $(LIST
-      * Set the #GtkWidget:has-tooltip property to true, this will make GTK+
-        monitor the widget for motion and related events which are needed to
-        determine when and where to show a tooltip.
-      
-      * Connect to the #GtkWidget::query-tooltip signal.  This signal will be
-        emitted when a tooltip is supposed to be shown. One of the arguments passed
-        to the signal handler is a GtkTooltip object. This is the object that we
-        are about to display as a tooltip, and can be manipulated in your callback
-        using functions like [gtk.tooltip.Tooltip.setIcon]. There are functions for setting
-        the tooltip’s markup, setting an image from a named icon, or even putting in
-        a custom widget.
-      
-        Return true from your query-tooltip handler. This causes the tooltip to be
-        show. If you return false, it will not be shown.
-    )
-      
+    - Set the #GtkWidget:has-tooltip property to true, this will make GTK+
+      monitor the widget for motion and related events which are needed to
+      determine when and where to show a tooltip.
+    
+    - Connect to the #GtkWidget::query-tooltip signal.  This signal will be
+      emitted when a tooltip is supposed to be shown. One of the arguments passed
+      to the signal handler is a GtkTooltip object. This is the object that we
+      are about to display as a tooltip, and can be manipulated in your callback
+      using functions like [gtk.tooltip.Tooltip.setIcon]. There are functions for setting
+      the tooltip’s markup, setting an image from a named icon, or even putting in
+      a custom widget.
+    
+      Return true from your query-tooltip handler. This causes the tooltip to be
+      show. If you return false, it will not be shown.
+    
     In the probably rare case where you want to have even more control over the
     tooltip that is about to be shown, you can set your own #GtkWindow which
     will be used as tooltip window.  This works as follows:
     
-    $(LIST
-      * Set #GtkWidget:has-tooltip and connect to #GtkWidget::query-tooltip as before.
-        Use [gtk.widget.Widget.setTooltipWindow] to set a #GtkWindow created by you as
-        tooltip window.
-      
-      * In the #GtkWidget::query-tooltip callback you can access your window using
-        [gtk.widget.Widget.getTooltipWindow] and manipulate as you wish. The semantics of
-        the return value are exactly as before, return true to show the window,
-        false to not show it.
-    )
+    - Set #GtkWidget:has-tooltip and connect to #GtkWidget::query-tooltip as before.
+      Use [gtk.widget.Widget.setTooltipWindow] to set a #GtkWindow created by you as
+      tooltip window.
+    
+    - In the #GtkWidget::query-tooltip callback you can access your window using
+      [gtk.widget.Widget.getTooltipWindow] and manipulate as you wish. The semantics of
+      the return value are exactly as before, return true to show the window,
+      false to not show it.
 */
 class Tooltip : gobject.object.ObjectWrap
 {

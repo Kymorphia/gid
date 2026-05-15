@@ -17,22 +17,20 @@ import gtk.widget;
     elements. It’s essentially a blank widget; you can draw on it. After
     creating a drawing area, the application may want to connect to:
     
-    $(LIST
-      * Mouse and button press signals to respond to input from
-        the user. (Use [gtk.widget.Widget.addEvents] to enable events
-        you wish to receive.)
-      
-      * The #GtkWidget::realize signal to take any necessary actions
-        when the widget is instantiated on a particular display.
-        (Create GDK resources in response to this signal.)
-      
-      * The #GtkWidget::size-allocate signal to take any necessary
-        actions when the widget changes size.
-      
-      * The #GtkWidget::draw signal to handle redrawing the
-        contents of the widget.
-    )
-      
+    - Mouse and button press signals to respond to input from
+      the user. (Use [gtk.widget.Widget.addEvents] to enable events
+      you wish to receive.)
+    
+    - The #GtkWidget::realize signal to take any necessary actions
+      when the widget is instantiated on a particular display.
+      (Create GDK resources in response to this signal.)
+    
+    - The #GtkWidget::size-allocate signal to take any necessary
+      actions when the widget changes size.
+    
+    - The #GtkWidget::draw signal to handle redrawing the
+      contents of the widget.
+    
     The following code portion demonstrates using a drawing
     area to display a circle in the normal widget foreground
     color.

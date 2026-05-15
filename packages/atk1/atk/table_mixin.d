@@ -494,7 +494,7 @@ template TableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int arg1, int arg2, atk.table.Table table))
+          `void callback(int arg1, int arg2, atk.table.Table table)`
   
           `arg1` The index of the first column deleted. (optional)
   
@@ -544,7 +544,7 @@ template TableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int arg1, int arg2, atk.table.Table table))
+          `void callback(int arg1, int arg2, atk.table.Table table)`
   
           `arg1` The index of the column inserted. (optional)
   
@@ -595,7 +595,7 @@ template TableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.table.Table table))
+          `void callback(atk.table.Table table)`
   
           `table` the instance the signal is connected to (optional)
   
@@ -634,7 +634,7 @@ template TableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.table.Table table))
+          `void callback(atk.table.Table table)`
   
           `table` the instance the signal is connected to (optional)
   
@@ -672,7 +672,7 @@ template TableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int arg1, int arg2, atk.table.Table table))
+          `void callback(int arg1, int arg2, atk.table.Table table)`
   
           `arg1` The index of the first row deleted. (optional)
   
@@ -722,7 +722,7 @@ template TableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int arg1, int arg2, atk.table.Table table))
+          `void callback(int arg1, int arg2, atk.table.Table table)`
   
           `arg1` The index of the first row inserted. (optional)
   
@@ -773,7 +773,7 @@ template TableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.table.Table table))
+          `void callback(atk.table.Table table)`
   
           `table` the instance the signal is connected to (optional)
   

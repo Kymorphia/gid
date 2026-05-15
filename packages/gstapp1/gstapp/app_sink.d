@@ -568,7 +568,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstapp.app_sink.AppSink appSink))
+          `void callback(gstapp.app_sink.AppSink appSink)`
   
           `appSink` the instance the signal is connected to (optional)
   
@@ -615,7 +615,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.types.FlowReturn callback(gstapp.app_sink.AppSink appSink))
+          `gst.types.FlowReturn callback(gstapp.app_sink.AppSink appSink)`
   
           `appSink` the instance the signal is connected to (optional)
   
@@ -665,7 +665,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.types.FlowReturn callback(gstapp.app_sink.AppSink appSink))
+          `gst.types.FlowReturn callback(gstapp.app_sink.AppSink appSink)`
   
           `appSink` the instance the signal is connected to (optional)
   
@@ -721,7 +721,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gstapp.app_sink.AppSink appSink))
+          `bool callback(gstapp.app_sink.AppSink appSink)`
   
           `appSink` the instance the signal is connected to (optional)
   
@@ -764,7 +764,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gst.query.Query query, gstapp.app_sink.AppSink appSink))
+          `bool callback(gst.query.Query query, gstapp.app_sink.AppSink appSink)`
   
           `query` the allocation query (optional)
   
@@ -827,7 +827,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.sample.Sample callback(gstapp.app_sink.AppSink appSink))
+          `gst.sample.Sample callback(gstapp.app_sink.AppSink appSink)`
   
           `appSink` the instance the signal is connected to (optional)
   
@@ -880,7 +880,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.sample.Sample callback(gstapp.app_sink.AppSink appSink))
+          `gst.sample.Sample callback(gstapp.app_sink.AppSink appSink)`
   
           `appSink` the instance the signal is connected to (optional)
   
@@ -941,7 +941,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.mini_object.MiniObject callback(ulong timeout, gstapp.app_sink.AppSink appSink))
+          `gst.mini_object.MiniObject callback(ulong timeout, gstapp.app_sink.AppSink appSink)`
   
           `timeout` the maximum amount of time to wait for a sample (optional)
   
@@ -1005,7 +1005,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.sample.Sample callback(ulong timeout, gstapp.app_sink.AppSink appSink))
+          `gst.sample.Sample callback(ulong timeout, gstapp.app_sink.AppSink appSink)`
   
           `timeout` the maximum amount of time to wait for the preroll sample (optional)
   
@@ -1066,7 +1066,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.sample.Sample callback(ulong timeout, gstapp.app_sink.AppSink appSink))
+          `gst.sample.Sample callback(ulong timeout, gstapp.app_sink.AppSink appSink)`
   
           `timeout` the maximum amount of time to wait for a sample (optional)
   

@@ -1091,21 +1091,17 @@ enum GstStreamVolumeFormat
     
     The #GstAggregator::samples-selected signal is provided with some
     additional information about the output buffer:
-    $(LIST
-      * "offset"  G_TYPE_UINT64   Offset in samples since segment start
-        for the position that is next to be filled in the output buffer.
-      * "frames"  G_TYPE_UINT   Number of frames per output buffer.
-    )
-      
+    - "offset"  G_TYPE_UINT64   Offset in samples since segment start
+      for the position that is next to be filled in the output buffer.
+    - "frames"  G_TYPE_UINT   Number of frames per output buffer.
+    
     In addition the [gstbase.aggregator.Aggregator.peekNextSample] function returns
     additional information in the info #GstStructure of the returned sample:
-    $(LIST
-      * "output-offset"  G_TYPE_UINT64   Sample offset in output segment relative to
-        the output segment's start where the current position of this input
-        buffer would be placed
-      * "position"  G_TYPE_UINT   current position in the input buffer in samples
-      * "size"  G_TYPE_UINT   size of the input buffer in samples
-    )
+    - "output-offset"  G_TYPE_UINT64   Sample offset in output segment relative to
+      the output segment's start where the current position of this input
+      buffer would be placed
+    - "position"  G_TYPE_UINT   current position in the input buffer in samples
+    - "size"  G_TYPE_UINT   size of the input buffer in samples
 */
 struct GstAudioAggregator
 {
@@ -1617,13 +1613,11 @@ struct GstAudioClockClass
     This object is used to convert audio samples from one format to another.
     The object can perform conversion of:
     
-     $(LIST
-        * audio format with optional dithering and noise shaping
-       
-        * audio samplerate
-       
-        * audio channels and channel layout
-     )
+     * audio format with optional dithering and noise shaping
+    
+     * audio samplerate
+    
+     * audio channels and channel layout
 */
 struct GstAudioConverter;
 
@@ -1635,19 +1629,17 @@ struct GstAudioConverter;
     
     ## Configuration
     
-      $(LIST
-          * Initially, GstAudioDecoder calls @start when the decoder element
-            is activated, which allows subclass to perform any global setup.
-            Base class (context) parameters can already be set according to subclass
-            capabilities (or possibly upon receive more information in subsequent
-            @set_format).
-          * GstAudioDecoder calls @set_format to inform subclass of the format
-            of input audio data that it is about to receive.
-            While unlikely, it might be called more than once, if changing input
-            parameters require reconfiguration.
-          * GstAudioDecoder calls @stop at end of all processing.
-      )
-        
+      * Initially, GstAudioDecoder calls @start when the decoder element
+        is activated, which allows subclass to perform any global setup.
+        Base class (context) parameters can already be set according to subclass
+        capabilities (or possibly upon receive more information in subsequent
+        @set_format).
+      * GstAudioDecoder calls @set_format to inform subclass of the format
+        of input audio data that it is about to receive.
+        While unlikely, it might be called more than once, if changing input
+        parameters require reconfiguration.
+      * GstAudioDecoder calls @stop at end of all processing.
+    
     As of configuration stage, and throughout processing, GstAudioDecoder
     provides various (context) parameters, e.g. describing the format of
     output audio data (valid when output caps have been set) or current parsing state.
@@ -1655,32 +1647,28 @@ struct GstAudioConverter;
     base class of its expectation w.r.t. buffer handling.
     
     ## Data processing
-        $(LIST
-              * Base class gathers input data, and optionally allows subclass
-                to parse this into subsequently manageable (as defined by subclass)
-                chunks.  Such chunks are subsequently referred to as 'frames',
-                though they may or may not correspond to 1 (or more) audio format frame.
-              * Input frame is provided to subclass' @handle_frame.
-              * If codec processing results in decoded data, subclass should call
-                @gst_audio_decoder_finish_frame to have decoded data pushed
-                downstream.
-              * Just prior to actually pushing a buffer downstream,
-                it is passed to @pre_push.  Subclass should either use this callback
-                to arrange for additional downstream pushing or otherwise ensure such
-                custom pushing occurs after at least a method call has finished since
-                setting src pad caps.
-              * During the parsing process GstAudioDecoderClass will handle both
-                srcpad and sinkpad events. Sink events will be passed to subclass
-                if @event callback has been provided.
-        )
-          
+        * Base class gathers input data, and optionally allows subclass
+          to parse this into subsequently manageable (as defined by subclass)
+          chunks.  Such chunks are subsequently referred to as 'frames',
+          though they may or may not correspond to 1 (or more) audio format frame.
+        * Input frame is provided to subclass' @handle_frame.
+        * If codec processing results in decoded data, subclass should call
+          @gst_audio_decoder_finish_frame to have decoded data pushed
+          downstream.
+        * Just prior to actually pushing a buffer downstream,
+          it is passed to @pre_push.  Subclass should either use this callback
+          to arrange for additional downstream pushing or otherwise ensure such
+          custom pushing occurs after at least a method call has finished since
+          setting src pad caps.
+        * During the parsing process GstAudioDecoderClass will handle both
+          srcpad and sinkpad events. Sink events will be passed to subclass
+          if @event callback has been provided.
+    
     ## Shutdown phase
     
-      $(LIST
-          * GstAudioDecoder class calls @stop to inform the subclass that data
-            parsing will be stopped.
-      )
-        
+      * GstAudioDecoder class calls @stop to inform the subclass that data
+        parsing will be stopped.
+    
     Subclass is responsible for providing pad template caps for
     source and sink pads. The pads need to be named "sink" and "src". It also
     needs to set the fixed caps on srcpad, when the format is ensured.  This
@@ -1713,18 +1701,16 @@ struct GstAudioConverter;
     
     Things that subclass need to take care of:
     
-      $(LIST
-          * Provide pad templates
-          * Set source pad caps when appropriate
-          * Set user-configurable properties to sane defaults for format and
-             implementing codec at hand, and convey some subclass capabilities and
-             expectations in context.
-        
-          * Accept data in @handle_frame and provide encoded results to
-             @gst_audio_decoder_finish_frame.  If it is prepared to perform
-             PLC, it should also accept NULL data in @handle_frame and provide for
-             data for indicated duration.
-      )
+      * Provide pad templates
+      * Set source pad caps when appropriate
+      * Set user-configurable properties to sane defaults for format and
+         implementing codec at hand, and convey some subclass capabilities and
+         expectations in context.
+    
+      * Accept data in @handle_frame and provide encoded results to
+         @gst_audio_decoder_finish_frame.  If it is prepared to perform
+         PLC, it should also accept NULL data in @handle_frame and provide for
+         data for indicated duration.
 */
 struct GstAudioDecoder
 {
@@ -1967,20 +1953,18 @@ struct GstAudioDownmixMeta
     
     ## Configuration
     
-      $(LIST
-          * Initially, GstAudioEncoder calls @start when the encoder element
-            is activated, which allows subclass to perform any global setup.
-        
-          * GstAudioEncoder calls @set_format to inform subclass of the format
-            of input audio data that it is about to receive.  Subclass should
-            setup for encoding and configure various base class parameters
-            appropriately, notably those directing desired input data handling.
-            While unlikely, it might be called more than once, if changing input
-            parameters require reconfiguration.
-        
-          * GstAudioEncoder calls @stop at end of all processing.
-      )
-        
+      * Initially, GstAudioEncoder calls @start when the encoder element
+        is activated, which allows subclass to perform any global setup.
+    
+      * GstAudioEncoder calls @set_format to inform subclass of the format
+        of input audio data that it is about to receive.  Subclass should
+        setup for encoding and configure various base class parameters
+        appropriately, notably those directing desired input data handling.
+        While unlikely, it might be called more than once, if changing input
+        parameters require reconfiguration.
+    
+      * GstAudioEncoder calls @stop at end of all processing.
+    
     As of configuration stage, and throughout processing, GstAudioEncoder
     maintains various parameters that provide required context,
     e.g. describing the format of input audio data.
@@ -1989,28 +1973,24 @@ struct GstAudioDownmixMeta
     
     ## Data processing
     
-        $(LIST
-              * Base class gathers input sample data (as directed by the context's
-                frame_samples and frame_max) and provides this to subclass' @handle_frame.
-              * If codec processing results in encoded data, subclass should call
-                [gstaudio.audio_encoder.AudioEncoder.finishFrame] to have encoded data pushed
-                downstream. Alternatively, it might also call
-                [gstaudio.audio_encoder.AudioEncoder.finishFrame] (with a NULL buffer and some number of
-                dropped samples) to indicate dropped (non-encoded) samples.
-              * Just prior to actually pushing a buffer downstream,
-                it is passed to @pre_push.
-              * During the parsing process GstAudioEncoderClass will handle both
-                srcpad and sinkpad events. Sink events will be passed to subclass
-                if @event callback has been provided.
-        )
-          
+        * Base class gathers input sample data (as directed by the context's
+          frame_samples and frame_max) and provides this to subclass' @handle_frame.
+        * If codec processing results in encoded data, subclass should call
+          [gstaudio.audio_encoder.AudioEncoder.finishFrame] to have encoded data pushed
+          downstream. Alternatively, it might also call
+          [gstaudio.audio_encoder.AudioEncoder.finishFrame] (with a NULL buffer and some number of
+          dropped samples) to indicate dropped (non-encoded) samples.
+        * Just prior to actually pushing a buffer downstream,
+          it is passed to @pre_push.
+        * During the parsing process GstAudioEncoderClass will handle both
+          srcpad and sinkpad events. Sink events will be passed to subclass
+          if @event callback has been provided.
+    
     ## Shutdown phase
     
-      $(LIST
-          * GstAudioEncoder class calls @stop to inform the subclass that data
-            parsing will be stopped.
-      )
-        
+      * GstAudioEncoder class calls @stop to inform the subclass that data
+        parsing will be stopped.
+    
     Subclass is responsible for providing pad template caps for
     source and sink pads. The pads need to be named "sink" and "src". It also
     needs to set the fixed caps on srcpad, when the format is ensured.  This
@@ -2049,17 +2029,15 @@ struct GstAudioDownmixMeta
     
     Things that subclass need to take care of:
     
-      $(LIST
-          * Provide pad templates
-          * Set source pad caps when appropriate
-          * Inform base class of buffer processing needs using context's
-             frame_samples and frame_bytes.
-          * Set user-configurable properties to sane defaults for format and
-             implementing codec at hand, e.g. those controlling timestamp behaviour
-             and discontinuity processing.
-          * Accept data in @handle_frame and provide encoded results to
-             [gstaudio.audio_encoder.AudioEncoder.finishFrame].
-      )
+      * Provide pad templates
+      * Set source pad caps when appropriate
+      * Inform base class of buffer processing needs using context's
+         frame_samples and frame_bytes.
+      * Set user-configurable properties to sane defaults for format and
+         implementing codec at hand, e.g. those controlling timestamp behaviour
+         and discontinuity processing.
+      * Accept data in @handle_frame and provide encoded results to
+         [gstaudio.audio_encoder.AudioEncoder.finishFrame].
 */
 struct GstAudioEncoder
 {
@@ -2726,25 +2704,21 @@ struct GstAudioRingBufferSpec
     This is the most simple base class for audio sinks that only requires
     subclasses to implement a set of simple functions:
     
-    $(LIST
-      * `open()` :Open the device.
-      
-      * `prepare()` :Configure the device with the specified format.
-      
-      * `write()` :Write samples to the device.
-      
-      * `reset()` :Unblock writes and flush the device.
-      
-      * `delay()` :Get the number of samples written but not yet played
-    )
+    * `open()` :Open the device.
+    
+    * `prepare()` :Configure the device with the specified format.
+    
+    * `write()` :Write samples to the device.
+    
+    * `reset()` :Unblock writes and flush the device.
+    
+    * `delay()` :Get the number of samples written but not yet played
     by the device.
     
-    $(LIST
-      * `unprepare()` :Undo operations done by prepare.
-      
-      * `close()` :Close the device.
-    )
-      
+    * `unprepare()` :Undo operations done by prepare.
+    
+    * `close()` :Close the device.
+    
     All scheduling of samples and timestamps is done in this base class
     together with #GstAudioBaseSink using a default implementation of a
     #GstAudioRingBuffer that uses threads.
@@ -2848,16 +2822,14 @@ struct GstAudioSinkClassExtension
     This is the most simple base class for audio sources that only requires
     subclasses to implement a set of simple functions:
     
-    $(LIST
-      * `open()` :Open the device.
-      * `prepare()` :Configure the device with the specified format.
-      * `read()` :Read samples from the device.
-      * `reset()` :Unblock reads and flush the device.
-      * `delay()` :Get the number of samples in the device but not yet read.
-      * `unprepare()` :Undo operations done by prepare.
-      * `close()` :Close the device.
-    )
-      
+    * `open()` :Open the device.
+    * `prepare()` :Configure the device with the specified format.
+    * `read()` :Read samples from the device.
+    * `reset()` :Unblock reads and flush the device.
+    * `delay()` :Get the number of samples in the device but not yet read.
+    * `unprepare()` :Undo operations done by prepare.
+    * `close()` :Close the device.
+    
     All scheduling of samples and timestamps is done in this base class
     together with #GstAudioBaseSrc using a default implementation of a
     #GstAudioRingBuffer that uses threads.

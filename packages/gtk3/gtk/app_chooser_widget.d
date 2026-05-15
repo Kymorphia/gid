@@ -404,7 +404,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget))
+          `void callback(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget)`
   
           `application` the activated #GAppInfo (optional)
   
@@ -447,7 +447,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget))
+          `void callback(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget)`
   
           `application` the selected #GAppInfo (optional)
   
@@ -493,7 +493,7 @@ class AppChooserWidget : gtk.box.Box, gtk.app_chooser.AppChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu.Menu menu, gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget))
+          `void callback(gtk.menu.Menu menu, gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget)`
   
           `menu` the #GtkMenu to populate (optional)
   

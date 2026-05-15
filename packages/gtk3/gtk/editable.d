@@ -208,7 +208,7 @@ interface Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.editable.Editable editable))
+          `void callback(gtk.editable.Editable editable)`
   
           `editable` the instance the signal is connected to (optional)
   
@@ -233,7 +233,7 @@ interface Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int startPos, int endPos, gtk.editable.Editable editable))
+          `void callback(int startPos, int endPos, gtk.editable.Editable editable)`
   
           `startPos` the starting position (optional)
   
@@ -260,7 +260,7 @@ interface Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string newText, ref int position, gtk.editable.Editable editable))
+          `void callback(string newText, ref int position, gtk.editable.Editable editable)`
   
           `newText` the new text to insert (optional)
   

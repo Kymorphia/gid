@@ -531,7 +531,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D int callback(out double newValue, adw.spin_row.SpinRow spinRow))
+          `int callback(out double newValue, adw.spin_row.SpinRow spinRow)`
   
           `newValue` return location for the new value (optional)
   
@@ -585,7 +585,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(adw.spin_row.SpinRow spinRow))
+          `bool callback(adw.spin_row.SpinRow spinRow)`
   
           `spinRow` the instance the signal is connected to (optional)
   
@@ -627,7 +627,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.spin_row.SpinRow spinRow))
+          `void callback(adw.spin_row.SpinRow spinRow)`
   
           `spinRow` the instance the signal is connected to (optional)
   

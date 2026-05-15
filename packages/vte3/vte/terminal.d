@@ -2827,7 +2827,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -2867,7 +2867,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint width, uint height, vte.terminal.Terminal terminal))
+          `void callback(uint width, uint height, vte.terminal.Terminal terminal)`
   
           `width` the new character cell width (optional)
   
@@ -2917,7 +2917,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int status, vte.terminal.Terminal terminal))
+          `void callback(int status, vte.terminal.Terminal terminal)`
   
           `status` the child's exit status (optional)
   
@@ -2961,7 +2961,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string text, vte.terminal.Terminal terminal))
+          `void callback(string text, vte.terminal.Terminal terminal)`
   
           `text` a string of text (optional)
   
@@ -3006,7 +3006,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3043,7 +3043,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3080,7 +3080,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3117,7 +3117,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3155,7 +3155,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3192,7 +3192,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3229,7 +3229,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3268,7 +3268,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3307,7 +3307,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3350,7 +3350,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string uri, gdk.rectangle.Rectangle bbox, vte.terminal.Terminal terminal))
+          `void callback(string uri, gdk.rectangle.Rectangle bbox, vte.terminal.Terminal terminal)`
   
           `uri` the nonempty target URI under the mouse, or NULL (optional)
   
@@ -3399,7 +3399,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3438,7 +3438,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3475,7 +3475,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3512,7 +3512,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3549,7 +3549,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3586,7 +3586,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint x, uint y, vte.terminal.Terminal terminal))
+          `void callback(uint x, uint y, vte.terminal.Terminal terminal)`
   
           `x` the terminal's desired location, X coordinate (optional)
   
@@ -3635,7 +3635,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3672,7 +3672,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3709,7 +3709,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3746,7 +3746,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint width, uint height, vte.terminal.Terminal terminal))
+          `void callback(uint width, uint height, vte.terminal.Terminal terminal)`
   
           `width` the desired number of columns (optional)
   
@@ -3795,7 +3795,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3832,7 +3832,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   
@@ -3880,7 +3880,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.event_context.EventContext context, vte.terminal.Terminal terminal))
+          `void callback(vte.event_context.EventContext context, vte.terminal.Terminal terminal)`
   
           `context` the context (optional)
   
@@ -3923,7 +3923,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(vte.terminal.Terminal terminal))
+          `void callback(vte.terminal.Terminal terminal)`
   
           `terminal` the instance the signal is connected to (optional)
   

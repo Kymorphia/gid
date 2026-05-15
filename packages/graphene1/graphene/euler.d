@@ -340,15 +340,13 @@ class Euler : gobject.boxed.Boxed
       associated with the #graphene_euler_t; for instance, if the order
       used to initialize `e` is `GRAPHENE_EULER_ORDER_XYZ`:
       
-       $(LIST
-          * the first rotation moves the body around the X axis with
-            an angle φ
-          * the second rotation moves the body around the Y axis with
-            an angle of ϑ
-          * the third rotation moves the body around the Z axis with
-            an angle of ψ
-       )
-         
+       * the first rotation moves the body around the X axis with
+         an angle φ
+       * the second rotation moves the body around the Y axis with
+         an angle of ϑ
+       * the third rotation moves the body around the Z axis with
+         an angle of ψ
+      
       The rotation sign convention is right-handed, to preserve compatibility
       between Euler-based, quaternion-based, and angle-axis-based rotations.
   

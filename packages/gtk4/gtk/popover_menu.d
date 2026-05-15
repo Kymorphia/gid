@@ -77,42 +77,36 @@ import gtk.widget;
     
     The following attributes are used when constructing menu items:
     
-    $(LIST
-      * "label": a user-visible string to display
-      * "use-markup": whether the text in the menu item includes [Pango markup](https://docs.gtk.org/Pango/pango_markup.html)
-      * "action": the prefixed name of the action to trigger
-      * "target": the parameter to use when activating the action
-      * "icon" and "verb-icon": names of icons that may be displayed
-      * "submenu-action": name of an action that may be used to track
-           whether a submenu is open
-      * "hidden-when": a string used to determine when the item will be hidden.
-           Possible values include "action-disabled", "action-missing", "macos-menubar".
-           This is mainly useful for exported menus, see [gtk.application.Application.setMenubar].
-      * "custom": a string used to match against the ID of a custom child added with
-           [gtk.popover_menu.PopoverMenu.addChild], [gtk.popover_menu_bar.PopoverMenuBar.addChild],
-           or in the ui file with `<child type="ID">`.
-    )
-      
+    - "label": a user-visible string to display
+    - "use-markup": whether the text in the menu item includes [Pango markup](https://docs.gtk.org/Pango/pango_markup.html)
+    - "action": the prefixed name of the action to trigger
+    - "target": the parameter to use when activating the action
+    - "icon" and "verb-icon": names of icons that may be displayed
+    - "submenu-action": name of an action that may be used to track
+         whether a submenu is open
+    - "hidden-when": a string used to determine when the item will be hidden.
+         Possible values include "action-disabled", "action-missing", "macos-menubar".
+         This is mainly useful for exported menus, see [gtk.application.Application.setMenubar].
+    - "custom": a string used to match against the ID of a custom child added with
+         [gtk.popover_menu.PopoverMenu.addChild], [gtk.popover_menu_bar.PopoverMenuBar.addChild],
+         or in the ui file with `<child type="ID">`.
+    
     The following attributes are used when constructing sections:
     
-    $(LIST
-      * "label": a user-visible string to use as section heading
-      * "display-hint": a string used to determine special formatting for the section.
-          Possible values include "horizontal-buttons", "circular-buttons" and
-          "inline-buttons". They all indicate that section should be
-          displayed as a horizontal row of buttons.
-      * "text-direction": a string used to determine the [gtk.types.TextDirection] to use
-          when "display-hint" is set to "horizontal-buttons". Possible values
-          include "rtl", "ltr", and "none".
-    )
-      
+    - "label": a user-visible string to use as section heading
+    - "display-hint": a string used to determine special formatting for the section.
+        Possible values include "horizontal-buttons", "circular-buttons" and
+        "inline-buttons". They all indicate that section should be
+        displayed as a horizontal row of buttons.
+    - "text-direction": a string used to determine the [gtk.types.TextDirection] to use
+        when "display-hint" is set to "horizontal-buttons". Possible values
+        include "rtl", "ltr", and "none".
+    
     The following attributes are used when constructing submenus:
     
-    $(LIST
-      * "label": a user-visible string to display
-      * "icon": icon name to display
-    )
-      
+    - "label": a user-visible string to display
+    - "icon": icon name to display
+    
     Menu items will also show accelerators, which are usually associated
     with actions via [gtk.application.Application.setAccelsForAction],
     [gtk.widget_class.WidgetClass.addBindingAction] or

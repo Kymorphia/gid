@@ -33,12 +33,10 @@ import gtk.types;
     
     A recognized gesture will then emit the following signals:
     
-    $(LIST
-      * [gtk.gesture.Gesture.begin] when the gesture is recognized.
-      * [gtk.gesture.Gesture.update], whenever an input event is processed.
-      * [gtk.gesture.Gesture.end] when the gesture is no longer recognized.
-    )
-      
+    - [gtk.gesture.Gesture.begin] when the gesture is recognized.
+    - [gtk.gesture.Gesture.update], whenever an input event is processed.
+    - [gtk.gesture.Gesture.end] when the gesture is no longer recognized.
+    
     ## Event propagation
     
     In order to receive events, a gesture needs to set a propagation phase
@@ -80,15 +78,13 @@ import gtk.types;
     If a sequence enters in the [gtk.types.EventSequenceState.Claimed] state, the gesture
     group will grab all interaction on the sequence, by:
     
-    $(LIST
-      * Setting the same sequence to [gtk.types.EventSequenceState.Denied] on every other
-        gesture group within the widget, and every gesture on parent widgets
-        in the propagation chain.
-      * Emitting [gtk.gesture.Gesture.cancel] on every gesture in widgets
-        underneath in the propagation chain.
-      * Stopping event propagation after the gesture group handles the event.
-    )
-      
+    - Setting the same sequence to [gtk.types.EventSequenceState.Denied] on every other
+      gesture group within the widget, and every gesture on parent widgets
+      in the propagation chain.
+    - Emitting [gtk.gesture.Gesture.cancel] on every gesture in widgets
+      underneath in the propagation chain.
+    - Stopping event propagation after the gesture group handles the event.
+    
     Note: if a sequence is set early to [gtk.types.EventSequenceState.Claimed] on
     [gdk.types.EventType.TouchBegin]/[gdk.types.EventType.ButtonPress] (so those events are captured before
     reaching the event widget, this implies [gtk.types.PropagationPhase.Capture]), one similar
@@ -106,10 +102,8 @@ import gtk.types;
     touchpad gesture events. The only precautions users of [gtk.gesture.Gesture] should
     do to enable this support are:
     
-    $(LIST
-      * If the gesture has [gtk.types.PropagationPhase.None], ensuring events of type
-        [gdk.types.EventType.TouchpadSwipe] and [gdk.types.EventType.TouchpadPinch] are handled by the [gtk.gesture.Gesture]
-    )
+    - If the gesture has [gtk.types.PropagationPhase.None], ensuring events of type
+      [gdk.types.EventType.TouchpadSwipe] and [gdk.types.EventType.TouchpadPinch] are handled by the [gtk.gesture.Gesture]
 */
 class Gesture : gtk.event_controller.EventController
 {
@@ -404,13 +398,11 @@ class Gesture : gtk.event_controller.EventController
       a not denied state. With these rules, the lifetime of an event
       sequence is constrained to the next four:
       
-      $(LIST
-        * None
-        * None → Denied
-        * None → Claimed
-        * None → Claimed → Denied
-      )
-        
+      * None
+      * None → Denied
+      * None → Claimed
+      * None → Claimed → Denied
+      
       Note: Due to event handling ordering, it may be unsafe to set the
       state on another gesture within a [gtk.gesture.Gesture.begin] signal
       handler, as the callback might be executed before the other gesture
@@ -466,13 +458,11 @@ class Gesture : gtk.event_controller.EventController
       a not denied state. With these rules, the lifetime of an event
       sequence is constrained to the next four:
       
-      $(LIST
-        * None
-        * None → Denied
-        * None → Claimed
-        * None → Claimed → Denied
-      )
-        
+      * None
+      * None → Denied
+      * None → Claimed
+      * None → Claimed → Denied
+      
       Note: Due to event handling ordering, it may be unsafe to set the
       state on another gesture within a [gtk.gesture.Gesture.begin] signal
       handler, as the callback might be executed before the other gesture
@@ -539,7 +529,7 @@ class Gesture : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture))
+          `void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture)`
   
           `sequence` the [gdk.event_sequence.EventSequence] that made the gesture
               to be recognized (optional)
@@ -592,7 +582,7 @@ class Gesture : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture))
+          `void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture)`
   
           `sequence` the [gdk.event_sequence.EventSequence] that was cancelled (optional)
   
@@ -643,7 +633,7 @@ class Gesture : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture))
+          `void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture)`
   
           `sequence` the [gdk.event_sequence.EventSequence] that made gesture
               recognition to finish (optional)
@@ -690,7 +680,7 @@ class Gesture : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.event_sequence.EventSequence sequence, gtk.types.EventSequenceState state, gtk.gesture.Gesture gesture))
+          `void callback(gdk.event_sequence.EventSequence sequence, gtk.types.EventSequenceState state, gtk.gesture.Gesture gesture)`
   
           `sequence` the [gdk.event_sequence.EventSequence] that was cancelled (optional)
   
@@ -741,7 +731,7 @@ class Gesture : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture))
+          `void callback(gdk.event_sequence.EventSequence sequence, gtk.gesture.Gesture gesture)`
   
           `sequence` the [gdk.event_sequence.EventSequence] that was updated (optional)
   

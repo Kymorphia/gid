@@ -158,7 +158,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion_context.CompletionContext completionContext))
+          `void callback(gtksource.completion_context.CompletionContext completionContext)`
   
           `completionContext` the instance the signal is connected to (optional)
   

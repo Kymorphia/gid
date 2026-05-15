@@ -360,7 +360,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.navigation_page.NavigationPage navigationPage))
+          `void callback(adw.navigation_page.NavigationPage navigationPage)`
   
           `navigationPage` the instance the signal is connected to (optional)
   
@@ -401,7 +401,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.navigation_page.NavigationPage navigationPage))
+          `void callback(adw.navigation_page.NavigationPage navigationPage)`
   
           `navigationPage` the instance the signal is connected to (optional)
   
@@ -442,7 +442,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.navigation_page.NavigationPage navigationPage))
+          `void callback(adw.navigation_page.NavigationPage navigationPage)`
   
           `navigationPage` the instance the signal is connected to (optional)
   
@@ -483,7 +483,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.navigation_page.NavigationPage navigationPage))
+          `void callback(adw.navigation_page.NavigationPage navigationPage)`
   
           `navigationPage` the instance the signal is connected to (optional)
   

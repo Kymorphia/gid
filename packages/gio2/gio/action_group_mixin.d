@@ -428,7 +428,7 @@ template ActionGroupT()
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string actionName, gio.action_group.ActionGroup actionGroup))
+          `void callback(string actionName, gio.action_group.ActionGroup actionGroup)`
   
           `actionName` the name of the action in action_group (optional)
   
@@ -472,7 +472,7 @@ template ActionGroupT()
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string actionName, bool enabled, gio.action_group.ActionGroup actionGroup))
+          `void callback(string actionName, bool enabled, gio.action_group.ActionGroup actionGroup)`
   
           `actionName` the name of the action in action_group (optional)
   
@@ -524,7 +524,7 @@ template ActionGroupT()
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string actionName, gio.action_group.ActionGroup actionGroup))
+          `void callback(string actionName, gio.action_group.ActionGroup actionGroup)`
   
           `actionName` the name of the action in action_group (optional)
   
@@ -568,7 +568,7 @@ template ActionGroupT()
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string actionName, glib.variant.Variant value, gio.action_group.ActionGroup actionGroup))
+          `void callback(string actionName, glib.variant.Variant value, gio.action_group.ActionGroup actionGroup)`
   
           `actionName` the name of the action in action_group (optional)
   

@@ -2791,7 +2791,7 @@ class Window : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.window.Window window))
+          `void callback(gtk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -2831,7 +2831,7 @@ class Window : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.window.Window window))
+          `void callback(gtk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -2875,7 +2875,7 @@ class Window : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool toggle, gtk.window.Window window))
+          `bool callback(bool toggle, gtk.window.Window window)`
   
           `toggle` toggle the debugger (optional)
   
@@ -2922,7 +2922,7 @@ class Window : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.window.Window window))
+          `void callback(gtk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -2960,7 +2960,7 @@ class Window : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget, gtk.window.Window window))
+          `void callback(gtk.widget.Widget widget, gtk.window.Window window)`
   
           `widget` the newly focused widget (or null for no focus) (optional)
   

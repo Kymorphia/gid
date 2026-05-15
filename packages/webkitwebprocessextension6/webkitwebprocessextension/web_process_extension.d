@@ -195,7 +195,7 @@ class WebProcessExtension : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkitwebprocessextension.web_page.WebPage webPage, webkitwebprocessextension.web_process_extension.WebProcessExtension webProcessExtension))
+          `void callback(webkitwebprocessextension.web_page.WebPage webPage, webkitwebprocessextension.web_process_extension.WebProcessExtension webProcessExtension)`
   
           `webPage` the #WebKitWebPage created (optional)
   
@@ -241,7 +241,7 @@ class WebProcessExtension : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkitwebprocessextension.user_message.UserMessage message, webkitwebprocessextension.web_process_extension.WebProcessExtension webProcessExtension))
+          `void callback(webkitwebprocessextension.user_message.UserMessage message, webkitwebprocessextension.web_process_extension.WebProcessExtension webProcessExtension)`
   
           `message` the #WebKitUserMessage received (optional)
   

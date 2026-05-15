@@ -490,7 +490,7 @@ template TextT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.text.Text text))
+          `void callback(atk.text.Text text)`
   
           `text` the instance the signal is connected to (optional)
   
@@ -529,7 +529,7 @@ template TextT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int arg1, atk.text.Text text))
+          `void callback(int arg1, atk.text.Text text)`
   
           `arg1` The new position of the text caret. (optional)
   
@@ -577,7 +577,7 @@ template TextT()
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int arg1, int arg2, atk.text.Text text))
+          `void callback(int arg1, int arg2, atk.text.Text text)`
   
           `arg1` The position (character offset) of the insertion or deletion. (optional)
   
@@ -633,7 +633,7 @@ template TextT()
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int arg1, int arg2, string arg3, atk.text.Text text))
+          `void callback(int arg1, int arg2, string arg3, atk.text.Text text)`
   
           `arg1` The position (character offset) of the insertion. (optional)
   
@@ -692,7 +692,7 @@ template TextT()
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int arg1, int arg2, string arg3, atk.text.Text text))
+          `void callback(int arg1, int arg2, string arg3, atk.text.Text text)`
   
           `arg1` The position (character offset) of the removal. (optional)
   
@@ -748,7 +748,7 @@ template TextT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.text.Text text))
+          `void callback(atk.text.Text text)`
   
           `text` the instance the signal is connected to (optional)
   

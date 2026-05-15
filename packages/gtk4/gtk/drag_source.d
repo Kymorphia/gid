@@ -301,7 +301,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag.Drag drag, gtk.drag_source.DragSource dragSource))
+          `void callback(gdk.drag.Drag drag, gtk.drag_source.DragSource dragSource)`
   
           `drag` the [gdk.drag.Drag] object (optional)
   
@@ -348,7 +348,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.drag.Drag drag, gdk.types.DragCancelReason reason, gtk.drag_source.DragSource dragSource))
+          `bool callback(gdk.drag.Drag drag, gdk.types.DragCancelReason reason, gtk.drag_source.DragSource dragSource)`
   
           `drag` the [gdk.drag.Drag] object (optional)
   
@@ -404,7 +404,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag.Drag drag, bool deleteData, gtk.drag_source.DragSource dragSource))
+          `void callback(gdk.drag.Drag drag, bool deleteData, gtk.drag_source.DragSource dragSource)`
   
           `drag` the [gdk.drag.Drag] object (optional)
   
@@ -459,7 +459,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gdk.content_provider.ContentProvider callback(double x, double y, gtk.drag_source.DragSource dragSource))
+          `gdk.content_provider.ContentProvider callback(double x, double y, gtk.drag_source.DragSource dragSource)`
   
           `x` the X coordinate of the drag starting point (optional)
   

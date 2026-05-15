@@ -1239,7 +1239,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message msg, soup.session.Session session))
+          `void callback(soup.message.Message msg, soup.session.Session session)`
   
           `msg` the request that was queued (optional)
   
@@ -1286,7 +1286,7 @@ class Session : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message msg, soup.session.Session session))
+          `void callback(soup.message.Message msg, soup.session.Session session)`
   
           `msg` the request that was unqueued (optional)
   

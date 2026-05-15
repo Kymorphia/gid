@@ -223,7 +223,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.drop.Drop drop, gtk.drop_target_async.DropTargetAsync dropTargetAsync))
+          `bool callback(gdk.drop.Drop drop, gtk.drop_target_async.DropTargetAsync dropTargetAsync)`
   
           `drop` the [gdk.drop.Drop] (optional)
   
@@ -271,7 +271,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gdk.types.DragAction callback(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync))
+          `gdk.types.DragAction callback(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync)`
   
           `drop` the [gdk.drop.Drop] (optional)
   
@@ -332,7 +332,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drop.Drop drop, gtk.drop_target_async.DropTargetAsync dropTargetAsync))
+          `void callback(gdk.drop.Drop drop, gtk.drop_target_async.DropTargetAsync dropTargetAsync)`
   
           `drop` the [gdk.drop.Drop] (optional)
   
@@ -375,7 +375,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gdk.types.DragAction callback(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync))
+          `gdk.types.DragAction callback(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync)`
   
           `drop` the [gdk.drop.Drop] (optional)
   
@@ -446,7 +446,7 @@ class DropTargetAsync : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync))
+          `bool callback(gdk.drop.Drop drop, double x, double y, gtk.drop_target_async.DropTargetAsync dropTargetAsync)`
   
           `drop` the [gdk.drop.Drop] (optional)
   

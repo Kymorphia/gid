@@ -1009,7 +1009,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.ScrollType scrollType, gtk.menu.Menu menu))
+          `void callback(gtk.types.ScrollType scrollType, gtk.menu.Menu menu)`
   
           `scrollType` a #GtkScrollType (optional)
   
@@ -1073,7 +1073,7 @@ class Menu : gtk.menu_shell.MenuShell
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(void* flippedRect, void* finalRect, bool flippedX, bool flippedY, gtk.menu.Menu menu))
+          `void callback(void* flippedRect, void* finalRect, bool flippedX, bool flippedY, gtk.menu.Menu menu)`
   
           `flippedRect` the position of menu after any possible
                            flipping or null if the backend can't obtain it (optional)

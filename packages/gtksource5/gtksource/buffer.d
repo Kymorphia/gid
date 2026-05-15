@@ -38,13 +38,11 @@ import gtksource.types;
     engine. The default context classes that are applied to regions of a
     [gtksource.buffer.Buffer]:
     
-     $(LIST
-        * **comment**: the region delimits a comment;
-        * **no-spell-check**: the region should not be spell checked;
-        * **path**: the region delimits a path to a file;
-        * **string**: the region delimits a string.
-     )
-       
+     - **comment**: the region delimits a comment;
+     - **no-spell-check**: the region should not be spell checked;
+     - **path**: the region delimits a path to a file;
+     - **string**: the region delimits a string.
+    
     Custom language definition files can create their own context classes,
     since the functions like [gtksource.buffer.Buffer.iterHasContextClass] take
     a string parameter as the context class.
@@ -74,13 +72,11 @@ import gtksource.types;
     Accessing a context class via the associated [gtk.text_tag.TextTag] is less
     convenient than the [gtksource.buffer.Buffer] API, because:
     
-     $(LIST
-        * The tag doesn't always exist, you need to listen to the
-          `signal@Gtk.TextTagTable::tag-added` and `signal@Gtk.TextTagTable::tag-removed` signals.
-        * Instead of the `signal@GtkSource.Buffer::highlight-updated` signal, you can listen
-          to the `signal@Gtk.TextBuffer::apply-tag` and `signal@Gtk.TextBuffer::remove-tag` signals.
-     )
-       
+     - The tag doesn't always exist, you need to listen to the
+       `signal@Gtk.TextTagTable::tag-added` and `signal@Gtk.TextTagTable::tag-removed` signals.
+     - Instead of the `signal@GtkSource.Buffer::highlight-updated` signal, you can listen
+       to the `signal@Gtk.TextBuffer::apply-tag` and `signal@Gtk.TextBuffer::remove-tag` signals.
+    
     A possible use-case for accessing a context class via the associated
     [gtk.text_tag.TextTag] is to read the region but without adding a hard dependency on the
     GtkSourceView library (for example for a spell-checking library that wants to
@@ -643,14 +639,12 @@ class Buffer : gtk.text_buffer.TextBuffer
       shows it as an empty line. This is generally not what the user expects.
       
       If implicit_trailing_newline is true (the default value):
-       $(LIST
-          * when a `classFileLoader` loads the content of a file into the buffer,
-            the trailing newline (if present in the file) is not inserted into the
-            buffer.
-          * when a `classFileSaver` saves the content of the buffer into a file, a
-            trailing newline is added to the file.
-       )
-         
+       - when a `classFileLoader` loads the content of a file into the buffer,
+         the trailing newline (if present in the file) is not inserted into the
+         buffer.
+       - when a `classFileSaver` saves the content of the buffer into a file, a
+         trailing newline is added to the file.
+      
       On the other hand, if implicit_trailing_newline is false, the file's
       content is not modified when loaded into the buffer, and the buffer's
       content is not modified when saved into a file.
@@ -732,7 +726,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter iter, gtksource.types.BracketMatchType state, gtksource.buffer.Buffer buffer))
+          `void callback(gtk.text_iter.TextIter iter, gtksource.types.BracketMatchType state, gtksource.buffer.Buffer buffer)`
   
           `iter` if found, the location of the matching bracket. (optional)
   
@@ -781,7 +775,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.buffer.Buffer buffer))
+          `void callback(gtksource.buffer.Buffer buffer)`
   
           `buffer` the instance the signal is connected to (optional)
   
@@ -820,7 +814,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.buffer.Buffer buffer))
+          `void callback(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.buffer.Buffer buffer)`
   
           `start` the start of the updated region (optional)
   
@@ -870,7 +864,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_mark.TextMark mark, gtksource.buffer.Buffer buffer))
+          `void callback(gtk.text_mark.TextMark mark, gtksource.buffer.Buffer buffer)`
   
           `mark` the `classMark` (optional)
   

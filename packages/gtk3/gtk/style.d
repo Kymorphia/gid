@@ -249,7 +249,7 @@ class Style : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.style.Style style))
+          `void callback(gtk.style.Style style)`
   
           `style` the instance the signal is connected to (optional)
   
@@ -289,7 +289,7 @@ class Style : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.style.Style style))
+          `void callback(gtk.style.Style style)`
   
           `style` the instance the signal is connected to (optional)
   

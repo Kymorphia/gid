@@ -1034,7 +1034,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.status_icon.StatusIcon statusIcon))
+          `void callback(gtk.status_icon.StatusIcon statusIcon)`
   
           `statusIcon` the instance the signal is connected to (optional)
   
@@ -1075,7 +1075,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon))
+          `bool callback(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon)`
   
           `event` the #GdkEventButton which triggered
                                             this signal (optional)
@@ -1127,7 +1127,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon))
+          `bool callback(gdk.event_button.EventButton event, gtk.status_icon.StatusIcon statusIcon)`
   
           `event` the #GdkEventButton which triggered
                                             this signal (optional)
@@ -1183,7 +1183,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint button, uint activateTime, gtk.status_icon.StatusIcon statusIcon))
+          `void callback(uint button, uint activateTime, gtk.status_icon.StatusIcon statusIcon)`
   
           `button` the button that was pressed, or 0 if the
               signal is not emitted in response to a button press event (optional)
@@ -1248,7 +1248,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.status_icon.StatusIcon statusIcon))
+          `bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.status_icon.StatusIcon statusIcon)`
   
           `x` the x coordinate of the cursor position where the request has been
                 emitted, relative to status_icon (optional)
@@ -1318,7 +1318,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_scroll.EventScroll event, gtk.status_icon.StatusIcon statusIcon))
+          `bool callback(gdk.event_scroll.EventScroll event, gtk.status_icon.StatusIcon statusIcon)`
   
           `event` the #GdkEventScroll which triggered
                                             this signal (optional)
@@ -1367,7 +1367,7 @@ class StatusIcon : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(int size, gtk.status_icon.StatusIcon statusIcon))
+          `bool callback(int size, gtk.status_icon.StatusIcon statusIcon)`
   
           `size` the new size (optional)
   

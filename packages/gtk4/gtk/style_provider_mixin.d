@@ -31,7 +31,7 @@ template StyleProviderT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.style_provider.StyleProvider styleProvider))
+          `void callback(gtk.style_provider.StyleProvider styleProvider)`
   
           `styleProvider` the instance the signal is connected to (optional)
   

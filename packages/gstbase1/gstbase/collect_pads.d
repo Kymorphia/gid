@@ -19,41 +19,39 @@ import gstbase.types;
     Manages a set of pads that operate in collect mode. This means that control
     is given to the manager of this object when all pads have data.
     
-      $(LIST
-          * Collectpads are created with [gstbase.collect_pads.CollectPads.new_]. A callback should then
-            be installed with gst_collect_pads_set_function ().
-        
-          * Pads are added to the collection with [gstbase.collect_pads.CollectPads.addPad]/
-            [gstbase.collect_pads.CollectPads.removePad]. The pad has to be a sinkpad. When added,
-            the chain, event and query functions of the pad are overridden. The
-            element_private of the pad is used to store private information for the
-            collectpads.
-        
-          * For each pad, data is queued in the _chain function or by
-            performing a pull_range.
-        
-          * When data is queued on all pads in waiting mode, the callback function is called.
-        
-          * Data can be dequeued from the pad with the [gstbase.collect_pads.CollectPads.pop] method.
-            One can peek at the data with the [gstbase.collect_pads.CollectPads.peek] function.
-            These functions will return null if the pad received an EOS event. When all
-            pads return null from a [gstbase.collect_pads.CollectPads.peek], the element can emit an EOS
-            event itself.
-        
-          * Data can also be dequeued in byte units using the [gstbase.collect_pads.CollectPads.available],
-            [gstbase.collect_pads.CollectPads.readBuffer] and [gstbase.collect_pads.CollectPads.flush] calls.
-        
-          * Elements should call [gstbase.collect_pads.CollectPads.start] and [gstbase.collect_pads.CollectPads.stop] in
-            their state change functions to start and stop the processing of the collectpads.
-            The [gstbase.collect_pads.CollectPads.stop] call should be called before calling the parent
-            element state change function in the PAUSED_TO_READY state change to ensure
-            no pad is blocked and the element can finish streaming.
-        
-          * [gstbase.collect_pads.CollectPads.setWaiting] sets a pad to waiting or non-waiting mode.
-            CollectPads element is not waiting for data to be collected on non-waiting pads.
-            Thus these pads may but need not have data when the callback is called.
-            All pads are in waiting mode by default.
-      )
+      * Collectpads are created with [gstbase.collect_pads.CollectPads.new_]. A callback should then
+        be installed with gst_collect_pads_set_function ().
+    
+      * Pads are added to the collection with [gstbase.collect_pads.CollectPads.addPad]/
+        [gstbase.collect_pads.CollectPads.removePad]. The pad has to be a sinkpad. When added,
+        the chain, event and query functions of the pad are overridden. The
+        element_private of the pad is used to store private information for the
+        collectpads.
+    
+      * For each pad, data is queued in the _chain function or by
+        performing a pull_range.
+    
+      * When data is queued on all pads in waiting mode, the callback function is called.
+    
+      * Data can be dequeued from the pad with the [gstbase.collect_pads.CollectPads.pop] method.
+        One can peek at the data with the [gstbase.collect_pads.CollectPads.peek] function.
+        These functions will return null if the pad received an EOS event. When all
+        pads return null from a [gstbase.collect_pads.CollectPads.peek], the element can emit an EOS
+        event itself.
+    
+      * Data can also be dequeued in byte units using the [gstbase.collect_pads.CollectPads.available],
+        [gstbase.collect_pads.CollectPads.readBuffer] and [gstbase.collect_pads.CollectPads.flush] calls.
+    
+      * Elements should call [gstbase.collect_pads.CollectPads.start] and [gstbase.collect_pads.CollectPads.stop] in
+        their state change functions to start and stop the processing of the collectpads.
+        The [gstbase.collect_pads.CollectPads.stop] call should be called before calling the parent
+        element state change function in the PAUSED_TO_READY state change to ensure
+        no pad is blocked and the element can finish streaming.
+    
+      * [gstbase.collect_pads.CollectPads.setWaiting] sets a pad to waiting or non-waiting mode.
+        CollectPads element is not waiting for data to be collected on non-waiting pads.
+        Thus these pads may but need not have data when the callback is called.
+        All pads are in waiting mode by default.
 */
 class CollectPads : gst.object.ObjectWrap
 {

@@ -525,18 +525,16 @@ struct GCClosure
     Using closures has a number of important advantages over a simple
     callback function/data pointer combination:
     
-    $(LIST
-      * Closures allow the callee to get the types of the callback parameters,
-        which means that language bindings don't have to write individual glue
-        for each callback type.
-      
-      * The reference counting of #GClosure makes it easy to handle reentrancy
-        right; if a callback is removed while it is being invoked, the closure
-        and its parameters won't be freed until the invocation finishes.
-      
-      * [gobject.closure.Closure.invalidate] and invalidation notifiers allow callbacks to be
-        automatically removed when the objects they point to go away.
-    )
+    - Closures allow the callee to get the types of the callback parameters,
+      which means that language bindings don't have to write individual glue
+      for each callback type.
+    
+    - The reference counting of #GClosure makes it easy to handle reentrancy
+      right; if a callback is removed while it is being invoked, the closure
+      and its parameters won't be freed until the invocation finishes.
+    
+    - [gobject.closure.Closure.invalidate] and invalidation notifiers allow callbacks to be
+      automatically removed when the objects they point to go away.
 */
 struct GClosure
 {
@@ -1732,13 +1730,11 @@ struct GParameter
     
     In particular, this allows you to:
     
-     $(LIST
-        * Change the target instance, which automatically causes disconnection
-          of the signals from the old instance and connecting to the new instance.
-        * Block and unblock signals as a group
-        * Ensuring that blocked state transfers across target instances.
-     )
-       
+     - Change the target instance, which automatically causes disconnection
+       of the signals from the old instance and connecting to the new instance.
+     - Block and unblock signals as a group
+     - Ensuring that blocked state transfers across target instances.
+    
     One place you might want to use such a structure is with [gtk.text_view.TextView] and
     [gtk.text_buffer.TextBuffer]. Often times, you'll need to connect to many signals on
     [gtk.text_buffer.TextBuffer] from a [gtk.text_view.TextView] subclass. This allows you to create a
@@ -2204,12 +2200,10 @@ struct GTypeValueTable
         this value bit-by-bit. Each character in the format represents
         an argument to be collected, and the characters themselves indicate
         the type of the argument. Currently supported arguments are:
-         $(LIST
-              * `'i'`: Integers, passed as `collect_values[].v_int`
-              * `'l'`: Longs, passed as `collect_values[].v_long`
-              * `'d'`: Doubles, passed as `collect_values[].v_double`
-              * `'p'`: Pointers, passed as `collect_values[].v_pointer`
-         )
+         - `'i'`: Integers, passed as `collect_values[].v_int`
+         - `'l'`: Longs, passed as `collect_values[].v_long`
+         - `'d'`: Doubles, passed as `collect_values[].v_double`
+         - `'p'`: Pointers, passed as `collect_values[].v_pointer`
         It should be noted that for variable argument list construction,
         ANSI C promotes every type smaller than an integer to an int, and
         floats to doubles. So for collection of short int or char, `'i'`

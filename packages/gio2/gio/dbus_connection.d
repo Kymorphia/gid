@@ -1713,17 +1713,15 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
         
         The cause of this event can be
         
-        $(LIST
-          * If [gio.dbus_connection.DBusConnection.close] is called. In this case
-            remote_peer_vanished is set to false and error is null.
-          
-          * If the remote peer closes the connection. In this case
-            remote_peer_vanished is set to true and error is set.
-          
-          * If the remote peer sends invalid or malformed data. In this
-            case remote_peer_vanished is set to false and error is set.
-        )
-          
+        - If [gio.dbus_connection.DBusConnection.close] is called. In this case
+          remote_peer_vanished is set to false and error is null.
+        
+        - If the remote peer closes the connection. In this case
+          remote_peer_vanished is set to true and error is set.
+        
+        - If the remote peer sends invalid or malformed data. In this
+          case remote_peer_vanished is set to false and error is set.
+        
         Upon receiving this signal, you should give up your reference to
         connection. You are guaranteed that this signal is emitted only
         once.
@@ -1731,7 +1729,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool remotePeerVanished, glib.error.ErrorWrap error, gio.dbus_connection.DBusConnection dBusConnection))
+          `void callback(bool remotePeerVanished, glib.error.ErrorWrap error, gio.dbus_connection.DBusConnection dBusConnection)`
   
           `remotePeerVanished` true if connection is closed because the
                 remote peer closed its end of the connection (optional)

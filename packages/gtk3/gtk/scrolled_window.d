@@ -894,7 +894,7 @@ class ScrolledWindow : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.PositionType pos, gtk.scrolled_window.ScrolledWindow scrolledWindow))
+          `void callback(gtk.types.PositionType pos, gtk.scrolled_window.ScrolledWindow scrolledWindow)`
   
           `pos` edge side that was hit (optional)
   
@@ -945,7 +945,7 @@ class ScrolledWindow : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.PositionType pos, gtk.scrolled_window.ScrolledWindow scrolledWindow))
+          `void callback(gtk.types.PositionType pos, gtk.scrolled_window.ScrolledWindow scrolledWindow)`
   
           `pos` edge side that was reached (optional)
   
@@ -994,7 +994,7 @@ class ScrolledWindow : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.DirectionType directionType, gtk.scrolled_window.ScrolledWindow scrolledWindow))
+          `void callback(gtk.types.DirectionType directionType, gtk.scrolled_window.ScrolledWindow scrolledWindow)`
   
           `directionType` either [gtk.types.DirectionType.TabForward] or
               [gtk.types.DirectionType.TabBackward] (optional)
@@ -1042,7 +1042,7 @@ class ScrolledWindow : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.ScrollType scroll, bool horizontal, gtk.scrolled_window.ScrolledWindow scrolledWindow))
+          `bool callback(gtk.types.ScrollType scroll, bool horizontal, gtk.scrolled_window.ScrolledWindow scrolledWindow)`
   
           `scroll` a #GtkScrollType describing how much to scroll (optional)
   

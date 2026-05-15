@@ -243,7 +243,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.password_entry.PasswordEntry passwordEntry))
+          `void callback(gtk.password_entry.PasswordEntry passwordEntry)`
   
           `passwordEntry` the instance the signal is connected to (optional)
   

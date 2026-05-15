@@ -413,7 +413,7 @@ interface Toplevel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.toplevel_size.ToplevelSize size, gdk.toplevel.Toplevel toplevel))
+          `void callback(gdk.toplevel_size.ToplevelSize size, gdk.toplevel.Toplevel toplevel)`
   
           `size` a [gdk.toplevel_size.ToplevelSize] (optional)
   

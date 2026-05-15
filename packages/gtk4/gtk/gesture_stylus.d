@@ -214,7 +214,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus))
+          `void callback(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus)`
   
           `x` the X coordinate of the stylus event (optional)
   
@@ -263,7 +263,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus))
+          `void callback(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus)`
   
           `x` the X coordinate of the stylus event (optional)
   
@@ -312,7 +312,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus))
+          `void callback(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus)`
   
           `x` the X coordinate of the stylus event (optional)
   
@@ -361,7 +361,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus))
+          `void callback(double x, double y, gtk.gesture_stylus.GestureStylus gestureStylus)`
   
           `x` the X coordinate of the stylus event (optional)
   

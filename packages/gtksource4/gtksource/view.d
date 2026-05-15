@@ -792,7 +792,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.types.ChangeCaseType caseType, gtksource.view.View view))
+          `void callback(gtksource.types.ChangeCaseType caseType, gtksource.view.View view)`
   
           `caseType` the case to use (optional)
   
@@ -835,7 +835,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int count, gtksource.view.View view))
+          `void callback(int count, gtksource.view.View view)`
   
           `count` the number to add to the number at the current position (optional)
   
@@ -878,7 +878,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.view.View view))
+          `void callback(gtksource.view.View view)`
   
           `view` the instance the signal is connected to (optional)
   
@@ -917,7 +917,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter iter, gdk.event.Event event, gtksource.view.View view))
+          `void callback(gtk.text_iter.TextIter iter, gdk.event.Event event, gtksource.view.View view)`
   
           `iter` a #GtkTextIter (optional)
   
@@ -969,7 +969,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool down, gtksource.view.View view))
+          `void callback(bool down, gtksource.view.View view)`
   
           `down` true to move down, false to move up. (optional)
   
@@ -1012,7 +1012,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool extendSelection, gtksource.view.View view))
+          `void callback(bool extendSelection, gtksource.view.View view)`
   
           `extendSelection` true if the move should extend the selection (optional)
   
@@ -1058,7 +1058,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int count, gtksource.view.View view))
+          `void callback(int count, gtksource.view.View view)`
   
           `count` the number of words to move over (optional)
   
@@ -1101,7 +1101,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.view.View view))
+          `void callback(gtksource.view.View view)`
   
           `view` the instance the signal is connected to (optional)
   
@@ -1147,7 +1147,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.view.View view))
+          `void callback(gtksource.view.View view)`
   
           `view` the instance the signal is connected to (optional)
   
@@ -1188,7 +1188,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter iter, int count, gtksource.view.View view))
+          `void callback(gtk.text_iter.TextIter iter, int count, gtksource.view.View view)`
   
           `iter` a #GtkTextIter (optional)
   
@@ -1237,7 +1237,7 @@ class View : gtk.text_view.TextView
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.view.View view))
+          `void callback(gtksource.view.View view)`
   
           `view` the instance the signal is connected to (optional)
   

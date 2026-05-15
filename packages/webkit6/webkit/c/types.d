@@ -1720,21 +1720,19 @@ struct WebKitFaviconDatabaseClass
     programmatically, each one represented by a #WebKitFeature that provides
     information about it:
     
-    $(LIST
-      * A unique “identifier”: [webkit.feature.Feature.getIdentifier].
-      * A “default value”, which indicates whether the option is enabled
-        automatically: [webkit.feature.Feature.getDefaultValue].
-      * Its “status”, which determines whether it should be considered
-        user-settable and its development stage (see `enum@FeatureStatus`
-        for details): [webkit.feature.Feature.getStatus].
-      * A category, which may be used to group features together:
-        [webkit.feature.Feature.getCategory].
-      * An optional short “name” which can be presented to an user:
-        [webkit.feature.Feature.getName].
-      * An optional longer “detailed” description:
-        [webkit.feature.Feature.getDetails].
-    )
-      
+    - A unique “identifier”: [webkit.feature.Feature.getIdentifier].
+    - A “default value”, which indicates whether the option is enabled
+      automatically: [webkit.feature.Feature.getDefaultValue].
+    - Its “status”, which determines whether it should be considered
+      user-settable and its development stage (see `enum@FeatureStatus`
+      for details): [webkit.feature.Feature.getStatus].
+    - A category, which may be used to group features together:
+      [webkit.feature.Feature.getCategory].
+    - An optional short “name” which can be presented to an user:
+      [webkit.feature.Feature.getName].
+    - An optional longer “detailed” description:
+      [webkit.feature.Feature.getDetails].
+    
     The lists of available features can be obtained with
     [webkit.settings.Settings.getAllFeatures], [webkit.settings.Settings.getExperimentalFeatures],
     and [webkit.settings.Settings.getDevelopmentFeatures]). As a rule of thumb,

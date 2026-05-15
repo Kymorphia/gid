@@ -33,20 +33,18 @@ import gtk.widget;
     
     Numerous factors can prohibit graphics offload:
     
-    $(LIST
-      * Unsupported platforms. Currently, graphics offload only works on Linux with Wayland.
-      
-      * Clipping, such as rounded corners that cause the video content to not be rectangular
-      
-      * Unsupported dmabuf formats (see [gdk.display.Display.getDmabufFormats])
-      
-      * Translucent video content (content with an alpha channel, even if it isn't used)
-      
-      * Transforms that are more complex than translations and scales
-      
-      * Filters such as opacity, grayscale or similar
-    )
-      
+    - Unsupported platforms. Currently, graphics offload only works on Linux with Wayland.
+    
+    - Clipping, such as rounded corners that cause the video content to not be rectangular
+    
+    - Unsupported dmabuf formats (see [gdk.display.Display.getDmabufFormats])
+    
+    - Translucent video content (content with an alpha channel, even if it isn't used)
+    
+    - Transforms that are more complex than translations and scales
+    
+    - Filters such as opacity, grayscale or similar
+    
     To investigate problems related graphics offload, GTK offers debug flags to print
     out information about graphics offload and dmabuf use:
     

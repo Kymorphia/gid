@@ -1207,7 +1207,7 @@ class TextTag : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gobject.object.ObjectWrap object, gdk.event.Event event, gtk.text_iter.TextIter iter, gtk.text_tag.TextTag textTag))
+          `bool callback(gobject.object.ObjectWrap object, gdk.event.Event event, gtk.text_iter.TextIter iter, gtk.text_tag.TextTag textTag)`
   
           `object` the object the event was fired from (typically a #GtkTextView) (optional)
   

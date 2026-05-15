@@ -364,7 +364,7 @@ class Animation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.animation.Animation animation))
+          `void callback(adw.animation.Animation animation)`
   
           `animation` the instance the signal is connected to (optional)
   

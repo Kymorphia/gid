@@ -355,7 +355,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.paned.Paned paned))
+          `bool callback(gtk.paned.Paned paned)`
   
           `paned` the instance the signal is connected to (optional)
   
@@ -401,7 +401,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.paned.Paned paned))
+          `bool callback(gtk.paned.Paned paned)`
   
           `paned` the instance the signal is connected to (optional)
   
@@ -445,7 +445,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool reversed, gtk.paned.Paned paned))
+          `bool callback(bool reversed, gtk.paned.Paned paned)`
   
           `reversed` whether cycling backward or forward (optional)
   
@@ -496,7 +496,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool reversed, gtk.paned.Paned paned))
+          `bool callback(bool reversed, gtk.paned.Paned paned)`
   
           `reversed` whether cycling backward or forward (optional)
   
@@ -545,7 +545,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.ScrollType scrollType, gtk.paned.Paned paned))
+          `bool callback(gtk.types.ScrollType scrollType, gtk.paned.Paned paned)`
   
           `scrollType` a #GtkScrollType (optional)
   
@@ -596,7 +596,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.paned.Paned paned))
+          `bool callback(gtk.paned.Paned paned)`
   
           `paned` the instance the signal is connected to (optional)
   

@@ -23,21 +23,17 @@ import gsttag.types;
     
     Subclasses have to do four things:
     
-     $(LIST
-        * In their base init function, they must add a pad template for the sink
-          pad to the element class, describing the media type they can parse in
-          the caps of the pad template.
-        * In their class init function, they must override
-          GST_TAG_DEMUX_CLASS(demux_klass)->identify_tag with their own identify
-          function.
-        * In their class init function, they must override
-     )
+     * In their base init function, they must add a pad template for the sink
+       pad to the element class, describing the media type they can parse in
+       the caps of the pad template.
+     * In their class init function, they must override
+       GST_TAG_DEMUX_CLASS(demux_klass)->identify_tag with their own identify
+       function.
+     * In their class init function, they must override
      GST_TAG_DEMUX_CLASS(demux_klass)->parse_tag with their own parse
      function.
-     $(LIST
-        * In their class init function, they must also set
-          GST_TAG_DEMUX_CLASS(demux_klass)->min_start_size and/or
-     )
+     * In their class init function, they must also set
+       GST_TAG_DEMUX_CLASS(demux_klass)->min_start_size and/or
      GST_TAG_DEMUX_CLASS(demux_klass)->min_end_size to the minimum size required
      for the identify function to decide whether the stream has a supported tag
      or not. A class parsing ID3v1 tags, for example, would set min_end_size to

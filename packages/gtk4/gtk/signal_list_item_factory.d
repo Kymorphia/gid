@@ -119,7 +119,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
+          `void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory)`
   
           `object` The [gobject.object.ObjectWrap] to bind (optional)
   
@@ -167,7 +167,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
+          `void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory)`
   
           `object` The [gobject.object.ObjectWrap] to set up (optional)
   
@@ -215,7 +215,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
+          `void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory)`
   
           `object` The [gobject.object.ObjectWrap] to tear down (optional)
   
@@ -263,7 +263,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory))
+          `void callback(gobject.object.ObjectWrap object, gtk.signal_list_item_factory.SignalListItemFactory signalListItemFactory)`
   
           `object` The [gobject.object.ObjectWrap] to unbind (optional)
   

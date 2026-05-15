@@ -1130,7 +1130,7 @@ class StyleContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.style_context.StyleContext styleContext))
+          `void callback(gtk.style_context.StyleContext styleContext)`
   
           `styleContext` the instance the signal is connected to (optional)
   

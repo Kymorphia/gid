@@ -84,14 +84,12 @@ int codecUtilsAacGetIndexFromSampleRate(uint rate)
     The audio_config parameter follows the following format, starting from the
     most significant bit of the first byte:
     
-      $(LIST
-          * Bit 0:4 contains the AudioObjectType (if this is 0x5, then the
-            real AudioObjectType is carried after the rate and channel data)
-          * Bit 5:8 contains the sample frequency index (if this is 0xf, then the
-            next 24 bits define the actual sample frequency, and subsequent
-            fields are appropriately shifted).
-          * Bit 9:12 contains the channel configuration
-      )
+      * Bit 0:4 contains the AudioObjectType (if this is 0x5, then the
+        real AudioObjectType is carried after the rate and channel data)
+      * Bit 5:8 contains the sample frequency index (if this is 0xf, then the
+        next 24 bits define the actual sample frequency, and subsequent
+        fields are appropriately shifted).
+      * Bit 9:12 contains the channel configuration
 
     Params:
       audioConfig = a pointer to the AudioSpecificConfig
@@ -281,16 +279,14 @@ ubyte codecUtilsH264GetLevelIdc(string level)
     as a bitstream here, with bit 0 being the most significant bit of the first
     byte.
     
-    $(LIST
-      * Bit 0:7   - Profile indication
-      * Bit 8     - constraint_set0_flag
-      * Bit 9     - constraint_set1_flag
-      * Bit 10    - constraint_set2_flag
-      * Bit 11    - constraint_set3_flag
-      * Bit 12    - constraint_set3_flag
-      * Bit 13:15 - Reserved
-      * Bit 16:24 - Level indication
-    )
+    * Bit 0:7   - Profile indication
+    * Bit 8     - constraint_set0_flag
+    * Bit 9     - constraint_set1_flag
+    * Bit 10    - constraint_set2_flag
+    * Bit 11    - constraint_set3_flag
+    * Bit 12    - constraint_set3_flag
+    * Bit 13:15 - Reserved
+    * Bit 16:24 - Level indication
 
     Params:
       sps = Pointer to the sequence parameter set for the stream.
@@ -406,18 +402,16 @@ ubyte codecUtilsH265GetLevelIdc(string level)
     specification. The profile_tier_level is viewed as a bitstream here,
     with bit 0 being the most significant bit of the first byte.
     
-    $(LIST
-      * Bit 0:1   - general_profile_space
-      * Bit 2     - general_tier_flag
-      * Bit 3:7   - general_profile_idc
-      * Bit 8:39  - gernal_profile_compatibility_flags
-      * Bit 40    - general_progressive_source_flag
-      * Bit 41    - general_interlaced_source_flag
-      * Bit 42    - general_non_packed_constraint_flag
-      * Bit 43    - general_frame_only_constraint_flag
-      * Bit 44:87 - See below
-      * Bit 88:95 - general_level_idc
-    )
+    * Bit 0:1   - general_profile_space
+    * Bit 2     - general_tier_flag
+    * Bit 3:7   - general_profile_idc
+    * Bit 8:39  - gernal_profile_compatibility_flags
+    * Bit 40    - general_progressive_source_flag
+    * Bit 41    - general_interlaced_source_flag
+    * Bit 42    - general_non_packed_constraint_flag
+    * Bit 43    - general_frame_only_constraint_flag
+    * Bit 44:87 - See below
+    * Bit 88:95 - general_level_idc
 
     Params:
       profileTierLevel = Pointer to the profile_tier_level

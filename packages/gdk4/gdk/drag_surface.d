@@ -53,7 +53,7 @@ interface DragSurface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag_surface_size.DragSurfaceSize size, gdk.drag_surface.DragSurface dragSurface))
+          `void callback(gdk.drag_surface_size.DragSurfaceSize size, gdk.drag_surface.DragSurface dragSurface)`
   
           `size` the size of the drag surface (optional)
   

@@ -309,7 +309,7 @@ class UserContentManager : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(javascriptcore.value.Value value, webkit.user_content_manager.UserContentManager userContentManager))
+          `void callback(javascriptcore.value.Value value, webkit.user_content_manager.UserContentManager userContentManager)`
   
           `value` the value received from the JavaScript world. (optional)
   
@@ -364,7 +364,7 @@ class UserContentManager : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(javascriptcore.value.Value value, webkit.script_message_reply.ScriptMessageReply reply, webkit.user_content_manager.UserContentManager userContentManager))
+          `bool callback(javascriptcore.value.Value value, webkit.script_message_reply.ScriptMessageReply reply, webkit.user_content_manager.UserContentManager userContentManager)`
   
           `value` the value received from the JavaScript world. (optional)
   

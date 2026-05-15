@@ -134,31 +134,25 @@ class DateTime : gobject.boxed.Boxed
       
       <date> is in the form:
       
-      $(LIST
-        * `YYYY-MM-DD` - Year/month/day, e.g. 2016-08-24.
-        * `YYYYMMDD` - Same as above without dividers.
-        * `YYYY-DDD` - Ordinal day where DDD is from 001 to 366, e.g. 2016-237.
-        * `YYYYDDD` - Same as above without dividers.
-        * `YYYY-Www-D` - Week day where ww is from 01 to 52 and D from 1-7,
-          e.g. 2016-W34-3.
-        * `YYYYWwwD` - Same as above without dividers.
-      )
-        
+      - `YYYY-MM-DD` - Year/month/day, e.g. 2016-08-24.
+      - `YYYYMMDD` - Same as above without dividers.
+      - `YYYY-DDD` - Ordinal day where DDD is from 001 to 366, e.g. 2016-237.
+      - `YYYYDDD` - Same as above without dividers.
+      - `YYYY-Www-D` - Week day where ww is from 01 to 52 and D from 1-7,
+        e.g. 2016-W34-3.
+      - `YYYYWwwD` - Same as above without dividers.
+      
       <time> is in the form:
       
-      $(LIST
-        * `hh:mm:ss(.sss)` - Hours, minutes, seconds (subseconds), e.g. 22:10:42.123.
-        * `hhmmss(.sss)` - Same as above without dividers.
-      )
-        
+      - `hh:mm:ss(.sss)` - Hours, minutes, seconds (subseconds), e.g. 22:10:42.123.
+      - `hhmmss(.sss)` - Same as above without dividers.
+      
       <tz> is an optional timezone suffix of the form:
       
-      $(LIST
-        * `Z` - UTC.
-        * `+hh:mm` or `-hh:mm` - Offset from UTC in hours and minutes, e.g. +12:00.
-        * `+hh` or `-hh` - Offset from UTC in hours, e.g. +12.
-      )
-        
+      - `Z` - UTC.
+      - `+hh:mm` or `-hh:mm` - Offset from UTC in hours and minutes, e.g. +12:00.
+      - `+hh` or `-hh` - Offset from UTC in hours, e.g. +12.
+      
       If the timezone is not provided in text it must be provided in default_tz
       (this field is otherwise ignored).
       
@@ -670,98 +664,92 @@ class DateTime : gobject.boxed.Boxed
       
       The following format specifiers are supported:
       
-      $(LIST
-        * ``a``: the abbreviated weekday name according to the current locale
-        * ``A``: the full weekday name according to the current locale
-        * ``b``: the abbreviated month name according to the current locale
-        * ``B``: the full month name according to the current locale
-        * ``c``: the preferred date and time representation for the current locale
-        * ``C``: the century number (year/100) as a 2-digit integer (00-99)
-        * ``d``: the day of the month as a decimal number (range 01 to 31)
-        * ``e``: the day of the month as a decimal number (range 1 to 31);
-          single digits are preceded by a figure space (U+2007)
-        * ``F``: equivalent to ``Y`-`m`-`d`` (the ISO 8601 date format)
-        * ``g``: the last two digits of the ISO 8601 week-based year as a
-          decimal number (00-99). This works well with ``V`` and ``u``.
-        * ``G``: the ISO 8601 week-based year as a decimal number. This works
-          well with ``V`` and ``u``.
-        * ``h``: equivalent to ``b``
-        * ``H``: the hour as a decimal number using a 24-hour clock (range 00 to 23)
-        * ``I``: the hour as a decimal number using a 12-hour clock (range 01 to 12)
-        * ``j``: the day of the year as a decimal number (range 001 to 366)
-        * ``k``: the hour (24-hour clock) as a decimal number (range 0 to 23);
-          single digits are preceded by a figure space (U+2007)
-        * ``l``: the hour (12-hour clock) as a decimal number (range 1 to 12);
-          single digits are preceded by a figure space (U+2007)
-        * ``m``: the month as a decimal number (range 01 to 12)
-        * ``M``: the minute as a decimal number (range 00 to 59)
-        * ``f``: the microsecond as a decimal number (range 000000 to 999999)
-        * ``p``: either ‘AM’ or ‘PM’ according to the given time value, or the
-          corresponding  strings for the current locale.  Noon is treated as
-          ‘PM’ and midnight as ‘AM’. Use of this format specifier is discouraged, as
-          many locales have no concept of AM/PM formatting. Use ``c`` or ``X`` instead.
-        * ``P``: like ``p`` but lowercase: ‘am’ or ‘pm’ or a corresponding string for
-          the current locale. Use of this format specifier is discouraged, as
-          many locales have no concept of AM/PM formatting. Use ``c`` or ``X`` instead.
-        * ``r``: the time in a.m. or p.m. notation. Use of this format specifier is
-          discouraged, as many locales have no concept of AM/PM formatting. Use ``c``
-          or ``X`` instead.
-        * ``R``: the time in 24-hour notation (``H`:`M``)
-        * ``s``: the number of seconds since the Epoch, that is, since 1970-01-01
-          00:00:00 UTC
-        * ``S``: the second as a decimal number (range 00 to 60)
-        * ``t``: a tab character
-        * ``T``: the time in 24-hour notation with seconds (``H`:`M`:`S``)
-        * ``u``: the ISO 8601 standard day of the week as a decimal, range 1 to 7,
-           Monday being 1. This works well with ``G`` and ``V``.
-        * ``V``: the ISO 8601 standard week number of the current year as a decimal
-          number, range 01 to 53, where week 1 is the first week that has at
-          least 4 days in the new year. See [glib.date_time.DateTime.getWeekOfYear].
-          This works well with ``G`` and ``u``.
-        * ``w``: the day of the week as a decimal, range 0 to 6, Sunday being 0.
-          This is not the ISO 8601 standard format — use ``u`` instead.
-        * ``x``: the preferred date representation for the current locale without
-          the time
-        * ``X``: the preferred time representation for the current locale without
-          the date
-        * ``y``: the year as a decimal number without the century
-        * ``Y``: the year as a decimal number including the century
-        * ``z``: the time zone as an offset from UTC (`+hhmm`)
-        * `%:z`: the time zone as an offset from UTC (`+hh:mm`).
-          This is a gnulib `strftime()` extension. Since: 2.38
-        * `%::z`: the time zone as an offset from UTC (`+hh:mm:ss`). This is a
-          gnulib `strftime()` extension. Since: 2.38
-        * `%:::z`: the time zone as an offset from UTC, with `:` to necessary
-          precision (e.g., `-04`, `+05:30`). This is a gnulib `strftime()` extension. Since: 2.38
-        * ``Z``: the time zone or name or abbreviation
-        * `%%`: a literal `%` character
-      )
-        
+      - ``a``: the abbreviated weekday name according to the current locale
+      - ``A``: the full weekday name according to the current locale
+      - ``b``: the abbreviated month name according to the current locale
+      - ``B``: the full month name according to the current locale
+      - ``c``: the preferred date and time representation for the current locale
+      - ``C``: the century number (year/100) as a 2-digit integer (00-99)
+      - ``d``: the day of the month as a decimal number (range 01 to 31)
+      - ``e``: the day of the month as a decimal number (range 1 to 31);
+        single digits are preceded by a figure space (U+2007)
+      - ``F``: equivalent to ``Y`-`m`-`d`` (the ISO 8601 date format)
+      - ``g``: the last two digits of the ISO 8601 week-based year as a
+        decimal number (00-99). This works well with ``V`` and ``u``.
+      - ``G``: the ISO 8601 week-based year as a decimal number. This works
+        well with ``V`` and ``u``.
+      - ``h``: equivalent to ``b``
+      - ``H``: the hour as a decimal number using a 24-hour clock (range 00 to 23)
+      - ``I``: the hour as a decimal number using a 12-hour clock (range 01 to 12)
+      - ``j``: the day of the year as a decimal number (range 001 to 366)
+      - ``k``: the hour (24-hour clock) as a decimal number (range 0 to 23);
+        single digits are preceded by a figure space (U+2007)
+      - ``l``: the hour (12-hour clock) as a decimal number (range 1 to 12);
+        single digits are preceded by a figure space (U+2007)
+      - ``m``: the month as a decimal number (range 01 to 12)
+      - ``M``: the minute as a decimal number (range 00 to 59)
+      - ``f``: the microsecond as a decimal number (range 000000 to 999999)
+      - ``p``: either ‘AM’ or ‘PM’ according to the given time value, or the
+        corresponding  strings for the current locale.  Noon is treated as
+        ‘PM’ and midnight as ‘AM’. Use of this format specifier is discouraged, as
+        many locales have no concept of AM/PM formatting. Use ``c`` or ``X`` instead.
+      - ``P``: like ``p`` but lowercase: ‘am’ or ‘pm’ or a corresponding string for
+        the current locale. Use of this format specifier is discouraged, as
+        many locales have no concept of AM/PM formatting. Use ``c`` or ``X`` instead.
+      - ``r``: the time in a.m. or p.m. notation. Use of this format specifier is
+        discouraged, as many locales have no concept of AM/PM formatting. Use ``c``
+        or ``X`` instead.
+      - ``R``: the time in 24-hour notation (``H`:`M``)
+      - ``s``: the number of seconds since the Epoch, that is, since 1970-01-01
+        00:00:00 UTC
+      - ``S``: the second as a decimal number (range 00 to 60)
+      - ``t``: a tab character
+      - ``T``: the time in 24-hour notation with seconds (``H`:`M`:`S``)
+      - ``u``: the ISO 8601 standard day of the week as a decimal, range 1 to 7,
+         Monday being 1. This works well with ``G`` and ``V``.
+      - ``V``: the ISO 8601 standard week number of the current year as a decimal
+        number, range 01 to 53, where week 1 is the first week that has at
+        least 4 days in the new year. See [glib.date_time.DateTime.getWeekOfYear].
+        This works well with ``G`` and ``u``.
+      - ``w``: the day of the week as a decimal, range 0 to 6, Sunday being 0.
+        This is not the ISO 8601 standard format — use ``u`` instead.
+      - ``x``: the preferred date representation for the current locale without
+        the time
+      - ``X``: the preferred time representation for the current locale without
+        the date
+      - ``y``: the year as a decimal number without the century
+      - ``Y``: the year as a decimal number including the century
+      - ``z``: the time zone as an offset from UTC (`+hhmm`)
+      - `%:z`: the time zone as an offset from UTC (`+hh:mm`).
+        This is a gnulib `strftime()` extension. Since: 2.38
+      - `%::z`: the time zone as an offset from UTC (`+hh:mm:ss`). This is a
+        gnulib `strftime()` extension. Since: 2.38
+      - `%:::z`: the time zone as an offset from UTC, with `:` to necessary
+        precision (e.g., `-04`, `+05:30`). This is a gnulib `strftime()` extension. Since: 2.38
+      - ``Z``: the time zone or name or abbreviation
+      - `%%`: a literal `%` character
+      
       Some conversion specifications can be modified by preceding the
       conversion specifier by one or more modifier characters.
       
       The following modifiers are supported for many of the numeric
       conversions:
       
-      $(LIST
-        * `O`: Use alternative numeric symbols, if the current locale supports those.
-        * `_`: Pad a numeric result with spaces. This overrides the default padding
-          for the specifier.
-        * `-`: Do not pad a numeric result. This overrides the default padding
-          for the specifier.
-        * `0`: Pad a numeric result with zeros. This overrides the default padding
-          for the specifier.
-      )
-        
+      - `O`: Use alternative numeric symbols, if the current locale supports those.
+      - `_`: Pad a numeric result with spaces. This overrides the default padding
+        for the specifier.
+      - `-`: Do not pad a numeric result. This overrides the default padding
+        for the specifier.
+      - `0`: Pad a numeric result with zeros. This overrides the default padding
+        for the specifier.
+      
       The following modifiers are supported for many of the alphabetic conversions:
       
-      $(LIST
-        * `^`: Use upper case if possible. This is a gnulib `strftime()` extension.
-          Since: 2.80
-        * `#`: Use opposite case if possible. This is a gnulib `strftime()`
-          extension. Since: 2.80
-      )
-        
+      - `^`: Use upper case if possible. This is a gnulib `strftime()` extension.
+        Since: 2.80
+      - `#`: Use opposite case if possible. This is a gnulib `strftime()`
+        extension. Since: 2.80
+      
       Additionally, when `O` is used with `B`, `b`, or `h`, it produces the alternative
       form of a month name. The alternative form should be used when the month
       name is used without a day number (e.g., standalone). It is required in
@@ -775,18 +763,16 @@ class DateTime : gobject.boxed.Boxed
       locale. This is typically used for the Thai solar calendar or Japanese era
       names, for example.
       
-      $(LIST
-        * ``Ec``: the preferred date and time representation for the current locale,
-          using the alternate era representation
-        * ``EC``: the name of the era
-        * ``Ex``: the preferred date representation for the current locale without
-          the time, using the alternate era representation
-        * ``EX``: the preferred time representation for the current locale without
-          the date, using the alternate era representation
-        * ``Ey``: the year since the beginning of the era denoted by the ``EC``
-          specifier
-        * ``EY``: the full alternative year representation
-      )
+      - ``Ec``: the preferred date and time representation for the current locale,
+        using the alternate era representation
+      - ``EC``: the name of the era
+      - ``Ex``: the preferred date representation for the current locale without
+        the time, using the alternate era representation
+      - ``EX``: the preferred time representation for the current locale without
+        the date, using the alternate era representation
+      - ``Ey``: the year since the beginning of the era denoted by the ``EC``
+        specifier
+      - ``EY``: the full alternative year representation
   
       Params:
         format = a valid UTF-8 string, containing the format for the

@@ -1018,7 +1018,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.tls_certificate.TlsCertificate tlsPeerCertificate, gio.types.TlsCertificateFlags tlsPeerErrors, soup.message.Message message))
+          `bool callback(gio.tls_certificate.TlsCertificate tlsPeerCertificate, gio.types.TlsCertificateFlags tlsPeerErrors, soup.message.Message message)`
   
           `tlsPeerCertificate` the peer's #GTlsCertificate (optional)
   
@@ -1085,7 +1085,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(soup.auth.Auth auth, bool retrying, soup.message.Message message))
+          `bool callback(soup.auth.Auth auth, bool retrying, soup.message.Message message)`
   
           `auth` the #SoupAuth to authenticate (optional)
   
@@ -1144,7 +1144,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string type, string[string] params, soup.message.Message message))
+          `void callback(string type, string[string] params, soup.message.Message message)`
   
           `type` the content type that we got from sniffing (optional)
   
@@ -1195,7 +1195,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message message))
+          `void callback(soup.message.Message message)`
   
           `message` the instance the signal is connected to (optional)
   
@@ -1232,7 +1232,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message message))
+          `void callback(soup.message.Message message)`
   
           `message` the instance the signal is connected to (optional)
   
@@ -1270,7 +1270,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint chunkSize, soup.message.Message message))
+          `void callback(uint chunkSize, soup.message.Message message)`
   
           `chunkSize` the number of bytes read (optional)
   
@@ -1326,7 +1326,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message message))
+          `void callback(soup.message.Message message)`
   
           `message` the instance the signal is connected to (optional)
   
@@ -1372,7 +1372,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message message))
+          `void callback(soup.message.Message message)`
   
           `message` the instance the signal is connected to (optional)
   
@@ -1411,7 +1411,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message message))
+          `void callback(soup.message.Message message)`
   
           `message` the instance the signal is connected to (optional)
   
@@ -1459,7 +1459,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.types.SocketClientEvent event, gio.iostream.IOStream connection, soup.message.Message message))
+          `void callback(gio.types.SocketClientEvent event, gio.iostream.IOStream connection, soup.message.Message message)`
   
           `event` the network event (optional)
   
@@ -1518,7 +1518,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.tls_client_connection.TlsClientConnection tlsConnection, soup.message.Message message))
+          `bool callback(gio.tls_client_connection.TlsClientConnection tlsConnection, soup.message.Message message)`
   
           `tlsConnection` the #GTlsClientConnection (optional)
   
@@ -1576,7 +1576,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.tls_password.TlsPassword tlsPassword, soup.message.Message message))
+          `bool callback(gio.tls_password.TlsPassword tlsPassword, soup.message.Message message)`
   
           `tlsPassword` the #GTlsPassword (optional)
   
@@ -1628,7 +1628,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message message))
+          `void callback(soup.message.Message message)`
   
           `message` the instance the signal is connected to (optional)
   
@@ -1665,7 +1665,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message message))
+          `void callback(soup.message.Message message)`
   
           `message` the instance the signal is connected to (optional)
   
@@ -1703,7 +1703,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message message))
+          `void callback(soup.message.Message message)`
   
           `message` the instance the signal is connected to (optional)
   
@@ -1741,7 +1741,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint chunkSize, soup.message.Message message))
+          `void callback(uint chunkSize, soup.message.Message message)`
   
           `chunkSize` the number of bytes written (optional)
   
@@ -1785,7 +1785,7 @@ class Message : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.message.Message message))
+          `void callback(soup.message.Message message)`
   
           `message` the instance the signal is connected to (optional)
   

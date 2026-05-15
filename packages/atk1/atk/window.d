@@ -37,7 +37,7 @@ interface Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.window.Window window))
+          `void callback(atk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -55,7 +55,7 @@ interface Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.window.Window window))
+          `void callback(atk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -73,7 +73,7 @@ interface Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.window.Window window))
+          `void callback(atk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -91,7 +91,7 @@ interface Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.window.Window window))
+          `void callback(atk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -109,7 +109,7 @@ interface Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.window.Window window))
+          `void callback(atk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -127,7 +127,7 @@ interface Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.window.Window window))
+          `void callback(atk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -145,7 +145,7 @@ interface Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.window.Window window))
+          `void callback(atk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -163,7 +163,7 @@ interface Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.window.Window window))
+          `void callback(atk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -181,7 +181,7 @@ interface Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.window.Window window))
+          `void callback(atk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   

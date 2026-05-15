@@ -298,7 +298,7 @@ interface Value
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double value, string text, atk.value.Value value))
+          `void callback(double value, string text, atk.value.Value value)`
   
           `value` the new value in a numerical form. (optional)
   

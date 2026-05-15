@@ -168,7 +168,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string pathString, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel))
+          `void callback(string pathString, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel)`
   
           `pathString` the path identifying the row of the edited cell (optional)
   
@@ -211,7 +211,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string pathString, uint accelKey, gdk.types.ModifierType accelMods, uint hardwareKeycode, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel))
+          `void callback(string pathString, uint accelKey, gdk.types.ModifierType accelMods, uint hardwareKeycode, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel)`
   
           `pathString` the path identifying the row of the edited cell (optional)
   

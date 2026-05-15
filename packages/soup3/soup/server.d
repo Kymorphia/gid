@@ -867,7 +867,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.server_message.ServerMessage message, soup.server.Server server))
+          `void callback(soup.server_message.ServerMessage message, soup.server.Server server)`
   
           `message` the message (optional)
   
@@ -911,7 +911,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.server_message.ServerMessage message, soup.server.Server server))
+          `void callback(soup.server_message.ServerMessage message, soup.server.Server server)`
   
           `message` the message (optional)
   
@@ -961,7 +961,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.server_message.ServerMessage message, soup.server.Server server))
+          `void callback(soup.server_message.ServerMessage message, soup.server.Server server)`
   
           `message` the message (optional)
   
@@ -1015,7 +1015,7 @@ class Server : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.server_message.ServerMessage message, soup.server.Server server))
+          `void callback(soup.server_message.ServerMessage message, soup.server.Server server)`
   
           `message` the new message (optional)
   

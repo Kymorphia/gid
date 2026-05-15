@@ -87,7 +87,7 @@ class GestureRotate : gtk.gesture.Gesture
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double angle, double angleDelta, gtk.gesture_rotate.GestureRotate gestureRotate))
+          `void callback(double angle, double angleDelta, gtk.gesture_rotate.GestureRotate gestureRotate)`
   
           `angle` Current angle in radians (optional)
   

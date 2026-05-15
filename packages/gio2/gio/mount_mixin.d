@@ -608,7 +608,7 @@ template MountT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount.Mount mount))
+          `void callback(gio.mount.Mount mount)`
   
           `mount` the instance the signal is connected to (optional)
   
@@ -649,7 +649,7 @@ template MountT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount.Mount mount))
+          `void callback(gio.mount.Mount mount)`
   
           `mount` the instance the signal is connected to (optional)
   
@@ -689,7 +689,7 @@ template MountT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount.Mount mount))
+          `void callback(gio.mount.Mount mount)`
   
           `mount` the instance the signal is connected to (optional)
   

@@ -694,7 +694,7 @@ class Clipboard : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.event_owner_change.EventOwnerChange event, gtk.clipboard.Clipboard clipboard))
+          `void callback(gdk.event_owner_change.EventOwnerChange event, gtk.clipboard.Clipboard clipboard)`
   
           `event` the GdkEventOwnerChange event (optional)
   

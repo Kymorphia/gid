@@ -243,7 +243,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.radio_action.RadioAction current, gtk.radio_action.RadioAction radioAction))
+          `void callback(gtk.radio_action.RadioAction current, gtk.radio_action.RadioAction radioAction)`
   
           `current` the member of action's group which has just been activated (optional)
   

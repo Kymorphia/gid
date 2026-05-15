@@ -119,43 +119,41 @@ import gtk.widget;
     parents. The correspondence of XML elements to widgets should be
     almost obvious:
     
-    $(LIST
-      * menubar
-      
-         a #GtkMenuBar
-      
-      * toolbar
-      
-         a #GtkToolbar
-      
-      * popup
-      
-         a toplevel #GtkMenu
-      
-      * menu
-      
-         a #GtkMenu attached to a menuitem
-      
-      * menuitem
-      
-         a #GtkMenuItem subclass, the exact type depends on the action
-      
-      * toolitem
-      
-         a #GtkToolItem subclass, the exact type depends on the
-         action. Note that toolitem elements may contain a menu element,
-         but only if their associated action specifies a
-         #GtkMenuToolButton as proxy.
-      
-      * separator
-      
-         a #GtkSeparatorMenuItem or #GtkSeparatorToolItem
-      
-      * accelerator
-      
-         a keyboard accelerator
-    )
-      
+    - menubar
+    
+       a #GtkMenuBar
+    
+    - toolbar
+    
+       a #GtkToolbar
+    
+    - popup
+    
+       a toplevel #GtkMenu
+    
+    - menu
+    
+       a #GtkMenu attached to a menuitem
+    
+    - menuitem
+    
+       a #GtkMenuItem subclass, the exact type depends on the action
+    
+    - toolitem
+    
+       a #GtkToolItem subclass, the exact type depends on the
+       action. Note that toolitem elements may contain a menu element,
+       but only if their associated action specifies a
+       #GtkMenuToolButton as proxy.
+    
+    - separator
+    
+       a #GtkSeparatorMenuItem or #GtkSeparatorToolItem
+    
+    - accelerator
+    
+       a keyboard accelerator
+    
     The “position” attribute determines where a constructed widget is positioned
     wrt. to its siblings in the partially constructed tree. If it is
     “top”, the widget is prepended, otherwise it is appended.
@@ -199,12 +197,10 @@ import gtk.widget;
     impossible to know in advance whether they will end up empty after merging.
     #GtkUIManager offers two ways to treat empty submenus:
     
-    $(LIST
-      * make them disappear by hiding the menu item they’re attached to
-      
-      * add an insensitive “Empty” item
-    )
-      
+    - make them disappear by hiding the menu item they’re attached to
+    
+    - add an insensitive “Empty” item
+    
     The behaviour is chosen based on the “hide_if_empty” property of the action
     to which the submenu is associated.
     
@@ -657,7 +653,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.uimanager.UIManager uIManager))
+          `void callback(gtk.uimanager.UIManager uIManager)`
   
           `uIManager` the instance the signal is connected to (optional)
   
@@ -696,7 +692,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget, gtk.uimanager.UIManager uIManager))
+          `void callback(gtk.widget.Widget widget, gtk.uimanager.UIManager uIManager)`
   
           `widget` the added widget (optional)
   
@@ -744,7 +740,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.action.Action action, gtk.widget.Widget proxy, gtk.uimanager.UIManager uIManager))
+          `void callback(gtk.action.Action action, gtk.widget.Widget proxy, gtk.uimanager.UIManager uIManager)`
   
           `action` the action (optional)
   
@@ -794,7 +790,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.action.Action action, gtk.widget.Widget proxy, gtk.uimanager.UIManager uIManager))
+          `void callback(gtk.action.Action action, gtk.widget.Widget proxy, gtk.uimanager.UIManager uIManager)`
   
           `action` the action (optional)
   
@@ -847,7 +843,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.action.Action action, gtk.uimanager.UIManager uIManager))
+          `void callback(gtk.action.Action action, gtk.uimanager.UIManager uIManager)`
   
           `action` the action (optional)
   
@@ -894,7 +890,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.action.Action action, gtk.uimanager.UIManager uIManager))
+          `void callback(gtk.action.Action action, gtk.uimanager.UIManager uIManager)`
   
           `action` the action (optional)
   

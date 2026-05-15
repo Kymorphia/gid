@@ -16,13 +16,11 @@ public import gobject.object;
     “Low Power” mode on some systems).
     
     When in “Low Power” mode, it is recommended that applications:
-    $(LIST
-      * disable automatic downloads;
-      * reduce the rate of refresh from online sources such as calendar or
-        email synchronisation;
-      * reduce the use of expensive visual effects.
-    )
-      
+    - disable automatic downloads;
+    - reduce the rate of refresh from online sources such as calendar or
+      email synchronisation;
+    - reduce the use of expensive visual effects.
+    
     It is also likely that OS components providing services to applications will
     lower their own background activity, for the sake of the system.
     

@@ -245,7 +245,7 @@ class ContentProvider : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.content_provider.ContentProvider contentProvider))
+          `void callback(gdk.content_provider.ContentProvider contentProvider)`
   
           `contentProvider` the instance the signal is connected to (optional)
   

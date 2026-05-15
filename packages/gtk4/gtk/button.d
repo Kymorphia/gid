@@ -474,7 +474,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.button.Button button))
+          `void callback(gtk.button.Button button)`
   
           `button` the instance the signal is connected to (optional)
   
@@ -511,7 +511,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.button.Button button))
+          `void callback(gtk.button.Button button)`
   
           `button` the instance the signal is connected to (optional)
   

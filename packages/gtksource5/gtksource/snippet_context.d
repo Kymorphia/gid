@@ -171,7 +171,7 @@ class SnippetContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.snippet_context.SnippetContext snippetContext))
+          `void callback(gtksource.snippet_context.SnippetContext snippetContext)`
   
           `snippetContext` the instance the signal is connected to (optional)
   

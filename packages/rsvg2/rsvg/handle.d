@@ -158,14 +158,12 @@ import rsvg.types;
     The documentation for the available methods in [rsvg.handle.Handle] may mention that a particular
     method is only callable on a "fully loaded handle".  This means either:
     
-    $(LIST
-      * The handle was loaded with [rsvg.handle.Handle.write] and [rsvg.handle.Handle.close], and
-        those functions returned no errors.
-      
-      * The handle was loaded with [rsvg.handle.Handle.readStreamSync] and that function
-        returned no errors.
-    )
-      
+    * The handle was loaded with [rsvg.handle.Handle.write] and [rsvg.handle.Handle.close], and
+      those functions returned no errors.
+    
+    * The handle was loaded with [rsvg.handle.Handle.readStreamSync] and that function
+      returned no errors.
+    
     Before librsvg 2.46, the library did not fully verify that a handle was in a
     fully loaded state for the methods that require it.  To preserve
     compatibility with old code which inadvertently called the API without
@@ -1048,30 +1046,28 @@ class Handle : gobject.object.ObjectWrap
       
       Historically this function has picked a size by itself, based on the following rules:
       
-      $(LIST
-        * If the SVG document has both `width` and `height`
-          attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,
-          ex), the function computes the size directly based on the dots-per-inch (DPI) you
-          have configured with [rsvg.handle.Handle.setDpi].  This is the same approach as
-          [rsvg.handle.Handle.getIntrinsicSizeInPixels].
-        
-        * Otherwise, if there is a `viewBox` attribute and both
-          `width` and `height` are set to
-          `100%` (or if they don't exist at all and thus default to 100%),
-          the function uses the width and height of the `viewBox` as a pixel size.  This
-          produces a rendered document with the correct aspect ratio.
-        
-        * Otherwise, this function computes the extents of every graphical object in the SVG
-          document to find the total extents.  This is moderately expensive, but no more expensive
-          than rendering the whole document, for example.
-        
-        * This function cannot deal with percentage-based units for `width`
-          and `height` because there is no viewport against which they could
-          be resolved; that is why it will compute the extents of objects in that case.  This
-          is why we recommend that you use [rsvg.handle.Handle.renderDocument] instead, which takes
-          in a viewport and follows the sizing policy from the web platform.
-      )
-        
+      * If the SVG document has both `width` and `height`
+        attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,
+        ex), the function computes the size directly based on the dots-per-inch (DPI) you
+        have configured with [rsvg.handle.Handle.setDpi].  This is the same approach as
+        [rsvg.handle.Handle.getIntrinsicSizeInPixels].
+      
+      * Otherwise, if there is a `viewBox` attribute and both
+        `width` and `height` are set to
+        `100%` (or if they don't exist at all and thus default to 100%),
+        the function uses the width and height of the `viewBox` as a pixel size.  This
+        produces a rendered document with the correct aspect ratio.
+      
+      * Otherwise, this function computes the extents of every graphical object in the SVG
+        document to find the total extents.  This is moderately expensive, but no more expensive
+        than rendering the whole document, for example.
+      
+      * This function cannot deal with percentage-based units for `width`
+        and `height` because there is no viewport against which they could
+        be resolved; that is why it will compute the extents of objects in that case.  This
+        is why we recommend that you use [rsvg.handle.Handle.renderDocument] instead, which takes
+        in a viewport and follows the sizing policy from the web platform.
+      
       Drawing will occur with respect to the cr's current transformation: for example, if
       the cr has a rotated current transformation matrix, the whole SVG will be rotated in
       the rendered version.
@@ -1110,30 +1106,28 @@ class Handle : gobject.object.ObjectWrap
       Historically this function has picked a size for the whole document by itself, based
       on the following rules:
       
-      $(LIST
-        * If the SVG document has both `width` and `height`
-          attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,
-          ex), the function computes the size directly based on the dots-per-inch (DPI) you
-          have configured with [rsvg.handle.Handle.setDpi].  This is the same approach as
-          [rsvg.handle.Handle.getIntrinsicSizeInPixels].
-        
-        * Otherwise, if there is a `viewBox` attribute and both
-          `width` and `height` are set to
-          `100%` (or if they don't exist at all and thus default to 100%),
-          the function uses the width and height of the `viewBox` as a pixel size.  This
-          produces a rendered document with the correct aspect ratio.
-        
-        * Otherwise, this function computes the extents of every graphical object in the SVG
-          document to find the total extents.  This is moderately expensive, but no more expensive
-          than rendering the whole document, for example.
-        
-        * This function cannot deal with percentage-based units for `width`
-          and `height` because there is no viewport against which they could
-          be resolved; that is why it will compute the extents of objects in that case.  This
-          is why we recommend that you use [rsvg.handle.Handle.renderLayer] instead, which takes
-          in a viewport and follows the sizing policy from the web platform.
-      )
-        
+      * If the SVG document has both `width` and `height`
+        attributes with physical units (px, in, cm, mm, pt, pc) or font-based units (em,
+        ex), the function computes the size directly based on the dots-per-inch (DPI) you
+        have configured with [rsvg.handle.Handle.setDpi].  This is the same approach as
+        [rsvg.handle.Handle.getIntrinsicSizeInPixels].
+      
+      * Otherwise, if there is a `viewBox` attribute and both
+        `width` and `height` are set to
+        `100%` (or if they don't exist at all and thus default to 100%),
+        the function uses the width and height of the `viewBox` as a pixel size.  This
+        produces a rendered document with the correct aspect ratio.
+      
+      * Otherwise, this function computes the extents of every graphical object in the SVG
+        document to find the total extents.  This is moderately expensive, but no more expensive
+        than rendering the whole document, for example.
+      
+      * This function cannot deal with percentage-based units for `width`
+        and `height` because there is no viewport against which they could
+        be resolved; that is why it will compute the extents of objects in that case.  This
+        is why we recommend that you use [rsvg.handle.Handle.renderLayer] instead, which takes
+        in a viewport and follows the sizing policy from the web platform.
+      
       Drawing will occur with respect to the cr's current transformation: for example, if
       the cr has a rotated current transformation matrix, the whole SVG will be rotated in
       the rendered version.
@@ -1360,14 +1354,12 @@ class Handle : gobject.object.ObjectWrap
       size that librsvg computes for SVG images.  The size_func is called from the
       following functions:
       
-      $(LIST
-        * [rsvg.handle.Handle.getDimensions]
-        * [rsvg.handle.Handle.getDimensionsSub]
-        * [rsvg.handle.Handle.getPositionSub]
-        * [rsvg.handle.Handle.renderCairo]
-        * [rsvg.handle.Handle.renderCairoSub]
-      )
-        
+      * [rsvg.handle.Handle.getDimensions]
+      * [rsvg.handle.Handle.getDimensionsSub]
+      * [rsvg.handle.Handle.getPositionSub]
+      * [rsvg.handle.Handle.renderCairo]
+      * [rsvg.handle.Handle.renderCairoSub]
+      
       Librsvg computes the size of the SVG being rendered, and passes it to the
       size_func, which may then modify these values to set the final size of the
       generated image.

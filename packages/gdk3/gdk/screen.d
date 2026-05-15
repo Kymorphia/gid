@@ -704,7 +704,7 @@ class Screen : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.screen.Screen screen))
+          `void callback(gdk.screen.Screen screen)`
   
           `screen` the instance the signal is connected to (optional)
   
@@ -745,7 +745,7 @@ class Screen : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.screen.Screen screen))
+          `void callback(gdk.screen.Screen screen)`
   
           `screen` the instance the signal is connected to (optional)
   
@@ -783,7 +783,7 @@ class Screen : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.screen.Screen screen))
+          `void callback(gdk.screen.Screen screen)`
   
           `screen` the instance the signal is connected to (optional)
   

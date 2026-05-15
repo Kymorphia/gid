@@ -152,7 +152,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.tab_button.TabButton tabButton))
+          `void callback(adw.tab_button.TabButton tabButton)`
   
           `tabButton` the instance the signal is connected to (optional)
   
@@ -189,7 +189,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.tab_button.TabButton tabButton))
+          `void callback(adw.tab_button.TabButton tabButton)`
   
           `tabButton` the instance the signal is connected to (optional)
   

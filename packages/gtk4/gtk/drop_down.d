@@ -601,7 +601,7 @@ class DropDown : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.drop_down.DropDown dropDown))
+          `void callback(gtk.drop_down.DropDown dropDown)`
   
           `dropDown` the instance the signal is connected to (optional)
   

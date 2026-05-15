@@ -284,7 +284,7 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.radio_menu_item.RadioMenuItem radioMenuItem))
+          `void callback(gtk.radio_menu_item.RadioMenuItem radioMenuItem)`
   
           `radioMenuItem` the instance the signal is connected to (optional)
   

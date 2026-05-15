@@ -209,7 +209,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string path, gtk.cell_renderer_toggle.CellRendererToggle cellRendererToggle))
+          `void callback(string path, gtk.cell_renderer_toggle.CellRendererToggle cellRendererToggle)`
   
           `path` string representation of [gtk.tree_path.TreePath] describing the
                    event location (optional)

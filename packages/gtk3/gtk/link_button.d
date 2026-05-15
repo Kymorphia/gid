@@ -219,7 +219,7 @@ class LinkButton : gtk.button.Button
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.link_button.LinkButton linkButton))
+          `bool callback(gtk.link_button.LinkButton linkButton)`
   
           `linkButton` the instance the signal is connected to (optional)
   

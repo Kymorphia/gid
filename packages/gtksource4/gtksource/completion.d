@@ -425,7 +425,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion.Completion completion))
+          `void callback(gtksource.completion.Completion completion)`
   
           `completion` the instance the signal is connected to (optional)
   
@@ -463,7 +463,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion.Completion completion))
+          `void callback(gtksource.completion.Completion completion)`
   
           `completion` the instance the signal is connected to (optional)
   
@@ -515,7 +515,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion))
+          `void callback(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion)`
   
           `step` The #GtkScrollStep by which to move the cursor (optional)
   
@@ -582,7 +582,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion))
+          `void callback(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion)`
   
           `step` The #GtkScrollStep by which to move the page (optional)
   
@@ -632,7 +632,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion_context.CompletionContext context, gtksource.completion.Completion completion))
+          `void callback(gtksource.completion_context.CompletionContext context, gtksource.completion.Completion completion)`
   
           `context` The #GtkSourceCompletionContext for the current completion (optional)
   
@@ -676,7 +676,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion.Completion completion))
+          `void callback(gtksource.completion.Completion completion)`
   
           `completion` the instance the signal is connected to (optional)
   

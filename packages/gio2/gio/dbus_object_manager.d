@@ -79,7 +79,7 @@ interface DBusObjectManager
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager))
+          `void callback(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager)`
   
           `object` The #GDBusObject on which an interface was added. (optional)
   
@@ -103,7 +103,7 @@ interface DBusObjectManager
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager))
+          `void callback(gio.dbus_object.DBusObject object, gio.dbus_interface.DBusInterface interface_, gio.dbus_object_manager.DBusObjectManager dBusObjectManager)`
   
           `object` The #GDBusObject on which an interface was removed. (optional)
   
@@ -124,7 +124,7 @@ interface DBusObjectManager
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager))
+          `void callback(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager)`
   
           `object` The #GDBusObject that was added. (optional)
   
@@ -143,7 +143,7 @@ interface DBusObjectManager
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager))
+          `void callback(gio.dbus_object.DBusObject object, gio.dbus_object_manager.DBusObjectManager dBusObjectManager)`
   
           `object` The #GDBusObject that was removed. (optional)
   

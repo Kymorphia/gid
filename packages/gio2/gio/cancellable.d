@@ -354,7 +354,7 @@ class Cancellable : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.cancellable.Cancellable cancellable))
+          `void callback(gio.cancellable.Cancellable cancellable)`
   
           `cancellable` the instance the signal is connected to (optional)
   

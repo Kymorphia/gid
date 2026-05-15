@@ -492,20 +492,18 @@ enum VIDEO_ENCODER_SRC_NAME = "src";
     List of all video formats, for use in template caps strings.
     
     Formats are sorted by decreasing "quality", using these criteria by priority:
-      $(LIST
-          * number of components
-          * depth
-          * subsampling factor of the width
-          * subsampling factor of the height
-          * number of planes
-          * native endianness preferred
-          * pixel stride
-          * poffset
-          * prefer non-complex formats
-          * prefer YUV formats over RGB ones
-          * prefer I420 over YV12
-          * format name
-      )
+      - number of components
+      - depth
+      - subsampling factor of the width
+      - subsampling factor of the height
+      - number of planes
+      - native endianness preferred
+      - pixel stride
+      - poffset
+      - prefer non-complex formats
+      - prefer YUV formats over RGB ones
+      - prefer I420 over YV12
+      - format name
 */
 enum VIDEO_FORMATS_ALL = "{ ";
 
@@ -513,20 +511,18 @@ enum VIDEO_FORMATS_ALL = "{ ";
     Declare all video formats as a string.
     
     Formats are sorted by decreasing "quality", using these criteria by priority:
-      $(LIST
-          * number of components
-          * depth
-          * subsampling factor of the width
-          * subsampling factor of the height
-          * number of planes
-          * native endianness preferred
-          * pixel stride
-          * poffset
-          * prefer non-complex formats
-          * prefer YUV formats over RGB ones
-          * prefer I420 over YV12
-          * format name
-      )
+      - number of components
+      - depth
+      - subsampling factor of the width
+      - subsampling factor of the height
+      - number of planes
+      - native endianness preferred
+      - pixel stride
+      - poffset
+      - prefer non-complex formats
+      - prefer YUV formats over RGB ones
+      - prefer I420 over YV12
+      - format name
 */
 enum VIDEO_FORMATS_ALL_STR = "A444_16BE, A444_16LE, AYUV64, ARGB64, RGBA64_BE, ARGB64_BE, BGRA64_BE, ABGR64_BE, RGBA64_LE, ARGB64_LE, BGRA64_LE, ABGR64_LE, A422_16BE, A422_16LE, A420_16BE, A420_16LE, A444_12BE, GBRA_12BE, A444_12LE, GBRA_12LE, Y412_BE, Y412_LE, A422_12BE, A422_12LE, A420_12BE, A420_12LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, BGR10A2_LE, Y410, RGB10A2_LE, A444, GBRA, AYUV, VUYA, RGBA, RBGA, ARGB, BGRA, ABGR, A422, A420, AV12, Y444_16BE, GBR_16BE, Y444_16LE, GBR_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, UYVP, v210, I420_10BE, I420_10LE, P010_10BE, MT2110R, MT2110T, NV12_10BE_8L128, NV12_10LE40_4L4, P010_10LE, NV12_10LE40, NV12_10LE32, Y444, BGRP, GBR, RGBP, NV24, v308, IYU2, RGBx, xRGB, BGRx, xBGR, RGB, BGR, Y42B, NV16, NV61, YUY2, YVYU, UYVY, VYUY, I420, YV12, NV12, NV21, NV12_16L32S, NV12_32L32, NV12_4L4, NV12_64Z32, NV12_8L128, Y41B, IYU1, YUV9, YVU9, BGR16, RGB16, BGR15, RGB15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8";
 

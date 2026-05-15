@@ -208,7 +208,7 @@ template ListModelT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, uint removed, uint added, gio.list_model.ListModel listModel))
+          `void callback(uint position, uint removed, uint added, gio.list_model.ListModel listModel)`
   
           `position` the position at which list changed (optional)
   

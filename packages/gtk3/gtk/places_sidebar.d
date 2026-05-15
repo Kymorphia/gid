@@ -50,11 +50,9 @@ import gtk.widget;
     
     Among the children of the places sidebar, the following style classes can
     be used:
-    $(LIST
-      * .sidebar-new-bookmark-row for the 'Add new bookmark' row
-      * .sidebar-placeholder-row for a row that is a placeholder
-      * .has-open-popup when a popup is open for a row
-    )
+    - .sidebar-new-bookmark-row for the 'Add new bookmark' row
+    - .sidebar-placeholder-row for a row that is a placeholder
+    - .has-open-popup when a popup is open for a row
 */
 class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 {
@@ -627,7 +625,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D int callback(int actions, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `int callback(int actions, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `actions` Possible drag actions that need to be asked for. (optional)
   
@@ -682,7 +680,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D int callback(gdk.drag_context.DragContext context, gio.file.File destFile, gio.file.File[] sourceFileList, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `int callback(gdk.drag_context.DragContext context, gio.file.File destFile, gio.file.File[] sourceFileList, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `context` #GdkDragContext with information about the drag operation (optional)
   
@@ -746,7 +744,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.file.File destFile, gio.file.File[] sourceFileList, int action, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gio.file.File destFile, gio.file.File[] sourceFileList, int action, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `destFile` Destination #GFile. (optional)
   
@@ -804,7 +802,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `mountOperation` the #GMountOperation that is going to start. (optional)
   
@@ -850,7 +848,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.file.File location, gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gio.file.File location, gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `location` #GFile to which the caller should switch. (optional)
   
@@ -923,7 +921,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget container, gio.file.File selectedItem, gio.volume.Volume selectedVolume, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gtk.widget.Widget container, gio.file.File selectedItem, gio.volume.Volume selectedVolume, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `container` a #GtkMenu or another #GtkContainer (optional)
   
@@ -984,7 +982,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `placesSidebar` the instance the signal is connected to (optional)
   
@@ -1027,7 +1025,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `placesSidebar` the instance the signal is connected to (optional)
   
@@ -1067,7 +1065,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string primary, string secondary, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(string primary, string secondary, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `primary` primary message with a summary of the error to show. (optional)
   
@@ -1120,7 +1118,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `placesSidebar` the instance the signal is connected to (optional)
   
@@ -1165,7 +1163,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `openFlags` a single value from #GtkPlacesOpenFlags specifying how it should be opened. (optional)
   
@@ -1211,7 +1209,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `openFlags` a single value from #GtkPlacesOpenFlags specifying how the
               starred file should be opened. (optional)
@@ -1258,7 +1256,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar))
+          `void callback(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar)`
   
           `mountOperation` the #GMountOperation that is going to start. (optional)
   

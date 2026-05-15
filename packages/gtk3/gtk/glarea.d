@@ -562,7 +562,7 @@ class GLArea : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gdk.glcontext.GLContext callback(gtk.glarea.GLArea gLArea))
+          `gdk.glcontext.GLContext callback(gtk.glarea.GLArea gLArea)`
   
           `gLArea` the instance the signal is connected to (optional)
   
@@ -607,7 +607,7 @@ class GLArea : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.glcontext.GLContext context, gtk.glarea.GLArea gLArea))
+          `bool callback(gdk.glcontext.GLContext context, gtk.glarea.GLArea gLArea)`
   
           `context` the #GdkGLContext used by area (optional)
   
@@ -662,7 +662,7 @@ class GLArea : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int width, int height, gtk.glarea.GLArea gLArea))
+          `void callback(int width, int height, gtk.glarea.GLArea gLArea)`
   
           `width` the width of the viewport (optional)
   

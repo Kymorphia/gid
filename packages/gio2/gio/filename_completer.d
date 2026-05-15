@@ -128,7 +128,7 @@ class FilenameCompleter : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.filename_completer.FilenameCompleter filenameCompleter))
+          `void callback(gio.filename_completer.FilenameCompleter filenameCompleter)`
   
           `filenameCompleter` the instance the signal is connected to (optional)
   

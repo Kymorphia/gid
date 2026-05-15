@@ -153,15 +153,13 @@ string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorK
     Modifiers are enclosed in angular brackets `<>`, and match the
     [gdk.types.ModifierType] mask:
     
-    $(LIST
-      * `<Shift>` for [gdk.types.ModifierType.ShiftMask]
-      * `<Ctrl>` for [gdk.types.ModifierType.ControlMask]
-      * `<Alt>` for [gdk.types.ModifierType.AltMask]
-      * `<Meta>` for [gdk.types.ModifierType.MetaMask]
-      * `<Super>` for [gdk.types.ModifierType.SuperMask]
-      * `<Hyper>` for [gdk.types.ModifierType.HyperMask]
-    )
-      
+    - `<Shift>` for [gdk.types.ModifierType.ShiftMask]
+    - `<Ctrl>` for [gdk.types.ModifierType.ControlMask]
+    - `<Alt>` for [gdk.types.ModifierType.AltMask]
+    - `<Meta>` for [gdk.types.ModifierType.MetaMask]
+    - `<Super>` for [gdk.types.ModifierType.SuperMask]
+    - `<Hyper>` for [gdk.types.ModifierType.HyperMask]
+    
     If the parse operation fails, accelerator_key and accelerator_mods will
     be set to 0 (zero).
 

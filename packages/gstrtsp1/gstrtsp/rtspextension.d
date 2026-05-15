@@ -67,7 +67,7 @@ interface RTSPExtension
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gstrtsp.types.RTSPResult callback(void* object, void* p0, gstrtsp.rtspextension.RTSPExtension rTSPExtension))
+          `gstrtsp.types.RTSPResult callback(void* object, void* p0, gstrtsp.rtspextension.RTSPExtension rTSPExtension)`
   
           `object`  (optional)
   

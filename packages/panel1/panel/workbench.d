@@ -188,7 +188,7 @@ class Workbench : gtk.window_group.WindowGroup
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(panel.workbench.Workbench workbench))
+          `void callback(panel.workbench.Workbench workbench)`
   
           `workbench` the instance the signal is connected to (optional)
   

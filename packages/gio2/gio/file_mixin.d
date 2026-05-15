@@ -33,22 +33,20 @@ public import gobject.object;
     
     To construct a [gio.file.File], you can use:
     
-    $(LIST
-      * [gio.file.File.newForPath] if you have a path.
-      * [gio.file.File.newForUri] if you have a URI.
-      * [gio.file.File.newForCommandlineArg] or
-        [gio.file.File.newForCommandlineArgAndCwd] for a command line
-        argument.
-      * [gio.file.File.newTmp] to create a temporary file from a template.
-      * [gio.file.File.newTmpAsync] to asynchronously create a temporary file.
-      * [gio.file.File.newTmpDirAsync] to asynchronously create a temporary
-        directory.
-      * [gio.file.File.parseName] from a UTF-8 string gotten from
-        [gio.file.File.getParseName].
-      * [gio.file.File.newBuildFilename] or [gio.file.File.newBuildFilenamev]
-        to create a file from path elements.
-    )
-      
+    - [gio.file.File.newForPath] if you have a path.
+    - [gio.file.File.newForUri] if you have a URI.
+    - [gio.file.File.newForCommandlineArg] or
+      [gio.file.File.newForCommandlineArgAndCwd] for a command line
+      argument.
+    - [gio.file.File.newTmp] to create a temporary file from a template.
+    - [gio.file.File.newTmpAsync] to asynchronously create a temporary file.
+    - [gio.file.File.newTmpDirAsync] to asynchronously create a temporary
+      directory.
+    - [gio.file.File.parseName] from a UTF-8 string gotten from
+      [gio.file.File.getParseName].
+    - [gio.file.File.newBuildFilename] or [gio.file.File.newBuildFilenamev]
+      to create a file from path elements.
+    
     One way to think of a [gio.file.File] is as an abstraction of a pathname. For
     normal files the system pathname is what is stored internally, but as
     [gio.file.File]s are extensible it could also be something else that corresponds
@@ -103,13 +101,11 @@ public import gobject.object;
     Some [gio.file.File] operations almost always take a noticeable amount of time, and
     so do not have synchronous analogs. Notable cases include:
     
-    $(LIST
-      * [gio.file.File.mountMountable] to mount a mountable file.
-      * [gio.file.File.unmountMountableWithOperation] to unmount a mountable
-        file.
-      * [gio.file.File.ejectMountableWithOperation] to eject a mountable file.
-    )
-      
+    - [gio.file.File.mountMountable] to mount a mountable file.
+    - [gio.file.File.unmountMountableWithOperation] to unmount a mountable
+      file.
+    - [gio.file.File.ejectMountableWithOperation] to eject a mountable file.
+    
     ## Entity Tags
     
     One notable feature of [gio.file.File]s are entity tags, or ‘etags’ for

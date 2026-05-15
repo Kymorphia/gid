@@ -516,26 +516,24 @@ struct GdkPixbufFormat
     
     The loader will emit three important signals throughout the process:
     
-     $(LIST
-        * `signal@GdkPixbuf.PixbufLoader::size-prepared` will be emitted as
-          soon as the image has enough information to determine the size of
-          the image to be used. If you want to scale the image while loading
-          it, you can call [gdkpixbuf.pixbuf_loader.PixbufLoader.setSize] in
-          response to this signal.
-        * `signal@GdkPixbuf.PixbufLoader::area-prepared` will be emitted as
-          soon as the pixbuf of the desired has been allocated. You can obtain
-          the [gdkpixbuf.pixbuf.Pixbuf] instance by calling [gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf].
-          If you want to use it, simply acquire a reference to it. You can
-          also call `[gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf]` later to get the same
-          pixbuf.
-        * `signal@GdkPixbuf.PixbufLoader::area-updated` will be emitted every
-          time a region is updated. This way you can update a partially
-          completed image. Note that you do not know anything about the
-          completeness of an image from the updated area. For example, in an
-          interlaced image you will need to make several passes before the
-          image is done loading.
-     )
-       
+     - `signal@GdkPixbuf.PixbufLoader::size-prepared` will be emitted as
+       soon as the image has enough information to determine the size of
+       the image to be used. If you want to scale the image while loading
+       it, you can call [gdkpixbuf.pixbuf_loader.PixbufLoader.setSize] in
+       response to this signal.
+     - `signal@GdkPixbuf.PixbufLoader::area-prepared` will be emitted as
+       soon as the pixbuf of the desired has been allocated. You can obtain
+       the [gdkpixbuf.pixbuf.Pixbuf] instance by calling [gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf].
+       If you want to use it, simply acquire a reference to it. You can
+       also call `[gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf]` later to get the same
+       pixbuf.
+     - `signal@GdkPixbuf.PixbufLoader::area-updated` will be emitted every
+       time a region is updated. This way you can update a partially
+       completed image. Note that you do not know anything about the
+       completeness of an image from the updated area. For example, in an
+       interlaced image you will need to make several passes before the
+       image is done loading.
+    
     ## Loading an animation
     
     Loading an animation is almost as easy as loading an image. Once the
@@ -614,14 +612,12 @@ struct GdkPixbufLoaderClass
     
     Installing a module is a two-step process:
     
-     $(LIST
-        * copy the module file(s) to the loader directory (normally
-          `$libdir/gdk-pixbuf-2.0/$version/loaders`, unless overridden by the
-          environment variable `GDK_PIXBUF_MODULEDIR`)
-        * call `gdk-pixbuf-query-loaders` to update the module file (normally
-          `$libdir/gdk-pixbuf-2.0/$version/loaders.cache`, unless overridden
-          by the environment variable `GDK_PIXBUF_MODULE_FILE`)
-     )
+     - copy the module file(s) to the loader directory (normally
+       `$libdir/gdk-pixbuf-2.0/$version/loaders`, unless overridden by the
+       environment variable `GDK_PIXBUF_MODULEDIR`)
+     - call `gdk-pixbuf-query-loaders` to update the module file (normally
+       `$libdir/gdk-pixbuf-2.0/$version/loaders.cache`, unless overridden
+       by the environment variable `GDK_PIXBUF_MODULE_FILE`)
 */
 struct GdkPixbufModule
 {

@@ -115,7 +115,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   
@@ -161,7 +161,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   
@@ -204,7 +204,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   
@@ -251,7 +251,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string path, gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(string path, gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `path` a string that gets put in the text entry for the file name (optional)
   
@@ -300,7 +300,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   
@@ -343,7 +343,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   
@@ -385,7 +385,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   
@@ -433,7 +433,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int bookmarkIndex, gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(int bookmarkIndex, gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `bookmarkIndex` the number of the bookmark to switch to (optional)
   
@@ -481,7 +481,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   
@@ -523,7 +523,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   
@@ -565,7 +565,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   
@@ -608,7 +608,7 @@ class FileChooserWidget : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget))
+          `void callback(gtk.file_chooser_widget.FileChooserWidget fileChooserWidget)`
   
           `fileChooserWidget` the instance the signal is connected to (optional)
   

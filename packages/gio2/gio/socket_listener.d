@@ -430,7 +430,7 @@ class SocketListener : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.types.SocketListenerEvent event, gio.socket.Socket socket, gio.socket_listener.SocketListener socketListener))
+          `void callback(gio.types.SocketListenerEvent event, gio.socket.Socket socket, gio.socket_listener.SocketListener socketListener)`
   
           `event` the event that is occurring (optional)
   

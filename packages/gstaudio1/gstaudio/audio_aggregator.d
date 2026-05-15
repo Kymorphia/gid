@@ -45,21 +45,17 @@ import gstbase.aggregator;
     
     The #GstAggregator::samples-selected signal is provided with some
     additional information about the output buffer:
-    $(LIST
-      * "offset"  G_TYPE_UINT64   Offset in samples since segment start
-        for the position that is next to be filled in the output buffer.
-      * "frames"  G_TYPE_UINT   Number of frames per output buffer.
-    )
-      
+    - "offset"  G_TYPE_UINT64   Offset in samples since segment start
+      for the position that is next to be filled in the output buffer.
+    - "frames"  G_TYPE_UINT   Number of frames per output buffer.
+    
     In addition the [gstbase.aggregator.Aggregator.peekNextSample] function returns
     additional information in the info #GstStructure of the returned sample:
-    $(LIST
-      * "output-offset"  G_TYPE_UINT64   Sample offset in output segment relative to
-        the output segment's start where the current position of this input
-        buffer would be placed
-      * "position"  G_TYPE_UINT   current position in the input buffer in samples
-      * "size"  G_TYPE_UINT   size of the input buffer in samples
-    )
+    - "output-offset"  G_TYPE_UINT64   Sample offset in output segment relative to
+      the output segment's start where the current position of this input
+      buffer would be placed
+    - "position"  G_TYPE_UINT   current position in the input buffer in samples
+    - "size"  G_TYPE_UINT   size of the input buffer in samples
 */
 class AudioAggregator : gstbase.aggregator.Aggregator
 {

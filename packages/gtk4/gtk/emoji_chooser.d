@@ -105,7 +105,7 @@ class EmojiChooser : gtk.popover.Popover
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string text, gtk.emoji_chooser.EmojiChooser emojiChooser))
+          `void callback(string text, gtk.emoji_chooser.EmojiChooser emojiChooser)`
   
           `text` the Unicode sequence for the picked Emoji, in UTF-8 (optional)
   

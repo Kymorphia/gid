@@ -492,7 +492,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string name, gtk.level_bar.LevelBar levelBar))
+          `void callback(string name, gtk.level_bar.LevelBar levelBar)`
   
           `name` the name of the offset that changed value (optional)
   

@@ -60,11 +60,9 @@ import pango.layout;
     Height-for-width geometry management is implemented in GTK by way
     of two virtual methods:
     
-    $(LIST
-      * `vfunc@Gtk.Widget.get_request_mode`
-      * `vfunc@Gtk.Widget.measure`
-    )
-      
+    - `vfunc@Gtk.Widget.get_request_mode`
+    - `vfunc@Gtk.Widget.measure`
+    
     There are some important things to keep in mind when implementing
     height-for-width and when using it in widget implementations.
     
@@ -2853,16 +2851,14 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       of a [gtk.widget.Widget] subclass and not in `GObject.constructed()` or
       `GObject.constructor()` for two reasons:
       
-       $(LIST
-          * derived widgets will assume that the composite widgets
-            defined by its parent classes have been created in their
-            relative instance initializers
-          * when calling `[gobject.object.ObjectWrap.new_]` on a widget with composite templates,
-            it’s important to build the composite widgets before the construct
-            properties are set. Properties passed to `[gobject.object.ObjectWrap.new_]` should
-            take precedence over properties set in the private template XML
-       )
-         
+       - derived widgets will assume that the composite widgets
+         defined by its parent classes have been created in their
+         relative instance initializers
+       - when calling `[gobject.object.ObjectWrap.new_]` on a widget with composite templates,
+         it’s important to build the composite widgets before the construct
+         properties are set. Properties passed to `[gobject.object.ObjectWrap.new_]` should
+         take precedence over properties set in the private template XML
+      
       A good rule of thumb is to call this function as the first thing in
       an instance initialization function.
   */
@@ -4168,7 +4164,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -4205,7 +4201,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.TextDirection previousDirection, gtk.widget.Widget widget))
+          `void callback(gtk.types.TextDirection previousDirection, gtk.widget.Widget widget)`
   
           `previousDirection` the previous text direction of widget (optional)
   
@@ -4248,7 +4244,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -4287,7 +4283,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.DirectionType direction, gtk.widget.Widget widget))
+          `bool callback(gtk.types.DirectionType direction, gtk.widget.Widget widget)`
   
           `direction` the direction of movement (optional)
   
@@ -4343,7 +4339,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -4383,7 +4379,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool groupCycling, gtk.widget.Widget widget))
+          `bool callback(bool groupCycling, gtk.widget.Widget widget)`
   
           `groupCycling` true if there are other widgets with the same mnemonic (optional)
   
@@ -4435,7 +4431,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.DirectionType direction, gtk.widget.Widget widget))
+          `void callback(gtk.types.DirectionType direction, gtk.widget.Widget widget)`
   
           `direction` the direction of the focus move (optional)
   
@@ -4491,7 +4487,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.widget.Widget widget))
+          `bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.widget.Widget widget)`
   
           `x` the x coordinate of the cursor position where the request has
               been emitted, relative to widget's left side (optional)
@@ -4560,7 +4556,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -4597,7 +4593,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -4636,7 +4632,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.StateFlags flags, gtk.widget.Widget widget))
+          `void callback(gtk.types.StateFlags flags, gtk.widget.Widget widget)`
   
           `flags` The previous state flags. (optional)
   
@@ -4685,7 +4681,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -4725,7 +4721,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   

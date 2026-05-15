@@ -378,7 +378,7 @@ class InfoBar : gtk.box.Box
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.info_bar.InfoBar infoBar))
+          `void callback(gtk.info_bar.InfoBar infoBar)`
   
           `infoBar` the instance the signal is connected to (optional)
   
@@ -417,7 +417,7 @@ class InfoBar : gtk.box.Box
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int responseId, gtk.info_bar.InfoBar infoBar))
+          `void callback(int responseId, gtk.info_bar.InfoBar infoBar)`
   
           `responseId` the response ID (optional)
   

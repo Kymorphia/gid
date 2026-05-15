@@ -33,18 +33,16 @@ import gst.types;
     On startup, plugins are searched for in the plugin search path. The following
     locations are checked in this order:
     
-    $(LIST
-      * location from --gst-plugin-path commandline option.
-      * the GST_PLUGIN_PATH environment variable.
-      * the GST_PLUGIN_SYSTEM_PATH environment variable.
-      * default locations (if GST_PLUGIN_SYSTEM_PATH is not set).
-        Those default locations are:
-        `$XDG_DATA_HOME/gstreamer-$GST_API_VERSION/plugins/`
-        and `$prefix/libs/gstreamer-$GST_API_VERSION/`.
-        [$XDG_DATA_HOME](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) defaults to
-        `$HOME/.local/share`.
-    )
-      
+    * location from --gst-plugin-path commandline option.
+    * the GST_PLUGIN_PATH environment variable.
+    * the GST_PLUGIN_SYSTEM_PATH environment variable.
+    * default locations (if GST_PLUGIN_SYSTEM_PATH is not set).
+      Those default locations are:
+      `$XDG_DATA_HOME/gstreamer-$GST_API_VERSION/plugins/`
+      and `$prefix/libs/gstreamer-$GST_API_VERSION/`.
+      [$XDG_DATA_HOME](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) defaults to
+      `$HOME/.local/share`.
+    
     The registry cache file is loaded from
     `$XDG_CACHE_HOME/gstreamer-$GST_API_VERSION/registry-$ARCH.bin`
     (where $XDG_CACHE_HOME defaults to `$HOME/.cache`) or the file listed in the `GST_REGISTRY`
@@ -53,12 +51,10 @@ import gst.types;
     For each plugin that is found in the plugin search path, there could be 3
     possibilities for cached information:
     
-      $(LIST
-          * the cache may not contain information about a given file.
-          * the cache may have stale information.
-          * the cache may have current information.
-      )
-        
+      * the cache may not contain information about a given file.
+      * the cache may have stale information.
+      * the cache may have current information.
+    
     In the first two cases, the plugin is loaded and the cache updated. In
     addition to these cases, the cache may have entries for plugins that are not
     relevant to the current process. These are marked as not available to the
@@ -479,7 +475,7 @@ class Registry : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.plugin_feature.PluginFeature feature, gst.registry.Registry registry))
+          `void callback(gst.plugin_feature.PluginFeature feature, gst.registry.Registry registry)`
   
           `feature` the feature that has been added (optional)
   
@@ -523,7 +519,7 @@ class Registry : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.plugin.Plugin plugin, gst.registry.Registry registry))
+          `void callback(gst.plugin.Plugin plugin, gst.registry.Registry registry)`
   
           `plugin` the plugin that has been added (optional)
   

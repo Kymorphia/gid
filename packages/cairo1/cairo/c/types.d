@@ -1470,11 +1470,9 @@ enum cairo_surface_type_t
     lengths in the SVG specification.
     
     See also:
-    $(LIST
-      * [SVG Units](https://www.w3.org/TR/SVG/coords.html#Units)
-      * [SVG Types](https://www.w3.org/TR/SVG/types.html#DataTypeLength)
-      * [CSS Length](https://www.w3.org/TR/css-values-3/#lengths)
-    )
+    - [SVG Units](https://www.w3.org/TR/SVG/coords.html#Units)
+    - [SVG Types](https://www.w3.org/TR/SVG/types.html#DataTypeLength)
+    - [CSS Length](https://www.w3.org/TR/css-values-3/#lengths)
 */
 enum cairo_svg_unit_t
 {

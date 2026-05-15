@@ -13,13 +13,11 @@ import gstaudio.types;
     This object is used to convert audio samples from one format to another.
     The object can perform conversion of:
     
-     $(LIST
-        * audio format with optional dithering and noise shaping
-       
-        * audio samplerate
-       
-        * audio channels and channel layout
-     )
+     * audio format with optional dithering and noise shaping
+    
+     * audio samplerate
+    
+     * audio channels and channel layout
 */
 class AudioConverter : gobject.boxed.Boxed
 {

@@ -297,7 +297,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string itemName, gtk.app_chooser_button.AppChooserButton appChooserButton))
+          `void callback(string itemName, gtk.app_chooser_button.AppChooserButton appChooserButton)`
   
           `itemName` the name of the activated item (optional)
   

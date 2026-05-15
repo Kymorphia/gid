@@ -470,60 +470,58 @@ import gobject.value;
     [gio.task.Task]’s API attempts to be simpler than [gio.simple_async_result.SimpleAsyncResult]’s
     in several ways:
     
-    $(LIST
-      * You can save task-specific data with [gio.task.Task.setTaskData], and
-        retrieve it later with [gio.task.Task.getTaskData]. This replaces the
-        abuse of [gio.simple_async_result.SimpleAsyncResult.setOpResGpointer] for the same
-        purpose with [gio.simple_async_result.SimpleAsyncResult].
-      * In addition to the task data, [gio.task.Task] also keeps track of the
-        [priority](iface.AsyncResult.html#io-priority), [gio.cancellable.Cancellable],
-        and [glib.main_context.MainContext] associated with the task, so tasks that
-        consist of a chain of simpler asynchronous operations will have easy access
-        to those values when starting each sub-task.
-      * [gio.task.Task.returnErrorIfCancelled] provides simplified
-        handling for cancellation. In addition, cancellation
-        overrides any other [gio.task.Task] return value by default, like
-        [gio.simple_async_result.SimpleAsyncResult] does when
-        [gio.simple_async_result.SimpleAsyncResult.setCheckCancellable] is called.
-        (You can use [gio.task.Task.setCheckCancellable] to turn off that
-        behavior.) On the other hand, [gio.task.Task.runInThread]
-        guarantees that it will always run your
-        `task_func`, even if the task’s [gio.cancellable.Cancellable]
-        is already cancelled before the task gets a chance to run;
-        you can start your `task_func` with a
-        [gio.task.Task.returnErrorIfCancelled] check if you need the
-        old behavior.
-      * The ‘return’ methods (eg, [gio.task.Task.returnPointer])
-        automatically cause the task to be ‘completed’ as well, and
-        there is no need to worry about the ‘complete’ vs ‘complete in idle’
-        distinction. ([gio.task.Task] automatically figures out
-        whether the task’s callback can be invoked directly, or
-        if it needs to be sent to another [glib.main_context.MainContext], or delayed
-        until the next iteration of the current [glib.main_context.MainContext].)
-      * The ‘finish’ functions for [gio.task.Task] based operations are generally
-        much simpler than [gio.simple_async_result.SimpleAsyncResult] ones, normally consisting
-        of only a single call to [gio.task.Task.propagatePointer] or the like.
-        Since [gio.task.Task.propagatePointer] ‘steals’ the return value from
-        the [gio.task.Task], it is not necessary to juggle pointers around to
-        prevent it from being freed twice.
-      * With [gio.simple_async_result.SimpleAsyncResult], it was common to call
-        [gio.simple_async_result.SimpleAsyncResult.propagateError] from the
-        `_finish()` wrapper function, and have
-        virtual method implementations only deal with successful
-        returns. This behavior is deprecated, because it makes it
-        difficult for a subclass to chain to a parent class’s async
-        methods. Instead, the wrapper function should just be a
-        simple wrapper, and the virtual method should call an
-        appropriate `g_task_propagate_` function.
-        Note that wrapper methods can now use
-        [gio.async_result.AsyncResult.legacyPropagateError] to do old-style
-        [gio.simple_async_result.SimpleAsyncResult] error-returning behavior, and
-        [gio.async_result.AsyncResult.isTagged] to check if a result is tagged as
-        having come from the `_async()` wrapper
-        function (for ‘short-circuit’ results, such as when passing
-        `0` to [gio.input_stream.InputStream.readAsync]).
-    )
-      
+    - You can save task-specific data with [gio.task.Task.setTaskData], and
+      retrieve it later with [gio.task.Task.getTaskData]. This replaces the
+      abuse of [gio.simple_async_result.SimpleAsyncResult.setOpResGpointer] for the same
+      purpose with [gio.simple_async_result.SimpleAsyncResult].
+    - In addition to the task data, [gio.task.Task] also keeps track of the
+      [priority](iface.AsyncResult.html#io-priority), [gio.cancellable.Cancellable],
+      and [glib.main_context.MainContext] associated with the task, so tasks that
+      consist of a chain of simpler asynchronous operations will have easy access
+      to those values when starting each sub-task.
+    - [gio.task.Task.returnErrorIfCancelled] provides simplified
+      handling for cancellation. In addition, cancellation
+      overrides any other [gio.task.Task] return value by default, like
+      [gio.simple_async_result.SimpleAsyncResult] does when
+      [gio.simple_async_result.SimpleAsyncResult.setCheckCancellable] is called.
+      (You can use [gio.task.Task.setCheckCancellable] to turn off that
+      behavior.) On the other hand, [gio.task.Task.runInThread]
+      guarantees that it will always run your
+      `task_func`, even if the task’s [gio.cancellable.Cancellable]
+      is already cancelled before the task gets a chance to run;
+      you can start your `task_func` with a
+      [gio.task.Task.returnErrorIfCancelled] check if you need the
+      old behavior.
+    - The ‘return’ methods (eg, [gio.task.Task.returnPointer])
+      automatically cause the task to be ‘completed’ as well, and
+      there is no need to worry about the ‘complete’ vs ‘complete in idle’
+      distinction. ([gio.task.Task] automatically figures out
+      whether the task’s callback can be invoked directly, or
+      if it needs to be sent to another [glib.main_context.MainContext], or delayed
+      until the next iteration of the current [glib.main_context.MainContext].)
+    - The ‘finish’ functions for [gio.task.Task] based operations are generally
+      much simpler than [gio.simple_async_result.SimpleAsyncResult] ones, normally consisting
+      of only a single call to [gio.task.Task.propagatePointer] or the like.
+      Since [gio.task.Task.propagatePointer] ‘steals’ the return value from
+      the [gio.task.Task], it is not necessary to juggle pointers around to
+      prevent it from being freed twice.
+    - With [gio.simple_async_result.SimpleAsyncResult], it was common to call
+      [gio.simple_async_result.SimpleAsyncResult.propagateError] from the
+      `_finish()` wrapper function, and have
+      virtual method implementations only deal with successful
+      returns. This behavior is deprecated, because it makes it
+      difficult for a subclass to chain to a parent class’s async
+      methods. Instead, the wrapper function should just be a
+      simple wrapper, and the virtual method should call an
+      appropriate `g_task_propagate_` function.
+      Note that wrapper methods can now use
+      [gio.async_result.AsyncResult.legacyPropagateError] to do old-style
+      [gio.simple_async_result.SimpleAsyncResult] error-returning behavior, and
+      [gio.async_result.AsyncResult.isTagged] to check if a result is tagged as
+      having come from the `_async()` wrapper
+      function (for ‘short-circuit’ results, such as when passing
+      `0` to [gio.input_stream.InputStream.readAsync]).
+    
     ## Thread-safety considerations
     
     Due to some infelicities in the API design, there is a
@@ -536,12 +534,10 @@ import gobject.value;
     This is a problem if the finalizers use non-threadsafe API, and
     can lead to hard-to-debug crashes. Possible workarounds include:
     
-    $(LIST
-      * Clear task data in a signal handler for `notify::completed`
-      * Keep iterating a main context in the main thread and defer
-        dropping the reference to the source object to that main
-        context when the task is finalized
-    )
+    - Clear task data in a signal handler for `notify::completed`
+    - Keep iterating a main context in the main thread and defer
+      dropping the reference to the source object to that main
+      context when the task is finalized
 */
 class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
 {

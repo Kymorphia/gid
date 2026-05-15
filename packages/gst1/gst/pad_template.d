@@ -273,7 +273,7 @@ class PadTemplate : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.pad.Pad pad, gst.pad_template.PadTemplate padTemplate))
+          `void callback(gst.pad.Pad pad, gst.pad_template.PadTemplate padTemplate)`
   
           `pad` the pad that was created. (optional)
   

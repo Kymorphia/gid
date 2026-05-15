@@ -363,11 +363,9 @@ class Memory : gobject.boxed.Boxed
       accessed according to flags.
       
       This function can return false for various reasons:
-      $(LIST
-        * the memory backed by mem is not accessible with the given flags.
-        * the memory was already mapped with a different mapping.
-      )
-        
+      - the memory backed by mem is not accessible with the given flags.
+      - the memory was already mapped with a different mapping.
+      
       info and its contents remain valid for as long as mem is valid and
       until [gst.memory.Memory.unmap] is called.
       

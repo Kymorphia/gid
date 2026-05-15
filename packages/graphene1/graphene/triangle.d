@@ -127,10 +127,8 @@ class Triangle : gobject.boxed.Boxed
       
       The returned #graphene_vec2_t contains the following values, in order:
       
-       $(LIST
-          * `res.x = u`
-          * `res.y = v`
-       )
+       - `res.x = u`
+       - `res.y = v`
   
       Params:
         p = a #graphene_point3d_t
@@ -227,11 +225,9 @@ class Triangle : gobject.boxed.Boxed
       
       The UV coordinates will be placed in the res vector:
       
-       $(LIST
-          * `res.x = u`
-          * `res.y = v`
-       )
-         
+       - `res.x = u`
+       - `res.y = v`
+      
       See also: [graphene.triangle.Triangle.getBarycoords]
   
       Params:

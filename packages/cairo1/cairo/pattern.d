@@ -367,9 +367,7 @@ class Pattern : gobject.boxed.Boxed
       Sets the filter to be used for resizing when using this pattern.
       See #cairo_filter_t for details on each filter.
       
-      $(LIST
-        * Note that you might want to control filtering even when you do not
-      )
+      * Note that you might want to control filtering even when you do not
       have an explicit #cairo_pattern_t object, (for example when using
       [cairo.context.Context.setSourceSurface]). In these cases, it is convenient to
       use [cairo.context.Context.getSource] to get access to the pattern that cairo

@@ -296,11 +296,9 @@ class FileSystem : gobject.object.ObjectWrap
   /**
       Move / rename a file or a directory.
       If the destination exists:
-      $(LIST
-        * if it is a non-empty directory, an error is returned
-        * otherwise, if it has the same type as the source, it is replaced
-        * otherwise, behavior is unspecified (implementation-dependent).
-      )
+      - if it is a non-empty directory, an error is returned
+      - otherwise, if it has the same type as the source, it is replaced
+      - otherwise, behavior is unspecified (implementation-dependent).
   
       Params:
         src = The path of the source file.

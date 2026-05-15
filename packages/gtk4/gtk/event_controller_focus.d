@@ -107,7 +107,7 @@ class EventControllerFocus : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.event_controller_focus.EventControllerFocus eventControllerFocus))
+          `void callback(gtk.event_controller_focus.EventControllerFocus eventControllerFocus)`
   
           `eventControllerFocus` the instance the signal is connected to (optional)
   
@@ -152,7 +152,7 @@ class EventControllerFocus : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.event_controller_focus.EventControllerFocus eventControllerFocus))
+          `void callback(gtk.event_controller_focus.EventControllerFocus eventControllerFocus)`
   
           `eventControllerFocus` the instance the signal is connected to (optional)
   

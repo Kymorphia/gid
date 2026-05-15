@@ -20,12 +20,10 @@ import gstbase.types;
     This is a generic base class for source elements. The following
     types of sources are supported:
     
-      $(LIST
-          * random access sources like files
-          * seekable sources
-          * live sources
-      )
-        
+      * random access sources like files
+      * seekable sources
+      * live sources
+    
     The source can be configured to operate in any #GstFormat with the
     [gstbase.base_src.BaseSrc.setFormat] method. The currently set format determines
     the format of the internal #GstSegment and any [gst.types.EventType.Segment]
@@ -34,24 +32,20 @@ import gstbase.types;
     #GstBaseSrc always supports push mode scheduling. If the following
     conditions are met, it also supports pull mode scheduling:
     
-      $(LIST
-          * The format is set to [gst.types.Format.Bytes] (default).
-          * #GstBaseSrcClass::is_seekable returns true.
-      )
-        
+      * The format is set to [gst.types.Format.Bytes] (default).
+      * #GstBaseSrcClass::is_seekable returns true.
+    
     If all the conditions are met for operating in pull mode, #GstBaseSrc is
     automatically seekable in push mode as well. The following conditions must
     be met to make the element seekable in push mode when the format is not
     [gst.types.Format.Bytes]:
     
-    $(LIST
-      * #GstBaseSrcClass::is_seekable returns true.
-      * #GstBaseSrcClass::query can convert all supported seek formats to the
-        internal format as set with [gstbase.base_src.BaseSrc.setFormat].
-      * #GstBaseSrcClass::do_seek is implemented, performs the seek and returns
-         true.
-    )
-      
+    * #GstBaseSrcClass::is_seekable returns true.
+    * #GstBaseSrcClass::query can convert all supported seek formats to the
+      internal format as set with [gstbase.base_src.BaseSrc.setFormat].
+    * #GstBaseSrcClass::do_seek is implemented, performs the seek and returns
+       true.
+    
     When the element does not meet the requirements to operate in pull mode, the
     offset and length in the #GstBaseSrcClass::create method should be ignored.
     It is recommended to subclass #GstPushSrc instead, in this situation. If the

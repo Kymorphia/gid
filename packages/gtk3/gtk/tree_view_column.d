@@ -977,7 +977,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_view_column.TreeViewColumn treeViewColumn))
+          `void callback(gtk.tree_view_column.TreeViewColumn treeViewColumn)`
   
           `treeViewColumn` the instance the signal is connected to (optional)
   

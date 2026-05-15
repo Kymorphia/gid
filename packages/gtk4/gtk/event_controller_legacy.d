@@ -73,7 +73,7 @@ class EventControllerLegacy : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event.Event event, gtk.event_controller_legacy.EventControllerLegacy eventControllerLegacy))
+          `bool callback(gdk.event.Event event, gtk.event_controller_legacy.EventControllerLegacy eventControllerLegacy)`
   
           `event` the [gdk.event.Event] which triggered this signal (optional)
   

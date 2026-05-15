@@ -352,7 +352,7 @@ class IMContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string str, gtk.imcontext.IMContext iMContext))
+          `void callback(string str, gtk.imcontext.IMContext iMContext)`
   
           `str` the completed character(s) entered by the user (optional)
   
@@ -396,7 +396,7 @@ class IMContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(int offset, int nChars, gtk.imcontext.IMContext iMContext))
+          `bool callback(int offset, int nChars, gtk.imcontext.IMContext iMContext)`
   
           `offset` the character offset from the cursor position of the text
                       to be deleted. A negative value indicates a position before
@@ -453,7 +453,7 @@ class IMContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.imcontext.IMContext iMContext))
+          `void callback(gtk.imcontext.IMContext iMContext)`
   
           `iMContext` the instance the signal is connected to (optional)
   
@@ -491,7 +491,7 @@ class IMContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.imcontext.IMContext iMContext))
+          `void callback(gtk.imcontext.IMContext iMContext)`
   
           `iMContext` the instance the signal is connected to (optional)
   
@@ -529,7 +529,7 @@ class IMContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.imcontext.IMContext iMContext))
+          `void callback(gtk.imcontext.IMContext iMContext)`
   
           `iMContext` the instance the signal is connected to (optional)
   
@@ -569,7 +569,7 @@ class IMContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.imcontext.IMContext iMContext))
+          `bool callback(gtk.imcontext.IMContext iMContext)`
   
           `iMContext` the instance the signal is connected to (optional)
   

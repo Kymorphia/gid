@@ -339,7 +339,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(panel.widget.Widget widget, panel.frame.Frame frame))
+          `bool callback(panel.widget.Widget widget, panel.frame.Frame frame)`
   
           `widget` a #PanelWidget (optional)
   
@@ -385,7 +385,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(panel.widget.Widget widget, panel.frame.Frame frame))
+          `void callback(panel.widget.Widget widget, panel.frame.Frame frame)`
   
           `widget` a #PanelWidget (optional)
   

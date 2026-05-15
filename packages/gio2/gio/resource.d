@@ -38,33 +38,31 @@ import gobject.object;
     `preprocess` attribute to a comma-separated list of preprocessing options.
     The only options currently supported are:
     
-     $(LIST
-        * `xml-stripblanks` which will use the [`xmllint`](man:xmllint(1)) command
-          to strip ignorable whitespace from the XML file. For this to work,
-          the `XMLLINT` environment variable must be set to the full path to
-          the xmllint executable, or xmllint must be in the `PATH`; otherwise
-          the preprocessing step is skipped.
-       
-        * `to-pixdata` (deprecated since gdk-pixbuf 2.32) which will use the
-          `gdk-pixbuf-pixdata` command to convert images to the [`GdkPixdata`](https://docs.gtk.org/gdk-pixbuf/class.Pixdata.html)
-          format, which allows you to create pixbufs directly using the data inside
-          the resource file, rather than an (uncompressed) copy of it. For this, the
-          `gdk-pixbuf-pixdata` program must be in the `PATH`, or the
-          `GDK_PIXBUF_PIXDATA` environment variable must be set to the full path to
-          the `gdk-pixbuf-pixdata` executable; otherwise the resource compiler will
-          abort. `to-pixdata` has been deprecated since gdk-pixbuf 2.32, as
-          [gio.resource.Resource] supports embedding modern image formats just as well. Instead
-          of using it, embed a PNG or SVG file in your [gio.resource.Resource].
-       
-        * `json-stripblanks` which will use the
-          [`json-glib-format`](man:json-glib-format(1)) command to strip ignorable
-          whitespace from the JSON file. For this to work, the `JSON_GLIB_FORMAT`
-          environment variable must be set to the full path to the
-          `json-glib-format` executable, or it must be in the `PATH`; otherwise the
-          preprocessing step is skipped. In addition, at least version 1.6 of
-          `json-glib-format` is required.
-     )
-       
+     - `xml-stripblanks` which will use the [`xmllint`](man:xmllint(1)) command
+       to strip ignorable whitespace from the XML file. For this to work,
+       the `XMLLINT` environment variable must be set to the full path to
+       the xmllint executable, or xmllint must be in the `PATH`; otherwise
+       the preprocessing step is skipped.
+    
+     - `to-pixdata` (deprecated since gdk-pixbuf 2.32) which will use the
+       `gdk-pixbuf-pixdata` command to convert images to the [`GdkPixdata`](https://docs.gtk.org/gdk-pixbuf/class.Pixdata.html)
+       format, which allows you to create pixbufs directly using the data inside
+       the resource file, rather than an (uncompressed) copy of it. For this, the
+       `gdk-pixbuf-pixdata` program must be in the `PATH`, or the
+       `GDK_PIXBUF_PIXDATA` environment variable must be set to the full path to
+       the `gdk-pixbuf-pixdata` executable; otherwise the resource compiler will
+       abort. `to-pixdata` has been deprecated since gdk-pixbuf 2.32, as
+       [gio.resource.Resource] supports embedding modern image formats just as well. Instead
+       of using it, embed a PNG or SVG file in your [gio.resource.Resource].
+    
+     - `json-stripblanks` which will use the
+       [`json-glib-format`](man:json-glib-format(1)) command to strip ignorable
+       whitespace from the JSON file. For this to work, the `JSON_GLIB_FORMAT`
+       environment variable must be set to the full path to the
+       `json-glib-format` executable, or it must be in the `PATH`; otherwise the
+       preprocessing step is skipped. In addition, at least version 1.6 of
+       `json-glib-format` is required.
+    
     Resource files will be exported in the [gio.resource.Resource] namespace using the
     combination of the given `prefix` and the filename from the `file` element.
     The `alias` attribute can be used to alter the filename to expose them at a

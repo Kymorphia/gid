@@ -273,7 +273,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.dbus_connection.DBusConnection connection, gio.dbus_server.DBusServer dBusServer))
+          `bool callback(gio.dbus_connection.DBusConnection connection, gio.dbus_server.DBusServer dBusServer)`
   
           `connection` A #GDBusConnection for the new connection. (optional)
   

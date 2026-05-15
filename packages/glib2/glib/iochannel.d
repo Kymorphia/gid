@@ -547,29 +547,27 @@ class IOChannel : gobject.boxed.Boxed
       The encoding can only be set if one of the following conditions
       is true:
       
-      $(LIST
-        * The channel was just created, and has not been written to or read from yet.
-        
-        * The channel is write-only.
-        
-        * The channel is a file, and the file pointer was just repositioned
-          by a call to [glib.iochannel.IOChannel.seekPosition]. (This flushes all the
-          internal buffers.)
-        
-        * The current encoding is null or UTF-8.
-        
-        * One of the (new API) read functions has just returned `G_IO_STATUS_EOF`
-          (or, in the case of [glib.iochannel.IOChannel.readToEnd], `G_IO_STATUS_NORMAL`).
-        
-        *  One of the functions [glib.iochannel.IOChannel.readChars] or
-           [glib.iochannel.IOChannel.readUnichar] has returned `G_IO_STATUS_AGAIN` or
-           `G_IO_STATUS_ERROR`. This may be useful in the case of
-           `G_CONVERT_ERROR_ILLEGAL_SEQUENCE`.
-           Returning one of these statuses from [glib.iochannel.IOChannel.readLine],
-           [glib.iochannel.IOChannel.readLineString], or [glib.iochannel.IOChannel.readToEnd]
-           does not guarantee that the encoding can be changed.
-      )
-        
+      - The channel was just created, and has not been written to or read from yet.
+      
+      - The channel is write-only.
+      
+      - The channel is a file, and the file pointer was just repositioned
+        by a call to [glib.iochannel.IOChannel.seekPosition]. (This flushes all the
+        internal buffers.)
+      
+      - The current encoding is null or UTF-8.
+      
+      - One of the (new API) read functions has just returned `G_IO_STATUS_EOF`
+        (or, in the case of [glib.iochannel.IOChannel.readToEnd], `G_IO_STATUS_NORMAL`).
+      
+      -  One of the functions [glib.iochannel.IOChannel.readChars] or
+         [glib.iochannel.IOChannel.readUnichar] has returned `G_IO_STATUS_AGAIN` or
+         `G_IO_STATUS_ERROR`. This may be useful in the case of
+         `G_CONVERT_ERROR_ILLEGAL_SEQUENCE`.
+         Returning one of these statuses from [glib.iochannel.IOChannel.readLine],
+         [glib.iochannel.IOChannel.readLineString], or [glib.iochannel.IOChannel.readToEnd]
+         does not guarantee that the encoding can be changed.
+      
       Channels which do not meet one of the above conditions cannot call
       [glib.iochannel.IOChannel.seekPosition] with an offset of `G_SEEK_CUR`, and, if
       they are "seekable", cannot call [glib.iochannel.IOChannel.writeChars] after

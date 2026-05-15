@@ -269,7 +269,7 @@ class HandleBox : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget, gtk.handle_box.HandleBox handleBox))
+          `void callback(gtk.widget.Widget widget, gtk.handle_box.HandleBox handleBox)`
   
           `widget` the child widget of the handlebox.
               (this argument provides no extra information
@@ -317,7 +317,7 @@ class HandleBox : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget, gtk.handle_box.HandleBox handleBox))
+          `void callback(gtk.widget.Widget widget, gtk.handle_box.HandleBox handleBox)`
   
           `widget` the child widget of the handlebox.
               (this argument provides no extra information

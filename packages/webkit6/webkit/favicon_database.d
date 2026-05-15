@@ -153,7 +153,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string pageUri, string faviconUri, webkit.favicon_database.FaviconDatabase faviconDatabase))
+          `void callback(string pageUri, string faviconUri, webkit.favicon_database.FaviconDatabase faviconDatabase)`
   
           `pageUri` the URI of the Web page containing the icon (optional)
   

@@ -18,15 +18,13 @@ import gsttag.types;
     
     Subclasses have to do the following things:
     
-     $(LIST
-        * In their base init function, they must add pad templates for the sink
-          pad and the source pad to the element class, describing the media type
-          they accept and output in the caps of the pad template.
-        * In their class init function, they must override the
-          GST_TAG_MUX_CLASS(mux_klass)->render_start_tag and/or
-          GST_TAG_MUX_CLASS(mux_klass)->render_end_tag vfuncs and set up a render
-          function.
-     )
+     * In their base init function, they must add pad templates for the sink
+       pad and the source pad to the element class, describing the media type
+       they accept and output in the caps of the pad template.
+     * In their class init function, they must override the
+       GST_TAG_MUX_CLASS(mux_klass)->render_start_tag and/or
+       GST_TAG_MUX_CLASS(mux_klass)->render_end_tag vfuncs and set up a render
+       function.
 */
 class TagMux : gst.element.Element, gst.tag_setter.TagSetter
 {

@@ -52,11 +52,9 @@ import gtksource.types;
     
     A possible use-case is to draw only unwanted white spaces. Examples:
     
-    $(LIST
-      * Draw all trailing spaces.
-      * If the indentation and alignment must be done with spaces, draw tabs.
-    )
-      
+    - Draw all trailing spaces.
+    - If the indentation and alignment must be done with spaces, draw tabs.
+    
     And non-breaking spaces can always be drawn, everywhere, to distinguish them
     from normal spaces.
 */

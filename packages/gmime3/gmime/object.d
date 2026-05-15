@@ -171,26 +171,22 @@ class ObjectWrap : gobject.object.ObjectWrap
       
       Each header in the returned list will:
       
-       $(LIST
-          * have a valid address
-          * be of the type requested
-          * be complete
-       )
-         
+       - have a valid address
+       - be of the type requested
+       - be complete
+      
       If no Autocrypt header is found for an address, no
       #GMimeAutocryptHeader will be in the list associated with that e-mail address.
       
       Note that the following types of Autocrypt headers will not be
       returned by this function:
       
-       $(LIST
-          * headers of an unrequested type
-          * headers that do not match an address in "From:"
-          * unparseable headers
-          * headers with unknown critical attributes
-          * duplicate valid headers for a given address
-       )
-         
+       - headers of an unrequested type
+       - headers that do not match an address in "From:"
+       - unparseable headers
+       - headers with unknown critical attributes
+       - duplicate valid headers for a given address
+      
       On error (e.g. if this version of GMime cannot handle the requested
       Autocrypt type, or if a parameter is missing or malformed), returns
       null

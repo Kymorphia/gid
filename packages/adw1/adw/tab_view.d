@@ -930,7 +930,7 @@ class TabView : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(adw.tab_page.TabPage page, adw.tab_view.TabView tabView))
+          `bool callback(adw.tab_page.TabPage page, adw.tab_view.TabView tabView)`
   
           `page` a page of self (optional)
   
@@ -981,7 +981,7 @@ class TabView : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D adw.tab_view.TabView callback(adw.tab_view.TabView tabView))
+          `adw.tab_view.TabView callback(adw.tab_view.TabView tabView)`
   
           `tabView` the instance the signal is connected to (optional)
   
@@ -1024,7 +1024,7 @@ class TabView : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.tab_page.TabPage page, adw.tab_view.TabView tabView))
+          `void callback(adw.tab_page.TabPage page, adw.tab_view.TabView tabView)`
   
           `page` a page of self (optional)
   
@@ -1070,7 +1070,7 @@ class TabView : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.tab_page.TabPage page, int position, adw.tab_view.TabView tabView))
+          `void callback(adw.tab_page.TabPage page, int position, adw.tab_view.TabView tabView)`
   
           `page` a page of self (optional)
   
@@ -1127,7 +1127,7 @@ class TabView : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.tab_page.TabPage page, int position, adw.tab_view.TabView tabView))
+          `void callback(adw.tab_page.TabPage page, int position, adw.tab_view.TabView tabView)`
   
           `page` a page of self (optional)
   
@@ -1176,7 +1176,7 @@ class TabView : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.tab_page.TabPage page, int position, adw.tab_view.TabView tabView))
+          `void callback(adw.tab_page.TabPage page, int position, adw.tab_view.TabView tabView)`
   
           `page` a page of self (optional)
   
@@ -1230,7 +1230,7 @@ class TabView : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.tab_page.TabPage page, adw.tab_view.TabView tabView))
+          `void callback(adw.tab_page.TabPage page, adw.tab_view.TabView tabView)`
   
           `page` a page of self (optional)
   

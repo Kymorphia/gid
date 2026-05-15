@@ -547,7 +547,7 @@ class Bus : gst.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.message.Message message, gst.bus.Bus bus))
+          `void callback(gst.message.Message message, gst.bus.Bus bus)`
   
           `message` the message that has been posted asynchronously (optional)
   
@@ -595,7 +595,7 @@ class Bus : gst.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.message.Message message, gst.bus.Bus bus))
+          `void callback(gst.message.Message message, gst.bus.Bus bus)`
   
           `message` the message that has been posted synchronously (optional)
   

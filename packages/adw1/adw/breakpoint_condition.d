@@ -145,32 +145,26 @@ class BreakpointCondition : gobject.boxed.Boxed
       
       Length conditions are specified as `<type>: <value>[<unit>]`, where:
       
-      $(LIST
-        * `<type>` can be `min-width`, `max-width`, `min-height` or `max-height`
-        * `<value>` is a fractional number
-        * `<unit>` can be `px`, `pt` or `sp`
-      )
-        
+      - `<type>` can be `min-width`, `max-width`, `min-height` or `max-height`
+      - `<value>` is a fractional number
+      - `<unit>` can be `px`, `pt` or `sp`
+      
       If the unit is omitted, `px` is assumed.
       
       See [adw.breakpoint_condition.BreakpointCondition.newLength].
       
       Examples:
       
-      $(LIST
-        * `min-width: 500px`
-        * `min-height: 400pt`
-        * `max-width: 100sp`
-        * `max-height: 500`
-      )
-        
+      - `min-width: 500px`
+      - `min-height: 400pt`
+      - `max-width: 100sp`
+      - `max-height: 500`
+      
       Ratio conditions are specified as `<type>: <width>[/<height>]`, where:
       
-      $(LIST
-        * `<type>` can be `min-aspect-ratio` or `max-aspect-ratio`
-        * `<width>` and `<height>` are integer numbers
-      )
-        
+      - `<type>` can be `min-aspect-ratio` or `max-aspect-ratio`
+      - `<width>` and `<height>` are integer numbers
+      
       See [adw.breakpoint_condition.BreakpointCondition.newRatio].
       
       The ratio is represented as `<width>` divided by `<height>`.
@@ -179,36 +173,28 @@ class BreakpointCondition : gobject.boxed.Boxed
       
       Examples:
       
-      $(LIST
-        * `min-aspect-ratio: 4/3`
-        * `max-aspect-ratio: 1`
-      )
-        
+      - `min-aspect-ratio: 4/3`
+      - `max-aspect-ratio: 1`
+      
       The logical operators `and`, `or` can be used to compose a complex condition
       as follows:
       
-      $(LIST
-        * `<condition> and <condition>`: the condition is true when both
-          `<condition>`s are true, same as when using
-          [adw.breakpoint_condition.BreakpointCondition.newAnd]
-        * `<condition> or <condition>`: the condition is true when either of the
-          `<condition>`s is true, same as when using
-          [adw.breakpoint_condition.BreakpointCondition.newOr]
-      )
-        
+      - `<condition> and <condition>`: the condition is true when both
+        `<condition>`s are true, same as when using
+        [adw.breakpoint_condition.BreakpointCondition.newAnd]
+      - `<condition> or <condition>`: the condition is true when either of the
+        `<condition>`s is true, same as when using
+        [adw.breakpoint_condition.BreakpointCondition.newOr]
+      
       Examples:
       
-      $(LIST
-        * `min-width: 400px and max-aspect-ratio: 4/3`
-        * `max-width: 360sp or max-width: 360px`
-      )
-        
+      - `min-width: 400px and max-aspect-ratio: 4/3`
+      - `max-width: 360sp or max-width: 360px`
+      
       Conditions can be further nested using parentheses, for example:
       
-      $(LIST
-        * `min-width: 400px and (max-aspect-ratio: 4/3 or max-height: 400px)`
-      )
-        
+      - `min-width: 400px and (max-aspect-ratio: 4/3 or max-height: 400px)`
+      
       If parentheses are omitted, the first operator takes priority.
   
       Params:

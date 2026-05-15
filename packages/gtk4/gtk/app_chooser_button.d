@@ -374,7 +374,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.app_chooser_button.AppChooserButton appChooserButton))
+          `void callback(gtk.app_chooser_button.AppChooserButton appChooserButton)`
   
           `appChooserButton` the instance the signal is connected to (optional)
   
@@ -411,7 +411,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.app_chooser_button.AppChooserButton appChooserButton))
+          `void callback(gtk.app_chooser_button.AppChooserButton appChooserButton)`
   
           `appChooserButton` the instance the signal is connected to (optional)
   
@@ -452,7 +452,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string itemName, gtk.app_chooser_button.AppChooserButton appChooserButton))
+          `void callback(string itemName, gtk.app_chooser_button.AppChooserButton appChooserButton)`
   
           `itemName` the name of the activated item (optional)
   

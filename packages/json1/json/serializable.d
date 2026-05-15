@@ -94,13 +94,11 @@ interface Serializable
       
       The `value` can be:
       
-      $(LIST
-        * an empty [gobject.value.Value] initialized by `G_VALUE_INIT`, which will be automatically
-          initialized with the expected type of the property by using the given
-          property description (since JSON-GLib 1.6)
-        * a [gobject.value.Value] initialized with the expected type of the property
-      )
-        
+      - an empty [gobject.value.Value] initialized by `G_VALUE_INIT`, which will be automatically
+        initialized with the expected type of the property by using the given
+        property description (since JSON-GLib 1.6)
+      - a [gobject.value.Value] initialized with the expected type of the property
+      
       This function will not be called for properties that are marked as
       as `G_PARAM_CONSTRUCT_ONLY`.
   

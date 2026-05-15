@@ -432,7 +432,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget))
+          `void callback(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget)`
   
           `application` the activated [gio.app_info.AppInfo] (optional)
   
@@ -475,7 +475,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget))
+          `void callback(gio.app_info.AppInfo application, gtk.app_chooser_widget.AppChooserWidget appChooserWidget)`
   
           `application` the selected [gio.app_info.AppInfo] (optional)
   

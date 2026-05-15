@@ -92,12 +92,10 @@ template TreeSortableT()
       `GtkTreeSortable::sort-column-changed` signal. sort_column_id may either be
       a regular column id, or one of the following special values:
       
-      $(LIST
-        * [gtk.types.TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID]: the default sort function
-          will be used, if it is set
-        
-        * [gtk.types.TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID]: no sorting will occur
-      )
+      - [gtk.types.TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID]: the default sort function
+        will be used, if it is set
+      
+      - [gtk.types.TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID]: no sorting will occur
   
       Params:
         sortColumnId = the sort column id to set
@@ -150,7 +148,7 @@ template TreeSortableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_sortable.TreeSortable treeSortable))
+          `void callback(gtk.tree_sortable.TreeSortable treeSortable)`
   
           `treeSortable` the instance the signal is connected to (optional)
   

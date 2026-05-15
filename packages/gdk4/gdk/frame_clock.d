@@ -261,7 +261,7 @@ class FrameClock : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.frame_clock.FrameClock frameClock))
+          `void callback(gdk.frame_clock.FrameClock frameClock)`
   
           `frameClock` the instance the signal is connected to (optional)
   
@@ -300,7 +300,7 @@ class FrameClock : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.frame_clock.FrameClock frameClock))
+          `void callback(gdk.frame_clock.FrameClock frameClock)`
   
           `frameClock` the instance the signal is connected to (optional)
   
@@ -340,7 +340,7 @@ class FrameClock : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.frame_clock.FrameClock frameClock))
+          `void callback(gdk.frame_clock.FrameClock frameClock)`
   
           `frameClock` the instance the signal is connected to (optional)
   
@@ -381,7 +381,7 @@ class FrameClock : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.frame_clock.FrameClock frameClock))
+          `void callback(gdk.frame_clock.FrameClock frameClock)`
   
           `frameClock` the instance the signal is connected to (optional)
   
@@ -424,7 +424,7 @@ class FrameClock : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.frame_clock.FrameClock frameClock))
+          `void callback(gdk.frame_clock.FrameClock frameClock)`
   
           `frameClock` the instance the signal is connected to (optional)
   
@@ -464,7 +464,7 @@ class FrameClock : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.frame_clock.FrameClock frameClock))
+          `void callback(gdk.frame_clock.FrameClock frameClock)`
   
           `frameClock` the instance the signal is connected to (optional)
   
@@ -507,7 +507,7 @@ class FrameClock : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.frame_clock.FrameClock frameClock))
+          `void callback(gdk.frame_clock.FrameClock frameClock)`
   
           `frameClock` the instance the signal is connected to (optional)
   

@@ -136,7 +136,7 @@ class DropControllerMotion : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion))
+          `void callback(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion)`
   
           `x` coordinates of pointer location (optional)
   
@@ -185,7 +185,7 @@ class DropControllerMotion : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.drop_controller_motion.DropControllerMotion dropControllerMotion))
+          `void callback(gtk.drop_controller_motion.DropControllerMotion dropControllerMotion)`
   
           `dropControllerMotion` the instance the signal is connected to (optional)
   
@@ -222,7 +222,7 @@ class DropControllerMotion : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion))
+          `void callback(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion)`
   
           `x` the x coordinate (optional)
   

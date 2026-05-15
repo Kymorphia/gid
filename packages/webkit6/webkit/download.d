@@ -295,7 +295,7 @@ class Download : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string destination, webkit.download.Download download))
+          `void callback(string destination, webkit.download.Download download)`
   
           `destination` the destination (optional)
   
@@ -348,7 +348,7 @@ class Download : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(string suggestedFilename, webkit.download.Download download))
+          `bool callback(string suggestedFilename, webkit.download.Download download)`
   
           `suggestedFilename` the filename suggested for the download (optional)
   
@@ -400,7 +400,7 @@ class Download : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.error.ErrorWrap error, webkit.download.Download download))
+          `void callback(glib.error.ErrorWrap error, webkit.download.Download download)`
   
           `error` the #GError that was triggered (optional)
   
@@ -444,7 +444,7 @@ class Download : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.download.Download download))
+          `void callback(webkit.download.Download download)`
   
           `download` the instance the signal is connected to (optional)
   
@@ -483,7 +483,7 @@ class Download : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(ulong dataLength, webkit.download.Download download))
+          `void callback(ulong dataLength, webkit.download.Download download)`
   
           `dataLength` the length of data received in bytes (optional)
   

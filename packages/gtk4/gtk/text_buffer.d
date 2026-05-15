@@ -1435,7 +1435,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer)`
   
           `tag` the applied tag (optional)
   
@@ -1499,7 +1499,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_buffer.TextBuffer textBuffer)`
   
           `textBuffer` the instance the signal is connected to (optional)
   
@@ -1536,7 +1536,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_buffer.TextBuffer textBuffer)`
   
           `textBuffer` the instance the signal is connected to (optional)
   
@@ -1583,7 +1583,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer)`
   
           `start` the start of the range to be deleted (optional)
   
@@ -1642,7 +1642,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_buffer.TextBuffer textBuffer)`
   
           `textBuffer` the instance the signal is connected to (optional)
   
@@ -1688,7 +1688,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter location, gtk.text_child_anchor.TextChildAnchor anchor, gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_iter.TextIter location, gtk.text_child_anchor.TextChildAnchor anchor, gtk.text_buffer.TextBuffer textBuffer)`
   
           `location` position to insert anchor in textbuffer (optional)
   
@@ -1746,7 +1746,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter location, gdk.paintable.Paintable paintable, gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_iter.TextIter location, gdk.paintable.Paintable paintable, gtk.text_buffer.TextBuffer textBuffer)`
   
           `location` position to insert paintable in textbuffer (optional)
   
@@ -1805,7 +1805,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter location, string text, gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_iter.TextIter location, string text, gtk.text_buffer.TextBuffer textBuffer)`
   
           `location` position to insert text in textbuffer (optional)
   
@@ -1857,7 +1857,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_mark.TextMark mark, gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_mark.TextMark mark, gtk.text_buffer.TextBuffer textBuffer)`
   
           `mark` The mark that was deleted (optional)
   
@@ -1904,7 +1904,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter location, gtk.text_mark.TextMark mark, gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_iter.TextIter location, gtk.text_mark.TextMark mark, gtk.text_buffer.TextBuffer textBuffer)`
   
           `location` The location of mark in textbuffer (optional)
   
@@ -1955,7 +1955,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_buffer.TextBuffer textBuffer)`
   
           `textBuffer` the instance the signal is connected to (optional)
   
@@ -1996,7 +1996,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.clipboard.Clipboard clipboard, gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gdk.clipboard.Clipboard clipboard, gtk.text_buffer.TextBuffer textBuffer)`
   
           `clipboard` the [gdk.clipboard.Clipboard] pasted from (optional)
   
@@ -2040,7 +2040,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_buffer.TextBuffer textBuffer)`
   
           `textBuffer` the instance the signal is connected to (optional)
   
@@ -2086,7 +2086,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_buffer.TextBuffer textBuffer)`
   
           `tag` the tag to be removed (optional)
   
@@ -2143,7 +2143,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_buffer.TextBuffer textBuffer))
+          `void callback(gtk.text_buffer.TextBuffer textBuffer)`
   
           `textBuffer` the instance the signal is connected to (optional)
   

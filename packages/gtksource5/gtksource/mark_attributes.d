@@ -35,12 +35,10 @@ import gtksource.types;
     [gtksource.mark_attributes.MarkAttributes.renderIcon] must be called.
     There are several ways to specify a base for an icon:
     
-    $(LIST
-      * [gtksource.mark_attributes.MarkAttributes.setIconName]
-      * [gtksource.mark_attributes.MarkAttributes.setGicon]
-      * [gtksource.mark_attributes.MarkAttributes.setPixbuf]
-    )
-      
+    - [gtksource.mark_attributes.MarkAttributes.setIconName]
+    - [gtksource.mark_attributes.MarkAttributes.setGicon]
+    - [gtksource.mark_attributes.MarkAttributes.setPixbuf]
+    
     Using any of the above functions overrides the one used earlier. But note
     that a getter counterpart of earlier used function can still return some
     value, but it is just not used when rendering the proper icon.
@@ -274,12 +272,10 @@ class MarkAttributes : gobject.object.ObjectWrap
       
       The base of the icon is set by the last call to one of:
       
-      $(LIST
-        * [gtksource.mark_attributes.MarkAttributes.setPixbuf]
-        * [gtksource.mark_attributes.MarkAttributes.setGicon]
-        * [gtksource.mark_attributes.MarkAttributes.setIconName]
-      )
-        
+      - [gtksource.mark_attributes.MarkAttributes.setPixbuf]
+      - [gtksource.mark_attributes.MarkAttributes.setGicon]
+      - [gtksource.mark_attributes.MarkAttributes.setIconName]
+      
       size cannot be lower than 1.
   
       Params:
@@ -350,7 +346,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes))
+          `string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes)`
   
           `mark` The #GtkSourceMark. (optional)
   
@@ -398,7 +394,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes))
+          `string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes)`
   
           `mark` The #GtkSourceMark. (optional)
   

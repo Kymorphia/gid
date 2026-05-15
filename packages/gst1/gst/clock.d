@@ -770,7 +770,7 @@ class Clock : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool synced, gst.clock.Clock clock))
+          `void callback(bool synced, gst.clock.Clock clock)`
   
           `synced` if the clock is synced now (optional)
   

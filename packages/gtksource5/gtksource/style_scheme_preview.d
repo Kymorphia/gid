@@ -133,7 +133,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.style_scheme_preview.StyleSchemePreview styleSchemePreview))
+          `void callback(gtksource.style_scheme_preview.StyleSchemePreview styleSchemePreview)`
   
           `styleSchemePreview` the instance the signal is connected to (optional)
   

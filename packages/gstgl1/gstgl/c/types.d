@@ -1276,22 +1276,20 @@ struct GstGLColorConvertPrivate;
     specified and must only be activated in a single thread.
     
     Environment variables:
-    $(LIST
-      * `GST_GL_API`: select which OpenGL API to create and OpenGL context for.
-                      Depending on the platform, the available values are
-                      'opengl', 'opengl3' (core profile), and 'gles2'.  See the
-                      the #GstGLAPI enumeration for more details.
-      * `GST_GL_PLATFORM`: select which OpenGL platform to create an OpenGL
-                           context with.  Depending on the platform and the
-                           dependencies available build-time, the available values
-                           are, 'glx', 'egl', 'cgl', 'wgl', and 'eagl'
-      * `GST_GL_CONFIG`: select the configuration used for creating the OpenGL
-                         context and OpenGL surface.  Written out as a GstStructure
-                         that has been serialized to string.  e.g.
-                         `GST_GL_CONFIG="gst-gl-context-config,red-size=8,green-size=8,blue-size=8,alpha-size=8,depth-size=16"`.
-                         Not all platforms will support the same level of
-                         functionality.
-    )
+    - `GST_GL_API`: select which OpenGL API to create and OpenGL context for.
+                    Depending on the platform, the available values are
+                    'opengl', 'opengl3' (core profile), and 'gles2'.  See the
+                    the #GstGLAPI enumeration for more details.
+    - `GST_GL_PLATFORM`: select which OpenGL platform to create an OpenGL
+                         context with.  Depending on the platform and the
+                         dependencies available build-time, the available values
+                         are, 'glx', 'egl', 'cgl', 'wgl', and 'eagl'
+    - `GST_GL_CONFIG`: select the configuration used for creating the OpenGL
+                       context and OpenGL surface.  Written out as a GstStructure
+                       that has been serialized to string.  e.g.
+                       `GST_GL_CONFIG="gst-gl-context-config,red-size=8,green-size=8,blue-size=8,alpha-size=8,depth-size=16"`.
+                       Not all platforms will support the same level of
+                       functionality.
 */
 struct GstGLContext
 {
@@ -1394,15 +1392,13 @@ struct GstGLContextPrivate;
     
     There are a number of environment variables that influence the choice of
     platform and window system specific functionality.
-    $(LIST
-      * GST_GL_WINDOW influences the window system to use.  Common values are
-        'x11', 'wayland', 'surfaceless', 'win32' or 'cocoa'.
-      * GST_GL_PLATFORM influences the OpenGL platform to use.  Common values are
-        'egl', 'glx', 'wgl' or 'cgl'.
-      * GST_GL_API influences the OpenGL API requested by the OpenGL platform.
-        Common values are 'opengl', 'opengl3' and 'gles2'.
-    )
-      
+    - GST_GL_WINDOW influences the window system to use.  Common values are
+      'x11', 'wayland', 'surfaceless', 'win32' or 'cocoa'.
+    - GST_GL_PLATFORM influences the OpenGL platform to use.  Common values are
+      'egl', 'glx', 'wgl' or 'cgl'.
+    - GST_GL_API influences the OpenGL API requested by the OpenGL platform.
+      Common values are 'opengl', 'opengl3' and 'gles2'.
+    
     > Certain window systems require a special function to be called to
     > initialize threading support.  As this GStreamer GL library does not preclude
     > concurrent access to the windowing system, it is strongly advised that

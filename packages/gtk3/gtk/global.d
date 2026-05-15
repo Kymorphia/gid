@@ -1046,16 +1046,14 @@ void main_()
     4. The event is sent to a widget. If a grab is active all events for widgets
        that are not in the contained in the grab widget are sent to the latter
        with a few exceptions:
-       $(LIST
-            * Deletion and destruction events are still sent to the event widget for
-              obvious reasons.
-            * Events which directly relate to the visual representation of the event
-              widget.
-            * Leave events are delivered to the event widget if there was an enter
-              event delivered to it before without the paired leave event.
-            * Drag events are not redirected because it is unclear what the semantics
-              of that would be.
-       )
+       - Deletion and destruction events are still sent to the event widget for
+         obvious reasons.
+       - Events which directly relate to the visual representation of the event
+         widget.
+       - Leave events are delivered to the event widget if there was an enter
+         event delivered to it before without the paired leave event.
+       - Drag events are not redirected because it is unclear what the semantics
+         of that would be.
        Another point of interest might be that all key events are first passed
        through the key snooper functions if there are any. Read the description
        of [gtk.global.keySnooperInstall] if you need this feature.
@@ -2684,12 +2682,10 @@ bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
     need to install gvfs to get support for uri schemes such as http://
     or ftp://, as only local files are handled by GIO itself).
     Typical examples are
-    $(LIST
-      * `file:///home/gnome/pict.jpg`
-      * `http://www.gnome.org`
-      * `mailto:megnome.org`
-    )
-      
+    - `file:///home/gnome/pict.jpg`
+    - `http://www.gnome.org`
+    - `mailto:megnome.org`
+    
     Ideally the timestamp is taken from the event triggering
     the [gtk.global.showUri] call. If timestamp is not known you can take
     [gdk.types.CURRENT_TIME].

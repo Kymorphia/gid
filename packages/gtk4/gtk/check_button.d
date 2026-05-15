@@ -456,7 +456,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.check_button.CheckButton checkButton))
+          `void callback(gtk.check_button.CheckButton checkButton)`
   
           `checkButton` the instance the signal is connected to (optional)
   
@@ -494,7 +494,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.check_button.CheckButton checkButton))
+          `void callback(gtk.check_button.CheckButton checkButton)`
   
           `checkButton` the instance the signal is connected to (optional)
   

@@ -183,7 +183,7 @@ class ToggleAction : gtk.action.Action
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.toggle_action.ToggleAction toggleAction))
+          `void callback(gtk.toggle_action.ToggleAction toggleAction)`
   
           `toggleAction` the instance the signal is connected to (optional)
   

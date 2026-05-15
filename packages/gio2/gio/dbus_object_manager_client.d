@@ -531,7 +531,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.dbus_object_proxy.DBusObjectProxy objectProxy, gio.dbus_proxy.DBusProxy interfaceProxy, glib.variant.Variant changedProperties, string[] invalidatedProperties, gio.dbus_object_manager_client.DBusObjectManagerClient dBusObjectManagerClient))
+          `void callback(gio.dbus_object_proxy.DBusObjectProxy objectProxy, gio.dbus_proxy.DBusProxy interfaceProxy, glib.variant.Variant changedProperties, string[] invalidatedProperties, gio.dbus_object_manager_client.DBusObjectManagerClient dBusObjectManagerClient)`
   
           `objectProxy` The #GDBusObjectProxy on which an interface has properties that are changing. (optional)
   
@@ -600,7 +600,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.dbus_object_proxy.DBusObjectProxy objectProxy, gio.dbus_proxy.DBusProxy interfaceProxy, string senderName, string signalName, glib.variant.Variant parameters, gio.dbus_object_manager_client.DBusObjectManagerClient dBusObjectManagerClient))
+          `void callback(gio.dbus_object_proxy.DBusObjectProxy objectProxy, gio.dbus_proxy.DBusProxy interfaceProxy, string senderName, string signalName, glib.variant.Variant parameters, gio.dbus_object_manager_client.DBusObjectManagerClient dBusObjectManagerClient)`
   
           `objectProxy` The #GDBusObjectProxy on which an interface is emitting a D-Bus signal. (optional)
   

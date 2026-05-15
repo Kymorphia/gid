@@ -42,32 +42,28 @@ import gst.types;
     What needs to be changed in a #GstElement?
     Very little - it is just two steps to make a plugin controllable!
     
-      $(LIST
-          * mark gobject-properties paramspecs that make sense to be controlled,
-            by GST_PARAM_CONTROLLABLE.
-        
-          * when processing data (get, chain, loop function) at the beginning call
-            gst_object_sync_values(element,timestamp).
-            This will make the controller update all GObject properties that are
-            under its control with the current values based on the timestamp.
-      )
-        
+      * mark gobject-properties paramspecs that make sense to be controlled,
+        by GST_PARAM_CONTROLLABLE.
+    
+      * when processing data (get, chain, loop function) at the beginning call
+        gst_object_sync_values(element,timestamp).
+        This will make the controller update all GObject properties that are
+        under its control with the current values based on the timestamp.
+    
     What needs to be done in applications? Again it's not a lot to change.
     
-      $(LIST
-          * create a #GstControlSource.
-            csource = gst_interpolation_control_source_new ();
-            g_object_set (csource, "mode", GST_INTERPOLATION_MODE_LINEAR, NULL);
-        
-          * Attach the #GstControlSource on the controller to a property.
-            gst_object_add_control_binding (object, gst_direct_control_binding_new (object, "prop1", csource));
-        
-          * Set the control values
-            gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,0 * GST_SECOND, value1);
-            gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,1 * GST_SECOND, value2);
-        
-          * start your pipeline
-      )
+      * create a #GstControlSource.
+        csource = gst_interpolation_control_source_new ();
+        g_object_set (csource, "mode", GST_INTERPOLATION_MODE_LINEAR, NULL);
+    
+      * Attach the #GstControlSource on the controller to a property.
+        gst_object_add_control_binding (object, gst_direct_control_binding_new (object, "prop1", csource));
+    
+      * Set the control values
+        gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,0 * GST_SECOND, value1);
+        gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,1 * GST_SECOND, value2);
+    
+      * start your pipeline
 */
 class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
 {
@@ -616,7 +612,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.object.ObjectWrap propObject, gobject.param_spec.ParamSpec prop, gst.object.ObjectWrap objectWrap))
+          `void callback(gst.object.ObjectWrap propObject, gobject.param_spec.ParamSpec prop, gst.object.ObjectWrap objectWrap)`
   
           `propObject` the object that originated the signal (optional)
   

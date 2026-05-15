@@ -537,7 +537,7 @@ class Assistant : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.assistant.Assistant assistant))
+          `void callback(gtk.assistant.Assistant assistant)`
   
           `assistant` the instance the signal is connected to (optional)
   
@@ -574,7 +574,7 @@ class Assistant : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.assistant.Assistant assistant))
+          `void callback(gtk.assistant.Assistant assistant)`
   
           `assistant` the instance the signal is connected to (optional)
   
@@ -613,7 +613,7 @@ class Assistant : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.assistant.Assistant assistant))
+          `void callback(gtk.assistant.Assistant assistant)`
   
           `assistant` the instance the signal is connected to (optional)
   
@@ -650,7 +650,7 @@ class Assistant : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.assistant.Assistant assistant))
+          `void callback(gtk.assistant.Assistant assistant)`
   
           `assistant` the instance the signal is connected to (optional)
   
@@ -691,7 +691,7 @@ class Assistant : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget page, gtk.assistant.Assistant assistant))
+          `void callback(gtk.widget.Widget page, gtk.assistant.Assistant assistant)`
   
           `page` the current page (optional)
   

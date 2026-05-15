@@ -481,7 +481,7 @@ class Clipboard : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.clipboard.Clipboard clipboard))
+          `void callback(gdk.clipboard.Clipboard clipboard)`
   
           `clipboard` the instance the signal is connected to (optional)
   

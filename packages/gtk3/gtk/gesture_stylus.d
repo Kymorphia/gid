@@ -132,7 +132,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus))
+          `void callback(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus)`
   
           `object`  (optional)
   
@@ -181,7 +181,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus))
+          `void callback(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus)`
   
           `object`  (optional)
   
@@ -230,7 +230,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus))
+          `void callback(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus)`
   
           `object`  (optional)
   
@@ -279,7 +279,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus))
+          `void callback(double object, double p0, gtk.gesture_stylus.GestureStylus gestureStylus)`
   
           `object`  (optional)
   

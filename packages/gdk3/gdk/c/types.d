@@ -2990,12 +2990,10 @@ struct GdkDeviceTool;
 /**
     #GdkDisplay objects purpose are two fold:
     
-    $(LIST
-      * To manage and provide information about input devices (pointers and keyboards)
-      
-      * To manage and provide information about the available #GdkScreens
-    )
-      
+    - To manage and provide information about input devices (pointers and keyboards)
+    
+    - To manage and provide information about the available #GdkScreens
+    
     GdkDisplay objects are the GDK representation of an X Display,
     which can be described as a workstation consisting of
     a keyboard, a pointing device (such as a mouse) and one or more
@@ -3265,14 +3263,12 @@ struct GdkEventAny
     Double and triple-clicks result in a sequence of events being received.
     For double-clicks the order of events will be:
     
-    $(LIST
-      * [gdk.types.EventType.ButtonPress]
-      * [gdk.types.EventType.ButtonRelease]
-      * [gdk.types.EventType.ButtonPress]
-      * [gdk.types.EventType._2buttonPress]
-      * [gdk.types.EventType.ButtonRelease]
-    )
-      
+    - [gdk.types.EventType.ButtonPress]
+    - [gdk.types.EventType.ButtonRelease]
+    - [gdk.types.EventType.ButtonPress]
+    - [gdk.types.EventType._2buttonPress]
+    - [gdk.types.EventType.ButtonRelease]
+    
     Note that the first click is received just like a normal
     button press, while the second click results in a [gdk.types.EventType._2buttonPress]
     being received just after the [gdk.types.EventType.ButtonPress].
@@ -3281,17 +3277,15 @@ struct GdkEventAny
     [gdk.types.EventType._3buttonPress] is inserted after the third click. The order of the
     events is:
     
-    $(LIST
-      * [gdk.types.EventType.ButtonPress]
-      * [gdk.types.EventType.ButtonRelease]
-      * [gdk.types.EventType.ButtonPress]
-      * [gdk.types.EventType._2buttonPress]
-      * [gdk.types.EventType.ButtonRelease]
-      * [gdk.types.EventType.ButtonPress]
-      * [gdk.types.EventType._3buttonPress]
-      * [gdk.types.EventType.ButtonRelease]
-    )
-      
+    - [gdk.types.EventType.ButtonPress]
+    - [gdk.types.EventType.ButtonRelease]
+    - [gdk.types.EventType.ButtonPress]
+    - [gdk.types.EventType._2buttonPress]
+    - [gdk.types.EventType.ButtonRelease]
+    - [gdk.types.EventType.ButtonPress]
+    - [gdk.types.EventType._3buttonPress]
+    - [gdk.types.EventType.ButtonRelease]
+    
     For a double click to occur, the second button press must occur within
     1/4 of a second of the first. For a triple click to occur, the third
     button press must also occur within 1/2 second of the first button press.

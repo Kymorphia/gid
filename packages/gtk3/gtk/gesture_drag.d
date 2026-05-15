@@ -111,7 +111,7 @@ class GestureDrag : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double startX, double startY, gtk.gesture_drag.GestureDrag gestureDrag))
+          `void callback(double startX, double startY, gtk.gesture_drag.GestureDrag gestureDrag)`
   
           `startX` X coordinate, relative to the widget allocation (optional)
   
@@ -160,7 +160,7 @@ class GestureDrag : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag))
+          `void callback(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag)`
   
           `offsetX` X offset, relative to the start point (optional)
   
@@ -209,7 +209,7 @@ class GestureDrag : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag))
+          `void callback(double offsetX, double offsetY, gtk.gesture_drag.GestureDrag gestureDrag)`
   
           `offsetX` X offset, relative to the start point (optional)
   

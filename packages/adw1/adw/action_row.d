@@ -476,7 +476,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.action_row.ActionRow actionRow))
+          `void callback(adw.action_row.ActionRow actionRow)`
   
           `actionRow` the instance the signal is connected to (optional)
   

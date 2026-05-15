@@ -142,7 +142,7 @@ class EditorState : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.editor_state.EditorState editorState))
+          `void callback(webkit.editor_state.EditorState editorState)`
   
           `editorState` the instance the signal is connected to (optional)
   

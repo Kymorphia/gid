@@ -394,7 +394,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool focusHome, gtk.toolbar.Toolbar toolbar))
+          `bool callback(bool focusHome, gtk.toolbar.Toolbar toolbar)`
   
           `focusHome` true if the first item should be focused (optional)
   
@@ -440,7 +440,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.Orientation orientation, gtk.toolbar.Toolbar toolbar))
+          `void callback(gtk.types.Orientation orientation, gtk.toolbar.Toolbar toolbar)`
   
           `orientation` the new #GtkOrientation of the toolbar (optional)
   
@@ -490,7 +490,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(int x, int y, int button, gtk.toolbar.Toolbar toolbar))
+          `bool callback(int x, int y, int button, gtk.toolbar.Toolbar toolbar)`
   
           `x` the x coordinate of the point where the menu should appear (optional)
   
@@ -548,7 +548,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.ToolbarStyle style, gtk.toolbar.Toolbar toolbar))
+          `void callback(gtk.types.ToolbarStyle style, gtk.toolbar.Toolbar toolbar)`
   
           `style` the new #GtkToolbarStyle of the toolbar (optional)
   

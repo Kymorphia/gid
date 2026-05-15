@@ -544,14 +544,12 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture)
     
     The possible backend names are:
     
-      $(LIST
-          * `broadway`
-          * `macos`
-          * `wayland`.
-          * `win32`
-          * `x11`
-      )
-        
+      - `broadway`
+      - `macos`
+      - `wayland`.
+      - `win32`
+      - `x11`
+    
     You can also include a `*` in the list to try all remaining backends.
     
     This call must happen prior to functions that open a display, such

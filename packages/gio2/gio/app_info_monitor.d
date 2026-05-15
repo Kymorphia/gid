@@ -24,19 +24,17 @@ import gobject.object;
     The following functions will re-arm the [gio.app_info_monitor.AppInfoMonitor.changed]
     signal so it can be emitted again:
     
-     $(LIST
-        * [gio.app_info.AppInfo.getAll]
-        * [gio.app_info.AppInfo.getAllForType]
-        * [gio.app_info.AppInfo.getDefaultForType]
-        * [gio.app_info.AppInfo.getFallbackForType]
-        * [gio.app_info.AppInfo.getRecommendedForType]
-        * [`[gio.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
-        * [`[gio.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
-        * [`[gio.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
-        * [`[gio.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
-        * [`[gio.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
-     )
-       
+     - [gio.app_info.AppInfo.getAll]
+     - [gio.app_info.AppInfo.getAllForType]
+     - [gio.app_info.AppInfo.getDefaultForType]
+     - [gio.app_info.AppInfo.getFallbackForType]
+     - [gio.app_info.AppInfo.getRecommendedForType]
+     - [`[gio.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
+     - [`[gio.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
+     - [`[gio.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
+     - [`[gio.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
+     - [`[gio.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
+    
     The latter functions are available if using
     [[gio.desktop_app_info.DesktopAppInfo]](../gio-unix/class.DesktopAppInfo.html) from
     `gio-unix-2.0.pc` (GIR namespace `GioUnix-2.0`).
@@ -122,7 +120,7 @@ class AppInfoMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.app_info_monitor.AppInfoMonitor appInfoMonitor))
+          `void callback(gio.app_info_monitor.AppInfoMonitor appInfoMonitor)`
   
           `appInfoMonitor` the instance the signal is connected to (optional)
   

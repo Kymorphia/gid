@@ -149,7 +149,7 @@ template SelectionT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.selection.Selection selection))
+          `void callback(atk.selection.Selection selection)`
   
           `selection` the instance the signal is connected to (optional)
   

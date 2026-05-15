@@ -32,15 +32,13 @@ import gstbase.types;
     helper struct is to follow the standard rules for #GstFlowReturn combination.
     These rules are:
     
-    $(LIST
-      * [gst.types.FlowReturn.Eos]: only if all returns are EOS too
-      * [gst.types.FlowReturn.NotLinked]: only if all returns are NOT_LINKED too
-      * [gst.types.FlowReturn.Error] or below: if at least one returns an error return
-      * [gst.types.FlowReturn.NotNegotiated]: if at least one returns a not-negotiated return
-      * [gst.types.FlowReturn.Flushing]: if at least one returns flushing
-      * [gst.types.FlowReturn.Ok]: otherwise
-    )
-      
+    * [gst.types.FlowReturn.Eos]: only if all returns are EOS too
+    * [gst.types.FlowReturn.NotLinked]: only if all returns are NOT_LINKED too
+    * [gst.types.FlowReturn.Error] or below: if at least one returns an error return
+    * [gst.types.FlowReturn.NotNegotiated]: if at least one returns a not-negotiated return
+    * [gst.types.FlowReturn.Flushing]: if at least one returns flushing
+    * [gst.types.FlowReturn.Ok]: otherwise
+    
     [gst.types.FlowReturn.Error] or below, GST_FLOW_NOT_NEGOTIATED and GST_FLOW_FLUSHING are
     returned immediately from the [gstbase.flow_combiner.FlowCombiner.updateFlow] function.
 */

@@ -198,7 +198,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu_tool_button.MenuToolButton menuToolButton))
+          `void callback(gtk.menu_tool_button.MenuToolButton menuToolButton)`
   
           `menuToolButton` the instance the signal is connected to (optional)
   

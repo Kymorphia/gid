@@ -107,18 +107,16 @@ import gtk.types;
     
     There are various cases in which you may need to use a #GtkFileChooserDialog:
     
-    $(LIST
-      * To select a file for opening. Use #GTK_FILE_CHOOSER_ACTION_OPEN.
-      
-      * To save a file for the first time. Use #GTK_FILE_CHOOSER_ACTION_SAVE,
-        and suggest a name such as “Untitled” with [gtk.file_chooser.FileChooser.setCurrentName].
-      
-      * To save a file under a different name. Use #GTK_FILE_CHOOSER_ACTION_SAVE,
-        and set the existing filename with [gtk.file_chooser.FileChooser.setFilename].
-      
-      * To choose a folder instead of a file. Use #GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER.
-    )
-      
+    - To select a file for opening. Use #GTK_FILE_CHOOSER_ACTION_OPEN.
+    
+    - To save a file for the first time. Use #GTK_FILE_CHOOSER_ACTION_SAVE,
+      and suggest a name such as “Untitled” with [gtk.file_chooser.FileChooser.setCurrentName].
+    
+    - To save a file under a different name. Use #GTK_FILE_CHOOSER_ACTION_SAVE,
+      and set the existing filename with [gtk.file_chooser.FileChooser.setFilename].
+    
+    - To choose a folder instead of a file. Use #GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER.
+    
     Note that old versions of the file chooser’s documentation suggested
     using [gtk.file_chooser.FileChooser.setCurrentFolder] in various
     situations, with the intention of letting the application
@@ -158,13 +156,11 @@ import gtk.types;
     its “accept”-type action, e.g. an “Open” or “Save” button,
     will have one of the following response codes:
     
-    $(LIST
-      * #GTK_RESPONSE_ACCEPT
-      * #GTK_RESPONSE_OK
-      * #GTK_RESPONSE_YES
-      * #GTK_RESPONSE_APPLY
-    )
-      
+    - #GTK_RESPONSE_ACCEPT
+    - #GTK_RESPONSE_OK
+    - #GTK_RESPONSE_YES
+    - #GTK_RESPONSE_APPLY
+    
     This is because #GtkFileChooserDialog must intercept responses
     and switch to folders if appropriate, rather than letting the
     dialog terminate — the implementation uses these known

@@ -374,7 +374,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.download.Download download, webkit.network_session.NetworkSession networkSession))
+          `void callback(webkit.download.Download download, webkit.network_session.NetworkSession networkSession)`
   
           `download` the #WebKitDownload associated with this event (optional)
   

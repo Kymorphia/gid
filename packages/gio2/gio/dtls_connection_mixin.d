@@ -897,7 +897,7 @@ template DtlsConnectionT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.dtls_connection.DtlsConnection dtlsConnection))
+          `bool callback(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.dtls_connection.DtlsConnection dtlsConnection)`
   
           `peerCert` the peer's #GTlsCertificate (optional)
   

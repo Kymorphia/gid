@@ -364,7 +364,7 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string id, string key, gstgl.glwindow.GLWindow gLWindow))
+          `void callback(string id, string key, gstgl.glwindow.GLWindow gLWindow)`
   
           `id` the name of the event (optional)
   
@@ -413,7 +413,7 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string id, int button, double x, double y, gstgl.glwindow.GLWindow gLWindow))
+          `void callback(string id, int button, double x, double y, gstgl.glwindow.GLWindow gLWindow)`
   
           `id` the name of the event (optional)
   
@@ -474,7 +474,7 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, double deltaX, double deltaY, gstgl.glwindow.GLWindow gLWindow))
+          `void callback(double x, double y, double deltaX, double deltaY, gstgl.glwindow.GLWindow gLWindow)`
   
           `x` the x coordinate of the mouse event (optional)
   
@@ -538,7 +538,7 @@ class GLWindow : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstgl.glwindow.GLWindow gLWindow))
+          `void callback(gstgl.glwindow.GLWindow gLWindow)`
   
           `gLWindow` the instance the signal is connected to (optional)
   

@@ -162,7 +162,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(string mechanism, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver))
+          `bool callback(string mechanism, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver)`
   
           `mechanism` The name of the mechanism, e.g. `DBUS_COOKIE_SHA1`. (optional)
   
@@ -209,7 +209,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.iostream.IOStream stream, gio.credentials.Credentials credentials, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver))
+          `bool callback(gio.iostream.IOStream stream, gio.credentials.Credentials credentials, gio.dbus_auth_observer.DBusAuthObserver dBusAuthObserver)`
   
           `stream` A #GIOStream for the #GDBusConnection. (optional)
   

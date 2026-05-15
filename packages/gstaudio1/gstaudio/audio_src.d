@@ -12,16 +12,14 @@ import gstaudio.types;
     This is the most simple base class for audio sources that only requires
     subclasses to implement a set of simple functions:
     
-    $(LIST
-      * `open()` :Open the device.
-      * `prepare()` :Configure the device with the specified format.
-      * `read()` :Read samples from the device.
-      * `reset()` :Unblock reads and flush the device.
-      * `delay()` :Get the number of samples in the device but not yet read.
-      * `unprepare()` :Undo operations done by prepare.
-      * `close()` :Close the device.
-    )
-      
+    * `open()` :Open the device.
+    * `prepare()` :Configure the device with the specified format.
+    * `read()` :Read samples from the device.
+    * `reset()` :Unblock reads and flush the device.
+    * `delay()` :Get the number of samples in the device but not yet read.
+    * `unprepare()` :Undo operations done by prepare.
+    * `close()` :Close the device.
+    
     All scheduling of samples and timestamps is done in this base class
     together with #GstAudioBaseSrc using a default implementation of a
     #GstAudioRingBuffer that uses threads.

@@ -636,7 +636,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.split_button.SplitButton splitButton))
+          `void callback(adw.split_button.SplitButton splitButton)`
   
           `splitButton` the instance the signal is connected to (optional)
   
@@ -673,7 +673,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.split_button.SplitButton splitButton))
+          `void callback(adw.split_button.SplitButton splitButton)`
   
           `splitButton` the instance the signal is connected to (optional)
   

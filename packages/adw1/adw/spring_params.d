@@ -32,13 +32,11 @@ import gobject.boxed;
     The damping can be replaced by damping ratio, which produces the following
     springs:
     
-    $(LIST
-      * 0: an undamped spring.
-      * Between 0 and 1: an underdamped spring.
-      * 1: a critically damped spring.
-      * Larger than 1: an overdamped spring.
-    )
-      
+    * 0: an undamped spring.
+    * Between 0 and 1: an underdamped spring.
+    * 1: a critically damped spring.
+    * Larger than 1: an overdamped spring.
+    
     As such
 */
 class SpringParams : gobject.boxed.Boxed
@@ -81,17 +79,15 @@ class SpringParams : gobject.boxed.Boxed
       The damping value is calculated from damping_ratio and the other two
       parameters.
       
-      $(LIST
-        * If damping_ratio is 0, the spring will not be damped and will oscillate
-          endlessly.
-        * If damping_ratio is between 0 and 1, the spring is underdamped and will
-          always overshoot.
-        * If damping_ratio is 1, the spring is critically damped and will reach its
-          resting position the quickest way possible.
-        * If damping_ratio is larger than 1, the spring is overdamped and will reach
-          its resting position faster than it can complete an oscillation.
-      )
-        
+      * If damping_ratio is 0, the spring will not be damped and will oscillate
+        endlessly.
+      * If damping_ratio is between 0 and 1, the spring is underdamped and will
+        always overshoot.
+      * If damping_ratio is 1, the spring is critically damped and will reach its
+        resting position the quickest way possible.
+      * If damping_ratio is larger than 1, the spring is overdamped and will reach
+        its resting position faster than it can complete an oscillation.
+      
       [adw.spring_params.SpringParams.newFull] allows to pass a raw damping value instead.
   
       Params:

@@ -72,7 +72,7 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.vulkan_context.VulkanContext vulkanContext))
+          `void callback(gdk.vulkan_context.VulkanContext vulkanContext)`
   
           `vulkanContext` the instance the signal is connected to (optional)
   

@@ -250,7 +250,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.check_menu_item.CheckMenuItem checkMenuItem))
+          `void callback(gtk.check_menu_item.CheckMenuItem checkMenuItem)`
   
           `checkMenuItem` the instance the signal is connected to (optional)
   

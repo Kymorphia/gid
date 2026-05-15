@@ -1024,7 +1024,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.combo_box.ComboBox comboBox))
+          `void callback(gtk.combo_box.ComboBox comboBox)`
   
           `comboBox` the instance the signal is connected to (optional)
   
@@ -1092,7 +1092,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D string callback(string path, gtk.combo_box.ComboBox comboBox))
+          `string callback(string path, gtk.combo_box.ComboBox comboBox)`
   
           `path` the GtkTreePath string from the combo box's current model to format text for (optional)
   
@@ -1141,7 +1141,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.ScrollType scrollType, gtk.combo_box.ComboBox comboBox))
+          `void callback(gtk.types.ScrollType scrollType, gtk.combo_box.ComboBox comboBox)`
   
           `scrollType` a #GtkScrollType (optional)
   
@@ -1188,7 +1188,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.combo_box.ComboBox comboBox))
+          `bool callback(gtk.combo_box.ComboBox comboBox)`
   
           `comboBox` the instance the signal is connected to (optional)
   
@@ -1232,7 +1232,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.combo_box.ComboBox comboBox))
+          `void callback(gtk.combo_box.ComboBox comboBox)`
   
           `comboBox` the instance the signal is connected to (optional)
   

@@ -1604,7 +1604,7 @@ class Pad : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.pad.Pad peer, gst.pad.Pad pad))
+          `void callback(gst.pad.Pad peer, gst.pad.Pad pad)`
   
           `peer` the peer pad that has been connected (optional)
   
@@ -1647,7 +1647,7 @@ class Pad : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.pad.Pad peer, gst.pad.Pad pad))
+          `void callback(gst.pad.Pad peer, gst.pad.Pad pad)`
   
           `peer` the peer pad that has been disconnected (optional)
   

@@ -48,68 +48,60 @@ import gtk.widget;
     
     ## Direction = Down
     
-    $(LIST
-      * halign = start
-      
-          ![](down-start.png)
-      
-      * halign = center
-      
-          ![](down-center.png)
-      
-      * halign = end
-      
-          ![](down-end.png)
-    )
-      
+    - halign = start
+    
+        ![](down-start.png)
+    
+    - halign = center
+    
+        ![](down-center.png)
+    
+    - halign = end
+    
+        ![](down-end.png)
+    
     ## Direction = Up
     
-    $(LIST
-      * halign = start
-      
-          ![](up-start.png)
-      
-      * halign = center
-      
-          ![](up-center.png)
-      
-      * halign = end
-      
-          ![](up-end.png)
-    )
-      
+    - halign = start
+    
+        ![](up-start.png)
+    
+    - halign = center
+    
+        ![](up-center.png)
+    
+    - halign = end
+    
+        ![](up-end.png)
+    
     ## Direction = Left
     
-    $(LIST
-      * valign = start
-      
-          ![](left-start.png)
-      
-      * valign = center
-      
-          ![](left-center.png)
-      
-      * valign = end
-      
-          ![](left-end.png)
-    )
-      
+    - valign = start
+    
+        ![](left-start.png)
+    
+    - valign = center
+    
+        ![](left-center.png)
+    
+    - valign = end
+    
+        ![](left-end.png)
+    
     ## Direction = Right
     
-    $(LIST
-      * valign = start
-      
-          ![](right-start.png)
-      
-      * valign = center
-      
-          ![](right-center.png)
-      
-      * valign = end
-      
-          ![](right-end.png)
-    )
-      
+    - valign = start
+    
+        ![](right-start.png)
+    
+    - valign = center
+    
+        ![](right-center.png)
+    
+    - valign = end
+    
+        ![](right-end.png)
+    
     # CSS nodes
     
     GtkMenuButton has a single CSS node with name button. To differentiate

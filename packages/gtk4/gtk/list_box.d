@@ -729,7 +729,7 @@ class ListBox : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.list_box.ListBox listBox))
+          `void callback(gtk.list_box.ListBox listBox)`
   
           `listBox` the instance the signal is connected to (optional)
   
@@ -766,7 +766,7 @@ class ListBox : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.MovementStep object, int p0, bool p1, bool p2, gtk.list_box.ListBox listBox))
+          `void callback(gtk.types.MovementStep object, int p0, bool p1, bool p2, gtk.list_box.ListBox listBox)`
   
           `object`  (optional)
   
@@ -827,7 +827,7 @@ class ListBox : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox))
+          `void callback(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox)`
   
           `row` the activated row (optional)
   
@@ -875,7 +875,7 @@ class ListBox : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox))
+          `void callback(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox)`
   
           `row` the selected row (optional)
   
@@ -923,7 +923,7 @@ class ListBox : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.list_box.ListBox listBox))
+          `void callback(gtk.list_box.ListBox listBox)`
   
           `listBox` the instance the signal is connected to (optional)
   
@@ -960,7 +960,7 @@ class ListBox : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.list_box.ListBox listBox))
+          `void callback(gtk.list_box.ListBox listBox)`
   
           `listBox` the instance the signal is connected to (optional)
   
@@ -997,7 +997,7 @@ class ListBox : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.list_box.ListBox listBox))
+          `void callback(gtk.list_box.ListBox listBox)`
   
           `listBox` the instance the signal is connected to (optional)
   
@@ -1040,7 +1040,7 @@ class ListBox : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.list_box.ListBox listBox))
+          `void callback(gtk.list_box.ListBox listBox)`
   
           `listBox` the instance the signal is connected to (optional)
   

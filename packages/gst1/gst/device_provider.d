@@ -305,7 +305,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string object, gst.device_provider.DeviceProvider deviceProvider))
+          `void callback(string object, gst.device_provider.DeviceProvider deviceProvider)`
   
           `object`  (optional)
   
@@ -348,7 +348,7 @@ class DeviceProvider : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string object, gst.device_provider.DeviceProvider deviceProvider))
+          `void callback(string object, gst.device_provider.DeviceProvider deviceProvider)`
   
           `object`  (optional)
   

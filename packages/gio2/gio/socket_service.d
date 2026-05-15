@@ -176,7 +176,7 @@ class SocketService : gio.socket_listener.SocketListener
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.socket_connection.SocketConnection connection, gobject.object.ObjectWrap sourceObject, gio.socket_service.SocketService socketService))
+          `bool callback(gio.socket_connection.SocketConnection connection, gobject.object.ObjectWrap sourceObject, gio.socket_service.SocketService socketService)`
   
           `connection` a new #GSocketConnection object (optional)
   

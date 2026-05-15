@@ -18,13 +18,11 @@ import gobject.types;
     
     In particular, this allows you to:
     
-     $(LIST
-        * Change the target instance, which automatically causes disconnection
-          of the signals from the old instance and connecting to the new instance.
-        * Block and unblock signals as a group
-        * Ensuring that blocked state transfers across target instances.
-     )
-       
+     - Change the target instance, which automatically causes disconnection
+       of the signals from the old instance and connecting to the new instance.
+     - Block and unblock signals as a group
+     - Ensuring that blocked state transfers across target instances.
+    
     One place you might want to use such a structure is with [gtk.text_view.TextView] and
     [gtk.text_buffer.TextBuffer]. Often times, you'll need to connect to many signals on
     [gtk.text_buffer.TextBuffer] from a [gtk.text_view.TextView] subclass. This allows you to create a
@@ -192,7 +190,7 @@ class SignalGroup : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectWrap instance, gobject.signal_group.SignalGroup signalGroup))
+          `void callback(gobject.object.ObjectWrap instance, gobject.signal_group.SignalGroup signalGroup)`
   
           `instance` a #GObject containing the new value for #GSignalGroup:target (optional)
   
@@ -239,7 +237,7 @@ class SignalGroup : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.signal_group.SignalGroup signalGroup))
+          `void callback(gobject.signal_group.SignalGroup signalGroup)`
   
           `signalGroup` the instance the signal is connected to (optional)
   

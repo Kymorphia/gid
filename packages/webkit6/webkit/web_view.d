@@ -1965,7 +1965,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.authentication_request.AuthenticationRequest request, webkit.web_view.WebView webView))
+          `bool callback(webkit.authentication_request.AuthenticationRequest request, webkit.web_view.WebView webView)`
   
           `request` a #WebKitAuthenticationRequest (optional)
   
@@ -2016,7 +2016,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.web_view.WebView webView))
+          `void callback(webkit.web_view.WebView webView)`
   
           `webView` the instance the signal is connected to (optional)
   
@@ -2085,7 +2085,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.context_menu.ContextMenu contextMenu, webkit.hit_test_result.HitTestResult hitTestResult, webkit.web_view.WebView webView))
+          `bool callback(webkit.context_menu.ContextMenu contextMenu, webkit.hit_test_result.HitTestResult hitTestResult, webkit.web_view.WebView webView)`
   
           `contextMenu` the proposed #WebKitContextMenu (optional)
   
@@ -2139,7 +2139,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.web_view.WebView webView))
+          `void callback(webkit.web_view.WebView webView)`
   
           `webView` the instance the signal is connected to (optional)
   
@@ -2190,7 +2190,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gtk.widget.Widget callback(webkit.navigation_action.NavigationAction navigationAction, webkit.web_view.WebView webView))
+          `gtk.widget.Widget callback(webkit.navigation_action.NavigationAction navigationAction, webkit.web_view.WebView webView)`
   
           `navigationAction` a #WebKitNavigationAction (optional)
   
@@ -2277,7 +2277,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.policy_decision.PolicyDecision decision, webkit.types.PolicyDecisionType decisionType, webkit.web_view.WebView webView))
+          `bool callback(webkit.policy_decision.PolicyDecision decision, webkit.types.PolicyDecisionType decisionType, webkit.web_view.WebView webView)`
   
           `decision` the #WebKitPolicyDecision (optional)
   
@@ -2337,7 +2337,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.web_view.WebView webView))
+          `bool callback(webkit.web_view.WebView webView)`
   
           `webView` the instance the signal is connected to (optional)
   
@@ -2380,7 +2380,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.types.InsecureContentEvent event, webkit.web_view.WebView webView))
+          `void callback(webkit.types.InsecureContentEvent event, webkit.web_view.WebView webView)`
   
           `event` the #WebKitInsecureContentEvent (optional)
   
@@ -2426,7 +2426,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.web_view.WebView webView))
+          `bool callback(webkit.web_view.WebView webView)`
   
           `webView` the instance the signal is connected to (optional)
   
@@ -2510,7 +2510,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.types.LoadEvent loadEvent, webkit.web_view.WebView webView))
+          `void callback(webkit.types.LoadEvent loadEvent, webkit.web_view.WebView webView)`
   
           `loadEvent` the #WebKitLoadEvent (optional)
   
@@ -2562,7 +2562,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.types.LoadEvent loadEvent, string failingUri, glib.error.ErrorWrap error, webkit.web_view.WebView webView))
+          `bool callback(webkit.types.LoadEvent loadEvent, string failingUri, glib.error.ErrorWrap error, webkit.web_view.WebView webView)`
   
           `loadEvent` the #WebKitLoadEvent of the load operation (optional)
   
@@ -2629,7 +2629,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(string failingUri, gio.tls_certificate.TlsCertificate certificate, gio.types.TlsCertificateFlags errors, webkit.web_view.WebView webView))
+          `bool callback(string failingUri, gio.tls_certificate.TlsCertificate certificate, gio.types.TlsCertificateFlags errors, webkit.web_view.WebView webView)`
   
           `failingUri` the URI that failed to load (optional)
   
@@ -2695,7 +2695,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.hit_test_result.HitTestResult hitTestResult, uint modifiers, webkit.web_view.WebView webView))
+          `void callback(webkit.hit_test_result.HitTestResult hitTestResult, uint modifiers, webkit.web_view.WebView webView)`
   
           `hitTestResult` a #WebKitHitTestResult (optional)
   
@@ -2789,7 +2789,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.permission_request.PermissionRequest request, webkit.web_view.WebView webView))
+          `bool callback(webkit.permission_request.PermissionRequest request, webkit.web_view.WebView webView)`
   
           `request` the #WebKitPermissionRequest (optional)
   
@@ -2844,7 +2844,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.print_operation.PrintOperation printOperation, webkit.web_view.WebView webView))
+          `bool callback(webkit.print_operation.PrintOperation printOperation, webkit.web_view.WebView webView)`
   
           `printOperation` the #WebKitPrintOperation that will handle the print request (optional)
   
@@ -2897,7 +2897,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.permission_state_query.PermissionStateQuery query, webkit.web_view.WebView webView))
+          `bool callback(webkit.permission_state_query.PermissionStateQuery query, webkit.web_view.WebView webView)`
   
           `query` the #WebKitPermissionStateQuery (optional)
   
@@ -2948,7 +2948,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.web_view.WebView webView))
+          `void callback(webkit.web_view.WebView webView)`
   
           `webView` the instance the signal is connected to (optional)
   
@@ -2988,7 +2988,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.web_resource.WebResource resource, webkit.urirequest.URIRequest request, webkit.web_view.WebView webView))
+          `void callback(webkit.web_resource.WebResource resource, webkit.urirequest.URIRequest request, webkit.web_view.WebView webView)`
   
           `resource` a #WebKitWebResource (optional)
   
@@ -3043,7 +3043,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.web_view.WebView webView))
+          `void callback(webkit.web_view.WebView webView)`
   
           `webView` the instance the signal is connected to (optional)
   
@@ -3092,7 +3092,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.color_chooser_request.ColorChooserRequest request, webkit.web_view.WebView webView))
+          `bool callback(webkit.color_chooser_request.ColorChooserRequest request, webkit.web_view.WebView webView)`
   
           `request` a #WebKitColorChooserRequest (optional)
   
@@ -3149,7 +3149,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.file_chooser_request.FileChooserRequest request, webkit.web_view.WebView webView))
+          `bool callback(webkit.file_chooser_request.FileChooserRequest request, webkit.web_view.WebView webView)`
   
           `request` a #WebKitFileChooserRequest (optional)
   
@@ -3222,7 +3222,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.script_dialog.ScriptDialog dialog, webkit.web_view.WebView webView))
+          `bool callback(webkit.script_dialog.ScriptDialog dialog, webkit.web_view.WebView webView)`
   
           `dialog` the #WebKitScriptDialog to show (optional)
   
@@ -3274,7 +3274,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.notification.Notification notification, webkit.web_view.WebView webView))
+          `bool callback(webkit.notification.Notification notification, webkit.web_view.WebView webView)`
   
           `notification` a #WebKitNotification (optional)
   
@@ -3327,7 +3327,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.option_menu.OptionMenu menu, gdk.rectangle.Rectangle rectangle, webkit.web_view.WebView webView))
+          `bool callback(webkit.option_menu.OptionMenu menu, gdk.rectangle.Rectangle rectangle, webkit.web_view.WebView webView)`
   
           `menu` the #WebKitOptionMenu (optional)
   
@@ -3390,7 +3390,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.form_submission_request.FormSubmissionRequest request, webkit.web_view.WebView webView))
+          `void callback(webkit.form_submission_request.FormSubmissionRequest request, webkit.web_view.WebView webView)`
   
           `request` a #WebKitFormSubmissionRequest (optional)
   
@@ -3440,7 +3440,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.user_message.UserMessage message, webkit.web_view.WebView webView))
+          `bool callback(webkit.user_message.UserMessage message, webkit.web_view.WebView webView)`
   
           `message` the #WebKitUserMessage received (optional)
   
@@ -3487,7 +3487,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.types.WebProcessTerminationReason reason, webkit.web_view.WebView webView))
+          `void callback(webkit.types.WebProcessTerminationReason reason, webkit.web_view.WebView webView)`
   
           `reason` the a #WebKitWebProcessTerminationReason (optional)
   

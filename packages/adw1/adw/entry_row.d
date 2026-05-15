@@ -490,7 +490,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.entry_row.EntryRow entryRow))
+          `void callback(adw.entry_row.EntryRow entryRow)`
   
           `entryRow` the instance the signal is connected to (optional)
   
@@ -527,7 +527,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.entry_row.EntryRow entryRow))
+          `void callback(adw.entry_row.EntryRow entryRow)`
   
           `entryRow` the instance the signal is connected to (optional)
   

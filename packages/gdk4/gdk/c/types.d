@@ -1829,11 +1829,9 @@ struct GdkDeviceTool;
     
     Their purpose are two-fold:
     
-    $(LIST
-      * To manage and provide information about input devices (pointers, keyboards, etc)
-      * To manage and provide information about output devices (monitors, projectors, etc)
-    )
-      
+    - To manage and provide information about input devices (pointers, keyboards, etc)
+    - To manage and provide information about output devices (monitors, projectors, etc)
+    
     Most of the input device handling has been factored out into separate
     [gdk.seat.Seat] objects. Every display has a one or more seats, which
     can be accessed with [gdk.display.Display.getDefaultSeat] and
@@ -1968,24 +1966,20 @@ struct GdkDmabufTexture;
     
     The required properties for a dma-buf texture are
     
-     $(LIST
-        * The width and height in pixels
-       
-        * The `fourcc` code and `modifier` which identify the format and memory layout of the dma-buf
-       
-        * The file descriptor, offset and stride for each of the planes
-     )
-       
+     * The width and height in pixels
+    
+     * The `fourcc` code and `modifier` which identify the format and memory layout of the dma-buf
+    
+     * The file descriptor, offset and stride for each of the planes
+    
     [gdk.dmabuf_texture_builder.DmabufTextureBuilder] can be used for quick one-shot construction of
     textures as well as kept around and reused to construct multiple textures.
     
     For further information, see
     
-    $(LIST
-      * The Linux kernel [documentation](https://docs.kernel.org/driver-api/dma-buf.html)
-      
-      * The header file [drm_fourcc.h](https://gitlab.freedesktop.org/mesa/drm/-/blob/main/include/drm/drm_fourcc.h)
-    )
+    * The Linux kernel [documentation](https://docs.kernel.org/driver-api/dma-buf.html)
+    
+    * The header file [drm_fourcc.h](https://gitlab.freedesktop.org/mesa/drm/-/blob/main/include/drm/drm_fourcc.h)
 */
 struct GdkDmabufTextureBuilder;
 

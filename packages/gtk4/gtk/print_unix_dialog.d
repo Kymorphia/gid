@@ -43,12 +43,10 @@ import gtk.window;
     
     [gtk.print_unix_dialog.PrintUnixDialog] uses the following response values:
     
-    $(LIST
-      * [gtk.types.ResponseType.Ok]: for the “Print” button
-      * [gtk.types.ResponseType.Apply]: for the “Preview” button
-      * [gtk.types.ResponseType.Cancel]: for the “Cancel” button
-    )
-      
+    - [gtk.types.ResponseType.Ok]: for the “Print” button
+    - [gtk.types.ResponseType.Apply]: for the “Preview” button
+    - [gtk.types.ResponseType.Cancel]: for the “Cancel” button
+    
     # GtkPrintUnixDialog as GtkBuildable
     
     The [gtk.print_unix_dialog.PrintUnixDialog] implementation of the [gtk.buildable.Buildable] interface

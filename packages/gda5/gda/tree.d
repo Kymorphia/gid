@@ -263,7 +263,7 @@ class Tree : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.tree_node.TreeNode node, gda.tree.Tree tree))
+          `void callback(gda.tree_node.TreeNode node, gda.tree.Tree tree)`
   
           `node` the #GdaTreeNode which has changed (optional)
   
@@ -306,7 +306,7 @@ class Tree : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string nodePath, gda.tree.Tree tree))
+          `void callback(string nodePath, gda.tree.Tree tree)`
   
           `nodePath` the position the node held in tree as a tree path (optional)
   
@@ -350,7 +350,7 @@ class Tree : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.tree_node.TreeNode node, gda.tree.Tree tree))
+          `void callback(gda.tree_node.TreeNode node, gda.tree.Tree tree)`
   
           `node` the #GdaTreeNode which changed from having children to being a
                    leaf or the other way around (optional)
@@ -394,7 +394,7 @@ class Tree : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.tree_node.TreeNode node, gda.tree.Tree tree))
+          `void callback(gda.tree_node.TreeNode node, gda.tree.Tree tree)`
   
           `node` the #GdaTreeNode which has inserted (optional)
   

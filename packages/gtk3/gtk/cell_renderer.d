@@ -656,7 +656,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.cell_renderer.CellRenderer cellRenderer))
+          `void callback(gtk.cell_renderer.CellRenderer cellRenderer)`
   
           `cellRenderer` the instance the signal is connected to (optional)
   
@@ -721,7 +721,7 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.cell_editable.CellEditable editable, string path, gtk.cell_renderer.CellRenderer cellRenderer))
+          `void callback(gtk.cell_editable.CellEditable editable, string path, gtk.cell_renderer.CellRenderer cellRenderer)`
   
           `editable` the #GtkCellEditable (optional)
   

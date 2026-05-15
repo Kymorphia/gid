@@ -745,12 +745,10 @@ enum AdwViewSwitcherPolicy
     
     The supported formatting options are:
     
-    $(LIST
-      * Paragraph (`<p>`)
-      * Ordered list (`<ol>`), with list items (`<li>`)
-      * Unordered list (`<ul>`), with list items (`<li>`)
-    )
-      
+    * Paragraph (`<p>`)
+    * Ordered list (`<ol>`), with list items (`<li>`)
+    * Unordered list (`<ul>`), with list items (`<li>`)
+    
     Within paragraphs and list items, emphasis (`<em>`) and inline code
     (`<code>`) text styles are supported. The emphasis is rendered in italic,
     while inline code is shown in a monospaced font.
@@ -781,11 +779,9 @@ enum AdwViewSwitcherPolicy
     
     [adw.about_dialog.AboutDialog] displays the following two links on the main page:
     
-    $(LIST
-      * Support Questions, set with the `property@AboutDialog:support-url` property,
-      * Report an Issue, set with the `property@AboutDialog:issue-url` property.
-    )
-      
+    * Support Questions, set with the `property@AboutDialog:support-url` property,
+    * Report an Issue, set with the `property@AboutDialog:issue-url` property.
+    
     Additionally, applications can provide debugging information. It will be
     shown separately on the Troubleshooting page. Use the
     `property@AboutDialog:debug-info` property to specify it.
@@ -801,14 +797,12 @@ enum AdwViewSwitcherPolicy
     
     The Credits page has the following default sections:
     
-    $(LIST
-      * Developers, set with the `property@AboutDialog:developers` property,
-      * Designers, set with the `property@AboutDialog:designers` property,
-      * Artists, set with the `property@AboutDialog:artists` property,
-      * Documenters, set with the `property@AboutDialog:documenters` property,
-      * Translators, set with the `property@AboutDialog:translator-credits` property.
-    )
-      
+    * Developers, set with the `property@AboutDialog:developers` property,
+    * Designers, set with the `property@AboutDialog:designers` property,
+    * Artists, set with the `property@AboutDialog:artists` property,
+    * Documenters, set with the `property@AboutDialog:documenters` property,
+    * Translators, set with the `property@AboutDialog:translator-credits` property.
+    
     When setting translator credits, use the strings `"translator-credits"` or
     `"translator_credits"` and mark them as translatable.
     
@@ -927,12 +921,10 @@ struct AdwAboutDialogClass
     
     The supported formatting options are:
     
-    $(LIST
-      * Paragraph (`<p>`)
-      * Ordered list (`<ol>`), with list items (`<li>`)
-      * Unordered list (`<ul>`), with list items (`<li>`)
-    )
-      
+    * Paragraph (`<p>`)
+    * Ordered list (`<ol>`), with list items (`<li>`)
+    * Unordered list (`<ul>`), with list items (`<li>`)
+    
     Within paragraphs and list items, emphasis (`<em>`) and inline code
     (`<code>`) text styles are supported. The emphasis is rendered in italic,
     while inline code is shown in a monospaced font.
@@ -963,11 +955,9 @@ struct AdwAboutDialogClass
     
     [adw.about_window.AboutWindow] displays the following two links on the main page:
     
-    $(LIST
-      * Support Questions, set with the `property@AboutWindow:support-url` property,
-      * Report an Issue, set with the `property@AboutWindow:issue-url` property.
-    )
-      
+    * Support Questions, set with the `property@AboutWindow:support-url` property,
+    * Report an Issue, set with the `property@AboutWindow:issue-url` property.
+    
     Additionally, applications can provide debugging information. It will be
     shown separately on the Troubleshooting page. Use the
     `property@AboutWindow:debug-info` property to specify it.
@@ -983,14 +973,12 @@ struct AdwAboutDialogClass
     
     The Credits page has the following default sections:
     
-    $(LIST
-      * Developers, set with the `property@AboutWindow:developers` property,
-      * Designers, set with the `property@AboutWindow:designers` property,
-      * Artists, set with the `property@AboutWindow:artists` property,
-      * Documenters, set with the `property@AboutWindow:documenters` property,
-      * Translators, set with the `property@AboutWindow:translator-credits` property.
-    )
-      
+    * Developers, set with the `property@AboutWindow:developers` property,
+    * Designers, set with the `property@AboutWindow:designers` property,
+    * Artists, set with the `property@AboutWindow:artists` property,
+    * Documenters, set with the `property@AboutWindow:documenters` property,
+    * Translators, set with the `property@AboutWindow:translator-credits` property.
+    
     When setting translator credits, use the strings `"translator-credits"` or
     `"translator_credits"` and mark them as translatable.
     
@@ -1377,20 +1365,16 @@ struct AdwAnimationTargetClass;
     
     They can be used to add custom styles to the application, as follows:
     
-    $(LIST
-      * `style.css` contains styles that are always present.
-      
-      * `style-dark.css` contains styles only used when
-    )
+    - `style.css` contains styles that are always present.
+    
+    - `style-dark.css` contains styles only used when
     `property@StyleManager:dark` is `TRUE`.
     
-    $(LIST
-      * `style-hc.css` contains styles used when the system high contrast
-        preference is enabled.
-      
-      * `style-hc-dark.css` contains styles used when the system high contrast
-        preference is enabled and `property@StyleManager:dark` is `TRUE`.
-    )
+    - `style-hc.css` contains styles used when the system high contrast
+      preference is enabled.
+    
+    - `style-hc-dark.css` contains styles used when the system high contrast
+      preference is enabled and `property@StyleManager:dark` is `TRUE`.
 */
 struct AdwApplication
 {
@@ -2780,15 +2764,11 @@ struct AdwNavigationPageClass
     [adw.navigation_split_view.NavigationSplitView] defines the same actions as [adw.navigation_view.NavigationView], but
     they can be used even when the split view is not collapsed:
     
-    $(LIST
-      * `navigation.push` takes a string parameter specifying the tag of the page
-    )
+    - `navigation.push` takes a string parameter specifying the tag of the page
     to push. If it matches the tag of the content widget, it sets
     `property@NavigationSplitView:show-content` to `TRUE`.
     
-    $(LIST
-      * `navigation.pop` doesn't take any parameters and sets
-    )
+    - `navigation.pop` doesn't take any parameters and sets
     `property@NavigationSplitView:show-content` to `FALSE`.
     
     ## [adw.navigation_split_view.NavigationSplitView] as [gtk.buildable.Buildable]
@@ -2895,20 +2875,16 @@ struct AdwNavigationSplitViewClass
     [adw.navigation_view.NavigationView] supports the following shortcuts for going to the
     previous page:
     
-    $(LIST
-      * <kbd>Escape</kbd> (unless `property@NavigationView:pop-on-escape` is set to
-        `FALSE`)
-      * <kbd>Alt</kbd>+<kbd>←</kbd>
-      * Back mouse button
-    )
-      
+    - <kbd>Escape</kbd> (unless `property@NavigationView:pop-on-escape` is set to
+      `FALSE`)
+    - <kbd>Alt</kbd>+<kbd>←</kbd>
+    - Back mouse button
+    
     Additionally, it supports interactive gestures:
     
-    $(LIST
-      * One-finger swipe towards the right on touchscreens
-      * Scrolling towards the right on touchpads (usually two-finger swipe)
-    )
-      
+    - One-finger swipe towards the right on touchscreens
+    - Scrolling towards the right on touchpads (usually two-finger swipe)
+    
     These gestures have transitions enabled regardless of the
     `property@NavigationView:animate-transitions` value.
     
@@ -2916,12 +2892,10 @@ struct AdwNavigationSplitViewClass
     navigation stack via connecting to the `signal@NavigationView::get-next-page`
     signal, in that case the following shortcuts are supported:
     
-    $(LIST
-      * <kbd>Alt</kbd>+<kbd>→</kbd>
-      * Forward mouse button
-      * Swipe/scrolling towards the left
-    )
-      
+    - <kbd>Alt</kbd>+<kbd>→</kbd>
+    - Forward mouse button
+    - Swipe/scrolling towards the left
+    
     For right-to-left locales, the gestures and shortcuts are reversed.
     
     `property@NavigationPage:can-pop` can be used to disable them, along with the
@@ -2932,14 +2906,10 @@ struct AdwNavigationSplitViewClass
     [adw.navigation_view.NavigationView] defines actions for controlling the navigation stack.
     actions for controlling the navigation stack:
     
-    $(LIST
-      * `navigation.push` takes a string parameter specifying the tag of the page to
-    )
+    - `navigation.push` takes a string parameter specifying the tag of the page to
     push, and is equivalent to calling [adw.navigation_view.NavigationView.pushByTag].
     
-    $(LIST
-      * `navigation.pop` doesn't take any parameters and pops the current page from
-    )
+    - `navigation.pop` doesn't take any parameters and pops the current page from
     the navigation stack, equivalent to calling [adw.navigation_view.NavigationView.pop].
     
     ## [adw.navigation_view.NavigationView] as [gtk.buildable.Buildable]
@@ -3540,13 +3510,11 @@ struct AdwSpringAnimationClass;
     The damping can be replaced by damping ratio, which produces the following
     springs:
     
-    $(LIST
-      * 0: an undamped spring.
-      * Between 0 and 1: an underdamped spring.
-      * 1: a critically damped spring.
-      * Larger than 1: an overdamped spring.
-    )
-      
+    * 0: an undamped spring.
+    * Between 0 and 1: an underdamped spring.
+    * 1: a critically damped spring.
+    * Larger than 1: an overdamped spring.
+    
     As such
 */
 struct AdwSpringParams;
@@ -4191,18 +4159,16 @@ struct AdwToastOverlayClass
     
     The following kinds of top and bottom bars are supported:
     
-    $(LIST
-      * `class@HeaderBar`
-      * `class@TabBar`
-      * `class@ViewSwitcherBar`
-      * [gtk.action_bar.ActionBar]
-      * [gtk.header_bar.HeaderBar]
-      * [gtk.popover_menu_bar.PopoverMenuBar]
-      * [gtk.search_bar.SearchBar]
-      * Any [gtk.box.Box] or a similar widget with the
-        [`.toolbar`](style-classes.html#toolbars) style class
-    )
-      
+    - `class@HeaderBar`
+    - `class@TabBar`
+    - `class@ViewSwitcherBar`
+    - [gtk.action_bar.ActionBar]
+    - [gtk.header_bar.HeaderBar]
+    - [gtk.popover_menu_bar.PopoverMenuBar]
+    - [gtk.search_bar.SearchBar]
+    - Any [gtk.box.Box] or a similar widget with the
+      [`.toolbar`](style-classes.html#toolbars) style class
+    
     By default, top and bottom bars are flat and scrolling content has a subtle
     undershoot shadow, same as when using the
     [`.undershoot-top`](style-classes.html#undershoot-indicators) and

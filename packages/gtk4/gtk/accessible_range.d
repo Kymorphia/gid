@@ -15,25 +15,21 @@ import gtk.types;
     This interface is expected to be implemented by controls using the following
     roles:
     
-    $(LIST
-      * [gtk.types.AccessibleRole.Meter]
-      * [gtk.types.AccessibleRole.ProgressBar]
-      * [gtk.types.AccessibleRole.Scrollbar]
-      * [gtk.types.AccessibleRole.Slider]
-      * [gtk.types.AccessibleRole.SpinButton]
-    )
-      
+    - [gtk.types.AccessibleRole.Meter]
+    - [gtk.types.AccessibleRole.ProgressBar]
+    - [gtk.types.AccessibleRole.Scrollbar]
+    - [gtk.types.AccessibleRole.Slider]
+    - [gtk.types.AccessibleRole.SpinButton]
+    
     If that is not the case, a warning will be issued at run time.
     
     In addition to this interface, its implementers are expected to provide the
     correct values for the following properties:
     
-    $(LIST
-      * [gtk.types.AccessibleProperty.ValueMax]
-      * [gtk.types.AccessibleProperty.ValueMin]
-      * [gtk.types.AccessibleProperty.ValueNow]
-      * [gtk.types.AccessibleProperty.ValueText]
-    )
+    - [gtk.types.AccessibleProperty.ValueMax]
+    - [gtk.types.AccessibleProperty.ValueMin]
+    - [gtk.types.AccessibleProperty.ValueNow]
+    - [gtk.types.AccessibleProperty.ValueText]
 */
 interface AccessibleRange
 {

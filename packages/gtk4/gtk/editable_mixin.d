@@ -675,7 +675,7 @@ template EditableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.editable.Editable editable))
+          `void callback(gtk.editable.Editable editable)`
   
           `editable` the instance the signal is connected to (optional)
   
@@ -720,7 +720,7 @@ template EditableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int startPos, int endPos, gtk.editable.Editable editable))
+          `void callback(int startPos, int endPos, gtk.editable.Editable editable)`
   
           `startPos` the starting position (optional)
   
@@ -774,7 +774,7 @@ template EditableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string text, ref int position, gtk.editable.Editable editable))
+          `void callback(string text, ref int position, gtk.editable.Editable editable)`
   
           `text` the new text to insert (optional)
   

@@ -343,7 +343,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string object, panel.settings.Settings settings))
+          `void callback(string object, panel.settings.Settings settings)`
   
           `object`  (optional)
   

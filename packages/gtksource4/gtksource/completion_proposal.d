@@ -115,7 +115,7 @@ interface CompletionProposal
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion_proposal.CompletionProposal completionProposal))
+          `void callback(gtksource.completion_proposal.CompletionProposal completionProposal)`
   
           `completionProposal` the instance the signal is connected to (optional)
   

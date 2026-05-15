@@ -328,7 +328,7 @@ class NativeDialog : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int responseId, gtk.native_dialog.NativeDialog nativeDialog))
+          `void callback(int responseId, gtk.native_dialog.NativeDialog nativeDialog)`
   
           `responseId` the response ID (optional)
   

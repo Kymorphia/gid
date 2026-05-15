@@ -272,7 +272,7 @@ class Statement : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.connection.Connection object, bool p0, gda.statement.Statement statement))
+          `void callback(gda.connection.Connection object, bool p0, gda.statement.Statement statement)`
   
           `object`  (optional)
   
@@ -321,7 +321,7 @@ class Statement : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.statement.Statement statement))
+          `void callback(gda.statement.Statement statement)`
   
           `statement` the instance the signal is connected to (optional)
   

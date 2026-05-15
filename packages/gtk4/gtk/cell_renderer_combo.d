@@ -178,7 +178,7 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string pathString, gtk.tree_iter.TreeIter newIter, gtk.cell_renderer_combo.CellRendererCombo cellRendererCombo))
+          `void callback(string pathString, gtk.tree_iter.TreeIter newIter, gtk.cell_renderer_combo.CellRendererCombo cellRendererCombo)`
   
           `pathString` a string of the path identifying the edited cell
                           (relative to the tree view model) (optional)

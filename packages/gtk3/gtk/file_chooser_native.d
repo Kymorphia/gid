@@ -109,20 +109,16 @@ import gtk.window;
     
     There is no support for the signals that are emitted when the user
     navigates in the dialog, including:
-    $(LIST
-      * #GtkFileChooser::current-folder-changed
-      * #GtkFileChooser::selection-changed
-      * #GtkFileChooser::file-activated
-      * #GtkFileChooser::confirm-overwrite
-    )
-      
+    * #GtkFileChooser::current-folder-changed
+    * #GtkFileChooser::selection-changed
+    * #GtkFileChooser::file-activated
+    * #GtkFileChooser::confirm-overwrite
+    
     You can also not use the methods that directly control user navigation:
-    $(LIST
-      * [gtk.file_chooser.FileChooser.unselectFilename]
-      * [gtk.file_chooser.FileChooser.selectAll]
-      * [gtk.file_chooser.FileChooser.unselectAll]
-    )
-      
+    * [gtk.file_chooser.FileChooser.unselectFilename]
+    * [gtk.file_chooser.FileChooser.selectAll]
+    * [gtk.file_chooser.FileChooser.unselectAll]
+    
     If you need any of the above you will have to use #GtkFileChooserDialog directly.
     
     No operations that change the the dialog work while the dialog is
@@ -134,14 +130,12 @@ import gtk.window;
     used. It supports many of the features that #GtkFileChooserDialog
     does, but there are some things it does not handle:
     
-    $(LIST
-      * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget].
-      
-      * Use of custom previews by connecting to #GtkFileChooser::update-preview.
-      
-      * Any #GtkFileFilter added using a mimetype or custom filter.
-    )
-      
+    * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget].
+    
+    * Use of custom previews by connecting to #GtkFileChooser::update-preview.
+    
+    * Any #GtkFileFilter added using a mimetype or custom filter.
+    
     If any of these features are used the regular #GtkFileChooserDialog
     will be used in place of the native one.
     
@@ -153,31 +147,27 @@ import gtk.window;
     be a GTK+ file chooser. In this situation, the following things are not
     supported and will be silently ignored:
     
-    $(LIST
-      * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget].
-      
-      * Use of custom previews by connecting to #GtkFileChooser::update-preview.
-      
-      * Any #GtkFileFilter added with a custom filter.
-    )
-      
+    * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget].
+    
+    * Use of custom previews by connecting to #GtkFileChooser::update-preview.
+    
+    * Any #GtkFileFilter added with a custom filter.
+    
     ## macOS details ## {#gtkfilechooserdialognative-macos}
     
     On macOS the NSSavePanel and NSOpenPanel classes are used to provide native
     file chooser dialogs. Some features provided by #GtkFileChooserDialog are
     not supported:
     
-    $(LIST
-      * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget], unless the
-        widget is an instance of GtkLabel, in which case the label text will be used
-        to set the NSSavePanel message instance property.
-      
-      * Use of custom previews by connecting to #GtkFileChooser::update-preview.
-      
-      * Any #GtkFileFilter added with a custom filter.
-      
-      * Shortcut folders.
-    )
+    * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget], unless the
+      widget is an instance of GtkLabel, in which case the label text will be used
+      to set the NSSavePanel message instance property.
+    
+    * Use of custom previews by connecting to #GtkFileChooser::update-preview.
+    
+    * Any #GtkFileFilter added with a custom filter.
+    
+    * Shortcut folders.
 */
 class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileChooser
 {

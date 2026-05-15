@@ -389,13 +389,11 @@ enum GtkSourceViewGutterPosition
     engine. The default context classes that are applied to regions of a
     [gtksource.buffer.Buffer]:
     
-     $(LIST
-        * **comment**: the region delimits a comment;
-        * **no-spell-check**: the region should not be spell checked;
-        * **path**: the region delimits a path to a file;
-        * **string**: the region delimits a string.
-     )
-       
+     - **comment**: the region delimits a comment;
+     - **no-spell-check**: the region should not be spell checked;
+     - **path**: the region delimits a path to a file;
+     - **string**: the region delimits a string.
+    
     Custom language definition files can create their own context classes,
     since the functions like [gtksource.buffer.Buffer.iterHasContextClass] take
     a string parameter as the context class.
@@ -425,13 +423,11 @@ enum GtkSourceViewGutterPosition
     Accessing a context class via the associated [gtk.text_tag.TextTag] is less
     convenient than the [gtksource.buffer.Buffer] API, because:
     
-     $(LIST
-        * The tag doesn't always exist, you need to listen to the
-          `signal@Gtk.TextTagTable::tag-added` and `signal@Gtk.TextTagTable::tag-removed` signals.
-        * Instead of the `signal@GtkSource.Buffer::highlight-updated` signal, you can listen
-          to the `signal@Gtk.TextBuffer::apply-tag` and `signal@Gtk.TextBuffer::remove-tag` signals.
-     )
-       
+     - The tag doesn't always exist, you need to listen to the
+       `signal@Gtk.TextTagTable::tag-added` and `signal@Gtk.TextTagTable::tag-removed` signals.
+     - Instead of the `signal@GtkSource.Buffer::highlight-updated` signal, you can listen
+       to the `signal@Gtk.TextBuffer::apply-tag` and `signal@Gtk.TextBuffer::remove-tag` signals.
+    
     A possible use-case for accessing a context class via the associated
     [gtk.text_tag.TextTag] is to read the region but without adding a hard dependency on the
     GtkSourceView library (for example for a spell-checking library that wants to
@@ -1186,12 +1182,10 @@ struct GtkSourceMark
     [gtksource.mark_attributes.MarkAttributes.renderIcon] must be called.
     There are several ways to specify a base for an icon:
     
-    $(LIST
-      * [gtksource.mark_attributes.MarkAttributes.setIconName]
-      * [gtksource.mark_attributes.MarkAttributes.setGicon]
-      * [gtksource.mark_attributes.MarkAttributes.setPixbuf]
-    )
-      
+    - [gtksource.mark_attributes.MarkAttributes.setIconName]
+    - [gtksource.mark_attributes.MarkAttributes.setGicon]
+    - [gtksource.mark_attributes.MarkAttributes.setPixbuf]
+    
     Using any of the above functions overrides the one used earlier. But note
     that a getter counterpart of earlier used function can still return some
     value, but it is just not used when rendering the proper icon.
@@ -1538,11 +1532,9 @@ struct GtkSourceSnippetManagerClass
     
     A possible use-case is to draw only unwanted white spaces. Examples:
     
-    $(LIST
-      * Draw all trailing spaces.
-      * If the indentation and alignment must be done with spaces, draw tabs.
-    )
-      
+    - Draw all trailing spaces.
+    - If the indentation and alignment must be done with spaces, draw tabs.
+    
     And non-breaking spaces can always be drawn, everywhere, to distinguish them
     from normal spaces.
 */
@@ -1738,16 +1730,14 @@ struct GtkSourceTagClass
     
     This class provides:
     
-     $(LIST
-        * Show the line numbers;
-        * Show a right margin;
-        * Highlight the current line;
-        * Indentation settings;
-        * Configuration for the Home and End keyboard keys;
-        * Configure and show line marks;
-        * And a few other things.
-     )
-       
+     - Show the line numbers;
+     - Show a right margin;
+     - Highlight the current line;
+     - Indentation settings;
+     - Configuration for the Home and End keyboard keys;
+     - Configure and show line marks;
+     - And a few other things.
+    
     An easy way to test all these features is to use the test-widget mini-program
     provided in the GtkSourceView repository, in the tests/ directory.
     
@@ -1834,18 +1824,16 @@ struct GtkSourceViewClass
     
     Various features supported by [gtksource.vim_imcontext.VimIMContext] include:
     
-     $(LIST
-        * Normal, Insert, Replace, Visual, and Visual Line modes
-        * Support for an integrated command bar and current command preview
-        * Search and replace
-        * Motions and Text Objects
-        * History replay
-        * Jumplists within the current file
-        * Registers including the system and primary clipboards
-        * Creation and motion to marks
-        * Some commonly used Vim commands
-     )
-       
+     - Normal, Insert, Replace, Visual, and Visual Line modes
+     - Support for an integrated command bar and current command preview
+     - Search and replace
+     - Motions and Text Objects
+     - History replay
+     - Jumplists within the current file
+     - Registers including the system and primary clipboards
+     - Creation and motion to marks
+     - Some commonly used Vim commands
+    
     It is recommended that applications display the contents of
     `property@VimIMContext:command-bar-text` and
     `property@VimIMContext:command-text` to the user as they represent the

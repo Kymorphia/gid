@@ -106,7 +106,7 @@ class EventControllerKey : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.event_controller_key.EventControllerKey eventControllerKey))
+          `void callback(gtk.event_controller_key.EventControllerKey eventControllerKey)`
   
           `eventControllerKey` the instance the signal is connected to (optional)
   
@@ -143,7 +143,7 @@ class EventControllerKey : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.event_controller_key.EventControllerKey eventControllerKey))
+          `void callback(gtk.event_controller_key.EventControllerKey eventControllerKey)`
   
           `eventControllerKey` the instance the signal is connected to (optional)
   
@@ -180,7 +180,7 @@ class EventControllerKey : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.event_controller_key.EventControllerKey eventControllerKey))
+          `void callback(gtk.event_controller_key.EventControllerKey eventControllerKey)`
   
           `eventControllerKey` the instance the signal is connected to (optional)
   
@@ -217,7 +217,7 @@ class EventControllerKey : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey))
+          `bool callback(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey)`
   
           `keyval` the pressed key. (optional)
   
@@ -275,7 +275,7 @@ class EventControllerKey : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey))
+          `void callback(uint keyval, uint keycode, gdk.types.ModifierType state, gtk.event_controller_key.EventControllerKey eventControllerKey)`
   
           `keyval` the released key. (optional)
   
@@ -330,7 +330,7 @@ class EventControllerKey : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.types.ModifierType object, gtk.event_controller_key.EventControllerKey eventControllerKey))
+          `bool callback(gdk.types.ModifierType object, gtk.event_controller_key.EventControllerKey eventControllerKey)`
   
           `object`  (optional)
   

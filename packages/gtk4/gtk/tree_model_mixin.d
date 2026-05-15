@@ -198,21 +198,19 @@ public import gtk.types;
     When working with reference counting, the following rules must be taken
     into account:
     
-    $(LIST
-      * Never take a reference on a node without owning a reference on its parent.
-        This means that all parent nodes of a referenced node must be referenced
-        as well.
-      
-      * Outstanding references on a deleted node are not released. This is not
-        possible because the node has already been deleted by the time the
-        row-deleted signal is received.
-      
-      * Models are not obligated to emit a signal on rows of which none of its
-        siblings are referenced. To phrase this differently, signals are only
-        required for levels in which nodes are referenced. For the root level
-        however, signals must be emitted at all times (however the root level
-        is always referenced when any view is attached).
-    )
+    - Never take a reference on a node without owning a reference on its parent.
+      This means that all parent nodes of a referenced node must be referenced
+      as well.
+    
+    - Outstanding references on a deleted node are not released. This is not
+      possible because the node has already been deleted by the time the
+      row-deleted signal is received.
+    
+    - Models are not obligated to emit a signal on rows of which none of its
+      siblings are referenced. To phrase this differently, signals are only
+      required for levels in which nodes are referenced. For the root level
+      however, signals must be emitted at all times (however the root level
+      is always referenced when any view is attached).
 
     Deprecated: Use [gio.list_model.ListModel] instead
 */
@@ -702,7 +700,7 @@ template TreeModelT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel))
+          `void callback(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel)`
   
           `path` a [gtk.tree_path.TreePath] identifying the changed row (optional)
   
@@ -758,7 +756,7 @@ template TreeModelT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_path.TreePath path, gtk.tree_model.TreeModel treeModel))
+          `void callback(gtk.tree_path.TreePath path, gtk.tree_model.TreeModel treeModel)`
   
           `path` a [gtk.tree_path.TreePath] identifying the row (optional)
   
@@ -802,7 +800,7 @@ template TreeModelT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel))
+          `void callback(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel)`
   
           `path` a [gtk.tree_path.TreePath] identifying the row (optional)
   
@@ -856,7 +854,7 @@ template TreeModelT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel))
+          `void callback(gtk.tree_path.TreePath path, gtk.tree_iter.TreeIter iter, gtk.tree_model.TreeModel treeModel)`
   
           `path` a [gtk.tree_path.TreePath] identifying the new row (optional)
   

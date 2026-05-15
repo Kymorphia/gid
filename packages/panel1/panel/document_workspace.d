@@ -180,7 +180,7 @@ class DocumentWorkspace : panel.workspace.Workspace
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(panel.widget.Widget widget, panel.position.Position position, panel.document_workspace.DocumentWorkspace documentWorkspace))
+          `bool callback(panel.widget.Widget widget, panel.position.Position position, panel.document_workspace.DocumentWorkspace documentWorkspace)`
   
           `widget` a #PanelWidget (optional)
   
@@ -233,7 +233,7 @@ class DocumentWorkspace : panel.workspace.Workspace
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D panel.frame.Frame callback(panel.position.Position position, panel.document_workspace.DocumentWorkspace documentWorkspace))
+          `panel.frame.Frame callback(panel.position.Position position, panel.document_workspace.DocumentWorkspace documentWorkspace)`
   
           `position` the position of the frame (optional)
   

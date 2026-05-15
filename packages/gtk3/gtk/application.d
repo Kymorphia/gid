@@ -738,7 +738,7 @@ class Application : gio.application.Application
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.application.Application application))
+          `void callback(gtk.application.Application application)`
   
           `application` the instance the signal is connected to (optional)
   
@@ -776,7 +776,7 @@ class Application : gio.application.Application
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.window.Window window, gtk.application.Application application))
+          `void callback(gtk.window.Window window, gtk.application.Application application)`
   
           `window` the newly-added #GtkWindow (optional)
   
@@ -821,7 +821,7 @@ class Application : gio.application.Application
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.window.Window window, gtk.application.Application application))
+          `void callback(gtk.window.Window window, gtk.application.Application application)`
   
           `window` the #GtkWindow that is being removed (optional)
   

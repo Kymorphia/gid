@@ -12,11 +12,9 @@ import gst.types;
     
     The structure can be used for two purposes:
     
-      $(LIST
-          * performing seeks (handling seek events)
-          * tracking playback regions (handling newsegment events)
-      )
-        
+      * performing seeks (handling seek events)
+      * tracking playback regions (handling newsegment events)
+    
     The segment is usually configured by the application with a seek event which
     is propagated upstream and eventually handled by an element that performs the seek.
     

@@ -23,12 +23,10 @@ import gstvideo.video_alignment;
     [gst.query.Query.addAllocationMeta] when handling the ALLOCATION query.
     This structure should be named 'video-meta' and can have the following
     fields:
-    $(LIST
-      * padding-top (uint): extra pixels on the top
-      * padding-bottom (uint): extra pixels on the bottom
-      * padding-left (uint): extra pixels on the left side
-      * padding-right (uint): extra pixels on the right side
-    )
+    - padding-top (uint): extra pixels on the top
+    - padding-bottom (uint): extra pixels on the bottom
+    - padding-left (uint): extra pixels on the left side
+    - padding-right (uint): extra pixels on the right side
     The padding fields have the same semantic as #GstVideoMeta.alignment
     and so represent the paddings requested on produced video buffers.
     

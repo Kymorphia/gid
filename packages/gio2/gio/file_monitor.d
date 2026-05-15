@@ -179,7 +179,7 @@ class FileMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.file.File file, gio.file.File otherFile, gio.types.FileMonitorEvent eventType, gio.file_monitor.FileMonitor fileMonitor))
+          `void callback(gio.file.File file, gio.file.File otherFile, gio.types.FileMonitorEvent eventType, gio.file_monitor.FileMonitor fileMonitor)`
   
           `file` a #GFile. (optional)
   

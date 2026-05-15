@@ -249,7 +249,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.css_section.CssSection section, glib.error.ErrorWrap error, gtk.css_provider.CssProvider cssProvider))
+          `void callback(gtk.css_section.CssSection section, glib.error.ErrorWrap error, gtk.css_provider.CssProvider cssProvider)`
   
           `section` section the error happened in (optional)
   

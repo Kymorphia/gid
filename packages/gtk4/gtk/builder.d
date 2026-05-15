@@ -140,25 +140,23 @@ import gtk.types;
     [gtk.builder.Builder] can parse textual representations for the most common
     property types:
     
-    $(LIST
-      * characters
-      * strings
-      * integers
-      * floating-point numbers
-      * booleans (strings like “TRUE”, “t”, “yes”, “y”, “1” are interpreted
-        as true values, strings like “FALSE”, “f”, “no”, “n”, “0” are interpreted
-        as false values)
-      * enumeration types (can be specified by their full C identifier their short
-        name used when registering the enumeration type, or their integer value)
-      * flag types (can be specified by their C identifier, short name, integer
-        value, and optionally combined with “|” for bitwise OR, e.g.
-        “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase”)
-      * colors (in a format understood by [gdk.rgba.RGBA.parse])
-      * [glib.variant.Variant] (can be specified in the format understood by
-         [glib.variant.Variant.parse])
-      * pixbufs (can be specified as a filename of an image file to load)
-    )
-      
+    - characters
+    - strings
+    - integers
+    - floating-point numbers
+    - booleans (strings like “TRUE”, “t”, “yes”, “y”, “1” are interpreted
+      as true values, strings like “FALSE”, “f”, “no”, “n”, “0” are interpreted
+      as false values)
+    - enumeration types (can be specified by their full C identifier their short
+      name used when registering the enumeration type, or their integer value)
+    - flag types (can be specified by their C identifier, short name, integer
+      value, and optionally combined with “|” for bitwise OR, e.g.
+      “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase”)
+    - colors (in a format understood by [gdk.rgba.RGBA.parse])
+    - [glib.variant.Variant] (can be specified in the format understood by
+       [glib.variant.Variant.parse])
+    - pixbufs (can be specified as a filename of an image file to load)
+    
     Objects can be referred to by their name and by default refer to
     objects declared in the local XML fragment and objects exposed via
     [gtk.builder.Builder.exposeObject]. In general, [gtk.builder.Builder] allows
@@ -289,15 +287,13 @@ import gtk.types;
     `func@GObject.signal_connect_object` or `func@GObject.signal_connect_data`
     functions:
     
-    $(LIST
-      * “after” matches the `G_CONNECT_AFTER` flag, and will ensure that the
-        handler is called after the default class closure for the signal
-      * “swapped” matches the `G_CONNECT_SWAPPED` flag, and will swap the
-        instance and closure arguments when invoking the signal handler
-      * “object” will bind the signal handler to the lifetime of the object
-        referenced by the attribute
-    )
-      
+    - “after” matches the `G_CONNECT_AFTER` flag, and will ensure that the
+      handler is called after the default class closure for the signal
+    - “swapped” matches the `G_CONNECT_SWAPPED` flag, and will swap the
+      instance and closure arguments when invoking the signal handler
+    - “object” will bind the signal handler to the lifetime of the object
+      referenced by the attribute
+    
     By default "swapped" will be set to "yes" if not specified otherwise, in
     the case where "object" is set, for convenience. A “last_modification_time”
     attribute is also allowed, but it does not have a meaning to the builder.

@@ -166,7 +166,7 @@ class HSV : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.hsv.HSV hSV))
+          `void callback(gtk.hsv.HSV hSV)`
   
           `hSV` the instance the signal is connected to (optional)
   
@@ -203,7 +203,7 @@ class HSV : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.DirectionType object, gtk.hsv.HSV hSV))
+          `void callback(gtk.types.DirectionType object, gtk.hsv.HSV hSV)`
   
           `object`  (optional)
   

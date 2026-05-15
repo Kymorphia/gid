@@ -457,7 +457,7 @@ class FontDialogButton : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.font_dialog_button.FontDialogButton fontDialogButton))
+          `void callback(gtk.font_dialog_button.FontDialogButton fontDialogButton)`
   
           `fontDialogButton` the instance the signal is connected to (optional)
   

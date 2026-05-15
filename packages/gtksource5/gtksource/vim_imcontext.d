@@ -22,18 +22,16 @@ import gtksource.view;
     
     Various features supported by [gtksource.vim_imcontext.VimIMContext] include:
     
-     $(LIST
-        * Normal, Insert, Replace, Visual, and Visual Line modes
-        * Support for an integrated command bar and current command preview
-        * Search and replace
-        * Motions and Text Objects
-        * History replay
-        * Jumplists within the current file
-        * Registers including the system and primary clipboards
-        * Creation and motion to marks
-        * Some commonly used Vim commands
-     )
-       
+     - Normal, Insert, Replace, Visual, and Visual Line modes
+     - Support for an integrated command bar and current command preview
+     - Search and replace
+     - Motions and Text Objects
+     - History replay
+     - Jumplists within the current file
+     - Registers including the system and primary clipboards
+     - Creation and motion to marks
+     - Some commonly used Vim commands
+    
     It is recommended that applications display the contents of
     `property@VimIMContext:command-bar-text` and
     `property@VimIMContext:command-text` to the user as they represent the
@@ -169,7 +167,7 @@ class VimIMContext : gtk.imcontext.IMContext
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.view.View view, string path, gtksource.vim_imcontext.VimIMContext vimIMContext))
+          `void callback(gtksource.view.View view, string path, gtksource.vim_imcontext.VimIMContext vimIMContext)`
   
           `view` the #GtkSourceView (optional)
   
@@ -222,7 +220,7 @@ class VimIMContext : gtk.imcontext.IMContext
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(string command, gtksource.vim_imcontext.VimIMContext vimIMContext))
+          `bool callback(string command, gtksource.vim_imcontext.VimIMContext vimIMContext)`
   
           `command` the command to execute (optional)
   
@@ -269,7 +267,7 @@ class VimIMContext : gtk.imcontext.IMContext
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter begin, gtk.text_iter.TextIter end, gtksource.vim_imcontext.VimIMContext vimIMContext))
+          `void callback(gtk.text_iter.TextIter begin, gtk.text_iter.TextIter end, gtksource.vim_imcontext.VimIMContext vimIMContext)`
   
           `begin` the start location (optional)
   
@@ -321,7 +319,7 @@ class VimIMContext : gtk.imcontext.IMContext
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.view.View view, string path, gtksource.vim_imcontext.VimIMContext vimIMContext))
+          `void callback(gtksource.view.View view, string path, gtksource.vim_imcontext.VimIMContext vimIMContext)`
   
           `view` the #GtkSourceView (optional)
   

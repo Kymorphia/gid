@@ -632,7 +632,7 @@ class Surface : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorWrap monitor, gdk.surface.Surface surface))
+          `void callback(gdk.monitor.MonitorWrap monitor, gdk.surface.Surface surface)`
   
           `monitor` the monitor (optional)
   
@@ -675,7 +675,7 @@ class Surface : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event.Event event, gdk.surface.Surface surface))
+          `bool callback(gdk.event.Event event, gdk.surface.Surface surface)`
   
           `event` an input event (optional)
   
@@ -725,7 +725,7 @@ class Surface : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int width, int height, gdk.surface.Surface surface))
+          `void callback(int width, int height, gdk.surface.Surface surface)`
   
           `width` the current width (optional)
   
@@ -774,7 +774,7 @@ class Surface : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorWrap monitor, gdk.surface.Surface surface))
+          `void callback(gdk.monitor.MonitorWrap monitor, gdk.surface.Surface surface)`
   
           `monitor` the monitor (optional)
   
@@ -817,7 +817,7 @@ class Surface : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(cairo.region.Region region, gdk.surface.Surface surface))
+          `bool callback(cairo.region.Region region, gdk.surface.Surface surface)`
   
           `region` the region that needs to be redrawn (optional)
   

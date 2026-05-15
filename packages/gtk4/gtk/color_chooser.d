@@ -171,7 +171,7 @@ interface ColorChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.rgba.RGBA color, gtk.color_chooser.ColorChooser colorChooser))
+          `void callback(gdk.rgba.RGBA color, gtk.color_chooser.ColorChooser colorChooser)`
   
           `color` the color (optional)
   

@@ -1122,7 +1122,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.cell_renderer.CellRenderer renderer, gtk.cell_editable.CellEditable editable, gdk.rectangle.Rectangle cellArea, string path, gtk.cell_area.CellArea cellArea))
+          `void callback(gtk.cell_renderer.CellRenderer renderer, gtk.cell_editable.CellEditable editable, gdk.rectangle.Rectangle cellArea, string path, gtk.cell_area.CellArea cellArea)`
   
           `renderer` the #GtkCellRenderer that started the edited (optional)
   
@@ -1184,7 +1184,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, bool isExpander, bool isExpanded, gtk.cell_area.CellArea cellArea))
+          `void callback(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, bool isExpander, bool isExpanded, gtk.cell_area.CellArea cellArea)`
   
           `model` the #GtkTreeModel to apply the attributes from (optional)
   
@@ -1252,7 +1252,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.cell_renderer.CellRenderer renderer, string path, gtk.cell_area.CellArea cellArea))
+          `void callback(gtk.cell_renderer.CellRenderer renderer, string path, gtk.cell_area.CellArea cellArea)`
   
           `renderer` the #GtkCellRenderer that has focus (optional)
   
@@ -1302,7 +1302,7 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.cell_renderer.CellRenderer renderer, gtk.cell_editable.CellEditable editable, gtk.cell_area.CellArea cellArea))
+          `void callback(gtk.cell_renderer.CellRenderer renderer, gtk.cell_editable.CellEditable editable, gtk.cell_area.CellArea cellArea)`
   
           `renderer` the #GtkCellRenderer that finished editeding (optional)
   

@@ -513,7 +513,7 @@ class ListView : gtk.list_base.ListBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, gtk.list_view.ListView listView))
+          `void callback(uint position, gtk.list_view.ListView listView)`
   
           `position` position of item to activate (optional)
   

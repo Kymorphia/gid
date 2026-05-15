@@ -169,16 +169,14 @@ alias ClassFinalizeFunc = void delegate(gobject.type_class.TypeClass gClass);
     
     The initialization process of a class involves:
     
-    $(LIST
-      * Copying common members from the parent class over to the
-        derived class structure.
-      * Zero initialization of the remaining members not copied
-        over from the parent class.
-      * Invocation of the GBaseInitFunc() initializers of all parent
-        types and the class' type.
-      * Invocation of the class' GClassInitFunc() initializer.
-    )
-      
+    - Copying common members from the parent class over to the
+      derived class structure.
+    - Zero initialization of the remaining members not copied
+      over from the parent class.
+    - Invocation of the GBaseInitFunc() initializers of all parent
+      types and the class' type.
+    - Invocation of the class' GClassInitFunc() initializer.
+    
     Since derived classes are partially initialized through a memory copy
     of the parent class, the general rule is that GBaseInitFunc() and
     GBaseFinalizeFunc() should take care of necessary reinitialization

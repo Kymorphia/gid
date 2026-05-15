@@ -580,7 +580,7 @@ class MetaStore : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.meta_store.MetaStore metaStore))
+          `void callback(gda.meta_store.MetaStore metaStore)`
   
           `metaStore` the instance the signal is connected to (optional)
   
@@ -619,7 +619,7 @@ class MetaStore : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D glib.error.ErrorWrap callback(gda.meta_context.MetaContext suggest, gda.meta_store.MetaStore metaStore))
+          `glib.error.ErrorWrap callback(gda.meta_context.MetaContext suggest, gda.meta_store.MetaStore metaStore)`
   
           `suggest` the suggested update, as a #GdaMetaContext structure (optional)
   

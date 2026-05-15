@@ -17,12 +17,10 @@ public import gtk.types;
     
     Every accessible implementation has:
     
-     $(LIST
-        * a “role”, represented by a value of the [gtk.types.AccessibleRole] enumeration
-        * an “attribute”, represented by a set of [gtk.types.AccessibleState],
-          [gtk.types.AccessibleProperty] and [gtk.types.AccessibleRelation] values
-     )
-       
+     - a “role”, represented by a value of the [gtk.types.AccessibleRole] enumeration
+     - an “attribute”, represented by a set of [gtk.types.AccessibleState],
+       [gtk.types.AccessibleProperty] and [gtk.types.AccessibleRelation] values
+    
     The role cannot be changed after instantiating a [gtk.accessible.Accessible]
     implementation.
     

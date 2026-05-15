@@ -385,7 +385,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(panel.save_delegate.SaveDelegate saveDelegate))
+          `void callback(panel.save_delegate.SaveDelegate saveDelegate)`
   
           `saveDelegate` the instance the signal is connected to (optional)
   
@@ -427,7 +427,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(panel.save_delegate.SaveDelegate saveDelegate))
+          `void callback(panel.save_delegate.SaveDelegate saveDelegate)`
   
           `saveDelegate` the instance the signal is connected to (optional)
   
@@ -470,7 +470,7 @@ class SaveDelegate : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.task.Task task, panel.save_delegate.SaveDelegate saveDelegate))
+          `bool callback(gio.task.Task task, panel.save_delegate.SaveDelegate saveDelegate)`
   
           `task` a #GTask (optional)
   

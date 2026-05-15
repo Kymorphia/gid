@@ -134,19 +134,17 @@ import gtk.types;
     
     There are various cases in which you may need to use a [gtk.file_chooser_dialog.FileChooserDialog]:
     
-    $(LIST
-      * To select a file for opening, use [gtk.types.FileChooserAction.Open].
-      
-      * To save a file for the first time, use [gtk.types.FileChooserAction.Save],
-        and suggest a name such as “Untitled” with
-        [gtk.file_chooser.FileChooser.setCurrentName].
-      
-      * To save a file under a different name, use [gtk.types.FileChooserAction.Save],
-        and set the existing file with [gtk.file_chooser.FileChooser.setFile].
-      
-      * To choose a folder instead of a filem use [gtk.types.FileChooserAction.SelectFolder].
-    )
-      
+    - To select a file for opening, use [gtk.types.FileChooserAction.Open].
+    
+    - To save a file for the first time, use [gtk.types.FileChooserAction.Save],
+      and suggest a name such as “Untitled” with
+      [gtk.file_chooser.FileChooser.setCurrentName].
+    
+    - To save a file under a different name, use [gtk.types.FileChooserAction.Save],
+      and set the existing file with [gtk.file_chooser.FileChooser.setFile].
+    
+    - To choose a folder instead of a filem use [gtk.types.FileChooserAction.SelectFolder].
+    
     In general, you should only cause the file chooser to show a specific
     folder when it is appropriate to use [gtk.file_chooser.FileChooser.setFile],
     i.e. when you are doing a “Save As” command and you already have a file
@@ -180,13 +178,11 @@ import gtk.types;
     its “accept”-type action, e.g. an “Open” or “Save” button,
     will have one of the following response codes:
     
-    $(LIST
-      * [gtk.types.ResponseType.Accept]
-      * [gtk.types.ResponseType.Ok]
-      * [gtk.types.ResponseType.Yes]
-      * [gtk.types.ResponseType.Apply]
-    )
-      
+    - [gtk.types.ResponseType.Accept]
+    - [gtk.types.ResponseType.Ok]
+    - [gtk.types.ResponseType.Yes]
+    - [gtk.types.ResponseType.Apply]
+    
     This is because [gtk.file_chooser_dialog.FileChooserDialog] must intercept responses and switch
     to folders if appropriate, rather than letting the dialog terminate — the
     implementation uses these known response codes to know which responses can

@@ -442,7 +442,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.swipe_tracker.SwipeTracker swipeTracker))
+          `void callback(adw.swipe_tracker.SwipeTracker swipeTracker)`
   
           `swipeTracker` the instance the signal is connected to (optional)
   
@@ -484,7 +484,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double velocity, double to, adw.swipe_tracker.SwipeTracker swipeTracker))
+          `void callback(double velocity, double to, adw.swipe_tracker.SwipeTracker swipeTracker)`
   
           `velocity` the velocity of the swipe (optional)
   
@@ -536,7 +536,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.types.NavigationDirection direction, adw.swipe_tracker.SwipeTracker swipeTracker))
+          `void callback(adw.types.NavigationDirection direction, adw.swipe_tracker.SwipeTracker swipeTracker)`
   
           `direction` the direction of the swipe (optional)
   
@@ -579,7 +579,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double progress, adw.swipe_tracker.SwipeTracker swipeTracker))
+          `void callback(double progress, adw.swipe_tracker.SwipeTracker swipeTracker)`
   
           `progress` the current animation progress value (optional)
   

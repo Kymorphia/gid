@@ -178,7 +178,7 @@ class Socket : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.socket.Socket socket))
+          `void callback(gtk.socket.Socket socket)`
   
           `socket` the instance the signal is connected to (optional)
   
@@ -217,7 +217,7 @@ class Socket : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.socket.Socket socket))
+          `bool callback(gtk.socket.Socket socket)`
   
           `socket` the instance the signal is connected to (optional)
   

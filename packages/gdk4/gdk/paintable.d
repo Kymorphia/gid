@@ -243,7 +243,7 @@ interface Paintable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.paintable.Paintable paintable))
+          `void callback(gdk.paintable.Paintable paintable)`
   
           `paintable` the instance the signal is connected to (optional)
   
@@ -269,7 +269,7 @@ interface Paintable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.paintable.Paintable paintable))
+          `void callback(gdk.paintable.Paintable paintable)`
   
           `paintable` the instance the signal is connected to (optional)
   

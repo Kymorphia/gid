@@ -92,7 +92,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.gesture_long_press.GestureLongPress gestureLongPress))
+          `void callback(gtk.gesture_long_press.GestureLongPress gestureLongPress)`
   
           `gestureLongPress` the instance the signal is connected to (optional)
   
@@ -130,7 +130,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, gtk.gesture_long_press.GestureLongPress gestureLongPress))
+          `void callback(double x, double y, gtk.gesture_long_press.GestureLongPress gestureLongPress)`
   
           `x` the X coordinate where the press happened, relative to the widget allocation (optional)
   

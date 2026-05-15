@@ -522,7 +522,7 @@ class IconTheme : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.icon_theme.IconTheme iconTheme))
+          `void callback(gtk.icon_theme.IconTheme iconTheme)`
   
           `iconTheme` the instance the signal is connected to (optional)
   

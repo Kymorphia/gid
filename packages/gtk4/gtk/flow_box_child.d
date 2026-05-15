@@ -177,7 +177,7 @@ class FlowBoxChild : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.flow_box_child.FlowBoxChild flowBoxChild))
+          `void callback(gtk.flow_box_child.FlowBoxChild flowBoxChild)`
   
           `flowBoxChild` the instance the signal is connected to (optional)
   

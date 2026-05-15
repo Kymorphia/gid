@@ -211,10 +211,8 @@ class Array : gobject.boxed.Boxed
       
       Equality is defined as:
       
-       $(LIST
-          * the array have the same number of elements
-          * the values of elements in corresponding positions are equal
-       )
+       - the array have the same number of elements
+       - the values of elements in corresponding positions are equal
   
       Params:
         b = another JSON array

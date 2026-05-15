@@ -120,12 +120,10 @@ class TypeValueTable
           this value bit-by-bit. Each character in the format represents
           an argument to be collected, and the characters themselves indicate
           the type of the argument. Currently supported arguments are:
-           $(LIST
-                * `'i'`: Integers, passed as `collect_values[].v_int`
-                * `'l'`: Longs, passed as `collect_values[].v_long`
-                * `'d'`: Doubles, passed as `collect_values[].v_double`
-                * `'p'`: Pointers, passed as `collect_values[].v_pointer`
-           )
+           - `'i'`: Integers, passed as `collect_values[].v_int`
+           - `'l'`: Longs, passed as `collect_values[].v_long`
+           - `'d'`: Doubles, passed as `collect_values[].v_double`
+           - `'p'`: Pointers, passed as `collect_values[].v_pointer`
           It should be noted that for variable argument list construction,
           ANSI C promotes every type smaller than an integer to an int, and
           floats to doubles. So for collection of short int or char, `'i'`
@@ -143,12 +141,10 @@ class TypeValueTable
             this value bit-by-bit. Each character in the format represents
             an argument to be collected, and the characters themselves indicate
             the type of the argument. Currently supported arguments are:
-             $(LIST
-                  * `'i'`: Integers, passed as `collect_values[].v_int`
-                  * `'l'`: Longs, passed as `collect_values[].v_long`
-                  * `'d'`: Doubles, passed as `collect_values[].v_double`
-                  * `'p'`: Pointers, passed as `collect_values[].v_pointer`
-             )
+             - `'i'`: Integers, passed as `collect_values[].v_int`
+             - `'l'`: Longs, passed as `collect_values[].v_long`
+             - `'d'`: Doubles, passed as `collect_values[].v_double`
+             - `'p'`: Pointers, passed as `collect_values[].v_pointer`
             It should be noted that for variable argument list construction,
             ANSI C promotes every type smaller than an integer to an int, and
             floats to doubles. So for collection of short int or char, `'i'`

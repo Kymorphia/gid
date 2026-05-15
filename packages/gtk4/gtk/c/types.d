@@ -5037,12 +5037,10 @@ struct GtkAboutDialog;
     
     Every accessible implementation has:
     
-     $(LIST
-        * a “role”, represented by a value of the [gtk.types.AccessibleRole] enumeration
-        * an “attribute”, represented by a set of [gtk.types.AccessibleState],
-          [gtk.types.AccessibleProperty] and [gtk.types.AccessibleRelation] values
-     )
-       
+     - a “role”, represented by a value of the [gtk.types.AccessibleRole] enumeration
+     - an “attribute”, represented by a set of [gtk.types.AccessibleState],
+       [gtk.types.AccessibleProperty] and [gtk.types.AccessibleRelation] values
+    
     The role cannot be changed after instantiating a [gtk.accessible.Accessible]
     implementation.
     
@@ -5110,25 +5108,21 @@ struct GtkAccessibleList;
     This interface is expected to be implemented by controls using the following
     roles:
     
-    $(LIST
-      * [gtk.types.AccessibleRole.Meter]
-      * [gtk.types.AccessibleRole.ProgressBar]
-      * [gtk.types.AccessibleRole.Scrollbar]
-      * [gtk.types.AccessibleRole.Slider]
-      * [gtk.types.AccessibleRole.SpinButton]
-    )
-      
+    - [gtk.types.AccessibleRole.Meter]
+    - [gtk.types.AccessibleRole.ProgressBar]
+    - [gtk.types.AccessibleRole.Scrollbar]
+    - [gtk.types.AccessibleRole.Slider]
+    - [gtk.types.AccessibleRole.SpinButton]
+    
     If that is not the case, a warning will be issued at run time.
     
     In addition to this interface, its implementers are expected to provide the
     correct values for the following properties:
     
-    $(LIST
-      * [gtk.types.AccessibleProperty.ValueMax]
-      * [gtk.types.AccessibleProperty.ValueMin]
-      * [gtk.types.AccessibleProperty.ValueNow]
-      * [gtk.types.AccessibleProperty.ValueText]
-    )
+    - [gtk.types.AccessibleProperty.ValueMax]
+    - [gtk.types.AccessibleProperty.ValueMin]
+    - [gtk.types.AccessibleProperty.ValueNow]
+    - [gtk.types.AccessibleProperty.ValueText]
 */
 struct GtkAccessibleRange;
 
@@ -6215,25 +6209,23 @@ struct GtkBuildableParser
     [gtk.builder.Builder] can parse textual representations for the most common
     property types:
     
-    $(LIST
-      * characters
-      * strings
-      * integers
-      * floating-point numbers
-      * booleans (strings like “TRUE”, “t”, “yes”, “y”, “1” are interpreted
-        as true values, strings like “FALSE”, “f”, “no”, “n”, “0” are interpreted
-        as false values)
-      * enumeration types (can be specified by their full C identifier their short
-        name used when registering the enumeration type, or their integer value)
-      * flag types (can be specified by their C identifier, short name, integer
-        value, and optionally combined with “|” for bitwise OR, e.g.
-        “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase”)
-      * colors (in a format understood by [gdk.rgba.RGBA.parse])
-      * [glib.variant.Variant] (can be specified in the format understood by
-         [glib.variant.Variant.parse])
-      * pixbufs (can be specified as a filename of an image file to load)
-    )
-      
+    - characters
+    - strings
+    - integers
+    - floating-point numbers
+    - booleans (strings like “TRUE”, “t”, “yes”, “y”, “1” are interpreted
+      as true values, strings like “FALSE”, “f”, “no”, “n”, “0” are interpreted
+      as false values)
+    - enumeration types (can be specified by their full C identifier their short
+      name used when registering the enumeration type, or their integer value)
+    - flag types (can be specified by their C identifier, short name, integer
+      value, and optionally combined with “|” for bitwise OR, e.g.
+      “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase”)
+    - colors (in a format understood by [gdk.rgba.RGBA.parse])
+    - [glib.variant.Variant] (can be specified in the format understood by
+       [glib.variant.Variant.parse])
+    - pixbufs (can be specified as a filename of an image file to load)
+    
     Objects can be referred to by their name and by default refer to
     objects declared in the local XML fragment and objects exposed via
     [gtk.builder.Builder.exposeObject]. In general, [gtk.builder.Builder] allows
@@ -6364,15 +6356,13 @@ struct GtkBuildableParser
     `func@GObject.signal_connect_object` or `func@GObject.signal_connect_data`
     functions:
     
-    $(LIST
-      * “after” matches the `G_CONNECT_AFTER` flag, and will ensure that the
-        handler is called after the default class closure for the signal
-      * “swapped” matches the `G_CONNECT_SWAPPED` flag, and will swap the
-        instance and closure arguments when invoking the signal handler
-      * “object” will bind the signal handler to the lifetime of the object
-        referenced by the attribute
-    )
-      
+    - “after” matches the `G_CONNECT_AFTER` flag, and will ensure that the
+      handler is called after the default class closure for the signal
+    - “swapped” matches the `G_CONNECT_SWAPPED` flag, and will swap the
+      instance and closure arguments when invoking the signal handler
+    - “object” will bind the signal handler to the lifetime of the object
+      referenced by the attribute
+    
     By default "swapped" will be set to "yes" if not specified otherwise, in
     the case where "object" is set, for convenience. A “last_modification_time”
     attribute is also allowed, but it does not have a meaning to the builder.
@@ -8519,14 +8509,12 @@ struct GtkConstraintGuideClass
     
     The definition above will add two constraints to the GtkConstraintLayout:
     
-     $(LIST
-        * a required constraint between the leading edge of "button" and
-          the leading edge of the widget using the constraint layout, plus
-          12 pixels
-        * a strong, constant constraint making the width of "button" greater
-          than, or equal to 250 pixels
-     )
-       
+     - a required constraint between the leading edge of "button" and
+       the leading edge of the widget using the constraint layout, plus
+       12 pixels
+     - a strong, constant constraint making the width of "button" greater
+       than, or equal to 250 pixels
+    
     The "target" and "target-attribute" attributes are required.
     
     The "source" and "source-attribute" attributes of the "constraint"
@@ -8556,17 +8544,15 @@ struct GtkConstraintGuideClass
     
     The "guide" element has the following optional attributes:
     
-      $(LIST
-          * "min-width", "nat-width", and "max-width", describe the minimum,
-            natural, and maximum width of the guide, respectively
-          * "min-height", "nat-height", and "max-height", describe the minimum,
-            natural, and maximum height of the guide, respectively
-          * "strength" describes the strength of the constraint on the natural
-            size of the guide; if not specified, the constraint is assumed to
-            have a medium strength
-          * "name" describes a name for the guide, useful when debugging
-      )
-        
+      - "min-width", "nat-width", and "max-width", describe the minimum,
+        natural, and maximum width of the guide, respectively
+      - "min-height", "nat-height", and "max-height", describe the minimum,
+        natural, and maximum height of the guide, respectively
+      - "strength" describes the strength of the constraint on the natural
+        size of the guide; if not specified, the constraint is assumed to
+        have a medium strength
+      - "name" describes a name for the guide, useful when debugging
+    
     ### Using the Visual Format Language
     
     Complex constraints can be described using a compact syntax called VFL,
@@ -9071,18 +9057,16 @@ struct GtkDragSourceClass;
     It’s essentially a blank widget; you can draw on it. After
     creating a drawing area, the application may want to connect to:
     
-    $(LIST
-      * The [gtk.widget.Widget.realize] signal to take any necessary actions
-        when the widget is instantiated on a particular display.
-        (Create GDK resources in response to this signal.)
-      
-      * The [gtk.drawing_area.DrawingArea.resize] signal to take any necessary
-        actions when the widget changes size.
-      
-      * Call [gtk.drawing_area.DrawingArea.setDrawFunc] to handle redrawing the
-        contents of the widget.
-    )
-      
+    - The [gtk.widget.Widget.realize] signal to take any necessary actions
+      when the widget is instantiated on a particular display.
+      (Create GDK resources in response to this signal.)
+    
+    - The [gtk.drawing_area.DrawingArea.resize] signal to take any necessary
+      actions when the widget changes size.
+    
+    - Call [gtk.drawing_area.DrawingArea.setDrawFunc] to handle redrawing the
+      contents of the widget.
+    
     The following code portion demonstrates using a drawing
     area to display a circle in the normal widget foreground
     color.
@@ -9296,18 +9280,16 @@ struct GtkDropDownClass
     
     [gtk.drop_target.DropTarget] supports more options, such as:
     
-     $(LIST
-        * rejecting potential drops via the [gtk.drop_target.DropTarget.accept] signal
-          and the [gtk.drop_target.DropTarget.reject] function to let other drop
-          targets handle the drop
-        * tracking an ongoing drag operation before the drop via the
-          [gtk.drop_target.DropTarget.enter], [gtk.drop_target.DropTarget.motion] and
-          [gtk.drop_target.DropTarget.leave] signals
-        * configuring how to receive data by setting the
-          [gtk.drop_target.DropTarget.preload] property and listening for its
-          availability via the [gtk.drop_target.DropTarget.value] property
-     )
-       
+     * rejecting potential drops via the [gtk.drop_target.DropTarget.accept] signal
+       and the [gtk.drop_target.DropTarget.reject] function to let other drop
+       targets handle the drop
+     * tracking an ongoing drag operation before the drop via the
+       [gtk.drop_target.DropTarget.enter], [gtk.drop_target.DropTarget.motion] and
+       [gtk.drop_target.DropTarget.leave] signals
+     * configuring how to receive data by setting the
+       [gtk.drop_target.DropTarget.preload] property and listening for its
+       availability via the [gtk.drop_target.DropTarget.value] property
+    
     However, [gtk.drop_target.DropTarget] is ultimately modeled in a synchronous way
     and only supports data transferred via `GType`. If you want full control
     over an ongoing drop, the [gtk.drop_target_async.DropTargetAsync] object gives you
@@ -10231,19 +10213,17 @@ struct GtkExpressionWatch;
     may be a bit confusing at first that these shortcuts come from various
     sources and in various flavours, so lets explain the terminology here:
     
-    $(LIST
-      * Bookmarks: are created by the user, by dragging folders from the
-        right pane to the left pane, or by using the “Add”. Bookmarks
-        can be renamed and deleted by the user.
-      
-      * Shortcuts: can be provided by the application. For example, a Paint
-        program may want to add a shortcut for a Clipart folder. Shortcuts
-        cannot be modified by the user.
-      
-      * Volumes: are provided by the underlying filesystem abstraction. They are
-        the “roots” of the filesystem.
-    )
-      
+    - Bookmarks: are created by the user, by dragging folders from the
+      right pane to the left pane, or by using the “Add”. Bookmarks
+      can be renamed and deleted by the user.
+    
+    - Shortcuts: can be provided by the application. For example, a Paint
+      program may want to add a shortcut for a Clipart folder. Shortcuts
+      cannot be modified by the user.
+    
+    - Volumes: are provided by the underlying filesystem abstraction. They are
+      the “roots” of the filesystem.
+    
     # File Names and Encodings
     
     When the user is finished selecting files in a [gtk.file_chooser.FileChooser], your
@@ -10375,19 +10355,17 @@ struct GtkFileChooser;
     
     There are various cases in which you may need to use a [gtk.file_chooser_dialog.FileChooserDialog]:
     
-    $(LIST
-      * To select a file for opening, use [gtk.types.FileChooserAction.Open].
-      
-      * To save a file for the first time, use [gtk.types.FileChooserAction.Save],
-        and suggest a name such as “Untitled” with
-        [gtk.file_chooser.FileChooser.setCurrentName].
-      
-      * To save a file under a different name, use [gtk.types.FileChooserAction.Save],
-        and set the existing file with [gtk.file_chooser.FileChooser.setFile].
-      
-      * To choose a folder instead of a filem use [gtk.types.FileChooserAction.SelectFolder].
-    )
-      
+    - To select a file for opening, use [gtk.types.FileChooserAction.Open].
+    
+    - To save a file for the first time, use [gtk.types.FileChooserAction.Save],
+      and suggest a name such as “Untitled” with
+      [gtk.file_chooser.FileChooser.setCurrentName].
+    
+    - To save a file under a different name, use [gtk.types.FileChooserAction.Save],
+      and set the existing file with [gtk.file_chooser.FileChooser.setFile].
+    
+    - To choose a folder instead of a filem use [gtk.types.FileChooserAction.SelectFolder].
+    
     In general, you should only cause the file chooser to show a specific
     folder when it is appropriate to use [gtk.file_chooser.FileChooser.setFile],
     i.e. when you are doing a “Save As” command and you already have a file
@@ -10421,13 +10399,11 @@ struct GtkFileChooser;
     its “accept”-type action, e.g. an “Open” or “Save” button,
     will have one of the following response codes:
     
-    $(LIST
-      * [gtk.types.ResponseType.Accept]
-      * [gtk.types.ResponseType.Ok]
-      * [gtk.types.ResponseType.Yes]
-      * [gtk.types.ResponseType.Apply]
-    )
-      
+    - [gtk.types.ResponseType.Accept]
+    - [gtk.types.ResponseType.Ok]
+    - [gtk.types.ResponseType.Yes]
+    - [gtk.types.ResponseType.Apply]
+    
     This is because [gtk.file_chooser_dialog.FileChooserDialog] must intercept responses and switch
     to folders if appropriate, rather than letting the dialog terminate — the
     implementation uses these known response codes to know which responses can
@@ -10573,10 +10549,8 @@ struct GtkFileChooserDialog;
     used. It supports many of the features that [gtk.file_chooser.FileChooser] has, but
     there are some things it does not handle:
     
-    $(LIST
-      * Any [gtk.file_filter.FileFilter] added using a mimetype
-    )
-      
+    * Any [gtk.file_filter.FileFilter] added using a mimetype
+    
     If any of these features are used the regular [gtk.file_chooser_dialog.FileChooserDialog]
     will be used in place of the native one.
     
@@ -10593,9 +10567,7 @@ struct GtkFileChooserDialog;
     native file chooser dialogs. Some features provided by [gtk.file_chooser.FileChooser]
     are not supported:
     
-    $(LIST
-      * Shortcut folders.
-    )
+    * Shortcut folders.
 
     Deprecated: Use [gtk.file_dialog.FileDialog] instead
 */
@@ -10813,19 +10785,17 @@ struct GtkFilterListModelClass
     things will result in truncated text, overlapping widgets, and
     other display bugs:
     
-    $(LIST
-      * Themes, which may change widget sizes.
-      
-      * Fonts other than the one you used to write the app will of course
-        change the size of widgets containing text; keep in mind that
-        users may use a larger font because of difficulty reading the
-        default, or they may be using a different OS that provides different fonts.
-      
-      * Translation of text into other languages changes its size. Also,
-        display of non-English text will use a different font in many
-        cases.
-    )
-      
+    - Themes, which may change widget sizes.
+    
+    - Fonts other than the one you used to write the app will of course
+      change the size of widgets containing text; keep in mind that
+      users may use a larger font because of difficulty reading the
+      default, or they may be using a different OS that provides different fonts.
+    
+    - Translation of text into other languages changes its size. Also,
+      display of non-English text will use a different font in many
+      cases.
+    
     In addition, [gtk.fixed.Fixed] does not pay attention to text direction and
     thus may produce unwanted results if your app is run under right-to-left
     languages such as Hebrew or Arabic. That is: normally GTK will order
@@ -10869,20 +10839,18 @@ struct GtkFixedClass
     internally so that application developers don't need to do it. Specifically,
     widgets positioned in a fixed layout manager will need to take into account:
     
-    $(LIST
-      * Themes, which may change widget sizes.
-      
-      * Fonts other than the one you used to write the app will of course
-        change the size of widgets containing text; keep in mind that
-        users may use a larger font because of difficulty reading the
-        default, or they may be using a different OS that provides different
-        fonts.
-      
-      * Translation of text into other languages changes its size. Also,
-        display of non-English text will use a different font in many
-        cases.
-    )
-      
+    - Themes, which may change widget sizes.
+    
+    - Fonts other than the one you used to write the app will of course
+      change the size of widgets containing text; keep in mind that
+      users may use a larger font because of difficulty reading the
+      default, or they may be using a different OS that provides different
+      fonts.
+    
+    - Translation of text into other languages changes its size. Also,
+      display of non-English text will use a different font in many
+      cases.
+    
     In addition, [gtk.fixed_layout.FixedLayout] does not pay attention to text direction and
     thus may produce unwanted results if your app is run under right-to-left
     languages such as Hebrew or Arabic. That is: normally GTK will order
@@ -11397,12 +11365,10 @@ struct GtkGLAreaClass
     
     A recognized gesture will then emit the following signals:
     
-    $(LIST
-      * [gtk.gesture.Gesture.begin] when the gesture is recognized.
-      * [gtk.gesture.Gesture.update], whenever an input event is processed.
-      * [gtk.gesture.Gesture.end] when the gesture is no longer recognized.
-    )
-      
+    - [gtk.gesture.Gesture.begin] when the gesture is recognized.
+    - [gtk.gesture.Gesture.update], whenever an input event is processed.
+    - [gtk.gesture.Gesture.end] when the gesture is no longer recognized.
+    
     ## Event propagation
     
     In order to receive events, a gesture needs to set a propagation phase
@@ -11444,15 +11410,13 @@ struct GtkGLAreaClass
     If a sequence enters in the [gtk.types.EventSequenceState.Claimed] state, the gesture
     group will grab all interaction on the sequence, by:
     
-    $(LIST
-      * Setting the same sequence to [gtk.types.EventSequenceState.Denied] on every other
-        gesture group within the widget, and every gesture on parent widgets
-        in the propagation chain.
-      * Emitting [gtk.gesture.Gesture.cancel] on every gesture in widgets
-        underneath in the propagation chain.
-      * Stopping event propagation after the gesture group handles the event.
-    )
-      
+    - Setting the same sequence to [gtk.types.EventSequenceState.Denied] on every other
+      gesture group within the widget, and every gesture on parent widgets
+      in the propagation chain.
+    - Emitting [gtk.gesture.Gesture.cancel] on every gesture in widgets
+      underneath in the propagation chain.
+    - Stopping event propagation after the gesture group handles the event.
+    
     Note: if a sequence is set early to [gtk.types.EventSequenceState.Claimed] on
     [gdk.types.EventType.TouchBegin]/[gdk.types.EventType.ButtonPress] (so those events are captured before
     reaching the event widget, this implies [gtk.types.PropagationPhase.Capture]), one similar
@@ -11470,10 +11434,8 @@ struct GtkGLAreaClass
     touchpad gesture events. The only precautions users of [gtk.gesture.Gesture] should
     do to enable this support are:
     
-    $(LIST
-      * If the gesture has [gtk.types.PropagationPhase.None], ensuring events of type
-        [gdk.types.EventType.TouchpadSwipe] and [gdk.types.EventType.TouchpadPinch] are handled by the [gtk.gesture.Gesture]
-    )
+    - If the gesture has [gtk.types.PropagationPhase.None], ensuring events of type
+      [gdk.types.EventType.TouchpadSwipe] and [gdk.types.EventType.TouchpadPinch] are handled by the [gtk.gesture.Gesture]
 */
 struct GtkGesture;
 
@@ -11645,20 +11607,18 @@ struct GtkGestureZoomClass;
     
     Numerous factors can prohibit graphics offload:
     
-    $(LIST
-      * Unsupported platforms. Currently, graphics offload only works on Linux with Wayland.
-      
-      * Clipping, such as rounded corners that cause the video content to not be rectangular
-      
-      * Unsupported dmabuf formats (see [gdk.display.Display.getDmabufFormats])
-      
-      * Translucent video content (content with an alpha channel, even if it isn't used)
-      
-      * Transforms that are more complex than translations and scales
-      
-      * Filters such as opacity, grayscale or similar
-    )
-      
+    - Unsupported platforms. Currently, graphics offload only works on Linux with Wayland.
+    
+    - Clipping, such as rounded corners that cause the video content to not be rectangular
+    
+    - Unsupported dmabuf formats (see [gdk.display.Display.getDmabufFormats])
+    
+    - Translucent video content (content with an alpha channel, even if it isn't used)
+    
+    - Transforms that are more complex than translations and scales
+    
+    - Filters such as opacity, grayscale or similar
+    
     To investigate problems related graphics offload, GTK offers debug flags to print
     out information about graphics offload and dmabuf use:
     
@@ -14018,12 +13978,10 @@ struct GtkNoSelectionClass
     
     [gtk.notebook.Notebook] uses the following roles:
     
-     $(LIST
-        * [gtk.types.AccessibleRole.Group] for the notebook widget
-        * [gtk.types.AccessibleRole.TabList] for the list of tabs
-        * [gtk.types.AccessibleRole.Tab] role for each tab
-        * [gtk.types.AccessibleRole.TabPanel] for each page
-     )
+     - [gtk.types.AccessibleRole.Group] for the notebook widget
+     - [gtk.types.AccessibleRole.TabList] for the list of tabs
+     - [gtk.types.AccessibleRole.Tab] role for each tab
+     - [gtk.types.AccessibleRole.TabPanel] for each page
 */
 struct GtkNotebook;
 
@@ -14679,42 +14637,36 @@ struct GtkPopoverClass
     
     The following attributes are used when constructing menu items:
     
-    $(LIST
-      * "label": a user-visible string to display
-      * "use-markup": whether the text in the menu item includes [Pango markup](https://docs.gtk.org/Pango/pango_markup.html)
-      * "action": the prefixed name of the action to trigger
-      * "target": the parameter to use when activating the action
-      * "icon" and "verb-icon": names of icons that may be displayed
-      * "submenu-action": name of an action that may be used to track
-           whether a submenu is open
-      * "hidden-when": a string used to determine when the item will be hidden.
-           Possible values include "action-disabled", "action-missing", "macos-menubar".
-           This is mainly useful for exported menus, see [gtk.application.Application.setMenubar].
-      * "custom": a string used to match against the ID of a custom child added with
-           [gtk.popover_menu.PopoverMenu.addChild], [gtk.popover_menu_bar.PopoverMenuBar.addChild],
-           or in the ui file with `<child type="ID">`.
-    )
-      
+    - "label": a user-visible string to display
+    - "use-markup": whether the text in the menu item includes [Pango markup](https://docs.gtk.org/Pango/pango_markup.html)
+    - "action": the prefixed name of the action to trigger
+    - "target": the parameter to use when activating the action
+    - "icon" and "verb-icon": names of icons that may be displayed
+    - "submenu-action": name of an action that may be used to track
+         whether a submenu is open
+    - "hidden-when": a string used to determine when the item will be hidden.
+         Possible values include "action-disabled", "action-missing", "macos-menubar".
+         This is mainly useful for exported menus, see [gtk.application.Application.setMenubar].
+    - "custom": a string used to match against the ID of a custom child added with
+         [gtk.popover_menu.PopoverMenu.addChild], [gtk.popover_menu_bar.PopoverMenuBar.addChild],
+         or in the ui file with `<child type="ID">`.
+    
     The following attributes are used when constructing sections:
     
-    $(LIST
-      * "label": a user-visible string to use as section heading
-      * "display-hint": a string used to determine special formatting for the section.
-          Possible values include "horizontal-buttons", "circular-buttons" and
-          "inline-buttons". They all indicate that section should be
-          displayed as a horizontal row of buttons.
-      * "text-direction": a string used to determine the [gtk.types.TextDirection] to use
-          when "display-hint" is set to "horizontal-buttons". Possible values
-          include "rtl", "ltr", and "none".
-    )
-      
+    - "label": a user-visible string to use as section heading
+    - "display-hint": a string used to determine special formatting for the section.
+        Possible values include "horizontal-buttons", "circular-buttons" and
+        "inline-buttons". They all indicate that section should be
+        displayed as a horizontal row of buttons.
+    - "text-direction": a string used to determine the [gtk.types.TextDirection] to use
+        when "display-hint" is set to "horizontal-buttons". Possible values
+        include "rtl", "ltr", and "none".
+    
     The following attributes are used when constructing submenus:
     
-    $(LIST
-      * "label": a user-visible string to display
-      * "icon": icon name to display
-    )
-      
+    - "label": a user-visible string to display
+    - "icon": icon name to display
+    
     Menu items will also show accelerators, which are usually associated
     with actions via [gtk.application.Application.setAccelsForAction],
     [gtk.widget_class.WidgetClass.addBindingAction] or
@@ -15138,12 +15090,10 @@ struct GtkPrintSetup;
     
     [gtk.print_unix_dialog.PrintUnixDialog] uses the following response values:
     
-    $(LIST
-      * [gtk.types.ResponseType.Ok]: for the “Print” button
-      * [gtk.types.ResponseType.Apply]: for the “Preview” button
-      * [gtk.types.ResponseType.Cancel]: for the “Cancel” button
-    )
-      
+    - [gtk.types.ResponseType.Ok]: for the “Print” button
+    - [gtk.types.ResponseType.Apply]: for the “Preview” button
+    - [gtk.types.ResponseType.Cancel]: for the “Cancel” button
+    
     # GtkPrintUnixDialog as GtkBuildable
     
     The [gtk.print_unix_dialog.PrintUnixDialog] implementation of the [gtk.buildable.Buildable] interface
@@ -15687,26 +15637,24 @@ struct GtkScrollInfo;
     
     All scrollable widgets should do the following.
     
-    $(LIST
-      * When a parent widget sets the scrollable child widget’s adjustments,
-        the widget should connect to the `signal@Gtk.Adjustment::value-changed`
-        signal. The child widget should then populate the adjustments’ properties
-        as soon as possible, which usually means queueing an allocation right away
-        and populating the properties in the `vfunc@Gtk.Widget.size_allocate`
-        implementation.
-      
-      * Because its preferred size is the size for a fully expanded widget,
-        the scrollable widget must be able to cope with underallocations.
-        This means that it must accept any value passed to its
-        `vfunc@Gtk.Widget.size_allocate` implementation.
-      
-      * When the parent allocates space to the scrollable child widget,
-        the widget must ensure the adjustments’ property values are correct and up
-        to date, for example using [gtk.adjustment.Adjustment.configure].
-      
-      * When any of the adjustments emits the `signal@Gtk.Adjustment::value-changed`
-        signal, the scrollable widget should scroll its contents.
-    )
+    - When a parent widget sets the scrollable child widget’s adjustments,
+      the widget should connect to the `signal@Gtk.Adjustment::value-changed`
+      signal. The child widget should then populate the adjustments’ properties
+      as soon as possible, which usually means queueing an allocation right away
+      and populating the properties in the `vfunc@Gtk.Widget.size_allocate`
+      implementation.
+    
+    - Because its preferred size is the size for a fully expanded widget,
+      the scrollable widget must be able to cope with underallocations.
+      This means that it must accept any value passed to its
+      `vfunc@Gtk.Widget.size_allocate` implementation.
+    
+    - When the parent allocates space to the scrollable child widget,
+      the widget must ensure the adjustments’ property values are correct and up
+      to date, for example using [gtk.adjustment.Adjustment.configure].
+    
+    - When any of the adjustments emits the `signal@Gtk.Adjustment::value-changed`
+      signal, the scrollable widget should scroll its contents.
 */
 struct GtkScrollable;
 
@@ -16189,19 +16137,17 @@ struct GtkShortcut;
     
     GTK provides various actions:
     
-     $(LIST
-        * [gtk.mnemonic_action.MnemonicAction]: a shortcut action that calls
-          [gtk.widget.Widget.mnemonicActivate]
-        * [gtk.callback_action.CallbackAction]: a shortcut action that invokes
-          a given callback
-        * [gtk.signal_action.SignalAction]: a shortcut action that emits a
-          given signal
-        * [gtk.activate_action.ActivateAction]: a shortcut action that calls
-          [gtk.widget.Widget.activate]
-        * [gtk.named_action.NamedAction]: a shortcut action that calls
-          [gtk.widget.Widget.activateAction]
-        * [gtk.nothing_action.NothingAction]: a shortcut action that does nothing
-     )
+     - [gtk.mnemonic_action.MnemonicAction]: a shortcut action that calls
+       [gtk.widget.Widget.mnemonicActivate]
+     - [gtk.callback_action.CallbackAction]: a shortcut action that invokes
+       a given callback
+     - [gtk.signal_action.SignalAction]: a shortcut action that emits a
+       given signal
+     - [gtk.activate_action.ActivateAction]: a shortcut action that calls
+       [gtk.widget.Widget.activate]
+     - [gtk.named_action.NamedAction]: a shortcut action that calls
+       [gtk.widget.Widget.activateAction]
+     - [gtk.nothing_action.NothingAction]: a shortcut action that does nothing
 */
 struct GtkShortcutAction;
 
@@ -17931,23 +17877,21 @@ struct GtkToggleButtonClass
     contents per [gtk.tree_view.TreeView] row or cell, you will have to do a
     little more work:
     
-    $(LIST
-      * Set the `property@Gtk.Widget:has-tooltip` property to true.
-        This will make GTK monitor the widget for motion and related events
-        which are needed to determine when and where to show a tooltip.
-      
-      * Connect to the `signal@Gtk.Widget::query-tooltip` signal.
-        This signal will be emitted when a tooltip is supposed to be shown.
-        One of the arguments passed to the signal handler is a [gtk.tooltip.Tooltip]
-        object. This is the object that we are about to display as a tooltip,
-        and can be manipulated in your callback using functions like
-        [gtk.tooltip.Tooltip.setIcon]. There are functions for setting
-        the tooltip’s markup, setting an image from a named icon, or even
-        putting in a custom widget.
-      
-      * Return true from your ::query-tooltip handler. This causes the tooltip
-        to be show. If you return false, it will not be shown.
-    )
+    - Set the `property@Gtk.Widget:has-tooltip` property to true.
+      This will make GTK monitor the widget for motion and related events
+      which are needed to determine when and where to show a tooltip.
+    
+    - Connect to the `signal@Gtk.Widget::query-tooltip` signal.
+      This signal will be emitted when a tooltip is supposed to be shown.
+      One of the arguments passed to the signal handler is a [gtk.tooltip.Tooltip]
+      object. This is the object that we are about to display as a tooltip,
+      and can be manipulated in your callback using functions like
+      [gtk.tooltip.Tooltip.setIcon]. There are functions for setting
+      the tooltip’s markup, setting an image from a named icon, or even
+      putting in a custom widget.
+    
+    - Return true from your ::query-tooltip handler. This causes the tooltip
+      to be show. If you return false, it will not be shown.
 */
 struct GtkTooltip;
 
@@ -18349,21 +18293,19 @@ struct GtkTreeListRowSorterClass
     When working with reference counting, the following rules must be taken
     into account:
     
-    $(LIST
-      * Never take a reference on a node without owning a reference on its parent.
-        This means that all parent nodes of a referenced node must be referenced
-        as well.
-      
-      * Outstanding references on a deleted node are not released. This is not
-        possible because the node has already been deleted by the time the
-        row-deleted signal is received.
-      
-      * Models are not obligated to emit a signal on rows of which none of its
-        siblings are referenced. To phrase this differently, signals are only
-        required for levels in which nodes are referenced. For the root level
-        however, signals must be emitted at all times (however the root level
-        is always referenced when any view is attached).
-    )
+    - Never take a reference on a node without owning a reference on its parent.
+      This means that all parent nodes of a referenced node must be referenced
+      as well.
+    
+    - Outstanding references on a deleted node are not released. This is not
+      possible because the node has already been deleted by the time the
+      row-deleted signal is received.
+    
+    - Models are not obligated to emit a signal on rows of which none of its
+      siblings are referenced. To phrase this differently, signals are only
+      required for levels in which nodes are referenced. For the root level
+      however, signals must be emitted at all times (however the root level
+      is always referenced when any view is attached).
 
     Deprecated: Use [gio.list_model.ListModel] instead
 */
@@ -18375,23 +18317,21 @@ struct GtkTreeModel;
     A [gtk.tree_model_filter.TreeModelFilter] is a tree model which wraps another tree model,
     and can do the following things:
     
-    $(LIST
-      * Filter specific rows, based on data from a “visible column”, a column
-        storing booleans indicating whether the row should be filtered or not,
-        or based on the return value of a “visible function”, which gets a
-        model, iter and user_data and returns a boolean indicating whether the
-        row should be filtered or not.
-      
-      * Modify the “appearance” of the model, using a modify function.
-        This is extremely powerful and allows for just changing some
-        values and also for creating a completely different model based
-        on the given child model.
-      
-      * Set a different root node, also known as a “virtual root”. You can pass
-        in a [gtk.tree_path.TreePath] indicating the root node for the filter at construction
-        time.
-    )
-      
+    - Filter specific rows, based on data from a “visible column”, a column
+      storing booleans indicating whether the row should be filtered or not,
+      or based on the return value of a “visible function”, which gets a
+      model, iter and user_data and returns a boolean indicating whether the
+      row should be filtered or not.
+    
+    - Modify the “appearance” of the model, using a modify function.
+      This is extremely powerful and allows for just changing some
+      values and also for creating a completely different model based
+      on the given child model.
+    
+    - Set a different root node, also known as a “virtual root”. You can pass
+      in a [gtk.tree_path.TreePath] indicating the root node for the filter at construction
+      time.
+    
     The basic API is similar to [gtk.tree_model_sort.TreeModelSort]. For an example on its usage,
     see the section on [gtk.tree_model_sort.TreeModelSort].
     
@@ -18878,15 +18818,13 @@ struct GtkTreeStorePrivate;
     
     ![](tree-view-coordinates.png)
     
-    $(LIST
-      * Widget coordinates: Coordinates relative to the widget (usually `widget->window`).
-      
-      * Bin window coordinates: Coordinates relative to the window that GtkTreeView renders to.
-      
-      * Tree coordinates: Coordinates relative to the entire scrollable area of GtkTreeView. These
-        coordinates start at (0, 0) for row 0 of the tree.
-    )
-      
+    - Widget coordinates: Coordinates relative to the widget (usually `widget->window`).
+    
+    - Bin window coordinates: Coordinates relative to the window that GtkTreeView renders to.
+    
+    - Tree coordinates: Coordinates relative to the entire scrollable area of GtkTreeView. These
+      coordinates start at (0, 0) for row 0 of the tree.
+    
     Several functions are available for converting between the different
     coordinate systems.  The most common translations are between widget and bin
     window coordinates and between bin window and tree coordinates. For the
@@ -19135,11 +19073,9 @@ struct GtkVolumeButton
     Height-for-width geometry management is implemented in GTK by way
     of two virtual methods:
     
-    $(LIST
-      * `vfunc@Gtk.Widget.get_request_mode`
-      * `vfunc@Gtk.Widget.measure`
-    )
-      
+    - `vfunc@Gtk.Widget.get_request_mode`
+    - `vfunc@Gtk.Widget.measure`
+    
     There are some important things to keep in mind when implementing
     height-for-width and when using it in widget implementations.
     
@@ -19798,12 +19734,10 @@ struct GtkWidgetPrivate;
     # Actions
     
     [gtk.window.Window] defines a set of built-in actions:
-    $(LIST
-      * `default.activate`: Activate the default widget.
-      * `window.minimize`: Minimize the window.
-      * `window.toggle-maximized`: Maximize or restore the window.
-      * `window.close`: Close the window.
-    )
+    - `default.activate`: Activate the default widget.
+    - `window.minimize`: Minimize the window.
+    - `window.toggle-maximized`: Maximize or restore the window.
+    - `window.close`: Close the window.
 */
 struct GtkWindow
 {

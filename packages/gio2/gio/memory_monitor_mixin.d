@@ -21,16 +21,14 @@ public import gobject.object;
     
     Possible actions to take when the signal is received are:
     
-     $(LIST
-        * Free caches
-        * Save files that haven’t been looked at in a while to disk, ready to be reopened when needed
-        * Run a garbage collection cycle
-        * Try and compress fragmented allocations
-        * Exit on idle if the process has no reason to stay around
-        * Call [`malloc_trim(3)`](man:malloc_trim(3)) to return cached heap pages to
-          the kernel (if supported by your libc)
-     )
-       
+     - Free caches
+     - Save files that haven’t been looked at in a while to disk, ready to be reopened when needed
+     - Run a garbage collection cycle
+     - Try and compress fragmented allocations
+     - Exit on idle if the process has no reason to stay around
+     - Call [`malloc_trim(3)`](man:malloc_trim(3)) to return cached heap pages to
+       the kernel (if supported by your libc)
+    
     Note that some actions may not always improve system performance, and so
     should be profiled for your application. `malloc_trim()`, for example, may
     make future heap allocations slower (due to releasing cached heap pages back
@@ -77,7 +75,7 @@ template MemoryMonitorT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.types.MemoryMonitorWarningLevel level, gio.memory_monitor.MemoryMonitor memoryMonitor))
+          `void callback(gio.types.MemoryMonitorWarningLevel level, gio.memory_monitor.MemoryMonitor memoryMonitor)`
   
           `level` the #GMemoryMonitorWarningLevel warning level (optional)
   

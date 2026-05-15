@@ -344,12 +344,10 @@ class Builder : gobject.object.ObjectWrap
       
       This function must be followed by of these functions:
       
-       $(LIST
-          * [json.builder.Builder.addValue], to add a scalar value to the member
-          * [json.builder.Builder.beginObject], to add an object to the member
-          * [json.builder.Builder.beginArray], to add an array to the member
-       )
-         
+       - [json.builder.Builder.addValue], to add a scalar value to the member
+       - [json.builder.Builder.beginObject], to add an object to the member
+       - [json.builder.Builder.beginArray], to add an array to the member
+      
       This function can only be called within an open object.
   
       Params:

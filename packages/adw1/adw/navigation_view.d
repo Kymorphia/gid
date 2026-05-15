@@ -77,20 +77,16 @@ import gtk.widget;
     [adw.navigation_view.NavigationView] supports the following shortcuts for going to the
     previous page:
     
-    $(LIST
-      * <kbd>Escape</kbd> (unless `property@NavigationView:pop-on-escape` is set to
-        `FALSE`)
-      * <kbd>Alt</kbd>+<kbd>←</kbd>
-      * Back mouse button
-    )
-      
+    - <kbd>Escape</kbd> (unless `property@NavigationView:pop-on-escape` is set to
+      `FALSE`)
+    - <kbd>Alt</kbd>+<kbd>←</kbd>
+    - Back mouse button
+    
     Additionally, it supports interactive gestures:
     
-    $(LIST
-      * One-finger swipe towards the right on touchscreens
-      * Scrolling towards the right on touchpads (usually two-finger swipe)
-    )
-      
+    - One-finger swipe towards the right on touchscreens
+    - Scrolling towards the right on touchpads (usually two-finger swipe)
+    
     These gestures have transitions enabled regardless of the
     `property@NavigationView:animate-transitions` value.
     
@@ -98,12 +94,10 @@ import gtk.widget;
     navigation stack via connecting to the `signal@NavigationView::get-next-page`
     signal, in that case the following shortcuts are supported:
     
-    $(LIST
-      * <kbd>Alt</kbd>+<kbd>→</kbd>
-      * Forward mouse button
-      * Swipe/scrolling towards the left
-    )
-      
+    - <kbd>Alt</kbd>+<kbd>→</kbd>
+    - Forward mouse button
+    - Swipe/scrolling towards the left
+    
     For right-to-left locales, the gestures and shortcuts are reversed.
     
     `property@NavigationPage:can-pop` can be used to disable them, along with the
@@ -114,14 +108,10 @@ import gtk.widget;
     [adw.navigation_view.NavigationView] defines actions for controlling the navigation stack.
     actions for controlling the navigation stack:
     
-    $(LIST
-      * `navigation.push` takes a string parameter specifying the tag of the page to
-    )
+    - `navigation.push` takes a string parameter specifying the tag of the page to
     push, and is equivalent to calling [adw.navigation_view.NavigationView.pushByTag].
     
-    $(LIST
-      * `navigation.pop` doesn't take any parameters and pops the current page from
-    )
+    - `navigation.pop` doesn't take any parameters and pops the current page from
     the navigation stack, equivalent to calling [adw.navigation_view.NavigationView.pop].
     
     ## [adw.navigation_view.NavigationView] as [gtk.buildable.Buildable]
@@ -652,7 +642,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D adw.navigation_page.NavigationPage callback(adw.navigation_view.NavigationView navigationView))
+          `adw.navigation_page.NavigationPage callback(adw.navigation_view.NavigationView navigationView)`
   
           `navigationView` the instance the signal is connected to (optional)
   
@@ -698,7 +688,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.navigation_page.NavigationPage page, adw.navigation_view.NavigationView navigationView))
+          `void callback(adw.navigation_page.NavigationPage page, adw.navigation_view.NavigationView navigationView)`
   
           `page` the popped page (optional)
   
@@ -743,7 +733,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.navigation_view.NavigationView navigationView))
+          `void callback(adw.navigation_view.NavigationView navigationView)`
   
           `navigationView` the instance the signal is connected to (optional)
   
@@ -782,7 +772,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.navigation_view.NavigationView navigationView))
+          `void callback(adw.navigation_view.NavigationView navigationView)`
   
           `navigationView` the instance the signal is connected to (optional)
   

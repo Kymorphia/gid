@@ -26,20 +26,18 @@ import gstaudio.types;
     
     ## Configuration
     
-      $(LIST
-          * Initially, GstAudioEncoder calls @start when the encoder element
-            is activated, which allows subclass to perform any global setup.
-        
-          * GstAudioEncoder calls @set_format to inform subclass of the format
-            of input audio data that it is about to receive.  Subclass should
-            setup for encoding and configure various base class parameters
-            appropriately, notably those directing desired input data handling.
-            While unlikely, it might be called more than once, if changing input
-            parameters require reconfiguration.
-        
-          * GstAudioEncoder calls @stop at end of all processing.
-      )
-        
+      * Initially, GstAudioEncoder calls @start when the encoder element
+        is activated, which allows subclass to perform any global setup.
+    
+      * GstAudioEncoder calls @set_format to inform subclass of the format
+        of input audio data that it is about to receive.  Subclass should
+        setup for encoding and configure various base class parameters
+        appropriately, notably those directing desired input data handling.
+        While unlikely, it might be called more than once, if changing input
+        parameters require reconfiguration.
+    
+      * GstAudioEncoder calls @stop at end of all processing.
+    
     As of configuration stage, and throughout processing, GstAudioEncoder
     maintains various parameters that provide required context,
     e.g. describing the format of input audio data.
@@ -48,28 +46,24 @@ import gstaudio.types;
     
     ## Data processing
     
-        $(LIST
-              * Base class gathers input sample data (as directed by the context's
-                frame_samples and frame_max) and provides this to subclass' @handle_frame.
-              * If codec processing results in encoded data, subclass should call
-                [gstaudio.audio_encoder.AudioEncoder.finishFrame] to have encoded data pushed
-                downstream. Alternatively, it might also call
-                [gstaudio.audio_encoder.AudioEncoder.finishFrame] (with a NULL buffer and some number of
-                dropped samples) to indicate dropped (non-encoded) samples.
-              * Just prior to actually pushing a buffer downstream,
-                it is passed to @pre_push.
-              * During the parsing process GstAudioEncoderClass will handle both
-                srcpad and sinkpad events. Sink events will be passed to subclass
-                if @event callback has been provided.
-        )
-          
+        * Base class gathers input sample data (as directed by the context's
+          frame_samples and frame_max) and provides this to subclass' @handle_frame.
+        * If codec processing results in encoded data, subclass should call
+          [gstaudio.audio_encoder.AudioEncoder.finishFrame] to have encoded data pushed
+          downstream. Alternatively, it might also call
+          [gstaudio.audio_encoder.AudioEncoder.finishFrame] (with a NULL buffer and some number of
+          dropped samples) to indicate dropped (non-encoded) samples.
+        * Just prior to actually pushing a buffer downstream,
+          it is passed to @pre_push.
+        * During the parsing process GstAudioEncoderClass will handle both
+          srcpad and sinkpad events. Sink events will be passed to subclass
+          if @event callback has been provided.
+    
     ## Shutdown phase
     
-      $(LIST
-          * GstAudioEncoder class calls @stop to inform the subclass that data
-            parsing will be stopped.
-      )
-        
+      * GstAudioEncoder class calls @stop to inform the subclass that data
+        parsing will be stopped.
+    
     Subclass is responsible for providing pad template caps for
     source and sink pads. The pads need to be named "sink" and "src". It also
     needs to set the fixed caps on srcpad, when the format is ensured.  This
@@ -108,17 +102,15 @@ import gstaudio.types;
     
     Things that subclass need to take care of:
     
-      $(LIST
-          * Provide pad templates
-          * Set source pad caps when appropriate
-          * Inform base class of buffer processing needs using context's
-             frame_samples and frame_bytes.
-          * Set user-configurable properties to sane defaults for format and
-             implementing codec at hand, e.g. those controlling timestamp behaviour
-             and discontinuity processing.
-          * Accept data in @handle_frame and provide encoded results to
-             [gstaudio.audio_encoder.AudioEncoder.finishFrame].
-      )
+      * Provide pad templates
+      * Set source pad caps when appropriate
+      * Inform base class of buffer processing needs using context's
+         frame_samples and frame_bytes.
+      * Set user-configurable properties to sane defaults for format and
+         implementing codec at hand, e.g. those controlling timestamp behaviour
+         and discontinuity processing.
+      * Accept data in @handle_frame and provide encoded results to
+         [gstaudio.audio_encoder.AudioEncoder.finishFrame].
 */
 class AudioEncoder : gst.element.Element, gst.preset.Preset
 {

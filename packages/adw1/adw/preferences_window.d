@@ -84,12 +84,10 @@ class PreferencesWindow : adw.window.Window
         
         The supported gestures are:
         
-        $(LIST
-          * One-finger swipe on touchscreens
-          * Horizontal scrolling on touchpads (usually two-finger swipe)
-          * Back mouse button
-        )
-          
+        - One-finger swipe on touchscreens
+        - Horizontal scrolling on touchpads (usually two-finger swipe)
+        - Back mouse button
+        
         The keyboard back key is also supported, as well as the
         <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
         
@@ -112,12 +110,10 @@ class PreferencesWindow : adw.window.Window
           
           The supported gestures are:
           
-          $(LIST
-            * One-finger swipe on touchscreens
-            * Horizontal scrolling on touchpads (usually two-finger swipe)
-            * Back mouse button
-          )
-            
+          - One-finger swipe on touchscreens
+          - Horizontal scrolling on touchpads (usually two-finger swipe)
+          - Back mouse button
+          
           The keyboard back key is also supported, as well as the
           <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
           
@@ -345,12 +341,10 @@ class PreferencesWindow : adw.window.Window
       
       The supported gestures are:
       
-      $(LIST
-        * One-finger swipe on touchscreens
-        * Horizontal scrolling on touchpads (usually two-finger swipe)
-        * Back mouse button
-      )
-        
+      - One-finger swipe on touchscreens
+      - Horizontal scrolling on touchpads (usually two-finger swipe)
+      - Back mouse button
+      
       The keyboard back key is also supported, as well as the
       <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
       
@@ -417,12 +411,10 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           The supported gestures are:
           
-          $(LIST
-            * One-finger swipe on touchscreens
-            * Horizontal scrolling on touchpads (usually two-finger swipe)
-            * Back mouse button
-          )
-            
+          - One-finger swipe on touchscreens
+          - Horizontal scrolling on touchpads (usually two-finger swipe)
+          - Back mouse button
+          
           The keyboard back key is also supported, as well as the
           <kbd>Alt</kbd>+<kbd>←</kbd> shortcut.
           

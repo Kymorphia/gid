@@ -93,7 +93,7 @@ template CellEditableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.cell_editable.CellEditable cellEditable))
+          `void callback(gtk.cell_editable.CellEditable cellEditable)`
   
           `cellEditable` the instance the signal is connected to (optional)
   
@@ -141,7 +141,7 @@ template CellEditableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.cell_editable.CellEditable cellEditable))
+          `void callback(gtk.cell_editable.CellEditable cellEditable)`
   
           `cellEditable` the instance the signal is connected to (optional)
   

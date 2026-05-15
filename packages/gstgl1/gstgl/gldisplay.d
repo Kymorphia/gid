@@ -22,15 +22,13 @@ import gstgl.types;
     
     There are a number of environment variables that influence the choice of
     platform and window system specific functionality.
-    $(LIST
-      * GST_GL_WINDOW influences the window system to use.  Common values are
-        'x11', 'wayland', 'surfaceless', 'win32' or 'cocoa'.
-      * GST_GL_PLATFORM influences the OpenGL platform to use.  Common values are
-        'egl', 'glx', 'wgl' or 'cgl'.
-      * GST_GL_API influences the OpenGL API requested by the OpenGL platform.
-        Common values are 'opengl', 'opengl3' and 'gles2'.
-    )
-      
+    - GST_GL_WINDOW influences the window system to use.  Common values are
+      'x11', 'wayland', 'surfaceless', 'win32' or 'cocoa'.
+    - GST_GL_PLATFORM influences the OpenGL platform to use.  Common values are
+      'egl', 'glx', 'wgl' or 'cgl'.
+    - GST_GL_API influences the OpenGL API requested by the OpenGL platform.
+      Common values are 'opengl', 'opengl3' and 'gles2'.
+    
     > Certain window systems require a special function to be called to
     > initialize threading support.  As this GStreamer GL library does not preclude
     > concurrent access to the windowing system, it is strongly advised that
@@ -311,7 +309,7 @@ class GLDisplay : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gstgl.glcontext.GLContext callback(gstgl.glcontext.GLContext context, gstgl.gldisplay.GLDisplay gLDisplay))
+          `gstgl.glcontext.GLContext callback(gstgl.glcontext.GLContext context, gstgl.gldisplay.GLDisplay gLDisplay)`
   
           `context` other context to share resources with. (optional)
   

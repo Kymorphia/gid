@@ -212,7 +212,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.hyperlink.Hyperlink hyperlink))
+          `void callback(atk.hyperlink.Hyperlink hyperlink)`
   
           `hyperlink` the instance the signal is connected to (optional)
   

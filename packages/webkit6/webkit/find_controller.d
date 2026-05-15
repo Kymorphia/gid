@@ -260,7 +260,7 @@ class FindController : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint matchCount, webkit.find_controller.FindController findController))
+          `void callback(uint matchCount, webkit.find_controller.FindController findController)`
   
           `matchCount` the number of matches of the search text (optional)
   
@@ -307,7 +307,7 @@ class FindController : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.find_controller.FindController findController))
+          `void callback(webkit.find_controller.FindController findController)`
   
           `findController` the instance the signal is connected to (optional)
   
@@ -348,7 +348,7 @@ class FindController : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint matchCount, webkit.find_controller.FindController findController))
+          `void callback(uint matchCount, webkit.find_controller.FindController findController)`
   
           `matchCount` the number of matches found of the search text (optional)
   

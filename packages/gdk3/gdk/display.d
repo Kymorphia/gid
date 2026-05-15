@@ -21,12 +21,10 @@ import gobject.object;
 /**
     #GdkDisplay objects purpose are two fold:
     
-    $(LIST
-      * To manage and provide information about input devices (pointers and keyboards)
-      
-      * To manage and provide information about the available #GdkScreens
-    )
-      
+    - To manage and provide information about input devices (pointers and keyboards)
+    
+    - To manage and provide information about the available #GdkScreens
+    
     GdkDisplay objects are the GDK representation of an X Display,
     which can be described as a workstation consisting of
     a keyboard, a pointing device (such as a mouse) and one or more
@@ -783,7 +781,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool isError, gdk.display.Display display))
+          `void callback(bool isError, gdk.display.Display display)`
   
           `isError` true if the display was closed due to an error (optional)
   
@@ -827,7 +825,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorWrap monitor, gdk.display.Display display))
+          `void callback(gdk.monitor.MonitorWrap monitor, gdk.display.Display display)`
   
           `monitor` the monitor that was just added (optional)
   
@@ -871,7 +869,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorWrap monitor, gdk.display.Display display))
+          `void callback(gdk.monitor.MonitorWrap monitor, gdk.display.Display display)`
   
           `monitor` the monitor that was just removed (optional)
   
@@ -915,7 +913,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.display.Display display))
+          `void callback(gdk.display.Display display)`
   
           `display` the instance the signal is connected to (optional)
   
@@ -953,7 +951,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.seat.Seat seat, gdk.display.Display display))
+          `void callback(gdk.seat.Seat seat, gdk.display.Display display)`
   
           `seat` the seat that was just added (optional)
   
@@ -997,7 +995,7 @@ class Display : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.seat.Seat seat, gdk.display.Display display))
+          `void callback(gdk.seat.Seat seat, gdk.display.Display display)`
   
           `seat` the seat that was just removed (optional)
   

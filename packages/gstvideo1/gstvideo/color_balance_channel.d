@@ -59,7 +59,7 @@ class ColorBalanceChannel : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int value, gstvideo.color_balance_channel.ColorBalanceChannel colorBalanceChannel))
+          `void callback(int value, gstvideo.color_balance_channel.ColorBalanceChannel colorBalanceChannel)`
   
           `value` The new value (optional)
   

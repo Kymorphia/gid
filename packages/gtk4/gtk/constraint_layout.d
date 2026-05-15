@@ -79,14 +79,12 @@ import gtk.types;
     
     The definition above will add two constraints to the GtkConstraintLayout:
     
-     $(LIST
-        * a required constraint between the leading edge of "button" and
-          the leading edge of the widget using the constraint layout, plus
-          12 pixels
-        * a strong, constant constraint making the width of "button" greater
-          than, or equal to 250 pixels
-     )
-       
+     - a required constraint between the leading edge of "button" and
+       the leading edge of the widget using the constraint layout, plus
+       12 pixels
+     - a strong, constant constraint making the width of "button" greater
+       than, or equal to 250 pixels
+    
     The "target" and "target-attribute" attributes are required.
     
     The "source" and "source-attribute" attributes of the "constraint"
@@ -116,17 +114,15 @@ import gtk.types;
     
     The "guide" element has the following optional attributes:
     
-      $(LIST
-          * "min-width", "nat-width", and "max-width", describe the minimum,
-            natural, and maximum width of the guide, respectively
-          * "min-height", "nat-height", and "max-height", describe the minimum,
-            natural, and maximum height of the guide, respectively
-          * "strength" describes the strength of the constraint on the natural
-            size of the guide; if not specified, the constraint is assumed to
-            have a medium strength
-          * "name" describes a name for the guide, useful when debugging
-      )
-        
+      - "min-width", "nat-width", and "max-width", describe the minimum,
+        natural, and maximum width of the guide, respectively
+      - "min-height", "nat-height", and "max-height", describe the minimum,
+        natural, and maximum height of the guide, respectively
+      - "strength" describes the strength of the constraint on the natural
+        size of the guide; if not specified, the constraint is assumed to
+        have a medium strength
+      - "name" describes a name for the guide, useful when debugging
+    
     ### Using the Visual Format Language
     
     Complex constraints can be described using a compact syntax called VFL,
@@ -241,14 +237,12 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
       The [gtk.constraint.Constraint.source] and [gtk.constraint.Constraint.target]
       properties of `constraint` can be:
       
-       $(LIST
-          * set to `NULL` to indicate that the constraint refers to the
-            widget using `layout`
-          * set to the [gtk.widget.Widget] using `layout`
-          * set to a child of the [gtk.widget.Widget] using `layout`
-          * set to a [gtk.constraint_guide.ConstraintGuide] that is part of `layout`
-       )
-         
+       - set to `NULL` to indicate that the constraint refers to the
+         widget using `layout`
+       - set to the [gtk.widget.Widget] using `layout`
+       - set to a child of the [gtk.widget.Widget] using `layout`
+       - set to a [gtk.constraint_guide.ConstraintGuide] that is part of `layout`
+      
       The layout acquires the ownership of constraint after calling
       this function.
   

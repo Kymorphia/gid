@@ -47,78 +47,72 @@ import gst.types;
     A #GstBin internally intercepts every #GstMessage posted by its children and
     implements the following default behaviour for each of them:
     
-    $(LIST
-      * [gst.types.MessageType.Eos]: This message is only posted by sinks in the PLAYING
-    )
+    * [gst.types.MessageType.Eos]: This message is only posted by sinks in the PLAYING
     state. If all sinks posted the EOS message, this bin will post and EOS
     message upwards.
     
-    $(LIST
-      * [gst.types.MessageType.SegmentStart]: Just collected and never forwarded upwards.
-        The messages are used to decide when all elements have completed playback
-        of their segment.
-      
-      * [gst.types.MessageType.SegmentDone]: Is posted by #GstBin when all elements that posted
-        a SEGMENT_START have posted a SEGMENT_DONE.
-      
-      * [gst.types.MessageType.DurationChanged]: Is posted by an element that detected a change
-        in the stream duration. The duration change is posted to the
-        application so that it can refetch the new duration with a duration
-        query.
-      
-        Note that these messages can be posted before the bin is prerolled, in which
-        case the duration query might fail.
-      
-        Note also that there might be a discrepancy (due to internal buffering/queueing)
-        between the stream being currently displayed and the returned duration query.
-      
-        Applications might want to also query for duration (and changes) by
-        listening to the [gst.types.MessageType.StreamStart] message, signaling the active start
-        of a (new) stream.
-      
-      * [gst.types.MessageType.ClockLost]: This message is posted by an element when it
-        can no longer provide a clock.
-      
-        The default bin behaviour is to check if the lost clock was the one provided
-        by the bin. If so and the bin is currently in the PLAYING state, the message
-        is forwarded to the bin parent.
-      
-        This message is also generated when a clock provider is removed from
-        the bin. If this message is received by the application, it should
-        PAUSE the pipeline and set it back to PLAYING to force a new clock
-        distribution.
-      
-      * [gst.types.MessageType.ClockProvide]: This message is generated when an element
-        can provide a clock. This mostly happens when a new clock
-        provider is added to the bin.
-      
-        The default behaviour of the bin is to mark the currently selected clock as
-        dirty, which will perform a clock recalculation the next time the bin is
-        asked to provide a clock.
-      
-        This message is never sent to the application but is forwarded to
-        the parent of the bin.
-      
-      * OTHERS: posted upwards.
-    )
-      
+    * [gst.types.MessageType.SegmentStart]: Just collected and never forwarded upwards.
+      The messages are used to decide when all elements have completed playback
+      of their segment.
+    
+    * [gst.types.MessageType.SegmentDone]: Is posted by #GstBin when all elements that posted
+      a SEGMENT_START have posted a SEGMENT_DONE.
+    
+    * [gst.types.MessageType.DurationChanged]: Is posted by an element that detected a change
+      in the stream duration. The duration change is posted to the
+      application so that it can refetch the new duration with a duration
+      query.
+    
+      Note that these messages can be posted before the bin is prerolled, in which
+      case the duration query might fail.
+    
+      Note also that there might be a discrepancy (due to internal buffering/queueing)
+      between the stream being currently displayed and the returned duration query.
+    
+      Applications might want to also query for duration (and changes) by
+      listening to the [gst.types.MessageType.StreamStart] message, signaling the active start
+      of a (new) stream.
+    
+    * [gst.types.MessageType.ClockLost]: This message is posted by an element when it
+      can no longer provide a clock.
+    
+      The default bin behaviour is to check if the lost clock was the one provided
+      by the bin. If so and the bin is currently in the PLAYING state, the message
+      is forwarded to the bin parent.
+    
+      This message is also generated when a clock provider is removed from
+      the bin. If this message is received by the application, it should
+      PAUSE the pipeline and set it back to PLAYING to force a new clock
+      distribution.
+    
+    * [gst.types.MessageType.ClockProvide]: This message is generated when an element
+      can provide a clock. This mostly happens when a new clock
+      provider is added to the bin.
+    
+      The default behaviour of the bin is to mark the currently selected clock as
+      dirty, which will perform a clock recalculation the next time the bin is
+      asked to provide a clock.
+    
+      This message is never sent to the application but is forwarded to
+      the parent of the bin.
+    
+    * OTHERS: posted upwards.
+    
     A #GstBin implements the following default behaviour for answering to a
     #GstQuery:
     
-    $(LIST
-      * [gst.types.QueryType.Duration]: The bin will forward the query to all sink
-        elements contained within and will return the maximum value.
-        If no sinks are available in the bin, the query fails.
-      
-      * [gst.types.QueryType.Position]: The query is sent to all sink elements in the bin and the
-        MAXIMUM of all values is returned. If no sinks are available in the bin,
-        the query fails.
-      
-      * OTHERS: the query is forwarded to all sink elements, the result
-        of the first sink that answers the query successfully is returned. If no
-        sink is in the bin, the query fails.
-    )
-      
+    * [gst.types.QueryType.Duration]: The bin will forward the query to all sink
+      elements contained within and will return the maximum value.
+      If no sinks are available in the bin, the query fails.
+    
+    * [gst.types.QueryType.Position]: The query is sent to all sink elements in the bin and the
+      MAXIMUM of all values is returned. If no sinks are available in the bin,
+      the query fails.
+    
+    * OTHERS: the query is forwarded to all sink elements, the result
+      of the first sink that answers the query successfully is returned. If no
+      sink is in the bin, the query fails.
+    
     A #GstBin will by default forward any event sent to it to all sink
     ( [gst.types.EventTypeFlags.Upstream] ) or source ( [gst.types.EventTypeFlags.Downstream] ) elements
     depending on the event type.
@@ -527,7 +521,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.bin.Bin subBin, gst.element.Element element, gst.bin.Bin bin))
+          `void callback(gst.bin.Bin subBin, gst.element.Element element, gst.bin.Bin bin)`
   
           `subBin` the #GstBin the element was added to (optional)
   
@@ -576,7 +570,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.bin.Bin subBin, gst.element.Element element, gst.bin.Bin bin))
+          `void callback(gst.bin.Bin subBin, gst.element.Element element, gst.bin.Bin bin)`
   
           `subBin` the #GstBin the element was removed from (optional)
   
@@ -635,7 +629,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gst.bin.Bin bin))
+          `bool callback(gst.bin.Bin bin)`
   
           `bin` the instance the signal is connected to (optional)
   
@@ -675,7 +669,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.element.Element element, gst.bin.Bin bin))
+          `void callback(gst.element.Element element, gst.bin.Bin bin)`
   
           `element` the #GstElement that was added to the bin (optional)
   
@@ -718,7 +712,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.element.Element element, gst.bin.Bin bin))
+          `void callback(gst.element.Element element, gst.bin.Bin bin)`
   
           `element` the #GstElement that was removed from the bin (optional)
   

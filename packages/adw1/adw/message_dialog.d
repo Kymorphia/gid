@@ -823,7 +823,7 @@ class MessageDialog : gtk.window.Window
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string response, adw.message_dialog.MessageDialog messageDialog))
+          `void callback(string response, adw.message_dialog.MessageDialog messageDialog)`
   
           `response` the response ID (optional)
   

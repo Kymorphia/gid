@@ -19,12 +19,10 @@ import gtk.types;
     should have user-configurable accelerators.
     
     An accelerator is uniquely defined by:
-    $(LIST
-      * accelerator path
-      * accelerator key
-      * accelerator modifiers
-    )
-      
+    - accelerator path
+    - accelerator key
+    - accelerator modifiers
+    
     The accelerator path must consist of
     “<WINDOWTYPE>/Category1/Category2/.../Action”, where WINDOWTYPE
     should be a unique application-specific identifier that corresponds
@@ -377,7 +375,7 @@ class AccelMap : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string accelPath, uint accelKey, gdk.types.ModifierType accelMods, gtk.accel_map.AccelMap accelMap))
+          `void callback(string accelPath, uint accelKey, gdk.types.ModifierType accelMods, gtk.accel_map.AccelMap accelMap)`
   
           `accelPath` the path of the accelerator that changed (optional)
   

@@ -173,7 +173,7 @@ class ShortcutsSection : gtk.box.Box
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(int object, gtk.shortcuts_section.ShortcutsSection shortcutsSection))
+          `bool callback(int object, gtk.shortcuts_section.ShortcutsSection shortcutsSection)`
   
           `object`  (optional)
   

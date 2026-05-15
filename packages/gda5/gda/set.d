@@ -409,7 +409,7 @@ class Set : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.holder.Holder holder, string attrName, gobject.value.Value attrValue, gda.set.Set set))
+          `void callback(gda.holder.Holder holder, string attrName, gobject.value.Value attrValue, gda.set.Set set)`
   
           `holder` the GdaHolder for which an attribute changed (optional)
   
@@ -464,7 +464,7 @@ class Set : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.holder.Holder object, gda.set.Set set))
+          `void callback(gda.holder.Holder object, gda.set.Set set)`
   
           `object`  (optional)
   
@@ -508,7 +508,7 @@ class Set : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.holder.Holder holder, gda.set.Set set))
+          `void callback(gda.holder.Holder holder, gda.set.Set set)`
   
           `holder` the #GdaHolder for which the #GType has been set (optional)
   
@@ -551,7 +551,7 @@ class Set : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.set.Set set))
+          `void callback(gda.set.Set set)`
   
           `set` the instance the signal is connected to (optional)
   
@@ -588,7 +588,7 @@ class Set : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(void* source, gda.set.Set set))
+          `void callback(void* source, gda.set.Set set)`
   
           `source` the #GdaSetSource for which the data_model attribute has changed (optional)
   
@@ -632,7 +632,7 @@ class Set : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D glib.error.ErrorWrap callback(gda.holder.Holder holder, gobject.value.Value newValue, gda.set.Set set))
+          `glib.error.ErrorWrap callback(gda.holder.Holder holder, gobject.value.Value newValue, gda.set.Set set)`
   
           `holder` the #GdaHolder which is going to change (optional)
   
@@ -686,7 +686,7 @@ class Set : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D glib.error.ErrorWrap callback(gda.set.Set set))
+          `glib.error.ErrorWrap callback(gda.set.Set set)`
   
           `set` the instance the signal is connected to (optional)
   

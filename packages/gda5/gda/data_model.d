@@ -538,7 +538,7 @@ interface DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.data_model.DataModel dataModel))
+          `void callback(gda.data_model.DataModel dataModel)`
   
           `dataModel` the instance the signal is connected to (optional)
   
@@ -555,7 +555,7 @@ interface DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.data_model.DataModel dataModel))
+          `void callback(gda.data_model.DataModel dataModel)`
   
           `dataModel` the instance the signal is connected to (optional)
   
@@ -573,7 +573,7 @@ interface DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.data_model.DataModel dataModel))
+          `void callback(gda.data_model.DataModel dataModel)`
   
           `dataModel` the instance the signal is connected to (optional)
   
@@ -590,7 +590,7 @@ interface DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int row, gda.data_model.DataModel dataModel))
+          `void callback(int row, gda.data_model.DataModel dataModel)`
   
           `row` the row number (optional)
   
@@ -609,7 +609,7 @@ interface DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int row, gda.data_model.DataModel dataModel))
+          `void callback(int row, gda.data_model.DataModel dataModel)`
   
           `row` the row number (optional)
   
@@ -628,7 +628,7 @@ interface DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int row, gda.data_model.DataModel dataModel))
+          `void callback(int row, gda.data_model.DataModel dataModel)`
   
           `row` the row number (optional)
   

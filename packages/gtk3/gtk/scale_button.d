@@ -255,7 +255,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.scale_button.ScaleButton scaleButton))
+          `void callback(gtk.scale_button.ScaleButton scaleButton)`
   
           `scaleButton` the instance the signal is connected to (optional)
   
@@ -296,7 +296,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.scale_button.ScaleButton scaleButton))
+          `void callback(gtk.scale_button.ScaleButton scaleButton)`
   
           `scaleButton` the instance the signal is connected to (optional)
   
@@ -334,7 +334,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double value, gtk.scale_button.ScaleButton scaleButton))
+          `void callback(double value, gtk.scale_button.ScaleButton scaleButton)`
   
           `value` the new value (optional)
   

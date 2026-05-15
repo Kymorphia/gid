@@ -1411,7 +1411,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.icon_view.IconView iconView))
+          `bool callback(gtk.icon_view.IconView iconView)`
   
           `iconView` the instance the signal is connected to (optional)
   
@@ -1457,7 +1457,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_path.TreePath path, gtk.icon_view.IconView iconView))
+          `void callback(gtk.tree_path.TreePath path, gtk.icon_view.IconView iconView)`
   
           `path` the #GtkTreePath for the activated item (optional)
   
@@ -1504,18 +1504,16 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
         programmatically.
         
         The default bindings for this signal include
-        $(LIST
-          * Arrow keys which move by individual steps
-          * Home/End keys which move to the first/last item
-          * PageUp/PageDown which move by "pages"
-        )
+        - Arrow keys which move by individual steps
+        - Home/End keys which move to the first/last item
+        - PageUp/PageDown which move by "pages"
         All of these will extend the selection when combined with
         the Shift modifier.
   
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.MovementStep step, int count, gtk.icon_view.IconView iconView))
+          `bool callback(gtk.types.MovementStep step, int count, gtk.icon_view.IconView iconView)`
   
           `step` the granularity of the move, as a #GtkMovementStep (optional)
   
@@ -1574,7 +1572,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.icon_view.IconView iconView))
+          `void callback(gtk.icon_view.IconView iconView)`
   
           `iconView` the instance the signal is connected to (optional)
   
@@ -1619,7 +1617,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.icon_view.IconView iconView))
+          `void callback(gtk.icon_view.IconView iconView)`
   
           `iconView` the instance the signal is connected to (optional)
   
@@ -1657,7 +1655,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.icon_view.IconView iconView))
+          `void callback(gtk.icon_view.IconView iconView)`
   
           `iconView` the instance the signal is connected to (optional)
   
@@ -1703,7 +1701,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.icon_view.IconView iconView))
+          `void callback(gtk.icon_view.IconView iconView)`
   
           `iconView` the instance the signal is connected to (optional)
   
@@ -1747,7 +1745,7 @@ class IconView : gtk.container.Container, gtk.cell_layout.CellLayout, gtk.scroll
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.icon_view.IconView iconView))
+          `void callback(gtk.icon_view.IconView iconView)`
   
           `iconView` the instance the signal is connected to (optional)
   

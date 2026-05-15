@@ -100,12 +100,10 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
         
         The supported gestures are:
         
-        $(LIST
-          * One-finger swipe on touchscreens
-          * Horizontal scrolling on touchpads (usually two-finger swipe)
-          * Back/forward mouse buttons
-        )
-          
+        - One-finger swipe on touchscreens
+        - Horizontal scrolling on touchpads (usually two-finger swipe)
+        - Back/forward mouse buttons
+        
         The keyboard back/forward keys are also supported, as well as the
         <kbd>Alt</kbd>+<kbd>←</kbd> shortcut for horizontal orientation, or
         <kbd>Alt</kbd>+<kbd>↑</kbd> for vertical orientation.
@@ -130,12 +128,10 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
           
           The supported gestures are:
           
-          $(LIST
-            * One-finger swipe on touchscreens
-            * Horizontal scrolling on touchpads (usually two-finger swipe)
-            * Back/forward mouse buttons
-          )
-            
+          - One-finger swipe on touchscreens
+          - Horizontal scrolling on touchpads (usually two-finger swipe)
+          - Back/forward mouse buttons
+          
           The keyboard back/forward keys are also supported, as well as the
           <kbd>Alt</kbd>+<kbd>←</kbd> shortcut for horizontal orientation, or
           <kbd>Alt</kbd>+<kbd>↑</kbd> for vertical orientation.
@@ -159,12 +155,10 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
         
         The supported gestures are:
         
-        $(LIST
-          * One-finger swipe on touchscreens
-          * Horizontal scrolling on touchpads (usually two-finger swipe)
-          * Back/forward mouse buttons
-        )
-          
+        - One-finger swipe on touchscreens
+        - Horizontal scrolling on touchpads (usually two-finger swipe)
+        - Back/forward mouse buttons
+        
         The keyboard back/forward keys are also supported, as well as the
         <kbd>Alt</kbd>+<kbd>→</kbd> shortcut for horizontal orientation, or
         <kbd>Alt</kbd>+<kbd>↓</kbd> for vertical orientation.
@@ -189,12 +183,10 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
           
           The supported gestures are:
           
-          $(LIST
-            * One-finger swipe on touchscreens
-            * Horizontal scrolling on touchpads (usually two-finger swipe)
-            * Back/forward mouse buttons
-          )
-            
+          - One-finger swipe on touchscreens
+          - Horizontal scrolling on touchpads (usually two-finger swipe)
+          - Back/forward mouse buttons
+          
           The keyboard back/forward keys are also supported, as well as the
           <kbd>Alt</kbd>+<kbd>→</kbd> shortcut for horizontal orientation, or
           <kbd>Alt</kbd>+<kbd>↓</kbd> for vertical orientation.
@@ -863,12 +855,10 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       
       The supported gestures are:
       
-      $(LIST
-        * One-finger swipe on touchscreens
-        * Horizontal scrolling on touchpads (usually two-finger swipe)
-        * Back/forward mouse buttons
-      )
-        
+      - One-finger swipe on touchscreens
+      - Horizontal scrolling on touchpads (usually two-finger swipe)
+      - Back/forward mouse buttons
+      
       The keyboard back/forward keys are also supported, as well as the
       <kbd>Alt</kbd>+<kbd>←</kbd> shortcut for horizontal orientation, or
       <kbd>Alt</kbd>+<kbd>↑</kbd> for vertical orientation.
@@ -894,12 +884,10 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       
       The supported gestures are:
       
-      $(LIST
-        * One-finger swipe on touchscreens
-        * Horizontal scrolling on touchpads (usually two-finger swipe)
-        * Back/forward mouse buttons
-      )
-        
+      - One-finger swipe on touchscreens
+      - Horizontal scrolling on touchpads (usually two-finger swipe)
+      - Back/forward mouse buttons
+      
       The keyboard back/forward keys are also supported, as well as the
       <kbd>Alt</kbd>+<kbd>→</kbd> shortcut for horizontal orientation, or
       <kbd>Alt</kbd>+<kbd>↓</kbd> for vertical orientation.
@@ -1067,12 +1055,10 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
           
           The supported gestures are:
           
-          $(LIST
-            * One-finger swipe on touchscreens
-            * Horizontal scrolling on touchpads (usually two-finger swipe)
-            * Back/forward mouse buttons
-          )
-            
+          - One-finger swipe on touchscreens
+          - Horizontal scrolling on touchpads (usually two-finger swipe)
+          - Back/forward mouse buttons
+          
           The keyboard back/forward keys are also supported, as well as the
           <kbd>Alt</kbd>+<kbd>←</kbd> shortcut for horizontal orientation, or
           <kbd>Alt</kbd>+<kbd>↑</kbd> for vertical orientation.
@@ -1098,12 +1084,10 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
           
           The supported gestures are:
           
-          $(LIST
-            * One-finger swipe on touchscreens
-            * Horizontal scrolling on touchpads (usually two-finger swipe)
-            * Back/forward mouse buttons
-          )
-            
+          - One-finger swipe on touchscreens
+          - Horizontal scrolling on touchpads (usually two-finger swipe)
+          - Back/forward mouse buttons
+          
           The keyboard back/forward keys are also supported, as well as the
           <kbd>Alt</kbd>+<kbd>→</kbd> shortcut for horizontal orientation, or
           <kbd>Alt</kbd>+<kbd>↓</kbd> for vertical orientation.

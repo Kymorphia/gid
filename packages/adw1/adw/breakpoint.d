@@ -259,7 +259,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.breakpoint.Breakpoint breakpoint))
+          `void callback(adw.breakpoint.Breakpoint breakpoint)`
   
           `breakpoint` the instance the signal is connected to (optional)
   
@@ -298,7 +298,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.breakpoint.Breakpoint breakpoint))
+          `void callback(adw.breakpoint.Breakpoint breakpoint)`
   
           `breakpoint` the instance the signal is connected to (optional)
   

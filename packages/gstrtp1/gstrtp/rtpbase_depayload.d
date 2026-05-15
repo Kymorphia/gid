@@ -163,19 +163,17 @@ class RTPBaseDepayload : gst.element.Element
         application/x-rtp-depayload-stats containing the following fields relating to
         the last processed buffer and current state of the stream being depayloaded:
         
-          $(LIST
-              * `clock-rate`: #G_TYPE_UINT, clock-rate of the stream
-              * `npt-start`: #G_TYPE_UINT64, time of playback start
-              * `npt-stop`: #G_TYPE_UINT64, time of playback stop
-              * `play-speed`: #G_TYPE_DOUBLE, the playback speed
-              * `play-scale`: #G_TYPE_DOUBLE, the playback scale
-              * `running-time-dts`: #G_TYPE_UINT64, the last running-time of the
-                 last DTS
-              * `running-time-pts`: #G_TYPE_UINT64, the last running-time of the
-                 last PTS
-              * `seqnum`: #G_TYPE_UINT, the last seen seqnum
-              * `timestamp`: #G_TYPE_UINT, the last seen RTP timestamp
-          )
+          * `clock-rate`: #G_TYPE_UINT, clock-rate of the stream
+          * `npt-start`: #G_TYPE_UINT64, time of playback start
+          * `npt-stop`: #G_TYPE_UINT64, time of playback stop
+          * `play-speed`: #G_TYPE_DOUBLE, the playback speed
+          * `play-scale`: #G_TYPE_DOUBLE, the playback scale
+          * `running-time-dts`: #G_TYPE_UINT64, the last running-time of the
+             last DTS
+          * `running-time-pts`: #G_TYPE_UINT64, the last running-time of the
+             last PTS
+          * `seqnum`: #G_TYPE_UINT, the last seen seqnum
+          * `timestamp`: #G_TYPE_UINT, the last seen RTP timestamp
   */
   @property gst.structure.Structure stats()
   {
@@ -334,7 +332,7 @@ class RTPBaseDepayload : gst.element.Element
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstrtp.rtpheader_extension.RTPHeaderExtension ext, gstrtp.rtpbase_depayload.RTPBaseDepayload rTPBaseDepayload))
+          `void callback(gstrtp.rtpheader_extension.RTPHeaderExtension ext, gstrtp.rtpbase_depayload.RTPBaseDepayload rTPBaseDepayload)`
   
           `ext` the #GstRTPHeaderExtension (optional)
   
@@ -377,7 +375,7 @@ class RTPBaseDepayload : gst.element.Element
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstrtp.rtpbase_depayload.RTPBaseDepayload rTPBaseDepayload))
+          `void callback(gstrtp.rtpbase_depayload.RTPBaseDepayload rTPBaseDepayload)`
   
           `rTPBaseDepayload` the instance the signal is connected to (optional)
   
@@ -415,7 +413,7 @@ class RTPBaseDepayload : gst.element.Element
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gstrtp.rtpheader_extension.RTPHeaderExtension callback(uint extId, string extUri, gstrtp.rtpbase_depayload.RTPBaseDepayload rTPBaseDepayload))
+          `gstrtp.rtpheader_extension.RTPHeaderExtension callback(uint extId, string extUri, gstrtp.rtpbase_depayload.RTPBaseDepayload rTPBaseDepayload)`
   
           `extId` the extension id being requested (optional)
   

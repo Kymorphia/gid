@@ -584,7 +584,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.popover.Popover popover))
+          `void callback(gtk.popover.Popover popover)`
   
           `popover` the instance the signal is connected to (optional)
   
@@ -621,7 +621,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.popover.Popover popover))
+          `void callback(gtk.popover.Popover popover)`
   
           `popover` the instance the signal is connected to (optional)
   

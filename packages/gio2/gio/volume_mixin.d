@@ -428,7 +428,7 @@ template VolumeT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.volume.Volume volume))
+          `void callback(gio.volume.Volume volume)`
   
           `volume` the instance the signal is connected to (optional)
   
@@ -467,7 +467,7 @@ template VolumeT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.volume.Volume volume))
+          `void callback(gio.volume.Volume volume)`
   
           `volume` the instance the signal is connected to (optional)
   

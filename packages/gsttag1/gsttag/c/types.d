@@ -244,21 +244,17 @@ enum GstTagLicenseFlags : uint
     
     Subclasses have to do four things:
     
-     $(LIST
-        * In their base init function, they must add a pad template for the sink
-          pad to the element class, describing the media type they can parse in
-          the caps of the pad template.
-        * In their class init function, they must override
-          GST_TAG_DEMUX_CLASS(demux_klass)->identify_tag with their own identify
-          function.
-        * In their class init function, they must override
-     )
+     * In their base init function, they must add a pad template for the sink
+       pad to the element class, describing the media type they can parse in
+       the caps of the pad template.
+     * In their class init function, they must override
+       GST_TAG_DEMUX_CLASS(demux_klass)->identify_tag with their own identify
+       function.
+     * In their class init function, they must override
      GST_TAG_DEMUX_CLASS(demux_klass)->parse_tag with their own parse
      function.
-     $(LIST
-        * In their class init function, they must also set
-          GST_TAG_DEMUX_CLASS(demux_klass)->min_start_size and/or
-     )
+     * In their class init function, they must also set
+       GST_TAG_DEMUX_CLASS(demux_klass)->min_start_size and/or
      GST_TAG_DEMUX_CLASS(demux_klass)->min_end_size to the minimum size required
      for the identify function to decide whether the stream has a supported tag
      or not. A class parsing ID3v1 tags, for example, would set min_end_size to
@@ -343,15 +339,13 @@ struct GstTagDemuxPrivate;
     
     Subclasses have to do the following things:
     
-     $(LIST
-        * In their base init function, they must add pad templates for the sink
-          pad and the source pad to the element class, describing the media type
-          they accept and output in the caps of the pad template.
-        * In their class init function, they must override the
-          GST_TAG_MUX_CLASS(mux_klass)->render_start_tag and/or
-          GST_TAG_MUX_CLASS(mux_klass)->render_end_tag vfuncs and set up a render
-          function.
-     )
+     * In their base init function, they must add pad templates for the sink
+       pad and the source pad to the element class, describing the media type
+       they accept and output in the caps of the pad template.
+     * In their class init function, they must override the
+       GST_TAG_MUX_CLASS(mux_klass)->render_start_tag and/or
+       GST_TAG_MUX_CLASS(mux_klass)->render_end_tag vfuncs and set up a render
+       function.
 */
 struct GstTagMux
 {

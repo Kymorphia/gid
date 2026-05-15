@@ -432,7 +432,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.action.Action action, gtk.widget.Widget proxy, gtk.action_group.ActionGroup actionGroup))
+          `void callback(gtk.action.Action action, gtk.widget.Widget proxy, gtk.action_group.ActionGroup actionGroup)`
   
           `action` the action (optional)
   
@@ -486,7 +486,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.action.Action action, gtk.widget.Widget proxy, gtk.action_group.ActionGroup actionGroup))
+          `void callback(gtk.action.Action action, gtk.widget.Widget proxy, gtk.action_group.ActionGroup actionGroup)`
   
           `action` the action (optional)
   
@@ -539,7 +539,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.action.Action action, gtk.action_group.ActionGroup actionGroup))
+          `void callback(gtk.action.Action action, gtk.action_group.ActionGroup actionGroup)`
   
           `action` the action (optional)
   
@@ -586,7 +586,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.action.Action action, gtk.action_group.ActionGroup actionGroup))
+          `void callback(gtk.action.Action action, gtk.action_group.ActionGroup actionGroup)`
   
           `action` the action (optional)
   

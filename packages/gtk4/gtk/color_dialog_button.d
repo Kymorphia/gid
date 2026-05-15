@@ -212,7 +212,7 @@ class ColorDialogButton : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.color_dialog_button.ColorDialogButton colorDialogButton))
+          `void callback(gtk.color_dialog_button.ColorDialogButton colorDialogButton)`
   
           `colorDialogButton` the instance the signal is connected to (optional)
   

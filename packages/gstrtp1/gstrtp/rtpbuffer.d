@@ -660,10 +660,8 @@ class RTPBuffer
       
       This function is able to handle both forward and backward timestamps taking
       into account:
-        $(LIST
-            * timestamp wraparound making sure that the returned value is properly increased.
-            * timestamp unwraparound making sure that the returned value is properly decreased.
-        )
+        - timestamp wraparound making sure that the returned value is properly increased.
+        - timestamp unwraparound making sure that the returned value is properly decreased.
   
       Params:
         exttimestamp = a previous extended timestamp

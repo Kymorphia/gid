@@ -204,7 +204,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.switch_.Switch switch_))
+          `void callback(gtk.switch_.Switch switch_)`
   
           `switch_` the instance the signal is connected to (optional)
   
@@ -255,7 +255,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool state, gtk.switch_.Switch switch_))
+          `bool callback(bool state, gtk.switch_.Switch switch_)`
   
           `state` the new state of the switch (optional)
   

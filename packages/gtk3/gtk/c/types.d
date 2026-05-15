@@ -4689,12 +4689,10 @@ struct GtkAccelLabelPrivate;
     should have user-configurable accelerators.
     
     An accelerator is uniquely defined by:
-    $(LIST
-      * accelerator path
-      * accelerator key
-      * accelerator modifiers
-    )
-      
+    - accelerator path
+    - accelerator key
+    - accelerator modifiers
+    
     The accelerator path must consist of
     “<WINDOWTYPE>/Category1/Category2/.../Action”, where WINDOWTYPE
     should be a unique application-specific identifier that corresponds
@@ -4803,29 +4801,25 @@ struct GtkAccessiblePrivate;
     As well as the callback that is called when the action gets activated,
     the following also gets associated with the action:
     
-    $(LIST
-      * a name (not translated, for path lookup)
-      
-      * a label (translated, for display)
-      
-      * an accelerator
-      
-      * whether label indicates a stock id
-      
-      * a tooltip (optional, translated)
-      
-      * a toolbar label (optional, shorter than label)
-    )
-      
-      
+    - a name (not translated, for path lookup)
+    
+    - a label (translated, for display)
+    
+    - an accelerator
+    
+    - whether label indicates a stock id
+    
+    - a tooltip (optional, translated)
+    
+    - a toolbar label (optional, shorter than label)
+    
+    
     The action will also have some state information:
     
-    $(LIST
-      * visible (shown/hidden)
-      
-      * sensitive (enabled/disabled)
-    )
-      
+    - visible (shown/hidden)
+    
+    - sensitive (enabled/disabled)
+    
     Apart from regular actions, there are [toggle actions][GtkToggleAction],
     which can be toggled between two states and
     [radio actions][GtkRadioAction], of which only one in a group
@@ -5855,32 +5849,26 @@ struct GtkApplicationPrivate;
     domain to use.
     
     The following attributes are used when constructing menu items:
-    $(LIST
-      * "label": a user-visible string to display
-      * "action": the prefixed name of the action to trigger
-      * "target": the parameter to use when activating the action
-      * "icon" and "verb-icon": names of icons that may be displayed
-      * "submenu-action": name of an action that may be used to determine
-           if a submenu can be opened
-      * "hidden-when": a string used to determine when the item will be hidden.
-           Possible values include "action-disabled", "action-missing", "macos-menubar".
-    )
-      
+    - "label": a user-visible string to display
+    - "action": the prefixed name of the action to trigger
+    - "target": the parameter to use when activating the action
+    - "icon" and "verb-icon": names of icons that may be displayed
+    - "submenu-action": name of an action that may be used to determine
+         if a submenu can be opened
+    - "hidden-when": a string used to determine when the item will be hidden.
+         Possible values include "action-disabled", "action-missing", "macos-menubar".
+    
     The following attributes are used when constructing sections:
-    $(LIST
-      * "label": a user-visible string to use as section heading
-      * "display-hint": a string used to determine special formatting for the section.
-          Possible values include "horizontal-buttons".
-      * "text-direction": a string used to determine the #GtkTextDirection to use
-          when "display-hint" is set to "horizontal-buttons". Possible values
-          include "rtl", "ltr", and "none".
-    )
-      
+    - "label": a user-visible string to use as section heading
+    - "display-hint": a string used to determine special formatting for the section.
+        Possible values include "horizontal-buttons".
+    - "text-direction": a string used to determine the #GtkTextDirection to use
+        when "display-hint" is set to "horizontal-buttons". Possible values
+        include "rtl", "ltr", and "none".
+    
     The following attributes are used when constructing submenus:
-    $(LIST
-      * "label": a user-visible string to display
-      * "icon": icon name to display
-    )
+    - "label": a user-visible string to display
+    - "icon": icon name to display
 */
 struct GtkApplicationWindow
 {
@@ -9653,22 +9641,20 @@ struct GtkDialogPrivate;
     elements. It’s essentially a blank widget; you can draw on it. After
     creating a drawing area, the application may want to connect to:
     
-    $(LIST
-      * Mouse and button press signals to respond to input from
-        the user. (Use [gtk.widget.Widget.addEvents] to enable events
-        you wish to receive.)
-      
-      * The #GtkWidget::realize signal to take any necessary actions
-        when the widget is instantiated on a particular display.
-        (Create GDK resources in response to this signal.)
-      
-      * The #GtkWidget::size-allocate signal to take any necessary
-        actions when the widget changes size.
-      
-      * The #GtkWidget::draw signal to handle redrawing the
-        contents of the widget.
-    )
-      
+    - Mouse and button press signals to respond to input from
+      the user. (Use [gtk.widget.Widget.addEvents] to enable events
+      you wish to receive.)
+    
+    - The #GtkWidget::realize signal to take any necessary actions
+      when the widget is instantiated on a particular display.
+      (Create GDK resources in response to this signal.)
+    
+    - The #GtkWidget::size-allocate signal to take any necessary
+      actions when the widget changes size.
+    
+    - The #GtkWidget::draw signal to handle redrawing the
+      contents of the widget.
+    
     The following code portion demonstrates using a drawing
     area to display a circle in the normal widget foreground
     color.
@@ -10490,19 +10476,17 @@ struct GtkExpanderPrivate;
     may be a bit confusing at first that these shortcuts come from various
     sources and in various flavours, so lets explain the terminology here:
     
-    $(LIST
-      * Bookmarks: are created by the user, by dragging folders from the
-        right pane to the left pane, or by using the “Add”. Bookmarks
-        can be renamed and deleted by the user.
-      
-      * Shortcuts: can be provided by the application. For example, a Paint
-        program may want to add a shortcut for a Clipart folder. Shortcuts
-        cannot be modified by the user.
-      
-      * Volumes: are provided by the underlying filesystem abstraction. They are
-        the “roots” of the filesystem.
-    )
-      
+    - Bookmarks: are created by the user, by dragging folders from the
+      right pane to the left pane, or by using the “Add”. Bookmarks
+      can be renamed and deleted by the user.
+    
+    - Shortcuts: can be provided by the application. For example, a Paint
+      program may want to add a shortcut for a Clipart folder. Shortcuts
+      cannot be modified by the user.
+    
+    - Volumes: are provided by the underlying filesystem abstraction. They are
+      the “roots” of the filesystem.
+    
     # File Names and Encodings
     
     When the user is finished selecting files in a
@@ -10773,18 +10757,16 @@ struct GtkFileChooserButtonPrivate;
     
     There are various cases in which you may need to use a #GtkFileChooserDialog:
     
-    $(LIST
-      * To select a file for opening. Use #GTK_FILE_CHOOSER_ACTION_OPEN.
-      
-      * To save a file for the first time. Use #GTK_FILE_CHOOSER_ACTION_SAVE,
-        and suggest a name such as “Untitled” with [gtk.file_chooser.FileChooser.setCurrentName].
-      
-      * To save a file under a different name. Use #GTK_FILE_CHOOSER_ACTION_SAVE,
-        and set the existing filename with [gtk.file_chooser.FileChooser.setFilename].
-      
-      * To choose a folder instead of a file. Use #GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER.
-    )
-      
+    - To select a file for opening. Use #GTK_FILE_CHOOSER_ACTION_OPEN.
+    
+    - To save a file for the first time. Use #GTK_FILE_CHOOSER_ACTION_SAVE,
+      and suggest a name such as “Untitled” with [gtk.file_chooser.FileChooser.setCurrentName].
+    
+    - To save a file under a different name. Use #GTK_FILE_CHOOSER_ACTION_SAVE,
+      and set the existing filename with [gtk.file_chooser.FileChooser.setFilename].
+    
+    - To choose a folder instead of a file. Use #GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER.
+    
     Note that old versions of the file chooser’s documentation suggested
     using [gtk.file_chooser.FileChooser.setCurrentFolder] in various
     situations, with the intention of letting the application
@@ -10824,13 +10806,11 @@ struct GtkFileChooserButtonPrivate;
     its “accept”-type action, e.g. an “Open” or “Save” button,
     will have one of the following response codes:
     
-    $(LIST
-      * #GTK_RESPONSE_ACCEPT
-      * #GTK_RESPONSE_OK
-      * #GTK_RESPONSE_YES
-      * #GTK_RESPONSE_APPLY
-    )
-      
+    - #GTK_RESPONSE_ACCEPT
+    - #GTK_RESPONSE_OK
+    - #GTK_RESPONSE_YES
+    - #GTK_RESPONSE_APPLY
+    
     This is because #GtkFileChooserDialog must intercept responses
     and switch to folders if appropriate, rather than letting the
     dialog terminate — the implementation uses these known
@@ -10970,20 +10950,16 @@ struct GtkFileChooserDialogPrivate;
     
     There is no support for the signals that are emitted when the user
     navigates in the dialog, including:
-    $(LIST
-      * #GtkFileChooser::current-folder-changed
-      * #GtkFileChooser::selection-changed
-      * #GtkFileChooser::file-activated
-      * #GtkFileChooser::confirm-overwrite
-    )
-      
+    * #GtkFileChooser::current-folder-changed
+    * #GtkFileChooser::selection-changed
+    * #GtkFileChooser::file-activated
+    * #GtkFileChooser::confirm-overwrite
+    
     You can also not use the methods that directly control user navigation:
-    $(LIST
-      * [gtk.file_chooser.FileChooser.unselectFilename]
-      * [gtk.file_chooser.FileChooser.selectAll]
-      * [gtk.file_chooser.FileChooser.unselectAll]
-    )
-      
+    * [gtk.file_chooser.FileChooser.unselectFilename]
+    * [gtk.file_chooser.FileChooser.selectAll]
+    * [gtk.file_chooser.FileChooser.unselectAll]
+    
     If you need any of the above you will have to use #GtkFileChooserDialog directly.
     
     No operations that change the the dialog work while the dialog is
@@ -10995,14 +10971,12 @@ struct GtkFileChooserDialogPrivate;
     used. It supports many of the features that #GtkFileChooserDialog
     does, but there are some things it does not handle:
     
-    $(LIST
-      * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget].
-      
-      * Use of custom previews by connecting to #GtkFileChooser::update-preview.
-      
-      * Any #GtkFileFilter added using a mimetype or custom filter.
-    )
-      
+    * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget].
+    
+    * Use of custom previews by connecting to #GtkFileChooser::update-preview.
+    
+    * Any #GtkFileFilter added using a mimetype or custom filter.
+    
     If any of these features are used the regular #GtkFileChooserDialog
     will be used in place of the native one.
     
@@ -11014,31 +10988,27 @@ struct GtkFileChooserDialogPrivate;
     be a GTK+ file chooser. In this situation, the following things are not
     supported and will be silently ignored:
     
-    $(LIST
-      * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget].
-      
-      * Use of custom previews by connecting to #GtkFileChooser::update-preview.
-      
-      * Any #GtkFileFilter added with a custom filter.
-    )
-      
+    * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget].
+    
+    * Use of custom previews by connecting to #GtkFileChooser::update-preview.
+    
+    * Any #GtkFileFilter added with a custom filter.
+    
     ## macOS details ## {#gtkfilechooserdialognative-macos}
     
     On macOS the NSSavePanel and NSOpenPanel classes are used to provide native
     file chooser dialogs. Some features provided by #GtkFileChooserDialog are
     not supported:
     
-    $(LIST
-      * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget], unless the
-        widget is an instance of GtkLabel, in which case the label text will be used
-        to set the NSSavePanel message instance property.
-      
-      * Use of custom previews by connecting to #GtkFileChooser::update-preview.
-      
-      * Any #GtkFileFilter added with a custom filter.
-      
-      * Shortcut folders.
-    )
+    * Extra widgets added with [gtk.file_chooser.FileChooser.setExtraWidget], unless the
+      widget is an instance of GtkLabel, in which case the label text will be used
+      to set the NSSavePanel message instance property.
+    
+    * Use of custom previews by connecting to #GtkFileChooser::update-preview.
+    
+    * Any #GtkFileFilter added with a custom filter.
+    
+    * Shortcut folders.
 */
 struct GtkFileChooserNative;
 
@@ -11200,19 +11170,17 @@ struct GtkFileFilterInfo
     things will result in truncated text, overlapping widgets, and
     other display bugs:
     
-    $(LIST
-      * Themes, which may change widget sizes.
-      
-      * Fonts other than the one you used to write the app will of course
-        change the size of widgets containing text; keep in mind that
-        users may use a larger font because of difficulty reading the
-        default, or they may be using a different OS that provides different fonts.
-      
-      * Translation of text into other languages changes its size. Also,
-        display of non-English text will use a different font in many
-        cases.
-    )
-      
+    - Themes, which may change widget sizes.
+    
+    - Fonts other than the one you used to write the app will of course
+      change the size of widgets containing text; keep in mind that
+      users may use a larger font because of difficulty reading the
+      default, or they may be using a different OS that provides different fonts.
+    
+    - Translation of text into other languages changes its size. Also,
+      display of non-English text will use a different font in many
+      cases.
+    
     In addition, #GtkFixed does not pay attention to text direction and thus may
     produce unwanted results if your app is run under right-to-left languages
     such as Hebrew or Arabic. That is: normally GTK+ will order containers
@@ -11936,12 +11904,10 @@ struct GtkGLAreaClass
     #GtkGesture subclasses.
     
     A recognized gesture will then emit the following signals:
-    $(LIST
-      * #GtkGesture::begin when the gesture is recognized.
-      * A number of #GtkGesture::update, whenever an input event is processed.
-      * #GtkGesture::end when the gesture is no longer recognized.
-    )
-      
+    - #GtkGesture::begin when the gesture is recognized.
+    - A number of #GtkGesture::update, whenever an input event is processed.
+    - #GtkGesture::end when the gesture is no longer recognized.
+    
     ## Event propagation
     
     In order to receive events, a gesture needs to either set a propagation phase
@@ -11986,15 +11952,13 @@ struct GtkGLAreaClass
     
     If a sequence enters in the #GTK_EVENT_SEQUENCE_CLAIMED state, the gesture
     group will grab all interaction on the sequence, by:
-    $(LIST
-      * Setting the same sequence to #GTK_EVENT_SEQUENCE_DENIED on every other gesture
-        group within the widget, and every gesture on parent widgets in the propagation
-        chain.
-      * calling #GtkGesture::cancel on every gesture in widgets underneath in the
-        propagation chain.
-      * Stopping event propagation after the gesture group handles the event.
-    )
-      
+    - Setting the same sequence to #GTK_EVENT_SEQUENCE_DENIED on every other gesture
+      group within the widget, and every gesture on parent widgets in the propagation
+      chain.
+    - calling #GtkGesture::cancel on every gesture in widgets underneath in the
+      propagation chain.
+    - Stopping event propagation after the gesture group handles the event.
+    
     Note: if a sequence is set early to #GTK_EVENT_SEQUENCE_CLAIMED on
     #GDK_TOUCH_BEGIN/#GDK_BUTTON_PRESS (so those events are captured before
     reaching the event widget, this implies #GTK_PHASE_CAPTURE), one similar
@@ -12010,11 +11974,9 @@ struct GtkGLAreaClass
     On the platforms that support it, #GtkGesture will handle transparently
     touchpad gesture events. The only precautions users of #GtkGesture should do
     to enable this support are:
-    $(LIST
-      * Enabling [gdk.types.EventMask.TouchpadGestureMask] on their #GdkWindows
-      * If the gesture has [gtk.types.PropagationPhase.None], ensuring events of type
-        [gdk.types.EventType.TouchpadSwipe] and [gdk.types.EventType.TouchpadPinch] are handled by the #GtkGesture
-    )
+    - Enabling [gdk.types.EventMask.TouchpadGestureMask] on their #GdkWindows
+    - If the gesture has [gtk.types.PropagationPhase.None], ensuring events of type
+      [gdk.types.EventType.TouchpadSwipe] and [gdk.types.EventType.TouchpadPinch] are handled by the #GtkGesture
 */
 struct GtkGesture;
 
@@ -12895,39 +12857,37 @@ struct GtkIMMulticontextPrivate;
     GtkIconFactory supports a custom `<sources>` element, which can contain
     multiple `<source>` elements. The following attributes are allowed:
     
-    $(LIST
-      * stock-id
-      
-          The stock id of the source, a string. This attribute is
-          mandatory
-      
-      * filename
-      
-          The filename of the source, a string.  This attribute is
-          optional
-      
-      * icon-name
-      
-          The icon name for the source, a string.  This attribute is
-          optional.
-      
-      * size
-      
-          Size of the icon, a #GtkIconSize enum value.  This attribute is
-          optional.
-      
-      * direction
-      
-          Direction of the source, a #GtkTextDirection enum value.  This
-          attribute is optional.
-      
-      * state
-      
-          State of the source, a #GtkStateType enum value.  This
-          attribute is optional.
-    )
-      
-      
+    - stock-id
+    
+        The stock id of the source, a string. This attribute is
+        mandatory
+    
+    - filename
+    
+        The filename of the source, a string.  This attribute is
+        optional
+    
+    - icon-name
+    
+        The icon name for the source, a string.  This attribute is
+        optional.
+    
+    - size
+    
+        Size of the icon, a #GtkIconSize enum value.  This attribute is
+        optional.
+    
+    - direction
+    
+        Direction of the source, a #GtkTextDirection enum value.  This
+        attribute is optional.
+    
+    - state
+    
+        State of the source, a #GtkStateType enum value.  This
+        attribute is optional.
+    
+    
     ## A #GtkIconFactory UI definition fragment. ##
     
     ```
@@ -13009,24 +12969,22 @@ struct GtkIconSource;
     and the distinction between the two may be a bit confusing.
     A few things to keep in mind:
     
-    $(LIST
-      * Stock images usually are used in conjunction with
-        [Stock Items][gtkstock], such as [gtk.types.STOCK_OK] or
-        [gtk.types.STOCK_OPEN]. Named icons are easier to set up and therefore
-        are more useful for new icons that an application wants to
-        add, such as application icons or window icons.
-      
-      * Stock images can only be loaded at the symbolic sizes defined
-        by the #GtkIconSize enumeration, or by custom sizes defined
-        by [gtk.global.iconSizeRegister], while named icons are more flexible
-        and any pixel size can be specified.
-      
-      * Because stock images are closely tied to stock items, and thus
-        to actions in the user interface, stock images may come in
-        multiple variants for different widget states or writing
-        directions.
-    )
-      
+    - Stock images usually are used in conjunction with
+      [Stock Items][gtkstock], such as [gtk.types.STOCK_OK] or
+      [gtk.types.STOCK_OPEN]. Named icons are easier to set up and therefore
+      are more useful for new icons that an application wants to
+      add, such as application icons or window icons.
+    
+    - Stock images can only be loaded at the symbolic sizes defined
+      by the #GtkIconSize enumeration, or by custom sizes defined
+      by [gtk.global.iconSizeRegister], while named icons are more flexible
+      and any pixel size can be specified.
+    
+    - Because stock images are closely tied to stock items, and thus
+      to actions in the user interface, stock images may come in
+      multiple variants for different widget states or writing
+      directions.
+    
     A good rule of thumb is that if there is a stock image for what
     you want to use, use it, otherwise use a named icon. It turns
     out that internally stock images are generally defined in
@@ -14724,68 +14682,60 @@ struct GtkMenuBarPrivate;
     
     ## Direction = Down
     
-    $(LIST
-      * halign = start
-      
-          ![](down-start.png)
-      
-      * halign = center
-      
-          ![](down-center.png)
-      
-      * halign = end
-      
-          ![](down-end.png)
-    )
-      
+    - halign = start
+    
+        ![](down-start.png)
+    
+    - halign = center
+    
+        ![](down-center.png)
+    
+    - halign = end
+    
+        ![](down-end.png)
+    
     ## Direction = Up
     
-    $(LIST
-      * halign = start
-      
-          ![](up-start.png)
-      
-      * halign = center
-      
-          ![](up-center.png)
-      
-      * halign = end
-      
-          ![](up-end.png)
-    )
-      
+    - halign = start
+    
+        ![](up-start.png)
+    
+    - halign = center
+    
+        ![](up-center.png)
+    
+    - halign = end
+    
+        ![](up-end.png)
+    
     ## Direction = Left
     
-    $(LIST
-      * valign = start
-      
-          ![](left-start.png)
-      
-      * valign = center
-      
-          ![](left-center.png)
-      
-      * valign = end
-      
-          ![](left-end.png)
-    )
-      
+    - valign = start
+    
+        ![](left-start.png)
+    
+    - valign = center
+    
+        ![](left-center.png)
+    
+    - valign = end
+    
+        ![](left-end.png)
+    
     ## Direction = Right
     
-    $(LIST
-      * valign = start
-      
-          ![](right-start.png)
-      
-      * valign = center
-      
-          ![](right-center.png)
-      
-      * valign = end
-      
-          ![](right-end.png)
-    )
-      
+    - valign = start
+    
+        ![](right-start.png)
+    
+    - valign = center
+    
+        ![](right-center.png)
+    
+    - valign = end
+    
+        ![](right-end.png)
+    
     # CSS nodes
     
     GtkMenuButton has a single CSS node with name button. To differentiate
@@ -16266,11 +16216,9 @@ struct GtkPaperSize;
     
     Among the children of the places sidebar, the following style classes can
     be used:
-    $(LIST
-      * .sidebar-new-bookmark-row for the 'Add new bookmark' row
-      * .sidebar-placeholder-row for a row that is a placeholder
-      * .has-open-popup when a popup is open for a row
-    )
+    - .sidebar-new-bookmark-row for the 'Add new bookmark' row
+    - .sidebar-placeholder-row for a row that is a placeholder
+    - .has-open-popup when a popup is open for a row
 */
 struct GtkPlacesSidebar;
 
@@ -18366,25 +18314,23 @@ struct GtkScalePrivate;
     
     All scrollable widgets should do the following.
     
-    $(LIST
-      * When a parent widget sets the scrollable child widget’s adjustments,
-        the widget should populate the adjustments’
-        #GtkAdjustment:lower, #GtkAdjustment:upper,
-        #GtkAdjustment:step-increment, #GtkAdjustment:page-increment and
-        #GtkAdjustment:page-size properties and connect to the
-        #GtkAdjustment::value-changed signal.
-      
-      * Because its preferred size is the size for a fully expanded widget,
-        the scrollable widget must be able to cope with underallocations.
-        This means that it must accept any value passed to its
-        #GtkWidgetClass.size_allocate() function.
-      
-      * When the parent allocates space to the scrollable child widget,
-        the widget should update the adjustments’ properties with new values.
-      
-      * When any of the adjustments emits the #GtkAdjustment::value-changed signal,
-        the scrollable widget should scroll its contents.
-    )
+    - When a parent widget sets the scrollable child widget’s adjustments,
+      the widget should populate the adjustments’
+      #GtkAdjustment:lower, #GtkAdjustment:upper,
+      #GtkAdjustment:step-increment, #GtkAdjustment:page-increment and
+      #GtkAdjustment:page-size properties and connect to the
+      #GtkAdjustment::value-changed signal.
+    
+    - Because its preferred size is the size for a fully expanded widget,
+      the scrollable widget must be able to cope with underallocations.
+      This means that it must accept any value passed to its
+      #GtkWidgetClass.size_allocate() function.
+    
+    - When the parent allocates space to the scrollable child widget,
+      the widget should update the adjustments’ properties with new values.
+    
+    - When any of the adjustments emits the #GtkAdjustment::value-changed signal,
+      the scrollable widget should scroll its contents.
 */
 struct GtkScrollable;
 
@@ -22105,37 +22051,33 @@ struct GtkToolbarPrivate;
     image, or you want the tooltip to have different contents per #GtkTreeView
     row or cell, you will have to do a little more work:
     
-    $(LIST
-      * Set the #GtkWidget:has-tooltip property to true, this will make GTK+
-        monitor the widget for motion and related events which are needed to
-        determine when and where to show a tooltip.
-      
-      * Connect to the #GtkWidget::query-tooltip signal.  This signal will be
-        emitted when a tooltip is supposed to be shown. One of the arguments passed
-        to the signal handler is a GtkTooltip object. This is the object that we
-        are about to display as a tooltip, and can be manipulated in your callback
-        using functions like [gtk.tooltip.Tooltip.setIcon]. There are functions for setting
-        the tooltip’s markup, setting an image from a named icon, or even putting in
-        a custom widget.
-      
-        Return true from your query-tooltip handler. This causes the tooltip to be
-        show. If you return false, it will not be shown.
-    )
-      
+    - Set the #GtkWidget:has-tooltip property to true, this will make GTK+
+      monitor the widget for motion and related events which are needed to
+      determine when and where to show a tooltip.
+    
+    - Connect to the #GtkWidget::query-tooltip signal.  This signal will be
+      emitted when a tooltip is supposed to be shown. One of the arguments passed
+      to the signal handler is a GtkTooltip object. This is the object that we
+      are about to display as a tooltip, and can be manipulated in your callback
+      using functions like [gtk.tooltip.Tooltip.setIcon]. There are functions for setting
+      the tooltip’s markup, setting an image from a named icon, or even putting in
+      a custom widget.
+    
+      Return true from your query-tooltip handler. This causes the tooltip to be
+      show. If you return false, it will not be shown.
+    
     In the probably rare case where you want to have even more control over the
     tooltip that is about to be shown, you can set your own #GtkWindow which
     will be used as tooltip window.  This works as follows:
     
-    $(LIST
-      * Set #GtkWidget:has-tooltip and connect to #GtkWidget::query-tooltip as before.
-        Use [gtk.widget.Widget.setTooltipWindow] to set a #GtkWindow created by you as
-        tooltip window.
-      
-      * In the #GtkWidget::query-tooltip callback you can access your window using
-        [gtk.widget.Widget.getTooltipWindow] and manipulate as you wish. The semantics of
-        the return value are exactly as before, return true to show the window,
-        false to not show it.
-    )
+    - Set #GtkWidget:has-tooltip and connect to #GtkWidget::query-tooltip as before.
+      Use [gtk.widget.Widget.setTooltipWindow] to set a #GtkWindow created by you as
+      tooltip window.
+    
+    - In the #GtkWidget::query-tooltip callback you can access your window using
+      [gtk.widget.Widget.getTooltipWindow] and manipulate as you wish. The semantics of
+      the return value are exactly as before, return true to show the window,
+      false to not show it.
 */
 struct GtkTooltip;
 
@@ -22422,21 +22364,19 @@ struct GtkTreeIter
     When working with reference counting, the following rules must be taken
     into account:
     
-    $(LIST
-      * Never take a reference on a node without owning a reference on its parent.
-        This means that all parent nodes of a referenced node must be referenced
-        as well.
-      
-      * Outstanding references on a deleted node are not released. This is not
-        possible because the node has already been deleted by the time the
-        row-deleted signal is received.
-      
-      * Models are not obligated to emit a signal on rows of which none of its
-        siblings are referenced. To phrase this differently, signals are only
-        required for levels in which nodes are referenced. For the root level
-        however, signals must be emitted at all times (however the root level
-        is always referenced when any view is attached).
-    )
+    - Never take a reference on a node without owning a reference on its parent.
+      This means that all parent nodes of a referenced node must be referenced
+      as well.
+    
+    - Outstanding references on a deleted node are not released. This is not
+      possible because the node has already been deleted by the time the
+      row-deleted signal is received.
+    
+    - Models are not obligated to emit a signal on rows of which none of its
+      siblings are referenced. To phrase this differently, signals are only
+      required for levels in which nodes are referenced. For the root level
+      however, signals must be emitted at all times (however the root level
+      is always referenced when any view is attached).
 */
 struct GtkTreeModel;
 
@@ -22444,23 +22384,21 @@ struct GtkTreeModel;
     A #GtkTreeModelFilter is a tree model which wraps another tree model,
     and can do the following things:
     
-    $(LIST
-      * Filter specific rows, based on data from a “visible column”, a column
-        storing booleans indicating whether the row should be filtered or not,
-        or based on the return value of a “visible function”, which gets a
-        model, iter and user_data and returns a boolean indicating whether the
-        row should be filtered or not.
-      
-      * Modify the “appearance” of the model, using a modify function.
-        This is extremely powerful and allows for just changing some
-        values and also for creating a completely different model based
-        on the given child model.
-      
-      * Set a different root node, also known as a “virtual root”. You can pass
-        in a #GtkTreePath indicating the root node for the filter at construction
-        time.
-    )
-      
+    - Filter specific rows, based on data from a “visible column”, a column
+      storing booleans indicating whether the row should be filtered or not,
+      or based on the return value of a “visible function”, which gets a
+      model, iter and user_data and returns a boolean indicating whether the
+      row should be filtered or not.
+    
+    - Modify the “appearance” of the model, using a modify function.
+      This is extremely powerful and allows for just changing some
+      values and also for creating a completely different model based
+      on the given child model.
+    
+    - Set a different root node, also known as a “virtual root”. You can pass
+      in a #GtkTreePath indicating the root node for the filter at construction
+      time.
+    
     The basic API is similar to #GtkTreeModelSort. For an example on its usage,
     see the section on #GtkTreeModelSort.
     
@@ -22983,15 +22921,13 @@ struct GtkTreeStorePrivate;
     
     Coordinate systems in GtkTreeView API:
     
-    $(LIST
-      * Widget coordinates: Coordinates relative to the widget (usually `widget->window`).
-      
-      * Bin window coordinates: Coordinates relative to the window that GtkTreeView renders to.
-      
-      * Tree coordinates: Coordinates relative to the entire scrollable area of GtkTreeView. These
-        coordinates start at (0, 0) for row 0 of the tree.
-    )
-      
+    - Widget coordinates: Coordinates relative to the widget (usually `widget->window`).
+    
+    - Bin window coordinates: Coordinates relative to the window that GtkTreeView renders to.
+    
+    - Tree coordinates: Coordinates relative to the entire scrollable area of GtkTreeView. These
+      coordinates start at (0, 0) for row 0 of the tree.
+    
     Several functions are available for converting between the different
     coordinate systems.  The most common translations are between widget and bin
     window coordinates and between bin window and tree coordinates. For the
@@ -23300,43 +23236,41 @@ struct GtkTreeViewPrivate;
     parents. The correspondence of XML elements to widgets should be
     almost obvious:
     
-    $(LIST
-      * menubar
-      
-         a #GtkMenuBar
-      
-      * toolbar
-      
-         a #GtkToolbar
-      
-      * popup
-      
-         a toplevel #GtkMenu
-      
-      * menu
-      
-         a #GtkMenu attached to a menuitem
-      
-      * menuitem
-      
-         a #GtkMenuItem subclass, the exact type depends on the action
-      
-      * toolitem
-      
-         a #GtkToolItem subclass, the exact type depends on the
-         action. Note that toolitem elements may contain a menu element,
-         but only if their associated action specifies a
-         #GtkMenuToolButton as proxy.
-      
-      * separator
-      
-         a #GtkSeparatorMenuItem or #GtkSeparatorToolItem
-      
-      * accelerator
-      
-         a keyboard accelerator
-    )
-      
+    - menubar
+    
+       a #GtkMenuBar
+    
+    - toolbar
+    
+       a #GtkToolbar
+    
+    - popup
+    
+       a toplevel #GtkMenu
+    
+    - menu
+    
+       a #GtkMenu attached to a menuitem
+    
+    - menuitem
+    
+       a #GtkMenuItem subclass, the exact type depends on the action
+    
+    - toolitem
+    
+       a #GtkToolItem subclass, the exact type depends on the
+       action. Note that toolitem elements may contain a menu element,
+       but only if their associated action specifies a
+       #GtkMenuToolButton as proxy.
+    
+    - separator
+    
+       a #GtkSeparatorMenuItem or #GtkSeparatorToolItem
+    
+    - accelerator
+    
+       a keyboard accelerator
+    
     The “position” attribute determines where a constructed widget is positioned
     wrt. to its siblings in the partially constructed tree. If it is
     “top”, the widget is prepended, otherwise it is appended.
@@ -23380,12 +23314,10 @@ struct GtkTreeViewPrivate;
     impossible to know in advance whether they will end up empty after merging.
     #GtkUIManager offers two ways to treat empty submenus:
     
-    $(LIST
-      * make them disappear by hiding the menu item they’re attached to
-      
-      * add an insensitive “Empty” item
-    )
-      
+    - make them disappear by hiding the menu item they’re attached to
+    
+    - add an insensitive “Empty” item
+    
     The behaviour is chosen based on the “hide_if_empty” property of the action
     to which the submenu is associated.
     
@@ -23723,15 +23655,13 @@ struct GtkVolumeButtonClass
     Height-for-width geometry management is implemented in GTK+ by way
     of five virtual methods:
     
-    $(LIST
-      * #GtkWidgetClass.get_request_mode()
-      * #GtkWidgetClass.get_preferred_width()
-      * #GtkWidgetClass.get_preferred_height()
-      * #GtkWidgetClass.get_preferred_height_for_width()
-      * #GtkWidgetClass.get_preferred_width_for_height()
-      * #GtkWidgetClass.get_preferred_height_and_baseline_for_width()
-    )
-      
+    - #GtkWidgetClass.get_request_mode()
+    - #GtkWidgetClass.get_preferred_width()
+    - #GtkWidgetClass.get_preferred_height()
+    - #GtkWidgetClass.get_preferred_height_for_width()
+    - #GtkWidgetClass.get_preferred_width_for_height()
+    - #GtkWidgetClass.get_preferred_height_and_baseline_for_width()
+    
     There are some important things to keep in mind when implementing
     height-for-width and when using it in container implementations.
     

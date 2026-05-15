@@ -306,7 +306,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.font_button.FontButton fontButton))
+          `void callback(gtk.font_button.FontButton fontButton)`
   
           `fontButton` the instance the signal is connected to (optional)
   
@@ -350,7 +350,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.font_button.FontButton fontButton))
+          `void callback(gtk.font_button.FontButton fontButton)`
   
           `fontButton` the instance the signal is connected to (optional)
   

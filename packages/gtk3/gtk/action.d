@@ -29,29 +29,25 @@ import gtk.widget;
     As well as the callback that is called when the action gets activated,
     the following also gets associated with the action:
     
-    $(LIST
-      * a name (not translated, for path lookup)
-      
-      * a label (translated, for display)
-      
-      * an accelerator
-      
-      * whether label indicates a stock id
-      
-      * a tooltip (optional, translated)
-      
-      * a toolbar label (optional, shorter than label)
-    )
-      
-      
+    - a name (not translated, for path lookup)
+    
+    - a label (translated, for display)
+    
+    - an accelerator
+    
+    - whether label indicates a stock id
+    
+    - a tooltip (optional, translated)
+    
+    - a toolbar label (optional, shorter than label)
+    
+    
     The action will also have some state information:
     
-    $(LIST
-      * visible (shown/hidden)
-      
-      * sensitive (enabled/disabled)
-    )
-      
+    - visible (shown/hidden)
+    
+    - sensitive (enabled/disabled)
+    
     Apart from regular actions, there are [toggle actions][GtkToggleAction],
     which can be toggled between two states and
     [radio actions][GtkRadioAction], of which only one in a group
@@ -1223,7 +1219,7 @@ class Action : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.action.Action action))
+          `void callback(gtk.action.Action action)`
   
           `action` the instance the signal is connected to (optional)
   

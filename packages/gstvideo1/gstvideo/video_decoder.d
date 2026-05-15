@@ -27,82 +27,74 @@ import gstvideo.video_codec_state;
     
     ## Configuration
     
-      $(LIST
-          * Initially, GstVideoDecoder calls @start when the decoder element
-            is activated, which allows the subclass to perform any global setup.
-        
-          * GstVideoDecoder calls @set_format to inform the subclass of caps
-            describing input video data that it is about to receive, including
-            possibly configuration data.
-            While unlikely, it might be called more than once, if changing input
-            parameters require reconfiguration.
-        
-          * Incoming data buffers are processed as needed, described in Data
-            Processing below.
-        
-          * GstVideoDecoder calls @stop at end of all processing.
-      )
-        
+      * Initially, GstVideoDecoder calls @start when the decoder element
+        is activated, which allows the subclass to perform any global setup.
+    
+      * GstVideoDecoder calls @set_format to inform the subclass of caps
+        describing input video data that it is about to receive, including
+        possibly configuration data.
+        While unlikely, it might be called more than once, if changing input
+        parameters require reconfiguration.
+    
+      * Incoming data buffers are processed as needed, described in Data
+        Processing below.
+    
+      * GstVideoDecoder calls @stop at end of all processing.
+    
     ## Data processing
     
-      $(LIST
-          * The base class gathers input data, and optionally allows subclass
-            to parse this into subsequently manageable chunks, typically
-            corresponding to and referred to as 'frames'.
-        
-          * Each input frame is provided in turn to the subclass' @handle_frame
-            callback.
-          * When the subclass enables the subframe mode with [gstvideo.video_decoder.VideoDecoder.setSubframeMode],
-            the base class will provide to the subclass the same input frame with
-            different input buffers to the subclass @handle_frame
-            callback. During this call, the subclass needs to take
-            ownership of the input_buffer as @GstVideoCodecFrame.input_buffer
-            will have been changed before the next subframe buffer is received.
-            The subclass will call [gstvideo.video_decoder.VideoDecoder.haveLastSubframe]
-            when a new input frame can be created by the base class.
-            Every subframe will share the same @GstVideoCodecFrame.output_buffer
-            to write the decoding result. The subclass is responsible to protect
-            its access.
-        
-          * If codec processing results in decoded data, the subclass should call
-            @gst_video_decoder_finish_frame to have decoded data pushed
-            downstream. In subframe mode
-            the subclass should call @gst_video_decoder_finish_subframe until the
-            last subframe where it should call @gst_video_decoder_finish_frame.
-            The subclass can detect the last subframe using GST_VIDEO_BUFFER_FLAG_MARKER
-            on buffers or using its own logic to collect the subframes.
-            In case of decoding failure, the subclass must call
-            @gst_video_decoder_drop_frame or @gst_video_decoder_drop_subframe,
-            to allow the base class to do timestamp and offset tracking, and possibly
-            to requeue the frame for a later attempt in the case of reverse playback.
-      )
-        
+      * The base class gathers input data, and optionally allows subclass
+        to parse this into subsequently manageable chunks, typically
+        corresponding to and referred to as 'frames'.
+    
+      * Each input frame is provided in turn to the subclass' @handle_frame
+        callback.
+      * When the subclass enables the subframe mode with [gstvideo.video_decoder.VideoDecoder.setSubframeMode],
+        the base class will provide to the subclass the same input frame with
+        different input buffers to the subclass @handle_frame
+        callback. During this call, the subclass needs to take
+        ownership of the input_buffer as @GstVideoCodecFrame.input_buffer
+        will have been changed before the next subframe buffer is received.
+        The subclass will call [gstvideo.video_decoder.VideoDecoder.haveLastSubframe]
+        when a new input frame can be created by the base class.
+        Every subframe will share the same @GstVideoCodecFrame.output_buffer
+        to write the decoding result. The subclass is responsible to protect
+        its access.
+    
+      * If codec processing results in decoded data, the subclass should call
+        @gst_video_decoder_finish_frame to have decoded data pushed
+        downstream. In subframe mode
+        the subclass should call @gst_video_decoder_finish_subframe until the
+        last subframe where it should call @gst_video_decoder_finish_frame.
+        The subclass can detect the last subframe using GST_VIDEO_BUFFER_FLAG_MARKER
+        on buffers or using its own logic to collect the subframes.
+        In case of decoding failure, the subclass must call
+        @gst_video_decoder_drop_frame or @gst_video_decoder_drop_subframe,
+        to allow the base class to do timestamp and offset tracking, and possibly
+        to requeue the frame for a later attempt in the case of reverse playback.
+    
     ## Shutdown phase
     
-      $(LIST
-          * The GstVideoDecoder class calls @stop to inform the subclass that data
-            parsing will be stopped.
-      )
-        
+      * The GstVideoDecoder class calls @stop to inform the subclass that data
+        parsing will be stopped.
+    
     ## Additional Notes
     
-      $(LIST
-          * Seeking/Flushing
-        
-            * When the pipeline is seeked or otherwise flushed, the subclass is
-              informed via a call to its @reset callback, with the hard parameter
-              set to true. This indicates the subclass should drop any internal data
-              queues and timestamps and prepare for a fresh set of buffers to arrive
-              for parsing and decoding.
-        
-          * End Of Stream
-        
-            * At end-of-stream, the subclass @parse function may be called some final
-              times with the at_eos parameter set to true, indicating that the element
-              should not expect any more data to be arriving, and it should parse and
-              remaining frames and call [gstvideo.video_decoder.VideoDecoder.haveFrame] if possible.
-      )
-        
+      * Seeking/Flushing
+    
+        * When the pipeline is seeked or otherwise flushed, the subclass is
+          informed via a call to its @reset callback, with the hard parameter
+          set to true. This indicates the subclass should drop any internal data
+          queues and timestamps and prepare for a fresh set of buffers to arrive
+          for parsing and decoding.
+    
+      * End Of Stream
+    
+        * At end-of-stream, the subclass @parse function may be called some final
+          times with the at_eos parameter set to true, indicating that the element
+          should not expect any more data to be arriving, and it should parse and
+          remaining frames and call [gstvideo.video_decoder.VideoDecoder.haveFrame] if possible.
+    
     The subclass is responsible for providing pad template caps for
     source and sink pads. The pads need to be named "sink" and "src". It also
     needs to provide information about the output caps, when they are known.
@@ -134,19 +126,17 @@ import gstvideo.video_codec_state;
     
     The bare minimum that a functional subclass needs to implement is:
     
-      $(LIST
-          * Provide pad templates
-          * Inform the base class of output caps via
-             @gst_video_decoder_set_output_state
-        
-          * Parse input data, if it is not considered packetized from upstream
-             Data will be provided to @parse which should invoke
-             @gst_video_decoder_add_to_frame and @gst_video_decoder_have_frame to
-             separate the data belonging to each video frame.
-        
-          * Accept data in @handle_frame and provide decoded results to
-             @gst_video_decoder_finish_frame, or call @gst_video_decoder_drop_frame.
-      )
+      * Provide pad templates
+      * Inform the base class of output caps via
+         @gst_video_decoder_set_output_state
+    
+      * Parse input data, if it is not considered packetized from upstream
+         Data will be provided to @parse which should invoke
+         @gst_video_decoder_add_to_frame and @gst_video_decoder_have_frame to
+         separate the data belonging to each video frame.
+    
+      * Accept data in @handle_frame and provide decoded results to
+         @gst_video_decoder_finish_frame, or call @gst_video_decoder_drop_frame.
 */
 class VideoDecoder : gst.element.Element
 {
@@ -797,19 +787,17 @@ class VideoDecoder : gst.element.Element
       The subclass can signal via flags how the frames until the next sync point
       should be handled:
       
-        $(LIST
-            * If [gstvideo.types.VideoDecoderRequestSyncPointFlags.DiscardInput] is selected then
-              all following input frames until the next sync point are discarded.
-              This can be useful if the lack of a sync point will prevent all further
-              decoding and the decoder implementation is not very robust in handling
-              missing references frames.
-            * If [gstvideo.types.VideoDecoderRequestSyncPointFlags.CorruptOutput] is selected
-              then all output frames following frame are marked as corrupted via
-              [gst.types.BufferFlags.Corrupted]. Corrupted frames can be automatically
-              dropped by the base class, see #GstVideoDecoder:discard-corrupted-frames.
-              Subclasses can manually mark frames as corrupted via [gstvideo.types.VideoCodecFrameFlags.Corrupted]
-              before calling [gstvideo.video_decoder.VideoDecoder.finishFrame].
-        )
+        * If [gstvideo.types.VideoDecoderRequestSyncPointFlags.DiscardInput] is selected then
+          all following input frames until the next sync point are discarded.
+          This can be useful if the lack of a sync point will prevent all further
+          decoding and the decoder implementation is not very robust in handling
+          missing references frames.
+        * If [gstvideo.types.VideoDecoderRequestSyncPointFlags.CorruptOutput] is selected
+          then all output frames following frame are marked as corrupted via
+          [gst.types.BufferFlags.Corrupted]. Corrupted frames can be automatically
+          dropped by the base class, see #GstVideoDecoder:discard-corrupted-frames.
+          Subclasses can manually mark frames as corrupted via [gstvideo.types.VideoCodecFrameFlags.Corrupted]
+          before calling [gstvideo.video_decoder.VideoDecoder.finishFrame].
   
       Params:
         frame = a #GstVideoCodecFrame

@@ -2941,21 +2941,19 @@ struct GstColorBalanceInterface
     
     The main parts of the API are:
     
-    $(LIST
-      * The GstNavigation interface, implemented by elements which provide an
-        application with the ability to create and inject navigation events into
-        the pipeline.
-      * GstNavigation event handling API. GstNavigation events are created in
-        response to calls on a GstNavigation interface implementation, and sent in
-        the pipeline. Upstream elements can use the navigation event API functions
-        to parse the contents of received messages.
-      
-      * GstNavigation message handling API. GstNavigation messages may be sent on
-        the message bus to inform applications of navigation related changes in the
-        pipeline, such as the mouse moving over a clickable region, or the set of
-        available angles changing.
-    )
-      
+    * The GstNavigation interface, implemented by elements which provide an
+      application with the ability to create and inject navigation events into
+      the pipeline.
+    * GstNavigation event handling API. GstNavigation events are created in
+      response to calls on a GstNavigation interface implementation, and sent in
+      the pipeline. Upstream elements can use the navigation event API functions
+      to parse the contents of received messages.
+    
+    * GstNavigation message handling API. GstNavigation messages may be sent on
+      the message bus to inform applications of navigation related changes in the
+      pipeline, such as the mouse moving over a clickable region, or the set of
+      available angles changing.
+    
     The GstNavigation message functions provide functions for creating and
     parsing custom bus messages for signaling GstNavigation changes.
 */
@@ -3716,82 +3714,74 @@ struct GstVideoCropMeta
     
     ## Configuration
     
-      $(LIST
-          * Initially, GstVideoDecoder calls @start when the decoder element
-            is activated, which allows the subclass to perform any global setup.
-        
-          * GstVideoDecoder calls @set_format to inform the subclass of caps
-            describing input video data that it is about to receive, including
-            possibly configuration data.
-            While unlikely, it might be called more than once, if changing input
-            parameters require reconfiguration.
-        
-          * Incoming data buffers are processed as needed, described in Data
-            Processing below.
-        
-          * GstVideoDecoder calls @stop at end of all processing.
-      )
-        
+      * Initially, GstVideoDecoder calls @start when the decoder element
+        is activated, which allows the subclass to perform any global setup.
+    
+      * GstVideoDecoder calls @set_format to inform the subclass of caps
+        describing input video data that it is about to receive, including
+        possibly configuration data.
+        While unlikely, it might be called more than once, if changing input
+        parameters require reconfiguration.
+    
+      * Incoming data buffers are processed as needed, described in Data
+        Processing below.
+    
+      * GstVideoDecoder calls @stop at end of all processing.
+    
     ## Data processing
     
-      $(LIST
-          * The base class gathers input data, and optionally allows subclass
-            to parse this into subsequently manageable chunks, typically
-            corresponding to and referred to as 'frames'.
-        
-          * Each input frame is provided in turn to the subclass' @handle_frame
-            callback.
-          * When the subclass enables the subframe mode with [gstvideo.video_decoder.VideoDecoder.setSubframeMode],
-            the base class will provide to the subclass the same input frame with
-            different input buffers to the subclass @handle_frame
-            callback. During this call, the subclass needs to take
-            ownership of the input_buffer as @GstVideoCodecFrame.input_buffer
-            will have been changed before the next subframe buffer is received.
-            The subclass will call [gstvideo.video_decoder.VideoDecoder.haveLastSubframe]
-            when a new input frame can be created by the base class.
-            Every subframe will share the same @GstVideoCodecFrame.output_buffer
-            to write the decoding result. The subclass is responsible to protect
-            its access.
-        
-          * If codec processing results in decoded data, the subclass should call
-            @gst_video_decoder_finish_frame to have decoded data pushed
-            downstream. In subframe mode
-            the subclass should call @gst_video_decoder_finish_subframe until the
-            last subframe where it should call @gst_video_decoder_finish_frame.
-            The subclass can detect the last subframe using GST_VIDEO_BUFFER_FLAG_MARKER
-            on buffers or using its own logic to collect the subframes.
-            In case of decoding failure, the subclass must call
-            @gst_video_decoder_drop_frame or @gst_video_decoder_drop_subframe,
-            to allow the base class to do timestamp and offset tracking, and possibly
-            to requeue the frame for a later attempt in the case of reverse playback.
-      )
-        
+      * The base class gathers input data, and optionally allows subclass
+        to parse this into subsequently manageable chunks, typically
+        corresponding to and referred to as 'frames'.
+    
+      * Each input frame is provided in turn to the subclass' @handle_frame
+        callback.
+      * When the subclass enables the subframe mode with [gstvideo.video_decoder.VideoDecoder.setSubframeMode],
+        the base class will provide to the subclass the same input frame with
+        different input buffers to the subclass @handle_frame
+        callback. During this call, the subclass needs to take
+        ownership of the input_buffer as @GstVideoCodecFrame.input_buffer
+        will have been changed before the next subframe buffer is received.
+        The subclass will call [gstvideo.video_decoder.VideoDecoder.haveLastSubframe]
+        when a new input frame can be created by the base class.
+        Every subframe will share the same @GstVideoCodecFrame.output_buffer
+        to write the decoding result. The subclass is responsible to protect
+        its access.
+    
+      * If codec processing results in decoded data, the subclass should call
+        @gst_video_decoder_finish_frame to have decoded data pushed
+        downstream. In subframe mode
+        the subclass should call @gst_video_decoder_finish_subframe until the
+        last subframe where it should call @gst_video_decoder_finish_frame.
+        The subclass can detect the last subframe using GST_VIDEO_BUFFER_FLAG_MARKER
+        on buffers or using its own logic to collect the subframes.
+        In case of decoding failure, the subclass must call
+        @gst_video_decoder_drop_frame or @gst_video_decoder_drop_subframe,
+        to allow the base class to do timestamp and offset tracking, and possibly
+        to requeue the frame for a later attempt in the case of reverse playback.
+    
     ## Shutdown phase
     
-      $(LIST
-          * The GstVideoDecoder class calls @stop to inform the subclass that data
-            parsing will be stopped.
-      )
-        
+      * The GstVideoDecoder class calls @stop to inform the subclass that data
+        parsing will be stopped.
+    
     ## Additional Notes
     
-      $(LIST
-          * Seeking/Flushing
-        
-            * When the pipeline is seeked or otherwise flushed, the subclass is
-              informed via a call to its @reset callback, with the hard parameter
-              set to true. This indicates the subclass should drop any internal data
-              queues and timestamps and prepare for a fresh set of buffers to arrive
-              for parsing and decoding.
-        
-          * End Of Stream
-        
-            * At end-of-stream, the subclass @parse function may be called some final
-              times with the at_eos parameter set to true, indicating that the element
-              should not expect any more data to be arriving, and it should parse and
-              remaining frames and call [gstvideo.video_decoder.VideoDecoder.haveFrame] if possible.
-      )
-        
+      * Seeking/Flushing
+    
+        * When the pipeline is seeked or otherwise flushed, the subclass is
+          informed via a call to its @reset callback, with the hard parameter
+          set to true. This indicates the subclass should drop any internal data
+          queues and timestamps and prepare for a fresh set of buffers to arrive
+          for parsing and decoding.
+    
+      * End Of Stream
+    
+        * At end-of-stream, the subclass @parse function may be called some final
+          times with the at_eos parameter set to true, indicating that the element
+          should not expect any more data to be arriving, and it should parse and
+          remaining frames and call [gstvideo.video_decoder.VideoDecoder.haveFrame] if possible.
+    
     The subclass is responsible for providing pad template caps for
     source and sink pads. The pads need to be named "sink" and "src". It also
     needs to provide information about the output caps, when they are known.
@@ -3823,19 +3813,17 @@ struct GstVideoCropMeta
     
     The bare minimum that a functional subclass needs to implement is:
     
-      $(LIST
-          * Provide pad templates
-          * Inform the base class of output caps via
-             @gst_video_decoder_set_output_state
-        
-          * Parse input data, if it is not considered packetized from upstream
-             Data will be provided to @parse which should invoke
-             @gst_video_decoder_add_to_frame and @gst_video_decoder_have_frame to
-             separate the data belonging to each video frame.
-        
-          * Accept data in @handle_frame and provide decoded results to
-             @gst_video_decoder_finish_frame, or call @gst_video_decoder_drop_frame.
-      )
+      * Provide pad templates
+      * Inform the base class of output caps via
+         @gst_video_decoder_set_output_state
+    
+      * Parse input data, if it is not considered packetized from upstream
+         Data will be provided to @parse which should invoke
+         @gst_video_decoder_add_to_frame and @gst_video_decoder_have_frame to
+         separate the data belonging to each video frame.
+    
+      * Accept data in @handle_frame and provide decoded results to
+         @gst_video_decoder_finish_frame, or call @gst_video_decoder_drop_frame.
 */
 struct GstVideoDecoder
 {
@@ -4075,44 +4063,38 @@ struct GstVideoDither;
     
     ## Configuration
     
-      $(LIST
-          * Initially, GstVideoEncoder calls @start when the encoder element
-            is activated, which allows subclass to perform any global setup.
-          * GstVideoEncoder calls @set_format to inform subclass of the format
-            of input video data that it is about to receive.  Subclass should
-            setup for encoding and configure base class as appropriate
-            (e.g. latency). While unlikely, it might be called more than once,
-            if changing input parameters require reconfiguration.  Baseclass
-            will ensure that processing of current configuration is finished.
-          * GstVideoEncoder calls @stop at end of all processing.
-      )
-        
+      * Initially, GstVideoEncoder calls @start when the encoder element
+        is activated, which allows subclass to perform any global setup.
+      * GstVideoEncoder calls @set_format to inform subclass of the format
+        of input video data that it is about to receive.  Subclass should
+        setup for encoding and configure base class as appropriate
+        (e.g. latency). While unlikely, it might be called more than once,
+        if changing input parameters require reconfiguration.  Baseclass
+        will ensure that processing of current configuration is finished.
+      * GstVideoEncoder calls @stop at end of all processing.
+    
     ## Data processing
     
-        $(LIST
-              * Base class collects input data and metadata into a frame and hands
-                this to subclass' @handle_frame.
-          
-              * If codec processing results in encoded data, subclass should call
-                @gst_video_encoder_finish_frame to have encoded data pushed
-                downstream.
-          
-              * If implemented, baseclass calls subclass @pre_push just prior to
-                pushing to allow subclasses to modify some metadata on the buffer.
-                If it returns GST_FLOW_OK, the buffer is pushed downstream.
-          
-              * GstVideoEncoderClass will handle both srcpad and sinkpad events.
-                Sink events will be passed to subclass if @event callback has been
-                provided.
-        )
-          
+        * Base class collects input data and metadata into a frame and hands
+          this to subclass' @handle_frame.
+    
+        * If codec processing results in encoded data, subclass should call
+          @gst_video_encoder_finish_frame to have encoded data pushed
+          downstream.
+    
+        * If implemented, baseclass calls subclass @pre_push just prior to
+          pushing to allow subclasses to modify some metadata on the buffer.
+          If it returns GST_FLOW_OK, the buffer is pushed downstream.
+    
+        * GstVideoEncoderClass will handle both srcpad and sinkpad events.
+          Sink events will be passed to subclass if @event callback has been
+          provided.
+    
     ## Shutdown phase
     
-      $(LIST
-          * GstVideoEncoder class calls @stop to inform the subclass that data
-            parsing will be stopped.
-      )
-        
+      * GstVideoEncoder class calls @stop to inform the subclass that data
+        parsing will be stopped.
+    
     Subclass is responsible for providing pad template caps for
     source and sink pads. The pads need to be named "sink" and "src". It should
     also be able to provide fixed src pad caps in @getcaps by the time it calls
@@ -4120,14 +4102,12 @@ struct GstVideoDither;
     
     Things that subclass need to take care of:
     
-      $(LIST
-          * Provide pad templates
-          * Provide source pad caps before pushing the first buffer
-          * Accept data in @handle_frame and provide encoded results to
-             @gst_video_encoder_finish_frame.
-      )
-        
-        
+      * Provide pad templates
+      * Provide source pad caps before pushing the first buffer
+      * Accept data in @handle_frame and provide encoded results to
+         @gst_video_encoder_finish_frame.
+    
+    
     The #GstVideoEncoder:qos property will enable the Quality-of-Service
     features of the encoder which gather statistics about the real-time
     performance of the downstream elements. If enabled, subclasses can
@@ -4804,12 +4784,10 @@ struct GstVideoMasteringDisplayInfoCoordinates
     [gst.query.Query.addAllocationMeta] when handling the ALLOCATION query.
     This structure should be named 'video-meta' and can have the following
     fields:
-    $(LIST
-      * padding-top (uint): extra pixels on the top
-      * padding-bottom (uint): extra pixels on the bottom
-      * padding-left (uint): extra pixels on the left side
-      * padding-right (uint): extra pixels on the right side
-    )
+    - padding-top (uint): extra pixels on the top
+    - padding-bottom (uint): extra pixels on the bottom
+    - padding-left (uint): extra pixels on the left side
+    - padding-right (uint): extra pixels on the right side
     The padding fields have the same semantic as #GstVideoMeta.alignment
     and so represent the paddings requested on produced video buffers.
     
@@ -4971,18 +4949,16 @@ struct GstVideoOrientationInterface
 /**
     The #GstVideoOverlay interface is used for 2 main purposes :
     
-    $(LIST
-      * To get a grab on the Window where the video sink element is going to render.
-        This is achieved by either being informed about the Window identifier that
-        the video sink element generated, or by forcing the video sink element to use
-        a specific Window identifier for rendering.
-      * To force a redrawing of the latest video frame the video sink element
-        displayed on the Window. Indeed if the #GstPipeline is in #GST_STATE_PAUSED
-        state, moving the Window around will damage its content. Application
-        developers will want to handle the Expose events themselves and force the
-        video sink element to refresh the Window's content.
-    )
-      
+    * To get a grab on the Window where the video sink element is going to render.
+      This is achieved by either being informed about the Window identifier that
+      the video sink element generated, or by forcing the video sink element to use
+      a specific Window identifier for rendering.
+    * To force a redrawing of the latest video frame the video sink element
+      displayed on the Window. Indeed if the #GstPipeline is in #GST_STATE_PAUSED
+      state, moving the Window around will damage its content. Application
+      developers will want to handle the Expose events themselves and force the
+      video sink element to refresh the Window's content.
+    
     Using the Window created by the video sink is probably the simplest scenario,
     in some cases, though, it might not be flexible enough for application
     developers if they need to catch events such as mouse moves and button
@@ -5240,17 +5216,15 @@ struct GstVideoOverlay;
     
     This API serves two main purposes:
     
-    $(LIST
-      * it can be used to attach overlay information (subtitles or logos)
-        to non-raw video buffers such as GL/VAAPI/VDPAU surfaces. The actual
-        blending of the overlay can then be done by e.g. the video sink that
-        processes these non-raw buffers.
-      
-      * it can also be used to blend overlay rectangles on top of raw video
-        buffers, thus consolidating blending functionality for raw video in
-        one place.
-    )
-      
+    * it can be used to attach overlay information (subtitles or logos)
+      to non-raw video buffers such as GL/VAAPI/VDPAU surfaces. The actual
+      blending of the overlay can then be done by e.g. the video sink that
+      processes these non-raw buffers.
+    
+    * it can also be used to blend overlay rectangles on top of raw video
+      buffers, thus consolidating blending functionality for raw video in
+      one place.
+    
     Together, this allows existing overlay elements to easily handle raw
     and non-raw video as input in without major changes (once the overlays
     have been put into a #GstVideoOverlayComposition object anyway) - for raw

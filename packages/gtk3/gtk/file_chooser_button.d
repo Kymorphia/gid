@@ -261,7 +261,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser_button.FileChooserButton fileChooserButton))
+          `void callback(gtk.file_chooser_button.FileChooserButton fileChooserButton)`
   
           `fileChooserButton` the instance the signal is connected to (optional)
   

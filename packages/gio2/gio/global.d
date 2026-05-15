@@ -551,11 +551,9 @@ bool contentTypeIsUnknown(string type)
     Set the list of directories used by GIO to load the MIME database.
     If dirs is null, the directories used are the default:
     
-     $(LIST
-        * the `mime` subdirectory of the directory in `$XDG_DATA_HOME`
-        * the `mime` subdirectory of every directory in `$XDG_DATA_DIRS`
-     )
-       
+     - the `mime` subdirectory of the directory in `$XDG_DATA_HOME`
+     - the `mime` subdirectory of every directory in `$XDG_DATA_DIRS`
+    
     This function is intended to be used when writing tests that depend on
     information stored in the MIME database, in order to control the data.
     
@@ -821,19 +819,17 @@ string dbusGenerateGuid()
     
     The conversion is using the following rules:
     
-    $(LIST
-      * `G_TYPE_STRING`: 's', 'o', 'g' or 'ay'
-      * `G_TYPE_STRV`: 'as', 'ao' or 'aay'
-      * `G_TYPE_BOOLEAN`: 'b'
-      * `G_TYPE_UCHAR`: 'y'
-      * `G_TYPE_INT`: 'i', 'n'
-      * `G_TYPE_UINT`: 'u', 'q'
-      * `G_TYPE_INT64`: 'x'
-      * `G_TYPE_UINT64`: 't'
-      * `G_TYPE_DOUBLE`: 'd'
-      * `G_TYPE_VARIANT`: Any #GVariantType
-    )
-      
+    - `G_TYPE_STRING`: 's', 'o', 'g' or 'ay'
+    - `G_TYPE_STRV`: 'as', 'ao' or 'aay'
+    - `G_TYPE_BOOLEAN`: 'b'
+    - `G_TYPE_UCHAR`: 'y'
+    - `G_TYPE_INT`: 'i', 'n'
+    - `G_TYPE_UINT`: 'u', 'q'
+    - `G_TYPE_INT64`: 'x'
+    - `G_TYPE_UINT64`: 't'
+    - `G_TYPE_DOUBLE`: 'd'
+    - `G_TYPE_VARIANT`: Any #GVariantType
+    
     This can fail if e.g. gvalue is of type `G_TYPE_STRING` and type
     is 'i', i.e. `G_VARIANT_TYPE_INT32`. It will also fail for any #GType
     (including e.g. `G_TYPE_OBJECT` and `G_TYPE_BOXED` derived-types) not

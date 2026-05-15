@@ -119,7 +119,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int nPress, double x, double y, gtk.gesture_multi_press.GestureMultiPress gestureMultiPress))
+          `void callback(int nPress, double x, double y, gtk.gesture_multi_press.GestureMultiPress gestureMultiPress)`
   
           `nPress` how many touch/button presses happened with this one (optional)
   
@@ -177,7 +177,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int nPress, double x, double y, gtk.gesture_multi_press.GestureMultiPress gestureMultiPress))
+          `void callback(int nPress, double x, double y, gtk.gesture_multi_press.GestureMultiPress gestureMultiPress)`
   
           `nPress` number of press that is paired with this release (optional)
   
@@ -233,7 +233,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.gesture_multi_press.GestureMultiPress gestureMultiPress))
+          `void callback(gtk.gesture_multi_press.GestureMultiPress gestureMultiPress)`
   
           `gestureMultiPress` the instance the signal is connected to (optional)
   

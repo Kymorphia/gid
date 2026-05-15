@@ -637,7 +637,7 @@ template RecentChooserT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.recent_chooser.RecentChooser recentChooser))
+          `void callback(gtk.recent_chooser.RecentChooser recentChooser)`
   
           `recentChooser` the instance the signal is connected to (optional)
   
@@ -677,7 +677,7 @@ template RecentChooserT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.recent_chooser.RecentChooser recentChooser))
+          `void callback(gtk.recent_chooser.RecentChooser recentChooser)`
   
           `recentChooser` the instance the signal is connected to (optional)
   

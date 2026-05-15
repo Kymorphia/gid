@@ -590,15 +590,13 @@ class ObjectWrap
       
       The value can be:
       
-       $(LIST
-          * an empty #GValue initialized by `G_VALUE_INIT`, which will be
-            automatically initialized with the expected type of the property
-            (since GLib 2.60)
-          * a #GValue initialized with the expected type of the property
-          * a #GValue initialized with a type to which the expected type
-            of the property can be transformed
-       )
-         
+       - an empty #GValue initialized by `G_VALUE_INIT`, which will be
+         automatically initialized with the expected type of the property
+         (since GLib 2.60)
+       - a #GValue initialized with the expected type of the property
+       - a #GValue initialized with a type to which the expected type
+         of the property can be transformed
+      
       In general, a copy is made of the property contents and the caller is
       responsible for freeing the memory by calling [gobject.value.Value.unset].
       
@@ -939,7 +937,7 @@ class ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.param_spec.ParamSpec pspec, gobject.object.ObjectWrap objectWrap))
+          `void callback(gobject.param_spec.ParamSpec pspec, gobject.object.ObjectWrap objectWrap)`
   
           `pspec` the #GParamSpec of the property which changed. (optional)
   

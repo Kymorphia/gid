@@ -1607,7 +1607,7 @@ class Element : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.element.Element element))
+          `void callback(gst.element.Element element)`
   
           `element` the instance the signal is connected to (optional)
   
@@ -1648,7 +1648,7 @@ class Element : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.pad.Pad newPad, gst.element.Element element))
+          `void callback(gst.pad.Pad newPad, gst.element.Element element)`
   
           `newPad` the pad that has been added (optional)
   
@@ -1691,7 +1691,7 @@ class Element : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.pad.Pad oldPad, gst.element.Element element))
+          `void callback(gst.pad.Pad oldPad, gst.element.Element element)`
   
           `oldPad` the pad that has been removed (optional)
   

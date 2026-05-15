@@ -238,65 +238,63 @@ struct GstAdapterClass;
     Manages a set of pads with the purpose of aggregating their buffers.
     Control is given to the subclass when all pads have data.
     
-     $(LIST
-        * Base class for mixers and muxers. Subclasses should at least implement
-          the #GstAggregatorClass::aggregate virtual method.
-       
-        * Installs a #GstPadChainFunction, a #GstPadEventFullFunction and a
-          #GstPadQueryFunction to queue all serialized data packets per sink pad.
-          Subclasses should not overwrite those, but instead implement
-          #GstAggregatorClass::sink_event and #GstAggregatorClass::sink_query as
-          needed.
-       
-        * When data is queued on all pads, the aggregate vmethod is called.
-       
-        * One can peek at the data on any given GstAggregatorPad with the
-          [gstbase.aggregator_pad.AggregatorPad.peekBuffer] method, and remove it from the pad
-          with the gst_aggregator_pad_pop_buffer () method. When a buffer
-          has been taken with pop_buffer (), a new buffer can be queued
-          on that pad.
-       
-        * When [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or [gstbase.aggregator_pad.AggregatorPad.hasBuffer]
-          are called, a reference is taken to the returned buffer, which stays
-          valid until either:
-       
-            - [gstbase.aggregator_pad.AggregatorPad.popBuffer] is called, in which case the caller
-              is guaranteed that the buffer they receive is the same as the peeked
-              buffer.
-            - [gstbase.aggregator_pad.AggregatorPad.dropBuffer] is called, in which case the caller
-              is guaranteed that the dropped buffer is the one that was peeked.
-            - the subclass implementation of #GstAggregatorClass.aggregate returns.
-       
-          Subsequent calls to [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or
-          [gstbase.aggregator_pad.AggregatorPad.hasBuffer] return / check the same buffer that was
-          returned / checked, until one of the conditions listed above is met.
-       
-          Subclasses are only allowed to call these methods from the aggregate
-          thread.
-       
-        * If the subclass wishes to push a buffer downstream in its aggregate
-          implementation, it should do so through the
-          [gstbase.aggregator.Aggregator.finishBuffer] method. This method will take care
-          of sending and ordering mandatory events such as stream start, caps
-          and segment. Buffer lists can also be pushed out with
-          [gstbase.aggregator.Aggregator.finishBufferList].
-       
-        * Same goes for EOS events, which should not be pushed directly by the
-          subclass, it should instead return GST_FLOW_EOS in its aggregate
-          implementation.
-       
-        * Note that the aggregator logic regarding gap event handling is to turn
-          these into gap buffers with matching PTS and duration. It will also
-          flag these buffers with GST_BUFFER_FLAG_GAP and GST_BUFFER_FLAG_DROPPABLE
-          to ease their identification and subsequent processing.
-          In addition, if the gap event was flagged with GST_GAP_FLAG_MISSING_DATA,
-          a custom meta is added to the resulting gap buffer (GstAggregatorMissingDataMeta).
-       
-        * Subclasses must use (a subclass of) #GstAggregatorPad for both their
-          sink and source pads.
-          See [gst.element_class.ElementClass.addStaticPadTemplateWithGtype].
-     )
-       
+     * Base class for mixers and muxers. Subclasses should at least implement
+       the #GstAggregatorClass::aggregate virtual method.
+    
+     * Installs a #GstPadChainFunction, a #GstPadEventFullFunction and a
+       #GstPadQueryFunction to queue all serialized data packets per sink pad.
+       Subclasses should not overwrite those, but instead implement
+       #GstAggregatorClass::sink_event and #GstAggregatorClass::sink_query as
+       needed.
+    
+     * When data is queued on all pads, the aggregate vmethod is called.
+    
+     * One can peek at the data on any given GstAggregatorPad with the
+       [gstbase.aggregator_pad.AggregatorPad.peekBuffer] method, and remove it from the pad
+       with the gst_aggregator_pad_pop_buffer () method. When a buffer
+       has been taken with pop_buffer (), a new buffer can be queued
+       on that pad.
+    
+     * When [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or [gstbase.aggregator_pad.AggregatorPad.hasBuffer]
+       are called, a reference is taken to the returned buffer, which stays
+       valid until either:
+    
+         - [gstbase.aggregator_pad.AggregatorPad.popBuffer] is called, in which case the caller
+           is guaranteed that the buffer they receive is the same as the peeked
+           buffer.
+         - [gstbase.aggregator_pad.AggregatorPad.dropBuffer] is called, in which case the caller
+           is guaranteed that the dropped buffer is the one that was peeked.
+         - the subclass implementation of #GstAggregatorClass.aggregate returns.
+    
+       Subsequent calls to [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or
+       [gstbase.aggregator_pad.AggregatorPad.hasBuffer] return / check the same buffer that was
+       returned / checked, until one of the conditions listed above is met.
+    
+       Subclasses are only allowed to call these methods from the aggregate
+       thread.
+    
+     * If the subclass wishes to push a buffer downstream in its aggregate
+       implementation, it should do so through the
+       [gstbase.aggregator.Aggregator.finishBuffer] method. This method will take care
+       of sending and ordering mandatory events such as stream start, caps
+       and segment. Buffer lists can also be pushed out with
+       [gstbase.aggregator.Aggregator.finishBufferList].
+    
+     * Same goes for EOS events, which should not be pushed directly by the
+       subclass, it should instead return GST_FLOW_EOS in its aggregate
+       implementation.
+    
+     * Note that the aggregator logic regarding gap event handling is to turn
+       these into gap buffers with matching PTS and duration. It will also
+       flag these buffers with GST_BUFFER_FLAG_GAP and GST_BUFFER_FLAG_DROPPABLE
+       to ease their identification and subsequent processing.
+       In addition, if the gap event was flagged with GST_GAP_FLAG_MISSING_DATA,
+       a custom meta is added to the resulting gap buffer (GstAggregatorMissingDataMeta).
+    
+     * Subclasses must use (a subclass of) #GstAggregatorPad for both their
+       sink and source pads.
+       See [gst.element_class.ElementClass.addStaticPadTemplateWithGtype].
+    
     This class used to live in gst-plugins-bad and was moved to core.
 */
 struct GstAggregator
@@ -570,16 +568,14 @@ struct GstAggregatorPrivate;
     
     It provides for:
     
-      $(LIST
-          * provides one sink pad and one source pad
-          * handles state changes
-          * can operate in pull mode or push mode
-          * handles seeking in both modes
-          * handles events (SEGMENT/EOS/FLUSH)
-          * handles queries (POSITION/DURATION/SEEKING/FORMAT/CONVERT)
-          * handles flushing
-      )
-        
+      * provides one sink pad and one source pad
+      * handles state changes
+      * can operate in pull mode or push mode
+      * handles seeking in both modes
+      * handles events (SEGMENT/EOS/FLUSH)
+      * handles queries (POSITION/DURATION/SEEKING/FORMAT/CONVERT)
+      * handles flushing
+    
     The purpose of this base class is to provide the basic functionality of
     a parser and share a lot of rather complex code.
     
@@ -587,84 +583,78 @@ struct GstAggregatorPrivate;
     
     ## Set-up phase
     
-     $(LIST
-        * #GstBaseParse calls #GstBaseParseClass::start to inform subclass
-          that data processing is about to start now.
-       
-        * #GstBaseParse class calls #GstBaseParseClass::set_sink_caps to
-          inform the subclass about incoming sinkpad caps. Subclass could
-          already set the srcpad caps accordingly, but this might be delayed
-          until calling [gstbase.base_parse.BaseParse.finishFrame] with a non-queued frame.
-       
-        * At least at this point subclass needs to tell the #GstBaseParse class
-          how big data chunks it wants to receive (minimum frame size ). It can
-          do this with [gstbase.base_parse.BaseParse.setMinFrameSize].
-       
-        * #GstBaseParse class sets up appropriate data passing mode (pull/push)
-          and starts to process the data.
-     )
-       
+     * #GstBaseParse calls #GstBaseParseClass::start to inform subclass
+       that data processing is about to start now.
+    
+     * #GstBaseParse class calls #GstBaseParseClass::set_sink_caps to
+       inform the subclass about incoming sinkpad caps. Subclass could
+       already set the srcpad caps accordingly, but this might be delayed
+       until calling [gstbase.base_parse.BaseParse.finishFrame] with a non-queued frame.
+    
+     * At least at this point subclass needs to tell the #GstBaseParse class
+       how big data chunks it wants to receive (minimum frame size ). It can
+       do this with [gstbase.base_parse.BaseParse.setMinFrameSize].
+    
+     * #GstBaseParse class sets up appropriate data passing mode (pull/push)
+       and starts to process the data.
+    
     ## Parsing phase
     
-     $(LIST
-        * #GstBaseParse gathers at least min_frame_size bytes of data either
-          by pulling it from upstream or collecting buffers in an internal
-          #GstAdapter.
-       
-        * A buffer of (at least) min_frame_size bytes is passed to subclass
-          with #GstBaseParseClass::handle_frame. Subclass checks the contents
-          and can optionally return #GST_FLOW_OK along with an amount of data
-          to be skipped to find a valid frame (which will result in a
-          subsequent DISCONT).  If, otherwise, the buffer does not hold a
-          complete frame, #GstBaseParseClass::handle_frame can merely return
-          and will be called again when additional data is available.  In push
-          mode this amounts to an additional input buffer (thus minimal
-          additional latency), in pull mode this amounts to some arbitrary
-          reasonable buffer size increase.
-       
-          Of course, [gstbase.base_parse.BaseParse.setMinFrameSize] could also be used if
-          a very specific known amount of additional data is required.  If,
-          however, the buffer holds a complete valid frame, it can pass the
-          size of this frame to [gstbase.base_parse.BaseParse.finishFrame].
-       
-          If acting as a converter, it can also merely indicate consumed input
-          data while simultaneously providing custom output data.  Note that
-          baseclass performs some processing (such as tracking overall consumed
-          data rate versus duration) for each finished frame, but other state
-          is only updated upon each call to #GstBaseParseClass::handle_frame
-          (such as tracking upstream input timestamp).
-       
-          Subclass is also responsible for setting the buffer metadata
-          (e.g. buffer timestamp and duration, or keyframe if applicable).
-          (although the latter can also be done by #GstBaseParse if it is
-          appropriately configured, see below).  Frame is provided with
-          timestamp derived from upstream (as much as generally possible),
-          duration obtained from configuration (see below), and offset
-          if meaningful (in pull mode).
-       
-          Note that #GstBaseParseClass::handle_frame might receive any small
-          amount of input data when leftover data is being drained (e.g. at
-          EOS).
-       
-        * As part of finish frame processing, just prior to actually pushing
-          the buffer in question, it is passed to
-          #GstBaseParseClass::pre_push_frame which gives subclass yet one last
-          chance to examine buffer metadata, or to send some custom (tag)
-          events, or to perform custom (segment) filtering.
-       
-        * During the parsing process #GstBaseParseClass will handle both srcpad
-          and sinkpad events. They will be passed to subclass if
-          #GstBaseParseClass::sink_event or #GstBaseParseClass::src_event
-          implementations have been provided.
-     )
-       
+     * #GstBaseParse gathers at least min_frame_size bytes of data either
+       by pulling it from upstream or collecting buffers in an internal
+       #GstAdapter.
+    
+     * A buffer of (at least) min_frame_size bytes is passed to subclass
+       with #GstBaseParseClass::handle_frame. Subclass checks the contents
+       and can optionally return #GST_FLOW_OK along with an amount of data
+       to be skipped to find a valid frame (which will result in a
+       subsequent DISCONT).  If, otherwise, the buffer does not hold a
+       complete frame, #GstBaseParseClass::handle_frame can merely return
+       and will be called again when additional data is available.  In push
+       mode this amounts to an additional input buffer (thus minimal
+       additional latency), in pull mode this amounts to some arbitrary
+       reasonable buffer size increase.
+    
+       Of course, [gstbase.base_parse.BaseParse.setMinFrameSize] could also be used if
+       a very specific known amount of additional data is required.  If,
+       however, the buffer holds a complete valid frame, it can pass the
+       size of this frame to [gstbase.base_parse.BaseParse.finishFrame].
+    
+       If acting as a converter, it can also merely indicate consumed input
+       data while simultaneously providing custom output data.  Note that
+       baseclass performs some processing (such as tracking overall consumed
+       data rate versus duration) for each finished frame, but other state
+       is only updated upon each call to #GstBaseParseClass::handle_frame
+       (such as tracking upstream input timestamp).
+    
+       Subclass is also responsible for setting the buffer metadata
+       (e.g. buffer timestamp and duration, or keyframe if applicable).
+       (although the latter can also be done by #GstBaseParse if it is
+       appropriately configured, see below).  Frame is provided with
+       timestamp derived from upstream (as much as generally possible),
+       duration obtained from configuration (see below), and offset
+       if meaningful (in pull mode).
+    
+       Note that #GstBaseParseClass::handle_frame might receive any small
+       amount of input data when leftover data is being drained (e.g. at
+       EOS).
+    
+     * As part of finish frame processing, just prior to actually pushing
+       the buffer in question, it is passed to
+       #GstBaseParseClass::pre_push_frame which gives subclass yet one last
+       chance to examine buffer metadata, or to send some custom (tag)
+       events, or to perform custom (segment) filtering.
+    
+     * During the parsing process #GstBaseParseClass will handle both srcpad
+       and sinkpad events. They will be passed to subclass if
+       #GstBaseParseClass::sink_event or #GstBaseParseClass::src_event
+       implementations have been provided.
+    
     ## Shutdown phase
     
-    $(LIST
-      * #GstBaseParse class calls #GstBaseParseClass::stop to inform the
-        subclass that data parsing will be stopped.
-    )
-      
+    * #GstBaseParse class calls #GstBaseParseClass::stop to inform the
+      subclass that data parsing will be stopped.
+    
     Subclass is responsible for providing pad template caps for source and
     sink pads. The pads need to be named "sink" and "src". It also needs to
     set the fixed caps on srcpad, when the format is ensured (e.g.  when
@@ -683,33 +673,31 @@ struct GstAggregatorPrivate;
     
     Things that subclass need to take care of:
     
-    $(LIST
-      * Provide pad templates
-      * Fixate the source pad caps when appropriate
-      * Inform base class how big data chunks should be retrieved. This is
-        done with [gstbase.base_parse.BaseParse.setMinFrameSize] function.
-      * Examine data chunks passed to subclass with
-        #GstBaseParseClass::handle_frame and pass proper frame(s) to
-        [gstbase.base_parse.BaseParse.finishFrame], and setting src pad caps and timestamps
-        on frame.
-      * Provide conversion functions
-      * Update the duration information with [gstbase.base_parse.BaseParse.setDuration]
-      * Optionally passthrough using [gstbase.base_parse.BaseParse.setPassthrough]
-      * Configure various baseparse parameters using
-        [gstbase.base_parse.BaseParse.setAverageBitrate], [gstbase.base_parse.BaseParse.setSyncable]
-        and [gstbase.base_parse.BaseParse.setFrameRate].
-      
-      * In particular, if subclass is unable to determine a duration, but
-        parsing (or specs) yields a frames per seconds rate, then this can be
-        provided to #GstBaseParse to enable it to cater for buffer time
-        metadata (which will be taken from upstream as much as
-        possible). Internally keeping track of frame durations and respective
-        sizes that have been pushed provides #GstBaseParse with an estimated
-        bitrate. A default #GstBaseParseClass::convert (used if not
-        overridden) will then use these rates to perform obvious conversions.
-        These rates are also used to update (estimated) duration at regular
-        frame intervals.
-    )
+    * Provide pad templates
+    * Fixate the source pad caps when appropriate
+    * Inform base class how big data chunks should be retrieved. This is
+      done with [gstbase.base_parse.BaseParse.setMinFrameSize] function.
+    * Examine data chunks passed to subclass with
+      #GstBaseParseClass::handle_frame and pass proper frame(s) to
+      [gstbase.base_parse.BaseParse.finishFrame], and setting src pad caps and timestamps
+      on frame.
+    * Provide conversion functions
+    * Update the duration information with [gstbase.base_parse.BaseParse.setDuration]
+    * Optionally passthrough using [gstbase.base_parse.BaseParse.setPassthrough]
+    * Configure various baseparse parameters using
+      [gstbase.base_parse.BaseParse.setAverageBitrate], [gstbase.base_parse.BaseParse.setSyncable]
+      and [gstbase.base_parse.BaseParse.setFrameRate].
+    
+    * In particular, if subclass is unable to determine a duration, but
+      parsing (or specs) yields a frames per seconds rate, then this can be
+      provided to #GstBaseParse to enable it to cater for buffer time
+      metadata (which will be taken from upstream as much as
+      possible). Internally keeping track of frame durations and respective
+      sizes that have been pushed provides #GstBaseParse with an estimated
+      bitrate. A default #GstBaseParseClass::convert (used if not
+      overridden) will then use these rates to perform obvious conversions.
+      These rates are also used to update (estimated) duration at regular
+      frame intervals.
 */
 struct GstBaseParse
 {
@@ -1215,12 +1203,10 @@ struct GstBaseSinkPrivate;
     This is a generic base class for source elements. The following
     types of sources are supported:
     
-      $(LIST
-          * random access sources like files
-          * seekable sources
-          * live sources
-      )
-        
+      * random access sources like files
+      * seekable sources
+      * live sources
+    
     The source can be configured to operate in any #GstFormat with the
     [gstbase.base_src.BaseSrc.setFormat] method. The currently set format determines
     the format of the internal #GstSegment and any [gst.types.EventType.Segment]
@@ -1229,24 +1215,20 @@ struct GstBaseSinkPrivate;
     #GstBaseSrc always supports push mode scheduling. If the following
     conditions are met, it also supports pull mode scheduling:
     
-      $(LIST
-          * The format is set to [gst.types.Format.Bytes] (default).
-          * #GstBaseSrcClass::is_seekable returns true.
-      )
-        
+      * The format is set to [gst.types.Format.Bytes] (default).
+      * #GstBaseSrcClass::is_seekable returns true.
+    
     If all the conditions are met for operating in pull mode, #GstBaseSrc is
     automatically seekable in push mode as well. The following conditions must
     be met to make the element seekable in push mode when the format is not
     [gst.types.Format.Bytes]:
     
-    $(LIST
-      * #GstBaseSrcClass::is_seekable returns true.
-      * #GstBaseSrcClass::query can convert all supported seek formats to the
-        internal format as set with [gstbase.base_src.BaseSrc.setFormat].
-      * #GstBaseSrcClass::do_seek is implemented, performs the seek and returns
-         true.
-    )
-      
+    * #GstBaseSrcClass::is_seekable returns true.
+    * #GstBaseSrcClass::query can convert all supported seek formats to the
+      internal format as set with [gstbase.base_src.BaseSrc.setFormat].
+    * #GstBaseSrcClass::do_seek is implemented, performs the seek and returns
+       true.
+    
     When the element does not meet the requirements to operate in pull mode, the
     offset and length in the #GstBaseSrcClass::create method should be ignored.
     It is recommended to subclass #GstPushSrc instead, in this situation. If the
@@ -1544,113 +1526,99 @@ struct GstBaseSrcPrivate;
     
     It provides for:
     
-    $(LIST
-      * one sinkpad and one srcpad
-      * Possible formats on sink and source pad implemented
-        with custom transform_caps function. By default uses
-        same format on sink and source.
-      
-      * Handles state changes
-      * Does flushing
-      * Push mode
-      * Pull mode if the sub-class transform can operate on arbitrary data
-    )
-      
+    * one sinkpad and one srcpad
+    * Possible formats on sink and source pad implemented
+      with custom transform_caps function. By default uses
+      same format on sink and source.
+    
+    * Handles state changes
+    * Does flushing
+    * Push mode
+    * Pull mode if the sub-class transform can operate on arbitrary data
+    
     # Use Cases
     
     ## Passthrough mode
     
-      $(LIST
-          * Element has no interest in modifying the buffer. It may want to inspect it,
-            in which case the element should have a transform_ip function. If there
-            is no transform_ip function in passthrough mode, the buffer is pushed
-            intact.
-        
-          * The #GstBaseTransformClass.passthrough_on_same_caps variable
-            will automatically set/unset passthrough based on whether the
-            element negotiates the same caps on both pads.
-        
-          * #GstBaseTransformClass.passthrough_on_same_caps on an element that
-            doesn't implement a transform_caps function is useful for elements that
-            only inspect data (such as level)
-        
-          * Example elements
-        
-            * Level
-            * Videoscale, audioconvert, videoconvert, audioresample in certain modes.
-      )
-        
+      * Element has no interest in modifying the buffer. It may want to inspect it,
+        in which case the element should have a transform_ip function. If there
+        is no transform_ip function in passthrough mode, the buffer is pushed
+        intact.
+    
+      * The #GstBaseTransformClass.passthrough_on_same_caps variable
+        will automatically set/unset passthrough based on whether the
+        element negotiates the same caps on both pads.
+    
+      * #GstBaseTransformClass.passthrough_on_same_caps on an element that
+        doesn't implement a transform_caps function is useful for elements that
+        only inspect data (such as level)
+    
+      * Example elements
+    
+        * Level
+        * Videoscale, audioconvert, videoconvert, audioresample in certain modes.
+    
     ## Modifications in-place - input buffer and output buffer are the same thing.
     
-    $(LIST
-      * The element must implement a transform_ip function.
-      * Output buffer size must <= input buffer size
-      * If the always_in_place flag is set, non-writable buffers will be copied
-        and passed to the transform_ip function, otherwise a new buffer will be
-        created and the transform function called.
-      
-      * Incoming writable buffers will be passed to the transform_ip function
-        immediately.
-      * only implementing transform_ip and not transform implies always_in_place = true
-      
-        * Example elements:
-          * Volume
-          * Audioconvert in certain modes (signed/unsigned conversion)
-          * videoconvert in certain modes (endianness swapping)
-    )
-      
+    * The element must implement a transform_ip function.
+    * Output buffer size must <= input buffer size
+    * If the always_in_place flag is set, non-writable buffers will be copied
+      and passed to the transform_ip function, otherwise a new buffer will be
+      created and the transform function called.
+    
+    * Incoming writable buffers will be passed to the transform_ip function
+      immediately.
+    * only implementing transform_ip and not transform implies always_in_place = true
+    
+      * Example elements:
+        * Volume
+        * Audioconvert in certain modes (signed/unsigned conversion)
+        * videoconvert in certain modes (endianness swapping)
+    
     ## Modifications only to the caps/metadata of a buffer
     
-    $(LIST
-      * The element does not require writable data, but non-writable buffers
-        should be subbuffered so that the meta-information can be replaced.
-      
-      * Elements wishing to operate in this mode should replace the
-        prepare_output_buffer method to create subbuffers of the input buffer
-        and set always_in_place to true
-      
-      * Example elements
-        * Capsfilter when setting caps on outgoing buffers that have
-          none.
-        * identity when it is going to re-timestamp buffers by
-          datarate.
-    )
-      
+    * The element does not require writable data, but non-writable buffers
+      should be subbuffered so that the meta-information can be replaced.
+    
+    * Elements wishing to operate in this mode should replace the
+      prepare_output_buffer method to create subbuffers of the input buffer
+      and set always_in_place to true
+    
+    * Example elements
+      * Capsfilter when setting caps on outgoing buffers that have
+        none.
+      * identity when it is going to re-timestamp buffers by
+        datarate.
+    
     ## Normal mode
-      $(LIST
-          * always_in_place flag is not set, or there is no transform_ip function
-          * Element will receive an input buffer and output buffer to operate on.
-          * Output buffer is allocated by calling the prepare_output_buffer function.
-          * Example elements:
-            * Videoscale, videoconvert, audioconvert when doing
-            scaling/conversions
-      )
-        
+      * always_in_place flag is not set, or there is no transform_ip function
+      * Element will receive an input buffer and output buffer to operate on.
+      * Output buffer is allocated by calling the prepare_output_buffer function.
+      * Example elements:
+        * Videoscale, videoconvert, audioconvert when doing
+        scaling/conversions
+    
     ## Special output buffer allocations
-      $(LIST
-          * Elements which need to do special allocation of their output buffers
-            beyond allocating output buffers via the negotiated allocator or
-            buffer pool should implement the prepare_output_buffer method.
-        
-          * Example elements:
-            * efence
-      )
-        
+      * Elements which need to do special allocation of their output buffers
+        beyond allocating output buffers via the negotiated allocator or
+        buffer pool should implement the prepare_output_buffer method.
+    
+      * Example elements:
+        * efence
+    
     # Sub-class settable flags on GstBaseTransform
     
-    $(LIST
-      * passthrough
-      
-        * Implies that in the current configuration, the sub-class is not interested in modifying the buffers.
-        * Elements which are always in passthrough mode whenever the same caps has been negotiated on both pads can set the class variable passthrough_on_same_caps to have this behaviour automatically.
-      
-      * always_in_place
-        * Determines whether a non-writable buffer will be copied before passing
-          to the transform_ip function.
-      
-        * Implied true if no transform function is implemented.
-        * Implied false if ONLY transform function is implemented.
-    )
+    * passthrough
+    
+      * Implies that in the current configuration, the sub-class is not interested in modifying the buffers.
+      * Elements which are always in passthrough mode whenever the same caps has been negotiated on both pads can set the class variable passthrough_on_same_caps to have this behaviour automatically.
+    
+    * always_in_place
+      * Determines whether a non-writable buffer will be copied before passing
+        to the transform_ip function.
+    
+      * Implied true if no transform function is implemented.
+      * Implied false if ONLY transform function is implemented.
 */
 struct GstBaseTransform
 {
@@ -2090,41 +2058,39 @@ struct GstCollectDataPrivate;
     Manages a set of pads that operate in collect mode. This means that control
     is given to the manager of this object when all pads have data.
     
-      $(LIST
-          * Collectpads are created with [gstbase.collect_pads.CollectPads.new_]. A callback should then
-            be installed with gst_collect_pads_set_function ().
-        
-          * Pads are added to the collection with [gstbase.collect_pads.CollectPads.addPad]/
-            [gstbase.collect_pads.CollectPads.removePad]. The pad has to be a sinkpad. When added,
-            the chain, event and query functions of the pad are overridden. The
-            element_private of the pad is used to store private information for the
-            collectpads.
-        
-          * For each pad, data is queued in the _chain function or by
-            performing a pull_range.
-        
-          * When data is queued on all pads in waiting mode, the callback function is called.
-        
-          * Data can be dequeued from the pad with the [gstbase.collect_pads.CollectPads.pop] method.
-            One can peek at the data with the [gstbase.collect_pads.CollectPads.peek] function.
-            These functions will return null if the pad received an EOS event. When all
-            pads return null from a [gstbase.collect_pads.CollectPads.peek], the element can emit an EOS
-            event itself.
-        
-          * Data can also be dequeued in byte units using the [gstbase.collect_pads.CollectPads.available],
-            [gstbase.collect_pads.CollectPads.readBuffer] and [gstbase.collect_pads.CollectPads.flush] calls.
-        
-          * Elements should call [gstbase.collect_pads.CollectPads.start] and [gstbase.collect_pads.CollectPads.stop] in
-            their state change functions to start and stop the processing of the collectpads.
-            The [gstbase.collect_pads.CollectPads.stop] call should be called before calling the parent
-            element state change function in the PAUSED_TO_READY state change to ensure
-            no pad is blocked and the element can finish streaming.
-        
-          * [gstbase.collect_pads.CollectPads.setWaiting] sets a pad to waiting or non-waiting mode.
-            CollectPads element is not waiting for data to be collected on non-waiting pads.
-            Thus these pads may but need not have data when the callback is called.
-            All pads are in waiting mode by default.
-      )
+      * Collectpads are created with [gstbase.collect_pads.CollectPads.new_]. A callback should then
+        be installed with gst_collect_pads_set_function ().
+    
+      * Pads are added to the collection with [gstbase.collect_pads.CollectPads.addPad]/
+        [gstbase.collect_pads.CollectPads.removePad]. The pad has to be a sinkpad. When added,
+        the chain, event and query functions of the pad are overridden. The
+        element_private of the pad is used to store private information for the
+        collectpads.
+    
+      * For each pad, data is queued in the _chain function or by
+        performing a pull_range.
+    
+      * When data is queued on all pads in waiting mode, the callback function is called.
+    
+      * Data can be dequeued from the pad with the [gstbase.collect_pads.CollectPads.pop] method.
+        One can peek at the data with the [gstbase.collect_pads.CollectPads.peek] function.
+        These functions will return null if the pad received an EOS event. When all
+        pads return null from a [gstbase.collect_pads.CollectPads.peek], the element can emit an EOS
+        event itself.
+    
+      * Data can also be dequeued in byte units using the [gstbase.collect_pads.CollectPads.available],
+        [gstbase.collect_pads.CollectPads.readBuffer] and [gstbase.collect_pads.CollectPads.flush] calls.
+    
+      * Elements should call [gstbase.collect_pads.CollectPads.start] and [gstbase.collect_pads.CollectPads.stop] in
+        their state change functions to start and stop the processing of the collectpads.
+        The [gstbase.collect_pads.CollectPads.stop] call should be called before calling the parent
+        element state change function in the PAUSED_TO_READY state change to ensure
+        no pad is blocked and the element can finish streaming.
+    
+      * [gstbase.collect_pads.CollectPads.setWaiting] sets a pad to waiting or non-waiting mode.
+        CollectPads element is not waiting for data to be collected on non-waiting pads.
+        Thus these pads may but need not have data when the callback is called.
+        All pads are in waiting mode by default.
 */
 struct GstCollectPads
 {
@@ -2280,15 +2246,13 @@ struct GstDataQueueSize
     helper struct is to follow the standard rules for #GstFlowReturn combination.
     These rules are:
     
-    $(LIST
-      * [gst.types.FlowReturn.Eos]: only if all returns are EOS too
-      * [gst.types.FlowReturn.NotLinked]: only if all returns are NOT_LINKED too
-      * [gst.types.FlowReturn.Error] or below: if at least one returns an error return
-      * [gst.types.FlowReturn.NotNegotiated]: if at least one returns a not-negotiated return
-      * [gst.types.FlowReturn.Flushing]: if at least one returns flushing
-      * [gst.types.FlowReturn.Ok]: otherwise
-    )
-      
+    * [gst.types.FlowReturn.Eos]: only if all returns are EOS too
+    * [gst.types.FlowReturn.NotLinked]: only if all returns are NOT_LINKED too
+    * [gst.types.FlowReturn.Error] or below: if at least one returns an error return
+    * [gst.types.FlowReturn.NotNegotiated]: if at least one returns a not-negotiated return
+    * [gst.types.FlowReturn.Flushing]: if at least one returns flushing
+    * [gst.types.FlowReturn.Ok]: otherwise
+    
     [gst.types.FlowReturn.Error] or below, GST_FLOW_NOT_NEGOTIATED and GST_FLOW_FLUSHING are
     returned immediately from the [gstbase.flow_combiner.FlowCombiner.updateFlow] function.
 */

@@ -99,7 +99,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double velocityX, double velocityY, gtk.gesture_swipe.GestureSwipe gestureSwipe))
+          `void callback(double velocityX, double velocityY, gtk.gesture_swipe.GestureSwipe gestureSwipe)`
   
           `velocityX` velocity in the X axis, in pixels/sec (optional)
   

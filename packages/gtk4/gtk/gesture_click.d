@@ -76,7 +76,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick))
+          `void callback(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick)`
   
           `nPress` how many touch/button presses happened with this one (optional)
   
@@ -136,7 +136,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick))
+          `void callback(int nPress, double x, double y, gtk.gesture_click.GestureClick gestureClick)`
   
           `nPress` number of press that is paired with this release (optional)
   
@@ -191,7 +191,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.gesture_click.GestureClick gestureClick))
+          `void callback(gtk.gesture_click.GestureClick gestureClick)`
   
           `gestureClick` the instance the signal is connected to (optional)
   
@@ -233,7 +233,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double x, double y, uint button, gdk.event_sequence.EventSequence sequence, gtk.gesture_click.GestureClick gestureClick))
+          `void callback(double x, double y, uint button, gdk.event_sequence.EventSequence sequence, gtk.gesture_click.GestureClick gestureClick)`
   
           `x` X coordinate of the event (optional)
   

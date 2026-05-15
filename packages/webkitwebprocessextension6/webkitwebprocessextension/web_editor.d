@@ -76,7 +76,7 @@ class WebEditor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkitwebprocessextension.web_editor.WebEditor webEditor))
+          `void callback(webkitwebprocessextension.web_editor.WebEditor webEditor)`
   
           `webEditor` the instance the signal is connected to (optional)
   

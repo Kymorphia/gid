@@ -2326,7 +2326,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.entry.Entry entry))
+          `void callback(gtk.entry.Entry entry)`
   
           `entry` the instance the signal is connected to (optional)
   
@@ -2368,7 +2368,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.entry.Entry entry))
+          `void callback(gtk.entry.Entry entry)`
   
           `entry` the instance the signal is connected to (optional)
   
@@ -2410,7 +2410,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.entry.Entry entry))
+          `void callback(gtk.entry.Entry entry)`
   
           `entry` the instance the signal is connected to (optional)
   
@@ -2452,7 +2452,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.entry.Entry entry))
+          `void callback(gtk.entry.Entry entry)`
   
           `entry` the instance the signal is connected to (optional)
   
@@ -2499,7 +2499,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.DeleteType type, int count, gtk.entry.Entry entry))
+          `void callback(gtk.types.DeleteType type, int count, gtk.entry.Entry entry)`
   
           `type` the granularity of the deletion, as a #GtkDeleteType (optional)
   
@@ -2549,7 +2549,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.EntryIconPosition iconPos, gdk.event.Event event, gtk.entry.Entry entry))
+          `void callback(gtk.types.EntryIconPosition iconPos, gdk.event.Event event, gtk.entry.Entry entry)`
   
           `iconPos` The position of the clicked icon (optional)
   
@@ -2599,7 +2599,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.EntryIconPosition iconPos, gdk.event.Event event, gtk.entry.Entry entry))
+          `void callback(gtk.types.EntryIconPosition iconPos, gdk.event.Event event, gtk.entry.Entry entry)`
   
           `iconPos` The position of the clicked icon (optional)
   
@@ -2653,7 +2653,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string string_, gtk.entry.Entry entry))
+          `void callback(string string_, gtk.entry.Entry entry)`
   
           `string_` the string to insert (optional)
   
@@ -2700,7 +2700,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.entry.Entry entry))
+          `void callback(gtk.entry.Entry entry)`
   
           `entry` the instance the signal is connected to (optional)
   
@@ -2746,16 +2746,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         the variant with the Shift modifier extends the selection,
         the variant without the Shift modifer does not.
         There are too many key combinations to list them all here.
-        $(LIST
-          * Arrow keys move by individual characters/lines
-          * Ctrl-arrow key combinations move by words/paragraphs
-          * Home/End keys move to the ends of the buffer
-        )
+        - Arrow keys move by individual characters/lines
+        - Ctrl-arrow key combinations move by words/paragraphs
+        - Home/End keys move to the ends of the buffer
   
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.MovementStep step, int count, bool extendSelection, gtk.entry.Entry entry))
+          `void callback(gtk.types.MovementStep step, int count, bool extendSelection, gtk.entry.Entry entry)`
   
           `step` the granularity of the move, as a #GtkMovementStep (optional)
   
@@ -2816,7 +2814,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.entry.Entry entry))
+          `void callback(gtk.entry.Entry entry)`
   
           `entry` the instance the signal is connected to (optional)
   
@@ -2864,7 +2862,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget, gtk.entry.Entry entry))
+          `void callback(gtk.widget.Widget widget, gtk.entry.Entry entry)`
   
           `widget` the container that is being populated (optional)
   
@@ -2909,7 +2907,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string preedit, gtk.entry.Entry entry))
+          `void callback(string preedit, gtk.entry.Entry entry)`
   
           `preedit` the current preedit string (optional)
   
@@ -2956,7 +2954,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.entry.Entry entry))
+          `void callback(gtk.entry.Entry entry)`
   
           `entry` the instance the signal is connected to (optional)
   

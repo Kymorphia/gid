@@ -849,11 +849,9 @@ class PrintCompositor : gobject.object.ObjectWrap
       A subset of strftime() codes are accepted, see [glib.date_time.DateTime.format]
       for more details on the accepted format specifiers.
       Additionally the following format specifiers are accepted:
-      $(LIST
-        * #N: the page number
-        * #Q: the page count.
-      )
-        
+      - #N: the page number
+      - #Q: the page count.
+      
       separator specifies if a solid line should be drawn to separate
       the header from the document text.
       

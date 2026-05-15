@@ -458,7 +458,7 @@ class Printer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool success, gtk.printer.Printer printer))
+          `void callback(bool success, gtk.printer.Printer printer)`
   
           `success` true if the details were successfully acquired (optional)
   

@@ -70,14 +70,12 @@ class ShortcutTrigger : gobject.object.ObjectWrap
       
       The accepted strings are:
       
-        $(LIST
-            * `never`, for [gtk.never_trigger.NeverTrigger]
-            * a string parsed by [gtk.global.acceleratorParse], for a [gtk.keyval_trigger.KeyvalTrigger], e.g. `<Control>C`
-            * underscore, followed by a single character, for [gtk.mnemonic_trigger.MnemonicTrigger], e.g. `_l`
-            * two valid trigger strings, separated by a `|` character, for a
-              [gtk.alternative_trigger.AlternativeTrigger]: `<Control>q|<Control>w`
-        )
-          
+        - `never`, for [gtk.never_trigger.NeverTrigger]
+        - a string parsed by [gtk.global.acceleratorParse], for a [gtk.keyval_trigger.KeyvalTrigger], e.g. `<Control>C`
+        - underscore, followed by a single character, for [gtk.mnemonic_trigger.MnemonicTrigger], e.g. `_l`
+        - two valid trigger strings, separated by a `|` character, for a
+          [gtk.alternative_trigger.AlternativeTrigger]: `<Control>q|<Control>w`
+      
       Note that you will have to escape the `<` and `>` characters when specifying
       triggers in XML files, such as GtkBuilder ui files. Use `&lt;` instead of
       `<` and `&gt;` instead of `>`.

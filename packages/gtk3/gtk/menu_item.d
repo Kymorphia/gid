@@ -501,7 +501,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu_item.MenuItem menuItem))
+          `void callback(gtk.menu_item.MenuItem menuItem)`
   
           `menuItem` the instance the signal is connected to (optional)
   
@@ -540,7 +540,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu_item.MenuItem menuItem))
+          `void callback(gtk.menu_item.MenuItem menuItem)`
   
           `menuItem` the instance the signal is connected to (optional)
   
@@ -577,7 +577,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu_item.MenuItem menuItem))
+          `void callback(gtk.menu_item.MenuItem menuItem)`
   
           `menuItem` the instance the signal is connected to (optional)
   
@@ -614,7 +614,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu_item.MenuItem menuItem))
+          `void callback(gtk.menu_item.MenuItem menuItem)`
   
           `menuItem` the instance the signal is connected to (optional)
   
@@ -651,7 +651,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int object, gtk.menu_item.MenuItem menuItem))
+          `void callback(int object, gtk.menu_item.MenuItem menuItem)`
   
           `object`  (optional)
   
@@ -694,7 +694,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(void* object, gtk.menu_item.MenuItem menuItem))
+          `void callback(void* object, gtk.menu_item.MenuItem menuItem)`
   
           `object`  (optional)
   

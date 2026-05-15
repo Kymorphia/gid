@@ -22,25 +22,23 @@ public import gtk.types;
     
     All scrollable widgets should do the following.
     
-    $(LIST
-      * When a parent widget sets the scrollable child widget’s adjustments,
-        the widget should populate the adjustments’
-        #GtkAdjustment:lower, #GtkAdjustment:upper,
-        #GtkAdjustment:step-increment, #GtkAdjustment:page-increment and
-        #GtkAdjustment:page-size properties and connect to the
-        #GtkAdjustment::value-changed signal.
-      
-      * Because its preferred size is the size for a fully expanded widget,
-        the scrollable widget must be able to cope with underallocations.
-        This means that it must accept any value passed to its
-        #GtkWidgetClass.size_allocate() function.
-      
-      * When the parent allocates space to the scrollable child widget,
-        the widget should update the adjustments’ properties with new values.
-      
-      * When any of the adjustments emits the #GtkAdjustment::value-changed signal,
-        the scrollable widget should scroll its contents.
-    )
+    - When a parent widget sets the scrollable child widget’s adjustments,
+      the widget should populate the adjustments’
+      #GtkAdjustment:lower, #GtkAdjustment:upper,
+      #GtkAdjustment:step-increment, #GtkAdjustment:page-increment and
+      #GtkAdjustment:page-size properties and connect to the
+      #GtkAdjustment::value-changed signal.
+    
+    - Because its preferred size is the size for a fully expanded widget,
+      the scrollable widget must be able to cope with underallocations.
+      This means that it must accept any value passed to its
+      #GtkWidgetClass.size_allocate() function.
+    
+    - When the parent allocates space to the scrollable child widget,
+      the widget should update the adjustments’ properties with new values.
+    
+    - When any of the adjustments emits the #GtkAdjustment::value-changed signal,
+      the scrollable widget should scroll its contents.
 */
 template ScrollableT()
 {

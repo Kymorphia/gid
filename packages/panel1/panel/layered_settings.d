@@ -315,7 +315,7 @@ class LayeredSettings : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string object, panel.layered_settings.LayeredSettings layeredSettings))
+          `void callback(string object, panel.layered_settings.LayeredSettings layeredSettings)`
   
           `object`  (optional)
   

@@ -259,12 +259,10 @@ enum AUDIO_ENCODER_SRC_NAME = "src";
     List of all audio formats, for use in template caps strings.
     
     Formats are sorted by decreasing "quality", using these criteria by priority:
-      $(LIST
-          * depth
-          * width
-          * Float > Signed > Unsigned
-          * native endianness preferred
-      )
+      - depth
+      - width
+      - Float > Signed > Unsigned
+      - native endianness preferred
 */
 enum AUDIO_FORMATS_ALL = "{ F64BE, F64LE, F32BE, F32LE, S32BE, S32LE, U32BE, U32LE, S24_32BE, S24_32LE, U24_32BE, U24_32LE, S24BE, S24LE, U24BE, U24LE, S20BE, S20LE, U20BE, U20LE, S18BE, S18LE, U18BE, U18LE, S16BE, S16LE, U16BE, U16LE, S8, U8 }";
 

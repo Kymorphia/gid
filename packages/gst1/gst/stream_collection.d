@@ -165,7 +165,7 @@ class StreamCollection : gst.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.stream.Stream propStream, gobject.param_spec.ParamSpec prop, gst.stream_collection.StreamCollection streamCollection))
+          `void callback(gst.stream.Stream propStream, gobject.param_spec.ParamSpec prop, gst.stream_collection.StreamCollection streamCollection)`
   
           `propStream` the #GstStream that originated the signal (optional)
   

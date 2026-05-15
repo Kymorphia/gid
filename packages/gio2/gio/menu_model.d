@@ -38,17 +38,15 @@ import gobject.object;
     There are 8 ‘menus’ visible in the screenshot: one menubar, two
     submenus and 5 sections:
     
-    $(LIST
-      * the toplevel menubar (containing 4 items)
-      * the View submenu (containing 3 sections)
-      * the first section of the View submenu (containing 2 items)
-      * the second section of the View submenu (containing 1 item)
-      * the final section of the View submenu (containing 1 item)
-      * the Highlight Mode submenu (containing 2 sections)
-      * the Sources section (containing 2 items)
-      * the Markup section (containing 2 items)
-    )
-      
+    - the toplevel menubar (containing 4 items)
+    - the View submenu (containing 3 sections)
+    - the first section of the View submenu (containing 2 items)
+    - the second section of the View submenu (containing 1 item)
+    - the final section of the View submenu (containing 1 item)
+    - the Highlight Mode submenu (containing 2 sections)
+    - the Sources section (containing 2 items)
+    - the Markup section (containing 2 items)
+    
     The [example](#a-menu-example) illustrates the conceptual connection between
     these 8 menus. Each large block in the figure represents a menu and the
     smaller blocks within the large block represent items in that menu. Some
@@ -99,12 +97,10 @@ import gobject.object;
     While a wide variety of stateful actions is possible, the following
     is the minimum that is expected to be supported by all users of exported
     menu information:
-    $(LIST
-      * an action with no parameter type and no state
-      * an action with no parameter type and boolean state
-      * an action with string parameter type and string state
-    )
-      
+    - an action with no parameter type and no state
+    - an action with no parameter type and boolean state
+    - an action with string parameter type and string state
+    
     ## Stateless
     
     A stateless action typically corresponds to an ordinary menu item.
@@ -336,7 +332,7 @@ class MenuModel : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int position, int removed, int added, gio.menu_model.MenuModel menuModel))
+          `void callback(int position, int removed, int added, gio.menu_model.MenuModel menuModel)`
   
           `position` the position of the change (optional)
   

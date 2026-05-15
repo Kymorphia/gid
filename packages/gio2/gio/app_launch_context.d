@@ -198,7 +198,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string startupNotifyId, gio.app_launch_context.AppLaunchContext appLaunchContext))
+          `void callback(string startupNotifyId, gio.app_launch_context.AppLaunchContext appLaunchContext)`
   
           `startupNotifyId` the startup notification id for the failed launch (optional)
   
@@ -258,7 +258,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.app_info.AppInfo info, glib.variant.Variant platformData, gio.app_launch_context.AppLaunchContext appLaunchContext))
+          `void callback(gio.app_info.AppInfo info, glib.variant.Variant platformData, gio.app_launch_context.AppLaunchContext appLaunchContext)`
   
           `info` the #GAppInfo that is about to be launched (optional)
   
@@ -326,7 +326,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.app_info.AppInfo info, glib.variant.Variant platformData, gio.app_launch_context.AppLaunchContext appLaunchContext))
+          `void callback(gio.app_info.AppInfo info, glib.variant.Variant platformData, gio.app_launch_context.AppLaunchContext appLaunchContext)`
   
           `info` the #GAppInfo that was just launched (optional)
   

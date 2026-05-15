@@ -449,7 +449,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses, gtksource.gutter_renderer.GutterRenderer gutterRenderer))
+          `void callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses, gtksource.gutter_renderer.GutterRenderer gutterRenderer)`
   
           `iter` a #GtkTextIter (optional)
   
@@ -516,7 +516,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gtksource.gutter_renderer.GutterRenderer gutterRenderer))
+          `bool callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gtksource.gutter_renderer.GutterRenderer gutterRenderer)`
   
           `iter` a #GtkTextIter (optional)
   
@@ -568,7 +568,7 @@ class GutterRenderer : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.object.ObjectWrap object, uint p0, gtksource.gutter_renderer.GutterRenderer gutterRenderer))
+          `void callback(gobject.object.ObjectWrap object, uint p0, gtksource.gutter_renderer.GutterRenderer gutterRenderer)`
   
           `object`  (optional)
   

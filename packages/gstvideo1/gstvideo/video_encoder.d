@@ -27,44 +27,38 @@ import gstvideo.video_codec_state;
     
     ## Configuration
     
-      $(LIST
-          * Initially, GstVideoEncoder calls @start when the encoder element
-            is activated, which allows subclass to perform any global setup.
-          * GstVideoEncoder calls @set_format to inform subclass of the format
-            of input video data that it is about to receive.  Subclass should
-            setup for encoding and configure base class as appropriate
-            (e.g. latency). While unlikely, it might be called more than once,
-            if changing input parameters require reconfiguration.  Baseclass
-            will ensure that processing of current configuration is finished.
-          * GstVideoEncoder calls @stop at end of all processing.
-      )
-        
+      * Initially, GstVideoEncoder calls @start when the encoder element
+        is activated, which allows subclass to perform any global setup.
+      * GstVideoEncoder calls @set_format to inform subclass of the format
+        of input video data that it is about to receive.  Subclass should
+        setup for encoding and configure base class as appropriate
+        (e.g. latency). While unlikely, it might be called more than once,
+        if changing input parameters require reconfiguration.  Baseclass
+        will ensure that processing of current configuration is finished.
+      * GstVideoEncoder calls @stop at end of all processing.
+    
     ## Data processing
     
-        $(LIST
-              * Base class collects input data and metadata into a frame and hands
-                this to subclass' @handle_frame.
-          
-              * If codec processing results in encoded data, subclass should call
-                @gst_video_encoder_finish_frame to have encoded data pushed
-                downstream.
-          
-              * If implemented, baseclass calls subclass @pre_push just prior to
-                pushing to allow subclasses to modify some metadata on the buffer.
-                If it returns GST_FLOW_OK, the buffer is pushed downstream.
-          
-              * GstVideoEncoderClass will handle both srcpad and sinkpad events.
-                Sink events will be passed to subclass if @event callback has been
-                provided.
-        )
-          
+        * Base class collects input data and metadata into a frame and hands
+          this to subclass' @handle_frame.
+    
+        * If codec processing results in encoded data, subclass should call
+          @gst_video_encoder_finish_frame to have encoded data pushed
+          downstream.
+    
+        * If implemented, baseclass calls subclass @pre_push just prior to
+          pushing to allow subclasses to modify some metadata on the buffer.
+          If it returns GST_FLOW_OK, the buffer is pushed downstream.
+    
+        * GstVideoEncoderClass will handle both srcpad and sinkpad events.
+          Sink events will be passed to subclass if @event callback has been
+          provided.
+    
     ## Shutdown phase
     
-      $(LIST
-          * GstVideoEncoder class calls @stop to inform the subclass that data
-            parsing will be stopped.
-      )
-        
+      * GstVideoEncoder class calls @stop to inform the subclass that data
+        parsing will be stopped.
+    
     Subclass is responsible for providing pad template caps for
     source and sink pads. The pads need to be named "sink" and "src". It should
     also be able to provide fixed src pad caps in @getcaps by the time it calls
@@ -72,14 +66,12 @@ import gstvideo.video_codec_state;
     
     Things that subclass need to take care of:
     
-      $(LIST
-          * Provide pad templates
-          * Provide source pad caps before pushing the first buffer
-          * Accept data in @handle_frame and provide encoded results to
-             @gst_video_encoder_finish_frame.
-      )
-        
-        
+      * Provide pad templates
+      * Provide source pad caps before pushing the first buffer
+      * Accept data in @handle_frame and provide encoded results to
+         @gst_video_encoder_finish_frame.
+    
+    
     The #GstVideoEncoder:qos property will enable the Quality-of-Service
     features of the encoder which gather statistics about the real-time
     performance of the downstream elements. If enabled, subclasses can

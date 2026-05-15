@@ -405,7 +405,7 @@ class Dialog : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.dialog.Dialog dialog))
+          `void callback(gtk.dialog.Dialog dialog)`
   
           `dialog` the instance the signal is connected to (optional)
   
@@ -449,7 +449,7 @@ class Dialog : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int responseId, gtk.dialog.Dialog dialog))
+          `void callback(int responseId, gtk.dialog.Dialog dialog)`
   
           `responseId` the response ID (optional)
   

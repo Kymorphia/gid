@@ -682,7 +682,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.button.Button button))
+          `void callback(gtk.button.Button button)`
   
           `button` the instance the signal is connected to (optional)
   
@@ -719,7 +719,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.button.Button button))
+          `void callback(gtk.button.Button button)`
   
           `button` the instance the signal is connected to (optional)
   
@@ -756,7 +756,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.button.Button button))
+          `void callback(gtk.button.Button button)`
   
           `button` the instance the signal is connected to (optional)
   
@@ -795,7 +795,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.button.Button button))
+          `void callback(gtk.button.Button button)`
   
           `button` the instance the signal is connected to (optional)
   
@@ -834,7 +834,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.button.Button button))
+          `void callback(gtk.button.Button button)`
   
           `button` the instance the signal is connected to (optional)
   
@@ -873,7 +873,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.button.Button button))
+          `void callback(gtk.button.Button button)`
   
           `button` the instance the signal is connected to (optional)
   

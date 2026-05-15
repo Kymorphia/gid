@@ -20,22 +20,20 @@ import gstgl.types;
     specified and must only be activated in a single thread.
     
     Environment variables:
-    $(LIST
-      * `GST_GL_API`: select which OpenGL API to create and OpenGL context for.
-                      Depending on the platform, the available values are
-                      'opengl', 'opengl3' (core profile), and 'gles2'.  See the
-                      the #GstGLAPI enumeration for more details.
-      * `GST_GL_PLATFORM`: select which OpenGL platform to create an OpenGL
-                           context with.  Depending on the platform and the
-                           dependencies available build-time, the available values
-                           are, 'glx', 'egl', 'cgl', 'wgl', and 'eagl'
-      * `GST_GL_CONFIG`: select the configuration used for creating the OpenGL
-                         context and OpenGL surface.  Written out as a GstStructure
-                         that has been serialized to string.  e.g.
-                         `GST_GL_CONFIG="gst-gl-context-config,red-size=8,green-size=8,blue-size=8,alpha-size=8,depth-size=16"`.
-                         Not all platforms will support the same level of
-                         functionality.
-    )
+    - `GST_GL_API`: select which OpenGL API to create and OpenGL context for.
+                    Depending on the platform, the available values are
+                    'opengl', 'opengl3' (core profile), and 'gles2'.  See the
+                    the #GstGLAPI enumeration for more details.
+    - `GST_GL_PLATFORM`: select which OpenGL platform to create an OpenGL
+                         context with.  Depending on the platform and the
+                         dependencies available build-time, the available values
+                         are, 'glx', 'egl', 'cgl', 'wgl', and 'eagl'
+    - `GST_GL_CONFIG`: select the configuration used for creating the OpenGL
+                       context and OpenGL surface.  Written out as a GstStructure
+                       that has been serialized to string.  e.g.
+                       `GST_GL_CONFIG="gst-gl-context-config,red-size=8,green-size=8,blue-size=8,alpha-size=8,depth-size=16"`.
+                       Not all platforms will support the same level of
+                       functionality.
 */
 class GLContext : gst.object.ObjectWrap
 {

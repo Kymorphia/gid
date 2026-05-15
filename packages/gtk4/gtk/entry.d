@@ -1885,7 +1885,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.entry.Entry entry))
+          `void callback(gtk.entry.Entry entry)`
   
           `entry` the instance the signal is connected to (optional)
   
@@ -1922,7 +1922,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry))
+          `void callback(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry)`
   
           `iconPos` The position of the clicked icon (optional)
   
@@ -1966,7 +1966,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry))
+          `void callback(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry)`
   
           `iconPos` The position of the clicked icon (optional)
   

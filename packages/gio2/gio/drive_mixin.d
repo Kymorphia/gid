@@ -527,7 +527,7 @@ template DriveT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.drive.Drive drive))
+          `void callback(gio.drive.Drive drive)`
   
           `drive` the instance the signal is connected to (optional)
   
@@ -567,7 +567,7 @@ template DriveT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.drive.Drive drive))
+          `void callback(gio.drive.Drive drive)`
   
           `drive` the instance the signal is connected to (optional)
   
@@ -605,7 +605,7 @@ template DriveT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.drive.Drive drive))
+          `void callback(gio.drive.Drive drive)`
   
           `drive` the instance the signal is connected to (optional)
   
@@ -643,7 +643,7 @@ template DriveT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.drive.Drive drive))
+          `void callback(gio.drive.Drive drive)`
   
           `drive` the instance the signal is connected to (optional)
   

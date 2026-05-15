@@ -211,7 +211,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `drive` the drive that changed (optional)
   
@@ -254,7 +254,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `drive` a #GDrive that was connected. (optional)
   
@@ -297,7 +297,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `drive` a #GDrive that was disconnected. (optional)
   
@@ -340,7 +340,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `drive` the drive where the eject button was pressed (optional)
   
@@ -383,7 +383,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.drive.Drive drive, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `drive` the drive where the stop button was pressed (optional)
   
@@ -426,7 +426,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `mount` a #GMount that was added. (optional)
   
@@ -469,7 +469,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `mount` a #GMount that changed. (optional)
   
@@ -515,7 +515,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `mount` a #GMount that is being unmounted. (optional)
   
@@ -558,7 +558,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.mount.Mount mount, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `mount` a #GMount that was removed. (optional)
   
@@ -601,7 +601,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `volume` a #GVolume that was added. (optional)
   
@@ -644,7 +644,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `volume` a #GVolume that changed. (optional)
   
@@ -687,7 +687,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor))
+          `void callback(gio.volume.Volume volume, gio.volume_monitor.VolumeMonitor volumeMonitor)`
   
           `volume` a #GVolume that was removed. (optional)
   

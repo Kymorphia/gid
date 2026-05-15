@@ -236,7 +236,7 @@ class DeviceManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.device.Device device, gdk.device_manager.DeviceManager deviceManager))
+          `void callback(gdk.device.Device device, gdk.device_manager.DeviceManager deviceManager)`
   
           `device` the newly added #GdkDevice. (optional)
   
@@ -288,7 +288,7 @@ class DeviceManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.device.Device device, gdk.device_manager.DeviceManager deviceManager))
+          `void callback(gdk.device.Device device, gdk.device_manager.DeviceManager deviceManager)`
   
           `device` the #GdkDevice that changed. (optional)
   
@@ -333,7 +333,7 @@ class DeviceManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.device.Device device, gdk.device_manager.DeviceManager deviceManager))
+          `void callback(gdk.device.Device device, gdk.device_manager.DeviceManager deviceManager)`
   
           `device` the just removed #GdkDevice. (optional)
   

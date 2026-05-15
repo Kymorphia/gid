@@ -734,14 +734,12 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
       
       This method can be expected to be available on the following platforms:
       
-      $(LIST
-        * Linux since GLib 2.26
-        * OpenBSD since GLib 2.30
-        * Solaris, Illumos and OpenSolaris since GLib 2.40
-        * NetBSD since GLib 2.42
-        * macOS, tvOS, iOS since GLib 2.66
-      )
-        
+      - Linux since GLib 2.26
+      - OpenBSD since GLib 2.30
+      - Solaris, Illumos and OpenSolaris since GLib 2.40
+      - NetBSD since GLib 2.42
+      - macOS, tvOS, iOS since GLib 2.66
+      
       Other ways to obtain credentials from a foreign peer includes the
       #GUnixCredentialsMessage type and
       [gio.unix_connection.UnixConnection.sendCredentials] /

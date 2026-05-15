@@ -324,7 +324,7 @@ class DataModelIter : gda.set.Set
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.data_model_iter.DataModelIter dataModelIter))
+          `void callback(gda.data_model_iter.DataModelIter dataModelIter)`
   
           `dataModelIter` the instance the signal is connected to (optional)
   
@@ -361,7 +361,7 @@ class DataModelIter : gda.set.Set
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int row, gda.data_model_iter.DataModelIter dataModelIter))
+          `void callback(int row, gda.data_model_iter.DataModelIter dataModelIter)`
   
           `row` the new iter's row (optional)
   

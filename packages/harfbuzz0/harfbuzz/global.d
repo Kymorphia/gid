@@ -1055,27 +1055,25 @@ void bufferSetClusterLevel(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferC
     You rarely need to call this function, since a number of other
     functions transition the content type for you. Namely:
     
-    $(LIST
-      * A newly created buffer starts with content type
-        [harfbuzz.types.BufferContentType.Invalid]. Calling [harfbuzz.global.bufferReset],
-        [harfbuzz.global.bufferClearContents], as well as calling [harfbuzz.global.bufferSetLength]
-        with an argument of zero all set the buffer content type to invalid
-        as well.
-      
-      * Calling [harfbuzz.global.bufferAddUtf8], [harfbuzz.global.bufferAddUtf16],
-        [harfbuzz.global.bufferAddUtf32], [harfbuzz.global.bufferAddCodepoints] and
-        [harfbuzz.global.bufferAddLatin1] expect that buffer is either empty and
-        have a content type of invalid, or that buffer content type is
-        [harfbuzz.types.BufferContentType.Unicode], and they also set the content
-        type to Unicode if they added anything to an empty buffer.
-      
-      * Finally [harfbuzz.global.shape] and [harfbuzz.global.shapeFull] expect that the buffer
-        is either empty and have content type of invalid, or that buffer
-        content type is [harfbuzz.types.BufferContentType.Unicode], and upon
-        success they set the buffer content type to
-        [harfbuzz.types.BufferContentType.Glyphs].
-    )
-      
+    - A newly created buffer starts with content type
+      [harfbuzz.types.BufferContentType.Invalid]. Calling [harfbuzz.global.bufferReset],
+      [harfbuzz.global.bufferClearContents], as well as calling [harfbuzz.global.bufferSetLength]
+      with an argument of zero all set the buffer content type to invalid
+      as well.
+    
+    - Calling [harfbuzz.global.bufferAddUtf8], [harfbuzz.global.bufferAddUtf16],
+      [harfbuzz.global.bufferAddUtf32], [harfbuzz.global.bufferAddCodepoints] and
+      [harfbuzz.global.bufferAddLatin1] expect that buffer is either empty and
+      have a content type of invalid, or that buffer content type is
+      [harfbuzz.types.BufferContentType.Unicode], and they also set the content
+      type to Unicode if they added anything to an empty buffer.
+    
+    - Finally [harfbuzz.global.shape] and [harfbuzz.global.shapeFull] expect that the buffer
+      is either empty and have content type of invalid, or that buffer
+      content type is [harfbuzz.types.BufferContentType.Unicode], and upon
+      success they set the buffer content type to
+      [harfbuzz.types.BufferContentType.Glyphs].
+    
     The above transitions are designed such that one can use a buffer
     in a loop of "reset : add-text : shape" without needing to ever
     modify the content type manually.

@@ -254,7 +254,7 @@ template PaintableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.paintable.Paintable paintable))
+          `void callback(gdk.paintable.Paintable paintable)`
   
           `paintable` the instance the signal is connected to (optional)
   
@@ -300,7 +300,7 @@ template PaintableT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.paintable.Paintable paintable))
+          `void callback(gdk.paintable.Paintable paintable)`
   
           `paintable` the instance the signal is connected to (optional)
   

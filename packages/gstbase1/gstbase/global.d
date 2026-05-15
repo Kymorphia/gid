@@ -150,9 +150,7 @@ gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectWrap obj, gs
 
     Params:
       obj = object doing the typefinding, or null (used for logging)
-      data = $(LIST
-          * a pointer with data to typefind
-        )
+      data = * a pointer with data to typefind
       prob = location to store the probability of the found
             caps, or null
     Returns: the #GstCaps corresponding to the data,
@@ -226,9 +224,7 @@ gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectWrap obj, ubyte[] d
 
     Params:
       obj = object doing the typefinding, or null (used for logging)
-      data = $(LIST
-          * a pointer with data to typefind
-        )
+      data = * a pointer with data to typefind
       extension = extension of the media, or null
       prob = location to store the probability of the found
             caps, or null

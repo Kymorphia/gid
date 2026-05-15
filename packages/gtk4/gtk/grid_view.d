@@ -461,7 +461,7 @@ class GridView : gtk.list_base.ListBase
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, gtk.grid_view.GridView gridView))
+          `void callback(uint position, gtk.grid_view.GridView gridView)`
   
           `position` position of item to activate (optional)
   

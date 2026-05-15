@@ -333,7 +333,7 @@ class Config : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(void* newDsn, gda.config.Config config))
+          `void callback(void* newDsn, gda.config.Config config)`
   
           `newDsn` a #GdaDsnInfo (optional)
   
@@ -376,7 +376,7 @@ class Config : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(void* dsn, gda.config.Config config))
+          `void callback(void* dsn, gda.config.Config config)`
   
           `dsn` a #GdaDsnInfo (optional)
   
@@ -419,7 +419,7 @@ class Config : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(void* oldDsn, gda.config.Config config))
+          `void callback(void* oldDsn, gda.config.Config config)`
   
           `oldDsn` a #GdaDsnInfo (optional)
   
@@ -462,7 +462,7 @@ class Config : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(void* oldDsn, gda.config.Config config))
+          `void callback(void* oldDsn, gda.config.Config config)`
   
           `oldDsn` a #GdaDsnInfo (optional)
   

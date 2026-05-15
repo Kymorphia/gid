@@ -32,20 +32,16 @@ import gtk.application;
     
     They can be used to add custom styles to the application, as follows:
     
-    $(LIST
-      * `style.css` contains styles that are always present.
-      
-      * `style-dark.css` contains styles only used when
-    )
+    - `style.css` contains styles that are always present.
+    
+    - `style-dark.css` contains styles only used when
     `property@StyleManager:dark` is `TRUE`.
     
-    $(LIST
-      * `style-hc.css` contains styles used when the system high contrast
-        preference is enabled.
-      
-      * `style-hc-dark.css` contains styles used when the system high contrast
-        preference is enabled and `property@StyleManager:dark` is `TRUE`.
-    )
+    - `style-hc.css` contains styles used when the system high contrast
+      preference is enabled.
+    
+    - `style-hc-dark.css` contains styles used when the system high contrast
+      preference is enabled and `property@StyleManager:dark` is `TRUE`.
 */
 class Application : gtk.application.Application
 {

@@ -525,7 +525,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double value, gtk.range.Range range))
+          `void callback(double value, gtk.range.Range range)`
   
           `value` the value before we clamp (optional)
   
@@ -579,7 +579,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.ScrollType scroll, double value, gtk.range.Range range))
+          `bool callback(gtk.types.ScrollType scroll, double value, gtk.range.Range range)`
   
           `scroll` the type of scroll action that was performed (optional)
   
@@ -634,7 +634,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.ScrollType step, gtk.range.Range range))
+          `void callback(gtk.types.ScrollType step, gtk.range.Range range)`
   
           `step` how to move the slider (optional)
   
@@ -677,7 +677,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.range.Range range))
+          `void callback(gtk.range.Range range)`
   
           `range` the instance the signal is connected to (optional)
   

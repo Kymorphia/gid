@@ -597,7 +597,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.data_proxy.DataProxy dataProxy))
+          `void callback(gda.data_proxy.DataProxy dataProxy)`
   
           `dataProxy` the instance the signal is connected to (optional)
   
@@ -634,7 +634,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int row, int proxiedRow, gda.data_proxy.DataProxy dataProxy))
+          `void callback(int row, int proxiedRow, gda.data_proxy.DataProxy dataProxy)`
   
           `row` the proxy's row (optional)
   
@@ -683,7 +683,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int row, bool toBeDeleted, gda.data_proxy.DataProxy dataProxy))
+          `void callback(int row, bool toBeDeleted, gda.data_proxy.DataProxy dataProxy)`
   
           `row` the concerned proxy's row (optional)
   
@@ -733,7 +733,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int sampleStart, int sampleEnd, gda.data_proxy.DataProxy dataProxy))
+          `void callback(int sampleStart, int sampleEnd, gda.data_proxy.DataProxy dataProxy)`
   
           `sampleStart` the first row of the sample (optional)
   
@@ -782,7 +782,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int sampleSize, gda.data_proxy.DataProxy dataProxy))
+          `void callback(int sampleSize, gda.data_proxy.DataProxy dataProxy)`
   
           `sampleSize` the new sample size (optional)
   
@@ -826,7 +826,7 @@ class DataProxy : gobject.object.ObjectWrap, gda.data_model.DataModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D glib.error.ErrorWrap callback(int row, int proxiedRow, gda.data_proxy.DataProxy dataProxy))
+          `glib.error.ErrorWrap callback(int row, int proxiedRow, gda.data_proxy.DataProxy dataProxy)`
   
           `row` the proxy's row (optional)
   

@@ -281,7 +281,7 @@ class MonitorWrap : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.monitor.MonitorWrap monitorWrap))
+          `void callback(gdk.monitor.MonitorWrap monitorWrap)`
   
           `monitorWrap` the instance the signal is connected to (optional)
   

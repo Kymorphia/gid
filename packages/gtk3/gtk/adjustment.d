@@ -454,7 +454,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.adjustment.Adjustment adjustment))
+          `void callback(gtk.adjustment.Adjustment adjustment)`
   
           `adjustment` the instance the signal is connected to (optional)
   
@@ -491,7 +491,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.adjustment.Adjustment adjustment))
+          `void callback(gtk.adjustment.Adjustment adjustment)`
   
           `adjustment` the instance the signal is connected to (optional)
   

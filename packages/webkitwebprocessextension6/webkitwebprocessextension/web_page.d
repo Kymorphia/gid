@@ -194,7 +194,7 @@ class WebPage : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkitwebprocessextension.console_message.ConsoleMessage consoleMessage, webkitwebprocessextension.web_page.WebPage webPage))
+          `void callback(webkitwebprocessextension.console_message.ConsoleMessage consoleMessage, webkitwebprocessextension.web_page.WebPage webPage)`
   
           `consoleMessage` the #WebKitConsoleMessage (optional)
   
@@ -244,7 +244,7 @@ class WebPage : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkitwebprocessextension.context_menu.ContextMenu contextMenu, webkitwebprocessextension.web_hit_test_result.WebHitTestResult hitTestResult, webkitwebprocessextension.web_page.WebPage webPage))
+          `bool callback(webkitwebprocessextension.context_menu.ContextMenu contextMenu, webkitwebprocessextension.web_hit_test_result.WebHitTestResult hitTestResult, webkitwebprocessextension.web_page.WebPage webPage)`
   
           `contextMenu` the proposed #WebKitContextMenu (optional)
   
@@ -299,7 +299,7 @@ class WebPage : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkitwebprocessextension.web_page.WebPage webPage))
+          `void callback(webkitwebprocessextension.web_page.WebPage webPage)`
   
           `webPage` the instance the signal is connected to (optional)
   
@@ -349,7 +349,7 @@ class WebPage : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkitwebprocessextension.urirequest.URIRequest request, webkitwebprocessextension.uriresponse.URIResponse redirectedResponse, webkitwebprocessextension.web_page.WebPage webPage))
+          `bool callback(webkitwebprocessextension.urirequest.URIRequest request, webkitwebprocessextension.uriresponse.URIResponse redirectedResponse, webkitwebprocessextension.web_page.WebPage webPage)`
   
           `request` a #WebKitURIRequest (optional)
   
@@ -409,7 +409,7 @@ class WebPage : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkitwebprocessextension.user_message.UserMessage message, webkitwebprocessextension.web_page.WebPage webPage))
+          `bool callback(webkitwebprocessextension.user_message.UserMessage message, webkitwebprocessextension.web_page.WebPage webPage)`
   
           `message` the #WebKitUserMessage received (optional)
   

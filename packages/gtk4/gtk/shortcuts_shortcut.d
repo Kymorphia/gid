@@ -90,14 +90,12 @@ class ShortcutsShortcut : gtk.widget.Widget
         
         Examples:
         
-        $(LIST
-          * A single shortcut: `<ctl><alt>delete`
-          * Two alternative shortcuts: `<shift>a Home`
-          * A range of shortcuts: `<alt>1...<alt>9`
-          * Several keys pressed together: `Control_L&Control_R`
-          * A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
-        )
-          
+        - A single shortcut: `<ctl><alt>delete`
+        - Two alternative shortcuts: `<shift>a Home`
+        - A range of shortcuts: `<alt>1...<alt>9`
+        - Several keys pressed together: `Control_L&Control_R`
+        - A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
+        
         Use "+" instead of "&" when the keys may (or have to be) pressed
         sequentially (e.g use "t+t" for 'press the t key twice').
         
@@ -128,14 +126,12 @@ class ShortcutsShortcut : gtk.widget.Widget
           
           Examples:
           
-          $(LIST
-            * A single shortcut: `<ctl><alt>delete`
-            * Two alternative shortcuts: `<shift>a Home`
-            * A range of shortcuts: `<alt>1...<alt>9`
-            * Several keys pressed together: `Control_L&Control_R`
-            * A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
-          )
-            
+          - A single shortcut: `<ctl><alt>delete`
+          - Two alternative shortcuts: `<shift>a Home`
+          - A range of shortcuts: `<alt>1...<alt>9`
+          - Several keys pressed together: `Control_L&Control_R`
+          - A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
+          
           Use "+" instead of "&" when the keys may (or have to be) pressed
           sequentially (e.g use "t+t" for 'press the t key twice').
           
@@ -389,14 +385,12 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           Examples:
           
-          $(LIST
-            * A single shortcut: `<ctl><alt>delete`
-            * Two alternative shortcuts: `<shift>a Home`
-            * A range of shortcuts: `<alt>1...<alt>9`
-            * Several keys pressed together: `Control_L&Control_R`
-            * A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
-          )
-            
+          - A single shortcut: `<ctl><alt>delete`
+          - Two alternative shortcuts: `<shift>a Home`
+          - A range of shortcuts: `<alt>1...<alt>9`
+          - Several keys pressed together: `Control_L&Control_R`
+          - A sequence of shortcuts or keys: `<ctl>c+<ctl>x`
+          
           Use "+" instead of "&" when the keys may (or have to be) pressed
           sequentially (e.g use "t+t" for 'press the t key twice').
           

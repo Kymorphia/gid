@@ -262,7 +262,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string text, webkit.input_method_context.InputMethodContext inputMethodContext))
+          `void callback(string text, webkit.input_method_context.InputMethodContext inputMethodContext)`
   
           `text` the string result (optional)
   
@@ -306,7 +306,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int offset, uint nChars, webkit.input_method_context.InputMethodContext inputMethodContext))
+          `void callback(int offset, uint nChars, webkit.input_method_context.InputMethodContext inputMethodContext)`
   
           `offset` the character offset from the cursor position of the text to be deleted. (optional)
   
@@ -357,7 +357,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.input_method_context.InputMethodContext inputMethodContext))
+          `void callback(webkit.input_method_context.InputMethodContext inputMethodContext)`
   
           `inputMethodContext` the instance the signal is connected to (optional)
   
@@ -394,7 +394,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.input_method_context.InputMethodContext inputMethodContext))
+          `void callback(webkit.input_method_context.InputMethodContext inputMethodContext)`
   
           `inputMethodContext` the instance the signal is connected to (optional)
   
@@ -431,7 +431,7 @@ class InputMethodContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.input_method_context.InputMethodContext inputMethodContext))
+          `void callback(webkit.input_method_context.InputMethodContext inputMethodContext)`
   
           `inputMethodContext` the instance the signal is connected to (optional)
   

@@ -395,7 +395,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tool_button.ToolButton toolButton))
+          `void callback(gtk.tool_button.ToolButton toolButton)`
   
           `toolButton` the instance the signal is connected to (optional)
   

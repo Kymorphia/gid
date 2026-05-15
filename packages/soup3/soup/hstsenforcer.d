@@ -203,7 +203,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(soup.hstspolicy.HSTSPolicy oldPolicy, soup.hstspolicy.HSTSPolicy newPolicy, soup.hstsenforcer.HSTSEnforcer hSTSEnforcer))
+          `void callback(soup.hstspolicy.HSTSPolicy oldPolicy, soup.hstspolicy.HSTSPolicy newPolicy, soup.hstsenforcer.HSTSEnforcer hSTSEnforcer)`
   
           `oldPolicy` the old #SoupHSTSPolicy value (optional)
   

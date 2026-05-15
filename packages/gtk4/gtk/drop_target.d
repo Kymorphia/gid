@@ -65,18 +65,16 @@ import gtk.types;
     
     [gtk.drop_target.DropTarget] supports more options, such as:
     
-     $(LIST
-        * rejecting potential drops via the [gtk.drop_target.DropTarget.accept] signal
-          and the [gtk.drop_target.DropTarget.reject] function to let other drop
-          targets handle the drop
-        * tracking an ongoing drag operation before the drop via the
-          [gtk.drop_target.DropTarget.enter], [gtk.drop_target.DropTarget.motion] and
-          [gtk.drop_target.DropTarget.leave] signals
-        * configuring how to receive data by setting the
-          [gtk.drop_target.DropTarget.preload] property and listening for its
-          availability via the [gtk.drop_target.DropTarget.value] property
-     )
-       
+     * rejecting potential drops via the [gtk.drop_target.DropTarget.accept] signal
+       and the [gtk.drop_target.DropTarget.reject] function to let other drop
+       targets handle the drop
+     * tracking an ongoing drag operation before the drop via the
+       [gtk.drop_target.DropTarget.enter], [gtk.drop_target.DropTarget.motion] and
+       [gtk.drop_target.DropTarget.leave] signals
+     * configuring how to receive data by setting the
+       [gtk.drop_target.DropTarget.preload] property and listening for its
+       availability via the [gtk.drop_target.DropTarget.value] property
+    
     However, [gtk.drop_target.DropTarget] is ultimately modeled in a synchronous way
     and only supports data transferred via `GType`. If you want full control
     over an ongoing drop, the [gtk.drop_target_async.DropTargetAsync] object gives you
@@ -430,7 +428,7 @@ class DropTarget : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.drop.Drop drop, gtk.drop_target.DropTarget dropTarget))
+          `bool callback(gdk.drop.Drop drop, gtk.drop_target.DropTarget dropTarget)`
   
           `drop` the [gdk.drop.Drop] (optional)
   
@@ -484,7 +482,7 @@ class DropTarget : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gobject.value.Value value, double x, double y, gtk.drop_target.DropTarget dropTarget))
+          `bool callback(gobject.value.Value value, double x, double y, gtk.drop_target.DropTarget dropTarget)`
   
           `value` the [gobject.value.Value] being dropped (optional)
   
@@ -544,7 +542,7 @@ class DropTarget : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gdk.types.DragAction callback(double x, double y, gtk.drop_target.DropTarget dropTarget))
+          `gdk.types.DragAction callback(double x, double y, gtk.drop_target.DropTarget dropTarget)`
   
           `x` the x coordinate of the current pointer position (optional)
   
@@ -600,7 +598,7 @@ class DropTarget : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.drop_target.DropTarget dropTarget))
+          `void callback(gtk.drop_target.DropTarget dropTarget)`
   
           `dropTarget` the instance the signal is connected to (optional)
   
@@ -637,7 +635,7 @@ class DropTarget : gtk.event_controller.EventController
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gdk.types.DragAction callback(double x, double y, gtk.drop_target.DropTarget dropTarget))
+          `gdk.types.DragAction callback(double x, double y, gtk.drop_target.DropTarget dropTarget)`
   
           `x` the x coordinate of the current pointer position (optional)
   

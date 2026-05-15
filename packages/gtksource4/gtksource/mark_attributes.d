@@ -305,7 +305,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes))
+          `string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes)`
   
           `mark` The #GtkSourceMark. (optional)
   
@@ -353,7 +353,7 @@ class MarkAttributes : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes))
+          `string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes)`
   
           `mark` The #GtkSourceMark. (optional)
   

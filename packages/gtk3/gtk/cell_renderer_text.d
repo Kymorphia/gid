@@ -794,7 +794,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string path, string newText, gtk.cell_renderer_text.CellRendererText cellRendererText))
+          `void callback(string path, string newText, gtk.cell_renderer_text.CellRendererText cellRendererText)`
   
           `path` the path identifying the edited cell (optional)
   

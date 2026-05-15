@@ -103,32 +103,26 @@ import gtk.window;
     domain to use.
     
     The following attributes are used when constructing menu items:
-    $(LIST
-      * "label": a user-visible string to display
-      * "action": the prefixed name of the action to trigger
-      * "target": the parameter to use when activating the action
-      * "icon" and "verb-icon": names of icons that may be displayed
-      * "submenu-action": name of an action that may be used to determine
-           if a submenu can be opened
-      * "hidden-when": a string used to determine when the item will be hidden.
-           Possible values include "action-disabled", "action-missing", "macos-menubar".
-    )
-      
+    - "label": a user-visible string to display
+    - "action": the prefixed name of the action to trigger
+    - "target": the parameter to use when activating the action
+    - "icon" and "verb-icon": names of icons that may be displayed
+    - "submenu-action": name of an action that may be used to determine
+         if a submenu can be opened
+    - "hidden-when": a string used to determine when the item will be hidden.
+         Possible values include "action-disabled", "action-missing", "macos-menubar".
+    
     The following attributes are used when constructing sections:
-    $(LIST
-      * "label": a user-visible string to use as section heading
-      * "display-hint": a string used to determine special formatting for the section.
-          Possible values include "horizontal-buttons".
-      * "text-direction": a string used to determine the #GtkTextDirection to use
-          when "display-hint" is set to "horizontal-buttons". Possible values
-          include "rtl", "ltr", and "none".
-    )
-      
+    - "label": a user-visible string to use as section heading
+    - "display-hint": a string used to determine special formatting for the section.
+        Possible values include "horizontal-buttons".
+    - "text-direction": a string used to determine the #GtkTextDirection to use
+        when "display-hint" is set to "horizontal-buttons". Possible values
+        include "rtl", "ltr", and "none".
+    
     The following attributes are used when constructing submenus:
-    $(LIST
-      * "label": a user-visible string to display
-      * "icon": icon name to display
-    )
+    - "label": a user-visible string to display
+    - "icon": icon name to display
 */
 class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.action_map.ActionMap
 {

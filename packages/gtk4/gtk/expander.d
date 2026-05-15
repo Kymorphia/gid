@@ -507,7 +507,7 @@ class Expander : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.expander.Expander expander))
+          `void callback(gtk.expander.Expander expander)`
   
           `expander` the instance the signal is connected to (optional)
   

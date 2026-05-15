@@ -261,17 +261,15 @@ class AttrList : gobject.boxed.Boxed
       of MAXUINT), TYPE is the nickname of the attribute value type, e.g.
       _weight_ or _stretch_, and the value is serialized according to its type:
       
-      $(LIST
-        * enum values as nick or numeric value
-        * boolean values as _true_ or _false_
-        * integers and floats as numbers
-        * strings as string, optionally quoted
-        * font features as quoted string
-        * PangoLanguage as string
-        * PangoFontDescription as serialized by [pango.font_description.FontDescription.toString_], quoted
-        * PangoColor as serialized by [pango.color.Color.toString_]
-      )
-        
+      - enum values as nick or numeric value
+      - boolean values as _true_ or _false_
+      - integers and floats as numbers
+      - strings as string, optionally quoted
+      - font features as quoted string
+      - PangoLanguage as string
+      - PangoFontDescription as serialized by [pango.font_description.FontDescription.toString_], quoted
+      - PangoColor as serialized by [pango.color.Color.toString_]
+      
       Examples:
       
       ```

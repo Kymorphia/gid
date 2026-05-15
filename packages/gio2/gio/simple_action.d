@@ -246,7 +246,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.variant.Variant parameter, gio.simple_action.SimpleAction simpleAction))
+          `void callback(glib.variant.Variant parameter, gio.simple_action.SimpleAction simpleAction)`
   
           `parameter` the parameter to the activation, or null if it has
               no parameter (optional)
@@ -322,7 +322,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.variant.Variant value, gio.simple_action.SimpleAction simpleAction))
+          `void callback(glib.variant.Variant value, gio.simple_action.SimpleAction simpleAction)`
   
           `value` the requested value for the state (optional)
   

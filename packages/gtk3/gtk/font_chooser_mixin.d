@@ -457,7 +457,7 @@ template FontChooserT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string fontname, gtk.font_chooser.FontChooser fontChooser))
+          `void callback(string fontname, gtk.font_chooser.FontChooser fontChooser)`
   
           `fontname` the font name (optional)
   

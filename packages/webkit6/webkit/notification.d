@@ -159,7 +159,7 @@ class Notification : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.notification.Notification notification))
+          `void callback(webkit.notification.Notification notification)`
   
           `notification` the instance the signal is connected to (optional)
   
@@ -199,7 +199,7 @@ class Notification : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.notification.Notification notification))
+          `void callback(webkit.notification.Notification notification)`
   
           `notification` the instance the signal is connected to (optional)
   

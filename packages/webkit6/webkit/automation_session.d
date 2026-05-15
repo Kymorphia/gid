@@ -131,7 +131,7 @@ class AutomationSession : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D webkit.web_view.WebView callback(webkit.automation_session.AutomationSession automationSession))
+          `webkit.web_view.WebView callback(webkit.automation_session.AutomationSession automationSession)`
   
           `automationSession` the instance the signal is connected to (optional)
   
@@ -172,7 +172,7 @@ class AutomationSession : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.automation_session.AutomationSession automationSession))
+          `void callback(webkit.automation_session.AutomationSession automationSession)`
   
           `automationSession` the instance the signal is connected to (optional)
   

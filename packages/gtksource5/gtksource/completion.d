@@ -333,7 +333,7 @@ class Completion : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion.Completion completion))
+          `void callback(gtksource.completion.Completion completion)`
   
           `completion` the instance the signal is connected to (optional)
   
@@ -371,7 +371,7 @@ class Completion : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion))
+          `void callback(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion)`
   
           `provider` a #GtkSourceCompletionProvider (optional)
   
@@ -415,7 +415,7 @@ class Completion : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion))
+          `void callback(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion)`
   
           `provider` a #GtkSourceCompletionProvider (optional)
   
@@ -459,7 +459,7 @@ class Completion : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion.Completion completion))
+          `void callback(gtksource.completion.Completion completion)`
   
           `completion` the instance the signal is connected to (optional)
   

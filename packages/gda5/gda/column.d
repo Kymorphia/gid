@@ -313,7 +313,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.types.GType oldType, gobject.types.GType newType, gda.column.Column column))
+          `void callback(gobject.types.GType oldType, gobject.types.GType newType, gda.column.Column column)`
   
           `oldType` the column's previous type (optional)
   
@@ -362,7 +362,7 @@ class Column : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string oldName, gda.column.Column column))
+          `void callback(string oldName, gda.column.Column column)`
   
           `oldName` the column's previous name (optional)
   

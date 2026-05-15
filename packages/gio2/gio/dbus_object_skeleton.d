@@ -173,7 +173,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_, gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.dbus_object_skeleton.DBusObjectSkeleton dBusObjectSkeleton))
+          `bool callback(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_, gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.dbus_object_skeleton.DBusObjectSkeleton dBusObjectSkeleton)`
   
           `interface_` The #GDBusInterfaceSkeleton that invocation is for. (optional)
   

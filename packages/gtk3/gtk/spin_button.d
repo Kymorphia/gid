@@ -593,7 +593,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.ScrollType scroll, gtk.spin_button.SpinButton spinButton))
+          `void callback(gtk.types.ScrollType scroll, gtk.spin_button.SpinButton spinButton)`
   
           `scroll` a #GtkScrollType to specify the speed and amount of change (optional)
   
@@ -641,7 +641,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D int callback(out double newValue, gtk.spin_button.SpinButton spinButton))
+          `int callback(out double newValue, gtk.spin_button.SpinButton spinButton)`
   
           `newValue` return location for the new value (optional)
   
@@ -713,7 +713,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.spin_button.SpinButton spinButton))
+          `bool callback(gtk.spin_button.SpinButton spinButton)`
   
           `spinButton` the instance the signal is connected to (optional)
   
@@ -754,7 +754,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.spin_button.SpinButton spinButton))
+          `void callback(gtk.spin_button.SpinButton spinButton)`
   
           `spinButton` the instance the signal is connected to (optional)
   
@@ -792,7 +792,7 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.spin_button.SpinButton spinButton))
+          `void callback(gtk.spin_button.SpinButton spinButton)`
   
           `spinButton` the instance the signal is connected to (optional)
   

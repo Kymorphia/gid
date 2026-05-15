@@ -218,7 +218,7 @@ class Device : gst.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.device.Device device))
+          `void callback(gst.device.Device device)`
   
           `device` the instance the signal is connected to (optional)
   

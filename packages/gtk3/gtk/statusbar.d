@@ -199,7 +199,7 @@ class Statusbar : gtk.box.Box
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint contextId, string text, gtk.statusbar.Statusbar statusbar))
+          `void callback(uint contextId, string text, gtk.statusbar.Statusbar statusbar)`
   
           `contextId` the context id of the relevant message/statusbar (optional)
   
@@ -248,7 +248,7 @@ class Statusbar : gtk.box.Box
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint contextId, string text, gtk.statusbar.Statusbar statusbar))
+          `void callback(uint contextId, string text, gtk.statusbar.Statusbar statusbar)`
   
           `contextId` the context id of the relevant message/statusbar (optional)
   

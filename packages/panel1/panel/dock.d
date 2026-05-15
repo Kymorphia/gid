@@ -465,7 +465,7 @@ class Dock : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(panel.widget.Widget widget, panel.dock.Dock dock))
+          `bool callback(panel.widget.Widget widget, panel.dock.Dock dock)`
   
           `widget` a #PanelWidget (optional)
   
@@ -512,7 +512,7 @@ class Dock : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D panel.frame.Frame callback(panel.position.Position position, panel.dock.Dock dock))
+          `panel.frame.Frame callback(panel.position.Position position, panel.dock.Dock dock)`
   
           `position` the position for the frame (optional)
   
@@ -558,7 +558,7 @@ class Dock : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(panel.widget.Widget panel, panel.dock.Dock dock))
+          `void callback(panel.widget.Widget panel, panel.dock.Dock dock)`
   
           `panel` a #PanelWidget (optional)
   
@@ -602,7 +602,7 @@ class Dock : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(panel.widget.Widget panel, panel.dock.Dock dock))
+          `void callback(panel.widget.Widget panel, panel.dock.Dock dock)`
   
           `panel` a #PanelWidget (optional)
   

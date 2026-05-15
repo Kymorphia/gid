@@ -278,14 +278,12 @@ struct RsvgDimensionData
     The documentation for the available methods in [rsvg.handle.Handle] may mention that a particular
     method is only callable on a "fully loaded handle".  This means either:
     
-    $(LIST
-      * The handle was loaded with [rsvg.handle.Handle.write] and [rsvg.handle.Handle.close], and
-        those functions returned no errors.
-      
-      * The handle was loaded with [rsvg.handle.Handle.readStreamSync] and that function
-        returned no errors.
-    )
-      
+    * The handle was loaded with [rsvg.handle.Handle.write] and [rsvg.handle.Handle.close], and
+      those functions returned no errors.
+    
+    * The handle was loaded with [rsvg.handle.Handle.readStreamSync] and that function
+      returned no errors.
+    
     Before librsvg 2.46, the library did not fully verify that a handle was in a
     fully loaded state for the methods that require it.  To preserve
     compatibility with old code which inadvertently called the API without

@@ -695,7 +695,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, gtk.column_view.ColumnView columnView))
+          `void callback(uint position, gtk.column_view.ColumnView columnView)`
   
           `position` position of item to activate (optional)
   

@@ -343,11 +343,9 @@ class BaseSink : gst.element.Element
       Returns: Various #GstBaseSink statistics. This property returns a #GstStructure
         with name `application/x-gst-base-sink-stats` with the following fields:
         
-        $(LIST
-          * "average-rate"  G_TYPE_DOUBLE   average frame rate
-          * "dropped" G_TYPE_UINT64   Number of dropped frames
-          * "rendered" G_TYPE_UINT64   Number of rendered frames
-        )
+        - "average-rate"  G_TYPE_DOUBLE   average frame rate
+        - "dropped" G_TYPE_UINT64   Number of dropped frames
+        - "rendered" G_TYPE_UINT64   Number of rendered frames
   */
   @property gst.structure.Structure stats()
   {
@@ -542,11 +540,9 @@ class BaseSink : gst.element.Element
       Return various #GstBaseSink statistics. This function returns a #GstStructure
       with name `application/x-gst-base-sink-stats` with the following fields:
       
-      $(LIST
-        * "average-rate" G_TYPE_DOUBLE   average frame rate
-        * "dropped" G_TYPE_UINT64   Number of dropped frames
-        * "rendered" G_TYPE_UINT64   Number of rendered frames
-      )
+      - "average-rate" G_TYPE_DOUBLE   average frame rate
+      - "dropped" G_TYPE_UINT64   Number of dropped frames
+      - "rendered" G_TYPE_UINT64   Number of rendered frames
       Returns: pointer to #GstStructure
   */
   gst.structure.Structure getStats()

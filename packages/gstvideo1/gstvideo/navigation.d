@@ -22,21 +22,19 @@ import gstvideo.types;
     
     The main parts of the API are:
     
-    $(LIST
-      * The GstNavigation interface, implemented by elements which provide an
-        application with the ability to create and inject navigation events into
-        the pipeline.
-      * GstNavigation event handling API. GstNavigation events are created in
-        response to calls on a GstNavigation interface implementation, and sent in
-        the pipeline. Upstream elements can use the navigation event API functions
-        to parse the contents of received messages.
-      
-      * GstNavigation message handling API. GstNavigation messages may be sent on
-        the message bus to inform applications of navigation related changes in the
-        pipeline, such as the mouse moving over a clickable region, or the set of
-        available angles changing.
-    )
-      
+    * The GstNavigation interface, implemented by elements which provide an
+      application with the ability to create and inject navigation events into
+      the pipeline.
+    * GstNavigation event handling API. GstNavigation events are created in
+      response to calls on a GstNavigation interface implementation, and sent in
+      the pipeline. Upstream elements can use the navigation event API functions
+      to parse the contents of received messages.
+    
+    * GstNavigation message handling API. GstNavigation messages may be sent on
+      the message bus to inform applications of navigation related changes in the
+      pipeline, such as the mouse moving over a clickable region, or the set of
+      available angles changing.
+    
     The GstNavigation message functions provide functions for creating and
     parsing custom bus messages for signaling GstNavigation changes.
 */

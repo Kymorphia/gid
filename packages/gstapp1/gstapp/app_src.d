@@ -882,7 +882,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.types.FlowReturn callback(gstapp.app_src.AppSrc appSrc))
+          `gst.types.FlowReturn callback(gstapp.app_src.AppSrc appSrc)`
   
           `appSrc` the instance the signal is connected to (optional)
   
@@ -924,7 +924,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstapp.app_src.AppSrc appSrc))
+          `void callback(gstapp.app_src.AppSrc appSrc)`
   
           `appSrc` the instance the signal is connected to (optional)
   
@@ -968,7 +968,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint length, gstapp.app_src.AppSrc appSrc))
+          `void callback(uint length, gstapp.app_src.AppSrc appSrc)`
   
           `length` the amount of bytes needed. (optional)
   
@@ -1019,7 +1019,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.types.FlowReturn callback(gst.buffer.Buffer buffer, gstapp.app_src.AppSrc appSrc))
+          `gst.types.FlowReturn callback(gst.buffer.Buffer buffer, gstapp.app_src.AppSrc appSrc)`
   
           `buffer` a buffer to push (optional)
   
@@ -1073,7 +1073,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.types.FlowReturn callback(gst.buffer_list.BufferList bufferList, gstapp.app_src.AppSrc appSrc))
+          `gst.types.FlowReturn callback(gst.buffer_list.BufferList bufferList, gstapp.app_src.AppSrc appSrc)`
   
           `bufferList` a buffer list to push (optional)
   
@@ -1131,7 +1131,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gst.types.FlowReturn callback(gst.sample.Sample sample, gstapp.app_src.AppSrc appSrc))
+          `gst.types.FlowReturn callback(gst.sample.Sample sample, gstapp.app_src.AppSrc appSrc)`
   
           `sample` a sample from which extract buffer to push (optional)
   
@@ -1179,7 +1179,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(ulong offset, gstapp.app_src.AppSrc appSrc))
+          `bool callback(ulong offset, gstapp.app_src.AppSrc appSrc)`
   
           `offset` the offset to seek to (optional)
   

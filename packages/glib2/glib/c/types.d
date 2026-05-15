@@ -2861,16 +2861,14 @@ enum GTraverseFlags : uint
     Specifies the type of traversal performed by [glib.tree.Tree.traverse],
     [glib.node.Node.traverse] and [glib.node.Node.find]. The different orders are
     illustrated here:
-    $(LIST
-      * In order: A, B, C, D, E, F, G, H, I
-        ![](Sorted_binary_tree_inorder.svg)
-      * Pre order: F, B, A, D, C, E, G, I, H
-        ![](Sorted_binary_tree_preorder.svg)
-      * Post order: A, C, E, D, B, H, I, G, F
-        ![](Sorted_binary_tree_postorder.svg)
-      * Level order: F, B, G, A, D, I, C, E, H
-        ![](Sorted_binary_tree_breadth-first_traversal.svg)
-    )
+    - In order: A, B, C, D, E, F, G, H, I
+      ![](Sorted_binary_tree_inorder.svg)
+    - Pre order: F, B, A, D, C, E, G, I, H
+      ![](Sorted_binary_tree_preorder.svg)
+    - Post order: A, C, E, D, B, H, I, G, F
+      ![](Sorted_binary_tree_postorder.svg)
+    - Level order: F, B, G, A, D, I, C, E, H
+      ![](Sorted_binary_tree_breadth-first_traversal.svg)
 */
 enum GTraverseType
 {
@@ -5380,23 +5378,21 @@ struct GIOFuncs
     This syntax is obviously inspired by the .ini files commonly met
     on Windows, but there are some important differences:
     
-    $(LIST
-      * .ini files use the ';' character to begin comments,
-        key files use the '#' character.
-      
-      * Key files do not allow for ungrouped keys meaning only
-        comments can precede the first group.
-      
-      * Key files are always encoded in UTF-8.
-      
-      * Key and Group names are case-sensitive. For example, a group called
-        [GROUP] is a different from [group].
-      
-      * .ini files don't have a strongly typed boolean entry type,
-         they only have GetProfileInt(). In key files, only
-         true and false (in lower case) are allowed.
-    )
-      
+    - .ini files use the ';' character to begin comments,
+      key files use the '#' character.
+    
+    - Key files do not allow for ungrouped keys meaning only
+      comments can precede the first group.
+    
+    - Key files are always encoded in UTF-8.
+    
+    - Key and Group names are case-sensitive. For example, a group called
+      [GROUP] is a different from [group].
+    
+    - .ini files don't have a strongly typed boolean entry type,
+       they only have GetProfileInt(). In key files, only
+       true and false (in lower case) are allowed.
+    
     Note that in contrast to the
     [Desktop Entry Specification](http://freedesktop.org/Standards/desktop-entry-spec),
     groups in key files may contain the same key multiple times; the last entry wins.
@@ -8055,16 +8051,14 @@ struct GVariantIter
     
     A [glib.variant.Variant] type string can be any of the following:
     
-    $(LIST
-      * any basic type string (listed below)
-      * `v`, `r` or `*`
-      * one of the characters `a` or `m`, followed by another type string
-      * the character `(`, followed by a concatenation of zero or more other
-        type strings, followed by the character `)`
-      * the character `{`, followed by a basic type string (see below),
-        followed by another type string, followed by the character `}`
-    )
-      
+    - any basic type string (listed below)
+    - `v`, `r` or `*`
+    - one of the characters `a` or `m`, followed by another type string
+    - the character `(`, followed by a concatenation of zero or more other
+      type strings, followed by the character `)`
+    - the character `{`, followed by a basic type string (see below),
+      followed by another type string, followed by the character `}`
+    
     A basic type string describes a basic type (as per
     [glib.variant_type.VariantType.isBasic]) and is always a single character in
     length. The valid basic type strings are `b`, `y`, `n`, `q`, `i`, `u`, `x`,
@@ -8080,56 +8074,54 @@ struct GVariantIter
     
     The meaning of each of the characters is as follows:
     
-    $(LIST
-      * `b`: the type string of `G_VARIANT_TYPE_BOOLEAN`; a boolean value.
-      * `y`: the type string of `G_VARIANT_TYPE_BYTE`; a byte.
-      * `n`: the type string of `G_VARIANT_TYPE_INT16`; a signed 16 bit integer.
-      * `q`: the type string of `G_VARIANT_TYPE_UINT16`; an unsigned 16 bit integer.
-      * `i`: the type string of `G_VARIANT_TYPE_INT32`; a signed 32 bit integer.
-      * `u`: the type string of `G_VARIANT_TYPE_UINT32`; an unsigned 32 bit integer.
-      * `x`: the type string of `G_VARIANT_TYPE_INT64`; a signed 64 bit integer.
-      * `t`: the type string of `G_VARIANT_TYPE_UINT64`; an unsigned 64 bit integer.
-      * `h`: the type string of `G_VARIANT_TYPE_HANDLE`; a signed 32 bit value
-        that, by convention, is used as an index into an array of file
-        descriptors that are sent alongside a D-Bus message.
-      * `d`: the type string of `G_VARIANT_TYPE_DOUBLE`; a double precision
-        floating point value.
-      * `s`: the type string of `G_VARIANT_TYPE_STRING`; a string.
-      * `o`: the type string of `G_VARIANT_TYPE_OBJECT_PATH`; a string in the form
-        of a D-Bus object path.
-      * `g`: the type string of `G_VARIANT_TYPE_SIGNATURE`; a string in the form of
-        a D-Bus type signature.
-      * `?`: the type string of `G_VARIANT_TYPE_BASIC`; an indefinite type that
-        is a supertype of any of the basic types.
-      * `v`: the type string of `G_VARIANT_TYPE_VARIANT`; a container type that
-        contain any other type of value.
-      * `a`: used as a prefix on another type string to mean an array of that
-        type; the type string `ai`, for example, is the type of an array of
-        signed 32-bit integers.
-      * `m`: used as a prefix on another type string to mean a ‘maybe’, or
-        ‘nullable’, version of that type; the type string `ms`, for example,
-        is the type of a value that maybe contains a string, or maybe contains
-        nothing.
-      * `()`: used to enclose zero or more other concatenated type strings to
-        create a tuple type; the type string `(is)`, for example, is the type of
-        a pair of an integer and a string.
-      * `r`: the type string of `G_VARIANT_TYPE_TUPLE`; an indefinite type that is
-        a supertype of any tuple type, regardless of the number of items.
-      * `{}`: used to enclose a basic type string concatenated with another type
-        string to create a dictionary entry type, which usually appears inside of
-        an array to form a dictionary; the type string `a{sd}`, for example, is
-        the type of a dictionary that maps strings to double precision floating
-        point values.
-      
-        The first type (the basic type) is the key type and the second type is
-        the value type. The reason that the first type is restricted to being a
-        basic type is so that it can easily be hashed.
-      * `*`: the type string of `G_VARIANT_TYPE_ANY`; the indefinite type that is
-        a supertype of all types.  Note that, as with all type strings, this
-        character represents exactly one type. It cannot be used inside of tuples
-        to mean ‘any number of items’.
-    )
-      
+    - `b`: the type string of `G_VARIANT_TYPE_BOOLEAN`; a boolean value.
+    - `y`: the type string of `G_VARIANT_TYPE_BYTE`; a byte.
+    - `n`: the type string of `G_VARIANT_TYPE_INT16`; a signed 16 bit integer.
+    - `q`: the type string of `G_VARIANT_TYPE_UINT16`; an unsigned 16 bit integer.
+    - `i`: the type string of `G_VARIANT_TYPE_INT32`; a signed 32 bit integer.
+    - `u`: the type string of `G_VARIANT_TYPE_UINT32`; an unsigned 32 bit integer.
+    - `x`: the type string of `G_VARIANT_TYPE_INT64`; a signed 64 bit integer.
+    - `t`: the type string of `G_VARIANT_TYPE_UINT64`; an unsigned 64 bit integer.
+    - `h`: the type string of `G_VARIANT_TYPE_HANDLE`; a signed 32 bit value
+      that, by convention, is used as an index into an array of file
+      descriptors that are sent alongside a D-Bus message.
+    - `d`: the type string of `G_VARIANT_TYPE_DOUBLE`; a double precision
+      floating point value.
+    - `s`: the type string of `G_VARIANT_TYPE_STRING`; a string.
+    - `o`: the type string of `G_VARIANT_TYPE_OBJECT_PATH`; a string in the form
+      of a D-Bus object path.
+    - `g`: the type string of `G_VARIANT_TYPE_SIGNATURE`; a string in the form of
+      a D-Bus type signature.
+    - `?`: the type string of `G_VARIANT_TYPE_BASIC`; an indefinite type that
+      is a supertype of any of the basic types.
+    - `v`: the type string of `G_VARIANT_TYPE_VARIANT`; a container type that
+      contain any other type of value.
+    - `a`: used as a prefix on another type string to mean an array of that
+      type; the type string `ai`, for example, is the type of an array of
+      signed 32-bit integers.
+    - `m`: used as a prefix on another type string to mean a ‘maybe’, or
+      ‘nullable’, version of that type; the type string `ms`, for example,
+      is the type of a value that maybe contains a string, or maybe contains
+      nothing.
+    - `()`: used to enclose zero or more other concatenated type strings to
+      create a tuple type; the type string `(is)`, for example, is the type of
+      a pair of an integer and a string.
+    - `r`: the type string of `G_VARIANT_TYPE_TUPLE`; an indefinite type that is
+      a supertype of any tuple type, regardless of the number of items.
+    - `{}`: used to enclose a basic type string concatenated with another type
+      string to create a dictionary entry type, which usually appears inside of
+      an array to form a dictionary; the type string `a{sd}`, for example, is
+      the type of a dictionary that maps strings to double precision floating
+      point values.
+    
+      The first type (the basic type) is the key type and the second type is
+      the value type. The reason that the first type is restricted to being a
+      basic type is so that it can easily be hashed.
+    - `*`: the type string of `G_VARIANT_TYPE_ANY`; the indefinite type that is
+      a supertype of all types.  Note that, as with all type strings, this
+      character represents exactly one type. It cannot be used inside of tuples
+      to mean ‘any number of items’.
+    
     Any type string of a container that contains an indefinite type is,
     itself, an indefinite type. For example, the type string `a*`
     (corresponding to `G_VARIANT_TYPE_ARRAY`) is an indefinite type

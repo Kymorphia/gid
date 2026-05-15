@@ -77,12 +77,10 @@ class Path : gobject.boxed.Boxed
       
       This function serves two purposes:
       
-      $(LIST
-        * When the flags allow everything, it provides access to the raw,
-          unmodified data of the path.
-        * When the flags disallow certain operations, it provides
-          an approximation of the path using just the allowed operations.
-      )
+      - When the flags allow everything, it provides access to the raw,
+        unmodified data of the path.
+      - When the flags disallow certain operations, it provides
+        an approximation of the path using just the allowed operations.
   
       Params:
         flags = flags to pass to the foreach function. See [gsk.types.PathForeachFlags]
@@ -268,20 +266,18 @@ class Path : gobject.boxed.Boxed
       
       A high-level summary of the syntax:
       
-      $(LIST
-        * `M x y` Move to `(x, y)`
-        * `L x y` Add a line from the current point to `(x, y)`
-        * `Q x1 y1 x2 y2` Add a quadratic Bézier from the current point to `(x2, y2)`, with control point `(x1, y1)`
-        * `C x1 y1 x2 y2 x3 y3` Add a cubic Bézier from the current point to `(x3, y3)`, with control points `(x1, y1)` and `(x2, y2)`
-        * `Z` Close the contour by drawing a line back to the start point
-        * `H x` Add a horizontal line from the current point to the given x value
-        * `V y` Add a vertical line from the current point to the given y value
-        * `T x2 y2` Add a quadratic Bézier, using the reflection of the previous segments' control point as control point
-        * `S x2 y2 x3 y3` Add a cubic Bézier, using the reflection of the previous segments' second control point as first control point
-        * `A rx ry r l s x y` Add an elliptical arc from the current point to `(x, y)` with radii rx and ry. See the SVG documentation for how the other parameters influence the arc.
-        * `O x1 y1 x2 y2 w` Add a rational quadratic Bézier from the current point to `(x2, y2)` with control point `(x1, y1)` and weight `w`.
-      )
-        
+      - `M x y` Move to `(x, y)`
+      - `L x y` Add a line from the current point to `(x, y)`
+      - `Q x1 y1 x2 y2` Add a quadratic Bézier from the current point to `(x2, y2)`, with control point `(x1, y1)`
+      - `C x1 y1 x2 y2 x3 y3` Add a cubic Bézier from the current point to `(x3, y3)`, with control points `(x1, y1)` and `(x2, y2)`
+      - `Z` Close the contour by drawing a line back to the start point
+      - `H x` Add a horizontal line from the current point to the given x value
+      - `V y` Add a vertical line from the current point to the given y value
+      - `T x2 y2` Add a quadratic Bézier, using the reflection of the previous segments' control point as control point
+      - `S x2 y2 x3 y3` Add a cubic Bézier, using the reflection of the previous segments' second control point as first control point
+      - `A rx ry r l s x y` Add an elliptical arc from the current point to `(x, y)` with radii rx and ry. See the SVG documentation for how the other parameters influence the arc.
+      - `O x1 y1 x2 y2 w` Add a rational quadratic Bézier from the current point to `(x2, y2)` with control point `(x1, y1)` and weight `w`.
+      
       All the commands have lowercase variants that interpret coordinates
       relative to the current point.
       

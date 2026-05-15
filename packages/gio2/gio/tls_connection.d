@@ -830,7 +830,7 @@ class TlsConnection : gio.iostream.IOStream
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.tls_connection.TlsConnection tlsConnection))
+          `bool callback(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors, gio.tls_connection.TlsConnection tlsConnection)`
   
           `peerCert` the peer's #GTlsCertificate (optional)
   

@@ -31,24 +31,22 @@ import gtk.types;
     and the distinction between the two may be a bit confusing.
     A few things to keep in mind:
     
-    $(LIST
-      * Stock images usually are used in conjunction with
-        [Stock Items][gtkstock], such as [gtk.types.STOCK_OK] or
-        [gtk.types.STOCK_OPEN]. Named icons are easier to set up and therefore
-        are more useful for new icons that an application wants to
-        add, such as application icons or window icons.
-      
-      * Stock images can only be loaded at the symbolic sizes defined
-        by the #GtkIconSize enumeration, or by custom sizes defined
-        by [gtk.global.iconSizeRegister], while named icons are more flexible
-        and any pixel size can be specified.
-      
-      * Because stock images are closely tied to stock items, and thus
-        to actions in the user interface, stock images may come in
-        multiple variants for different widget states or writing
-        directions.
-    )
-      
+    - Stock images usually are used in conjunction with
+      [Stock Items][gtkstock], such as [gtk.types.STOCK_OK] or
+      [gtk.types.STOCK_OPEN]. Named icons are easier to set up and therefore
+      are more useful for new icons that an application wants to
+      add, such as application icons or window icons.
+    
+    - Stock images can only be loaded at the symbolic sizes defined
+      by the #GtkIconSize enumeration, or by custom sizes defined
+      by [gtk.global.iconSizeRegister], while named icons are more flexible
+      and any pixel size can be specified.
+    
+    - Because stock images are closely tied to stock items, and thus
+      to actions in the user interface, stock images may come in
+      multiple variants for different widget states or writing
+      directions.
+    
     A good rule of thumb is that if there is a stock image for what
     you want to use, use it, otherwise use a named icon. It turns
     out that internally stock images are generally defined in
@@ -758,7 +756,7 @@ class IconTheme : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.icon_theme.IconTheme iconTheme))
+          `void callback(gtk.icon_theme.IconTheme iconTheme)`
   
           `iconTheme` the instance the signal is connected to (optional)
   

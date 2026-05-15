@@ -503,7 +503,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.mount_operation.MountOperation mountOperation))
+          `void callback(gio.mount_operation.MountOperation mountOperation)`
   
           `mountOperation` the instance the signal is connected to (optional)
   
@@ -544,7 +544,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string message, string defaultUser, string defaultDomain, gio.types.AskPasswordFlags flags, gio.mount_operation.MountOperation mountOperation))
+          `void callback(string message, string defaultUser, string defaultDomain, gio.types.AskPasswordFlags flags, gio.mount_operation.MountOperation mountOperation)`
   
           `message` string containing a message to display to the user. (optional)
   
@@ -610,7 +610,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string message, string[] choices, gio.mount_operation.MountOperation mountOperation))
+          `void callback(string message, string[] choices, gio.mount_operation.MountOperation mountOperation)`
   
           `message` string containing a message to display to the user. (optional)
   
@@ -659,7 +659,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.types.MountOperationResult result, gio.mount_operation.MountOperation mountOperation))
+          `void callback(gio.types.MountOperationResult result, gio.mount_operation.MountOperation mountOperation)`
   
           `result` a #GMountOperationResult indicating how the request was handled (optional)
   
@@ -713,7 +713,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string message, glib.types.Pid[] processes, string[] choices, gio.mount_operation.MountOperation mountOperation))
+          `void callback(string message, glib.types.Pid[] processes, string[] choices, gio.mount_operation.MountOperation mountOperation)`
   
           `message` string containing a message to display to the user. (optional)
   
@@ -784,7 +784,7 @@ class MountOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string message, long timeLeft, long bytesLeft, gio.mount_operation.MountOperation mountOperation))
+          `void callback(string message, long timeLeft, long bytesLeft, gio.mount_operation.MountOperation mountOperation)`
   
           `message` string containing a message to display to the user (optional)
   

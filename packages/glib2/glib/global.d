@@ -1740,25 +1740,23 @@ uint childWatchAdd(int priority, glib.types.Pid pid, glib.types.ChildWatchFunc f
     On POSIX platforms, the following restrictions apply to this API
     due to limitations in POSIX process interfaces:
     
-    $(LIST
-      * pid must be a child of this process
-      * pid must be positive
-      * the application must not call `waitpid` with a non-positive
-        first argument, for instance in another thread
-      * the application must not wait for pid to exit by any other
-        mechanism, including `waitpid(pid, ...)` or a second child-watch
-        source for the same pid
-      * the application must not ignore `SIGCHLD`
-      * Before 2.78, the application could not send a signal (`kill()`) to the
-        watched pid in a race free manner. Since 2.78, you can do that while the
-        associated #GMainContext is acquired.
-      * Before 2.78, even after destroying the #GSource, you could not
-        be sure that pid wasn't already reaped. Hence, it was also not
-        safe to `kill()` or `waitpid()` on the process ID after the child watch
-        source was gone. Destroying the source before it fired made it
-        impossible to reliably reap the process.
-    )
-      
+    * pid must be a child of this process
+    * pid must be positive
+    * the application must not call `waitpid` with a non-positive
+      first argument, for instance in another thread
+    * the application must not wait for pid to exit by any other
+      mechanism, including `waitpid(pid, ...)` or a second child-watch
+      source for the same pid
+    * the application must not ignore `SIGCHLD`
+    * Before 2.78, the application could not send a signal (`kill()`) to the
+      watched pid in a race free manner. Since 2.78, you can do that while the
+      associated #GMainContext is acquired.
+    * Before 2.78, even after destroying the #GSource, you could not
+      be sure that pid wasn't already reaped. Hence, it was also not
+      safe to `kill()` or `waitpid()` on the process ID after the child watch
+      source was gone. Destroying the source before it fired made it
+      impossible to reliably reap the process.
+    
     If any of those conditions are not met, this and related APIs will
     not work correctly. This can often be diagnosed via a GLib warning
     stating that `ECHILD` was received by `waitpid`.
@@ -2302,18 +2300,16 @@ string dcgettext(string domain, string msgid, int category)
     This function disables translations if and only if upon its first
     call all the following conditions hold:
     
-    $(LIST
-      * domain is not null
-      
-      * textdomain() has been called to set a default text domain
-      
-      * there is no translations available for the default text domain
-        and the current locale
-      
-      * current locale is not "C" or any English locales (those
-        starting with "en_")
-    )
-      
+    - domain is not null
+    
+    - textdomain() has been called to set a default text domain
+    
+    - there is no translations available for the default text domain
+      and the current locale
+    
+    - current locale is not "C" or any English locales (those
+      starting with "en_")
+    
     Note that this behavior may not be desired for example if an application
     has its untranslated messages in a language other than English. In those
     cases the application should call textdomain() after initializing GTK.
@@ -2758,34 +2754,32 @@ bool fileSetContents(string filename, ubyte[] contents)
     
     Notes:
     
-    $(LIST
-      * On UNIX, if filename already exists hard links to filename will break.
-        Also since the file is recreated, existing permissions, access control
-        lists, metadata etc. may be lost. If filename is a symbolic link,
-        the link itself will be replaced, not the linked file.
-      
-      * On UNIX, if filename already exists and is non-empty, and if the system
-        supports it (via a journalling filesystem or equivalent), and if
-        `G_FILE_SET_CONTENTS_CONSISTENT` is set in flags, the `fsync()` call (or
-        equivalent) will be used to ensure atomic replacement: filename
-        will contain either its old contents or contents, even in the face of
-        system power loss, the disk being unsafely removed, etc.
-      
-      * On UNIX, if filename does not already exist or is empty, there is a
-        possibility that system power loss etc. after calling this function will
-        leave filename empty or full of NUL bytes, depending on the underlying
-        filesystem, unless `G_FILE_SET_CONTENTS_DURABLE` and
-        `G_FILE_SET_CONTENTS_CONSISTENT` are set in flags.
-      
-      * On Windows renaming a file will not remove an existing file with the
-        new name, so on Windows there is a race condition between the existing
-        file being removed and the temporary file being renamed.
-      
-      * On Windows there is no way to remove a file that is open to some
-        process, or mapped into memory. Thus, this function will fail if
-        filename already exists and is open.
-    )
-      
+    - On UNIX, if filename already exists hard links to filename will break.
+      Also since the file is recreated, existing permissions, access control
+      lists, metadata etc. may be lost. If filename is a symbolic link,
+      the link itself will be replaced, not the linked file.
+    
+    - On UNIX, if filename already exists and is non-empty, and if the system
+      supports it (via a journalling filesystem or equivalent), and if
+      `G_FILE_SET_CONTENTS_CONSISTENT` is set in flags, the `fsync()` call (or
+      equivalent) will be used to ensure atomic replacement: filename
+      will contain either its old contents or contents, even in the face of
+      system power loss, the disk being unsafely removed, etc.
+    
+    - On UNIX, if filename does not already exist or is empty, there is a
+      possibility that system power loss etc. after calling this function will
+      leave filename empty or full of NUL bytes, depending on the underlying
+      filesystem, unless `G_FILE_SET_CONTENTS_DURABLE` and
+      `G_FILE_SET_CONTENTS_CONSISTENT` are set in flags.
+    
+    - On Windows renaming a file will not remove an existing file with the
+      new name, so on Windows there is a race condition between the existing
+      file being removed and the temporary file being renamed.
+    
+    - On Windows there is no way to remove a file that is open to some
+      process, or mapped into memory. Thus, this function will fail if
+      filename already exists and is open.
+    
     If the call was successful, it returns true. If the call was not successful,
     it returns false and sets error. The error domain is `G_FILE_ERROR`.
     Possible error codes are those in the #GFileError enumeration.
@@ -4690,16 +4684,14 @@ string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead)
     The behavior of this log handler can be influenced by a number of
     environment variables:
     
-      $(LIST
-          * `G_MESSAGES_PREFIXED`: A `:`-separated list of log levels for which
-            messages should be prefixed by the program name and PID of the
-            application.
-          * `G_MESSAGES_DEBUG`: A space-separated list of log domains for
-            which debug and informational messages are printed. By default
-            these messages are not printed. If you need to set the allowed
-            domains at runtime, use `funcGLib.log_writer_default_set_debug_domains`.
-      )
-        
+      - `G_MESSAGES_PREFIXED`: A `:`-separated list of log levels for which
+        messages should be prefixed by the program name and PID of the
+        application.
+      - `G_MESSAGES_DEBUG`: A space-separated list of log domains for
+        which debug and informational messages are printed. By default
+        these messages are not printed. If you need to set the allowed
+        domains at runtime, use `funcGLib.log_writer_default_set_debug_domains`.
+    
     `stderr` is used for levels `flagsGLib.LogLevelFlags.LEVEL_ERROR`,
     `flagsGLib.LogLevelFlags.LEVEL_CRITICAL`, `flagsGLib.LogLevelFlags.LEVEL_WARNING` and
     `flagsGLib.LogLevelFlags.LEVEL_MESSAGE`. `stdout` is used for
@@ -11405,10 +11397,8 @@ bool utf8ValidateLen(ubyte[] str, out string end)
     
     The function accepts the following syntax:
     
-    $(LIST
-      * simple forms (e.g. `f81d4fae-7dec-11d0-a765-00a0c91e6bf6`)
-    )
-      
+    - simple forms (e.g. `f81d4fae-7dec-11d0-a765-00a0c91e6bf6`)
+    
     Note that hyphens are required within the UUID string itself,
     as per the aforementioned RFC.
 

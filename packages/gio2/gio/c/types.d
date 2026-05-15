@@ -3591,19 +3591,17 @@ struct GAppInfoIface
     The following functions will re-arm the [gio.app_info_monitor.AppInfoMonitor.changed]
     signal so it can be emitted again:
     
-     $(LIST
-        * [gio.app_info.AppInfo.getAll]
-        * [gio.app_info.AppInfo.getAllForType]
-        * [gio.app_info.AppInfo.getDefaultForType]
-        * [gio.app_info.AppInfo.getFallbackForType]
-        * [gio.app_info.AppInfo.getRecommendedForType]
-        * [`[gio.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
-        * [`[gio.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
-        * [`[gio.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
-        * [`[gio.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
-        * [`[gio.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
-     )
-       
+     - [gio.app_info.AppInfo.getAll]
+     - [gio.app_info.AppInfo.getAllForType]
+     - [gio.app_info.AppInfo.getDefaultForType]
+     - [gio.app_info.AppInfo.getFallbackForType]
+     - [gio.app_info.AppInfo.getRecommendedForType]
+     - [`[gio.desktop_app_info.DesktopAppInfo.getImplementations]`](../gio-unix/type_func.DesktopAppInfo.get_implementation.html)
+     - [`[gio.desktop_app_info.DesktopAppInfo.new_]`](../gio-unix/ctor.DesktopAppInfo.new.html)
+     - [`[gio.desktop_app_info.DesktopAppInfo.newFromFilename]`](../gio-unix/ctor.DesktopAppInfo.new_from_filename.html)
+     - [`[gio.desktop_app_info.DesktopAppInfo.newFromKeyfile]`](../gio-unix/ctor.DesktopAppInfo.new_from_keyfile.html)
+     - [`[gio.desktop_app_info.DesktopAppInfo.search]`](../gio-unix/type_func.DesktopAppInfo.search.html)
+    
     The latter functions are available if using
     [[gio.desktop_app_info.DesktopAppInfo]](../gio-unix/class.DesktopAppInfo.html) from
     `gio-unix-2.0.pc` (GIR namespace `GioUnix-2.0`).
@@ -3747,16 +3745,14 @@ struct GAppLaunchContextPrivate;
     
     There is a number of different entry points into a [gio.application.Application]:
     
-    $(LIST
-      * via 'Activate' (i.e. just starting the application)
-      
-      * via 'Open' (i.e. opening some files)
-      
-      * by handling a command-line
-      
-      * via activating an action
-    )
-      
+    - via 'Activate' (i.e. just starting the application)
+    
+    - via 'Open' (i.e. opening some files)
+    
+    - by handling a command-line
+    
+    - via activating an action
+    
     The [gio.application.Application.startup] signal lets you handle the application
     initialization for all of these in a single place.
     
@@ -6457,22 +6453,20 @@ struct GEmblemedIconPrivate;
     
     To construct a [gio.file.File], you can use:
     
-    $(LIST
-      * [gio.file.File.newForPath] if you have a path.
-      * [gio.file.File.newForUri] if you have a URI.
-      * [gio.file.File.newForCommandlineArg] or
-        [gio.file.File.newForCommandlineArgAndCwd] for a command line
-        argument.
-      * [gio.file.File.newTmp] to create a temporary file from a template.
-      * [gio.file.File.newTmpAsync] to asynchronously create a temporary file.
-      * [gio.file.File.newTmpDirAsync] to asynchronously create a temporary
-        directory.
-      * [gio.file.File.parseName] from a UTF-8 string gotten from
-        [gio.file.File.getParseName].
-      * [gio.file.File.newBuildFilename] or [gio.file.File.newBuildFilenamev]
-        to create a file from path elements.
-    )
-      
+    - [gio.file.File.newForPath] if you have a path.
+    - [gio.file.File.newForUri] if you have a URI.
+    - [gio.file.File.newForCommandlineArg] or
+      [gio.file.File.newForCommandlineArgAndCwd] for a command line
+      argument.
+    - [gio.file.File.newTmp] to create a temporary file from a template.
+    - [gio.file.File.newTmpAsync] to asynchronously create a temporary file.
+    - [gio.file.File.newTmpDirAsync] to asynchronously create a temporary
+      directory.
+    - [gio.file.File.parseName] from a UTF-8 string gotten from
+      [gio.file.File.getParseName].
+    - [gio.file.File.newBuildFilename] or [gio.file.File.newBuildFilenamev]
+      to create a file from path elements.
+    
     One way to think of a [gio.file.File] is as an abstraction of a pathname. For
     normal files the system pathname is what is stored internally, but as
     [gio.file.File]s are extensible it could also be something else that corresponds
@@ -6527,13 +6521,11 @@ struct GEmblemedIconPrivate;
     Some [gio.file.File] operations almost always take a noticeable amount of time, and
     so do not have synchronous analogs. Notable cases include:
     
-    $(LIST
-      * [gio.file.File.mountMountable] to mount a mountable file.
-      * [gio.file.File.unmountMountableWithOperation] to unmount a mountable
-        file.
-      * [gio.file.File.ejectMountableWithOperation] to eject a mountable file.
-    )
-      
+    - [gio.file.File.mountMountable] to mount a mountable file.
+    - [gio.file.File.unmountMountableWithOperation] to unmount a mountable
+      file.
+    - [gio.file.File.ejectMountableWithOperation] to eject a mountable file.
+    
     ## Entity Tags
     
     One notable feature of [gio.file.File]s are entity tags, or ‘etags’ for
@@ -8419,16 +8411,14 @@ struct GMemoryInputStreamPrivate;
     
     Possible actions to take when the signal is received are:
     
-     $(LIST
-        * Free caches
-        * Save files that haven’t been looked at in a while to disk, ready to be reopened when needed
-        * Run a garbage collection cycle
-        * Try and compress fragmented allocations
-        * Exit on idle if the process has no reason to stay around
-        * Call [`malloc_trim(3)`](man:malloc_trim(3)) to return cached heap pages to
-          the kernel (if supported by your libc)
-     )
-       
+     - Free caches
+     - Save files that haven’t been looked at in a while to disk, ready to be reopened when needed
+     - Run a garbage collection cycle
+     - Try and compress fragmented allocations
+     - Exit on idle if the process has no reason to stay around
+     - Call [`malloc_trim(3)`](man:malloc_trim(3)) to return cached heap pages to
+       the kernel (if supported by your libc)
+    
     Note that some actions may not always improve system performance, and so
     should be profiled for your application. `malloc_trim()`, for example, may
     make future heap allocations slower (due to releasing cached heap pages back
@@ -8615,17 +8605,15 @@ struct GMenuLinkIterPrivate;
     There are 8 ‘menus’ visible in the screenshot: one menubar, two
     submenus and 5 sections:
     
-    $(LIST
-      * the toplevel menubar (containing 4 items)
-      * the View submenu (containing 3 sections)
-      * the first section of the View submenu (containing 2 items)
-      * the second section of the View submenu (containing 1 item)
-      * the final section of the View submenu (containing 1 item)
-      * the Highlight Mode submenu (containing 2 sections)
-      * the Sources section (containing 2 items)
-      * the Markup section (containing 2 items)
-    )
-      
+    - the toplevel menubar (containing 4 items)
+    - the View submenu (containing 3 sections)
+    - the first section of the View submenu (containing 2 items)
+    - the second section of the View submenu (containing 1 item)
+    - the final section of the View submenu (containing 1 item)
+    - the Highlight Mode submenu (containing 2 sections)
+    - the Sources section (containing 2 items)
+    - the Markup section (containing 2 items)
+    
     The [example](#a-menu-example) illustrates the conceptual connection between
     these 8 menus. Each large block in the figure represents a menu and the
     smaller blocks within the large block represent items in that menu. Some
@@ -8676,12 +8664,10 @@ struct GMenuLinkIterPrivate;
     While a wide variety of stateful actions is possible, the following
     is the minimum that is expected to be supported by all users of exported
     menu information:
-    $(LIST
-      * an action with no parameter type and no state
-      * an action with no parameter type and boolean state
-      * an action with string parameter type and string state
-    )
-      
+    - an action with no parameter type and no state
+    - an action with no parameter type and boolean state
+    - an action with string parameter type and string state
+    
     ## Stateless
     
     A stateless action typically corresponds to an ordinary menu item.
@@ -9555,13 +9541,11 @@ struct GPollableOutputStreamInterface
     “Low Power” mode on some systems).
     
     When in “Low Power” mode, it is recommended that applications:
-    $(LIST
-      * disable automatic downloads;
-      * reduce the rate of refresh from online sources such as calendar or
-        email synchronisation;
-      * reduce the use of expensive visual effects.
-    )
-      
+    - disable automatic downloads;
+    - reduce the rate of refresh from online sources such as calendar or
+      email synchronisation;
+    - reduce the use of expensive visual effects.
+    
     It is also likely that OS components providing services to applications will
     lower their own background activity, for the sake of the system.
     
@@ -9968,33 +9952,31 @@ struct GResolverPrivate;
     `preprocess` attribute to a comma-separated list of preprocessing options.
     The only options currently supported are:
     
-     $(LIST
-        * `xml-stripblanks` which will use the [`xmllint`](man:xmllint(1)) command
-          to strip ignorable whitespace from the XML file. For this to work,
-          the `XMLLINT` environment variable must be set to the full path to
-          the xmllint executable, or xmllint must be in the `PATH`; otherwise
-          the preprocessing step is skipped.
-       
-        * `to-pixdata` (deprecated since gdk-pixbuf 2.32) which will use the
-          `gdk-pixbuf-pixdata` command to convert images to the [`GdkPixdata`](https://docs.gtk.org/gdk-pixbuf/class.Pixdata.html)
-          format, which allows you to create pixbufs directly using the data inside
-          the resource file, rather than an (uncompressed) copy of it. For this, the
-          `gdk-pixbuf-pixdata` program must be in the `PATH`, or the
-          `GDK_PIXBUF_PIXDATA` environment variable must be set to the full path to
-          the `gdk-pixbuf-pixdata` executable; otherwise the resource compiler will
-          abort. `to-pixdata` has been deprecated since gdk-pixbuf 2.32, as
-          [gio.resource.Resource] supports embedding modern image formats just as well. Instead
-          of using it, embed a PNG or SVG file in your [gio.resource.Resource].
-       
-        * `json-stripblanks` which will use the
-          [`json-glib-format`](man:json-glib-format(1)) command to strip ignorable
-          whitespace from the JSON file. For this to work, the `JSON_GLIB_FORMAT`
-          environment variable must be set to the full path to the
-          `json-glib-format` executable, or it must be in the `PATH`; otherwise the
-          preprocessing step is skipped. In addition, at least version 1.6 of
-          `json-glib-format` is required.
-     )
-       
+     - `xml-stripblanks` which will use the [`xmllint`](man:xmllint(1)) command
+       to strip ignorable whitespace from the XML file. For this to work,
+       the `XMLLINT` environment variable must be set to the full path to
+       the xmllint executable, or xmllint must be in the `PATH`; otherwise
+       the preprocessing step is skipped.
+    
+     - `to-pixdata` (deprecated since gdk-pixbuf 2.32) which will use the
+       `gdk-pixbuf-pixdata` command to convert images to the [`GdkPixdata`](https://docs.gtk.org/gdk-pixbuf/class.Pixdata.html)
+       format, which allows you to create pixbufs directly using the data inside
+       the resource file, rather than an (uncompressed) copy of it. For this, the
+       `gdk-pixbuf-pixdata` program must be in the `PATH`, or the
+       `GDK_PIXBUF_PIXDATA` environment variable must be set to the full path to
+       the `gdk-pixbuf-pixdata` executable; otherwise the resource compiler will
+       abort. `to-pixdata` has been deprecated since gdk-pixbuf 2.32, as
+       [gio.resource.Resource] supports embedding modern image formats just as well. Instead
+       of using it, embed a PNG or SVG file in your [gio.resource.Resource].
+    
+     - `json-stripblanks` which will use the
+       [`json-glib-format`](man:json-glib-format(1)) command to strip ignorable
+       whitespace from the JSON file. For this to work, the `JSON_GLIB_FORMAT`
+       environment variable must be set to the full path to the
+       `json-glib-format` executable, or it must be in the `PATH`; otherwise the
+       preprocessing step is skipped. In addition, at least version 1.6 of
+       `json-glib-format` is required.
+    
     Resource files will be exported in the [gio.resource.Resource] namespace using the
     combination of the given `prefix` and the filename from the `file` element.
     The `alias` attribute can be used to alter the filename to expose them at a
@@ -12141,60 +12123,58 @@ struct GSubprocessLauncher;
     [gio.task.Task]’s API attempts to be simpler than [gio.simple_async_result.SimpleAsyncResult]’s
     in several ways:
     
-    $(LIST
-      * You can save task-specific data with [gio.task.Task.setTaskData], and
-        retrieve it later with [gio.task.Task.getTaskData]. This replaces the
-        abuse of [gio.simple_async_result.SimpleAsyncResult.setOpResGpointer] for the same
-        purpose with [gio.simple_async_result.SimpleAsyncResult].
-      * In addition to the task data, [gio.task.Task] also keeps track of the
-        [priority](iface.AsyncResult.html#io-priority), [gio.cancellable.Cancellable],
-        and [glib.main_context.MainContext] associated with the task, so tasks that
-        consist of a chain of simpler asynchronous operations will have easy access
-        to those values when starting each sub-task.
-      * [gio.task.Task.returnErrorIfCancelled] provides simplified
-        handling for cancellation. In addition, cancellation
-        overrides any other [gio.task.Task] return value by default, like
-        [gio.simple_async_result.SimpleAsyncResult] does when
-        [gio.simple_async_result.SimpleAsyncResult.setCheckCancellable] is called.
-        (You can use [gio.task.Task.setCheckCancellable] to turn off that
-        behavior.) On the other hand, [gio.task.Task.runInThread]
-        guarantees that it will always run your
-        `task_func`, even if the task’s [gio.cancellable.Cancellable]
-        is already cancelled before the task gets a chance to run;
-        you can start your `task_func` with a
-        [gio.task.Task.returnErrorIfCancelled] check if you need the
-        old behavior.
-      * The ‘return’ methods (eg, [gio.task.Task.returnPointer])
-        automatically cause the task to be ‘completed’ as well, and
-        there is no need to worry about the ‘complete’ vs ‘complete in idle’
-        distinction. ([gio.task.Task] automatically figures out
-        whether the task’s callback can be invoked directly, or
-        if it needs to be sent to another [glib.main_context.MainContext], or delayed
-        until the next iteration of the current [glib.main_context.MainContext].)
-      * The ‘finish’ functions for [gio.task.Task] based operations are generally
-        much simpler than [gio.simple_async_result.SimpleAsyncResult] ones, normally consisting
-        of only a single call to [gio.task.Task.propagatePointer] or the like.
-        Since [gio.task.Task.propagatePointer] ‘steals’ the return value from
-        the [gio.task.Task], it is not necessary to juggle pointers around to
-        prevent it from being freed twice.
-      * With [gio.simple_async_result.SimpleAsyncResult], it was common to call
-        [gio.simple_async_result.SimpleAsyncResult.propagateError] from the
-        `_finish()` wrapper function, and have
-        virtual method implementations only deal with successful
-        returns. This behavior is deprecated, because it makes it
-        difficult for a subclass to chain to a parent class’s async
-        methods. Instead, the wrapper function should just be a
-        simple wrapper, and the virtual method should call an
-        appropriate `g_task_propagate_` function.
-        Note that wrapper methods can now use
-        [gio.async_result.AsyncResult.legacyPropagateError] to do old-style
-        [gio.simple_async_result.SimpleAsyncResult] error-returning behavior, and
-        [gio.async_result.AsyncResult.isTagged] to check if a result is tagged as
-        having come from the `_async()` wrapper
-        function (for ‘short-circuit’ results, such as when passing
-        `0` to [gio.input_stream.InputStream.readAsync]).
-    )
-      
+    - You can save task-specific data with [gio.task.Task.setTaskData], and
+      retrieve it later with [gio.task.Task.getTaskData]. This replaces the
+      abuse of [gio.simple_async_result.SimpleAsyncResult.setOpResGpointer] for the same
+      purpose with [gio.simple_async_result.SimpleAsyncResult].
+    - In addition to the task data, [gio.task.Task] also keeps track of the
+      [priority](iface.AsyncResult.html#io-priority), [gio.cancellable.Cancellable],
+      and [glib.main_context.MainContext] associated with the task, so tasks that
+      consist of a chain of simpler asynchronous operations will have easy access
+      to those values when starting each sub-task.
+    - [gio.task.Task.returnErrorIfCancelled] provides simplified
+      handling for cancellation. In addition, cancellation
+      overrides any other [gio.task.Task] return value by default, like
+      [gio.simple_async_result.SimpleAsyncResult] does when
+      [gio.simple_async_result.SimpleAsyncResult.setCheckCancellable] is called.
+      (You can use [gio.task.Task.setCheckCancellable] to turn off that
+      behavior.) On the other hand, [gio.task.Task.runInThread]
+      guarantees that it will always run your
+      `task_func`, even if the task’s [gio.cancellable.Cancellable]
+      is already cancelled before the task gets a chance to run;
+      you can start your `task_func` with a
+      [gio.task.Task.returnErrorIfCancelled] check if you need the
+      old behavior.
+    - The ‘return’ methods (eg, [gio.task.Task.returnPointer])
+      automatically cause the task to be ‘completed’ as well, and
+      there is no need to worry about the ‘complete’ vs ‘complete in idle’
+      distinction. ([gio.task.Task] automatically figures out
+      whether the task’s callback can be invoked directly, or
+      if it needs to be sent to another [glib.main_context.MainContext], or delayed
+      until the next iteration of the current [glib.main_context.MainContext].)
+    - The ‘finish’ functions for [gio.task.Task] based operations are generally
+      much simpler than [gio.simple_async_result.SimpleAsyncResult] ones, normally consisting
+      of only a single call to [gio.task.Task.propagatePointer] or the like.
+      Since [gio.task.Task.propagatePointer] ‘steals’ the return value from
+      the [gio.task.Task], it is not necessary to juggle pointers around to
+      prevent it from being freed twice.
+    - With [gio.simple_async_result.SimpleAsyncResult], it was common to call
+      [gio.simple_async_result.SimpleAsyncResult.propagateError] from the
+      `_finish()` wrapper function, and have
+      virtual method implementations only deal with successful
+      returns. This behavior is deprecated, because it makes it
+      difficult for a subclass to chain to a parent class’s async
+      methods. Instead, the wrapper function should just be a
+      simple wrapper, and the virtual method should call an
+      appropriate `g_task_propagate_` function.
+      Note that wrapper methods can now use
+      [gio.async_result.AsyncResult.legacyPropagateError] to do old-style
+      [gio.simple_async_result.SimpleAsyncResult] error-returning behavior, and
+      [gio.async_result.AsyncResult.isTagged] to check if a result is tagged as
+      having come from the `_async()` wrapper
+      function (for ‘short-circuit’ results, such as when passing
+      `0` to [gio.input_stream.InputStream.readAsync]).
+    
     ## Thread-safety considerations
     
     Due to some infelicities in the API design, there is a
@@ -12207,12 +12187,10 @@ struct GSubprocessLauncher;
     This is a problem if the finalizers use non-threadsafe API, and
     can lead to hard-to-debug crashes. Possible workarounds include:
     
-    $(LIST
-      * Clear task data in a signal handler for `notify::completed`
-      * Keep iterating a main context in the main thread and defer
-        dropping the reference to the source object to that main
-        context when the task is finalized
-    )
+    - Clear task data in a signal handler for `notify::completed`
+    - Keep iterating a main context in the main thread and defer
+      dropping the reference to the source object to that main
+      context when the task is finalized
 */
 struct GTask;
 

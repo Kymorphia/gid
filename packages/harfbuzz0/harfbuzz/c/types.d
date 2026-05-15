@@ -2026,23 +2026,21 @@ enum hb_glyph_flags_t : uint
     
     Regarding these various memory-modes:
     
-    $(LIST
-      * In no case shall the HarfBuzz client modify memory
-        that is passed to HarfBuzz in a blob.  If there is
-        any such possibility, @HB_MEMORY_MODE_DUPLICATE should be used
-        such that HarfBuzz makes a copy immediately,
-      
-      * Use @HB_MEMORY_MODE_READONLY otherwise, unless you really really
-        really know what you are doing,
-      
-      * @HB_MEMORY_MODE_WRITABLE is appropriate if you really made a
-        copy of data solely for the purpose of passing to
-        HarfBuzz and doing that just once (no reuse!),
-      
-      * If the font is mmap()ed, it's okay to use
-        @HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE, however, using that mode
-        correctly is very tricky.  Use @HB_MEMORY_MODE_READONLY instead.
-    )
+    - In no case shall the HarfBuzz client modify memory
+      that is passed to HarfBuzz in a blob.  If there is
+      any such possibility, @HB_MEMORY_MODE_DUPLICATE should be used
+      such that HarfBuzz makes a copy immediately,
+    
+    - Use @HB_MEMORY_MODE_READONLY otherwise, unless you really really
+      really know what you are doing,
+    
+    - @HB_MEMORY_MODE_WRITABLE is appropriate if you really made a
+      copy of data solely for the purpose of passing to
+      HarfBuzz and doing that just once (no reuse!),
+    
+    - If the font is mmap()ed, it's okay to use
+      @HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE, however, using that mode
+      correctly is very tricky.  Use @HB_MEMORY_MODE_READONLY instead.
 */
 enum hb_memory_mode_t
 {

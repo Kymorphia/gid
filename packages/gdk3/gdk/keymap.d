@@ -378,7 +378,7 @@ class Keymap : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.keymap.Keymap keymap))
+          `void callback(gdk.keymap.Keymap keymap)`
   
           `keymap` the instance the signal is connected to (optional)
   
@@ -416,7 +416,7 @@ class Keymap : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.keymap.Keymap keymap))
+          `void callback(gdk.keymap.Keymap keymap)`
   
           `keymap` the instance the signal is connected to (optional)
   
@@ -455,7 +455,7 @@ class Keymap : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.keymap.Keymap keymap))
+          `void callback(gdk.keymap.Keymap keymap)`
   
           `keymap` the instance the signal is connected to (optional)
   

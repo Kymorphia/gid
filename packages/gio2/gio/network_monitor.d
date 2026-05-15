@@ -206,7 +206,7 @@ interface NetworkMonitor
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool networkAvailable, gio.network_monitor.NetworkMonitor networkMonitor))
+          `void callback(bool networkAvailable, gio.network_monitor.NetworkMonitor networkMonitor)`
   
           `networkAvailable` the current value of #GNetworkMonitor:network-available (optional)
   

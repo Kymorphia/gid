@@ -689,7 +689,7 @@ class Widget : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gtk.widget.Widget callback(panel.widget.Widget widget))
+          `gtk.widget.Widget callback(panel.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -731,7 +731,7 @@ class Widget : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(panel.widget.Widget widget))
+          `void callback(panel.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   

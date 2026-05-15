@@ -28,19 +28,17 @@ public import gtk.widget;
     may be a bit confusing at first that these shortcuts come from various
     sources and in various flavours, so lets explain the terminology here:
     
-    $(LIST
-      * Bookmarks: are created by the user, by dragging folders from the
-        right pane to the left pane, or by using the “Add”. Bookmarks
-        can be renamed and deleted by the user.
-      
-      * Shortcuts: can be provided by the application. For example, a Paint
-        program may want to add a shortcut for a Clipart folder. Shortcuts
-        cannot be modified by the user.
-      
-      * Volumes: are provided by the underlying filesystem abstraction. They are
-        the “roots” of the filesystem.
-    )
-      
+    - Bookmarks: are created by the user, by dragging folders from the
+      right pane to the left pane, or by using the “Add”. Bookmarks
+      can be renamed and deleted by the user.
+    
+    - Shortcuts: can be provided by the application. For example, a Paint
+      program may want to add a shortcut for a Clipart folder. Shortcuts
+      cannot be modified by the user.
+    
+    - Volumes: are provided by the underlying filesystem abstraction. They are
+      the “roots” of the filesystem.
+    
     # File Names and Encodings
     
     When the user is finished selecting files in a
@@ -1492,7 +1490,7 @@ template FileChooserT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gtk.types.FileChooserConfirmation callback(gtk.file_chooser.FileChooser fileChooser))
+          `gtk.types.FileChooserConfirmation callback(gtk.file_chooser.FileChooser fileChooser)`
   
           `fileChooser` the instance the signal is connected to (optional)
   
@@ -1545,7 +1543,7 @@ template FileChooserT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser.FileChooser fileChooser))
+          `void callback(gtk.file_chooser.FileChooser fileChooser)`
   
           `fileChooser` the instance the signal is connected to (optional)
   
@@ -1592,7 +1590,7 @@ template FileChooserT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser.FileChooser fileChooser))
+          `void callback(gtk.file_chooser.FileChooser fileChooser)`
   
           `fileChooser` the instance the signal is connected to (optional)
   
@@ -1642,7 +1640,7 @@ template FileChooserT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser.FileChooser fileChooser))
+          `void callback(gtk.file_chooser.FileChooser fileChooser)`
   
           `fileChooser` the instance the signal is connected to (optional)
   
@@ -1700,7 +1698,7 @@ template FileChooserT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.file_chooser.FileChooser fileChooser))
+          `void callback(gtk.file_chooser.FileChooser fileChooser)`
   
           `fileChooser` the instance the signal is connected to (optional)
   

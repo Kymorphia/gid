@@ -177,7 +177,7 @@ class Overlay : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.widget.Widget widget, out gdk.rectangle.Rectangle allocation, gtk.overlay.Overlay overlay))
+          `bool callback(gtk.widget.Widget widget, out gdk.rectangle.Rectangle allocation, gtk.overlay.Overlay overlay)`
   
           `widget` the child widget to position (optional)
   

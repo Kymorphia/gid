@@ -146,7 +146,7 @@ class AggregatorPad : gst.pad.Pad
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.buffer.Buffer object, gstbase.aggregator_pad.AggregatorPad aggregatorPad))
+          `void callback(gst.buffer.Buffer object, gstbase.aggregator_pad.AggregatorPad aggregatorPad)`
   
           `object`  (optional)
   

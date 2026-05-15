@@ -292,7 +292,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel model, gtksource.completion_context.CompletionContext completionContext))
+          `void callback(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel model, gtksource.completion_context.CompletionContext completionContext)`
   
           `provider` a #GtkSourceCompletionProvider (optional)
   

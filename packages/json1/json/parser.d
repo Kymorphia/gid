@@ -380,7 +380,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.array.Array array, int index, json.parser.Parser parser))
+          `void callback(json.array.Array array, int index, json.parser.Parser parser)`
   
           `array` a JSON array (optional)
   
@@ -430,7 +430,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.array.Array array, json.parser.Parser parser))
+          `void callback(json.array.Array array, json.parser.Parser parser)`
   
           `array` the parsed JSON array (optional)
   
@@ -474,7 +474,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.parser.Parser parser))
+          `void callback(json.parser.Parser parser)`
   
           `parser` the instance the signal is connected to (optional)
   
@@ -512,7 +512,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(void* error, json.parser.Parser parser))
+          `void callback(void* error, json.parser.Parser parser)`
   
           `error` the error (optional)
   
@@ -556,7 +556,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.object.ObjectWrap object, json.parser.Parser parser))
+          `void callback(json.object.ObjectWrap object, json.parser.Parser parser)`
   
           `object` the parsed JSON object (optional)
   
@@ -600,7 +600,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.object.ObjectWrap object, string memberName, json.parser.Parser parser))
+          `void callback(json.object.ObjectWrap object, string memberName, json.parser.Parser parser)`
   
           `object` the JSON object being parsed (optional)
   
@@ -649,7 +649,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.parser.Parser parser))
+          `void callback(json.parser.Parser parser)`
   
           `parser` the instance the signal is connected to (optional)
   
@@ -687,7 +687,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.parser.Parser parser))
+          `void callback(json.parser.Parser parser)`
   
           `parser` the instance the signal is connected to (optional)
   
@@ -724,7 +724,7 @@ class Parser : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(json.parser.Parser parser))
+          `void callback(json.parser.Parser parser)`
   
           `parser` the instance the signal is connected to (optional)
   

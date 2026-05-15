@@ -138,17 +138,15 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
     slave-only mode according to the config.
     
     config is a #GstStructure with the following optional fields:
-    $(LIST
-      * #guint64 `clock-id`: The clock ID to use for the local clock. If the
-          clock-id is not provided or [gstnet.types.PTP_CLOCK_ID_NONE] is provided, a clock
-          id is automatically generated from the MAC address of the first network
-          interface.
-      * #GStrv `interfaces`: The interface names to listen on for PTP packets. If
-          none are provided then all compatible interfaces will be used.
-      * #guint `ttl`: The TTL to use for multicast packets sent out by GStreamer.
-          This defaults to 1, i.e. packets will not leave the local network.
-    )
-      
+    * #guint64 `clock-id`: The clock ID to use for the local clock. If the
+        clock-id is not provided or [gstnet.types.PTP_CLOCK_ID_NONE] is provided, a clock
+        id is automatically generated from the MAC address of the first network
+        interface.
+    * #GStrv `interfaces`: The interface names to listen on for PTP packets. If
+        none are provided then all compatible interfaces will be used.
+    * #guint `ttl`: The TTL to use for multicast packets sent out by GStreamer.
+        This defaults to 1, i.e. packets will not leave the local network.
+    
     This function is automatically called by [gstnet.ptp_clock.PtpClock.new_] with default
     parameters if it wasn't called before.
 

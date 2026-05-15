@@ -163,7 +163,7 @@ class ATContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.atcontext.ATContext aTContext))
+          `void callback(gtk.atcontext.ATContext aTContext)`
   
           `aTContext` the instance the signal is connected to (optional)
   

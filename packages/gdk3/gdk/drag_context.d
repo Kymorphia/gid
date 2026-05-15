@@ -159,17 +159,15 @@ class DragContext : gobject.object.ObjectWrap
       
       Once the drag and drop operation is managed, the drag context will
       emit the following signals:
-      $(LIST
-        * The #GdkDragContext::action-changed signal whenever the final action
-          to be performed by the drag and drop operation changes.
-        * The #GdkDragContext::drop-performed signal after the user performs
-          the drag and drop gesture (typically by releasing the mouse button).
-        * The #GdkDragContext::dnd-finished signal after the drag and drop
-          operation concludes (after all #GdkSelection transfers happen).
-        * The #GdkDragContext::cancel signal if the drag and drop operation is
-          finished but doesn't happen over an accepting destination, or is
-          cancelled through other means.
-      )
+      - The #GdkDragContext::action-changed signal whenever the final action
+        to be performed by the drag and drop operation changes.
+      - The #GdkDragContext::drop-performed signal after the user performs
+        the drag and drop gesture (typically by releasing the mouse button).
+      - The #GdkDragContext::dnd-finished signal after the drag and drop
+        operation concludes (after all #GdkSelection transfers happen).
+      - The #GdkDragContext::cancel signal if the drag and drop operation is
+        finished but doesn't happen over an accepting destination, or is
+        cancelled through other means.
   
       Params:
         ipcWindow = Window to use for IPC messaging/events
@@ -221,7 +219,7 @@ class DragContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.types.DragAction action, gdk.drag_context.DragContext dragContext))
+          `void callback(gdk.types.DragAction action, gdk.drag_context.DragContext dragContext)`
   
           `action` The action currently chosen (optional)
   
@@ -268,7 +266,7 @@ class DragContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.types.DragCancelReason reason, gdk.drag_context.DragContext dragContext))
+          `void callback(gdk.types.DragCancelReason reason, gdk.drag_context.DragContext dragContext)`
   
           `reason` The reason the context was cancelled (optional)
   
@@ -317,7 +315,7 @@ class DragContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag_context.DragContext dragContext))
+          `void callback(gdk.drag_context.DragContext dragContext)`
   
           `dragContext` the instance the signal is connected to (optional)
   
@@ -358,7 +356,7 @@ class DragContext : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int time, gdk.drag_context.DragContext dragContext))
+          `void callback(int time, gdk.drag_context.DragContext dragContext)`
   
           `time` the time at which the drop happened. (optional)
   

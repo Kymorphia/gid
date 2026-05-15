@@ -75,14 +75,12 @@ class UnixConnection : gio.socket_connection.SocketConnection
       
       This method can be expected to be available on the following platforms:
       
-      $(LIST
-        * Linux since GLib 2.26
-        * FreeBSD since GLib 2.26
-        * GNU/kFreeBSD since GLib 2.36
-        * Solaris, Illumos and OpenSolaris since GLib 2.40
-        * GNU/Hurd since GLib 2.40
-      )
-        
+      - Linux since GLib 2.26
+      - FreeBSD since GLib 2.26
+      - GNU/kFreeBSD since GLib 2.36
+      - Solaris, Illumos and OpenSolaris since GLib 2.40
+      - GNU/Hurd since GLib 2.40
+      
       Other ways to exchange credentials with a foreign peer includes the
       #GUnixCredentialsMessage type and [gio.socket.Socket.getCredentials] function.
   
@@ -188,14 +186,12 @@ class UnixConnection : gio.socket_connection.SocketConnection
       
       This method can be expected to be available on the following platforms:
       
-      $(LIST
-        * Linux since GLib 2.26
-        * FreeBSD since GLib 2.26
-        * GNU/kFreeBSD since GLib 2.36
-        * Solaris, Illumos and OpenSolaris since GLib 2.40
-        * GNU/Hurd since GLib 2.40
-      )
-        
+      - Linux since GLib 2.26
+      - FreeBSD since GLib 2.26
+      - GNU/kFreeBSD since GLib 2.36
+      - Solaris, Illumos and OpenSolaris since GLib 2.40
+      - GNU/Hurd since GLib 2.40
+      
       Other ways to exchange credentials with a foreign peer includes the
       #GUnixCredentialsMessage type and [gio.socket.Socket.getCredentials] function.
   

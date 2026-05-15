@@ -113,7 +113,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor))
+          `void callback(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor)`
   
           `unixMountMonitor` the instance the signal is connected to (optional)
   
@@ -150,7 +150,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor))
+          `void callback(gio.unix_mount_monitor.UnixMountMonitor unixMountMonitor)`
   
           `unixMountMonitor` the instance the signal is connected to (optional)
   

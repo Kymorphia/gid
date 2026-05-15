@@ -2952,7 +2952,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D cairo.surface.Surface callback(int width, int height, gdk.window.Window window))
+          `cairo.surface.Surface callback(int width, int height, gdk.window.Window window)`
   
           `width` the width of the offscreen surface to create (optional)
   
@@ -3007,7 +3007,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double embedderX, double embedderY, out double offscreenX, out double offscreenY, gdk.window.Window window))
+          `void callback(double embedderX, double embedderY, out double offscreenX, out double offscreenY, gdk.window.Window window)`
   
           `embedderX` x coordinate in the embedder window (optional)
   
@@ -3090,7 +3090,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(void* flippedRect, void* finalRect, bool flippedX, bool flippedY, gdk.window.Window window))
+          `void callback(void* flippedRect, void* finalRect, bool flippedX, bool flippedY, gdk.window.Window window)`
   
           `flippedRect` the position of window after any possible
                            flipping or null if the backend can't obtain it (optional)
@@ -3154,7 +3154,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gdk.window.Window callback(double x, double y, gdk.window.Window window))
+          `gdk.window.Window callback(double x, double y, gdk.window.Window window)`
   
           `x` x coordinate in the window (optional)
   
@@ -3210,7 +3210,7 @@ class Window : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double offscreenX, double offscreenY, out double embedderX, out double embedderY, gdk.window.Window window))
+          `void callback(double offscreenX, double offscreenY, out double embedderX, out double embedderY, gdk.window.Window window)`
   
           `offscreenX` x coordinate in the offscreen window (optional)
   

@@ -562,7 +562,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event, gtksource.gutter_renderer.GutterRenderer gutterRenderer))
+          `void callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event, gtksource.gutter_renderer.GutterRenderer gutterRenderer)`
   
           `iter` a #GtkTextIter (optional)
   
@@ -618,7 +618,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event, gtksource.gutter_renderer.GutterRenderer gutterRenderer))
+          `bool callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event, gtksource.gutter_renderer.GutterRenderer gutterRenderer)`
   
           `iter` a #GtkTextIter (optional)
   
@@ -679,7 +679,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state, gtksource.gutter_renderer.GutterRenderer gutterRenderer))
+          `void callback(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state, gtksource.gutter_renderer.GutterRenderer gutterRenderer)`
   
           `start` a #GtkTextIter (optional)
   
@@ -735,7 +735,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, int x, int y, gtk.tooltip.Tooltip tooltip, gtksource.gutter_renderer.GutterRenderer gutterRenderer))
+          `bool callback(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, int x, int y, gtk.tooltip.Tooltip tooltip, gtksource.gutter_renderer.GutterRenderer gutterRenderer)`
   
           `iter` a #GtkTextIter (optional)
   
@@ -808,7 +808,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.gutter_renderer.GutterRenderer gutterRenderer))
+          `void callback(gtksource.gutter_renderer.GutterRenderer gutterRenderer)`
   
           `gutterRenderer` the instance the signal is connected to (optional)
   

@@ -81,12 +81,10 @@ import gtk.window_group;
     # Actions
     
     [gtk.window.Window] defines a set of built-in actions:
-    $(LIST
-      * `default.activate`: Activate the default widget.
-      * `window.minimize`: Minimize the window.
-      * `window.toggle-maximized`: Maximize or restore the window.
-      * `window.close`: Close the window.
-    )
+    - `default.activate`: Activate the default widget.
+    - `window.minimize`: Minimize the window.
+    - `window.toggle-maximized`: Maximize or restore the window.
+    - `window.close`: Close the window.
 */
 class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut_manager.ShortcutManager
 {
@@ -1643,7 +1641,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.window.Window window))
+          `void callback(gtk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -1683,7 +1681,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.window.Window window))
+          `void callback(gtk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -1720,7 +1718,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.window.Window window))
+          `bool callback(gtk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   
@@ -1769,7 +1767,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool toggle, gtk.window.Window window))
+          `bool callback(bool toggle, gtk.window.Window window)`
   
           `toggle` toggle the debugger (optional)
   
@@ -1816,7 +1814,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.window.Window window))
+          `void callback(gtk.window.Window window)`
   
           `window` the instance the signal is connected to (optional)
   

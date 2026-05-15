@@ -203,7 +203,7 @@ class WebResource : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.error.ErrorWrap error, webkit.web_resource.WebResource webResource))
+          `void callback(glib.error.ErrorWrap error, webkit.web_resource.WebResource webResource)`
   
           `error` the #GError that was triggered (optional)
   
@@ -246,7 +246,7 @@ class WebResource : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.tls_certificate.TlsCertificate certificate, gio.types.TlsCertificateFlags errors, webkit.web_resource.WebResource webResource))
+          `void callback(gio.tls_certificate.TlsCertificate certificate, gio.types.TlsCertificateFlags errors, webkit.web_resource.WebResource webResource)`
   
           `certificate` a #GTlsCertificate (optional)
   
@@ -297,7 +297,7 @@ class WebResource : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.web_resource.WebResource webResource))
+          `void callback(webkit.web_resource.WebResource webResource)`
   
           `webResource` the instance the signal is connected to (optional)
   
@@ -339,7 +339,7 @@ class WebResource : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.urirequest.URIRequest request, webkit.uriresponse.URIResponse redirectedResponse, webkit.web_resource.WebResource webResource))
+          `void callback(webkit.urirequest.URIRequest request, webkit.uriresponse.URIResponse redirectedResponse, webkit.web_resource.WebResource webResource)`
   
           `request` a #WebKitURIRequest (optional)
   

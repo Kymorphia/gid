@@ -183,7 +183,7 @@ class DisplayManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.display.Display display, gdk.display_manager.DisplayManager displayManager))
+          `void callback(gdk.display.Display display, gdk.display_manager.DisplayManager displayManager)`
   
           `display` the opened display (optional)
   

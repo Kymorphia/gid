@@ -603,11 +603,9 @@ class MenuButton : gtk.widget.Widget
       
       func should use one of
       
-       $(LIST
-          * [gtk.menu_button.MenuButton.setPopover]
-          * [gtk.menu_button.MenuButton.setMenuModel]
-       )
-         
+       - [gtk.menu_button.MenuButton.setPopover]
+       - [gtk.menu_button.MenuButton.setMenuModel]
+      
       to set a popup for menu_button.
       If func is non-null, menu_button will always be sensitive.
       
@@ -775,7 +773,7 @@ class MenuButton : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.menu_button.MenuButton menuButton))
+          `void callback(gtk.menu_button.MenuButton menuButton)`
   
           `menuButton` the instance the signal is connected to (optional)
   

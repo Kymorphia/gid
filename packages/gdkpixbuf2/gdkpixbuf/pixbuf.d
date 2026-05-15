@@ -341,13 +341,11 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       
       If `NULL` is returned, then error will be set. Possible errors are:
       
-       $(LIST
-          * the file could not be opened
-          * there is no loader for the file's format
-          * there is not enough memory to allocate the image buffer
-          * the image buffer contains invalid data
-       )
-         
+       - the file could not be opened
+       - there is no loader for the file's format
+       - there is not enough memory to allocate the image buffer
+       - the image buffer contains invalid data
+      
       The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
   
       Params:
@@ -375,13 +373,11 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       
       If `NULL` is returned, then error will be set. Possible errors are:
       
-       $(LIST
-          * the file could not be opened
-          * there is no loader for the file's format
-          * there is not enough memory to allocate the image buffer
-          * the image buffer contains invalid data
-       )
-         
+       - the file could not be opened
+       - there is no loader for the file's format
+       - there is not enough memory to allocate the image buffer
+       - the image buffer contains invalid data
+      
       The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
       
       The image will be scaled to fit in the requested size, optionally preserving
@@ -422,13 +418,11 @@ class Pixbuf : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loada
       
       If `NULL` is returned, then error will be set. Possible errors are:
       
-       $(LIST
-          * the file could not be opened
-          * there is no loader for the file's format
-          * there is not enough memory to allocate the image buffer
-          * the image buffer contains invalid data
-       )
-         
+       - the file could not be opened
+       - there is no loader for the file's format
+       - there is not enough memory to allocate the image buffer
+       - the image buffer contains invalid data
+      
       The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
       
       The image will be scaled to fit in the requested size, preserving

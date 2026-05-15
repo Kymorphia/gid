@@ -1610,7 +1610,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(glib.types.Quark[] keys, gio.settings.Settings settings))
+          `bool callback(glib.types.Quark[] keys, gio.settings.Settings settings)`
   
           `keys` an array of #GQuarks for the changed keys, or null (optional)
   
@@ -1673,7 +1673,7 @@ class Settings : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string key, gio.settings.Settings settings))
+          `void callback(string key, gio.settings.Settings settings)`
   
           `key` the name of the key that changed (optional)
   
@@ -1733,7 +1733,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(uint key, gio.settings.Settings settings))
+          `bool callback(uint key, gio.settings.Settings settings)`
   
           `key` the quark of the key, or 0 (optional)
   
@@ -1787,7 +1787,7 @@ class Settings : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string key, gio.settings.Settings settings))
+          `void callback(string key, gio.settings.Settings settings)`
   
           `key` the key (optional)
   

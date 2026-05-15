@@ -76,7 +76,7 @@ interface PrintOperationPreview
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview))
+          `void callback(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview)`
   
           `context` the current [gtk.print_context.PrintContext] (optional)
   
@@ -100,7 +100,7 @@ interface PrintOperationPreview
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview))
+          `void callback(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview)`
   
           `context` the current [gtk.print_context.PrintContext] (optional)
   

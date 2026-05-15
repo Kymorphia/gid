@@ -325,7 +325,7 @@ class Drag : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.types.DragCancelReason reason, gdk.drag.Drag drag))
+          `void callback(gdk.types.DragCancelReason reason, gdk.drag.Drag drag)`
   
           `reason` The reason the drag was cancelled (optional)
   
@@ -370,7 +370,7 @@ class Drag : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag.Drag drag))
+          `void callback(gdk.drag.Drag drag)`
   
           `drag` the instance the signal is connected to (optional)
   
@@ -407,7 +407,7 @@ class Drag : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag.Drag drag))
+          `void callback(gdk.drag.Drag drag)`
   
           `drag` the instance the signal is connected to (optional)
   

@@ -410,7 +410,7 @@ class TreeSelection : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_selection.TreeSelection treeSelection))
+          `void callback(gtk.tree_selection.TreeSelection treeSelection)`
   
           `treeSelection` the instance the signal is connected to (optional)
   

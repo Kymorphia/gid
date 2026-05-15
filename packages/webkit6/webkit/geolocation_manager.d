@@ -117,7 +117,7 @@ class GeolocationManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(webkit.geolocation_manager.GeolocationManager geolocationManager))
+          `bool callback(webkit.geolocation_manager.GeolocationManager geolocationManager)`
   
           `geolocationManager` the instance the signal is connected to (optional)
   
@@ -159,7 +159,7 @@ class GeolocationManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.geolocation_manager.GeolocationManager geolocationManager))
+          `void callback(webkit.geolocation_manager.GeolocationManager geolocationManager)`
   
           `geolocationManager` the instance the signal is connected to (optional)
   

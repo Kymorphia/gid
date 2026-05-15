@@ -645,7 +645,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int index, gtk.entry_completion.EntryCompletion entryCompletion))
+          `void callback(int index, gtk.entry_completion.EntryCompletion entryCompletion)`
   
           `index` the index of the activated action (optional)
   
@@ -694,7 +694,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion))
+          `bool callback(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion)`
   
           `model` the #GtkTreeModel containing the matches (optional)
   
@@ -753,7 +753,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(string prefix, gtk.entry_completion.EntryCompletion entryCompletion))
+          `bool callback(string prefix, gtk.entry_completion.EntryCompletion entryCompletion)`
   
           `prefix` the common prefix of all possible completions (optional)
   
@@ -805,7 +805,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion))
+          `bool callback(gtk.tree_model.TreeModel model, gtk.tree_iter.TreeIter iter, gtk.entry_completion.EntryCompletion entryCompletion)`
   
           `model` the #GtkTreeModel containing the matches (optional)
   
@@ -860,7 +860,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.entry_completion.EntryCompletion entryCompletion))
+          `void callback(gtk.entry_completion.EntryCompletion entryCompletion)`
   
           `entryCompletion` the instance the signal is connected to (optional)
   

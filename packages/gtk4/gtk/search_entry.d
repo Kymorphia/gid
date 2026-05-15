@@ -360,7 +360,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.search_entry.SearchEntry searchEntry))
+          `void callback(gtk.search_entry.SearchEntry searchEntry)`
   
           `searchEntry` the instance the signal is connected to (optional)
   
@@ -405,7 +405,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.search_entry.SearchEntry searchEntry))
+          `void callback(gtk.search_entry.SearchEntry searchEntry)`
   
           `searchEntry` the instance the signal is connected to (optional)
   
@@ -450,7 +450,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.search_entry.SearchEntry searchEntry))
+          `void callback(gtk.search_entry.SearchEntry searchEntry)`
   
           `searchEntry` the instance the signal is connected to (optional)
   
@@ -489,7 +489,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.search_entry.SearchEntry searchEntry))
+          `void callback(gtk.search_entry.SearchEntry searchEntry)`
   
           `searchEntry` the instance the signal is connected to (optional)
   
@@ -526,7 +526,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.search_entry.SearchEntry searchEntry))
+          `void callback(gtk.search_entry.SearchEntry searchEntry)`
   
           `searchEntry` the instance the signal is connected to (optional)
   
@@ -570,7 +570,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.search_entry.SearchEntry searchEntry))
+          `void callback(gtk.search_entry.SearchEntry searchEntry)`
   
           `searchEntry` the instance the signal is connected to (optional)
   

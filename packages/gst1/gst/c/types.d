@@ -3153,91 +3153,79 @@ enum GstStateChange
 {
   /**
       state change from NULL to READY.
-        $(LIST
-            * The element must check if the resources it needs are available. Device
-              sinks and -sources typically try to probe the device to constrain their
-              caps.
-            * The element opens the device (in case feature need to be probed).
-        )
+        * The element must check if the resources it needs are available. Device
+          sinks and -sources typically try to probe the device to constrain their
+          caps.
+        * The element opens the device (in case feature need to be probed).
   */
   NullToReady = 10,
 
   /**
       state change from READY to PAUSED.
-        $(LIST
-            * The element pads are activated in order to receive data in PAUSED.
-              Streaming threads are started.
-            * Some elements might need to return [gst.types.StateChangeReturn.Async] and complete
-              the state change when they have enough information. It is a requirement
-              for sinks to return [gst.types.StateChangeReturn.Async] and complete the state change
-              when they receive the first buffer or [gst.types.EventType.Eos] (preroll).
-              Sinks also block the dataflow when in PAUSED.
-            * A pipeline resets the running_time to 0.
-            * Live sources return [gst.types.StateChangeReturn.NoPreroll] and don't generate data.
-        )
+        * The element pads are activated in order to receive data in PAUSED.
+          Streaming threads are started.
+        * Some elements might need to return [gst.types.StateChangeReturn.Async] and complete
+          the state change when they have enough information. It is a requirement
+          for sinks to return [gst.types.StateChangeReturn.Async] and complete the state change
+          when they receive the first buffer or [gst.types.EventType.Eos] (preroll).
+          Sinks also block the dataflow when in PAUSED.
+        * A pipeline resets the running_time to 0.
+        * Live sources return [gst.types.StateChangeReturn.NoPreroll] and don't generate data.
   */
   ReadyToPaused = 19,
 
   /**
       state change from PAUSED to PLAYING.
-        $(LIST
-            * Most elements ignore this state change.
-            * The pipeline selects a #GstClock and distributes this to all the children
-              before setting them to PLAYING. This means that it is only allowed to
-              synchronize on the #GstClock in the PLAYING state.
-            * The pipeline uses the #GstClock and the running_time to calculate the
-              base_time. The base_time is distributed to all children when performing
-              the state change.
-            * Sink elements stop blocking on the preroll buffer or event and start
-              rendering the data.
-            * Sinks can post [gst.types.MessageType.Eos] in the PLAYING state. It is not allowed
-              to post [gst.types.MessageType.Eos] when not in the PLAYING state.
-            * While streaming in PAUSED or PLAYING elements can create and remove
-              sometimes pads.
-            * Live sources start generating data and return [gst.types.StateChangeReturn.Success].
-        )
+        * Most elements ignore this state change.
+        * The pipeline selects a #GstClock and distributes this to all the children
+          before setting them to PLAYING. This means that it is only allowed to
+          synchronize on the #GstClock in the PLAYING state.
+        * The pipeline uses the #GstClock and the running_time to calculate the
+          base_time. The base_time is distributed to all children when performing
+          the state change.
+        * Sink elements stop blocking on the preroll buffer or event and start
+          rendering the data.
+        * Sinks can post [gst.types.MessageType.Eos] in the PLAYING state. It is not allowed
+          to post [gst.types.MessageType.Eos] when not in the PLAYING state.
+        * While streaming in PAUSED or PLAYING elements can create and remove
+          sometimes pads.
+        * Live sources start generating data and return [gst.types.StateChangeReturn.Success].
   */
   PausedToPlaying = 28,
 
   /**
       state change from PLAYING to PAUSED.
-        $(LIST
-            * Most elements ignore this state change.
-            * The pipeline calculates the running_time based on the last selected
-              #GstClock and the base_time. It stores this information to continue
-              playback when going back to the PLAYING state.
-            * Sinks unblock any #GstClock wait calls.
-            * When a sink does not have a pending buffer to play, it returns
-              #GST_STATE_CHANGE_ASYNC from this state change and completes the state
-              change when it receives a new buffer or an [gst.types.EventType.Eos].
-            * Any queued [gst.types.MessageType.Eos] items are removed since they will be reposted
-              when going back to the PLAYING state. The EOS messages are queued in
-              #GstBin containers.
-            * Live sources stop generating data and return [gst.types.StateChangeReturn.NoPreroll].
-        )
+        * Most elements ignore this state change.
+        * The pipeline calculates the running_time based on the last selected
+          #GstClock and the base_time. It stores this information to continue
+          playback when going back to the PLAYING state.
+        * Sinks unblock any #GstClock wait calls.
+        * When a sink does not have a pending buffer to play, it returns
+          #GST_STATE_CHANGE_ASYNC from this state change and completes the state
+          change when it receives a new buffer or an [gst.types.EventType.Eos].
+        * Any queued [gst.types.MessageType.Eos] items are removed since they will be reposted
+          when going back to the PLAYING state. The EOS messages are queued in
+          #GstBin containers.
+        * Live sources stop generating data and return [gst.types.StateChangeReturn.NoPreroll].
   */
   PlayingToPaused = 35,
 
   /**
       state change from PAUSED to READY.
-        $(LIST
-            * Sinks unblock any waits in the preroll.
-            * Elements unblock any waits on devices
-            * Chain or get_range functions return [gst.types.FlowReturn.Flushing].
-            * The element pads are deactivated so that streaming becomes impossible and
-              all streaming threads are stopped.
-            * The sink forgets all negotiated formats
-            * Elements remove all sometimes pads
-        )
+        * Sinks unblock any waits in the preroll.
+        * Elements unblock any waits on devices
+        * Chain or get_range functions return [gst.types.FlowReturn.Flushing].
+        * The element pads are deactivated so that streaming becomes impossible and
+          all streaming threads are stopped.
+        * The sink forgets all negotiated formats
+        * Elements remove all sometimes pads
   */
   PausedToReady = 26,
 
   /**
       state change from READY to NULL.
-        $(LIST
-            * Elements close devices
-            * Elements reset any internal state.
-        )
+        * Elements close devices
+        * Elements reset any internal state.
   */
   ReadyToNull = 17,
 
@@ -4030,78 +4018,72 @@ struct GstAtomicQueue;
     A #GstBin internally intercepts every #GstMessage posted by its children and
     implements the following default behaviour for each of them:
     
-    $(LIST
-      * [gst.types.MessageType.Eos]: This message is only posted by sinks in the PLAYING
-    )
+    * [gst.types.MessageType.Eos]: This message is only posted by sinks in the PLAYING
     state. If all sinks posted the EOS message, this bin will post and EOS
     message upwards.
     
-    $(LIST
-      * [gst.types.MessageType.SegmentStart]: Just collected and never forwarded upwards.
-        The messages are used to decide when all elements have completed playback
-        of their segment.
-      
-      * [gst.types.MessageType.SegmentDone]: Is posted by #GstBin when all elements that posted
-        a SEGMENT_START have posted a SEGMENT_DONE.
-      
-      * [gst.types.MessageType.DurationChanged]: Is posted by an element that detected a change
-        in the stream duration. The duration change is posted to the
-        application so that it can refetch the new duration with a duration
-        query.
-      
-        Note that these messages can be posted before the bin is prerolled, in which
-        case the duration query might fail.
-      
-        Note also that there might be a discrepancy (due to internal buffering/queueing)
-        between the stream being currently displayed and the returned duration query.
-      
-        Applications might want to also query for duration (and changes) by
-        listening to the [gst.types.MessageType.StreamStart] message, signaling the active start
-        of a (new) stream.
-      
-      * [gst.types.MessageType.ClockLost]: This message is posted by an element when it
-        can no longer provide a clock.
-      
-        The default bin behaviour is to check if the lost clock was the one provided
-        by the bin. If so and the bin is currently in the PLAYING state, the message
-        is forwarded to the bin parent.
-      
-        This message is also generated when a clock provider is removed from
-        the bin. If this message is received by the application, it should
-        PAUSE the pipeline and set it back to PLAYING to force a new clock
-        distribution.
-      
-      * [gst.types.MessageType.ClockProvide]: This message is generated when an element
-        can provide a clock. This mostly happens when a new clock
-        provider is added to the bin.
-      
-        The default behaviour of the bin is to mark the currently selected clock as
-        dirty, which will perform a clock recalculation the next time the bin is
-        asked to provide a clock.
-      
-        This message is never sent to the application but is forwarded to
-        the parent of the bin.
-      
-      * OTHERS: posted upwards.
-    )
-      
+    * [gst.types.MessageType.SegmentStart]: Just collected and never forwarded upwards.
+      The messages are used to decide when all elements have completed playback
+      of their segment.
+    
+    * [gst.types.MessageType.SegmentDone]: Is posted by #GstBin when all elements that posted
+      a SEGMENT_START have posted a SEGMENT_DONE.
+    
+    * [gst.types.MessageType.DurationChanged]: Is posted by an element that detected a change
+      in the stream duration. The duration change is posted to the
+      application so that it can refetch the new duration with a duration
+      query.
+    
+      Note that these messages can be posted before the bin is prerolled, in which
+      case the duration query might fail.
+    
+      Note also that there might be a discrepancy (due to internal buffering/queueing)
+      between the stream being currently displayed and the returned duration query.
+    
+      Applications might want to also query for duration (and changes) by
+      listening to the [gst.types.MessageType.StreamStart] message, signaling the active start
+      of a (new) stream.
+    
+    * [gst.types.MessageType.ClockLost]: This message is posted by an element when it
+      can no longer provide a clock.
+    
+      The default bin behaviour is to check if the lost clock was the one provided
+      by the bin. If so and the bin is currently in the PLAYING state, the message
+      is forwarded to the bin parent.
+    
+      This message is also generated when a clock provider is removed from
+      the bin. If this message is received by the application, it should
+      PAUSE the pipeline and set it back to PLAYING to force a new clock
+      distribution.
+    
+    * [gst.types.MessageType.ClockProvide]: This message is generated when an element
+      can provide a clock. This mostly happens when a new clock
+      provider is added to the bin.
+    
+      The default behaviour of the bin is to mark the currently selected clock as
+      dirty, which will perform a clock recalculation the next time the bin is
+      asked to provide a clock.
+    
+      This message is never sent to the application but is forwarded to
+      the parent of the bin.
+    
+    * OTHERS: posted upwards.
+    
     A #GstBin implements the following default behaviour for answering to a
     #GstQuery:
     
-    $(LIST
-      * [gst.types.QueryType.Duration]: The bin will forward the query to all sink
-        elements contained within and will return the maximum value.
-        If no sinks are available in the bin, the query fails.
-      
-      * [gst.types.QueryType.Position]: The query is sent to all sink elements in the bin and the
-        MAXIMUM of all values is returned. If no sinks are available in the bin,
-        the query fails.
-      
-      * OTHERS: the query is forwarded to all sink elements, the result
-        of the first sink that answers the query successfully is returned. If no
-        sink is in the bin, the query fails.
-    )
-      
+    * [gst.types.QueryType.Duration]: The bin will forward the query to all sink
+      elements contained within and will return the maximum value.
+      If no sinks are available in the bin, the query fails.
+    
+    * [gst.types.QueryType.Position]: The query is sent to all sink elements in the bin and the
+      MAXIMUM of all values is returned. If no sinks are available in the bin,
+      the query fails.
+    
+    * OTHERS: the query is forwarded to all sink elements, the result
+      of the first sink that answers the query successfully is returned. If no
+      sink is in the bin, the query fails.
+    
     A #GstBin will by default forward any event sent to it to all sink
     ( [gst.types.EventTypeFlags.Upstream] ) or source ( [gst.types.EventTypeFlags.Downstream] ) elements
     depending on the event type.
@@ -6388,32 +6370,28 @@ struct GstObjectClass
     What needs to be changed in a #GstElement?
     Very little - it is just two steps to make a plugin controllable!
     
-      $(LIST
-          * mark gobject-properties paramspecs that make sense to be controlled,
-            by GST_PARAM_CONTROLLABLE.
-        
-          * when processing data (get, chain, loop function) at the beginning call
-            gst_object_sync_values(element,timestamp).
-            This will make the controller update all GObject properties that are
-            under its control with the current values based on the timestamp.
-      )
-        
+      * mark gobject-properties paramspecs that make sense to be controlled,
+        by GST_PARAM_CONTROLLABLE.
+    
+      * when processing data (get, chain, loop function) at the beginning call
+        gst_object_sync_values(element,timestamp).
+        This will make the controller update all GObject properties that are
+        under its control with the current values based on the timestamp.
+    
     What needs to be done in applications? Again it's not a lot to change.
     
-      $(LIST
-          * create a #GstControlSource.
-            csource = gst_interpolation_control_source_new ();
-            g_object_set (csource, "mode", GST_INTERPOLATION_MODE_LINEAR, NULL);
-        
-          * Attach the #GstControlSource on the controller to a property.
-            gst_object_add_control_binding (object, gst_direct_control_binding_new (object, "prop1", csource));
-        
-          * Set the control values
-            gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,0 * GST_SECOND, value1);
-            gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,1 * GST_SECOND, value2);
-        
-          * start your pipeline
-      )
+      * create a #GstControlSource.
+        csource = gst_interpolation_control_source_new ();
+        g_object_set (csource, "mode", GST_INTERPOLATION_MODE_LINEAR, NULL);
+    
+      * Attach the #GstControlSource on the controller to a property.
+        gst_object_add_control_binding (object, gst_direct_control_binding_new (object, "prop1", csource));
+    
+      * Set the control values
+        gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,0 * GST_SECOND, value1);
+        gst_timed_value_control_source_set ((GstTimedValueControlSource *)csource,1 * GST_SECOND, value2);
+    
+      * start your pipeline
 */
 struct GstObject
 {
@@ -7441,19 +7419,17 @@ struct GstQuery
     The reference is stored as a #GstCaps in @reference. Examples of valid
     references would be
     
-     $(LIST
-        * `timestamp/x-drivername-stream`: for timestamps that are locally
-          generated by some driver named `drivername` when generating the stream,
-          e.g. based on a frame counter
-        * `timestamp/x-ntp, host=pool.ntp.org, port=123`: for timestamps based on a
-          specific NTP server. Note that the host/port parameters might not always
-          be given.
-        * `timestamp/x-ptp, version=IEEE1588-2008, domain=1`: for timestamps based
-          on a given PTP clock.
-        * `timestamp/x-unix`: for timestamps based on the UNIX epoch according to
-          the local clock.
-     )
-       
+     * `timestamp/x-drivername-stream`: for timestamps that are locally
+       generated by some driver named `drivername` when generating the stream,
+       e.g. based on a frame counter
+     * `timestamp/x-ntp, host=pool.ntp.org, port=123`: for timestamps based on a
+       specific NTP server. Note that the host/port parameters might not always
+       be given.
+     * `timestamp/x-ptp, version=IEEE1588-2008, domain=1`: for timestamps based
+       on a given PTP clock.
+     * `timestamp/x-unix`: for timestamps based on the UNIX epoch according to
+       the local clock.
+    
     Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
     [gst.meta.Meta.deserialize].
 */
@@ -7500,18 +7476,16 @@ struct GstReferenceTimestampMeta
     On startup, plugins are searched for in the plugin search path. The following
     locations are checked in this order:
     
-    $(LIST
-      * location from --gst-plugin-path commandline option.
-      * the GST_PLUGIN_PATH environment variable.
-      * the GST_PLUGIN_SYSTEM_PATH environment variable.
-      * default locations (if GST_PLUGIN_SYSTEM_PATH is not set).
-        Those default locations are:
-        `$XDG_DATA_HOME/gstreamer-$GST_API_VERSION/plugins/`
-        and `$prefix/libs/gstreamer-$GST_API_VERSION/`.
-        [$XDG_DATA_HOME](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) defaults to
-        `$HOME/.local/share`.
-    )
-      
+    * location from --gst-plugin-path commandline option.
+    * the GST_PLUGIN_PATH environment variable.
+    * the GST_PLUGIN_SYSTEM_PATH environment variable.
+    * default locations (if GST_PLUGIN_SYSTEM_PATH is not set).
+      Those default locations are:
+      `$XDG_DATA_HOME/gstreamer-$GST_API_VERSION/plugins/`
+      and `$prefix/libs/gstreamer-$GST_API_VERSION/`.
+      [$XDG_DATA_HOME](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) defaults to
+      `$HOME/.local/share`.
+    
     The registry cache file is loaded from
     `$XDG_CACHE_HOME/gstreamer-$GST_API_VERSION/registry-$ARCH.bin`
     (where $XDG_CACHE_HOME defaults to `$HOME/.cache`) or the file listed in the `GST_REGISTRY`
@@ -7520,12 +7494,10 @@ struct GstReferenceTimestampMeta
     For each plugin that is found in the plugin search path, there could be 3
     possibilities for cached information:
     
-      $(LIST
-          * the cache may not contain information about a given file.
-          * the cache may have stale information.
-          * the cache may have current information.
-      )
-        
+      * the cache may not contain information about a given file.
+      * the cache may have stale information.
+      * the cache may have current information.
+    
     In the first two cases, the plugin is loaded and the cache updated. In
     addition to these cases, the cache may have entries for plugins that are not
     relevant to the current process. These are marked as not available to the
@@ -7575,11 +7547,9 @@ struct GstSample;
     
     The structure can be used for two purposes:
     
-      $(LIST
-          * performing seeks (handling seek events)
-          * tracking playback regions (handling newsegment events)
-      )
-        
+      * performing seeks (handling seek events)
+      * tracking playback regions (handling newsegment events)
+    
     The segment is usually configured by the application with a seek event which
     is propagated upstream and eventually handled by an element that performs the seek.
     
@@ -7973,17 +7943,15 @@ struct GstStreamPrivate;
     
     Some types have special delimiters:
     
-    $(LIST
-      * [GstValueArray](GST_TYPE_ARRAY) are inside curly brackets (`{` and `}`).
-        For example `a-structure, array={1, 2, 3}`
-      * Ranges are inside brackets (`[` and `]`). For example `a-structure,
-        range=[1, 6, 2]` 1 being the min value, 6 the maximum and 2 the step. To
-        specify a #GST_TYPE_INT64_RANGE you need to explicitly specify it like:
-        `a-structure, a-int64-range=(gint64) [1, 5]`
-      * [GstValueList](GST_TYPE_LIST) are inside "less and greater than" (`<` and
-        `>`). For example `a-structure, list=<1, 2, 3>
-    )
-      
+    - [GstValueArray](GST_TYPE_ARRAY) are inside curly brackets (`{` and `}`).
+      For example `a-structure, array={1, 2, 3}`
+    - Ranges are inside brackets (`[` and `]`). For example `a-structure,
+      range=[1, 6, 2]` 1 being the min value, 6 the maximum and 2 the step. To
+      specify a #GST_TYPE_INT64_RANGE you need to explicitly specify it like:
+      `a-structure, a-int64-range=(gint64) [1, 5]`
+    - [GstValueList](GST_TYPE_LIST) are inside "less and greater than" (`<` and
+      `>`). For example `a-structure, list=<1, 2, 3>
+    
     Structures are delimited either by a null character `\0` or a semicolon `;`
     the latter allowing to store multiple structures in the same string (see
     #GstCaps).

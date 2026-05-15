@@ -1501,7 +1501,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.connection.Connection connection))
+          `void callback(gda.connection.Connection connection)`
   
           `connection` the instance the signal is connected to (optional)
   
@@ -1538,7 +1538,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.connection.Connection connection))
+          `void callback(gda.connection.Connection connection)`
   
           `connection` the instance the signal is connected to (optional)
   
@@ -1575,7 +1575,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.connection.Connection connection))
+          `void callback(gda.connection.Connection connection)`
   
           `connection` the instance the signal is connected to (optional)
   
@@ -1612,7 +1612,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.connection.Connection connection))
+          `void callback(gda.connection.Connection connection)`
   
           `connection` the instance the signal is connected to (optional)
   
@@ -1650,7 +1650,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.connection_event.ConnectionEvent event, gda.connection.Connection connection))
+          `void callback(gda.connection_event.ConnectionEvent event, gda.connection.Connection connection)`
   
           `event` a #GdaConnectionEvent object (optional)
   
@@ -1694,7 +1694,7 @@ class Connection : gobject.object.ObjectWrap, gda.lockable.Lockable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gda.connection.Connection connection))
+          `void callback(gda.connection.Connection connection)`
   
           `connection` the instance the signal is connected to (optional)
   

@@ -368,7 +368,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.color_button.ColorButton colorButton))
+          `void callback(gtk.color_button.ColorButton colorButton)`
   
           `colorButton` the instance the signal is connected to (optional)
   

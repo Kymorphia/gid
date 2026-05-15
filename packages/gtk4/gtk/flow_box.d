@@ -816,7 +816,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.flow_box.FlowBox flowBox))
+          `void callback(gtk.flow_box.FlowBox flowBox)`
   
           `flowBox` the instance the signal is connected to (optional)
   
@@ -853,7 +853,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.flow_box_child.FlowBoxChild child, gtk.flow_box.FlowBox flowBox))
+          `void callback(gtk.flow_box_child.FlowBoxChild child, gtk.flow_box.FlowBox flowBox)`
   
           `child` the child that is activated (optional)
   
@@ -903,17 +903,15 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
         the variant without the Shift modifier does not.
         There are too many key combinations to list them all here.
         
-        $(LIST
-          * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
-            move by individual children
-          * <kbd>Home</kbd>, <kbd>End</kbd> move to the ends of the box
-          * <kbd>PgUp</kbd>, <kbd>PgDn</kbd> move vertically by pages
-        )
+        - <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+          move by individual children
+        - <kbd>Home</kbd>, <kbd>End</kbd> move to the ends of the box
+        - <kbd>PgUp</kbd>, <kbd>PgDn</kbd> move vertically by pages
   
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.MovementStep step, int count, bool extend, bool modify, gtk.flow_box.FlowBox flowBox))
+          `bool callback(gtk.types.MovementStep step, int count, bool extend, bool modify, gtk.flow_box.FlowBox flowBox)`
   
           `step` the granularity of the move, as a [gtk.types.MovementStep] (optional)
   
@@ -983,7 +981,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.flow_box.FlowBox flowBox))
+          `void callback(gtk.flow_box.FlowBox flowBox)`
   
           `flowBox` the instance the signal is connected to (optional)
   
@@ -1024,7 +1022,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.flow_box.FlowBox flowBox))
+          `void callback(gtk.flow_box.FlowBox flowBox)`
   
           `flowBox` the instance the signal is connected to (optional)
   
@@ -1065,7 +1063,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.flow_box.FlowBox flowBox))
+          `void callback(gtk.flow_box.FlowBox flowBox)`
   
           `flowBox` the instance the signal is connected to (optional)
   
@@ -1107,7 +1105,7 @@ class FlowBox : gtk.widget.Widget, gtk.orientable.Orientable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.flow_box.FlowBox flowBox))
+          `void callback(gtk.flow_box.FlowBox flowBox)`
   
           `flowBox` the instance the signal is connected to (optional)
   

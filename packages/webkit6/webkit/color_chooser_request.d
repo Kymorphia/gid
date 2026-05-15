@@ -155,7 +155,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.color_chooser_request.ColorChooserRequest colorChooserRequest))
+          `void callback(webkit.color_chooser_request.ColorChooserRequest colorChooserRequest)`
   
           `colorChooserRequest` the instance the signal is connected to (optional)
   

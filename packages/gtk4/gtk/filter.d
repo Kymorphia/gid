@@ -140,7 +140,7 @@ class Filter : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.FilterChange change, gtk.filter.Filter filter))
+          `void callback(gtk.types.FilterChange change, gtk.filter.Filter filter)`
   
           `change` how the filter changed (optional)
   

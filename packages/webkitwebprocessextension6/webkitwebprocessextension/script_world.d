@@ -126,7 +126,7 @@ class ScriptWorld : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkitwebprocessextension.web_page.WebPage page, webkitwebprocessextension.frame.Frame frame, webkitwebprocessextension.script_world.ScriptWorld scriptWorld))
+          `void callback(webkitwebprocessextension.web_page.WebPage page, webkitwebprocessextension.frame.Frame frame, webkitwebprocessextension.script_world.ScriptWorld scriptWorld)`
   
           `page` a #WebKitWebPage (optional)
   

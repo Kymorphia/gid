@@ -129,7 +129,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.PanDirection direction, double offset, gtk.gesture_pan.GesturePan gesturePan))
+          `void callback(gtk.types.PanDirection direction, double offset, gtk.gesture_pan.GesturePan gesturePan)`
   
           `direction` current direction of the pan gesture (optional)
   

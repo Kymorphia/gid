@@ -42,18 +42,16 @@ import gtk.widget;
     
     The following kinds of top and bottom bars are supported:
     
-    $(LIST
-      * `class@HeaderBar`
-      * `class@TabBar`
-      * `class@ViewSwitcherBar`
-      * [gtk.action_bar.ActionBar]
-      * [gtk.header_bar.HeaderBar]
-      * [gtk.popover_menu_bar.PopoverMenuBar]
-      * [gtk.search_bar.SearchBar]
-      * Any [gtk.box.Box] or a similar widget with the
-        [`.toolbar`](style-classes.html#toolbars) style class
-    )
-      
+    - `class@HeaderBar`
+    - `class@TabBar`
+    - `class@ViewSwitcherBar`
+    - [gtk.action_bar.ActionBar]
+    - [gtk.header_bar.HeaderBar]
+    - [gtk.popover_menu_bar.PopoverMenuBar]
+    - [gtk.search_bar.SearchBar]
+    - Any [gtk.box.Box] or a similar widget with the
+      [`.toolbar`](style-classes.html#toolbars) style class
+    
     By default, top and bottom bars are flat and scrolling content has a subtle
     undershoot shadow, same as when using the
     [`.undershoot-top`](style-classes.html#undershoot-indicators) and

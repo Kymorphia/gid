@@ -12,25 +12,21 @@ import gstaudio.types;
     This is the most simple base class for audio sinks that only requires
     subclasses to implement a set of simple functions:
     
-    $(LIST
-      * `open()` :Open the device.
-      
-      * `prepare()` :Configure the device with the specified format.
-      
-      * `write()` :Write samples to the device.
-      
-      * `reset()` :Unblock writes and flush the device.
-      
-      * `delay()` :Get the number of samples written but not yet played
-    )
+    * `open()` :Open the device.
+    
+    * `prepare()` :Configure the device with the specified format.
+    
+    * `write()` :Write samples to the device.
+    
+    * `reset()` :Unblock writes and flush the device.
+    
+    * `delay()` :Get the number of samples written but not yet played
     by the device.
     
-    $(LIST
-      * `unprepare()` :Undo operations done by prepare.
-      
-      * `close()` :Close the device.
-    )
-      
+    * `unprepare()` :Undo operations done by prepare.
+    
+    * `close()` :Close the device.
+    
     All scheduling of samples and timestamps is done in this base class
     together with #GstAudioBaseSink using a default implementation of a
     #GstAudioRingBuffer that uses threads.

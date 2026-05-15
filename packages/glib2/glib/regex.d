@@ -476,14 +476,12 @@ class Regex : gobject.boxed.Boxed
       
       There are also escapes that changes the case of the following text:
       
-      $(LIST
-        * \l: Convert to lower case the next character
-        * \u: Convert to upper case the next character
-        * \L: Convert to lower case till \E
-        * \U: Convert to upper case till \E
-        * \E: End case modification
-      )
-        
+      - \l: Convert to lower case the next character
+      - \u: Convert to upper case the next character
+      - \L: Convert to lower case till \E
+      - \U: Convert to upper case till \E
+      - \E: End case modification
+      
       If you do not need to use backreferences use [glib.regex.Regex.replaceLiteral].
       
       The replacement string must be UTF-8 encoded even if `G_REGEX_RAW` was

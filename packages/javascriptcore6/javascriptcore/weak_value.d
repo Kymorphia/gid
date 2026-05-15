@@ -86,7 +86,7 @@ class WeakValue : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(javascriptcore.weak_value.WeakValue weakValue))
+          `void callback(javascriptcore.weak_value.WeakValue weakValue)`
   
           `weakValue` the instance the signal is connected to (optional)
   

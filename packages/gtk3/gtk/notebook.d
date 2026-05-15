@@ -935,7 +935,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(int object, gtk.notebook.Notebook notebook))
+          `bool callback(int object, gtk.notebook.Notebook notebook)`
   
           `object`  (optional)
   
@@ -988,7 +988,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gtk.notebook.Notebook callback(gtk.widget.Widget page, int x, int y, gtk.notebook.Notebook notebook))
+          `gtk.notebook.Notebook callback(gtk.widget.Widget page, int x, int y, gtk.notebook.Notebook notebook)`
   
           `page` the tab of notebook that is being detached (optional)
   
@@ -1047,7 +1047,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.NotebookTab object, gtk.notebook.Notebook notebook))
+          `bool callback(gtk.types.NotebookTab object, gtk.notebook.Notebook notebook)`
   
           `object`  (optional)
   
@@ -1093,7 +1093,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.DirectionType object, gtk.notebook.Notebook notebook))
+          `void callback(gtk.types.DirectionType object, gtk.notebook.Notebook notebook)`
   
           `object`  (optional)
   
@@ -1137,7 +1137,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook))
+          `void callback(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook)`
   
           `child` the child #GtkWidget affected (optional)
   
@@ -1187,7 +1187,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook))
+          `void callback(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook)`
   
           `child` the child #GtkWidget affected (optional)
   
@@ -1237,7 +1237,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook))
+          `void callback(gtk.widget.Widget child, uint pageNum, gtk.notebook.Notebook notebook)`
   
           `child` the child #GtkWidget affected (optional)
   
@@ -1286,7 +1286,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.DirectionType object, bool p0, gtk.notebook.Notebook notebook))
+          `bool callback(gtk.types.DirectionType object, bool p0, gtk.notebook.Notebook notebook)`
   
           `object`  (optional)
   
@@ -1338,7 +1338,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool object, gtk.notebook.Notebook notebook))
+          `bool callback(bool object, gtk.notebook.Notebook notebook)`
   
           `object`  (optional)
   
@@ -1384,7 +1384,7 @@ class Notebook : gtk.container.Container
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget page, uint pageNum, gtk.notebook.Notebook notebook))
+          `void callback(gtk.widget.Widget page, uint pageNum, gtk.notebook.Notebook notebook)`
   
           `page` the new current page (optional)
   

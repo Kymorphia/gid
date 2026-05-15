@@ -268,7 +268,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.credential.Credential credential, webkit.authentication_request.AuthenticationRequest authenticationRequest))
+          `void callback(webkit.credential.Credential credential, webkit.authentication_request.AuthenticationRequest authenticationRequest)`
   
           `credential` the #WebKitCredential accepted (optional)
   
@@ -313,7 +313,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.authentication_request.AuthenticationRequest authenticationRequest))
+          `void callback(webkit.authentication_request.AuthenticationRequest authenticationRequest)`
   
           `authenticationRequest` the instance the signal is connected to (optional)
   

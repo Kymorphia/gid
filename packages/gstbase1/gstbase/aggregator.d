@@ -25,65 +25,63 @@ import gstbase.types;
     Manages a set of pads with the purpose of aggregating their buffers.
     Control is given to the subclass when all pads have data.
     
-     $(LIST
-        * Base class for mixers and muxers. Subclasses should at least implement
-          the #GstAggregatorClass::aggregate virtual method.
-       
-        * Installs a #GstPadChainFunction, a #GstPadEventFullFunction and a
-          #GstPadQueryFunction to queue all serialized data packets per sink pad.
-          Subclasses should not overwrite those, but instead implement
-          #GstAggregatorClass::sink_event and #GstAggregatorClass::sink_query as
-          needed.
-       
-        * When data is queued on all pads, the aggregate vmethod is called.
-       
-        * One can peek at the data on any given GstAggregatorPad with the
-          [gstbase.aggregator_pad.AggregatorPad.peekBuffer] method, and remove it from the pad
-          with the gst_aggregator_pad_pop_buffer () method. When a buffer
-          has been taken with pop_buffer (), a new buffer can be queued
-          on that pad.
-       
-        * When [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or [gstbase.aggregator_pad.AggregatorPad.hasBuffer]
-          are called, a reference is taken to the returned buffer, which stays
-          valid until either:
-       
-            - [gstbase.aggregator_pad.AggregatorPad.popBuffer] is called, in which case the caller
-              is guaranteed that the buffer they receive is the same as the peeked
-              buffer.
-            - [gstbase.aggregator_pad.AggregatorPad.dropBuffer] is called, in which case the caller
-              is guaranteed that the dropped buffer is the one that was peeked.
-            - the subclass implementation of #GstAggregatorClass.aggregate returns.
-       
-          Subsequent calls to [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or
-          [gstbase.aggregator_pad.AggregatorPad.hasBuffer] return / check the same buffer that was
-          returned / checked, until one of the conditions listed above is met.
-       
-          Subclasses are only allowed to call these methods from the aggregate
-          thread.
-       
-        * If the subclass wishes to push a buffer downstream in its aggregate
-          implementation, it should do so through the
-          [gstbase.aggregator.Aggregator.finishBuffer] method. This method will take care
-          of sending and ordering mandatory events such as stream start, caps
-          and segment. Buffer lists can also be pushed out with
-          [gstbase.aggregator.Aggregator.finishBufferList].
-       
-        * Same goes for EOS events, which should not be pushed directly by the
-          subclass, it should instead return GST_FLOW_EOS in its aggregate
-          implementation.
-       
-        * Note that the aggregator logic regarding gap event handling is to turn
-          these into gap buffers with matching PTS and duration. It will also
-          flag these buffers with GST_BUFFER_FLAG_GAP and GST_BUFFER_FLAG_DROPPABLE
-          to ease their identification and subsequent processing.
-          In addition, if the gap event was flagged with GST_GAP_FLAG_MISSING_DATA,
-          a custom meta is added to the resulting gap buffer (GstAggregatorMissingDataMeta).
-       
-        * Subclasses must use (a subclass of) #GstAggregatorPad for both their
-          sink and source pads.
-          See [gst.element_class.ElementClass.addStaticPadTemplateWithGtype].
-     )
-       
+     * Base class for mixers and muxers. Subclasses should at least implement
+       the #GstAggregatorClass::aggregate virtual method.
+    
+     * Installs a #GstPadChainFunction, a #GstPadEventFullFunction and a
+       #GstPadQueryFunction to queue all serialized data packets per sink pad.
+       Subclasses should not overwrite those, but instead implement
+       #GstAggregatorClass::sink_event and #GstAggregatorClass::sink_query as
+       needed.
+    
+     * When data is queued on all pads, the aggregate vmethod is called.
+    
+     * One can peek at the data on any given GstAggregatorPad with the
+       [gstbase.aggregator_pad.AggregatorPad.peekBuffer] method, and remove it from the pad
+       with the gst_aggregator_pad_pop_buffer () method. When a buffer
+       has been taken with pop_buffer (), a new buffer can be queued
+       on that pad.
+    
+     * When [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or [gstbase.aggregator_pad.AggregatorPad.hasBuffer]
+       are called, a reference is taken to the returned buffer, which stays
+       valid until either:
+    
+         - [gstbase.aggregator_pad.AggregatorPad.popBuffer] is called, in which case the caller
+           is guaranteed that the buffer they receive is the same as the peeked
+           buffer.
+         - [gstbase.aggregator_pad.AggregatorPad.dropBuffer] is called, in which case the caller
+           is guaranteed that the dropped buffer is the one that was peeked.
+         - the subclass implementation of #GstAggregatorClass.aggregate returns.
+    
+       Subsequent calls to [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or
+       [gstbase.aggregator_pad.AggregatorPad.hasBuffer] return / check the same buffer that was
+       returned / checked, until one of the conditions listed above is met.
+    
+       Subclasses are only allowed to call these methods from the aggregate
+       thread.
+    
+     * If the subclass wishes to push a buffer downstream in its aggregate
+       implementation, it should do so through the
+       [gstbase.aggregator.Aggregator.finishBuffer] method. This method will take care
+       of sending and ordering mandatory events such as stream start, caps
+       and segment. Buffer lists can also be pushed out with
+       [gstbase.aggregator.Aggregator.finishBufferList].
+    
+     * Same goes for EOS events, which should not be pushed directly by the
+       subclass, it should instead return GST_FLOW_EOS in its aggregate
+       implementation.
+    
+     * Note that the aggregator logic regarding gap event handling is to turn
+       these into gap buffers with matching PTS and duration. It will also
+       flag these buffers with GST_BUFFER_FLAG_GAP and GST_BUFFER_FLAG_DROPPABLE
+       to ease their identification and subsequent processing.
+       In addition, if the gap event was flagged with GST_GAP_FLAG_MISSING_DATA,
+       a custom meta is added to the resulting gap buffer (GstAggregatorMissingDataMeta).
+    
+     * Subclasses must use (a subclass of) #GstAggregatorPad for both their
+       sink and source pads.
+       See [gst.element_class.ElementClass.addStaticPadTemplateWithGtype].
+    
     This class used to live in gst-plugins-bad and was moved to core.
 */
 class Aggregator : gst.element.Element
@@ -455,7 +453,7 @@ class Aggregator : gst.element.Element
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.segment.Segment segment, ulong pts, ulong dts, ulong duration, gst.structure.Structure info, gstbase.aggregator.Aggregator aggregator))
+          `void callback(gst.segment.Segment segment, ulong pts, ulong dts, ulong duration, gst.structure.Structure info, gstbase.aggregator.Aggregator aggregator)`
   
           `segment` The #GstSegment the next output buffer is part of (optional)
   

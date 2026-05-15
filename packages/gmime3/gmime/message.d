@@ -190,26 +190,22 @@ class Message : gmime.object.ObjectWrap
       
       Each header in the returned list will:
       
-       $(LIST
-          * have a valid address
-          * be of the type requested
-          * be complete
-       )
-         
+       - have a valid address
+       - be of the type requested
+       - be complete
+      
       If no Autocrypt header is found for a recipient, no
       #GMimeAutocryptHeader will be in the list associated with that e-mail address.
       
       Note that the following types of Autocrypt headers will not be
       returned by this function:
       
-       $(LIST
-          * headers of an unrequested type
-          * headers that do not match an address in "From:"
-          * unparseable headers
-          * headers with unknown critical attributes
-          * duplicate valid headers for a given address
-       )
-         
+       - headers of an unrequested type
+       - headers that do not match an address in "From:"
+       - unparseable headers
+       - headers with unknown critical attributes
+       - duplicate valid headers for a given address
+      
       On error (e.g. if this version of GMime cannot handle the requested
       Autocrypt type, or if a parameter is missing or malformed), returns
       null
@@ -217,10 +213,8 @@ class Message : gmime.object.ObjectWrap
       The returned Autocrypt headers will have their effective_date set
       to the earliest of either:
       
-      $(LIST
-        * the Date: header of the message or
-        * now (or the current time, if now is null)
-      )
+      - the Date: header of the message or
+      - now (or the current time, if now is null)
   
       Params:
         now = a #GDateTime object, or null
@@ -252,20 +246,16 @@ class Message : gmime.object.ObjectWrap
       Note that the following types of Autocrypt headers will not be
       returned by this function:
       
-       $(LIST
-          * headers that do not match an address in "From:"
-          * unparseable headers
-          * headers with unknown critical attributes
-          * duplicate valid headers for the sender's address
-       )
-         
+       - headers that do not match an address in "From:"
+       - unparseable headers
+       - headers with unknown critical attributes
+       - duplicate valid headers for the sender's address
+      
       The returned Autocrypt header will have its effective_date set to
       the earliest of either:
       
-      $(LIST
-        * the Date: header of the message or
-        * now (or the current time, if now is null)
-      )
+      - the Date: header of the message or
+      - now (or the current time, if now is null)
   
       Params:
         now = a #GDateTime object, or null

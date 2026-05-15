@@ -416,7 +416,7 @@ class ColorSelection : gtk.box.Box
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.color_selection.ColorSelection colorSelection))
+          `void callback(gtk.color_selection.ColorSelection colorSelection)`
   
           `colorSelection` the instance the signal is connected to (optional)
   

@@ -622,7 +622,7 @@ class Resolver : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.resolver.Resolver resolver))
+          `void callback(gio.resolver.Resolver resolver)`
   
           `resolver` the instance the signal is connected to (optional)
   

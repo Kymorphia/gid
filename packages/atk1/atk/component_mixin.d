@@ -294,7 +294,7 @@ template ComponentT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.types.Rectangle arg1, atk.component.Component component))
+          `void callback(atk.types.Rectangle arg1, atk.component.Component component)`
   
           `arg1` The AtkRectangle giving the new position and size. (optional)
   

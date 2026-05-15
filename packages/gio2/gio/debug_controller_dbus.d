@@ -255,7 +255,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.debug_controller_dbus.DebugControllerDBus debugControllerDBus))
+          `bool callback(gio.dbus_method_invocation.DBusMethodInvocation invocation, gio.debug_controller_dbus.DebugControllerDBus debugControllerDBus)`
   
           `invocation` A #GDBusMethodInvocation. (optional)
   

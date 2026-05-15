@@ -677,20 +677,16 @@ class Node : gobject.boxed.Boxed
       
       The following [gobject.value.Value] types have a direct mapping to JSON types:
       
-       $(LIST
-          * `G_TYPE_INT64`
-          * `G_TYPE_DOUBLE`
-          * `G_TYPE_BOOLEAN`
-          * `G_TYPE_STRING`
-       )
-         
+       - `G_TYPE_INT64`
+       - `G_TYPE_DOUBLE`
+       - `G_TYPE_BOOLEAN`
+       - `G_TYPE_STRING`
+      
       JSON-GLib will also automatically promote the following [gobject.value.Value] types:
       
-       $(LIST
-          * `G_TYPE_INT` to `G_TYPE_INT64`
-          * `G_TYPE_FLOAT` to `G_TYPE_DOUBLE`
-       )
-         
+       - `G_TYPE_INT` to `G_TYPE_INT64`
+       - `G_TYPE_FLOAT` to `G_TYPE_DOUBLE`
+      
       It is an error to call this on an immutable node, or on a node which is not
       a value node.
   

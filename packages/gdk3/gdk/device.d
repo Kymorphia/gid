@@ -730,7 +730,7 @@ class Device : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.device.Device device))
+          `void callback(gdk.device.Device device)`
   
           `device` the instance the signal is connected to (optional)
   
@@ -768,7 +768,7 @@ class Device : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.device_tool.DeviceTool tool, gdk.device.Device device))
+          `void callback(gdk.device_tool.DeviceTool tool, gdk.device.Device device)`
   
           `tool` The new current tool (optional)
   

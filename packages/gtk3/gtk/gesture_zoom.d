@@ -90,7 +90,7 @@ class GestureZoom : gtk.gesture.Gesture
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(double scale, gtk.gesture_zoom.GestureZoom gestureZoom))
+          `void callback(double scale, gtk.gesture_zoom.GestureZoom gestureZoom)`
   
           `scale` Scale delta, taking the initial state as 1:1 (optional)
   

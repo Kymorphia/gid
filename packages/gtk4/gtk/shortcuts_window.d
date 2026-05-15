@@ -198,7 +198,7 @@ class ShortcutsWindow : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow))
+          `void callback(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow)`
   
           `shortcutsWindow` the instance the signal is connected to (optional)
   
@@ -239,7 +239,7 @@ class ShortcutsWindow : gtk.window.Window
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow))
+          `void callback(gtk.shortcuts_window.ShortcutsWindow shortcutsWindow)`
   
           `shortcutsWindow` the instance the signal is connected to (optional)
   

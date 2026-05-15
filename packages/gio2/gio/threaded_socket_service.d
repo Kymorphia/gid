@@ -102,7 +102,7 @@ class ThreadedSocketService : gio.socket_service.SocketService
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.socket_connection.SocketConnection connection, gobject.object.ObjectWrap sourceObject, gio.threaded_socket_service.ThreadedSocketService threadedSocketService))
+          `bool callback(gio.socket_connection.SocketConnection connection, gobject.object.ObjectWrap sourceObject, gio.threaded_socket_service.ThreadedSocketService threadedSocketService)`
   
           `connection` a new #GSocketConnection object. (optional)
   

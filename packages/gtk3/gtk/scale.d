@@ -414,7 +414,7 @@ class Scale : gtk.range.Range
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D string callback(double value, gtk.scale.Scale scale))
+          `string callback(double value, gtk.scale.Scale scale)`
   
           `value` the value to format (optional)
   

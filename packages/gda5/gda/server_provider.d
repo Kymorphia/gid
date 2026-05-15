@@ -392,12 +392,10 @@ class ServerProvider : gobject.object.ObjectWrap
       pass #G_TYPE_INVALID if any returned type is acceptable.
       
       The returned value is either a new #GValue or null in the following cases:
-      $(LIST
-        * string cannot be converted to preferred_type type
-        * the provider does not handle preferred_type
-        * the provider could not make a #GValue from string
-      )
-        
+      - string cannot be converted to preferred_type type
+      - the provider does not handle preferred_type
+      - the provider could not make a #GValue from string
+      
       If dbms_type is not null, then if will contain a constant string representing
       the database type used for the conversion if the conversion was successfull, or null
       otherwise.

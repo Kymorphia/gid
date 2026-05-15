@@ -807,7 +807,7 @@ class AlertDialog : adw.dialog.Dialog
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string response, adw.alert_dialog.AlertDialog alertDialog))
+          `void callback(string response, adw.alert_dialog.AlertDialog alertDialog)`
   
           `response` the response ID (optional)
   

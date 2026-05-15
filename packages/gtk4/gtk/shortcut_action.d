@@ -28,19 +28,17 @@ import gtk.widget;
     
     GTK provides various actions:
     
-     $(LIST
-        * [gtk.mnemonic_action.MnemonicAction]: a shortcut action that calls
-          [gtk.widget.Widget.mnemonicActivate]
-        * [gtk.callback_action.CallbackAction]: a shortcut action that invokes
-          a given callback
-        * [gtk.signal_action.SignalAction]: a shortcut action that emits a
-          given signal
-        * [gtk.activate_action.ActivateAction]: a shortcut action that calls
-          [gtk.widget.Widget.activate]
-        * [gtk.named_action.NamedAction]: a shortcut action that calls
-          [gtk.widget.Widget.activateAction]
-        * [gtk.nothing_action.NothingAction]: a shortcut action that does nothing
-     )
+     - [gtk.mnemonic_action.MnemonicAction]: a shortcut action that calls
+       [gtk.widget.Widget.mnemonicActivate]
+     - [gtk.callback_action.CallbackAction]: a shortcut action that invokes
+       a given callback
+     - [gtk.signal_action.SignalAction]: a shortcut action that emits a
+       given signal
+     - [gtk.activate_action.ActivateAction]: a shortcut action that calls
+       [gtk.widget.Widget.activate]
+     - [gtk.named_action.NamedAction]: a shortcut action that calls
+       [gtk.widget.Widget.activateAction]
+     - [gtk.nothing_action.NothingAction]: a shortcut action that does nothing
 */
 class ShortcutAction : gobject.object.ObjectWrap
 {
@@ -87,13 +85,11 @@ class ShortcutAction : gobject.object.ObjectWrap
       
       The accepted strings are:
       
-      $(LIST
-        * `nothing`, for [gtk.nothing_action.NothingAction]
-        * `activate`, for [gtk.activate_action.ActivateAction]
-        * `mnemonic-activate`, for [gtk.mnemonic_action.MnemonicAction]
-        * `action(NAME)`, for a [gtk.named_action.NamedAction] for the action named `NAME`
-        * `signal(NAME)`, for a [gtk.signal_action.SignalAction] for the signal `NAME`
-      )
+      - `nothing`, for [gtk.nothing_action.NothingAction]
+      - `activate`, for [gtk.activate_action.ActivateAction]
+      - `mnemonic-activate`, for [gtk.mnemonic_action.MnemonicAction]
+      - `action(NAME)`, for a [gtk.named_action.NamedAction] for the action named `NAME`
+      - `signal(NAME)`, for a [gtk.signal_action.SignalAction] for the signal `NAME`
   
       Params:
         string_ = the string to parse

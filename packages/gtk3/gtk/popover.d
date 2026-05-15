@@ -545,7 +545,7 @@ class Popover : gtk.bin.Bin
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.popover.Popover popover))
+          `void callback(gtk.popover.Popover popover)`
   
           `popover` the instance the signal is connected to (optional)
   

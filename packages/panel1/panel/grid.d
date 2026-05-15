@@ -210,7 +210,7 @@ class Grid : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D panel.frame.Frame callback(panel.grid.Grid grid))
+          `panel.frame.Frame callback(panel.grid.Grid grid)`
   
           `grid` the instance the signal is connected to (optional)
   

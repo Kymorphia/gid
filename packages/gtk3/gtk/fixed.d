@@ -24,19 +24,17 @@ import gtk.widget;
     things will result in truncated text, overlapping widgets, and
     other display bugs:
     
-    $(LIST
-      * Themes, which may change widget sizes.
-      
-      * Fonts other than the one you used to write the app will of course
-        change the size of widgets containing text; keep in mind that
-        users may use a larger font because of difficulty reading the
-        default, or they may be using a different OS that provides different fonts.
-      
-      * Translation of text into other languages changes its size. Also,
-        display of non-English text will use a different font in many
-        cases.
-    )
-      
+    - Themes, which may change widget sizes.
+    
+    - Fonts other than the one you used to write the app will of course
+      change the size of widgets containing text; keep in mind that
+      users may use a larger font because of difficulty reading the
+      default, or they may be using a different OS that provides different fonts.
+    
+    - Translation of text into other languages changes its size. Also,
+      display of non-English text will use a different font in many
+      cases.
+    
     In addition, #GtkFixed does not pay attention to text direction and thus may
     produce unwanted results if your app is run under right-to-left languages
     such as Hebrew or Arabic. That is: normally GTK+ will order containers

@@ -139,10 +139,8 @@ import gtk.window;
     used. It supports many of the features that [gtk.file_chooser.FileChooser] has, but
     there are some things it does not handle:
     
-    $(LIST
-      * Any [gtk.file_filter.FileFilter] added using a mimetype
-    )
-      
+    * Any [gtk.file_filter.FileFilter] added using a mimetype
+    
     If any of these features are used the regular [gtk.file_chooser_dialog.FileChooserDialog]
     will be used in place of the native one.
     
@@ -159,9 +157,7 @@ import gtk.window;
     native file chooser dialogs. Some features provided by [gtk.file_chooser.FileChooser]
     are not supported:
     
-    $(LIST
-      * Shortcut folders.
-    )
+    * Shortcut folders.
 
     Deprecated: Use [gtk.file_dialog.FileDialog] instead
 */

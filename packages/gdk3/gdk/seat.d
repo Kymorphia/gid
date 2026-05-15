@@ -212,7 +212,7 @@ class Seat : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.device.Device device, gdk.seat.Seat seat))
+          `void callback(gdk.device.Device device, gdk.seat.Seat seat)`
   
           `device` the newly added #GdkDevice. (optional)
   
@@ -256,7 +256,7 @@ class Seat : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.device.Device device, gdk.seat.Seat seat))
+          `void callback(gdk.device.Device device, gdk.seat.Seat seat)`
   
           `device` the just removed #GdkDevice. (optional)
   
@@ -304,7 +304,7 @@ class Seat : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat))
+          `void callback(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat)`
   
           `tool` the new #GdkDeviceTool known to the seat (optional)
   
@@ -348,7 +348,7 @@ class Seat : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat))
+          `void callback(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat)`
   
           `tool` the just removed #GdkDeviceTool (optional)
   

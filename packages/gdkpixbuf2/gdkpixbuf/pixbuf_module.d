@@ -48,14 +48,12 @@ import gmodule.module_;
     
     Installing a module is a two-step process:
     
-     $(LIST
-        * copy the module file(s) to the loader directory (normally
-          `$libdir/gdk-pixbuf-2.0/$version/loaders`, unless overridden by the
-          environment variable `GDK_PIXBUF_MODULEDIR`)
-        * call `gdk-pixbuf-query-loaders` to update the module file (normally
-          `$libdir/gdk-pixbuf-2.0/$version/loaders.cache`, unless overridden
-          by the environment variable `GDK_PIXBUF_MODULE_FILE`)
-     )
+     - copy the module file(s) to the loader directory (normally
+       `$libdir/gdk-pixbuf-2.0/$version/loaders`, unless overridden by the
+       environment variable `GDK_PIXBUF_MODULEDIR`)
+     - call `gdk-pixbuf-query-loaders` to update the module file (normally
+       `$libdir/gdk-pixbuf-2.0/$version/loaders.cache`, unless overridden
+       by the environment variable `GDK_PIXBUF_MODULE_FILE`)
 */
 class PixbufModule
 {

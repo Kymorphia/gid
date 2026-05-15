@@ -680,7 +680,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.toast.Toast toast))
+          `void callback(adw.toast.Toast toast)`
   
           `toast` the instance the signal is connected to (optional)
   
@@ -717,7 +717,7 @@ class Toast : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(adw.toast.Toast toast))
+          `void callback(adw.toast.Toast toast)`
   
           `toast` the instance the signal is connected to (optional)
   

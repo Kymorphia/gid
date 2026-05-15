@@ -240,7 +240,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(glib.error.ErrorWrap error, webkit.print_operation.PrintOperation printOperation))
+          `void callback(glib.error.ErrorWrap error, webkit.print_operation.PrintOperation printOperation)`
   
           `error` the #GError that was triggered (optional)
   
@@ -284,7 +284,7 @@ class PrintOperation : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.print_operation.PrintOperation printOperation))
+          `void callback(webkit.print_operation.PrintOperation printOperation)`
   
           `printOperation` the instance the signal is connected to (optional)
   

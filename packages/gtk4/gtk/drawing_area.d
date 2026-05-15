@@ -25,18 +25,16 @@ import gtk.widget;
     It’s essentially a blank widget; you can draw on it. After
     creating a drawing area, the application may want to connect to:
     
-    $(LIST
-      * The [gtk.widget.Widget.realize] signal to take any necessary actions
-        when the widget is instantiated on a particular display.
-        (Create GDK resources in response to this signal.)
-      
-      * The [gtk.drawing_area.DrawingArea.resize] signal to take any necessary
-        actions when the widget changes size.
-      
-      * Call [gtk.drawing_area.DrawingArea.setDrawFunc] to handle redrawing the
-        contents of the widget.
-    )
-      
+    - The [gtk.widget.Widget.realize] signal to take any necessary actions
+      when the widget is instantiated on a particular display.
+      (Create GDK resources in response to this signal.)
+    
+    - The [gtk.drawing_area.DrawingArea.resize] signal to take any necessary
+      actions when the widget changes size.
+    
+    - Call [gtk.drawing_area.DrawingArea.setDrawFunc] to handle redrawing the
+      contents of the widget.
+    
     The following code portion demonstrates using a drawing
     area to display a circle in the normal widget foreground
     color.
@@ -289,7 +287,7 @@ class DrawingArea : gtk.widget.Widget
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int width, int height, gtk.drawing_area.DrawingArea drawingArea))
+          `void callback(int width, int height, gtk.drawing_area.DrawingArea drawingArea)`
   
           `width` the width of the viewport (optional)
   

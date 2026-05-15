@@ -205,7 +205,7 @@ class Discoverer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstpbutils.discoverer_info.DiscovererInfo info, glib.error.ErrorWrap error, gstpbutils.discoverer.Discoverer discoverer))
+          `void callback(gstpbutils.discoverer_info.DiscovererInfo info, glib.error.ErrorWrap error, gstpbutils.discoverer.Discoverer discoverer)`
   
           `info` the results #GstDiscovererInfo (optional)
   
@@ -258,7 +258,7 @@ class Discoverer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstpbutils.discoverer.Discoverer discoverer))
+          `void callback(gstpbutils.discoverer.Discoverer discoverer)`
   
           `discoverer` the instance the signal is connected to (optional)
   
@@ -297,7 +297,7 @@ class Discoverer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gstpbutils.discoverer_info.DiscovererInfo callback(string uri, gstpbutils.discoverer.Discoverer discoverer))
+          `gstpbutils.discoverer_info.DiscovererInfo callback(string uri, gstpbutils.discoverer.Discoverer discoverer)`
   
           `uri` THe URI to load the serialized info for (optional)
   
@@ -350,7 +350,7 @@ class Discoverer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gst.element.Element source, gstpbutils.discoverer.Discoverer discoverer))
+          `void callback(gst.element.Element source, gstpbutils.discoverer.Discoverer discoverer)`
   
           `source` source element (optional)
   
@@ -393,7 +393,7 @@ class Discoverer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstpbutils.discoverer.Discoverer discoverer))
+          `void callback(gstpbutils.discoverer.Discoverer discoverer)`
   
           `discoverer` the instance the signal is connected to (optional)
   

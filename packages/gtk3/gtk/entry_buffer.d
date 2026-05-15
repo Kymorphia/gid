@@ -304,7 +304,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, uint nChars, gtk.entry_buffer.EntryBuffer entryBuffer))
+          `void callback(uint position, uint nChars, gtk.entry_buffer.EntryBuffer entryBuffer)`
   
           `position` the position the text was deleted at. (optional)
   
@@ -353,7 +353,7 @@ class EntryBuffer : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, string chars, gtk.entry_buffer.EntryBuffer entryBuffer))
+          `void callback(uint position, string chars, gtk.entry_buffer.EntryBuffer entryBuffer)`
   
           `position` the position the text was inserted at. (optional)
   

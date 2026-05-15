@@ -273,7 +273,7 @@ template SelectionModelT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint position, uint nItems, gtk.selection_model.SelectionModel selectionModel))
+          `void callback(uint position, uint nItems, gtk.selection_model.SelectionModel selectionModel)`
   
           `position` The first item that may have changed (optional)
   

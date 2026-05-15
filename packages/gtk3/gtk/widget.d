@@ -87,15 +87,13 @@ import pango.layout;
     Height-for-width geometry management is implemented in GTK+ by way
     of five virtual methods:
     
-    $(LIST
-      * #GtkWidgetClass.get_request_mode()
-      * #GtkWidgetClass.get_preferred_width()
-      * #GtkWidgetClass.get_preferred_height()
-      * #GtkWidgetClass.get_preferred_height_for_width()
-      * #GtkWidgetClass.get_preferred_width_for_height()
-      * #GtkWidgetClass.get_preferred_height_and_baseline_for_width()
-    )
-      
+    - #GtkWidgetClass.get_request_mode()
+    - #GtkWidgetClass.get_preferred_width()
+    - #GtkWidgetClass.get_preferred_height()
+    - #GtkWidgetClass.get_preferred_height_for_width()
+    - #GtkWidgetClass.get_preferred_width_for_height()
+    - #GtkWidgetClass.get_preferred_height_and_baseline_for_width()
+    
     There are some important things to keep in mind when implementing
     height-for-width and when using it in container implementations.
     
@@ -1566,17 +1564,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       When a widget is destroyed all references it holds on other objects
       will be released:
       
-       $(LIST
-          * if the widget is inside a container, it will be removed from its
-       )
+       - if the widget is inside a container, it will be removed from its
        parent
-       $(LIST
-          * if the widget is a container, all its children will be destroyed,
-       )
+       - if the widget is a container, all its children will be destroyed,
        recursively
-       $(LIST
-          * if the widget is a top level, it will be removed from the list
-       )
+       - if the widget is a top level, it will be removed from the list
        of top level widgets that GTK+ maintains internally
       
       It's expected that all references held on the widget will also
@@ -5990,7 +5982,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -6033,7 +6025,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_button.EventButton event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_button.EventButton event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventButton which triggered
               this signal. (optional)
@@ -6087,7 +6079,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_button.EventButton event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_button.EventButton event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventButton which triggered
               this signal. (optional)
@@ -6139,7 +6131,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(uint signalId, gtk.widget.Widget widget))
+          `bool callback(uint signalId, gtk.widget.Widget widget)`
   
           `signalId` the ID of a signal installed on widget (optional)
   
@@ -6188,7 +6180,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gobject.param_spec.ParamSpec childProperty, gtk.widget.Widget widget))
+          `void callback(gobject.param_spec.ParamSpec childProperty, gtk.widget.Widget widget)`
   
           `childProperty` the #GParamSpec of the changed child property (optional)
   
@@ -6233,7 +6225,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -6277,7 +6269,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_configure.EventConfigure event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_configure.EventConfigure event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventConfigure which triggered
               this signal. (optional)
@@ -6327,7 +6319,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_expose.EventExpose event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_expose.EventExpose event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventExpose event (optional)
   
@@ -6378,7 +6370,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event.Event event, gtk.widget.Widget widget))
+          `bool callback(gdk.event.Event event, gtk.widget.Widget widget)`
   
           `event` the event which triggered this signal (optional)
   
@@ -6429,7 +6421,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -6473,7 +6465,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event.Event event, gtk.widget.Widget widget))
+          `bool callback(gdk.event.Event event, gtk.widget.Widget widget)`
   
           `event` the event which triggered this signal (optional)
   
@@ -6521,7 +6513,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.TextDirection previousDirection, gtk.widget.Widget widget))
+          `void callback(gtk.types.TextDirection previousDirection, gtk.widget.Widget widget)`
   
           `previousDirection` the previous text direction of widget (optional)
   
@@ -6570,7 +6562,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag_context.DragContext context, gtk.widget.Widget widget))
+          `void callback(gdk.drag_context.DragContext context, gtk.widget.Widget widget)`
   
           `context` the drag context (optional)
   
@@ -6616,7 +6608,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag_context.DragContext context, gtk.widget.Widget widget))
+          `void callback(gdk.drag_context.DragContext context, gtk.widget.Widget widget)`
   
           `context` the drag context (optional)
   
@@ -6663,7 +6655,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag_context.DragContext context, gtk.selection_data.SelectionData data, uint info, uint time, gtk.widget.Widget widget))
+          `void callback(gdk.drag_context.DragContext context, gtk.selection_data.SelectionData data, uint info, uint time, gtk.widget.Widget widget)`
   
           `context` the drag context (optional)
   
@@ -6784,7 +6776,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag_context.DragContext context, int x, int y, gtk.selection_data.SelectionData data, uint info, uint time, gtk.widget.Widget widget))
+          `void callback(gdk.drag_context.DragContext context, int x, int y, gtk.selection_data.SelectionData data, uint info, uint time, gtk.widget.Widget widget)`
   
           `context` the drag context (optional)
   
@@ -6867,7 +6859,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.drag_context.DragContext context, int x, int y, uint time, gtk.widget.Widget widget))
+          `bool callback(gdk.drag_context.DragContext context, int x, int y, uint time, gtk.widget.Widget widget)`
   
           `context` the drag context (optional)
   
@@ -6933,7 +6925,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag_context.DragContext context, gtk.widget.Widget widget))
+          `void callback(gdk.drag_context.DragContext context, gtk.widget.Widget widget)`
   
           `context` the drag context (optional)
   
@@ -6980,7 +6972,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.drag_context.DragContext context, gtk.types.DragResult result, gtk.widget.Widget widget))
+          `bool callback(gdk.drag_context.DragContext context, gtk.types.DragResult result, gtk.widget.Widget widget)`
   
           `context` the drag context (optional)
   
@@ -7040,7 +7032,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.drag_context.DragContext context, uint time, gtk.widget.Widget widget))
+          `void callback(gdk.drag_context.DragContext context, uint time, gtk.widget.Widget widget)`
   
           `context` the drag context (optional)
   
@@ -7174,7 +7166,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.drag_context.DragContext context, int x, int y, uint time, gtk.widget.Widget widget))
+          `bool callback(gdk.drag_context.DragContext context, int x, int y, uint time, gtk.widget.Widget widget)`
   
           `context` the drag context (optional)
   
@@ -7254,7 +7246,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(cairo.context.Context cr, gtk.widget.Widget widget))
+          `bool callback(cairo.context.Context cr, gtk.widget.Widget widget)`
   
           `cr` the cairo context to draw to (optional)
   
@@ -7307,7 +7299,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_crossing.EventCrossing event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_crossing.EventCrossing event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventCrossing which triggered
               this signal. (optional)
@@ -7359,7 +7351,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event.Event event, gtk.widget.Widget widget))
+          `bool callback(gdk.event.Event event, gtk.widget.Widget widget)`
   
           `event` the #GdkEvent which triggered this signal (optional)
   
@@ -7411,7 +7403,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.event.Event event, gtk.widget.Widget widget))
+          `void callback(gdk.event.Event event, gtk.widget.Widget widget)`
   
           `event` the #GdkEvent which triggered this signal (optional)
   
@@ -7454,7 +7446,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.DirectionType direction, gtk.widget.Widget widget))
+          `bool callback(gtk.types.DirectionType direction, gtk.widget.Widget widget)`
   
           `direction`  (optional)
   
@@ -7504,7 +7496,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_focus.EventFocus event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_focus.EventFocus event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventFocus which triggered
               this signal. (optional)
@@ -7556,7 +7548,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_focus.EventFocus event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_focus.EventFocus event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventFocus which triggered this
               signal. (optional)
@@ -7609,7 +7601,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_grab_broken.EventGrabBroken event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_grab_broken.EventGrabBroken event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventGrabBroken event (optional)
   
@@ -7656,7 +7648,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -7700,7 +7692,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(bool wasGrabbed, gtk.widget.Widget widget))
+          `void callback(bool wasGrabbed, gtk.widget.Widget widget)`
   
           `wasGrabbed` false if the widget becomes shadowed, true
                           if it becomes unshadowed (optional)
@@ -7745,7 +7737,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -7786,7 +7778,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget previousToplevel, gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget previousToplevel, gtk.widget.Widget widget)`
   
           `previousToplevel` the previous toplevel ancestor, or null
               if the widget was previously unanchored (optional)
@@ -7836,7 +7828,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_key.EventKey event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_key.EventKey event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventKey which triggered this signal. (optional)
   
@@ -7888,7 +7880,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_key.EventKey event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_key.EventKey event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventKey which triggered this signal. (optional)
   
@@ -7936,7 +7928,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.DirectionType direction, gtk.widget.Widget widget))
+          `bool callback(gtk.types.DirectionType direction, gtk.widget.Widget widget)`
   
           `direction` the direction of movement (optional)
   
@@ -7990,7 +7982,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_crossing.EventCrossing event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_crossing.EventCrossing event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventCrossing which triggered
               this signal. (optional)
@@ -8046,7 +8038,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8088,7 +8080,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_any.EventAny event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_any.EventAny event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventAny which triggered this signal. (optional)
   
@@ -8136,7 +8128,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool groupCycling, gtk.widget.Widget widget))
+          `bool callback(bool groupCycling, gtk.widget.Widget widget)`
   
           `groupCycling` true if there are other widgets with the same mnemonic (optional)
   
@@ -8189,7 +8181,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_motion.EventMotion event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_motion.EventMotion event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventMotion which triggered
               this signal. (optional)
@@ -8237,7 +8229,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.DirectionType direction, gtk.widget.Widget widget))
+          `void callback(gtk.types.DirectionType direction, gtk.widget.Widget widget)`
   
           `direction`  (optional)
   
@@ -8281,7 +8273,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget oldParent, gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget oldParent, gtk.widget.Widget widget)`
   
           `oldParent` the previous parent, or null if the widget
               just got its initial parent. (optional)
@@ -8331,7 +8323,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.widget.Widget widget))
+          `bool callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8375,7 +8367,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_property.EventProperty event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_property.EventProperty event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventProperty which triggered
               this signal. (optional)
@@ -8426,7 +8418,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_proximity.EventProximity event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_proximity.EventProximity event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventProximity which triggered
               this signal. (optional)
@@ -8477,7 +8469,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_proximity.EventProximity event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_proximity.EventProximity event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventProximity which triggered
               this signal. (optional)
@@ -8536,7 +8528,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.widget.Widget widget))
+          `bool callback(int x, int y, bool keyboardMode, gtk.tooltip.Tooltip tooltip, gtk.widget.Widget widget)`
   
           `x` the x coordinate of the cursor position where the request has
                 been emitted, relative to widget's left side (optional)
@@ -8604,7 +8596,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -8642,7 +8634,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gdk.screen.Screen previousScreen, gtk.widget.Widget widget))
+          `void callback(gdk.screen.Screen previousScreen, gtk.widget.Widget widget)`
   
           `previousScreen` the previous screen, or null if the
               widget was not associated with a screen before (optional)
@@ -8693,7 +8685,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_scroll.EventScroll event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_scroll.EventScroll event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventScroll which triggered
               this signal. (optional)
@@ -8742,7 +8734,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventSelection which triggered
               this signal. (optional)
@@ -8790,7 +8782,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.selection_data.SelectionData data, uint info, uint time, gtk.widget.Widget widget))
+          `void callback(gtk.selection_data.SelectionData data, uint info, uint time, gtk.widget.Widget widget)`
   
           `data`  (optional)
   
@@ -8845,7 +8837,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget)`
   
           `event`  (optional)
   
@@ -8891,7 +8883,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.selection_data.SelectionData data, uint time, gtk.widget.Widget widget))
+          `void callback(gtk.selection_data.SelectionData data, uint time, gtk.widget.Widget widget)`
   
           `data`  (optional)
   
@@ -8942,7 +8934,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_selection.EventSelection event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventSelection which triggered
               this signal. (optional)
@@ -8991,7 +8983,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9028,7 +9020,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.WidgetHelpType helpType, gtk.widget.Widget widget))
+          `bool callback(gtk.types.WidgetHelpType helpType, gtk.widget.Widget widget)`
   
           `helpType`  (optional)
   
@@ -9075,7 +9067,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.Allocation allocation, gtk.widget.Widget widget))
+          `void callback(gtk.types.Allocation allocation, gtk.widget.Widget widget)`
   
           `allocation` the region which has been
               allocated to the widget. (optional)
@@ -9120,7 +9112,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.StateType state, gtk.widget.Widget widget))
+          `void callback(gtk.types.StateType state, gtk.widget.Widget widget)`
   
           `state` the previous state (optional)
   
@@ -9166,7 +9158,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.types.StateFlags flags, gtk.widget.Widget widget))
+          `void callback(gtk.types.StateFlags flags, gtk.widget.Widget widget)`
   
           `flags` The previous state flags. (optional)
   
@@ -9215,7 +9207,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.style.Style previousStyle, gtk.widget.Widget widget))
+          `void callback(gtk.style.Style previousStyle, gtk.widget.Widget widget)`
   
           `previousStyle` the previous style, or null if the widget
               just got its initial style (optional)
@@ -9266,7 +9258,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9303,7 +9295,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event.Event object, gtk.widget.Widget widget))
+          `bool callback(gdk.event.Event object, gtk.widget.Widget widget)`
   
           `object`  (optional)
   
@@ -9354,7 +9346,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9396,7 +9388,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_any.EventAny event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_any.EventAny event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventAny which triggered this signal (optional)
   
@@ -9446,7 +9438,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.widget.Widget widget))
+          `void callback(gtk.widget.Widget widget)`
   
           `widget` the instance the signal is connected to (optional)
   
@@ -9487,7 +9479,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_visibility.EventVisibility event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_visibility.EventVisibility event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventVisibility which
               triggered this signal. (optional)
@@ -9545,7 +9537,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gdk.event_window_state.EventWindowState event, gtk.widget.Widget widget))
+          `bool callback(gdk.event_window_state.EventWindowState event, gtk.widget.Widget widget)`
   
           `event` the #GdkEventWindowState which
               triggered this signal. (optional)

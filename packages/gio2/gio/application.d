@@ -100,16 +100,14 @@ import gobject.object;
     
     There is a number of different entry points into a [gio.application.Application]:
     
-    $(LIST
-      * via 'Activate' (i.e. just starting the application)
-      
-      * via 'Open' (i.e. opening some files)
-      
-      * by handling a command-line
-      
-      * via activating an action
-    )
-      
+    - via 'Activate' (i.e. just starting the application)
+    
+    - via 'Open' (i.e. opening some files)
+    
+    - by handling a command-line
+    
+    - via activating an action
+    
     The [gio.application.Application.startup] signal lets you handle the application
     initialization for all of these in a single place.
     
@@ -373,22 +371,20 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       For convenience, the restrictions on application identifiers are
       reproduced here:
       
-      $(LIST
-        * Application identifiers are composed of 1 or more elements separated by a
-          period (`.`) character. All elements must contain at least one character.
-        
-        * Each element must only contain the ASCII characters `[A-Z][a-z][0-9]_-`,
-          with `-` discouraged in new application identifiers. Each element must not
-          begin with a digit.
-        
-        * Application identifiers must contain at least one `.` (period) character
-          (and thus at least two elements).
-        
-        * Application identifiers must not begin with a `.` (period) character.
-        
-        * Application identifiers must not exceed 255 characters.
-      )
-        
+      - Application identifiers are composed of 1 or more elements separated by a
+        period (`.`) character. All elements must contain at least one character.
+      
+      - Each element must only contain the ASCII characters `[A-Z][a-z][0-9]_-`,
+        with `-` discouraged in new application identifiers. Each element must not
+        begin with a digit.
+      
+      - Application identifiers must contain at least one `.` (period) character
+        (and thus at least two elements).
+      
+      - Application identifiers must not begin with a `.` (period) character.
+      
+      - Application identifiers must not exceed 255 characters.
+      
       Note that the hyphen (`-`) character is allowed in application identifiers,
       but is problematic or not allowed in various specifications and APIs that
       refer to D-Bus, such as
@@ -517,16 +513,14 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       
       It is important to use the proper GVariant format when retrieving
       the options with [glib.variant_dict.VariantDict.lookup]:
-      $(LIST
-        * for `G_OPTION_ARG_NONE`, use `b`
-        * for `G_OPTION_ARG_STRING`, use `&s`
-        * for `G_OPTION_ARG_INT`, use `i`
-        * for `G_OPTION_ARG_INT64`, use `x`
-        * for `G_OPTION_ARG_DOUBLE`, use `d`
-        * for `G_OPTION_ARG_FILENAME`, use `^&ay`
-        * for `G_OPTION_ARG_STRING_ARRAY`, use `^a&s`
-        * for `G_OPTION_ARG_FILENAME_ARRAY`, use `^a&ay`
-      )
+      - for `G_OPTION_ARG_NONE`, use `b`
+      - for `G_OPTION_ARG_STRING`, use `&s`
+      - for `G_OPTION_ARG_INT`, use `i`
+      - for `G_OPTION_ARG_INT64`, use `x`
+      - for `G_OPTION_ARG_DOUBLE`, use `d`
+      - for `G_OPTION_ARG_FILENAME`, use `^&ay`
+      - for `G_OPTION_ARG_STRING_ARRAY`, use `^a&s`
+      - for `G_OPTION_ARG_FILENAME_ARRAY`, use `^a&ay`
   
       Params:
         entries = the
@@ -1291,7 +1285,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.application.Application application))
+          `void callback(gio.application.Application application)`
   
           `application` the instance the signal is connected to (optional)
   
@@ -1330,7 +1324,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D int callback(gio.application_command_line.ApplicationCommandLine commandLine, gio.application.Application application))
+          `int callback(gio.application_command_line.ApplicationCommandLine commandLine, gio.application.Application application)`
   
           `commandLine` a #GApplicationCommandLine representing the
                 passed commandline (optional)
@@ -1418,7 +1412,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D int callback(glib.variant_dict.VariantDict options, gio.application.Application application))
+          `int callback(glib.variant_dict.VariantDict options, gio.application.Application application)`
   
           `options` the options dictionary (optional)
   
@@ -1471,7 +1465,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gio.application.Application application))
+          `bool callback(gio.application.Application application)`
   
           `application` the instance the signal is connected to (optional)
   
@@ -1512,7 +1506,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.file.File[] files, string hint, gio.application.Application application))
+          `void callback(gio.file.File[] files, string hint, gio.application.Application application)`
   
           `files` an array of #GFiles (optional)
   
@@ -1569,7 +1563,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.application.Application application))
+          `void callback(gio.application.Application application)`
   
           `application` the instance the signal is connected to (optional)
   
@@ -1607,7 +1601,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.application.Application application))
+          `void callback(gio.application.Application application)`
   
           `application` the instance the signal is connected to (optional)
   

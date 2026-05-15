@@ -314,16 +314,14 @@ class RTPBasePayload : gst.element.Element
         application/x-rtp-payload-stats containing the following fields relating to
         the last processed buffer and current state of the stream being payloaded:
         
-          $(LIST
-              * `clock-rate` :#G_TYPE_UINT, clock-rate of the stream
-              * `running-time` :#G_TYPE_UINT64, running time
-              * `seqnum` :#G_TYPE_UINT, sequence number, same as #GstRTPBasePayload:seqnum
-              * `timestamp` :#G_TYPE_UINT, RTP timestamp, same as #GstRTPBasePayload:timestamp
-              * `ssrc` :#G_TYPE_UINT, The SSRC in use
-              * `pt` :#G_TYPE_UINT, The Payload type in use, same as #GstRTPBasePayload:pt
-              * `seqnum-offset` :#G_TYPE_UINT, The current offset added to the seqnum
-              * `timestamp-offset` :#G_TYPE_UINT, The current offset added to the timestamp
-          )
+          * `clock-rate` :#G_TYPE_UINT, clock-rate of the stream
+          * `running-time` :#G_TYPE_UINT64, running time
+          * `seqnum` :#G_TYPE_UINT, sequence number, same as #GstRTPBasePayload:seqnum
+          * `timestamp` :#G_TYPE_UINT, RTP timestamp, same as #GstRTPBasePayload:timestamp
+          * `ssrc` :#G_TYPE_UINT, The SSRC in use
+          * `pt` :#G_TYPE_UINT, The Payload type in use, same as #GstRTPBasePayload:pt
+          * `seqnum-offset` :#G_TYPE_UINT, The current offset added to the seqnum
+          * `timestamp-offset` :#G_TYPE_UINT, The current offset added to the timestamp
   */
   @property gst.structure.Structure stats()
   {
@@ -503,7 +501,7 @@ class RTPBasePayload : gst.element.Element
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstrtp.rtpheader_extension.RTPHeaderExtension ext, gstrtp.rtpbase_payload.RTPBasePayload rTPBasePayload))
+          `void callback(gstrtp.rtpheader_extension.RTPHeaderExtension ext, gstrtp.rtpbase_payload.RTPBasePayload rTPBasePayload)`
   
           `ext` the #GstRTPHeaderExtension (optional)
   
@@ -546,7 +544,7 @@ class RTPBasePayload : gst.element.Element
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gstrtp.rtpbase_payload.RTPBasePayload rTPBasePayload))
+          `void callback(gstrtp.rtpbase_payload.RTPBasePayload rTPBasePayload)`
   
           `rTPBasePayload` the instance the signal is connected to (optional)
   
@@ -584,7 +582,7 @@ class RTPBasePayload : gst.element.Element
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D gstrtp.rtpheader_extension.RTPHeaderExtension callback(uint extId, string extUri, gstrtp.rtpbase_payload.RTPBasePayload rTPBasePayload))
+          `gstrtp.rtpheader_extension.RTPHeaderExtension callback(uint extId, string extUri, gstrtp.rtpbase_payload.RTPBasePayload rTPBasePayload)`
   
           `extId` the extension id being requested (optional)
   

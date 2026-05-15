@@ -972,43 +972,41 @@ class SocketClient : gobject.object.ObjectWrap
         information about a network connection in the UI. The meanings of
         the different event values are as follows:
         
-        $(LIST
-          * [gio.types.SocketClientEvent.Resolving]: client is about to look up connectable
-            in DNS. connection will be null.
-          
-          * [gio.types.SocketClientEvent.Resolved]:  client has successfully resolved
-            connectable in DNS. connection will be null.
-          
-          * [gio.types.SocketClientEvent.Connecting]: client is about to make a connection
-            to a remote host; either a proxy server or the destination server
-            itself. connection is the #GSocketConnection, which is not yet
-            connected.  Since GLib 2.40, you can access the remote
-            address via [gio.socket_connection.SocketConnection.getRemoteAddress].
-          
-          * [gio.types.SocketClientEvent.Connected]: client has successfully connected
-            to a remote host. connection is the connected #GSocketConnection.
-          
-          * [gio.types.SocketClientEvent.ProxyNegotiating]: client is about to negotiate
-            with a proxy to get it to connect to connectable. connection is
-            the #GSocketConnection to the proxy server.
-          
-          * [gio.types.SocketClientEvent.ProxyNegotiated]: client has negotiated a
-            connection to connectable through a proxy server. connection is
-            the stream returned from [gio.proxy.Proxy.connect], which may or may not
-            be a #GSocketConnection.
-          
-          * [gio.types.SocketClientEvent.TlsHandshaking]: client is about to begin a TLS
-            handshake. connection is a #GTlsClientConnection.
-          
-          * [gio.types.SocketClientEvent.TlsHandshaked]: client has successfully completed
-            the TLS handshake. connection is a #GTlsClientConnection.
-          
-          * [gio.types.SocketClientEvent.Complete]: client has either successfully connected
-            to connectable (in which case connection is the #GSocketConnection
-            that it will be returning to the caller) or has failed (in which
-            case connection is null and the client is about to return an error).
-        )
-          
+        - [gio.types.SocketClientEvent.Resolving]: client is about to look up connectable
+          in DNS. connection will be null.
+        
+        - [gio.types.SocketClientEvent.Resolved]:  client has successfully resolved
+          connectable in DNS. connection will be null.
+        
+        - [gio.types.SocketClientEvent.Connecting]: client is about to make a connection
+          to a remote host; either a proxy server or the destination server
+          itself. connection is the #GSocketConnection, which is not yet
+          connected.  Since GLib 2.40, you can access the remote
+          address via [gio.socket_connection.SocketConnection.getRemoteAddress].
+        
+        - [gio.types.SocketClientEvent.Connected]: client has successfully connected
+          to a remote host. connection is the connected #GSocketConnection.
+        
+        - [gio.types.SocketClientEvent.ProxyNegotiating]: client is about to negotiate
+          with a proxy to get it to connect to connectable. connection is
+          the #GSocketConnection to the proxy server.
+        
+        - [gio.types.SocketClientEvent.ProxyNegotiated]: client has negotiated a
+          connection to connectable through a proxy server. connection is
+          the stream returned from [gio.proxy.Proxy.connect], which may or may not
+          be a #GSocketConnection.
+        
+        - [gio.types.SocketClientEvent.TlsHandshaking]: client is about to begin a TLS
+          handshake. connection is a #GTlsClientConnection.
+        
+        - [gio.types.SocketClientEvent.TlsHandshaked]: client has successfully completed
+          the TLS handshake. connection is a #GTlsClientConnection.
+        
+        - [gio.types.SocketClientEvent.Complete]: client has either successfully connected
+          to connectable (in which case connection is the #GSocketConnection
+          that it will be returning to the caller) or has failed (in which
+          case connection is null and the client is about to return an error).
+        
         Each event except [gio.types.SocketClientEvent.Complete] may be emitted
         multiple times (or not at all) for a given connectable (in
         particular, if client ends up attempting to connect to more than
@@ -1022,7 +1020,7 @@ class SocketClient : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gio.types.SocketClientEvent event, gio.socket_connectable.SocketConnectable connectable, gio.iostream.IOStream connection, gio.socket_client.SocketClient socketClient))
+          `void callback(gio.types.SocketClientEvent event, gio.socket_connectable.SocketConnectable connectable, gio.iostream.IOStream connection, gio.socket_client.SocketClient socketClient)`
   
           `event` the event that is occurring (optional)
   

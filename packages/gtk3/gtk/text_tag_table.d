@@ -174,7 +174,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable))
+          `void callback(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable)`
   
           `tag` the added tag. (optional)
   
@@ -217,7 +217,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_tag.TextTag tag, bool sizeChanged, gtk.text_tag_table.TextTagTable textTagTable))
+          `void callback(gtk.text_tag.TextTag tag, bool sizeChanged, gtk.text_tag_table.TextTagTable textTagTable)`
   
           `tag` the changed tag. (optional)
   
@@ -266,7 +266,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable))
+          `void callback(gtk.text_tag.TextTag tag, gtk.text_tag_table.TextTagTable textTagTable)`
   
           `tag` the removed tag. (optional)
   

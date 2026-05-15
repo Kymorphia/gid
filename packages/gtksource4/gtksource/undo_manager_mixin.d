@@ -97,7 +97,7 @@ template UndoManagerT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.undo_manager.UndoManager undoManager))
+          `void callback(gtksource.undo_manager.UndoManager undoManager)`
   
           `undoManager` the instance the signal is connected to (optional)
   
@@ -134,7 +134,7 @@ template UndoManagerT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtksource.undo_manager.UndoManager undoManager))
+          `void callback(gtksource.undo_manager.UndoManager undoManager)`
   
           `undoManager` the instance the signal is connected to (optional)
   

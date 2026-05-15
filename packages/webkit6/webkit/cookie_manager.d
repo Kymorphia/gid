@@ -382,7 +382,7 @@ class CookieManager : gobject.object.ObjectWrap
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(webkit.cookie_manager.CookieManager cookieManager))
+          `void callback(webkit.cookie_manager.CookieManager cookieManager)`
   
           `cookieManager` the instance the signal is connected to (optional)
   

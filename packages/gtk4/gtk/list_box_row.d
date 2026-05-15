@@ -290,7 +290,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.list_box_row.ListBoxRow listBoxRow))
+          `void callback(gtk.list_box_row.ListBoxRow listBoxRow)`
   
           `listBoxRow` the instance the signal is connected to (optional)
   

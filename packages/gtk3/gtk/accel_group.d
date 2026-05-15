@@ -299,7 +299,7 @@ class AccelGroup : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gobject.object.ObjectWrap acceleratable, uint keyval, gdk.types.ModifierType modifier, gtk.accel_group.AccelGroup accelGroup))
+          `bool callback(gobject.object.ObjectWrap acceleratable, uint keyval, gdk.types.ModifierType modifier, gtk.accel_group.AccelGroup accelGroup)`
   
           `acceleratable` the object on which the accelerator was activated (optional)
   
@@ -363,7 +363,7 @@ class AccelGroup : gobject.object.ObjectWrap
         detail = Signal detail or null (default)
         callback = signal callback delegate or function to connect
   
-          $(D void callback(uint keyval, gdk.types.ModifierType modifier, gobject.closure.Closure accelClosure, gtk.accel_group.AccelGroup accelGroup))
+          `void callback(uint keyval, gdk.types.ModifierType modifier, gobject.closure.Closure accelClosure, gtk.accel_group.AccelGroup accelGroup)`
   
           `keyval` the accelerator keyval (optional)
   

@@ -46,15 +46,13 @@ import gtk.widget;
     
     ![](tree-view-coordinates.png)
     
-    $(LIST
-      * Widget coordinates: Coordinates relative to the widget (usually `widget->window`).
-      
-      * Bin window coordinates: Coordinates relative to the window that GtkTreeView renders to.
-      
-      * Tree coordinates: Coordinates relative to the entire scrollable area of GtkTreeView. These
-        coordinates start at (0, 0) for row 0 of the tree.
-    )
-      
+    - Widget coordinates: Coordinates relative to the widget (usually `widget->window`).
+    
+    - Bin window coordinates: Coordinates relative to the window that GtkTreeView renders to.
+    
+    - Tree coordinates: Coordinates relative to the entire scrollable area of GtkTreeView. These
+      coordinates start at (0, 0) for row 0 of the tree.
+    
     Several functions are available for converting between the different
     coordinate systems.  The most common translations are between widget and bin
     window coordinates and between bin window and tree coordinates. For the
@@ -2058,7 +2056,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_view.TreeView treeView))
+          `void callback(gtk.tree_view.TreeView treeView)`
   
           `treeView` the instance the signal is connected to (optional)
   
@@ -2095,7 +2093,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_view.TreeView treeView))
+          `void callback(gtk.tree_view.TreeView treeView)`
   
           `treeView` the instance the signal is connected to (optional)
   
@@ -2132,7 +2130,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool object, bool p0, bool p1, gtk.tree_view.TreeView treeView))
+          `bool callback(bool object, bool p0, bool p1, gtk.tree_view.TreeView treeView)`
   
           `object`  (optional)
   
@@ -2198,7 +2196,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.types.MovementStep step, int direction, bool extend, bool modify, gtk.tree_view.TreeView treeView))
+          `bool callback(gtk.types.MovementStep step, int direction, bool extend, bool modify, gtk.tree_view.TreeView treeView)`
   
           `step` the granularity of the move, as a [gtk.types.MovementStep].
                 [gtk.types.MovementStep.LogicalPositions], [gtk.types.MovementStep.VisualPositions],
@@ -2281,7 +2279,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, gtk.tree_view.TreeView treeView))
+          `void callback(gtk.tree_path.TreePath path, gtk.tree_view_column.TreeViewColumn column, gtk.tree_view.TreeView treeView)`
   
           `path` the [gtk.tree_path.TreePath] for the activated row (optional)
   
@@ -2330,7 +2328,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView))
+          `void callback(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView)`
   
           `iter` the tree iter of the collapsed row (optional)
   
@@ -2379,7 +2377,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView))
+          `void callback(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView)`
   
           `iter` the tree iter of the expanded row (optional)
   
@@ -2428,7 +2426,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.tree_view.TreeView treeView))
+          `bool callback(gtk.tree_view.TreeView treeView)`
   
           `treeView` the instance the signal is connected to (optional)
   
@@ -2468,7 +2466,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.tree_view.TreeView treeView))
+          `bool callback(gtk.tree_view.TreeView treeView)`
   
           `treeView` the instance the signal is connected to (optional)
   
@@ -2508,7 +2506,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(bool object, gtk.tree_view.TreeView treeView))
+          `bool callback(bool object, gtk.tree_view.TreeView treeView)`
   
           `object`  (optional)
   
@@ -2554,7 +2552,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.tree_view.TreeView treeView))
+          `bool callback(gtk.tree_view.TreeView treeView)`
   
           `treeView` the instance the signal is connected to (optional)
   
@@ -2595,7 +2593,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView))
+          `bool callback(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView)`
   
           `iter` the tree iter of the row to collapse (optional)
   
@@ -2648,7 +2646,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView))
+          `bool callback(gtk.tree_iter.TreeIter iter, gtk.tree_path.TreePath path, gtk.tree_view.TreeView treeView)`
   
           `iter` the tree iter of the row to expand (optional)
   
@@ -2700,7 +2698,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.tree_view.TreeView treeView))
+          `bool callback(gtk.tree_view.TreeView treeView)`
   
           `treeView` the instance the signal is connected to (optional)
   
@@ -2740,7 +2738,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(gtk.tree_view.TreeView treeView))
+          `bool callback(gtk.tree_view.TreeView treeView)`
   
           `treeView` the instance the signal is connected to (optional)
   

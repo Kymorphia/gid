@@ -873,7 +873,7 @@ class AboutDialog : gtk.dialog.Dialog
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D bool callback(string uri, gtk.about_dialog.AboutDialog aboutDialog))
+          `bool callback(string uri, gtk.about_dialog.AboutDialog aboutDialog)`
   
           `uri` the URI that is activated (optional)
   

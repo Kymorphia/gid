@@ -148,7 +148,7 @@ template DocumentT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(string arg1, string arg2, atk.document.Document document))
+          `void callback(string arg1, string arg2, atk.document.Document document)`
   
           `arg1` the name of the attribute being modified, or null if not
                      available. (optional)
@@ -206,7 +206,7 @@ template DocumentT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.document.Document document))
+          `void callback(atk.document.Document document)`
   
           `document` the instance the signal is connected to (optional)
   
@@ -248,7 +248,7 @@ template DocumentT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.document.Document document))
+          `void callback(atk.document.Document document)`
   
           `document` the instance the signal is connected to (optional)
   
@@ -287,7 +287,7 @@ template DocumentT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(int pageNumber, atk.document.Document document))
+          `void callback(int pageNumber, atk.document.Document document)`
   
           `pageNumber` the new page number. If this value is unknown
             or not applicable, -1 should be provided. (optional)
@@ -335,7 +335,7 @@ template DocumentT()
       Params:
         callback = signal callback delegate or function to connect
   
-          $(D void callback(atk.document.Document document))
+          `void callback(atk.document.Document document)`
   
           `document` the instance the signal is connected to (optional)
   
