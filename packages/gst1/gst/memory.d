@@ -1,6 +1,7 @@
 /// Module for [Memory] class
 module gst.memory;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

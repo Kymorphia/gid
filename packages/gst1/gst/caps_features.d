@@ -1,6 +1,7 @@
 /// Module for [CapsFeatures] class
 module gst.caps_features;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

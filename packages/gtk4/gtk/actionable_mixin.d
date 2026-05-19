@@ -1,6 +1,7 @@
 /// Module for [Actionable] interface mixin
 module gtk.actionable_mixin;
 
+public import gid.basictypes;
 public import gtk.actionable_iface_proxy;
 public import gid.gid;
 public import glib.variant;
@@ -14,8 +15,8 @@ public import gtk.types;
     The [gtk.actionable.Actionable] interface provides a convenient way of associating
     widgets with actions.
     
-    It primarily consists of two properties: `property@Gtk.Actionable:action-name`
-    and `property@Gtk.Actionable:action-target`. There are also some convenience
+    It primarily consists of two properties: [gtk.actionable.Actionable.actionName]
+    and [gtk.actionable.Actionable.actionTarget]. There are also some convenience
     APIs for setting these properties.
     
     The action will be looked up in action groups that are found among
@@ -87,7 +88,7 @@ template ActionableT()
       located) within the hierarchy of a [gtk.application_window.ApplicationWindow].
       
       Names are of the form “win.save” or “app.quit” for actions on the
-      containing `classApplicationWindow` or its associated `classApplication`,
+      containing [gtk.application_window.ApplicationWindow] or its associated [gtk.application.Application],
       respectively. This is the same form used for actions in the [gio.menu.Menu]
       associated with the window.
   

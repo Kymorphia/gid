@@ -1,6 +1,7 @@
 /// Module for [Popover] class
 module gtk.popover;
 
+public import gid.basictypes;
 import gdk.rectangle;
 import gid.gid;
 import gobject.dclosure;
@@ -415,7 +416,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
       Pops popover down.
       
       This may have the side-effect of closing a parent popover
-      as well. See `propertyGtk.Popover:cascade-popdown`.
+      as well. See [gtk.popover.Popover.cascadePopdown].
   */
   void popdown()
   {

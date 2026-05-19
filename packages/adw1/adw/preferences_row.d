@@ -1,6 +1,7 @@
 /// Module for [PreferencesRow] class
 module adw.preferences_row;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -19,11 +20,11 @@ import gtk.list_box_row;
 /**
     A [gtk.list_box_row.ListBoxRow] used to present preferences.
     
-    The [adw.preferences_row.PreferencesRow] widget has a title that `class@PreferencesDialog`
+    The [adw.preferences_row.PreferencesRow] widget has a title that [adw.preferences_dialog.PreferencesDialog]
     will use to let the user look for a preference. It doesn't present the title
     in any way and lets you present the preference as you please.
     
-    `class@ActionRow` and its derivatives are convenient to use as preference
+    [adw.action_row.ActionRow] and its derivatives are convenient to use as preference
     rows as they take care of presenting the preference's title while letting you
     compose the inputs of the preference around it.
 */
@@ -69,7 +70,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Returns: The title of the preference represented by this row.
         
         The title is interpreted as Pango markup unless
-        `property@PreferencesRow:use-markup` is set to `FALSE`.
+        [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
   @property string title()
   {
@@ -82,7 +83,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
         propval = The title of the preference represented by this row.
           
           The title is interpreted as Pango markup unless
-          `property@PreferencesRow:use-markup` is set to `FALSE`.
+          [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
   @property void title(string propval)
   {
@@ -218,7 +219,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
       Sets the title of the preference represented by self.
       
       The title is interpreted as Pango markup unless
-      `propertyPreferencesRow:use-markup` is set to `FALSE`.
+      [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   
       Params:
         title = the title
@@ -280,7 +281,7 @@ class PreferencesRowGidBuilderImpl(T) : gtk.list_box_row.ListBoxRowGidBuilderImp
         propval = The title of the preference represented by this row.
           
           The title is interpreted as Pango markup unless
-          `property@PreferencesRow:use-markup` is set to `FALSE`.
+          [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
       Returns: Builder instance for fluent chaining
   */
   T title(string propval)

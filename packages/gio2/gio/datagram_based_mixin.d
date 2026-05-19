@@ -1,6 +1,7 @@
 /// Module for [DatagramBased] interface mixin
 module gio.datagram_based_mixin;
 
+public import gid.basictypes;
 public import gio.datagram_based_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

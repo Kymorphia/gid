@@ -1,6 +1,7 @@
 /// Module for [LayeredSettings] class
 module panel.layered_settings;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.settings;
 import gio.settings_schema_key;

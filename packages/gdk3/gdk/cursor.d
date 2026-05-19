@@ -1,6 +1,7 @@
 /// Module for [Cursor] class
 module gdk.cursor;
 
+public import gid.basictypes;
 import cairo.surface;
 import gdk.c.functions;
 import gdk.c.types;

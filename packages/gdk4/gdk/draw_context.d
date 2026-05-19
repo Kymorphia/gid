@@ -1,6 +1,7 @@
 /// Module for [DrawContext] class
 module gdk.draw_context;
 
+public import gid.basictypes;
 import cairo.region;
 import gdk.c.functions;
 import gdk.c.types;

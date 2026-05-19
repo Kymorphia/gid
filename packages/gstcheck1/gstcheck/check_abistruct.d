@@ -1,6 +1,7 @@
 /// Module for [CheckABIStruct] class
 module gstcheck.check_abistruct;
 
+public import gid.basictypes;
 import gid.gid;
 import gstcheck.c.functions;
 import gstcheck.c.types;

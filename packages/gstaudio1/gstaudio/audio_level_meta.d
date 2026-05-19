@@ -1,6 +1,7 @@
 /// Module for [AudioLevelMeta] class
 module gstaudio.audio_level_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

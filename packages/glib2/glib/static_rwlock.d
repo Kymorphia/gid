@@ -1,6 +1,7 @@
 /// Module for [StaticRWLock] class
 module glib.static_rwlock;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

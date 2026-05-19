@@ -1,6 +1,7 @@
 /// Module for [PollableOutputStream] interface
 module gio.pollable_output_stream;
 
+public import gid.basictypes;
 public import gio.pollable_output_stream_iface_proxy;
 import gid.gid;
 import gio.c.functions;

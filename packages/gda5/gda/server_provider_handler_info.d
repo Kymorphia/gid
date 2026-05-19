@@ -1,6 +1,7 @@
 /// Module for [ServerProviderHandlerInfo] class
 module gda.server_provider_handler_info;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

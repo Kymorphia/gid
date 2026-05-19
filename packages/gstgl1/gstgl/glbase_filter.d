@@ -1,6 +1,7 @@
 /// Module for [GLBaseFilter] class
 module gstgl.glbase_filter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

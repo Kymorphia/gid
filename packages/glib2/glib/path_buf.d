@@ -1,6 +1,7 @@
 /// Module for [PathBuf] struct
 module glib.path_buf;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

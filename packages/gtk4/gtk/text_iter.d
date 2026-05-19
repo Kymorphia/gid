@@ -1,6 +1,7 @@
 /// Module for [TextIter] class
 module gtk.text_iter;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gid.gid;
 import gobject.boxed;

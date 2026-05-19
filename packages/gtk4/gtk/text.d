@@ -1,6 +1,7 @@
 /// Module for [Text] class
 module gtk.text;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
@@ -240,7 +241,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
         See [gtk.immulticontext.IMMulticontext].
         
         Setting this to a non-null value overrides the system-wide
-        IM module setting. See the `property@Gtk.Settings:gtk-im-module`
+        IM module setting. See the [gtk.settings.Settings.gtkImModule]
         property.
   */
   @property string imModule()
@@ -256,7 +257,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
           See [gtk.immulticontext.IMMulticontext].
           
           Setting this to a non-null value overrides the system-wide
-          IM module setting. See the `property@Gtk.Settings:gtk-im-module`
+          IM module setting. See the [gtk.settings.Settings.gtkImModule]
           property.
   */
   @property void imModule(string propval)
@@ -992,7 +993,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
       in the current font, but it can be changed with
       [gtk.text.Text.setInvisibleChar].
       
-      Note that you probably want to set `propertyGtk.Text:input-purpose`
+      Note that you probably want to set [gtk.text.Text.inputPurpose]
       to [gtk.types.InputPurpose.Password] or [gtk.types.InputPurpose.Pin] to
       inform input methods about the purpose of this self,
       in addition to setting visibility to false.
@@ -1616,7 +1617,7 @@ class TextGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible_
           See [gtk.immulticontext.IMMulticontext].
           
           Setting this to a non-null value overrides the system-wide
-          IM module setting. See the `property@Gtk.Settings:gtk-im-module`
+          IM module setting. See the [gtk.settings.Settings.gtkImModule]
           property.
       Returns: Builder instance for fluent chaining
   */

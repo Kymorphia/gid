@@ -1,6 +1,7 @@
 /// Module for [HSTSEnforcer] class
 module soup.hstsenforcer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -13,10 +14,10 @@ import soup.session_feature_mixin;
 import soup.types;
 
 /**
-    Automatic HTTP Strict Transport Security enforcing for `class@Session`.
+    Automatic HTTP Strict Transport Security enforcing for [soup.session.Session].
     
     A #SoupHSTSEnforcer stores HSTS policies and enforces them when
-    required. #SoupHSTSEnforcer implements `iface@SessionFeature`, so you
+    required. #SoupHSTSEnforcer implements [soup.session_feature.SessionFeature], so you
     can add an HSTS enforcer to a session with
     [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
     
@@ -25,15 +26,15 @@ import soup.types;
     valid values. #SoupHSTSEnforcer will forget those destinations
     upon expiry or when the server requests it.
     
-    When the `class@Session` the #SoupHSTSEnforcer is attached to queues or
+    When the [soup.session.Session] the #SoupHSTSEnforcer is attached to queues or
     restarts a message, the #SoupHSTSEnforcer will rewrite the URI to HTTPS if
     the destination is a known HSTS host and is contacted over an insecure
     transport protocol (HTTP). Users of #SoupHSTSEnforcer are advised to listen
-    to changes in the `property@Message:uri` property in order to be aware of
+    to changes in the [soup.message.Message.uri] property in order to be aware of
     changes in the message URI.
     
     Note that #SoupHSTSEnforcer does not support any form of long-term
-    HSTS policy persistence. See `class@HSTSEnforcerDB` for a persistent
+    HSTS policy persistence. See [soup.hstsenforcer_db.HSTSEnforcerDB] for a persistent
     enforcer.
 */
 class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
@@ -79,7 +80,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       Creates a new #SoupHSTSEnforcer.
       
       The base #SoupHSTSEnforcer class does not support persistent storage of HSTS
-      policies, see `classHSTSEnforcerDB` for that.
+      policies, see [soup.hstsenforcer_db.HSTSEnforcerDB] for that.
       Returns: a new #SoupHSTSEnforcer
   */
   this()
@@ -158,7 +159,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       the new policy will be inserted. If the policy is a session policy, that is,
       one created with [soup.hstspolicy.HSTSPolicy.newSessionPolicy], the policy will not
       expire and will be enforced during the lifetime of hsts_enforcer's
-      `classSession`.
+      [soup.session.Session].
   
       Params:
         policy = the policy of the HSTS host
@@ -172,7 +173,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
       Sets a session policy for domain.
       
       A session policy is a policy that is permanent to the lifetime of
-      hsts_enforcer's `classSession` and doesn't expire.
+      hsts_enforcer's [soup.session.Session] and doesn't expire.
   
       Params:
         domain = policy domain or hostname

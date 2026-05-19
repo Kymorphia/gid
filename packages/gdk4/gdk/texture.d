@@ -1,6 +1,7 @@
 /// Module for [Texture] class
 module gdk.texture;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.paintable;

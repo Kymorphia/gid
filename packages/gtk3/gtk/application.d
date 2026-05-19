@@ -1,6 +1,7 @@
 /// Module for [Application] class
 module gtk.application;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;

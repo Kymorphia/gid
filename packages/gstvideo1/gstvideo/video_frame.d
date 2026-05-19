@@ -1,6 +1,7 @@
 /// Module for [VideoFrame] class
 module gstvideo.video_frame;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gst.types;

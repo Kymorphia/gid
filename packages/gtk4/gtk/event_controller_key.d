@@ -1,6 +1,7 @@
 /// Module for [EventControllerKey] class
 module gtk.event_controller_key;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
@@ -69,8 +70,8 @@ class EventControllerKey : gtk.event_controller.EventController
       Forwards the current event of this controller to a widget.
       
       This function can only be used in handlers for the
-      `signalGtk.EventControllerKey::key-pressed`,
-      `signalGtk.EventControllerKey::key-released`
+      [gtk.event_controller_key.EventControllerKey.keyPressed],
+      [gtk.event_controller_key.EventControllerKey.keyReleased]
       or [gtk.event_controller_key.EventControllerKey.modifiers] signals.
   
       Params:

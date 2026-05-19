@@ -1,6 +1,7 @@
 /// Module for [BaseParseFrame] class
 module gstbase.base_parse_frame;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.buffer;

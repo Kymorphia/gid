@@ -1,6 +1,7 @@
 /// Module for [Initable] interface
 module gio.initable;
 
+public import gid.basictypes;
 public import gio.initable_iface_proxy;
 import gid.gid;
 import gio.c.functions;

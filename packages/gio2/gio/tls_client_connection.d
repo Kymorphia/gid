@@ -1,6 +1,7 @@
 /// Module for [TlsClientConnection] interface
 module gio.tls_client_connection;
 
+public import gid.basictypes;
 public import gio.tls_client_connection_iface_proxy;
 import gid.gid;
 import gio.c.functions;

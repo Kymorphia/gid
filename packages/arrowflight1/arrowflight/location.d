@@ -1,6 +1,7 @@
 /// Module for [Location] class
 module arrowflight.location;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

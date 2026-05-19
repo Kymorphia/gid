@@ -1,6 +1,7 @@
 /// Module for [FloatScalar] class
 module arrow.float_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;

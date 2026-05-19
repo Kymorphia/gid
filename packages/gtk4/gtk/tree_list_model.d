@@ -1,6 +1,7 @@
 /// Module for [TreeListModel] class
 module gtk.tree_list_model;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;

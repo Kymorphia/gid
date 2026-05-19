@@ -1,6 +1,7 @@
 /// Module for [SqlSelectFrom] class
 module gda.sql_select_from;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

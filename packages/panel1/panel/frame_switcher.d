@@ -1,6 +1,7 @@
 /// Module for [FrameSwitcher] class
 module panel.frame_switcher;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;

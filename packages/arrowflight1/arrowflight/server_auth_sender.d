@@ -1,6 +1,7 @@
 /// Module for [ServerAuthSender] class
 module arrowflight.server_auth_sender;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

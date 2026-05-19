@@ -1,6 +1,7 @@
 /// Module for [MetadataReader] class
 module arrowflight.metadata_reader;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrowflight.c.functions;
 import arrowflight.c.types;

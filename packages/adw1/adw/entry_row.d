@@ -1,6 +1,7 @@
 /// Module for [EntryRow] class
 module adw.entry_row;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.preferences_row;
@@ -34,7 +35,7 @@ import pango.attr_list;
     indicating that it's editable and can receive additional widgets before or
     after the editable part.
     
-    If `property@EntryRow:show-apply-button` is set to `TRUE`, [adw.entry_row.EntryRow] can
+    If [adw.entry_row.EntryRow.showApplyButton] is set to `TRUE`, [adw.entry_row.EntryRow] can
     show an apply button when editing its contents. This can be useful if
     changing its contents can result in an expensive operation, such as network
     activity.
@@ -42,7 +43,7 @@ import pango.attr_list;
     [adw.entry_row.EntryRow] provides only minimal API and should be used with the
     [gtk.editable.Editable] API.
     
-    See also `class@PasswordEntryRow`.
+    See also [adw.password_entry_row.PasswordEntryRow].
     
     ## AdwEntryRow as GtkBuildable
     
@@ -168,7 +169,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         
         Input hints allow input methods to fine-tune their behavior.
         
-        See also: `property@Adw.EntryRow:input-purpose`
+        See also: [adw.entry_row.EntryRow.inputPurpose]
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -182,7 +183,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
           
           Input hints allow input methods to fine-tune their behavior.
           
-          See also: `property@Adw.EntryRow:input-purpose`
+          See also: [adw.entry_row.EntryRow.inputPurpose]
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -218,7 +219,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
         
         When set to `TRUE`, typing text in the entry will reveal an apply button.
         Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-        emit the `signal@EntryRow::apply` signal.
+        emit the [adw.entry_row.EntryRow.apply] signal.
         
         This is useful if changing the entry contents can trigger an expensive
         operation, e.g. network activity, to avoid triggering it after typing every
@@ -236,7 +237,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
           
           When set to `TRUE`, typing text in the entry will reveal an apply button.
           Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-          emit the `signal@EntryRow::apply` signal.
+          emit the [adw.entry_row.EntryRow.apply] signal.
           
           This is useful if changing the entry contents can trigger an expensive
           operation, e.g. network activity, to avoid triggering it after typing every
@@ -466,7 +467,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
       
       When set to `TRUE`, typing text in the entry will reveal an apply button.
       Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-      emit the `signalEntryRow::apply` signal.
+      emit the [adw.entry_row.EntryRow.apply] signal.
       
       This is useful if changing the entry contents can trigger an expensive
       operation, e.g. network activity, to avoid triggering it after typing every
@@ -485,7 +486,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   
       Emitted when the apply button is pressed.
         
-        See `propertyEntryRow:show-apply-button`.
+        See [adw.entry_row.EntryRow.showApplyButton].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -608,7 +609,7 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
           
           Input hints allow input methods to fine-tune their behavior.
           
-          See also: `property@Adw.EntryRow:input-purpose`
+          See also: [adw.entry_row.EntryRow.inputPurpose]
       Returns: Builder instance for fluent chaining
   */
   T inputHints(gtk.types.InputHints propval)
@@ -636,7 +637,7 @@ class EntryRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderIm
           
           When set to `TRUE`, typing text in the entry will reveal an apply button.
           Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-          emit the `signal@EntryRow::apply` signal.
+          emit the [adw.entry_row.EntryRow.apply] signal.
           
           This is useful if changing the entry contents can trigger an expensive
           operation, e.g. network activity, to avoid triggering it after typing every

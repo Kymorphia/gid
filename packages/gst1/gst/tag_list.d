@@ -1,6 +1,7 @@
 /// Module for [TagList] class
 module gst.tag_list;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.date;
 import gobject.boxed;

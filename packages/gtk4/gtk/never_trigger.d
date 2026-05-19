@@ -1,6 +1,7 @@
 /// Module for [NeverTrigger] class
 module gtk.never_trigger;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

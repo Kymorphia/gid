@@ -1,6 +1,7 @@
 /// Module for [Message] class
 module gmime.message;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.date_time;
 import glib.error;

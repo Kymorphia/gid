@@ -1,6 +1,7 @@
 /// Module for [GhostPad] class
 module gst.ghost_pad;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

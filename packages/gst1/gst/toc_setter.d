@@ -1,6 +1,7 @@
 /// Module for [TocSetter] interface
 module gst.toc_setter;
 
+public import gid.basictypes;
 public import gst.toc_setter_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [NotificationPermissionRequest] class
 module webkit.notification_permission_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

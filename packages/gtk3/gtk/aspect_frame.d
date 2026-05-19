@@ -1,6 +1,7 @@
 /// Module for [AspectFrame] class
 module gtk.aspect_frame;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

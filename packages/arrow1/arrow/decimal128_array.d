@@ -1,6 +1,7 @@
 /// Module for [Decimal128Array] class
 module arrow.decimal128_array;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.decimal128;

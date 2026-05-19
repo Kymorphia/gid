@@ -1,6 +1,7 @@
 /// Module for [URISchemeRequest] class
 module webkit.urischeme_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.input_stream;
 import glib.error;

@@ -1,6 +1,7 @@
 /// Module for [TlsBackend] interface mixin
 module gio.tls_backend_mixin;
 
+public import gid.basictypes;
 public import gio.tls_backend_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

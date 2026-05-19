@@ -1,6 +1,7 @@
 /// Module for [SliceListModel] class
 module gtk.slice_list_model;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;

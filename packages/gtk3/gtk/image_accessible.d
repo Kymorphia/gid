@@ -1,6 +1,7 @@
 /// Module for [ImageAccessible] class
 module gtk.image_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.image;

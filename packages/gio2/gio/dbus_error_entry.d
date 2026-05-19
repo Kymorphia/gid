@@ -1,6 +1,7 @@
 /// Module for [DBusErrorEntry] class
 module gio.dbus_error_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

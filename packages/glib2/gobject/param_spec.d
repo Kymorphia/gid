@@ -1,6 +1,7 @@
 /// Module for [ParamSpec] class
 module gobject.param_spec;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.c.functions;

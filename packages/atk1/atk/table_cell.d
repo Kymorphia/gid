@@ -1,6 +1,7 @@
 /// Module for [TableCell] interface
 module atk.table_cell;
 
+public import gid.basictypes;
 public import atk.table_cell_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

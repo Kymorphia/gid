@@ -1,6 +1,7 @@
 /// Module for [Editable] interface mixin
 module gtk.editable_mixin;
 
+public import gid.basictypes;
 public import gtk.editable_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
@@ -22,7 +23,7 @@ public import gtk.types;
     of a widget.
     
     As an example of the latter usage, by connecting the following handler to
-    `signal@Gtk.Editable::insert-text`, an application can convert all entry
+    [gtk.editable.Editable.insertText], an application can convert all entry
     into a widget into uppercase.
     
     ## Forcing entry to uppercase.
@@ -134,12 +135,12 @@ public import gtk.types;
     ```
     
     It is important to note that if you create a [gtk.editable.Editable] that uses
-    a delegate, the low level `signal@Gtk.Editable::insert-text` and
-    `signal@Gtk.Editable::delete-text` signals will be propagated from the
+    a delegate, the low level [gtk.editable.Editable.insertText] and
+    [gtk.editable.Editable.deleteText] signals will be propagated from the
     "wrapper" editable to the delegate, but they will not be propagated from
     the delegate to the "wrapper" editable, as they would cause an infinite
-    recursion. If you wish to connect to the `signal@Gtk.Editable::insert-text`
-    and `signal@Gtk.Editable::delete-text` signals, you will need to connect
+    recursion. If you wish to connect to the [gtk.editable.Editable.insertText]
+    and [gtk.editable.Editable.deleteText] signals, you will need to connect
     to them on the delegate obtained via [gtk.editable.Editable.getDelegate].
 */
 template EditableT()

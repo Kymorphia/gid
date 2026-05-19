@@ -1,6 +1,7 @@
 /// Module for [DragContext] class
 module gdk.drag_context;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.device;

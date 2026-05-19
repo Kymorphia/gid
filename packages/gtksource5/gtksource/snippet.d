@@ -1,6 +1,7 @@
 /// Module for [Snippet] class
 module gtksource.snippet;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;
@@ -16,11 +17,11 @@ import gtksource.types;
     Quick insertion code snippets.
     
     The [gtksource.snippet.Snippet] represents a series of chunks that can quickly be
-    inserted into the `class@View`.
+    inserted into the [gtksource.view.View].
     
     Snippets are defined in XML files which are loaded by the
-    `class@SnippetManager`. Alternatively, applications can create snippets
-    on demand and insert them into the `class@View` using
+    [gtksource.snippet_manager.SnippetManager]. Alternatively, applications can create snippets
+    on demand and insert them into the [gtksource.view.View] using
     [gtksource.view.View.pushSnippet].
     
     Snippet chunks can reference other snippet chunks as well as post-process
@@ -228,7 +229,7 @@ class Snippet : gobject.object.ObjectWrap
       Gets the language-id used for the source snippet.
       
       The language identifier should be one that matches a
-      source language `propertyLanguage:id` property.
+      source language [gtksource.language.Language.id] property.
       Returns: the language identifier
   */
   string getLanguageId()
@@ -309,7 +310,7 @@ class Snippet : gobject.object.ObjectWrap
   /**
       Sets the language identifier for the snippet.
       
-      This should match the `propertyLanguage:id` identifier.
+      This should match the [gtksource.language.Language.id] identifier.
   
       Params:
         languageId = the language identifier for the snippet

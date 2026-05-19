@@ -1,6 +1,7 @@
 /// Module for [StreamMem] class
 module gmime.stream_mem;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

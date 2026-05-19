@@ -1,6 +1,7 @@
 /// Module for [Date] struct
 module glib.date;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

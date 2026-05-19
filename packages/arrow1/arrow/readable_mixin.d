@@ -1,6 +1,7 @@
 /// Module for [Readable] interface mixin
 module arrow.readable_mixin;
 
+public import gid.basictypes;
 public import arrow.readable_iface_proxy;
 public import arrow.buffer;
 public import arrow.c.functions;

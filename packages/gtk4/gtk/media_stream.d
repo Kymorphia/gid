@@ -1,6 +1,7 @@
 /// Module for [MediaStream] class
 module gtk.media_stream;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gdk.surface;

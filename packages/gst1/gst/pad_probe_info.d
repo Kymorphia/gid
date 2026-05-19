@@ -1,6 +1,7 @@
 /// Module for [PadProbeInfo] class
 module gst.pad_probe_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gst.buffer_list;

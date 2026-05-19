@@ -1,6 +1,7 @@
 /// Module for [Simd4X4F] class
 module graphene.simd4_x4_f;
 
+public import gid.basictypes;
 import gid.gid;
 import graphene.c.functions;
 import graphene.c.types;

@@ -1,6 +1,7 @@
 /// Module for [VulkanRenderer] class
 module gsk.vulkan_renderer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gsk.c.functions;

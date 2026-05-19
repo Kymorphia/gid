@@ -1,6 +1,7 @@
 /// Module for [WeakValue] class
 module javascriptcore.weak_value;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [SearchBar] class
 module gtk.search_bar;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.event;

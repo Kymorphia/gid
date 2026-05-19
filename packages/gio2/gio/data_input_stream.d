@@ -1,6 +1,7 @@
 /// Module for [DataInputStream] class
 module gio.data_input_stream;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.buffered_input_stream;

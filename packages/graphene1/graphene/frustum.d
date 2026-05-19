@@ -1,6 +1,7 @@
 /// Module for [Frustum] class
 module graphene.frustum;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import graphene.box;

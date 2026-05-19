@@ -1,6 +1,7 @@
 /// Module for [GutterLines] class
 module gtksource.gutter_lines;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.gid_builder;
@@ -18,7 +19,7 @@ import gtksource.types;
     The [gtksource.gutter_lines.GutterLines] object is used to collect information about
     visible lines.
     
-    Use this from your `signal@GutterRenderer::query-data` to collect the
+    Use this from your [gtksource.gutter_renderer.GutterRenderer.queryData] to collect the
     necessary information on visible lines. Doing so reduces the number of
     passes through the text btree allowing GtkSourceView to reach more
     frames-per-second while performing kinetic scrolling.

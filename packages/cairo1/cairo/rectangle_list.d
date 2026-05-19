@@ -1,6 +1,7 @@
 /// Module for [RectangleList] class
 module cairo.rectangle_list;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;

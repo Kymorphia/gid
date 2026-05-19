@@ -1,6 +1,7 @@
 /// Module for [HSTSPolicy] class
 module soup.hstspolicy;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.date_time;
 import gobject.boxed;
@@ -132,7 +133,7 @@ class HSTSPolicy : gobject.boxed.Boxed
       Creates a new session #SoupHSTSPolicy with the given attributes.
       
       A session policy is a policy that is valid during the lifetime of
-      the `classHSTSEnforcer` it is added to. Contrary to regular policies,
+      the [soup.hstsenforcer.HSTSEnforcer] it is added to. Contrary to regular policies,
       it has no expiration date and is not stored in persistent
       enforcers. These policies are useful for user-agent to load their
       own or user-defined rules.

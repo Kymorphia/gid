@@ -1,6 +1,7 @@
 /// Module for [Toplevel] interface
 module gdk.toplevel;
 
+public import gid.basictypes;
 public import gdk.toplevel_iface_proxy;
 import gdk.c.functions;
 import gdk.c.types;
@@ -225,7 +226,7 @@ interface Toplevel
       or deny the request or even choose to ignore the request entirely.
       
       The caller can be notified whenever the request is granted or revoked
-      by listening to the `propertyGdk.Toplevel:shortcuts-inhibited` property.
+      by listening to the [gdk.toplevel.Toplevel.shortcutsInhibited] property.
   
       Params:
         event = the [gdk.event.Event] that is triggering the inhibit
@@ -255,7 +256,7 @@ interface Toplevel
       If the toplevel was previously not showing, it will be showed,
       otherwise it will change layout according to layout.
       
-      GDK may emit the `signalGdk.Toplevel::compute-size` signal to let
+      GDK may emit the [gdk.toplevel.Toplevel.computeSize] signal to let
       the user of this toplevel compute the preferred size of the toplevel
       surface.
       

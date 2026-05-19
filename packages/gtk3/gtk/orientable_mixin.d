@@ -1,6 +1,7 @@
 /// Module for [Orientable] interface mixin
 module gtk.orientable_mixin;
 
+public import gid.basictypes;
 public import gtk.orientable_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

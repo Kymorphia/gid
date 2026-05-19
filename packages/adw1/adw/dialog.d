@@ -1,6 +1,7 @@
 /// Module for [Dialog] class
 module adw.dialog;
 
+public import gid.basictypes;
 import adw.breakpoint;
 import adw.c.functions;
 import adw.c.types;
@@ -30,47 +31,47 @@ import gtk.widget;
     </picture>
     
     [adw.dialog.Dialog] is similar to a window, but is shown within another window. It
-    can be used with `class@Window` and `class@ApplicationWindow`, use
+    can be used with [adw.window.Window] and [adw.application_window.ApplicationWindow], use
     [adw.dialog.Dialog.present] to show it.
     
-    [adw.dialog.Dialog] is not resizable. Use the `property@Dialog:content-width` and
-    `property@Dialog:content-height` properties to set its size, or set
-    `property@Dialog:follows-content-size` to `TRUE` to make the dialog track the
+    [adw.dialog.Dialog] is not resizable. Use the [adw.dialog.Dialog.contentWidth] and
+    [adw.dialog.Dialog.contentHeight] properties to set its size, or set
+    [adw.dialog.Dialog.followsContentSize] to `TRUE` to make the dialog track the
     content's size as it changes. [adw.dialog.Dialog] can never be larger than its parent
     window.
     
     [adw.dialog.Dialog] can be presented as a centered floating window or a bottom sheet.
     By default it's automatic depending on the available size.
-    `property@Dialog:presentation-mode` can be used to change that.
+    [adw.dialog.Dialog.presentationMode] can be used to change that.
     
     [adw.dialog.Dialog] can be closed via [adw.dialog.Dialog.close].
     
     When presented as a bottom sheet, [adw.dialog.Dialog] can also be closed via swiping
     it down.
     
-    The `property@Dialog:can-close` can be used to prevent closing. In that case,
-    `signal@Dialog::close-attempt` gets emitted instead.
+    The [adw.dialog.Dialog.canClose] can be used to prevent closing. In that case,
+    [adw.dialog.Dialog.closeAttempt] gets emitted instead.
     
     Use [adw.dialog.Dialog.forceClose] to close the dialog even when `can-close` is set to
     `FALSE`.
     
     ## Header Bar Integration
     
-    When placed inside an [adw.dialog.Dialog], `class@HeaderBar` will display the dialog
+    When placed inside an [adw.dialog.Dialog], [adw.header_bar.HeaderBar] will display the dialog
     title instead of window title. It will also adjust the decoration layout to
     ensure it always has a close button and nothing else. Set
-    `property@HeaderBar:show-start-title-buttons` and
-    `property@HeaderBar:show-end-title-buttons` to `FALSE` to remove it if it's
+    [adw.header_bar.HeaderBar.showStartTitleButtons] and
+    [adw.header_bar.HeaderBar.showEndTitleButtons] to `FALSE` to remove it if it's
     unwanted.
     
     ## Breakpoints
     
-    [adw.dialog.Dialog] can be used with `class@Breakpoint` the same way as
-    `class@BreakpointBin`. Refer to that widget's documentation for details.
+    [adw.dialog.Dialog] can be used with [adw.breakpoint.Breakpoint] the same way as
+    [adw.breakpoint_bin.BreakpointBin]. Refer to that widget's documentation for details.
     
     Like [adw.breakpoint_bin.BreakpointBin], if breakpoints are used, [adw.dialog.Dialog] doesn't have a
-    minimum size, and `property@Gtk.Widget:width-request` and
-    `property@Gtk.Widget:height-request` properties must be set manually.
+    minimum size, and [gtk.widget.Widget.widthRequest] and
+    [gtk.widget.Widget.heightRequest] properties must be set manually.
 */
 class Dialog : gtk.widget.Widget
 {
@@ -114,7 +115,7 @@ class Dialog : gtk.widget.Widget
       Returns: Whether the dialog can be closed.
         
         If set to `FALSE`, the close button, shortcuts and
-        [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
+        [adw.dialog.Dialog.close] will result in [adw.dialog.Dialog.closeAttempt] being
         emitted instead, and bottom sheet close swipe will be disabled.
         [adw.dialog.Dialog.forceClose] still works.
   */
@@ -129,7 +130,7 @@ class Dialog : gtk.widget.Widget
         propval = Whether the dialog can be closed.
           
           If set to `FALSE`, the close button, shortcuts and
-          [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
+          [adw.dialog.Dialog.close] will result in [adw.dialog.Dialog.closeAttempt] being
           emitted instead, and bottom sheet close swipe will be disabled.
           [adw.dialog.Dialog.forceClose] still works.
   */
@@ -163,7 +164,7 @@ class Dialog : gtk.widget.Widget
         
         Set it to -1 to reset it to the content's natural height.
         
-        See also: `property@Gtk.Window:default-height`
+        See also: [gtk.window.Window.defaultHeight]
   */
   @property int contentHeight()
   {
@@ -177,7 +178,7 @@ class Dialog : gtk.widget.Widget
           
           Set it to -1 to reset it to the content's natural height.
           
-          See also: `property@Gtk.Window:default-height`
+          See also: [gtk.window.Window.defaultHeight]
   */
   @property void contentHeight(int propval)
   {
@@ -190,7 +191,7 @@ class Dialog : gtk.widget.Widget
         
         Set it to -1 to reset it to the content's natural width.
         
-        See also: `property@Gtk.Window:default-width`
+        See also: [gtk.window.Window.defaultWidth]
   */
   @property int contentWidth()
   {
@@ -204,7 +205,7 @@ class Dialog : gtk.widget.Widget
           
           Set it to -1 to reset it to the content's natural width.
           
-          See also: `property@Gtk.Window:default-width`
+          See also: [gtk.window.Window.defaultWidth]
   */
   @property void contentWidth(int propval)
   {
@@ -267,7 +268,7 @@ class Dialog : gtk.widget.Widget
       Returns: Whether to size content automatically.
         
         If set to `TRUE`, always use the content's natural size instead of
-        `property@Dialog:content-width` and `property@Dialog:content-height`. If
+        [adw.dialog.Dialog.contentWidth] and [adw.dialog.Dialog.contentHeight]. If
         the content resizes, the dialog will immediately resize as well.
         
         See also: [gtk.window.Window.resizable]
@@ -283,7 +284,7 @@ class Dialog : gtk.widget.Widget
         propval = Whether to size content automatically.
           
           If set to `TRUE`, always use the content's natural size instead of
-          `property@Dialog:content-width` and `property@Dialog:content-height`. If
+          [adw.dialog.Dialog.contentWidth] and [adw.dialog.Dialog.contentHeight]. If
           the content resizes, the dialog will immediately resize as well.
           
           See also: [gtk.window.Window.resizable]
@@ -376,8 +377,8 @@ class Dialog : gtk.widget.Widget
   /**
       Attempts to close self.
       
-      If the `propertyDialog:can-close` property is set to `FALSE`, the
-      `signalDialog::close-attempt` signal is emitted.
+      If the [adw.dialog.Dialog.canClose] property is set to `FALSE`, the
+      [adw.dialog.Dialog.closeAttempt] signal is emitted.
       
       See also: [adw.dialog.Dialog.forceClose].
       Returns: whether self was successfully closed
@@ -392,7 +393,7 @@ class Dialog : gtk.widget.Widget
   /**
       Closes self.
       
-      Unlike [adw.dialog.Dialog.close], it succeeds even if `propertyDialog:can-close`
+      Unlike [adw.dialog.Dialog.close], it succeeds even if [adw.dialog.Dialog.canClose]
       is set to `FALSE`.
   */
   void forceClose()
@@ -521,7 +522,7 @@ class Dialog : gtk.widget.Widget
       
       If self is already shown, raises it to the top instead.
       
-      If the window is an `classWindow` or `classApplicationWindow`, the dialog
+      If the window is an [adw.window.Window] or [adw.application_window.ApplicationWindow], the dialog
       will be shown within it. Otherwise, it will be a separate window.
   
       Params:
@@ -536,7 +537,7 @@ class Dialog : gtk.widget.Widget
       Sets whether self can be closed.
       
       If set to `FALSE`, the close button, shortcuts and
-      [adw.dialog.Dialog.close] will result in `signalDialog::close-attempt` being
+      [adw.dialog.Dialog.close] will result in [adw.dialog.Dialog.closeAttempt] being
       emitted instead, and bottom sheet close swipe will be disabled.
       [adw.dialog.Dialog.forceClose] still works.
   
@@ -564,7 +565,7 @@ class Dialog : gtk.widget.Widget
       
       Set it to -1 to reset it to the content's natural height.
       
-      See also: `propertyGtk.Window:default-height`
+      See also: [gtk.window.Window.defaultHeight]
   
       Params:
         contentHeight = the content height
@@ -579,7 +580,7 @@ class Dialog : gtk.widget.Widget
       
       Set it to -1 to reset it to the content's natural width.
       
-      See also: `propertyGtk.Window:default-width`
+      See also: [gtk.window.Window.defaultWidth]
   
       Params:
         contentWidth = the content width
@@ -624,7 +625,7 @@ class Dialog : gtk.widget.Widget
       Sets whether to size content of self automatically.
       
       If set to `TRUE`, always use the content's natural size instead of
-      `propertyDialog:content-width` and `propertyDialog:content-height`. If
+      [adw.dialog.Dialog.contentWidth] and [adw.dialog.Dialog.contentHeight]. If
       the content resizes, the dialog will immediately resize as well.
       
       See also: [gtk.window.Window.resizable]
@@ -674,7 +675,7 @@ class Dialog : gtk.widget.Widget
       Connect to `CloseAttempt` signal.
   
       Emitted when the close button or shortcut is used, or
-        [adw.dialog.Dialog.close] is called while `propertyDialog:can-close` is set to
+        [adw.dialog.Dialog.close] is called while [adw.dialog.Dialog.canClose] is set to
         `FALSE`.
   
       Params:
@@ -758,7 +759,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the dialog can be closed.
           
           If set to `FALSE`, the close button, shortcuts and
-          [adw.dialog.Dialog.close] will result in `signal@Dialog::close-attempt` being
+          [adw.dialog.Dialog.close] will result in [adw.dialog.Dialog.closeAttempt] being
           emitted instead, and bottom sheet close swipe will be disabled.
           [adw.dialog.Dialog.forceClose] still works.
       Returns: Builder instance for fluent chaining
@@ -786,7 +787,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           Set it to -1 to reset it to the content's natural height.
           
-          See also: `property@Gtk.Window:default-height`
+          See also: [gtk.window.Window.defaultHeight]
       Returns: Builder instance for fluent chaining
   */
   T contentHeight(int propval)
@@ -801,7 +802,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           Set it to -1 to reset it to the content's natural width.
           
-          See also: `property@Gtk.Window:default-width`
+          See also: [gtk.window.Window.defaultWidth]
       Returns: Builder instance for fluent chaining
   */
   T contentWidth(int propval)
@@ -839,7 +840,7 @@ class DialogGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to size content automatically.
           
           If set to `TRUE`, always use the content's natural size instead of
-          `property@Dialog:content-width` and `property@Dialog:content-height`. If
+          [adw.dialog.Dialog.contentWidth] and [adw.dialog.Dialog.contentHeight]. If
           the content resizes, the dialog will immediately resize as well.
           
           See also: [gtk.window.Window.resizable]

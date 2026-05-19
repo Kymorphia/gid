@@ -1,6 +1,7 @@
 /// Module for [Root] interface
 module gtk.root;
 
+public import gid.basictypes;
 public import gtk.root_iface_proxy;
 import gdk.display;
 import gid.gid;

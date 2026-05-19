@@ -1,6 +1,7 @@
 /// Module for [Part] class
 module gmime.part;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gmime.c.functions;

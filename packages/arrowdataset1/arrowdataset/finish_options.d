@@ -1,6 +1,7 @@
 /// Module for [FinishOptions] class
 module arrowdataset.finish_options;
 
+public import gid.basictypes;
 import arrow.schema;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;

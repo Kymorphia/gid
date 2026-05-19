@@ -1,6 +1,7 @@
 /// Module for [EmojiChooser] class
 module gtk.emoji_chooser;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -25,7 +26,7 @@ import gtk.types;
     
     ![An example GtkEmojiChooser](emojichooser.png)
     
-    [gtk.emoji_chooser.EmojiChooser] emits the `signal@Gtk.EmojiChooser::emoji-picked`
+    [gtk.emoji_chooser.EmojiChooser] emits the [gtk.emoji_chooser.EmojiChooser.emojiPicked]
     signal when an Emoji is selected.
     
     # CSS nodes

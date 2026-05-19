@@ -1,6 +1,7 @@
 /// Module for [LargeStringScalar] class
 module arrow.large_string_scalar;
 
+public import gid.basictypes;
 import arrow.base_binary_scalar;
 import arrow.buffer;
 import arrow.c.functions;

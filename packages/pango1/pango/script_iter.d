@@ -1,6 +1,7 @@
 /// Module for [ScriptIter] class
 module pango.script_iter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.c.functions;

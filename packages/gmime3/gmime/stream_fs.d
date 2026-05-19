@@ -1,6 +1,7 @@
 /// Module for [StreamFs] class
 module gmime.stream_fs;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gmime.c.functions;

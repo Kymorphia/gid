@@ -1,6 +1,7 @@
 /// Module for [VideoFilter] class
 module gstvideo.video_filter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstbase.base_transform;

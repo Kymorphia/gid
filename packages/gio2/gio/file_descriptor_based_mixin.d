@@ -1,6 +1,7 @@
 /// Module for [FileDescriptorBased] interface mixin
 module gio.file_descriptor_based_mixin;
 
+public import gid.basictypes;
 public import gio.file_descriptor_based_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

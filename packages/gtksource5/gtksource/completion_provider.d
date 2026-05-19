@@ -1,6 +1,7 @@
 /// Module for [CompletionProvider] interface
 module gtksource.completion_provider;
 
+public import gid.basictypes;
 public import gtksource.completion_provider_iface_proxy;
 import gdk.types;
 import gid.gid;
@@ -22,7 +23,7 @@ import gtksource.types;
 /**
     Completion provider interface.
     
-    You must implement this interface to provide proposals to `class@Completion`.
+    You must implement this interface to provide proposals to [gtksource.completion.Completion].
     
     In most cases, implementations of this interface will want to use
     `vfunc@CompletionProvider.populate_async` to asynchronously populate the results
@@ -46,7 +47,7 @@ interface CompletionProvider
       provider. Many providers may choose to insert a #GtkSourceSnippet with
       edit points the user may cycle through.
       
-      See also: `classSnippet`, `classSnippetChunk`, [gtksource.view.View.pushSnippet]
+      See also: [gtksource.snippet.Snippet], [gtksource.snippet_chunk.SnippetChunk], [gtksource.view.View.pushSnippet]
   
       Params:
         context = a #GtkSourceCompletionContext
@@ -172,7 +173,7 @@ interface CompletionProvider
 
   /**
       This function can be used to filter results previously provided to
-      the `classCompletionContext` by the #GtkSourceCompletionProvider.
+      the [gtksource.completion_context.CompletionContext] by the #GtkSourceCompletionProvider.
       
       This can happen as the user types additional text onto the word so
       that previously matched items may be removed from the list instead of

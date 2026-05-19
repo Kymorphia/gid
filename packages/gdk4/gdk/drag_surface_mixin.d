@@ -1,6 +1,7 @@
 /// Module for [DragSurface] interface mixin
 module gdk.drag_surface_mixin;
 
+public import gid.basictypes;
 public import gdk.drag_surface_iface_proxy;
 public import gdk.c.functions;
 public import gdk.c.types;

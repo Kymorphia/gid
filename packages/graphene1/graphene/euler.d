@@ -1,6 +1,7 @@
 /// Module for [Euler] class
 module graphene.euler;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import graphene.c.functions;

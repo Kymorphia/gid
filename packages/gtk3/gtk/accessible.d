@@ -1,6 +1,7 @@
 /// Module for [Accessible] class
 module gtk.accessible;
 
+public import gid.basictypes;
 import atk.object;
 import gid.gid;
 import gobject.gid_builder;

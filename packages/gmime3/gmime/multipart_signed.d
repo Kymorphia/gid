@@ -1,6 +1,7 @@
 /// Module for [MultipartSigned] class
 module gmime.multipart_signed;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gmime.c.functions;

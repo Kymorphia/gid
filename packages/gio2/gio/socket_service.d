@@ -1,6 +1,7 @@
 /// Module for [SocketService] class
 module gio.socket_service;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

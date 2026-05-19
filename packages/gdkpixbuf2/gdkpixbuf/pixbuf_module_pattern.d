@@ -1,6 +1,7 @@
 /// Module for [PixbufModulePattern] class
 module gdkpixbuf.pixbuf_module_pattern;
 
+public import gid.basictypes;
 import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.types;

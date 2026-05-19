@@ -1,6 +1,7 @@
 /// Module for [Logger] class
 module soup.logger;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -14,7 +15,7 @@ import soup.types;
 /**
     Debug logging support
     
-    #SoupLogger watches a `class@Session` and logs the HTTP traffic that
+    #SoupLogger watches a [soup.session.Session] and logs the HTTP traffic that
     it generates, for debugging purposes. Many applications use an
     environment variable to determine whether or not to use
     #SoupLogger, and to determine the amount of debugging output.
@@ -47,7 +48,7 @@ import soup.types;
     request was sent, or the response fully received.
     
     The `Soup-Debug` line gives further debugging information about the
-    `class@Session`, `class@Message`, and [gio.socket.Socket] involved; the hex
+    [soup.session.Session], [soup.message.Message], and [gio.socket.Socket] involved; the hex
     numbers are the addresses of the objects in question (which may be useful if
     you are running in a debugger). The decimal IDs are simply counters that
     uniquely identify objects across the lifetime of the #SoupLogger. In
@@ -56,19 +57,19 @@ import soup.types;
     
     Currently, the request half of the message is logged just before
     the first byte of the request gets written to the network (from the
-    `signal@Message::starting` signal).
+    [soup.message.Message.starting] signal).
     
     The response is logged just after the last byte of the response body is read
-    from the network (from the `signal@Message::got-body` or
-    `signal@Message::got-informational` signal), which means that the
-    `signal@Message::got-headers` signal, and anything triggered off it (such as
+    from the network (from the [soup.message.Message.gotBody] or
+    [soup.message.Message.gotInformational] signal), which means that the
+    [soup.message.Message.gotHeaders] signal, and anything triggered off it (such as
     #SoupMessage::authenticate) will be emitted *before* the response headers are
     actually logged.
     
-    If the response doesn't happen to trigger the `signal@Message::got-body` nor
-    `signal@Message::got-informational` signals due to, for example, a
+    If the response doesn't happen to trigger the [soup.message.Message.gotBody] nor
+    [soup.message.Message.gotInformational] signals due to, for example, a
     cancellation before receiving the last byte of the response body, the
-    response will still be logged on the event of the `signal@Message::finished`
+    response will still be logged on the event of the [soup.message.Message.finished]
     signal.
 */
 class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
@@ -129,7 +130,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 
   /**
       Get `maxBodySize` property.
-      Returns: If `property@Logger:level` is [soup.types.LoggerLogLevel.Body], this gives
+      Returns: If [soup.logger.Logger.level] is [soup.types.LoggerLogLevel.Body], this gives
         the maximum number of bytes of the body that will be logged.
         (-1 means "no limit".)
   */
@@ -141,7 +142,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   /**
       Set `maxBodySize` property.
       Params:
-        propval = If `property@Logger:level` is [soup.types.LoggerLogLevel.Body], this gives
+        propval = If [soup.logger.Logger.level] is [soup.types.LoggerLogLevel.Body], this gives
           the maximum number of bytes of the body that will be logged.
           (-1 means "no limit".)
   */
@@ -293,7 +294,7 @@ class LoggerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, soup.
   /**
       Set `maxBodySize` property.
       Params:
-        propval = If `property@Logger:level` is [soup.types.LoggerLogLevel.Body], this gives
+        propval = If [soup.logger.Logger.level] is [soup.types.LoggerLogLevel.Body], this gives
           the maximum number of bytes of the body that will be logged.
           (-1 means "no limit".)
       Returns: Builder instance for fluent chaining

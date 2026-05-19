@@ -1,6 +1,7 @@
 /// Module for [ConsoleMessage] class
 module webkitwebprocessextension.console_message;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkitwebprocessextension.c.functions;

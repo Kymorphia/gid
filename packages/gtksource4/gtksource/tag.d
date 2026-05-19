@@ -1,6 +1,7 @@
 /// Module for [Tag] class
 module gtksource.tag;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

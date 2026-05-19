@@ -1,6 +1,7 @@
 /// Module for [GLMemoryPBO] class
 module gstgl.glmemory_pbo;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstgl.c.functions;

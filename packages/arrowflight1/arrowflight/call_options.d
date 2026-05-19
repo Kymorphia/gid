@@ -1,6 +1,7 @@
 /// Module for [CallOptions] class
 module arrowflight.call_options;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

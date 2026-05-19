@@ -1,6 +1,7 @@
 /// Module for [CallbackAction] class
 module gtk.callback_action;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.variant;
 import gobject.gid_builder;

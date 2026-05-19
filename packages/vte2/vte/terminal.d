@@ -1,6 +1,7 @@
 /// Module for [Terminal] class
 module vte.terminal;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import cairo.font_options;

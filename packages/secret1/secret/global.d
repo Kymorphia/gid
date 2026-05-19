@@ -137,7 +137,7 @@ string passwordLookupSync(secret.schema.Schema schema, string[string] attributes
     Params:
       result = the asynchronous result passed to the callback
     Returns: a list of
-        `ifaceRetrievable` containing attributes of the matched items
+        [secret.retrievable.Retrievable] containing attributes of the matched items
     Throws: [ErrorWrap]
 */
 secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResult result)
@@ -167,7 +167,7 @@ secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResu
       flags = search option flags
       cancellable = optional cancellation object
     Returns: a list of
-        `ifaceRetrievable` containing attributes of the matched items
+        [secret.retrievable.Retrievable] containing attributes of the matched items
     Throws: [ErrorWrap]
 */
 secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
@@ -204,7 +204,7 @@ bool passwordStoreFinish(gio.async_result.AsyncResult result)
 /**
     Store a password in the secret service.
     
-    This is similar to `funcpassword_storev_sync`, but takes a `structValue` as
+    This is similar to `funcpassword_storev_sync`, but takes a [secret.value.Value] as
     the argument instead of a null-terminated passwords.
     
     This method may block indefinitely and should not be used in user interface
@@ -216,7 +216,7 @@ bool passwordStoreFinish(gio.async_result.AsyncResult result)
       collection = a collection alias, or D-Bus object path of the
           collection where to store the secret
       label = label for the secret
-      value = a `structValue`
+      value = a [secret.value.Value]
       cancellable = optional cancellation object
     Returns: whether the storage was successful or not
     Throws: [ErrorWrap]
@@ -244,7 +244,7 @@ bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attribu
     the item will be updated with these new values.
     
     If collection is null, then the default collection will be
-    used. Use `constCOLLECTION_SESSION` to store the password in the session
+    used. Use [secret.types.COLLECTION_SESSION] to store the password in the session
     collection, which doesn't get stored across login sessions.
     
     This method may block indefinitely and should not be used in user interface

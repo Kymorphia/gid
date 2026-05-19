@@ -1,6 +1,7 @@
 /// Module for [TextBuffer] class
 module gtk.text_buffer;
 
+public import gid.basictypes;
 import gdk.atom;
 import gdkpixbuf.pixbuf;
 import gid.gid;

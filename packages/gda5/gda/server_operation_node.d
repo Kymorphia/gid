@@ -1,6 +1,7 @@
 /// Module for [ServerOperationNode] class
 module gda.server_operation_node;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.column;

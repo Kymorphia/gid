@@ -1,6 +1,7 @@
 /// Module for [LinearGradientNode] class
 module gsk.linear_gradient_node;
 
+public import gid.basictypes;
 import gid.gid;
 import graphene.point;
 import gsk.c.functions;

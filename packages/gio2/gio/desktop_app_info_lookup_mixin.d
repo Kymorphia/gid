@@ -1,6 +1,7 @@
 /// Module for [DesktopAppInfoLookup] interface mixin
 module gio.desktop_app_info_lookup_mixin;
 
+public import gid.basictypes;
 public import gio.desktop_app_info_lookup_iface_proxy;
 public import gid.gid;
 public import gio.app_info;

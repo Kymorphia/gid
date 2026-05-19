@@ -1,6 +1,7 @@
 /// Module for [EventController] class
 module gtk.event_controller;
 
+public import gid.basictypes;
 import gdk.event;
 import gid.gid;
 import gobject.gid_builder;

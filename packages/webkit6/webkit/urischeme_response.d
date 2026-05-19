@@ -1,6 +1,7 @@
 /// Module for [URISchemeResponse] class
 module webkit.urischeme_response;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.input_stream;
 import gobject.gid_builder;

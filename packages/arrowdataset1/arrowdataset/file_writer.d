@@ -1,6 +1,7 @@
 /// Module for [FileWriter] class
 module arrowdataset.file_writer;
 
+public import gid.basictypes;
 import arrow.record_batch;
 import arrow.record_batch_reader;
 import arrowdataset.c.functions;

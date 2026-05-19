@@ -1,6 +1,7 @@
 /// Module for [DataProxy] class
 module gda.data_proxy;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_model;

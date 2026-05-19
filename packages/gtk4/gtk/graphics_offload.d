@@ -1,6 +1,7 @@
 /// Module for [GraphicsOffload] class
 module gtk.graphics_offload;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

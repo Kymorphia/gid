@@ -1,6 +1,7 @@
 /// Module for [DayTimeIntervalScalar] class
 module arrow.day_time_interval_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.day_millisecond;

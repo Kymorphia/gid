@@ -1,6 +1,7 @@
 /// Module for [CookieJarDB] class
 module soup.cookie_jar_db;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -14,7 +15,7 @@ import soup.types;
 /**
     Database-based Cookie Jar.
     
-    #SoupCookieJarDB is a `class@CookieJar` that reads cookies from and writes
+    #SoupCookieJarDB is a [soup.cookie_jar.CookieJar] that reads cookies from and writes
     them to a sqlite database in the new Mozilla format.
     
     (This is identical to `SoupCookieJarSqlite` in
@@ -72,7 +73,7 @@ class CookieJarDB : soup.cookie_jar.CookieJar
       
       filename will be read in at startup to create an initial set of cookies. If
       read_only is false, then the non-session cookies will be written to
-      filename when the `signalCookieJar::changed` signal is emitted from the
+      filename when the [soup.cookie_jar.CookieJar.changed] signal is emitted from the
       jar. (If read_only is true, then the cookie jar will only be used for this
       session, and changes made to it will be lost when the jar is destroyed.)
   

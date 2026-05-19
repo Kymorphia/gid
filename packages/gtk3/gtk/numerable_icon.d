@@ -1,6 +1,7 @@
 /// Module for [NumerableIcon] class
 module gtk.numerable_icon;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.emblemed_icon;
 import gio.icon;

@@ -1,6 +1,7 @@
 /// Module for [Grid] class
 module panel.grid;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

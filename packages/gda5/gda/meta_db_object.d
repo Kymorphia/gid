@@ -1,6 +1,7 @@
 /// Module for [MetaDbObject] class
 module gda.meta_db_object;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

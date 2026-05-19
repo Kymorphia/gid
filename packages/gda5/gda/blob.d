@@ -1,6 +1,7 @@
 /// Module for [Blob] class
 module gda.blob;
 
+public import gid.basictypes;
 import gda.binary;
 import gda.blob_op;
 import gda.c.functions;

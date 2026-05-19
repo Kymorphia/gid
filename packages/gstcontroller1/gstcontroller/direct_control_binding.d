@@ -1,6 +1,7 @@
 /// Module for [DirectControlBinding] class
 module gstcontroller.direct_control_binding;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [HandlerBoolean] class
 module gda.handler_boolean;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_handler;

@@ -1,6 +1,7 @@
 /// Module for [AttrSize] class
 module pango.attr_size;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.attribute;
 import pango.c.functions;

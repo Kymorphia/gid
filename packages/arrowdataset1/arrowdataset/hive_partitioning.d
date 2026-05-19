@@ -1,6 +1,7 @@
 /// Module for [HivePartitioning] class
 module arrowdataset.hive_partitioning;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.schema;
 import arrowdataset.c.functions;

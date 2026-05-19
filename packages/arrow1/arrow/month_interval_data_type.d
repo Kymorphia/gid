@@ -1,6 +1,7 @@
 /// Module for [MonthIntervalDataType] class
 module arrow.month_interval_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.interval_data_type;

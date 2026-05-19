@@ -1,6 +1,7 @@
 /// Module for [ActionBar] class
 module gtk.action_bar;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

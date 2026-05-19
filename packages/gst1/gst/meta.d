@@ -1,6 +1,7 @@
 /// Module for [Meta] class
 module gst.meta;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.types;

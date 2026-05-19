@@ -1,6 +1,7 @@
 /// Module for [EventOwnerChange] class
 module gdk.event_owner_change;
 
+public import gid.basictypes;
 import gdk.atom;
 import gdk.c.functions;
 import gdk.c.types;

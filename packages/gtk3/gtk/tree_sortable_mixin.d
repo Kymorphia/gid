@@ -1,6 +1,7 @@
 /// Module for [TreeSortable] interface mixin
 module gtk.tree_sortable_mixin;
 
+public import gid.basictypes;
 public import gtk.tree_sortable_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;

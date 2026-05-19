@@ -1,6 +1,7 @@
 /// Module for [Mount] interface mixin
 module gio.mount_mixin;
 
+public import gid.basictypes;
 public import gio.mount_iface_proxy;
 public import gid.gid;
 public import gio.async_result;

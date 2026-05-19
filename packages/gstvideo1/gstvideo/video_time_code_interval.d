@@ -1,6 +1,7 @@
 /// Module for [VideoTimeCodeInterval] struct
 module gstvideo.video_time_code_interval;
 
+public import gid.basictypes;
 import gid.gid;
 import gstvideo.c.functions;
 import gstvideo.c.types;

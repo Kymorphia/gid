@@ -6,7 +6,7 @@ public import gio.c.types;
 public import gtk.c.types;
 
 /**
-    Describes the possible states of an `class@Animation`.
+    Describes the possible states of an [adw.animation.Animation].
     
     The state can be controlled with [adw.animation.Animation.play],
     [adw.animation.Animation.pause], [adw.animation.Animation.resume],
@@ -36,7 +36,7 @@ enum AdwAnimationState
 }
 
 /**
-    Describes length types for `struct@BreakpointCondition`.
+    Describes length types for [adw.breakpoint_condition.BreakpointCondition].
     
     See [adw.breakpoint_condition.BreakpointCondition.newLength].
     
@@ -70,7 +70,7 @@ enum AdwBreakpointConditionLengthType
 }
 
 /**
-    Describes ratio types for `struct@BreakpointCondition`.
+    Describes ratio types for [adw.breakpoint_condition.BreakpointCondition].
     
     See [adw.breakpoint_condition.BreakpointCondition.newRatio].
     
@@ -92,7 +92,7 @@ enum AdwBreakpointConditionRatioType
 }
 
 /**
-    Describes title centering behavior of a `class@HeaderBar` widget.
+    Describes title centering behavior of a [adw.header_bar.HeaderBar] widget.
 */
 enum AdwCenteringPolicy
 {
@@ -108,7 +108,7 @@ enum AdwCenteringPolicy
 }
 
 /**
-    Application color schemes for `property@StyleManager:color-scheme`.
+    Application color schemes for [adw.style_manager.StyleManager.colorScheme].
 */
 enum AdwColorScheme
 {
@@ -143,11 +143,11 @@ enum AdwColorScheme
 }
 
 /**
-    Describes the available presentation modes for `class@Dialog`.
+    Describes the available presentation modes for [adw.dialog.Dialog].
     
     New values may be added to this enumeration over time.
     
-    See `property@Dialog:presentation-mode`.
+    See [adw.dialog.Dialog.presentationMode].
 */
 enum AdwDialogPresentationMode
 {
@@ -170,7 +170,7 @@ enum AdwDialogPresentationMode
 
 /**
     Describes the available easing functions for use with
-    `class@TimedAnimation`.
+    [adw.timed_animation.TimedAnimation].
     
     New values may be added to this enumeration over time.
 */
@@ -348,7 +348,7 @@ enum AdwEasing
 }
 
 /**
-    Describes the possible folding behavior of a `class@Flap` widget.
+    Describes the possible folding behavior of a [adw.flap.Flap] widget.
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
 */
@@ -373,11 +373,11 @@ enum AdwFlapFoldPolicy
 }
 
 /**
-    Describes transitions types of a `class@Flap` widget.
+    Describes transitions types of a [adw.flap.Flap] widget.
     
     It determines the type of animation when transitioning between children in a
-    `class@Flap` widget, as well as which areas can be swiped via
-    `property@Flap:swipe-to-open` and `property@Flap:swipe-to-close`.
+    [adw.flap.Flap] widget, as well as which areas can be swiped via
+    [adw.flap.Flap.swipeToOpen] and [adw.flap.Flap.swipeToClose].
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
 */
@@ -404,7 +404,7 @@ enum AdwFlapTransitionType
 }
 
 /**
-    Determines when `class@Flap` and `class@Leaflet` will fold.
+    Determines when [adw.flap.Flap] and [adw.leaflet.Leaflet] will fold.
 
     Deprecated: Stop using [adw.leaflet.Leaflet] and [adw.flap.Flap]
 */
@@ -422,7 +422,7 @@ enum AdwFoldThresholdPolicy
 }
 
 /**
-    Describes the possible transitions in a `class@Leaflet` widget.
+    Describes the possible transitions in a [adw.leaflet.Leaflet] widget.
     
     New values may be added to this enumeration over time.
 
@@ -492,7 +492,7 @@ enum AdwNavigationDirection
 }
 
 /**
-    Describes the possible styles of `class@AlertDialog` response buttons.
+    Describes the possible styles of [adw.alert_dialog.AlertDialog] response buttons.
     
     See [adw.alert_dialog.AlertDialog.setResponseAppearance].
 */
@@ -518,7 +518,7 @@ enum AdwResponseAppearance
 }
 
 /**
-    Describes the possible transitions in a `class@Squeezer` widget.
+    Describes the possible transitions in a [adw.squeezer.Squeezer] widget.
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
 */
@@ -536,9 +536,9 @@ enum AdwSqueezerTransitionType
 }
 
 /**
-    Describes available shortcuts in an `class@TabView`.
+    Describes available shortcuts in an [adw.tab_view.TabView].
     
-    Shortcuts can be set with `property@TabView:shortcuts`, or added/removed
+    Shortcuts can be set with [adw.tab_view.TabView.shortcuts], or added/removed
     individually with [adw.tab_view.TabView.addShortcuts] and
     [adw.tab_view.TabView.removeShortcuts].
     
@@ -623,7 +623,7 @@ enum AdwTabViewShortcuts : uint
 }
 
 /**
-    `class@Toast` behavior when another toast is already displayed.
+    [adw.toast.Toast] behavior when another toast is already displayed.
 */
 enum AdwToastPriority
 {
@@ -641,11 +641,11 @@ enum AdwToastPriority
 }
 
 /**
-    Describes the possible top or bottom bar styles in an `class@ToolbarView`
+    Describes the possible top or bottom bar styles in an [adw.toolbar_view.ToolbarView]
     widget.
     
     [adw.types.ToolbarStyle.Flat] is suitable for simple content, such as
-    `class@StatusPage` or `class@PreferencesPage`, where the background at the
+    [adw.status_page.StatusPage] or [adw.preferences_page.PreferencesPage], where the background at the
     top and bottom parts of the page is uniform. Additionally, windows with
     sidebars should always use this style.
     
@@ -661,7 +661,7 @@ enum AdwToastPriority
     [adw.types.ToolbarStyle.Raised] style is suitable for content such as
     [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
     where some elements are directly adjacent to the top/bottom bars, or
-    `class@TabView`, where each page can have a different background.
+    [adw.tab_view.TabView], where each page can have a different background.
     
     [adw.types.ToolbarStyle.RaisedBorder] style is similar to [adw.types.ToolbarStyle.Raised], but
     with the shadow replaced with a more subtle border. It's intended to be used
@@ -677,8 +677,8 @@ enum AdwToastPriority
       <img src="toolbar-view-raised-border.png" alt="toolbar-view-raised-border">
     </picture>
     
-    See `property@ToolbarView:top-bar-style` and
-    `property@ToolbarView:bottom-bar-style`.
+    See [adw.toolbar_view.ToolbarView.topBarStyle] and
+    [adw.toolbar_view.ToolbarView.bottomBarStyle].
     
     New values may be added to this enumeration over time.
 */
@@ -701,7 +701,7 @@ enum AdwToolbarStyle
 }
 
 /**
-    Describes the adaptive modes of `class@ViewSwitcher`.
+    Describes the adaptive modes of [adw.view_switcher.ViewSwitcher].
 */
 enum AdwViewSwitcherPolicy
 {
@@ -730,15 +730,15 @@ enum AdwViewSwitcherPolicy
     ## Main page
     
     [adw.about_dialog.AboutDialog] prominently displays the application's icon, name, developer
-    name and version. They can be set with the `property@AboutDialog:application-icon`,
-    `property@AboutDialog:application-name`,
-    `property@AboutDialog:developer-name` and `property@AboutDialog:version`
+    name and version. They can be set with the [adw.about_dialog.AboutDialog.applicationIcon],
+    [adw.about_dialog.AboutDialog.applicationName],
+    [adw.about_dialog.AboutDialog.developerName] and [adw.about_dialog.AboutDialog.version_]
     respectively.
     
     ## What's New
     
     [adw.about_dialog.AboutDialog] provides a way for applications to display their release
-    notes, set with the `property@AboutDialog:release-notes` property.
+    notes, set with the [adw.about_dialog.AboutDialog.releaseNotes] property.
     
     Release notes are formatted the same way as
     [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
@@ -758,18 +758,18 @@ enum AdwViewSwitcherPolicy
     Nested lists are not supported.
     
     Only one version can be shown at a time. By default, the displayed version
-    number matches `property@AboutDialog:version`. Use
-    `property@AboutDialog:release-notes-version` to override it.
+    number matches [adw.about_dialog.AboutDialog.version_]. Use
+    [adw.about_dialog.AboutDialog.releaseNotesVersion] to override it.
     
     ## Details
     
     The Details page displays the application comments and links.
     
-    The comments can be set with the `property@AboutDialog:comments` property.
+    The comments can be set with the [adw.about_dialog.AboutDialog.comments] property.
     Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
     detailed. It can also contain links and Pango markup.
     
-    To set the application website, use `property@AboutDialog:website`.
+    To set the application website, use [adw.about_dialog.AboutDialog.website].
     To add extra links below the website, use [adw.about_dialog.AboutDialog.addLink].
     
     If the Details page doesn't have any other content besides website, the
@@ -779,29 +779,29 @@ enum AdwViewSwitcherPolicy
     
     [adw.about_dialog.AboutDialog] displays the following two links on the main page:
     
-    * Support Questions, set with the `property@AboutDialog:support-url` property,
-    * Report an Issue, set with the `property@AboutDialog:issue-url` property.
+    * Support Questions, set with the [adw.about_dialog.AboutDialog.supportUrl] property,
+    * Report an Issue, set with the [adw.about_dialog.AboutDialog.issueUrl] property.
     
     Additionally, applications can provide debugging information. It will be
     shown separately on the Troubleshooting page. Use the
-    `property@AboutDialog:debug-info` property to specify it.
+    [adw.about_dialog.AboutDialog.debugInfo] property to specify it.
     
     It's intended to be attached to issue reports when reporting issues against
     the application. As such, it cannot contain markup or links.
     
     [adw.about_dialog.AboutDialog] provides a quick way to save debug information to a file.
-    When saving, `property@AboutDialog:debug-info-filename` would be used as
+    When saving, [adw.about_dialog.AboutDialog.debugInfoFilename] would be used as
     the suggested filename.
     
     ## Credits and Acknowledgements
     
     The Credits page has the following default sections:
     
-    * Developers, set with the `property@AboutDialog:developers` property,
-    * Designers, set with the `property@AboutDialog:designers` property,
-    * Artists, set with the `property@AboutDialog:artists` property,
-    * Documenters, set with the `property@AboutDialog:documenters` property,
-    * Translators, set with the `property@AboutDialog:translator-credits` property.
+    * Developers, set with the [adw.about_dialog.AboutDialog.developers] property,
+    * Designers, set with the [adw.about_dialog.AboutDialog.designers] property,
+    * Artists, set with the [adw.about_dialog.AboutDialog.artists] property,
+    * Documenters, set with the [adw.about_dialog.AboutDialog.documenters] property,
+    * Translators, set with the [adw.about_dialog.AboutDialog.translatorCredits] property.
     
     When setting translator credits, use the strings `"translator-credits"` or
     `"translator_credits"` and mark them as translatable.
@@ -832,13 +832,13 @@ enum AdwViewSwitcherPolicy
     The Legal page displays the copyright and licensing information for the
     application and other modules.
     
-    The copyright string is set with the `property@AboutDialog:copyright`
+    The copyright string is set with the [adw.about_dialog.AboutDialog.copyright]
     property and should be a short string of one or two lines, for example:
     `© 2022 Example`.
     
     Licensing information can be quickly set from a list of known licenses with
-    the `property@AboutDialog:license-type` property. If the application's
-    license is not in the list, `property@AboutDialog:license` can be used
+    the [adw.about_dialog.AboutDialog.licenseType] property. If the application's
+    license is not in the list, [adw.about_dialog.AboutDialog.license] can be used
     instead.
     
     To add information about other modules, such as application dependencies or
@@ -906,15 +906,15 @@ struct AdwAboutDialogClass
     ## Main page
     
     [adw.about_window.AboutWindow] prominently displays the application's icon, name, developer
-    name and version. They can be set with the `property@AboutWindow:application-icon`,
-    `property@AboutWindow:application-name`,
-    `property@AboutWindow:developer-name` and `property@AboutWindow:version`
+    name and version. They can be set with the [adw.about_window.AboutWindow.applicationIcon],
+    [adw.about_window.AboutWindow.applicationName],
+    [adw.about_window.AboutWindow.developerName] and [adw.about_window.AboutWindow.version_]
     respectively.
     
     ## What's New
     
     [adw.about_window.AboutWindow] provides a way for applications to display their release
-    notes, set with the `property@AboutWindow:release-notes` property.
+    notes, set with the [adw.about_window.AboutWindow.releaseNotes] property.
     
     Release notes are formatted the same way as
     [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
@@ -934,18 +934,18 @@ struct AdwAboutDialogClass
     Nested lists are not supported.
     
     Only one version can be shown at a time. By default, the displayed version
-    number matches `property@AboutWindow:version`. Use
-    `property@AboutWindow:release-notes-version` to override it.
+    number matches [adw.about_window.AboutWindow.version_]. Use
+    [adw.about_window.AboutWindow.releaseNotesVersion] to override it.
     
     ## Details
     
     The Details page displays the application comments and links.
     
-    The comments can be set with the `property@AboutWindow:comments` property.
+    The comments can be set with the [adw.about_window.AboutWindow.comments] property.
     Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
     detailed. It can also contain links and Pango markup.
     
-    To set the application website, use `property@AboutWindow:website`.
+    To set the application website, use [adw.about_window.AboutWindow.website].
     To add extra links below the website, use [adw.about_window.AboutWindow.addLink].
     
     If the Details page doesn't have any other content besides website, the
@@ -955,29 +955,29 @@ struct AdwAboutDialogClass
     
     [adw.about_window.AboutWindow] displays the following two links on the main page:
     
-    * Support Questions, set with the `property@AboutWindow:support-url` property,
-    * Report an Issue, set with the `property@AboutWindow:issue-url` property.
+    * Support Questions, set with the [adw.about_window.AboutWindow.supportUrl] property,
+    * Report an Issue, set with the [adw.about_window.AboutWindow.issueUrl] property.
     
     Additionally, applications can provide debugging information. It will be
     shown separately on the Troubleshooting page. Use the
-    `property@AboutWindow:debug-info` property to specify it.
+    [adw.about_window.AboutWindow.debugInfo] property to specify it.
     
     It's intended to be attached to issue reports when reporting issues against
     the application. As such, it cannot contain markup or links.
     
     [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
-    When saving, `property@AboutWindow:debug-info-filename` would be used as
+    When saving, [adw.about_window.AboutWindow.debugInfoFilename] would be used as
     the suggested filename.
     
     ## Credits and Acknowledgements
     
     The Credits page has the following default sections:
     
-    * Developers, set with the `property@AboutWindow:developers` property,
-    * Designers, set with the `property@AboutWindow:designers` property,
-    * Artists, set with the `property@AboutWindow:artists` property,
-    * Documenters, set with the `property@AboutWindow:documenters` property,
-    * Translators, set with the `property@AboutWindow:translator-credits` property.
+    * Developers, set with the [adw.about_window.AboutWindow.developers] property,
+    * Designers, set with the [adw.about_window.AboutWindow.designers] property,
+    * Artists, set with the [adw.about_window.AboutWindow.artists] property,
+    * Documenters, set with the [adw.about_window.AboutWindow.documenters] property,
+    * Translators, set with the [adw.about_window.AboutWindow.translatorCredits] property.
     
     When setting translator credits, use the strings `"translator-credits"` or
     `"translator_credits"` and mark them as translatable.
@@ -1008,13 +1008,13 @@ struct AdwAboutDialogClass
     The Legal page displays the copyright and licensing information for the
     application and other modules.
     
-    The copyright string is set with the `property@AboutWindow:copyright`
+    The copyright string is set with the [adw.about_window.AboutWindow.copyright]
     property and should be a short string of one or two lines, for example:
     `© 2022 Example`.
     
     Licensing information can be quickly set from a list of known licenses with
-    the `property@AboutWindow:license-type` property. If the application's
-    license is not in the list, `property@AboutWindow:license` can be used
+    the [adw.about_window.AboutWindow.licenseType] property. If the application's
+    license is not in the list, [adw.about_window.AboutWindow.license] can be used
     instead.
     
     To add information about other modules, such as application dependencies or
@@ -1148,10 +1148,10 @@ struct AdwActionRowClass
     appearance.
     
     When one of the responses is activated, or the dialog is closed, the
-    `signal@AlertDialog::response` signal will be emitted. This signal is
+    [adw.alert_dialog.AlertDialog.response] signal will be emitted. This signal is
     detailed, and the detail, as well as the `response` parameter will be set to
     the ID of the activated response, or to the value of the
-    `property@AlertDialog:close-response` property if the dialog had been closed
+    [adw.alert_dialog.AlertDialog.closeResponse] property if the dialog had been closed
     without activating any of the responses.
     
     Response buttons can be presented horizontally or vertically depending on
@@ -1292,13 +1292,13 @@ struct AdwAlertDialogClass
     animation hasn't been started yet, is playing, paused or finished.
     
     Currently there are two concrete animation types:
-    `class@TimedAnimation` and `class@SpringAnimation`.
+    [adw.timed_animation.TimedAnimation] and [adw.spring_animation.SpringAnimation].
     
     [adw.animation.Animation] will automatically skip the animation if
-    `property@Animation:widget` is unmapped, or if
-    `property@Gtk.Settings:gtk-enable-animations` is `FALSE`.
+    [adw.animation.Animation.widget] is unmapped, or if
+    [gtk.settings.Settings.gtkEnableAnimations] is `FALSE`.
     
-    The `signal@Animation::done` signal can be used to perform an action after
+    The [adw.animation.Animation.done] signal can be used to perform an action after
     the animation ends, for example hiding a widget after animating its
     [gtk.widget.Widget.opacity] to 0.
     
@@ -1341,7 +1341,7 @@ struct AdwAnimation
 struct AdwAnimationClass;
 
 /**
-    Represents a value `class@Animation` can animate.
+    Represents a value [adw.animation.Animation] can animate.
 */
 struct AdwAnimationTarget;
 
@@ -1368,13 +1368,13 @@ struct AdwAnimationTargetClass;
     - `style.css` contains styles that are always present.
     
     - `style-dark.css` contains styles only used when
-    `property@StyleManager:dark` is `TRUE`.
+    [adw.style_manager.StyleManager.dark] is `TRUE`.
     
     - `style-hc.css` contains styles used when the system high contrast
       preference is enabled.
     
     - `style-hc-dark.css` contains styles used when the system high contrast
-      preference is enabled and `property@StyleManager:dark` is `TRUE`.
+      preference is enabled and [adw.style_manager.StyleManager.dark] is `TRUE`.
 */
 struct AdwApplication
 {
@@ -1403,9 +1403,9 @@ struct AdwApplicationClass
     </picture>
     
     [adw.application_window.ApplicationWindow] is a [gtk.application_window.ApplicationWindow] subclass providing
-    the same features as `class@Window`.
+    the same features as [adw.window.Window].
     
-    See `class@Window` for details.
+    See [adw.window.Window] for details.
     
     Example of an [adw.application_window.ApplicationWindow] UI definition:
     
@@ -1454,15 +1454,15 @@ struct AdwApplicationWindowClass
     [adw.avatar.Avatar] is a widget that shows a round avatar.
     
     [adw.avatar.Avatar] generates an avatar with the initials of  the
-    `property@Avatar:text` on top of a colored background.
+    [adw.avatar.Avatar.text] on top of a colored background.
     
-    The color is picked based on the hash of the `property@Avatar:text`.
+    The color is picked based on the hash of the [adw.avatar.Avatar.text].
     
-    If `property@Avatar:show-initials` is set to `FALSE`,
-    `property@Avatar:icon-name` or `avatar-default-symbolic` is shown instead of
+    If [adw.avatar.Avatar.showInitials] is set to `FALSE`,
+    [adw.avatar.Avatar.iconName] or `avatar-default-symbolic` is shown instead of
     the initials.
     
-    Use `property@Avatar:custom-image` to set a custom image.
+    Use [adw.avatar.Avatar.customImage] to set a custom image.
     
     ## CSS nodes
     
@@ -1485,17 +1485,17 @@ struct AdwAvatarClass
       <img src="banner.png" alt="banner">
     </picture>
     
-    Banners are hidden by default, use `property@Banner:revealed` to show them.
+    Banners are hidden by default, use [adw.banner.Banner.revealed] to show them.
     
-    Banners have a title, set with `property@Banner:title`. Titles can be marked
-    up with Pango markup, use `property@Banner:use-markup` to enable it.
+    Banners have a title, set with [adw.banner.Banner.title]. Titles can be marked
+    up with Pango markup, use [adw.banner.Banner.useMarkup] to enable it.
     
     The title will be shown centered or left-aligned depending on available
     space.
     
     Banners can optionally have a button with text on it, set through
-    `property@Banner:button-label`. The button can be used with a [gio.action.Action],
-    or with the `signal@Banner::button-clicked` signal.
+    [adw.banner.Banner.buttonLabel]. The button can be used with a [gio.action.Action],
+    or with the [adw.banner.Banner.buttonClicked] signal.
     
     ## CSS nodes
     
@@ -1518,7 +1518,7 @@ struct AdwBannerClass
       <img src="bin.png" alt="bin">
     </picture>
     
-    The [adw.bin.Bin] widget has only one child, set with the `property@Bin:child`
+    The [adw.bin.Bin] widget has only one child, set with the [adw.bin.Bin.child]
     property.
     
     It is useful for deriving subclasses, since it provides common code needed
@@ -1538,7 +1538,7 @@ struct AdwBinClass
 }
 
 /**
-    Describes a breakpoint for `class@Window` or `class@Dialog`.
+    Describes a breakpoint for [adw.window.Window] or [adw.dialog.Dialog].
     
     Breakpoints are used to create adaptive UI, allowing to change the layout
     depending on available size.
@@ -1551,11 +1551,11 @@ struct AdwBinClass
     the specified value, and reset it back to the original value when it's
     unapplied.
     
-    For more complicated scenarios, `signal@Breakpoint::apply` and
-    `signal@Breakpoint::unapply` can be used instead.
+    For more complicated scenarios, [adw.breakpoint.Breakpoint.apply] and
+    [adw.breakpoint.Breakpoint.unapply] can be used instead.
     
-    Breakpoints can be used within `class@Window`, `class@ApplicationWindow`,
-    `class@Dialog` or `class@BreakpointBin`.
+    Breakpoints can be used within [adw.window.Window], [adw.application_window.ApplicationWindow],
+    [adw.dialog.Dialog] or [adw.breakpoint_bin.BreakpointBin].
     
     ## [adw.breakpoint.Breakpoint] as [gtk.buildable.Buildable]:
     
@@ -1595,23 +1595,23 @@ struct AdwBreakpoint;
       <img src="breakpoint-bin.png" alt="breakpoint-bin">
     </picture>
     
-    [adw.breakpoint_bin.BreakpointBin] provides a way to use breakpoints without `class@Window`,
-    `class@ApplicationWindow` or `class@Dialog`. It can be useful for limiting
+    [adw.breakpoint_bin.BreakpointBin] provides a way to use breakpoints without [adw.window.Window],
+    [adw.application_window.ApplicationWindow] or [adw.dialog.Dialog]. It can be useful for limiting
     breakpoints to a single page and similar purposes. Most applications
     shouldn't need it.
     
-    [adw.breakpoint_bin.BreakpointBin] is similar to `class@Bin`. It has one child, set via the
-    `property@BreakpointBin:child` property.
+    [adw.breakpoint_bin.BreakpointBin] is similar to [adw.bin.Bin]. It has one child, set via the
+    [adw.breakpoint_bin.BreakpointBin.child] property.
     
     When [adw.breakpoint_bin.BreakpointBin] is resized, its child widget can rearrange its layout
     at specific thresholds.
     
-    The thresholds and layout changes are defined via `class@Breakpoint` objects.
+    The thresholds and layout changes are defined via [adw.breakpoint.Breakpoint] objects.
     They can be added using [adw.breakpoint_bin.BreakpointBin.addBreakpoint].
     
     Each breakpoint has a condition, specifying the bin's size and/or aspect
     ratio, and setters that automatically set object properties when that
-    happens. The `signal@Breakpoint::apply` and `signal@Breakpoint::unapply` can
+    happens. The [adw.breakpoint.Breakpoint.apply] and [adw.breakpoint.Breakpoint.unapply] can
     be used instead for more complex scenarios.
     
     Breakpoints are only allowed to modify widgets inside the [adw.breakpoint_bin.BreakpointBin],
@@ -1619,7 +1619,7 @@ struct AdwBreakpoint;
     
     If multiple breakpoints can be used for the current size, the last one is
     always picked. The current breakpoint can be tracked using the
-    `property@BreakpointBin:current-breakpoint` property.
+    [adw.breakpoint_bin.BreakpointBin.currentBreakpoint] property.
     
     If none of the breakpoints can be used, that property will be set to `NULL`,
     and the original property values will be used instead.
@@ -1627,8 +1627,8 @@ struct AdwBreakpoint;
     ## Minimum Size
     
     Adding a breakpoint to [adw.breakpoint_bin.BreakpointBin] will result in it having no minimum
-    size. The `property@Gtk.Widget:width-request` and
-    `property@Gtk.Widget:height-request` properties must always be set when using
+    size. The [gtk.widget.Widget.widthRequest] and
+    [gtk.widget.Widget.heightRequest] properties must always be set when using
     breakpoints, indicating the smallest size you want to support.
     
     The minimum size and breakpoint conditions must be carefully selected so that
@@ -1640,11 +1640,11 @@ struct AdwBreakpoint;
     ellipsizing or wrapping if they might not fit.
     
     For [gtk.label.Label] this can be done via [gtk.label.Label.ellipsize], or
-    via [gtk.label.Label.wrap] together with [gtk.label.Label.wrap].
+    via [gtk.label.Label.wrap] together with [gtk.label.Label.wrapMode].
     
-    For buttons, use `property@Gtk.Button:can-shrink`,
-    `property@Gtk.MenuButton:can-shrink`, `property@Adw.SplitButton:can-shrink`,
-    or `property@Adw.ButtonContent:can-shrink`.
+    For buttons, use [gtk.button.Button.canShrink],
+    [gtk.menu_button.MenuButton.canShrink], [adw.split_button.SplitButton.canShrink],
+    or [adw.button_content.ButtonContent.canShrink].
     
     ## Example
     
@@ -1698,7 +1698,7 @@ struct AdwBreakpoint;
     </object>
     ```
     
-    See `class@Breakpoint` documentation for details.
+    See [adw.breakpoint.Breakpoint] documentation for details.
 */
 struct AdwBreakpointBin
 {
@@ -1724,7 +1724,7 @@ struct AdwBreakpointClass
 }
 
 /**
-    Describes condition for an `class@Breakpoint`.
+    Describes condition for an [adw.breakpoint.Breakpoint].
 */
 struct AdwBreakpointCondition;
 
@@ -1739,7 +1739,7 @@ struct AdwBreakpointCondition;
     [adw.button_content.ButtonContent] is a box-like widget with an icon and a label.
     
     It's intended to be used as a direct child of [gtk.button.Button],
-    [gtk.menu_button.MenuButton] or `class@SplitButton`, when they need to have both an
+    [gtk.menu_button.MenuButton] or [adw.split_button.SplitButton], when they need to have both an
     icon and a label, as follows:
     
     ```xml
@@ -1787,7 +1787,7 @@ struct AdwButtonContentClass
 }
 
 /**
-    An `class@AnimationTarget` that calls a given callback during the
+    An [adw.animation_target.AnimationTarget] that calls a given callback during the
     animation.
 */
 struct AdwCallbackAnimationTarget;
@@ -1806,7 +1806,7 @@ struct AdwCallbackAnimationTargetClass;
     The [adw.carousel.Carousel] widget can be used to display a set of pages with
     swipe-based navigation between them.
     
-    `class@CarouselIndicatorDots` and `class@CarouselIndicatorLines` can be used
+    [adw.carousel_indicator_dots.CarouselIndicatorDots] and [adw.carousel_indicator_lines.CarouselIndicatorLines] can be used
     to provide page indicators for [adw.carousel.Carousel].
     
     ## CSS nodes
@@ -1823,7 +1823,7 @@ struct AdwCarouselClass
 }
 
 /**
-    A dots indicator for `class@Carousel`.
+    A dots indicator for [adw.carousel.Carousel].
     
     <picture>
       <source srcset="carousel-indicator-dots-dark.png" media="(prefers-color-scheme: dark)">
@@ -1831,11 +1831,11 @@ struct AdwCarouselClass
     </picture>
     
     The [adw.carousel_indicator_dots.CarouselIndicatorDots] widget shows a set of dots for each page of a
-    given `class@Carousel`. The dot representing the carousel's active page is
+    given [adw.carousel.Carousel]. The dot representing the carousel's active page is
     larger and more opaque than the others, the transition to the active and
     inactive state is gradual to match the carousel's position.
     
-    See also `class@CarouselIndicatorLines`.
+    See also [adw.carousel_indicator_lines.CarouselIndicatorLines].
     
     ## CSS nodes
     
@@ -1852,7 +1852,7 @@ struct AdwCarouselIndicatorDotsClass
 }
 
 /**
-    A lines indicator for `class@Carousel`.
+    A lines indicator for [adw.carousel.Carousel].
     
     <picture>
       <source srcset="carousel-indicator-dots-lines.png" media="(prefers-color-scheme: dark)">
@@ -1860,10 +1860,10 @@ struct AdwCarouselIndicatorDotsClass
     </picture>
     
     The [adw.carousel_indicator_lines.CarouselIndicatorLines] widget shows a set of lines for each page of
-    a given `class@Carousel`. The carousel's active page is shown as another line
+    a given [adw.carousel.Carousel]. The carousel's active page is shown as another line
     that moves between them to match the carousel's position.
     
-    See also `class@CarouselIndicatorDots`.
+    See also [adw.carousel_indicator_dots.CarouselIndicatorDots].
     
     ## CSS nodes
     
@@ -1900,9 +1900,9 @@ struct AdwCarouselIndicatorLinesClass
     allocated the minimum size it can fit in instead.
     
     [adw.clamp.Clamp] can scale with the text scale factor, use the
-    `property@Clamp:unit` property to enable that behavior.
+    [adw.clamp.Clamp.unit] property to enable that behavior.
     
-    See also: `class@ClampLayout`, `class@ClampScrollable`.
+    See also: [adw.clamp_layout.ClampLayout], [adw.clamp_scrollable.ClampScrollable].
     
     ## CSS nodes
     
@@ -1938,9 +1938,9 @@ struct AdwClampClass
     allocated the minimum size it can fit in instead.
     
     [adw.clamp_layout.ClampLayout] can scale with the text scale factor, use the
-    `property@ClampLayout:unit` property to enable that behavior.
+    [adw.clamp_layout.ClampLayout.unit] property to enable that behavior.
     
-    See also: `class@Clamp`, `class@ClampScrollable`.
+    See also: [adw.clamp.Clamp], [adw.clamp_scrollable.ClampScrollable].
 */
 struct AdwClampLayout;
 
@@ -1952,15 +1952,15 @@ struct AdwClampLayoutClass
 }
 
 /**
-    A scrollable `class@Clamp`.
+    A scrollable [adw.clamp.Clamp].
     
-    [adw.clamp_scrollable.ClampScrollable] is a variant of `class@Clamp` that implements the
+    [adw.clamp_scrollable.ClampScrollable] is a variant of [adw.clamp.Clamp] that implements the
     [gtk.scrollable.Scrollable] interface.
     
     The primary use case for [adw.clamp_scrollable.ClampScrollable] is clamping
     [gtk.list_view.ListView].
     
-    See also: `class@ClampLayout`.
+    See also: [adw.clamp_layout.ClampLayout].
 */
 struct AdwClampScrollable;
 
@@ -1999,7 +1999,7 @@ struct AdwClampScrollableClass
     </object>
     ```
     
-    The `property@ComboRow:selected` and `property@ComboRow:selected-item`
+    The [adw.combo_row.ComboRow.selected] and [adw.combo_row.ComboRow.selectedItem]
     properties can be used to keep track of the selected item and react to their
     changes.
     
@@ -2051,47 +2051,47 @@ struct AdwComboRowClass
     </picture>
     
     [adw.dialog.Dialog] is similar to a window, but is shown within another window. It
-    can be used with `class@Window` and `class@ApplicationWindow`, use
+    can be used with [adw.window.Window] and [adw.application_window.ApplicationWindow], use
     [adw.dialog.Dialog.present] to show it.
     
-    [adw.dialog.Dialog] is not resizable. Use the `property@Dialog:content-width` and
-    `property@Dialog:content-height` properties to set its size, or set
-    `property@Dialog:follows-content-size` to `TRUE` to make the dialog track the
+    [adw.dialog.Dialog] is not resizable. Use the [adw.dialog.Dialog.contentWidth] and
+    [adw.dialog.Dialog.contentHeight] properties to set its size, or set
+    [adw.dialog.Dialog.followsContentSize] to `TRUE` to make the dialog track the
     content's size as it changes. [adw.dialog.Dialog] can never be larger than its parent
     window.
     
     [adw.dialog.Dialog] can be presented as a centered floating window or a bottom sheet.
     By default it's automatic depending on the available size.
-    `property@Dialog:presentation-mode` can be used to change that.
+    [adw.dialog.Dialog.presentationMode] can be used to change that.
     
     [adw.dialog.Dialog] can be closed via [adw.dialog.Dialog.close].
     
     When presented as a bottom sheet, [adw.dialog.Dialog] can also be closed via swiping
     it down.
     
-    The `property@Dialog:can-close` can be used to prevent closing. In that case,
-    `signal@Dialog::close-attempt` gets emitted instead.
+    The [adw.dialog.Dialog.canClose] can be used to prevent closing. In that case,
+    [adw.dialog.Dialog.closeAttempt] gets emitted instead.
     
     Use [adw.dialog.Dialog.forceClose] to close the dialog even when `can-close` is set to
     `FALSE`.
     
     ## Header Bar Integration
     
-    When placed inside an [adw.dialog.Dialog], `class@HeaderBar` will display the dialog
+    When placed inside an [adw.dialog.Dialog], [adw.header_bar.HeaderBar] will display the dialog
     title instead of window title. It will also adjust the decoration layout to
     ensure it always has a close button and nothing else. Set
-    `property@HeaderBar:show-start-title-buttons` and
-    `property@HeaderBar:show-end-title-buttons` to `FALSE` to remove it if it's
+    [adw.header_bar.HeaderBar.showStartTitleButtons] and
+    [adw.header_bar.HeaderBar.showEndTitleButtons] to `FALSE` to remove it if it's
     unwanted.
     
     ## Breakpoints
     
-    [adw.dialog.Dialog] can be used with `class@Breakpoint` the same way as
-    `class@BreakpointBin`. Refer to that widget's documentation for details.
+    [adw.dialog.Dialog] can be used with [adw.breakpoint.Breakpoint] the same way as
+    [adw.breakpoint_bin.BreakpointBin]. Refer to that widget's documentation for details.
     
     Like [adw.breakpoint_bin.BreakpointBin], if breakpoints are used, [adw.dialog.Dialog] doesn't have a
-    minimum size, and `property@Gtk.Widget:width-request` and
-    `property@Gtk.Widget:height-request` properties must be set manually.
+    minimum size, and [gtk.widget.Widget.widthRequest] and
+    [gtk.widget.Widget.heightRequest] properties must be set manually.
 */
 struct AdwDialog
 {
@@ -2127,7 +2127,7 @@ struct AdwDialogClass
     indicating that it's editable and can receive additional widgets before or
     after the editable part.
     
-    If `property@EntryRow:show-apply-button` is set to `TRUE`, [adw.entry_row.EntryRow] can
+    If [adw.entry_row.EntryRow.showApplyButton] is set to `TRUE`, [adw.entry_row.EntryRow] can
     show an apply button when editing its contents. This can be useful if
     changing its contents can result in an expensive operation, such as network
     activity.
@@ -2135,7 +2135,7 @@ struct AdwDialogClass
     [adw.entry_row.EntryRow] provides only minimal API and should be used with the
     [gtk.editable.Editable] API.
     
-    See also `class@PasswordEntryRow`.
+    See also [adw.password_entry_row.PasswordEntryRow].
     
     ## AdwEntryRow as GtkBuildable
     
@@ -2167,7 +2167,7 @@ struct AdwEntryRowClass
 }
 
 /**
-    [adw.enum_list_item.EnumListItem] is the type of items in a `class@EnumListModel`.
+    [adw.enum_list_item.EnumListItem] is the type of items in a [adw.enum_list_model.EnumListModel].
 */
 struct AdwEnumListItem;
 
@@ -2181,7 +2181,7 @@ struct AdwEnumListItemClass
 /**
     A [gio.list_model.ListModel] representing values of a given enum.
     
-    [adw.enum_list_model.EnumListModel] contains objects of type `class@EnumListItem`.
+    [adw.enum_list_model.EnumListModel] contains objects of type [adw.enum_list_item.EnumListItem].
 */
 struct AdwEnumListModel;
 
@@ -2254,34 +2254,34 @@ struct AdwExpanderRowClass
     
     The [adw.flap.Flap] widget can display its children like a [gtk.box.Box] does or
     like a [gtk.overlay.Overlay] does, according to the
-    `property@Flap:fold-policy` value.
+    [adw.flap.Flap.foldPolicy] value.
     
-    [adw.flap.Flap] has at most three children: `property@Flap:content`,
-    `property@Flap:flap` and `property@Flap:separator`. Content is the primary
+    [adw.flap.Flap] has at most three children: [adw.flap.Flap.content],
+    [adw.flap.Flap.flap] and [adw.flap.Flap.separator]. Content is the primary
     child, flap is displayed next to it when unfolded, or overlays it when
     folded. Flap can be shown or hidden by changing the
-    `property@Flap:reveal-flap` value, as well as via swipe gestures if
-    `property@Flap:swipe-to-open` and/or `property@Flap:swipe-to-close` are set
+    [adw.flap.Flap.revealFlap] value, as well as via swipe gestures if
+    [adw.flap.Flap.swipeToOpen] and/or [adw.flap.Flap.swipeToClose] are set
     to `TRUE`.
     
     Optionally, a separator can be provided, which would be displayed between
     the content and the flap when there's no shadow to separate them, depending
     on the transition type.
     
-    `property@Flap:flap` is transparent by default; add the
+    [adw.flap.Flap.flap] is transparent by default; add the
     [`.background`](style-classes.html#background) style class to it if this is
     unwanted.
     
-    If `property@Flap:modal` is set to `TRUE`, content becomes completely
+    If [adw.flap.Flap.modal] is set to `TRUE`, content becomes completely
     inaccessible when the flap is revealed while folded.
     
     The position of the flap and separator children relative to the content is
-    determined by orientation, as well as the `property@Flap:flap-position`
+    determined by orientation, as well as the [adw.flap.Flap.flapPosition]
     value.
     
     Folding the flap will automatically hide the flap widget, and unfolding it
     will automatically reveal it. If this behavior is not desired, the
-    `property@Flap:locked` property can be used to override it.
+    [adw.flap.Flap.locked] property can be used to override it.
     
     Common use cases include sidebars, header bars that need to be able to
     overlap the window content (for example, in fullscreen mode) and bottom
@@ -2320,47 +2320,47 @@ struct AdwFlapClass
     
     [adw.header_bar.HeaderBar] is similar to [gtk.header_bar.HeaderBar], but provides additional
     features compared to it. Refer to [gtk.header_bar.HeaderBar] for details. It is typically
-    used as a top bar within `class@ToolbarView`.
+    used as a top bar within [adw.toolbar_view.ToolbarView].
     
     ## Dialog Integration
     
-    When placed inside an `class@Dialog`, [adw.header_bar.HeaderBar] will display the dialog
+    When placed inside an [adw.dialog.Dialog], [adw.header_bar.HeaderBar] will display the dialog
     title intead of window title. It will also adjust the decoration layout to
     ensure it always has a close button and nothing else. Set
-    `property@HeaderBar:show-start-title-buttons` and
-    `property@HeaderBar:show-end-title-buttons` to `FALSE` to remove it if it's
+    [adw.header_bar.HeaderBar.showStartTitleButtons] and
+    [adw.header_bar.HeaderBar.showEndTitleButtons] to `FALSE` to remove it if it's
     unwanted.
     
     ## Navigation View Integration
     
-    When placed inside an `class@NavigationPage`, [adw.header_bar.HeaderBar] will display the
+    When placed inside an [adw.navigation_page.NavigationPage], [adw.header_bar.HeaderBar] will display the
     page title instead of window title.
     
-    When used together with `class@NavigationView` or `class@NavigationSplitView`,
+    When used together with [adw.navigation_view.NavigationView] or [adw.navigation_split_view.NavigationSplitView],
     it will also display a back button that can be used to go back to the previous
     page. The button also has a context menu, allowing to pop multiple pages at
     once, potentially across multiple navigation views.
     
-    Set `property@HeaderBar:show-back-button` to `FALSE` to disable this behavior
+    Set [adw.header_bar.HeaderBar.showBackButton] to `FALSE` to disable this behavior
     in rare scenarios where it's unwanted.
     
     ## Split View Integration
     
-    When placed inside `class@NavigationSplitView` or `class@OverlaySplitView`,
+    When placed inside [adw.navigation_split_view.NavigationSplitView] or [adw.overlay_split_view.OverlaySplitView],
     [adw.header_bar.HeaderBar] will automatically hide the title buttons other than at the
     edges of the window.
     
     ## Centering Policy
     
-    `property@HeaderBar:centering-policy` allows to enforce strict centering of
-    the title widget. This can be useful for entries inside `class@Clamp`.
+    [adw.header_bar.HeaderBar.centeringPolicy] allows to enforce strict centering of
+    the title widget. This can be useful for entries inside [adw.clamp.Clamp].
     
     ## Title Buttons
     
     Unlike [gtk.header_bar.HeaderBar], [adw.header_bar.HeaderBar] allows to toggle title button
     visibility for each side individually, using the
-    `property@HeaderBar:show-start-title-buttons` and
-    `property@HeaderBar:show-end-title-buttons` properties.
+    [adw.header_bar.HeaderBar.showStartTitleButtons] and
+    [adw.header_bar.HeaderBar.showEndTitleButtons] properties.
     
     ## CSS nodes
     
@@ -2391,7 +2391,7 @@ struct AdwFlapClass
     Each of the boxes contains a `windowcontrols` subnode, see
     [gtk.window_controls.WindowControls] for details, as well as other children.
     
-    When `property@HeaderBar:show-back-button` is `TRUE`, the start box also
+    When [adw.header_bar.HeaderBar.showBackButton] is `TRUE`, the start box also
     contains a node with the name `widget` that contains a node with the name
     `button` and `.back` style class.
     
@@ -2453,7 +2453,7 @@ struct AdwLeafletClass
 }
 
 /**
-    An auxiliary class used by `class@Leaflet`.
+    An auxiliary class used by [adw.leaflet.Leaflet].
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
 */
@@ -2482,10 +2482,10 @@ struct AdwLeafletPageClass
     appearance.
     
     When one of the responses is activated, or the dialog is closed, the
-    `signal@MessageDialog::response` signal will be emitted. This signal is
+    [adw.message_dialog.MessageDialog.response] signal will be emitted. This signal is
     detailed, and the detail, as well as the `response` parameter will be set to
     the ID of the activated response, or to the value of the
-    `property@MessageDialog:close-response` property if the dialog had been
+    [adw.message_dialog.MessageDialog.closeResponse] property if the dialog had been
     closed without activating any of the responses.
     
     Response buttons can be presented horizontally or vertically depending on
@@ -2618,22 +2618,22 @@ struct AdwMessageDialogClass
 }
 
 /**
-    A page within `class@NavigationView` or `class@NavigationSplitView`.
+    A page within [adw.navigation_view.NavigationView] or [adw.navigation_split_view.NavigationSplitView].
     
     Each page has a child widget, a title and optionally a tag.
     
-    The `signal@NavigationPage::showing`, `signal@NavigationPage::shown`,
-    `signal@NavigationPage::hiding` and `signal@NavigationPage::hidden` signals
+    The [adw.navigation_page.NavigationPage.showing], [adw.navigation_page.NavigationPage.shown],
+    [adw.navigation_page.NavigationPage.hiding] and [adw.navigation_page.NavigationPage.hidden] signals
     can be used to track the page's visibility within its [adw.navigation_view.NavigationView].
     
     ## Header Bar Integration
     
-    When placed inside [adw.navigation_page.NavigationPage], `class@HeaderBar` will display the
+    When placed inside [adw.navigation_page.NavigationPage], [adw.header_bar.HeaderBar] will display the
     page title instead of window title.
     
-    When used together with `class@NavigationView`, it will also display a back
+    When used together with [adw.navigation_view.NavigationView], it will also display a back
     button that can be used to go back to the previous page. Set
-    `property@HeaderBar:show-back-button` to `FALSE` to disable that behavior if
+    [adw.header_bar.HeaderBar.showBackButton] to `FALSE` to disable that behavior if
     it's unwanted.
     
     ## CSS Nodes
@@ -2685,17 +2685,17 @@ struct AdwNavigationPageClass
       <img src="navigation-split-view-collapsed.png" alt="navigation-split-view-collapsed">
     </picture>
     
-    [adw.navigation_split_view.NavigationSplitView] has two `class@NavigationPage` children: sidebar and
+    [adw.navigation_split_view.NavigationSplitView] has two [adw.navigation_page.NavigationPage] children: sidebar and
     content, and displays them side by side.
     
-    When `property@NavigationSplitView:collapsed` is set to `TRUE`, it instead
-    puts both children inside an `class@NavigationView`. The
-    `property@NavigationSplitView:show-content` controls which child is visible
+    When [adw.navigation_split_view.NavigationSplitView.collapsed] is set to `TRUE`, it instead
+    puts both children inside an [adw.navigation_view.NavigationView]. The
+    [adw.navigation_split_view.NavigationSplitView.showContent] controls which child is visible
     while collapsed.
     
-    See also `class@OverlaySplitView`.
+    See also [adw.overlay_split_view.OverlaySplitView].
     
-    [adw.navigation_split_view.NavigationSplitView] is typically used together with an `class@Breakpoint`
+    [adw.navigation_split_view.NavigationSplitView] is typically used together with an [adw.breakpoint.Breakpoint]
     setting the `collapsed` property to `TRUE` on small widths, as follows:
     
     ```xml
@@ -2739,25 +2739,25 @@ struct AdwNavigationPageClass
     depending on its own width.
     
     If possible, it tries to allocate a fraction of the total width, controlled
-    with the `property@NavigationSplitView:sidebar-width-fraction` property.
+    with the [adw.navigation_split_view.NavigationSplitView.sidebarWidthFraction] property.
     
     The sidebar also has minimum and maximum sizes, controlled with the
-    `property@NavigationSplitView:min-sidebar-width` and
-    `property@NavigationSplitView:max-sidebar-width` properties.
+    [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+    [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth] properties.
     
     The minimum and maximum sizes are using the length unit specified with the
-    `property@NavigationSplitView:sidebar-width-unit`.
+    [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
     
     By default, sidebar is using 25% of the total width, with 180sp as the
     minimum size and 280sp as the maximum size.
     
     ## Header Bar Integration
     
-    When used inside [adw.navigation_split_view.NavigationSplitView], `class@HeaderBar` will
+    When used inside [adw.navigation_split_view.NavigationSplitView], [adw.header_bar.HeaderBar] will
     automatically hide the window buttons in the middle.
     
     When collapsed, it also displays a back button for the content widget, as
-    well as the page titles. See `class@NavigationView` documentation for details.
+    well as the page titles. See [adw.navigation_view.NavigationView] documentation for details.
     
     ## Actions
     
@@ -2766,10 +2766,10 @@ struct AdwNavigationPageClass
     
     - `navigation.push` takes a string parameter specifying the tag of the page
     to push. If it matches the tag of the content widget, it sets
-    `property@NavigationSplitView:show-content` to `TRUE`.
+    [adw.navigation_split_view.NavigationSplitView.showContent] to `TRUE`.
     
     - `navigation.pop` doesn't take any parameters and sets
-    `property@NavigationSplitView:show-content` to `FALSE`.
+    [adw.navigation_split_view.NavigationSplitView.showContent] to `FALSE`.
     
     ## [adw.navigation_split_view.NavigationSplitView] as [gtk.buildable.Buildable]
     
@@ -2829,7 +2829,7 @@ struct AdwNavigationSplitViewClass
     [adw.navigation_view.NavigationView] presents one child at a time, similar to
     [gtk.stack.Stack].
     
-    [adw.navigation_view.NavigationView] can only contain `class@NavigationPage` children.
+    [adw.navigation_view.NavigationView] can only contain [adw.navigation_page.NavigationPage] children.
     
     It maintains a navigation stack that can be controlled with
     [adw.navigation_view.NavigationView.push] and [adw.navigation_view.NavigationView.pop]. The whole
@@ -2853,18 +2853,18 @@ struct AdwNavigationSplitViewClass
     ## Tags
     
     Static pages, as well as any pages in the navigation stack, can be accessed
-    by their `property@NavigationPage:tag`. For example,
+    by their [adw.navigation_page.NavigationPage.tag]. For example,
     [adw.navigation_view.NavigationView.pushByTag] can be used to push a static page that's
     not in the navigation stack without having to keep a reference to it manually.
     
     ## Header Bar Integration
     
-    When used inside [adw.navigation_view.NavigationView], `class@HeaderBar` will automatically
+    When used inside [adw.navigation_view.NavigationView], [adw.header_bar.HeaderBar] will automatically
     display a back button that can be used to go back to the previous page when
     possible. The button also has a context menu, allowing to pop multiple pages
     at once, potentially across multiple navigation views.
     
-    Set `property@HeaderBar:show-back-button` to `FALSE` to disable this behavior
+    Set [adw.header_bar.HeaderBar.showBackButton] to `FALSE` to disable this behavior
     in rare scenarios where it's unwanted.
     
     [adw.header_bar.HeaderBar] will also display the title of the [adw.navigation_page.NavigationPage] it's
@@ -2875,7 +2875,7 @@ struct AdwNavigationSplitViewClass
     [adw.navigation_view.NavigationView] supports the following shortcuts for going to the
     previous page:
     
-    - <kbd>Escape</kbd> (unless `property@NavigationView:pop-on-escape` is set to
+    - <kbd>Escape</kbd> (unless [adw.navigation_view.NavigationView.popOnEscape] is set to
       `FALSE`)
     - <kbd>Alt</kbd>+<kbd>←</kbd>
     - Back mouse button
@@ -2886,10 +2886,10 @@ struct AdwNavigationSplitViewClass
     - Scrolling towards the right on touchpads (usually two-finger swipe)
     
     These gestures have transitions enabled regardless of the
-    `property@NavigationView:animate-transitions` value.
+    [adw.navigation_view.NavigationView.animateTransitions] value.
     
     Applications can also enable shortcuts for pushing another page onto the
-    navigation stack via connecting to the `signal@NavigationView::get-next-page`
+    navigation stack via connecting to the [adw.navigation_view.NavigationView.getNextPage]
     signal, in that case the following shortcuts are supported:
     
     - <kbd>Alt</kbd>+<kbd>→</kbd>
@@ -2898,7 +2898,7 @@ struct AdwNavigationSplitViewClass
     
     For right-to-left locales, the gestures and shortcuts are reversed.
     
-    `property@NavigationPage:can-pop` can be used to disable them, along with the
+    [adw.navigation_page.NavigationPage.canPop] can be used to disable them, along with the
     header bar back buttons.
     
     ## Actions
@@ -3001,28 +3001,28 @@ struct AdwNavigationViewClass
     [adw.overlay_split_view.OverlaySplitView] has two children: sidebar and content, and displays
     them side by side.
     
-    When `property@OverlaySplitView:collapsed` is set to `TRUE`, the sidebar is
+    When [adw.overlay_split_view.OverlaySplitView.collapsed] is set to `TRUE`, the sidebar is
     instead shown as an overlay above the content widget.
     
     The sidebar can be hidden or shown using the
-    `property@OverlaySplitView:show-sidebar` property.
+    [adw.overlay_split_view.OverlaySplitView.showSidebar] property.
     
     Sidebar can be displayed before or after the content, this can be controlled
-    with the `property@OverlaySplitView:sidebar-position` property.
+    with the [adw.overlay_split_view.OverlaySplitView.sidebarPosition] property.
     
     Collapsing the split view automatically hides the sidebar widget, and
     uncollapsing it shows the sidebar. If this behavior is not desired, the
-    `property@OverlaySplitView:pin-sidebar` property can be used to override it.
+    [adw.overlay_split_view.OverlaySplitView.pinSidebar] property can be used to override it.
     
     [adw.overlay_split_view.OverlaySplitView] supports an edge swipe gesture for showing the sidebar,
     and a swipe from the sidebar for hiding it. Gestures are only supported on
     touchscreen, but not touchpad. Gestures can be controlled with the
-    `property@OverlaySplitView:enable-show-gesture` and
-    `property@OverlaySplitView:enable-hide-gesture` properties.
+    [adw.overlay_split_view.OverlaySplitView.enableShowGesture] and
+    [adw.overlay_split_view.OverlaySplitView.enableHideGesture] properties.
     
-    See also `class@NavigationSplitView`.
+    See also [adw.navigation_split_view.NavigationSplitView].
     
-    [adw.overlay_split_view.OverlaySplitView] is typically used together with an `class@Breakpoint`
+    [adw.overlay_split_view.OverlaySplitView] is typically used together with an [adw.breakpoint.Breakpoint]
     setting the `collapsed` property to `TRUE` on small widths, as follows:
     
     ```xml
@@ -3060,24 +3060,24 @@ struct AdwNavigationViewClass
     depending on its own width.
     
     If possible, it tries to allocate a fraction of the total width, controlled
-    with the `property@OverlaySplitView:sidebar-width-fraction` property.
+    with the [adw.overlay_split_view.OverlaySplitView.sidebarWidthFraction] property.
     
     The sidebar also has minimum and maximum sizes, controlled with the
-    `property@OverlaySplitView:min-sidebar-width` and
-    `property@OverlaySplitView:max-sidebar-width` properties.
+    [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+    [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth] properties.
     
     The minimum and maximum sizes are using the length unit specified with the
-    `property@OverlaySplitView:sidebar-width-unit`.
+    [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
     
     By default, sidebar is using 25% of the total width, with 180sp as the
     minimum size and 280sp as the maximum size.
     
     When collapsed, the preferred width fraction is ignored and the sidebar uses
-    `property@OverlaySplitView:max-sidebar-width` when possible.
+    [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth] when possible.
     
     ## Header Bar Integration
     
-    When used inside [adw.overlay_split_view.OverlaySplitView], `class@HeaderBar` will automatically
+    When used inside [adw.overlay_split_view.OverlaySplitView], [adw.header_bar.HeaderBar] will automatically
     hide the window buttons in the middle.
     
     ## [adw.overlay_split_view.OverlaySplitView] as [gtk.buildable.Buildable]
@@ -3131,7 +3131,7 @@ struct AdwOverlaySplitViewClass
 }
 
 /**
-    A `class@EntryRow` tailored for entering secrets.
+    A [adw.entry_row.EntryRow] tailored for entering secrets.
     
     <picture>
       <source srcset="password-entry-row-dark.png" media="(prefers-color-scheme: dark)">
@@ -3203,17 +3203,17 @@ struct AdwPreferencesDialogClass
     </picture>
     
     An [adw.preferences_group.PreferencesGroup] represents a group or tightly related preferences,
-    which in turn are represented by `class@PreferencesRow`.
+    which in turn are represented by [adw.preferences_row.PreferencesRow].
     
     To summarize the role of the preferences it gathers, a group can have both a
-    title and a description. The title will be used by `class@PreferencesDialog`
+    title and a description. The title will be used by [adw.preferences_dialog.PreferencesDialog]
     to let the user look for a preference.
     
     ## AdwPreferencesGroup as GtkBuildable
     
     The [adw.preferences_group.PreferencesGroup] implementation of the [gtk.buildable.Buildable] interface
-    supports adding `class@PreferencesRow`s to the list by omitting "type". If "type"
-    is omitted and the widget isn't a `class@PreferencesRow` the child is added to
+    supports adding [adw.preferences_row.PreferencesRow]s to the list by omitting "type". If "type"
+    is omitted and the widget isn't a [adw.preferences_row.PreferencesRow] the child is added to
     a box below the list.
     
     When the "type" attribute of a child is `header-suffix`, the child
@@ -3246,7 +3246,7 @@ struct AdwPreferencesGroupClass
 }
 
 /**
-    A page from `class@PreferencesDialog`.
+    A page from [adw.preferences_dialog.PreferencesDialog].
     
     <picture>
       <source srcset="preferences-page-dark.png" media="(prefers-color-scheme: dark)">
@@ -3285,11 +3285,11 @@ struct AdwPreferencesPageClass
 /**
     A [gtk.list_box_row.ListBoxRow] used to present preferences.
     
-    The [adw.preferences_row.PreferencesRow] widget has a title that `class@PreferencesDialog`
+    The [adw.preferences_row.PreferencesRow] widget has a title that [adw.preferences_dialog.PreferencesDialog]
     will use to let the user look for a preference. It doesn't present the title
     in any way and lets you present the preference as you please.
     
-    `class@ActionRow` and its derivatives are convenient to use as preference
+    [adw.action_row.ActionRow] and its derivatives are convenient to use as preference
     rows as they take care of presenting the preference's title while letting you
     compose the inputs of the preference around it.
 */
@@ -3346,7 +3346,7 @@ struct AdwPreferencesWindowClass
 }
 
 /**
-    An `class@AnimationTarget` changing the value of a property of a
+    An [adw.animation_target.AnimationTarget] changing the value of a property of a
     [gobject.object.ObjectWrap] instance.
 */
 struct AdwPropertyAnimationTarget;
@@ -3355,7 +3355,7 @@ struct AdwPropertyAnimationTarget;
 struct AdwPropertyAnimationTargetClass;
 
 /**
-    An `class@ActionRow` with an embedded spin button.
+    An [adw.action_row.ActionRow] with an embedded spin button.
     
     <picture>
       <source srcset="spin-row-dark.png" media="(prefers-color-scheme: dark)">
@@ -3383,7 +3383,7 @@ struct AdwPropertyAnimationTargetClass;
     
     ## CSS nodes
     
-    [adw.spin_row.SpinRow] has the same structure as `class@ActionRow`, as well as the
+    [adw.spin_row.SpinRow] has the same structure as [adw.action_row.ActionRow], as well as the
     `.spin` style class on the main node.
     
     ## Accessibility
@@ -3448,32 +3448,32 @@ struct AdwSplitButtonClass
 }
 
 /**
-    A spring-based `class@Animation`.
+    A spring-based [adw.animation.Animation].
     
     [adw.spring_animation.SpringAnimation] implements an animation driven by a physical model of a
-    spring described by `struct@SpringParams`, with a resting position in
-    `property@SpringAnimation:value-to`, stretched to
-    `property@SpringAnimation:value-from`.
+    spring described by [adw.spring_params.SpringParams], with a resting position in
+    [adw.spring_animation.SpringAnimation.valueTo], stretched to
+    [adw.spring_animation.SpringAnimation.valueFrom].
     
     Since the animation is physically simulated, spring animations don't have a
     fixed duration. The animation will stop when the simulated spring comes to a
     rest - when the amplitude of the oscillations becomes smaller than
-    `property@SpringAnimation:epsilon`, or immediately when it reaches
-    `property@SpringAnimation:value-to` if
-    `property@SpringAnimation:clamp` is set to `TRUE`. The estimated duration can
-    be obtained with `property@SpringAnimation:estimated-duration`.
+    [adw.spring_animation.SpringAnimation.epsilon], or immediately when it reaches
+    [adw.spring_animation.SpringAnimation.valueTo] if
+    [adw.spring_animation.SpringAnimation.clamp] is set to `TRUE`. The estimated duration can
+    be obtained with [adw.spring_animation.SpringAnimation.estimatedDuration].
     
     Due to the nature of spring-driven motion the animation can overshoot
-    `property@SpringAnimation:value-to` before coming to a rest. Whether the
+    [adw.spring_animation.SpringAnimation.valueTo] before coming to a rest. Whether the
     animation will overshoot or not depends on the damping ratio of the spring.
-    See `struct@SpringParams` for more information about specific damping ratio
+    See [adw.spring_params.SpringParams] for more information about specific damping ratio
     values.
     
-    If `property@SpringAnimation:clamp` is `TRUE`, the animation will abruptly
+    If [adw.spring_animation.SpringAnimation.clamp] is `TRUE`, the animation will abruptly
     end as soon as it reaches the final value, preventing overshooting.
     
     Animations can have an initial velocity value, set via
-    `property@SpringAnimation:initial-velocity`, which adjusts the curve without
+    [adw.spring_animation.SpringAnimation.initialVelocity], which adjusts the curve without
     changing the duration. This makes spring animations useful for deceleration
     at the end of gestures.
     
@@ -3486,7 +3486,7 @@ struct AdwSpringAnimation;
 struct AdwSpringAnimationClass;
 
 /**
-    Physical parameters of a spring for `class@SpringAnimation`.
+    Physical parameters of a spring for [adw.spring_animation.SpringAnimation].
     
     Any spring can be described by three parameters: mass, stiffness and damping.
     
@@ -3537,7 +3537,7 @@ struct AdwSpringParams;
     the widget seem to squeeze itself to fit in the available space.
     
     Transitions between children can be animated as fades. This can be controlled
-    with `property@Squeezer:transition-type`.
+    with [adw.squeezer.Squeezer.transitionType].
     
     ## CSS nodes
     
@@ -3555,7 +3555,7 @@ struct AdwSqueezerClass
 }
 
 /**
-    An auxiliary class used by `class@Squeezer`.
+    An auxiliary class used by [adw.squeezer.Squeezer].
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
 */
@@ -3603,7 +3603,7 @@ struct AdwStatusPageClass
     styles, such as whether to use dark or high contrast appearance.
     
     It allows to set the color scheme via the
-    `property@StyleManager:color-scheme` property, and to query the current
+    [adw.style_manager.StyleManager.colorScheme] property, and to query the current
     appearance, as well as whether a system-wide color scheme preference exists.
 */
 struct AdwStyleManager;
@@ -3616,16 +3616,16 @@ struct AdwStyleManagerClass
 }
 
 /**
-    A swipe tracker used in `class@Carousel`, `class@NavigationView` and
-    `class@OverlaySplitView`.
+    A swipe tracker used in [adw.carousel.Carousel], [adw.navigation_view.NavigationView] and
+    [adw.overlay_split_view.OverlaySplitView].
     
     The [adw.swipe_tracker.SwipeTracker] object can be used for implementing widgets with swipe
     gestures. It supports touch-based swipes, pointer dragging, and touchpad
     scrolling.
     
-    The widgets will probably want to expose the `property@SwipeTracker:enabled`
+    The widgets will probably want to expose the [adw.swipe_tracker.SwipeTracker.enabled]
     property. If they expect to use horizontal orientation,
-    `property@SwipeTracker:reversed` can be used for supporting RTL text
+    [adw.swipe_tracker.SwipeTracker.reversed] can be used for supporting RTL text
     direction.
 */
 struct AdwSwipeTracker;
@@ -3642,7 +3642,7 @@ struct AdwSwipeTrackerClass
     
     The [adw.swipeable.Swipeable] interface is implemented by all swipeable widgets.
     
-    See `class@SwipeTracker` for details about implementing it.
+    See [adw.swipe_tracker.SwipeTracker] for details about implementing it.
 */
 struct AdwSwipeable;
 
@@ -3710,7 +3710,7 @@ struct AdwSwipeableInterface
     </object>
     ```
     
-    The `property@SwitchRow:active` property should be connected to in order to
+    The [adw.switch_row.SwitchRow.active] property should be connected to in order to
     monitor changes to the active state.
     
     ## Accessibility
@@ -3727,7 +3727,7 @@ struct AdwSwitchRowClass
 }
 
 /**
-    A tab bar for `class@TabView`.
+    A tab bar for [adw.tab_view.TabView].
     
     <picture>
       <source srcset="tab-bar-dark.png" media="(prefers-color-scheme: dark)">
@@ -3735,7 +3735,7 @@ struct AdwSwitchRowClass
     </picture>
     
     The [adw.tab_bar.TabBar] widget is a tab bar that can be used with conjunction with
-    [adw.tab_view.TabView]. It is typically used as a top bar within `class@ToolbarView`.
+    [adw.tab_view.TabView]. It is typically used as a top bar within [adw.toolbar_view.ToolbarView].
     
     [adw.tab_bar.TabBar] can autohide and can optionally contain action widgets on both
     sides of the tabs.
@@ -3758,7 +3758,7 @@ struct AdwTabBarClass
 }
 
 /**
-    A button that displays the number of `class@TabView` pages.
+    A button that displays the number of [adw.tab_view.TabView] pages.
     
     <picture>
       <source srcset="tab-button-dark.png" media="(prefers-color-scheme: dark)">
@@ -3769,7 +3769,7 @@ struct AdwTabBarClass
     [adw.tab_view.TabView], as well as whether one of the inactive pages needs attention.
     
     It's intended to be used as a visible indicator when there's no visible tab
-    bar, typically opening an `class@TabOverview` on click, e.g. via the
+    bar, typically opening an [adw.tab_overview.TabOverview] on click, e.g. via the
     `overview.open` action name:
     
     ```xml
@@ -3797,7 +3797,7 @@ struct AdwTabButtonClass
 }
 
 /**
-    A tab overview for `class@TabView`.
+    A tab overview for [adw.tab_view.TabView].
     
     <picture>
       <source srcset="tab-overview-dark.png" media="(prefers-color-scheme: dark)">
@@ -3809,37 +3809,37 @@ struct AdwTabButtonClass
     
     [adw.tab_overview.TabOverview] shows a thumbnail for each tab. By default thumbnails are
     static for all pages except the selected one. They can be made always live
-    by setting `property@TabPage:live-thumbnail` to `TRUE`, or refreshed with
+    by setting [adw.tab_page.TabPage.liveThumbnail] to `TRUE`, or refreshed with
     [adw.tab_page.TabPage.invalidateThumbnail] or
     [adw.tab_view.TabView.invalidateThumbnails] otherwise.
     
     If the pages are too tall or too wide, the thumbnails will be cropped; use
-    `property@TabPage:thumbnail-xalign` and `property@TabPage:thumbnail-yalign` to
+    [adw.tab_page.TabPage.thumbnailXalign] and [adw.tab_page.TabPage.thumbnailYalign] to
     control which part of the page should be visible in this case.
     
     Pinned tabs are shown as smaller cards without thumbnails above the other
-    tabs. Unlike in `class@TabBar`, they still have titles, as well as an unpin
+    tabs. Unlike in [adw.tab_bar.TabBar], they still have titles, as well as an unpin
     button.
     
     [adw.tab_overview.TabOverview] provides search in open tabs. It searches in tab titles and
-    tooltips, as well as `property@TabPage:keyword`.
+    tooltips, as well as [adw.tab_page.TabPage.keyword].
     
-    If `property@TabOverview:enable-new-tab` is set to `TRUE`, a new tab button
-    will be shown. Connect to the `signal@TabOverview::create-tab` signal to use
+    If [adw.tab_overview.TabOverview.enableNewTab] is set to `TRUE`, a new tab button
+    will be shown. Connect to the [adw.tab_overview.TabOverview.createTab] signal to use
     it.
     
-    `property@TabOverview:secondary-menu` can be used to provide a secondary menu
+    [adw.tab_overview.TabOverview.secondaryMenu] can be used to provide a secondary menu
     for the overview. Use it to add extra actions, e.g. to open a new window or
     undo closed tab.
     
     [adw.tab_overview.TabOverview] is intended to be used as the direct child of the window,
-    with the rest of the window contents set as the `property@TabOverview:child`.
-    The child is expected to contain an `class@TabView`.
+    with the rest of the window contents set as the [adw.tab_overview.TabOverview.child].
+    The child is expected to contain an [adw.tab_view.TabView].
     
     [adw.tab_overview.TabOverview] shows window buttons by default. They can be disabled by
-    setting `property@TabOverview:show-start-title-buttons` and/or
-    `property@TabOverview:show-start-title-buttons` and/or
-    `property@TabOverview:show-end-title-buttons` to `FALSE`.
+    setting [adw.tab_overview.TabOverview.showStartTitleButtons] and/or
+    [adw.tab_overview.TabOverview.showStartTitleButtons] and/or
+    [adw.tab_overview.TabOverview.showEndTitleButtons] to `FALSE`.
     
     If search and window buttons are disabled, and secondary menu is not set, the
     header bar will be hidden.
@@ -3848,7 +3848,7 @@ struct AdwTabButtonClass
     
     [adw.tab_overview.TabOverview] defines the `overview.open` and `overview.close` actions for
     opening and closing itself. They can be convenient when used together with
-    `class@TabButton`.
+    [adw.tab_button.TabButton].
     
     ## CSS nodes
     
@@ -3864,7 +3864,7 @@ struct AdwTabOverviewClass
 }
 
 /**
-    An auxiliary class used by `class@TabView`.
+    An auxiliary class used by [adw.tab_view.TabView].
 */
 struct AdwTabPage;
 
@@ -3881,9 +3881,9 @@ struct AdwTabPageClass
     [adw.tab_view.TabView] is a container which shows one child at a time. While it
     provides keyboard shortcuts for switching between pages, it does not provide
     a visible tab switcher and relies on external widgets for that, such as
-    `class@TabBar`, `class@TabOverview` and `class@TabButton`.
+    [adw.tab_bar.TabBar], [adw.tab_overview.TabOverview] and [adw.tab_button.TabButton].
     
-    [adw.tab_view.TabView] maintains a `class@TabPage` object for each page, which holds
+    [adw.tab_view.TabView] maintains a [adw.tab_page.TabPage] object for each page, which holds
     additional per-page properties. You can obtain the [adw.tab_page.TabPage] for a page
     with [adw.tab_view.TabView.getPage], and as the return value for
     [adw.tab_view.TabView.append] and other functions for adding children.
@@ -3896,9 +3896,9 @@ struct AdwTabPageClass
     As such, it does not support disabling page reordering or detaching.
     
     [adw.tab_view.TabView] adds a number of global page switching and reordering shortcuts.
-    The `property@TabView:shortcuts` property can be used to manage them.
+    The [adw.tab_view.TabView.shortcuts] property can be used to manage them.
     
-    See `flags@TabViewShortcuts` for the list of the available shortcuts. All of
+    See [adw.types.TabViewShortcuts] for the list of the available shortcuts. All of
     the shortcuts are enabled by default.
     
     [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts] can be
@@ -3928,21 +3928,21 @@ struct AdwTabViewClass
 }
 
 /**
-    A time-based `class@Animation`.
+    A time-based [adw.animation.Animation].
     
     [adw.timed_animation.TimedAnimation] implements a simple animation interpolating the given
-    value from `property@TimedAnimation:value-from` to
-    `property@TimedAnimation:value-to` over
-    `property@TimedAnimation:duration` milliseconds using the curve described by
-    `property@TimedAnimation:easing`.
+    value from [adw.timed_animation.TimedAnimation.valueFrom] to
+    [adw.timed_animation.TimedAnimation.valueTo] over
+    [adw.timed_animation.TimedAnimation.duration] milliseconds using the curve described by
+    [adw.timed_animation.TimedAnimation.easing].
     
-    If `property@TimedAnimation:reverse` is set to `TRUE`, [adw.timed_animation.TimedAnimation]
-    will instead animate from `property@TimedAnimation:value-to` to
-    `property@TimedAnimation:value-from`, and the easing curve will be inverted.
+    If [adw.timed_animation.TimedAnimation.reverse] is set to `TRUE`, [adw.timed_animation.TimedAnimation]
+    will instead animate from [adw.timed_animation.TimedAnimation.valueTo] to
+    [adw.timed_animation.TimedAnimation.valueFrom], and the easing curve will be inverted.
     
     The animation can repeat a certain amount of times, or endlessly, depending
-    on the `property@TimedAnimation:repeat-count` value. If
-    `property@TimedAnimation:alternate` is set to `TRUE`, it will also change the
+    on the [adw.timed_animation.TimedAnimation.repeatCount] value. If
+    [adw.timed_animation.TimedAnimation.alternate] is set to `TRUE`, it will also change the
     direction every other iteration.
 */
 struct AdwTimedAnimation;
@@ -3951,7 +3951,7 @@ struct AdwTimedAnimation;
 struct AdwTimedAnimationClass;
 
 /**
-    A helper object for `class@ToastOverlay`.
+    A helper object for [adw.toast_overlay.ToastOverlay].
     
     Toasts are meant to be passed into [adw.toast_overlay.ToastOverlay.addToast] as
     follows:
@@ -3965,17 +3965,17 @@ struct AdwTimedAnimationClass;
       <img src="toast-simple.png" alt="toast-simple">
     </picture>
     
-    Toasts always have a close button. They emit the `signal@Toast::dismissed`
+    Toasts always have a close button. They emit the [adw.toast.Toast.dismissed]
     signal when disappearing.
     
-    `property@Toast:timeout` determines how long the toast stays on screen, while
-    `property@Toast:priority` determines how it behaves if another toast is
+    [adw.toast.Toast.timeout] determines how long the toast stays on screen, while
+    [adw.toast.Toast.priority] determines how it behaves if another toast is
     already being displayed.
     
-    Toast titles use Pango markup by default, set `property@Toast:use-markup` to
+    Toast titles use Pango markup by default, set [adw.toast.Toast.useMarkup] to
     `FALSE` if this is unwanted.
     
-    `property@Toast:custom-title` can be used to replace the title label with a
+    [adw.toast.Toast.customTitle] can be used to replace the title label with a
     custom widget.
     
     ## Actions
@@ -4091,10 +4091,10 @@ struct AdwToastClass
     </picture>
     
     Much like [gtk.overlay.Overlay], [adw.toast_overlay.ToastOverlay] is a container with a single
-    main child, on top of which it can display a `class@Toast`, overlaid.
+    main child, on top of which it can display a [adw.toast.Toast], overlaid.
     Toasts can be shown with [adw.toast_overlay.ToastOverlay.addToast].
     
-    See `class@Toast` for details.
+    See [adw.toast.Toast] for details.
     
     ## CSS nodes
     
@@ -4159,9 +4159,9 @@ struct AdwToastOverlayClass
     
     The following kinds of top and bottom bars are supported:
     
-    - `class@HeaderBar`
-    - `class@TabBar`
-    - `class@ViewSwitcherBar`
+    - [adw.header_bar.HeaderBar]
+    - [adw.tab_bar.TabBar]
+    - [adw.view_switcher_bar.ViewSwitcherBar]
     - [gtk.action_bar.ActionBar]
     - [gtk.header_bar.HeaderBar]
     - [gtk.popover_menu_bar.PopoverMenuBar]
@@ -4173,16 +4173,16 @@ struct AdwToastOverlayClass
     undershoot shadow, same as when using the
     [`.undershoot-top`](style-classes.html#undershoot-indicators) and
     [`.undershoot-bottom`](style-classes.html#undershoot-indicators) style
-    classes. This works well in most cases, e.g. with `class@StatusPage` or
-    `class@PreferencesPage`, where the background at the top and bottom parts of
+    classes. This works well in most cases, e.g. with [adw.status_page.StatusPage] or
+    [adw.preferences_page.PreferencesPage], where the background at the top and bottom parts of
     the page is uniform. Additionally, windows with sidebars should always use
     this style.
     
-    `property@ToolbarView:top-bar-style` and
-    `property@ToolbarView:bottom-bar-style` properties can be used add an opaque
+    [adw.toolbar_view.ToolbarView.topBarStyle] and
+    [adw.toolbar_view.ToolbarView.bottomBarStyle] properties can be used add an opaque
     background and a persistent shadow to top and bottom bars, this can be useful
     for content such as [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
-    where some elements are adjacent to the top/bottom bars, or `class@TabView`,
+    where some elements are adjacent to the top/bottom bars, or [adw.tab_view.TabView],
     where each page can have a different background.
     
     <picture style="min-width: 33%; display: inline-block;">
@@ -4215,12 +4215,12 @@ struct AdwToastOverlayClass
     
     Content is typically place between top and bottom bars, but can also extend
     behind them. This is controlled with the
-    `property@ToolbarView:extend-content-to-top-edge` and
-    `property@ToolbarView:extend-content-to-bottom-edge` properties.
+    [adw.toolbar_view.ToolbarView.extendContentToTopEdge] and
+    [adw.toolbar_view.ToolbarView.extendContentToBottomEdge] properties.
     
     Top and bottom bars can be hidden and revealed with an animation using the
-    `property@ToolbarView:reveal-top-bars` and
-    `property@ToolbarView:reveal-bottom-bars` properties.
+    [adw.toolbar_view.ToolbarView.revealTopBars] and
+    [adw.toolbar_view.ToolbarView.revealBottomBars] properties.
     
     ## [adw.toolbar_view.ToolbarView] as [gtk.buildable.Buildable]
     
@@ -4242,34 +4242,34 @@ struct AdwToolbarViewClass
 }
 
 /**
-    A view container for `class@ViewSwitcher`.
+    A view container for [adw.view_switcher.ViewSwitcher].
     
     [adw.view_stack.ViewStack] is a container which only shows one page at a time.
     It is typically used to hold an application's main views.
     
     It doesn't provide a way to transition between pages.
-    Instead, a separate widget such as `class@ViewSwitcher` can be used with
+    Instead, a separate widget such as [adw.view_switcher.ViewSwitcher] can be used with
     [adw.view_stack.ViewStack] to provide this functionality.
     
     [adw.view_stack.ViewStack] pages can have a title, an icon, an attention request, and a
-    numbered badge that `class@ViewSwitcher` will use to let users identify which
-    page is which. Set them using the `property@ViewStackPage:title`,
-    `property@ViewStackPage:icon-name`,
-    `property@ViewStackPage:needs-attention`, and
-    `property@ViewStackPage:badge-number` properties.
+    numbered badge that [adw.view_switcher.ViewSwitcher] will use to let users identify which
+    page is which. Set them using the [adw.view_stack_page.ViewStackPage.title],
+    [adw.view_stack_page.ViewStackPage.iconName],
+    [adw.view_stack_page.ViewStackPage.needsAttention], and
+    [adw.view_stack_page.ViewStackPage.badgeNumber] properties.
     
     Unlike [gtk.stack.Stack], transitions between views are not animated.
     
-    [adw.view_stack.ViewStack] maintains a `class@ViewStackPage` object for each added child,
+    [adw.view_stack.ViewStack] maintains a [adw.view_stack_page.ViewStackPage] object for each added child,
     which holds additional per-child properties. You obtain the
-    `class@ViewStackPage` for a child with [adw.view_stack.ViewStack.getPage] and you
+    [adw.view_stack_page.ViewStackPage] for a child with [adw.view_stack.ViewStack.getPage] and you
     can obtain a [gtk.selection_model.SelectionModel] containing all the pages with
     [adw.view_stack.ViewStack.getPages].
     
     ## AdwViewStack as GtkBuildable
     
     To set child-specific properties in a .ui file, create
-    `class@ViewStackPage` objects explicitly, and set the child widget as a
+    [adw.view_stack_page.ViewStackPage] objects explicitly, and set the child widget as a
     property on it:
     
     ```xml
@@ -4307,7 +4307,7 @@ struct AdwViewStackClass
 }
 
 /**
-    An auxiliary class used by `class@ViewStack`.
+    An auxiliary class used by [adw.view_stack.ViewStack].
 */
 struct AdwViewStackPage;
 
@@ -4319,9 +4319,9 @@ struct AdwViewStackPageClass
 }
 
 /**
-    An auxiliary class used by `class@ViewStack`.
+    An auxiliary class used by [adw.view_stack.ViewStack].
     
-    See `property@ViewStack:pages`.
+    See [adw.view_stack.ViewStack.pages].
 */
 struct AdwViewStackPages;
 
@@ -4341,15 +4341,15 @@ struct AdwViewStackPagesClass
     </picture>
     
     An adaptive view switcher designed to switch between multiple views
-    contained in a `class@ViewStack` in a similar fashion to
+    contained in a [adw.view_stack.ViewStack] in a similar fashion to
     [gtk.stack_switcher.StackSwitcher].
     
     [adw.view_switcher.ViewSwitcher] buttons always have an icon and a label. They can be
     displayed side by side, or icon on top of the label. This can be controlled
-    via the `property@ViewSwitcher:policy` property.
+    via the [adw.view_switcher.ViewSwitcher.policy] property.
     
     [adw.view_switcher.ViewSwitcher] is intended to be used in a header bar together with
-    `class@ViewSwitcherBar` at the bottom of the window, and a `class@Breakpoint`
+    [adw.view_switcher_bar.ViewSwitcherBar] at the bottom of the window, and a [adw.breakpoint.Breakpoint]
     showing the view switcher bar on narrow sizes, while removing the view
     switcher from the header bar, as follows:
     
@@ -4389,7 +4389,7 @@ struct AdwViewStackPagesClass
     </object>
     ```
     
-    It's recommended to set `property@ViewSwitcher:policy` to
+    It's recommended to set [adw.view_switcher.ViewSwitcher.policy] to
     [adw.types.ViewSwitcherPolicy.Wide] in this case.
     
     You may have to adjust the breakpoint condition for your specific pages.
@@ -4415,12 +4415,12 @@ struct AdwViewSwitcher;
     </picture>
     
     An action bar letting you switch between multiple views contained in a
-    `class@ViewStack`, via an `class@ViewSwitcher`. It is designed to be put at
+    [adw.view_stack.ViewStack], via an [adw.view_switcher.ViewSwitcher]. It is designed to be put at
     the bottom of a window and to be revealed only on really narrow windows, e.g.
     on mobile phones. It can't be revealed if there are less than two pages.
     
     [adw.view_switcher_bar.ViewSwitcherBar] is intended to be used together with
-    [adw.view_switcher.ViewSwitcher] in a header bar, and a `class@Breakpoint` showing the view
+    [adw.view_switcher.ViewSwitcher] in a header bar, and a [adw.breakpoint.Breakpoint] showing the view
     switcher bar on narrow sizes, while removing the view switcher from the
     header bar, as follows:
     
@@ -4460,7 +4460,7 @@ struct AdwViewSwitcher;
     </object>
     ```
     
-    It's recommended to set `property@ViewSwitcher:policy` to
+    It's recommended to set [adw.view_switcher.ViewSwitcher.policy] to
     [adw.types.ViewSwitcherPolicy.Wide] in this case.
     
     You may have to adjust the breakpoint condition for your specific pages.
@@ -4494,21 +4494,21 @@ struct AdwViewSwitcherClass
     </picture>
     
     A widget letting you switch between multiple views contained by a
-    `class@ViewStack` via an `class@ViewSwitcher`.
+    [adw.view_stack.ViewStack] via an [adw.view_switcher.ViewSwitcher].
     
-    It is designed to be used as the title widget of a `class@HeaderBar`, and
+    It is designed to be used as the title widget of a [adw.header_bar.HeaderBar], and
     will display the window's title when the window is too narrow to fit the view
     switcher e.g. on mobile phones, or if there are less than two views.
     
     In order to center the title in narrow windows, the header bar should have
-    `property@HeaderBar:centering-policy` set to
+    [adw.header_bar.HeaderBar.centeringPolicy] set to
     [adw.types.CenteringPolicy.Strict].
     
     [adw.view_switcher_title.ViewSwitcherTitle] is intended to be used together with
-    `class@ViewSwitcherBar`.
+    [adw.view_switcher_bar.ViewSwitcherBar].
     
-    A common use case is to bind the `property@ViewSwitcherBar:reveal` property
-    to `property@ViewSwitcherTitle:title-visible` to automatically reveal the
+    A common use case is to bind the [adw.view_switcher_bar.ViewSwitcherBar.reveal] property
+    to [adw.view_switcher_title.ViewSwitcherTitle.titleVisible] to automatically reveal the
     view switcher bar when the title label is displayed in place of the view
     switcher, as follows:
     
@@ -4566,8 +4566,8 @@ struct AdwViewSwitcherTitleClass
     </picture>
     
     The [adw.window.Window] widget is a subclass of [gtk.window.Window] which has no
-    titlebar area. Instead, `class@ToolbarView` can be used together with
-    `class@HeaderBar` or [gtk.header_bar.HeaderBar] as follows:
+    titlebar area. Instead, [adw.toolbar_view.ToolbarView] can be used together with
+    [adw.header_bar.HeaderBar] or [gtk.header_bar.HeaderBar] as follows:
     
     ```xml
     <object class="AdwWindow">
@@ -4585,18 +4585,18 @@ struct AdwViewSwitcherTitleClass
     ```
     
     Using [gtk.window.Window.titlebar] or [gtk.window.Window.child]
-    is not supported and will result in a crash. Use `property@Window:content`
+    is not supported and will result in a crash. Use [adw.window.Window.content]
     instead.
     
     ## Dialogs
     
-    [adw.window.Window] can contain `class@Dialog`. Use [adw.dialog.Dialog.present] with the
+    [adw.window.Window] can contain [adw.dialog.Dialog]. Use [adw.dialog.Dialog.present] with the
     window or a widget within a window to show a dialog.
     
     ## Breakpoints
     
-    [adw.window.Window] can be used with `class@Breakpoint` the same way as
-    `class@BreakpointBin`. Refer to that widget's documentation for details.
+    [adw.window.Window] can be used with [adw.breakpoint.Breakpoint] the same way as
+    [adw.breakpoint_bin.BreakpointBin]. Refer to that widget's documentation for details.
     
     Example:
     
@@ -4630,8 +4630,8 @@ struct AdwViewSwitcherTitleClass
     ```
     
     Like [adw.breakpoint_bin.BreakpointBin], if breakpoints are used, [adw.window.Window] doesn't have a
-    minimum size, and `property@Gtk.Widget:width-request` and
-    `property@Gtk.Widget:height-request` properties must be set manually.
+    minimum size, and [gtk.widget.Widget.widthRequest] and
+    [gtk.widget.Widget.heightRequest] properties must be set manually.
 */
 struct AdwWindow
 {
@@ -4658,7 +4658,7 @@ struct AdwWindowClass
     </picture>
     
     [adw.window_title.WindowTitle] shows a title and subtitle. It's intended to be used as the
-    title child of [gtk.header_bar.HeaderBar] or `class@HeaderBar`.
+    title child of [gtk.header_bar.HeaderBar] or [adw.header_bar.HeaderBar].
     
     ## CSS nodes
     

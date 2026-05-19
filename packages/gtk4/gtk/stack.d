@@ -1,6 +1,7 @@
 /// Module for [Stack] class
 module gtk.stack;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -28,7 +29,7 @@ import gtk.widget;
     
     Transitions between pages can be animated as slides or fades. This
     can be controlled with [gtk.stack.Stack.setTransitionType].
-    These animations respect the `property@Gtk.Settings:gtk-enable-animations`
+    These animations respect the [gtk.settings.Settings.gtkEnableAnimations]
     setting.
     
     [gtk.stack.Stack] maintains a [gtk.stack_page.StackPage] object for each added
@@ -502,7 +503,7 @@ class Stack : gtk.widget.Widget
       Sets whether or not stack will interpolate its size when
       changing the visible child.
       
-      If the `propertyGtk.Stack:interpolate-size` property is set
+      If the [gtk.stack.Stack.interpolateSize] property is set
       to true, stack will interpolate its size between the current
       one and the one it'll take after changing the visible child,
       according to the set transition duration.

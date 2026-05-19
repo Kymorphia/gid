@@ -1,6 +1,7 @@
 /// Module for [FileSystemDatasetFactory] class
 module arrowdataset.file_system_dataset_factory;
 
+public import gid.basictypes;
 import arrow.file_system;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;

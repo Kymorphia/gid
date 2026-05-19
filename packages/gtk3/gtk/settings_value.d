@@ -1,6 +1,7 @@
 /// Module for [SettingsValue] class
 module gtk.settings_value;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.value;
 import gtk.c.functions;

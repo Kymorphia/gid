@@ -1,6 +1,7 @@
 /// Module for [DebugController] interface mixin
 module gio.debug_controller_mixin;
 
+public import gid.basictypes;
 public import gio.debug_controller_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;
@@ -17,7 +18,7 @@ public import gobject.gid_builder;
     features in this process.
     
     Whether debug output is enabled is exposed as
-    `property@Gio.DebugController:debug-enabled`. This controls
+    [gio.debug_controller.DebugController.debugEnabled]. This controls
     `func@GLib.log_set_debug_enabled` by default. Application code may
     connect to the [gobject.object.ObjectWrap.notify] signal for it
     to control other parts of its debug infrastructure as necessary.

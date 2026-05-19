@@ -1,6 +1,7 @@
 /// Module for [PopoverMenu] class
 module gtk.popover_menu;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.menu_model;
 import gobject.gid_builder;

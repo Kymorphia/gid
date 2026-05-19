@@ -1,6 +1,7 @@
 /// Module for [GeolocationPosition] class
 module webkit.geolocation_position;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

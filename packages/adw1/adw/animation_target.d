@@ -1,6 +1,7 @@
 /// Module for [AnimationTarget] class
 module adw.animation_target;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -9,7 +10,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    Represents a value `class@Animation` can animate.
+    Represents a value [adw.animation.Animation] can animate.
 */
 class AnimationTarget : gobject.object.ObjectWrap
 {

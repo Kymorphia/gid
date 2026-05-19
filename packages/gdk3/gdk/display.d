@@ -1,6 +1,7 @@
 /// Module for [Display] class
 module gdk.display;
 
+public import gid.basictypes;
 import gdk.app_launch_context;
 import gdk.atom;
 import gdk.c.functions;

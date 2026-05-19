@@ -1,6 +1,7 @@
 /// Module for [SignalQuery] class
 module gobject.signal_query;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

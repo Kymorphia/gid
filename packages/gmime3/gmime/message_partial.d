@@ -1,6 +1,7 @@
 /// Module for [MessagePartial] class
 module gmime.message_partial;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

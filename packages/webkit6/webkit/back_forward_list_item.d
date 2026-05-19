@@ -1,6 +1,7 @@
 /// Module for [BackForwardListItem] class
 module webkit.back_forward_list_item;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.initially_unowned;

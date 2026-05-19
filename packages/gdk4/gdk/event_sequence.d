@@ -1,6 +1,7 @@
 /// Module for [EventSequence] class
 module gdk.event_sequence;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

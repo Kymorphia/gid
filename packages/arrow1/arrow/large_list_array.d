@@ -1,6 +1,7 @@
 /// Module for [LargeListArray] class
 module arrow.large_list_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.buffer;
 import arrow.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [ScrolledWindow] class
 module gtk.scrolled_window;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -33,8 +34,8 @@ import gtk.widget;
     
     If [gtk.scrolled_window.ScrolledWindow.setChild] has added a [gtk.viewport.Viewport] for you,
     it will be automatically removed when you unset the child.
-    Unless `property@Gtk.ScrolledWindow:hscrollbar-policy` and
-    `property@Gtk.ScrolledWindow:vscrollbar-policy` are [gtk.types.PolicyType.Never] or
+    Unless [gtk.scrolled_window.ScrolledWindow.hscrollbarPolicy] and
+    [gtk.scrolled_window.ScrolledWindow.vscrollbarPolicy] are [gtk.types.PolicyType.Never] or
     [gtk.types.PolicyType.External], [gtk.scrolled_window.ScrolledWindow] adds internal [gtk.scrollbar.Scrollbar] widgets
     around its child. The scroll position of the child, and if applicable the
     scrollbars, is controlled by the [gtk.scrolled_window.ScrolledWindow.hadjustment]
@@ -52,22 +53,22 @@ import gtk.widget;
     [gtk.scrolled_window.ScrolledWindow] has built-in support for touch devices. When a
     touchscreen is used, swiping will move the scrolled window, and will
     expose 'kinetic' behavior. This can be turned off with the
-    `property@Gtk.ScrolledWindow:kinetic-scrolling` property if it is undesired.
+    [gtk.scrolled_window.ScrolledWindow.kineticScrolling] property if it is undesired.
     
     [gtk.scrolled_window.ScrolledWindow] also displays visual 'overshoot' indication when
     the content is pulled beyond the end, and this situation can be
-    captured with the `signal@Gtk.ScrolledWindow::edge-overshot` signal.
+    captured with the [gtk.scrolled_window.ScrolledWindow.edgeOvershot] signal.
     
     If no mouse device is present, the scrollbars will overlaid as
     narrow, auto-hiding indicators over the content. If traditional
     scrollbars are desired although no mouse is present, this behaviour
-    can be turned off with the `property@Gtk.ScrolledWindow:overlay-scrolling`
+    can be turned off with the [gtk.scrolled_window.ScrolledWindow.overlayScrolling]
     property.
     
     # CSS nodes
     
     [gtk.scrolled_window.ScrolledWindow] has a main CSS node with name scrolledwindow.
-    It gets a .frame style class added when `property@Gtk.ScrolledWindow:has-frame`
+    It gets a .frame style class added when [gtk.scrolled_window.ScrolledWindow.hasFrame]
     is true.
     
     It uses subnodes with names overshoot and undershoot to draw the overflow
@@ -315,7 +316,7 @@ class ScrolledWindow : gtk.widget.Widget
         the content, as narrow indicators.
         
         Note that overlay scrolling can also be globally disabled, with
-        the `property@Gtk.Settings:gtk-overlay-scrolling` setting.
+        the [gtk.settings.Settings.gtkOverlayScrolling] setting.
   */
   @property bool overlayScrolling()
   {
@@ -332,7 +333,7 @@ class ScrolledWindow : gtk.widget.Widget
           the content, as narrow indicators.
           
           Note that overlay scrolling can also be globally disabled, with
-          the `property@Gtk.Settings:gtk-overlay-scrolling` setting.
+          the [gtk.settings.Settings.gtkOverlayScrolling] setting.
   */
   @property void overlayScrolling(bool propval)
   {
@@ -718,7 +719,7 @@ class ScrolledWindow : gtk.widget.Widget
       scrolling the content.
       
       It is a programming error to set the maximum content height to a value
-      smaller than `propertyGtk.ScrolledWindow:min-content-height`.
+      smaller than [gtk.scrolled_window.ScrolledWindow.minContentHeight].
   
       Params:
         height = the maximum content height
@@ -735,7 +736,7 @@ class ScrolledWindow : gtk.widget.Widget
       scrolling the content.
       
       It is a programming error to set the maximum content width to a
-      value smaller than `propertyGtk.ScrolledWindow:min-content-width`.
+      value smaller than [gtk.scrolled_window.ScrolledWindow.minContentWidth].
   
       Params:
         width = the maximum content width
@@ -752,7 +753,7 @@ class ScrolledWindow : gtk.widget.Widget
       size of the content.
       
       It is a programming error to set the minimum content height to a
-      value greater than `propertyGtk.ScrolledWindow:max-content-height`.
+      value greater than [gtk.scrolled_window.ScrolledWindow.maxContentHeight].
   
       Params:
         height = the minimal content height
@@ -769,7 +770,7 @@ class ScrolledWindow : gtk.widget.Widget
       size of the content.
       
       It is a programming error to set the minimum content width to a
-      value greater than `propertyGtk.ScrolledWindow:max-content-width`.
+      value greater than [gtk.scrolled_window.ScrolledWindow.maxContentWidth].
   
       Params:
         width = the minimal content width
@@ -883,7 +884,7 @@ class ScrolledWindow : gtk.widget.Widget
         in that orientation.
         
         A similar behavior without edge resistance is provided by the
-        `signalGtk.ScrolledWindow::edge-reached` signal.
+        [gtk.scrolled_window.ScrolledWindow.edgeReached] signal.
         
         Note: The pos argument is LTR/RTL aware, so callers should be
         aware too if intending to provide behavior on horizontal edges.
@@ -934,7 +935,7 @@ class ScrolledWindow : gtk.widget.Widget
         adjustment in that orientation.
         
         A similar behavior with edge resistance is provided by the
-        `signalGtk.ScrolledWindow::edge-overshot` signal.
+        [gtk.scrolled_window.ScrolledWindow.edgeOvershot] signal.
         
         Note: The pos argument is LTR/RTL aware, so callers should be
         aware too if intending to provide behavior on horizontal edges.
@@ -1205,7 +1206,7 @@ class ScrolledWindowGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           the content, as narrow indicators.
           
           Note that overlay scrolling can also be globally disabled, with
-          the `property@Gtk.Settings:gtk-overlay-scrolling` setting.
+          the [gtk.settings.Settings.gtkOverlayScrolling] setting.
       Returns: Builder instance for fluent chaining
   */
   T overlayScrolling(bool propval)

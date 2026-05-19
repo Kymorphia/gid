@@ -1,6 +1,7 @@
 /// Module for [ISO8601TimestampParser] class
 module arrow.iso8601_timestamp_parser;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.timestamp_parser;

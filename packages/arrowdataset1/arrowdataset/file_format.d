@@ -1,6 +1,7 @@
 /// Module for [FileFormat] class
 module arrowdataset.file_format;
 
+public import gid.basictypes;
 import arrow.file_system;
 import arrow.output_stream;
 import arrow.schema;

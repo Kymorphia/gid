@@ -1,6 +1,7 @@
 /// Module for [GLBaseMixerPad] class
 module gstgl.glbase_mixer_pad;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstgl.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [Document] interface
 module atk.document;
 
+public import gid.basictypes;
 public import atk.document_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

@@ -1,6 +1,7 @@
 /// Module for [DirectoryPartitioning] class
 module arrowdataset.directory_partitioning;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.schema;
 import arrowdataset.c.functions;

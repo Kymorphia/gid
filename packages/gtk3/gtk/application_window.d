@@ -1,6 +1,7 @@
 /// Module for [ApplicationWindow] class
 module gtk.application_window;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

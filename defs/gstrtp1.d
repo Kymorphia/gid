@@ -1,7 +1,7 @@
 //!gir GstRtp-1.0
 //!info description "D binding for the GstRtp library - RTP library for the GStreamer multimedia framework"
 //!info homepage https://gstreamer.freedesktop.org
-//!info docs https://www.kymorphia.com/gid/gstrtp.html
+//!info docs https://www.kymorphia.com/gid/gid~gstrtp1/
 //!info capi https://gstreamer.freedesktop.org/documentation/rtplib/index.html
 
 //# ssrc parameter appears to be an input uint pointer for some unknown reason, mark it unsupported

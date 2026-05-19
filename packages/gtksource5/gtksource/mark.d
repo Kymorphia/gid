@@ -1,6 +1,7 @@
 /// Module for [Mark] class
 module gtksource.mark;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -10,7 +11,7 @@ import gtksource.c.types;
 import gtksource.types;
 
 /**
-    Mark object for `class@Buffer`.
+    Mark object for [gtksource.buffer.Buffer].
     
     A [gtksource.mark.Mark] marks a position in the text where you want to display
     additional info. It is based on [gtk.text_mark.TextMark] and thus is still valid after
@@ -20,7 +21,7 @@ import gtksource.types;
     when you create the mark. Each category can have a priority, a pixbuf and
     other associated attributes. See [gtksource.view.View.setMarkAttributes].
     The pixbuf will be displayed in the margin at the line where the mark
-    residents if the `property@View:show-line-marks` property is set to true. If
+    residents if the [gtksource.view.View.showLineMarks] property is set to true. If
     there are multiple marks in the same line, the pixbufs will be drawn on top
     of each other. The mark with the highest priority will be drawn on top.
 */

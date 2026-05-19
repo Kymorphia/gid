@@ -1,6 +1,7 @@
 /// Module for [Widget] class
 module panel.widget;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action_group;
 import gio.icon;

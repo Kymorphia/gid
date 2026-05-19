@@ -1,6 +1,7 @@
 /// Module for [Box] class
 module graphene.box;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import graphene.c.functions;

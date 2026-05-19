@@ -1,6 +1,7 @@
 /// Module for [InitiallyUnowned] class
 module gobject.initially_unowned;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

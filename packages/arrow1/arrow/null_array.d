@@ -1,6 +1,7 @@
 /// Module for [NullArray] class
 module arrow.null_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;

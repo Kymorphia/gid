@@ -1,6 +1,7 @@
 /// Module for [MenuAccessible] class
 module gtk.menu_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.selection;

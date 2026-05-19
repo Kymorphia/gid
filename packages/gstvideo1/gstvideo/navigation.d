@@ -1,6 +1,7 @@
 /// Module for [Navigation] interface
 module gstvideo.navigation;
 
+public import gid.basictypes;
 public import gstvideo.navigation_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

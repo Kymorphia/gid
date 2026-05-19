@@ -1,6 +1,7 @@
 /// Module for [TargetEntry] class
 module gtk.target_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;

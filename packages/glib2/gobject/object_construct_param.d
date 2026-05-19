@@ -1,6 +1,7 @@
 /// Module for [ObjectConstructParam] class
 module gobject.object_construct_param;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

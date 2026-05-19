@@ -1,6 +1,7 @@
 /// Module for [ReferenceTimestampMeta] class
 module gst.reference_timestamp_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

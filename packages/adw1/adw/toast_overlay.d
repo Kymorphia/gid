@@ -1,6 +1,7 @@
 /// Module for [ToastOverlay] class
 module adw.toast_overlay;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.toast;
@@ -25,10 +26,10 @@ import gtk.widget;
     </picture>
     
     Much like [gtk.overlay.Overlay], [adw.toast_overlay.ToastOverlay] is a container with a single
-    main child, on top of which it can display a `class@Toast`, overlaid.
+    main child, on top of which it can display a [adw.toast.Toast], overlaid.
     Toasts can be shown with [adw.toast_overlay.ToastOverlay.addToast].
     
-    See `class@Toast` for details.
+    See [adw.toast.Toast] for details.
     
     ## CSS nodes
     
@@ -129,7 +130,7 @@ class ToastOverlay : gtk.widget.Widget
       
       Only one toast can be shown at a time; if a toast is already being displayed,
       either toast or the original toast will be placed in a queue, depending on
-      the priority of toast. See `propertyToast:priority`.
+      the priority of toast. See [adw.toast.Toast.priority].
       
       If called on a toast that's already displayed, its timeout will be reset.
       

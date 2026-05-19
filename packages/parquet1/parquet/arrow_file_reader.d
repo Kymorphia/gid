@@ -1,6 +1,7 @@
 /// Module for [ArrowFileReader] class
 module parquet.arrow_file_reader;
 
+public import gid.basictypes;
 import arrow.chunked_array;
 import arrow.schema;
 import arrow.seekable_input_stream;

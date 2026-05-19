@@ -1,6 +1,7 @@
 /// Module for [WritableFile] interface
 module arrow.writable_file;
 
+public import gid.basictypes;
 public import arrow.writable_file_iface_proxy;
 import arrow.c.functions;
 import arrow.c.types;

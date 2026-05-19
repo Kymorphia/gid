@@ -1,6 +1,7 @@
 /// Module for [FileList] class
 module gdk.file_list;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

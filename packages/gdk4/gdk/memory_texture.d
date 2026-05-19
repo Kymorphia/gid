@@ -1,6 +1,7 @@
 /// Module for [MemoryTexture] class
 module gdk.memory_texture;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.paintable;

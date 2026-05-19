@@ -1,6 +1,7 @@
 /// Module for [TreeIter] class
 module gtk.tree_iter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;

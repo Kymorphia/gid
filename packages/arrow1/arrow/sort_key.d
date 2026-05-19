@@ -1,6 +1,7 @@
 /// Module for [SortKey] class
 module arrow.sort_key;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

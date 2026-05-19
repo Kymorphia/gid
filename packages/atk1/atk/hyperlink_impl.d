@@ -1,6 +1,7 @@
 /// Module for [HyperlinkImpl] interface
 module atk.hyperlink_impl;
 
+public import gid.basictypes;
 public import atk.hyperlink_impl_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

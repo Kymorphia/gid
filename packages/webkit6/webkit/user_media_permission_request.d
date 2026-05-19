@@ -1,6 +1,7 @@
 /// Module for [UserMediaPermissionRequest] class
 module webkit.user_media_permission_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

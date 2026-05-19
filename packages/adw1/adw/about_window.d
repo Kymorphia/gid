@@ -1,6 +1,7 @@
 /// Module for [AboutWindow] class
 module adw.about_window;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -37,15 +38,15 @@ import gtk.types;
     ## Main page
     
     [adw.about_window.AboutWindow] prominently displays the application's icon, name, developer
-    name and version. They can be set with the `property@AboutWindow:application-icon`,
-    `property@AboutWindow:application-name`,
-    `property@AboutWindow:developer-name` and `property@AboutWindow:version`
+    name and version. They can be set with the [adw.about_window.AboutWindow.applicationIcon],
+    [adw.about_window.AboutWindow.applicationName],
+    [adw.about_window.AboutWindow.developerName] and [adw.about_window.AboutWindow.version_]
     respectively.
     
     ## What's New
     
     [adw.about_window.AboutWindow] provides a way for applications to display their release
-    notes, set with the `property@AboutWindow:release-notes` property.
+    notes, set with the [adw.about_window.AboutWindow.releaseNotes] property.
     
     Release notes are formatted the same way as
     [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
@@ -65,18 +66,18 @@ import gtk.types;
     Nested lists are not supported.
     
     Only one version can be shown at a time. By default, the displayed version
-    number matches `property@AboutWindow:version`. Use
-    `property@AboutWindow:release-notes-version` to override it.
+    number matches [adw.about_window.AboutWindow.version_]. Use
+    [adw.about_window.AboutWindow.releaseNotesVersion] to override it.
     
     ## Details
     
     The Details page displays the application comments and links.
     
-    The comments can be set with the `property@AboutWindow:comments` property.
+    The comments can be set with the [adw.about_window.AboutWindow.comments] property.
     Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
     detailed. It can also contain links and Pango markup.
     
-    To set the application website, use `property@AboutWindow:website`.
+    To set the application website, use [adw.about_window.AboutWindow.website].
     To add extra links below the website, use [adw.about_window.AboutWindow.addLink].
     
     If the Details page doesn't have any other content besides website, the
@@ -86,29 +87,29 @@ import gtk.types;
     
     [adw.about_window.AboutWindow] displays the following two links on the main page:
     
-    * Support Questions, set with the `property@AboutWindow:support-url` property,
-    * Report an Issue, set with the `property@AboutWindow:issue-url` property.
+    * Support Questions, set with the [adw.about_window.AboutWindow.supportUrl] property,
+    * Report an Issue, set with the [adw.about_window.AboutWindow.issueUrl] property.
     
     Additionally, applications can provide debugging information. It will be
     shown separately on the Troubleshooting page. Use the
-    `property@AboutWindow:debug-info` property to specify it.
+    [adw.about_window.AboutWindow.debugInfo] property to specify it.
     
     It's intended to be attached to issue reports when reporting issues against
     the application. As such, it cannot contain markup or links.
     
     [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
-    When saving, `property@AboutWindow:debug-info-filename` would be used as
+    When saving, [adw.about_window.AboutWindow.debugInfoFilename] would be used as
     the suggested filename.
     
     ## Credits and Acknowledgements
     
     The Credits page has the following default sections:
     
-    * Developers, set with the `property@AboutWindow:developers` property,
-    * Designers, set with the `property@AboutWindow:designers` property,
-    * Artists, set with the `property@AboutWindow:artists` property,
-    * Documenters, set with the `property@AboutWindow:documenters` property,
-    * Translators, set with the `property@AboutWindow:translator-credits` property.
+    * Developers, set with the [adw.about_window.AboutWindow.developers] property,
+    * Designers, set with the [adw.about_window.AboutWindow.designers] property,
+    * Artists, set with the [adw.about_window.AboutWindow.artists] property,
+    * Documenters, set with the [adw.about_window.AboutWindow.documenters] property,
+    * Translators, set with the [adw.about_window.AboutWindow.translatorCredits] property.
     
     When setting translator credits, use the strings `"translator-credits"` or
     `"translator_credits"` and mark them as translatable.
@@ -139,13 +140,13 @@ import gtk.types;
     The Legal page displays the copyright and licensing information for the
     application and other modules.
     
-    The copyright string is set with the `property@AboutWindow:copyright`
+    The copyright string is set with the [adw.about_window.AboutWindow.copyright]
     property and should be a short string of one or two lines, for example:
     `© 2022 Example`.
     
     Licensing information can be quickly set from a list of known licenses with
-    the `property@AboutWindow:license-type` property. If the application's
-    license is not in the list, `property@AboutWindow:license` can be used
+    the [adw.about_window.AboutWindow.licenseType] property. If the application's
+    license is not in the list, [adw.about_window.AboutWindow.license] can be used
     instead.
     
     To add information about other modules, such as application dependencies or
@@ -348,7 +349,7 @@ class AboutWindow : adw.window.Window
         application.
         
         [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
-        When saving, `property@AboutWindow:debug-info-filename` would be used as
+        When saving, [adw.about_window.AboutWindow.debugInfoFilename] would be used as
         the suggested filename.
         
         Debug information cannot contain markup or links.
@@ -368,7 +369,7 @@ class AboutWindow : adw.window.Window
           application.
           
           [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
-          When saving, `property@AboutWindow:debug-info-filename` would be used as
+          When saving, [adw.about_window.AboutWindow.debugInfoFilename] would be used as
           the suggested filename.
           
           Debug information cannot contain markup or links.
@@ -385,7 +386,7 @@ class AboutWindow : adw.window.Window
         It will be used as the suggested filename when saving debug information to
         a file.
         
-        See `property@AboutWindow:debug-info`.
+        See [adw.about_window.AboutWindow.debugInfo].
   */
   @property string debugInfoFilename()
   {
@@ -400,7 +401,7 @@ class AboutWindow : adw.window.Window
           It will be used as the suggested filename when saving debug information to
           a file.
           
-          See `property@AboutWindow:debug-info`.
+          See [adw.about_window.AboutWindow.debugInfo].
   */
   @property void debugInfoFilename(string propval)
   {
@@ -417,7 +418,7 @@ class AboutWindow : adw.window.Window
         If the application is developed by multiple people, the developer name can
         be set to values like "AppName team", "AppName developers" or
         "The AppName project", and the individual contributors can be listed on the
-        Credits page, with `property@AboutWindow:developers` and related
+        Credits page, with [adw.about_window.AboutWindow.developers] and related
         properties.
   */
   @property string developerName()
@@ -436,7 +437,7 @@ class AboutWindow : adw.window.Window
           If the application is developed by multiple people, the developer name can
           be set to values like "AppName team", "AppName developers" or
           "The AppName project", and the individual contributors can be listed on the
-          Credits page, with `property@AboutWindow:developers` and related
+          Credits page, with [adw.about_window.AboutWindow.developers] and related
           properties.
   */
   @property void developerName(string propval)
@@ -472,9 +473,9 @@ class AboutWindow : adw.window.Window
       Returns: The license text.
         
         This can be used to set a custom text for the license if it can't be set
-        via `property@AboutWindow:license-type`.
+        via [adw.about_window.AboutWindow.licenseType].
         
-        When set, `property@AboutWindow:license-type` will be set to
+        When set, [adw.about_window.AboutWindow.licenseType] will be set to
         [gtk.types.License.Custom].
         
         The license text will be displayed on the Legal page, below the copyright
@@ -496,9 +497,9 @@ class AboutWindow : adw.window.Window
         propval = The license text.
           
           This can be used to set a custom text for the license if it can't be set
-          via `property@AboutWindow:license-type`.
+          via [adw.about_window.AboutWindow.licenseType].
           
-          When set, `property@AboutWindow:license-type` will be set to
+          When set, [adw.about_window.AboutWindow.licenseType] will be set to
           [gtk.types.License.Custom].
           
           The license text will be displayed on the Legal page, below the copyright
@@ -521,13 +522,13 @@ class AboutWindow : adw.window.Window
         Allows to set the application's license froma list of known licenses.
         
         If the application's license is not in the list,
-        `property@AboutWindow:license` can be used instead. The license type will
+        [adw.about_window.AboutWindow.license] can be used instead. The license type will
         be automatically set to [gtk.types.License.Custom] in that case.
         
         If set to [gtk.types.License.Unknown], no information will be displayed.
         
         If the license type is different from [gtk.types.License.Custom].
-        `property@AboutWindow:license` will be cleared out.
+        [adw.about_window.AboutWindow.license] will be cleared out.
         
         The license description will be displayed on the Legal page, below the
         copyright information.
@@ -548,13 +549,13 @@ class AboutWindow : adw.window.Window
           Allows to set the application's license froma list of known licenses.
           
           If the application's license is not in the list,
-          `property@AboutWindow:license` can be used instead. The license type will
+          [adw.about_window.AboutWindow.license] can be used instead. The license type will
           be automatically set to [gtk.types.License.Custom] in that case.
           
           If set to [gtk.types.License.Unknown], no information will be displayed.
           
           If the license type is different from [gtk.types.License.Custom].
-          `property@AboutWindow:license` will be cleared out.
+          [adw.about_window.AboutWindow.license] will be cleared out.
           
           The license description will be displayed on the Legal page, below the
           copyright information.
@@ -591,8 +592,8 @@ class AboutWindow : adw.window.Window
         Nested lists are not supported.
         
         [adw.about_window.AboutWindow] displays the version above the release notes. If set, the
-        `property@AboutWindow:release-notes-version` of the property will be used
-        as the version; otherwise, `property@AboutWindow:version` is used.
+        [adw.about_window.AboutWindow.releaseNotesVersion] of the property will be used
+        as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
   */
   @property string releaseNotes()
   {
@@ -624,8 +625,8 @@ class AboutWindow : adw.window.Window
           Nested lists are not supported.
           
           [adw.about_window.AboutWindow] displays the version above the release notes. If set, the
-          `property@AboutWindow:release-notes-version` of the property will be used
-          as the version; otherwise, `property@AboutWindow:version` is used.
+          [adw.about_window.AboutWindow.releaseNotesVersion] of the property will be used
+          as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
   */
   @property void releaseNotes(string propval)
   {
@@ -639,13 +640,13 @@ class AboutWindow : adw.window.Window
         The release notes version is displayed on the What's New page, above the
         release notes.
         
-        If not set, `property@AboutWindow:version` will be used instead.
+        If not set, [adw.about_window.AboutWindow.version_] will be used instead.
         
         For example, an application with the current version 2.0.2 might want to
         keep the release notes from 2.0.0, and set the release notes version
         accordingly.
         
-        See `property@AboutWindow:release-notes`.
+        See [adw.about_window.AboutWindow.releaseNotes].
   */
   @property string releaseNotesVersion()
   {
@@ -660,13 +661,13 @@ class AboutWindow : adw.window.Window
           The release notes version is displayed on the What's New page, above the
           release notes.
           
-          If not set, `property@AboutWindow:version` will be used instead.
+          If not set, [adw.about_window.AboutWindow.version_] will be used instead.
           
           For example, an application with the current version 2.0.2 might want to
           keep the release notes from 2.0.0, and set the release notes version
           accordingly.
           
-          See `property@AboutWindow:release-notes`.
+          See [adw.about_window.AboutWindow.releaseNotes].
   */
   @property void releaseNotesVersion(string propval)
   {
@@ -710,10 +711,10 @@ class AboutWindow : adw.window.Window
         
         See also:
         
-        * `property@AboutWindow:developers`
-        * `property@AboutWindow:designers`
-        * `property@AboutWindow:artists`
-        * `property@AboutWindow:documenters`
+        * [adw.about_window.AboutWindow.developers]
+        * [adw.about_window.AboutWindow.designers]
+        * [adw.about_window.AboutWindow.artists]
+        * [adw.about_window.AboutWindow.documenters]
         * [adw.about_window.AboutWindow.addCreditSection]
         * [adw.about_window.AboutWindow.addAcknowledgementSection]
   */
@@ -737,10 +738,10 @@ class AboutWindow : adw.window.Window
           
           See also:
           
-          * `property@AboutWindow:developers`
-          * `property@AboutWindow:designers`
-          * `property@AboutWindow:artists`
-          * `property@AboutWindow:documenters`
+          * [adw.about_window.AboutWindow.developers]
+          * [adw.about_window.AboutWindow.designers]
+          * [adw.about_window.AboutWindow.artists]
+          * [adw.about_window.AboutWindow.documenters]
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
   */
@@ -755,7 +756,7 @@ class AboutWindow : adw.window.Window
         
         The version is displayed on the main page.
         
-        If `property@AboutWindow:release-notes-version` is not set, the version
+        If [adw.about_window.AboutWindow.releaseNotesVersion] is not set, the version
         will also be displayed above the release notes on the What's New page.
   */
   @property string version_()
@@ -770,7 +771,7 @@ class AboutWindow : adw.window.Window
           
           The version is displayed on the main page.
           
-          If `property@AboutWindow:release-notes-version` is not set, the version
+          If [adw.about_window.AboutWindow.releaseNotesVersion] is not set, the version
           will also be displayed above the release notes on the What's New page.
   */
   @property void version_(string propval)
@@ -824,21 +825,21 @@ class AboutWindow : adw.window.Window
       This automatically sets the following properties with the following AppStream
       values:
       
-      * `propertyAboutWindow:application-icon` is set from the `<id>`
-      * `propertyAboutWindow:application-name` is set from the `<name>`
-      * `propertyAboutWindow:developer-name` is set from the `<name>` within
+      * [adw.about_window.AboutWindow.applicationIcon] is set from the `<id>`
+      * [adw.about_window.AboutWindow.applicationName] is set from the `<name>`
+      * [adw.about_window.AboutWindow.developerName] is set from the `<name>` within
            `<developer>`
-      * `propertyAboutWindow:version` is set from the version of the latest release
-      * `propertyAboutWindow:website` is set from the `<url type="homepage">`
-      * `propertyAboutWindow:support-url` is set from the `<url type="help">`
-      * `propertyAboutWindow:issue-url` is set from the `<url type="bugtracker">`
-      * `propertyAboutWindow:license-type` is set from the `<project_license>`.
+      * [adw.about_window.AboutWindow.version_] is set from the version of the latest release
+      * [adw.about_window.AboutWindow.website] is set from the `<url type="homepage">`
+      * [adw.about_window.AboutWindow.supportUrl] is set from the `<url type="help">`
+      * [adw.about_window.AboutWindow.issueUrl] is set from the `<url type="bugtracker">`
+      * [adw.about_window.AboutWindow.licenseType] is set from the `<project_license>`.
           If the license type retrieved from AppStream is not listed in
           [gtk.types.License], it will be set to `GTK_LICENCE_CUSTOM`.
       
       If release_notes_version is not `NULL`,
-      `propertyAboutWindow:release-notes-version` is set to match it, while
-      `propertyAboutWindow:release-notes` is set from the AppStream release
+      [adw.about_window.AboutWindow.releaseNotesVersion] is set to match it, while
+      [adw.about_window.AboutWindow.releaseNotes] is set from the AppStream release
       description for that version.
   
       Params:
@@ -868,11 +869,11 @@ class AboutWindow : adw.window.Window
       
       See also:
       
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
+      * [adw.about_window.AboutWindow.developers]
+      * [adw.about_window.AboutWindow.designers]
+      * [adw.about_window.AboutWindow.artists]
+      * [adw.about_window.AboutWindow.documenters]
+      * [adw.about_window.AboutWindow.translatorCredits]
       * [adw.about_window.AboutWindow.addCreditSection]
   
       Params:
@@ -901,11 +902,11 @@ class AboutWindow : adw.window.Window
       
       See also:
       
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
+      * [adw.about_window.AboutWindow.developers]
+      * [adw.about_window.AboutWindow.designers]
+      * [adw.about_window.AboutWindow.artists]
+      * [adw.about_window.AboutWindow.documenters]
+      * [adw.about_window.AboutWindow.translatorCredits]
       * [adw.about_window.AboutWindow.addAcknowledgementSection]
   
       Params:
@@ -930,8 +931,8 @@ class AboutWindow : adw.window.Window
       Extra sections will be displayed below the application's own information.
       
       The parameters copyright, license_type and license will be used to present
-      the it the same way as `propertyAboutWindow:copyright`,
-      `propertyAboutWindow:license-type` and `propertyAboutWindow:license` are
+      the it the same way as [adw.about_window.AboutWindow.copyright],
+      [adw.about_window.AboutWindow.licenseType] and [adw.about_window.AboutWindow.license] are
       for the application's own information.
       
       See those properties for more details.
@@ -987,7 +988,7 @@ class AboutWindow : adw.window.Window
       
       Underlines in title will be interpreted as indicating a mnemonic.
       
-      See `propertyAboutWindow:website`.
+      See [adw.about_window.AboutWindow.website].
   
       Params:
         title = the link title
@@ -1318,10 +1319,10 @@ class AboutWindow : adw.window.Window
       
       See also:
       
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
+      * [adw.about_window.AboutWindow.developers]
+      * [adw.about_window.AboutWindow.designers]
+      * [adw.about_window.AboutWindow.documenters]
+      * [adw.about_window.AboutWindow.translatorCredits]
       * [adw.about_window.AboutWindow.addCreditSection]
       * [adw.about_window.AboutWindow.addAcknowledgementSection]
   
@@ -1385,7 +1386,7 @@ class AboutWindow : adw.window.Window
       application.
       
       [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
-      When saving, `propertyAboutWindow:debug-info-filename` would be used as
+      When saving, [adw.about_window.AboutWindow.debugInfoFilename] would be used as
       the suggested filename.
       
       Debug information cannot contain markup or links.
@@ -1405,7 +1406,7 @@ class AboutWindow : adw.window.Window
       It will be used as the suggested filename when saving debug information to a
       file.
       
-      See `propertyAboutWindow:debug-info`.
+      See [adw.about_window.AboutWindow.debugInfo].
   
       Params:
         filename = the debug info filename
@@ -1426,10 +1427,10 @@ class AboutWindow : adw.window.Window
       
       See also:
       
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
+      * [adw.about_window.AboutWindow.developers]
+      * [adw.about_window.AboutWindow.artists]
+      * [adw.about_window.AboutWindow.documenters]
+      * [adw.about_window.AboutWindow.translatorCredits]
       * [adw.about_window.AboutWindow.addCreditSection]
       * [adw.about_window.AboutWindow.addAcknowledgementSection]
   
@@ -1455,7 +1456,7 @@ class AboutWindow : adw.window.Window
       If the application is developed by multiple people, the developer name can be
       set to values like "AppName team", "AppName developers" or
       "The AppName project", and the individual contributors can be listed on the
-      Credits page, with `propertyAboutWindow:developers` and related properties.
+      Credits page, with [adw.about_window.AboutWindow.developers] and related properties.
   
       Params:
         developerName = the developer name
@@ -1476,10 +1477,10 @@ class AboutWindow : adw.window.Window
       
       See also:
       
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
+      * [adw.about_window.AboutWindow.designers]
+      * [adw.about_window.AboutWindow.artists]
+      * [adw.about_window.AboutWindow.documenters]
+      * [adw.about_window.AboutWindow.translatorCredits]
       * [adw.about_window.AboutWindow.addCreditSection]
       * [adw.about_window.AboutWindow.addAcknowledgementSection]
   
@@ -1507,10 +1508,10 @@ class AboutWindow : adw.window.Window
       
       See also:
       
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:translator-credits`
+      * [adw.about_window.AboutWindow.developers]
+      * [adw.about_window.AboutWindow.designers]
+      * [adw.about_window.AboutWindow.artists]
+      * [adw.about_window.AboutWindow.translatorCredits]
       * [adw.about_window.AboutWindow.addCreditSection]
       * [adw.about_window.AboutWindow.addAcknowledgementSection]
   
@@ -1546,9 +1547,9 @@ class AboutWindow : adw.window.Window
       Sets the license for self.
       
       This can be used to set a custom text for the license if it can't be set via
-      `propertyAboutWindow:license-type`.
+      [adw.about_window.AboutWindow.licenseType].
       
-      When set, `propertyAboutWindow:license-type` will be set to
+      When set, [adw.about_window.AboutWindow.licenseType] will be set to
       [gtk.types.License.Custom].
       
       The license text will be displayed on the Legal page, below the copyright
@@ -1572,13 +1573,13 @@ class AboutWindow : adw.window.Window
       Sets the license for self from a list of known licenses.
       
       If the application's license is not in the list,
-      `propertyAboutWindow:license` can be used instead. The license type will be
+      [adw.about_window.AboutWindow.license] can be used instead. The license type will be
       automatically set to [gtk.types.License.Custom] in that case.
       
       If license_type is [gtk.types.License.Unknown], no information will be displayed.
       
       If license_type is different from [gtk.types.License.Custom].
-      `propertyAboutWindow:license` will be cleared out.
+      [adw.about_window.AboutWindow.license] will be cleared out.
       
       The license description will be displayed on the Legal page, below the
       copyright information.
@@ -1617,8 +1618,8 @@ class AboutWindow : adw.window.Window
       Nested lists are not supported.
       
       [adw.about_window.AboutWindow] displays the version above the release notes. If set, the
-      `propertyAboutWindow:release-notes-version` of the property will be used
-      as the version; otherwise, `propertyAboutWindow:version` is used.
+      [adw.about_window.AboutWindow.releaseNotesVersion] of the property will be used
+      as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
   
       Params:
         releaseNotes = the release notes
@@ -1635,13 +1636,13 @@ class AboutWindow : adw.window.Window
       The release notes version is displayed on the What's New page, above the
       release notes.
       
-      If not set, `propertyAboutWindow:version` will be used instead.
+      If not set, [adw.about_window.AboutWindow.version_] will be used instead.
       
       For example, an application with the current version 2.0.2 might want to
       keep the release notes from 2.0.0, and set the release notes version
       accordingly.
       
-      See `propertyAboutWindow:release-notes`.
+      See [adw.about_window.AboutWindow.releaseNotes].
   
       Params:
         version_ = the release notes version
@@ -1679,10 +1680,10 @@ class AboutWindow : adw.window.Window
       
       See also:
       
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
+      * [adw.about_window.AboutWindow.developers]
+      * [adw.about_window.AboutWindow.designers]
+      * [adw.about_window.AboutWindow.artists]
+      * [adw.about_window.AboutWindow.documenters]
       * [adw.about_window.AboutWindow.addCreditSection]
       * [adw.about_window.AboutWindow.addAcknowledgementSection]
   
@@ -1700,7 +1701,7 @@ class AboutWindow : adw.window.Window
       
       The version is displayed on the main page.
       
-      If `propertyAboutWindow:release-notes-version` is not set, the version will
+      If [adw.about_window.AboutWindow.releaseNotesVersion] is not set, the version will
       also be displayed above the release notes on the What's New page.
   
       Params:
@@ -1856,7 +1857,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           application.
           
           [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
-          When saving, `property@AboutWindow:debug-info-filename` would be used as
+          When saving, [adw.about_window.AboutWindow.debugInfoFilename] would be used as
           the suggested filename.
           
           Debug information cannot contain markup or links.
@@ -1875,7 +1876,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           It will be used as the suggested filename when saving debug information to
           a file.
           
-          See `property@AboutWindow:debug-info`.
+          See [adw.about_window.AboutWindow.debugInfo].
       Returns: Builder instance for fluent chaining
   */
   T debugInfoFilename(string propval)
@@ -1894,7 +1895,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           If the application is developed by multiple people, the developer name can
           be set to values like "AppName team", "AppName developers" or
           "The AppName project", and the individual contributors can be listed on the
-          Credits page, with `property@AboutWindow:developers` and related
+          Credits page, with [adw.about_window.AboutWindow.developers] and related
           properties.
       Returns: Builder instance for fluent chaining
   */
@@ -1922,9 +1923,9 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
         propval = The license text.
           
           This can be used to set a custom text for the license if it can't be set
-          via `property@AboutWindow:license-type`.
+          via [adw.about_window.AboutWindow.licenseType].
           
-          When set, `property@AboutWindow:license-type` will be set to
+          When set, [adw.about_window.AboutWindow.licenseType] will be set to
           [gtk.types.License.Custom].
           
           The license text will be displayed on the Legal page, below the copyright
@@ -1949,13 +1950,13 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           Allows to set the application's license froma list of known licenses.
           
           If the application's license is not in the list,
-          `property@AboutWindow:license` can be used instead. The license type will
+          [adw.about_window.AboutWindow.license] can be used instead. The license type will
           be automatically set to [gtk.types.License.Custom] in that case.
           
           If set to [gtk.types.License.Unknown], no information will be displayed.
           
           If the license type is different from [gtk.types.License.Custom].
-          `property@AboutWindow:license` will be cleared out.
+          [adw.about_window.AboutWindow.license] will be cleared out.
           
           The license description will be displayed on the Legal page, below the
           copyright information.
@@ -1994,8 +1995,8 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           Nested lists are not supported.
           
           [adw.about_window.AboutWindow] displays the version above the release notes. If set, the
-          `property@AboutWindow:release-notes-version` of the property will be used
-          as the version; otherwise, `property@AboutWindow:version` is used.
+          [adw.about_window.AboutWindow.releaseNotesVersion] of the property will be used
+          as the version; otherwise, [adw.about_window.AboutWindow.version_] is used.
       Returns: Builder instance for fluent chaining
   */
   T releaseNotes(string propval)
@@ -2011,13 +2012,13 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           The release notes version is displayed on the What's New page, above the
           release notes.
           
-          If not set, `property@AboutWindow:version` will be used instead.
+          If not set, [adw.about_window.AboutWindow.version_] will be used instead.
           
           For example, an application with the current version 2.0.2 might want to
           keep the release notes from 2.0.0, and set the release notes version
           accordingly.
           
-          See `property@AboutWindow:release-notes`.
+          See [adw.about_window.AboutWindow.releaseNotes].
       Returns: Builder instance for fluent chaining
   */
   T releaseNotesVersion(string propval)
@@ -2053,10 +2054,10 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           See also:
           
-          * `property@AboutWindow:developers`
-          * `property@AboutWindow:designers`
-          * `property@AboutWindow:artists`
-          * `property@AboutWindow:documenters`
+          * [adw.about_window.AboutWindow.developers]
+          * [adw.about_window.AboutWindow.designers]
+          * [adw.about_window.AboutWindow.artists]
+          * [adw.about_window.AboutWindow.documenters]
           * [adw.about_window.AboutWindow.addCreditSection]
           * [adw.about_window.AboutWindow.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
@@ -2073,7 +2074,7 @@ class AboutWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           
           The version is displayed on the main page.
           
-          If `property@AboutWindow:release-notes-version` is not set, the version
+          If [adw.about_window.AboutWindow.releaseNotesVersion] is not set, the version
           will also be displayed above the release notes on the What's New page.
       Returns: Builder instance for fluent chaining
   */

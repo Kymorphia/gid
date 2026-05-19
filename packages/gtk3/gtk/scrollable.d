@@ -1,6 +1,7 @@
 /// Module for [Scrollable] interface
 module gtk.scrollable;
 
+public import gid.basictypes;
 public import gtk.scrollable_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

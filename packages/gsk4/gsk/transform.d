@@ -1,6 +1,7 @@
 /// Module for [Transform] class
 module gsk.transform;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.string_;
 import gobject.boxed;

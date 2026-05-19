@@ -1,6 +1,7 @@
 /// Module for [EmblemedIcon] class
 module gio.emblemed_icon;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

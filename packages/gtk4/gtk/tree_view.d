@@ -1,6 +1,7 @@
 /// Module for [TreeView] class
 module gtk.tree_view;
 
+public import gid.basictypes;
 import gdk.content_formats;
 import gdk.paintable;
 import gdk.rectangle;
@@ -2265,7 +2266,7 @@ class TreeView : gtk.widget.Widget, gtk.scrollable.Scrollable
         [gtk.tree_view.TreeView.rowActivated] is called.
         
         This signal is emitted when the user double-clicks a treeview row with the
-        `propertyGtk.TreeView:activate-on-single-click` property set to false,
+        [gtk.tree_view.TreeView.activateOnSingleClick] property set to false,
         or when the user single-clicks a row when that property set to true.
         
         This signal is also emitted when a non-editable row is selected and one

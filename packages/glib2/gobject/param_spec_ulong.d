@@ -1,6 +1,7 @@
 /// Module for [ParamSpecULong] class
 module gobject.param_spec_ulong;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

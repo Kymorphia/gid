@@ -1,6 +1,7 @@
 /// Module for [Bus] class
 module gst.bus;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.source;
 import glib.types;

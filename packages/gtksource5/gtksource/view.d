@@ -1,6 +1,7 @@
 /// Module for [View] class
 module gtksource.view;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
@@ -35,7 +36,7 @@ import gtksource.types;
     Subclass of [gtk.text_view.TextView].
     
     [gtksource.view.View] is the main class of the GtkSourceView library.
-    Use a `class@Buffer` to display text with a [gtksource.view.View].
+    Use a [gtksource.buffer.Buffer] to display text with a [gtksource.view.View].
     
     This class provides:
     
@@ -53,7 +54,7 @@ import gtksource.types;
     # GtkSourceView as GtkBuildable
     
     The GtkSourceView implementation of the [gtk.buildable.Buildable] interface exposes the
-    `property@View:completion` object with the internal-child "completion".
+    [gtksource.view.View.completion] object with the internal-child "completion".
     
     An example of a UI definition fragment with GtkSourceView:
     ```xml
@@ -71,7 +72,7 @@ import gtksource.types;
     # Changing the Font
     
     Gtk CSS provides the best way to change the font for a [gtksource.view.View] in a
-    manner that allows for components like `class@Map` to scale the desired
+    manner that allows for components like [gtksource.map.Map] to scale the desired
     font.
     
     ```c
@@ -172,7 +173,7 @@ class View : gtk.text_view.TextView
       Get `enableSnippets` property.
       Returns: The property denotes if snippets should be
         expanded when the user presses Tab after having typed a word
-        matching the snippets found in `class@SnippetManager`.
+        matching the snippets found in [gtksource.snippet_manager.SnippetManager].
         
         The user may tab through focus-positions of the snippet if any
         are available by pressing Tab repeatedly until the desired focus
@@ -188,7 +189,7 @@ class View : gtk.text_view.TextView
       Params:
         propval = The property denotes if snippets should be
           expanded when the user presses Tab after having typed a word
-          matching the snippets found in `class@SnippetManager`.
+          matching the snippets found in [gtksource.snippet_manager.SnippetManager].
           
           The user may tab through focus-positions of the snippet if any
           are available by pressing Tab repeatedly until the desired focus
@@ -244,8 +245,8 @@ class View : gtk.text_view.TextView
 
   /**
       Get `indenter` property.
-      Returns: The property is a `iface@Indenter` to use to indent
-        as the user types into the `class@View`.
+      Returns: The property is a [gtksource.indenter.Indenter] to use to indent
+        as the user types into the [gtksource.view.View].
   */
   @property gtksource.indenter.Indenter indenter()
   {
@@ -255,8 +256,8 @@ class View : gtk.text_view.TextView
   /**
       Set `indenter` property.
       Params:
-        propval = The property is a `iface@Indenter` to use to indent
-          as the user types into the `class@View`.
+        propval = The property is a [gtksource.indenter.Indenter] to use to indent
+          as the user types into the [gtksource.view.View].
   */
   @property void indenter(gtksource.indenter.Indenter propval)
   {
@@ -391,7 +392,7 @@ class View : gtk.text_view.TextView
 
   /**
       Get `spaceDrawer` property.
-      Returns: The `class@SpaceDrawer` object associated with the view.4
+      Returns: The [gtksource.space_drawer.SpaceDrawer] object associated with the view.4
   */
   @property gtksource.space_drawer.SpaceDrawer spaceDrawer()
   {
@@ -420,7 +421,7 @@ class View : gtk.text_view.TextView
   /**
       Creates a new [gtksource.view.View].
       
-      By default, an empty `classBuffer` will be lazily created and can be
+      By default, an empty [gtksource.buffer.Buffer] will be lazily created and can be
       retrieved with [gtk.text_view.TextView.getBuffer].
       
       If you want to specify your own buffer, either override the
@@ -477,10 +478,10 @@ class View : gtk.text_view.TextView
   }
 
   /**
-      Gets the `classCompletion` associated with view.
+      Gets the [gtksource.completion.Completion] associated with view.
       
       The returned object is guaranteed to be the same for the lifetime of view.
-      Each [gtksource.view.View] object has a different `classCompletion`.
+      Each [gtksource.view.View] object has a different [gtksource.completion.Completion].
       Returns: the #GtkSourceCompletion associated with view.
   */
   gtksource.completion.Completion getCompletion()
@@ -492,10 +493,10 @@ class View : gtk.text_view.TextView
   }
 
   /**
-      Gets the `propertyView:enable-snippets` property.
+      Gets the [gtksource.view.View.enableSnippets] property.
       
-      If true, matching snippets found in the `classSnippetManager`
-      may be expanded when the user presses Tab after a word in the `classView`.
+      If true, matching snippets found in the [gtksource.snippet_manager.SnippetManager]
+      may be expanded when the user presses Tab after a word in the [gtksource.view.View].
       Returns: true if enabled
   */
   bool getEnableSnippets()
@@ -506,7 +507,7 @@ class View : gtk.text_view.TextView
   }
 
   /**
-      Returns the `classGutter` object associated with window_type for view.
+      Returns the [gtksource.gutter.Gutter] object associated with window_type for view.
       
       Only [gtk.types.TextWindowType.Left] and [gtk.types.TextWindowType.Right] are supported,
       respectively corresponding to the left and right gutter. The line numbers
@@ -536,10 +537,10 @@ class View : gtk.text_view.TextView
   }
 
   /**
-      Gets the `classHover` associated with view.
+      Gets the [gtksource.hover.Hover] associated with view.
       
       The returned object is guaranteed to be the same for the lifetime of view.
-      Each `classView` object has a different `classHover`.
+      Each [gtksource.view.View] object has a different [gtksource.hover.Hover].
       Returns: a #GtkSourceHover associated with view.
   */
   gtksource.hover.Hover getHover()
@@ -576,7 +577,7 @@ class View : gtk.text_view.TextView
   }
 
   /**
-      Gets the `propertyView:indenter` property.
+      Gets the [gtksource.view.View.indenter] property.
       Returns: a #GtkSourceIndenter or null
   */
   gtksource.indenter.Indenter getIndenter()
@@ -674,7 +675,7 @@ class View : gtk.text_view.TextView
   }
 
   /**
-      Returns a `enumSmartHomeEndType` end value specifying
+      Returns a [gtksource.types.SmartHomeEndType] end value specifying
       how the cursor will move when HOME and END keys are pressed.
       Returns: a #GtkSourceSmartHomeEndType value.
   */
@@ -687,10 +688,10 @@ class View : gtk.text_view.TextView
   }
 
   /**
-      Gets the `classSpaceDrawer` associated with view.
+      Gets the [gtksource.space_drawer.SpaceDrawer] associated with view.
       
       The returned object is guaranteed to be the same for the lifetime of view.
-      Each `classView` object has a different `classSpaceDrawer`.
+      Each [gtksource.view.View] object has a different [gtksource.space_drawer.SpaceDrawer].
       Returns: the #GtkSourceSpaceDrawer associated with view.
   */
   gtksource.space_drawer.SpaceDrawer getSpaceDrawer()
@@ -714,7 +715,7 @@ class View : gtk.text_view.TextView
 
   /**
       Determines the visual column at iter taking into consideration the
-      `propertyView:tab-width` of view.
+      [gtksource.view.View.tabWidth] of view.
   
       Params:
         iter = a position in view.
@@ -784,11 +785,11 @@ class View : gtk.text_view.TextView
   }
 
   /**
-      Sets the `propertyView:enable-snippets` property.
+      Sets the [gtksource.view.View.enableSnippets] property.
       
       If enable_snippets is true, matching snippets found in the
-      `classSnippetManager` may be expanded when the user presses
-      Tab after a word in the `classView`.
+      [gtksource.snippet_manager.SnippetManager] may be expanded when the user presses
+      Tab after a word in the [gtksource.view.View].
   
       Params:
         enableSnippets = if snippets should be enabled
@@ -832,19 +833,19 @@ class View : gtk.text_view.TextView
       Sets the number of spaces to use for each step of indent when the tab key is
       pressed.
       
-      If width is -1, the value of the `propertyView:tab-width` property
+      If width is -1, the value of the [gtksource.view.View.tabWidth] property
       will be used.
       
-      The `propertyView:indent-width` interacts with the
-      `propertyView:insert-spaces-instead-of-tabs` property and
-      `propertyView:tab-width`. An example will be clearer:
+      The [gtksource.view.View.indentWidth] interacts with the
+      [gtksource.view.View.insertSpacesInsteadOfTabs] property and
+      [gtksource.view.View.tabWidth]. An example will be clearer:
       
-      If the `propertyView:indent-width` is 4 and `propertyView:tab-width` is 8 and
-      `propertyView:insert-spaces-instead-of-tabs` is false, then pressing the tab
+      If the [gtksource.view.View.indentWidth] is 4 and [gtksource.view.View.tabWidth] is 8 and
+      [gtksource.view.View.insertSpacesInsteadOfTabs] is false, then pressing the tab
       key at the beginning of a line will insert 4 spaces. So far so good. Pressing
       the tab key a second time will remove the 4 spaces and insert a `\t` character
-      instead (since `propertyView:tab-width` is 8). On the other hand, if
-      `propertyView:insert-spaces-instead-of-tabs` is true, the second tab key
+      instead (since [gtksource.view.View.tabWidth] is 8). On the other hand, if
+      [gtksource.view.View.insertSpacesInsteadOfTabs] is true, the second tab key
       pressed will insert 4 more spaces for a total of 8 spaces in the
       [gtk.text_buffer.TextBuffer].
       
@@ -974,7 +975,7 @@ class View : gtk.text_view.TextView
       Sets the width of tabulation in characters.
       
       The #GtkTextBuffer still contains `\t` characters,
-      but they can take a different visual width in a `classView` widget.
+      but they can take a different visual width in a [gtksource.view.View] widget.
   
       Params:
         width = width of tab in characters.
@@ -1384,7 +1385,7 @@ class View : gtk.text_view.TextView
         emitted when the user requests a completion, by pressing
         <keycombo><keycap>Control</keycap><keycap>space</keycap></keycombo>.
         
-        This will create a `classCompletionContext` with the activation
+        This will create a [gtksource.completion_context.CompletionContext] with the activation
         type as [gtksource.types.CompletionActivation.UserRequested].
         
         Applications should not connect to it, but may emit it with
@@ -1429,7 +1430,7 @@ class View : gtk.text_view.TextView
       Emitted when a the cursor was moved according to the smart home end setting.
         
         The signal is emitted after the cursor is moved, but
-        during the `signalGtk.TextView::move-cursor` action. This can be used to find
+        during the [gtk.text_view.TextView.moveCursor] action. This can be used to find
         out whether the cursor was moved by a normal home/end or by a smart
         home/end.
   
@@ -1505,7 +1506,7 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
       Params:
         propval = The property denotes if snippets should be
           expanded when the user presses Tab after having typed a word
-          matching the snippets found in `class@SnippetManager`.
+          matching the snippets found in [gtksource.snippet_manager.SnippetManager].
           
           The user may tab through focus-positions of the snippet if any
           are available by pressing Tab repeatedly until the desired focus
@@ -1543,8 +1544,8 @@ class ViewGidBuilderImpl(T) : gtk.text_view.TextViewGidBuilderImpl!T
   /**
       Set `indenter` property.
       Params:
-        propval = The property is a `iface@Indenter` to use to indent
-          as the user types into the `class@View`.
+        propval = The property is a [gtksource.indenter.Indenter] to use to indent
+          as the user types into the [gtksource.view.View].
       Returns: Builder instance for fluent chaining
   */
   T indenter(gtksource.indenter.Indenter propval)

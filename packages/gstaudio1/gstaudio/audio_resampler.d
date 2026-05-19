@@ -1,6 +1,7 @@
 /// Module for [AudioResampler] class
 module gstaudio.audio_resampler;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.structure;
 import gstaudio.c.functions;

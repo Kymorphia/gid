@@ -1,6 +1,7 @@
 /// Module for [Gesture] class
 module gtk.gesture;
 
+public import gid.basictypes;
 import gdk.device;
 import gdk.event;
 import gdk.event_sequence;
@@ -23,7 +24,7 @@ import gtk.types;
     value for these).
     
     The number of touches that a [gtk.gesture.Gesture] need to be recognized is
-    controlled by the `property@Gtk.Gesture:n-points` property, if a
+    controlled by the [gtk.gesture.Gesture.nPoints] property, if a
     gesture is keeping track of less or more than that number of sequences,
     it won't check whether the gesture is recognized.
     
@@ -519,7 +520,7 @@ class Gesture : gtk.event_controller.EventController
       Emitted when the gesture is recognized.
         
         This means the number of touch sequences matches
-        `propertyGtk.Gesture:n-points`.
+        [gtk.gesture.Gesture.nPoints].
         
         Note: These conditions may also happen when an extra touch
         (eg. a third touch on a 2-touches gesture) is lifted, in that
@@ -622,11 +623,11 @@ class Gesture : gtk.event_controller.EventController
   
       Emitted when gesture either stopped recognizing the event
         sequences as something to be handled, or the number of touch
-        sequences became higher or lower than `propertyGtk.Gesture:n-points`.
+        sequences became higher or lower than [gtk.gesture.Gesture.nPoints].
         
         Note: sequence might not pertain to the group of sequences that
         were previously triggering recognition on gesture (ie. a just
-        pressed touch sequence that exceeds `propertyGtk.Gesture:n-points`).
+        pressed touch sequence that exceeds [gtk.gesture.Gesture.nPoints]).
         This situation may be detected by checking through
         [gtk.gesture.Gesture.handlesSequence].
   

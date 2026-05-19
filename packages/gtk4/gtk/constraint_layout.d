@@ -1,6 +1,7 @@
 /// Module for [ConstraintLayout] class
 module gtk.constraint_layout;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import glib.error;

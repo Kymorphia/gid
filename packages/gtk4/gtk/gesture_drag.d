@@ -1,6 +1,7 @@
 /// Module for [GestureDrag] class
 module gtk.gesture_drag;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -13,9 +14,9 @@ import gtk.types;
     [gtk.gesture_drag.GestureDrag] is a [gtk.gesture.Gesture] implementation for drags.
     
     The drag operation itself can be tracked throughout the
-    `signal@Gtk.GestureDrag::drag-begin`,
-    `signal@Gtk.GestureDrag::drag-update` and
-    `signal@Gtk.GestureDrag::drag-end` signals, and the relevant
+    [gtk.gesture_drag.GestureDrag.dragBegin],
+    [gtk.gesture_drag.GestureDrag.dragUpdate] and
+    [gtk.gesture_drag.GestureDrag.dragEnd] signals, and the relevant
     coordinates can be extracted through
     [gtk.gesture_drag.GestureDrag.getOffset] and
     [gtk.gesture_drag.GestureDrag.getStartPoint].

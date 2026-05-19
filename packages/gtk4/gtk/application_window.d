@@ -1,6 +1,7 @@
 /// Module for [ApplicationWindow] class
 module gtk.application_window;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;
@@ -46,8 +47,8 @@ import gtk.window;
     can also activate these actions, if they implement the
     [gtk.actionable.Actionable] interface.
     
-    The settings `property@Gtk.Settings:gtk-shell-shows-app-menu` and
-    `property@Gtk.Settings:gtk-shell-shows-menubar` tell GTK whether the
+    The settings [gtk.settings.Settings.gtkShellShowsAppMenu] and
+    [gtk.settings.Settings.gtkShellShowsMenubar] tell GTK whether the
     desktop environment is showing the application menu and menubar
     models outside the application as part of the desktop shell.
     For instance, on OS X, both menus will be displayed remotely;
@@ -56,7 +57,7 @@ import gtk.window;
     If the desktop environment does not display the menubar, then
     [gtk.application_window.ApplicationWindow] will automatically show a menubar for it.
     This behaviour can be overridden with the
-    `property@Gtk.ApplicationWindow:show-menubar` property. If the
+    [gtk.application_window.ApplicationWindow.showMenubar] property. If the
     desktop environment does not display the application menu, then
     it will automatically be included in the menubar or in the windows
     client-side decorations.

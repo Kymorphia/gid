@@ -1,6 +1,7 @@
 /// Module for [EventControllerLegacy] class
 module gtk.event_controller_legacy;
 
+public import gid.basictypes;
 import gdk.event;
 import gid.gid;
 import gobject.dclosure;

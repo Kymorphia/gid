@@ -1,6 +1,7 @@
 /// Module for [FilterDos2Unix] class
 module gmime.filter_dos2_unix;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

@@ -1,6 +1,7 @@
 /// Module for [DataSelect] class
 module gda.data_select;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

@@ -1,6 +1,7 @@
 /// Module for [Window] class
 module gtk.window;
 
+public import gid.basictypes;
 import gdk.display;
 import gdk.monitor;
 import gid.gid;

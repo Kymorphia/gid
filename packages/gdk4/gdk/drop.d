@@ -1,6 +1,7 @@
 /// Module for [Drop] class
 module gdk.drop;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_formats;

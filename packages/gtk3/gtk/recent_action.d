@@ -1,6 +1,7 @@
 /// Module for [RecentAction] class
 module gtk.recent_action;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

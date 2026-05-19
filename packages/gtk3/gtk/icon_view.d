@@ -1,6 +1,7 @@
 /// Module for [IconView] class
 module gtk.icon_view;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import cairo.surface;

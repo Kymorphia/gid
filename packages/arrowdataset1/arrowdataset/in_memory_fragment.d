@@ -1,6 +1,7 @@
 /// Module for [InMemoryFragment] class
 module arrowdataset.in_memory_fragment;
 
+public import gid.basictypes;
 import arrow.record_batch;
 import arrow.schema;
 import arrowdataset.c.functions;

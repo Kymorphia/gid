@@ -1,6 +1,7 @@
 /// Module for [EventGrabBroken] class
 module gdk.event_grab_broken;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

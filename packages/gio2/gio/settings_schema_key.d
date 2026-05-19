@@ -1,6 +1,7 @@
 /// Module for [SettingsSchemaKey] class
 module gio.settings_schema_key;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

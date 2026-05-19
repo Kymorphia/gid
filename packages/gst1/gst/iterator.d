@@ -1,6 +1,7 @@
 /// Module for [Iterator] class
 module gst.iterator;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

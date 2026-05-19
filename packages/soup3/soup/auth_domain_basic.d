@@ -1,6 +1,7 @@
 /// Module for [AuthDomainBasic] class
 module soup.auth_domain_basic;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -55,7 +56,7 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
 
   /**
       Get `authCallback` property.
-      Returns: The `callback@AuthDomainBasicAuthCallback`.
+      Returns: The [soup.types.AuthDomainBasicAuthCallback].
   */
   @property soup.types.AuthDomainBasicAuthCallback authCallback()
   {
@@ -65,7 +66,7 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   /**
       Set `authCallback` property.
       Params:
-        propval = The `callback@AuthDomainBasicAuthCallback`.
+        propval = The [soup.types.AuthDomainBasicAuthCallback].
   */
   @property void authCallback(soup.types.AuthDomainBasicAuthCallback propval)
   {
@@ -74,7 +75,7 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
 
   /**
       Get `authData` property.
-      Returns: The data to pass to the `callback@AuthDomainBasicAuthCallback`.
+      Returns: The data to pass to the [soup.types.AuthDomainBasicAuthCallback].
   */
   @property void* authData()
   {
@@ -84,7 +85,7 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   /**
       Set `authData` property.
       Params:
-        propval = The data to pass to the `callback@AuthDomainBasicAuthCallback`.
+        propval = The data to pass to the [soup.types.AuthDomainBasicAuthCallback].
   */
   @property void authData(void* propval)
   {
@@ -100,8 +101,8 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
       value.
       
       You can also set the auth callback by setting the
-      `propertyAuthDomainBasic:auth-callback` and
-      `propertyAuthDomainBasic:auth-data` properties, which can also be used to
+      [soup.auth_domain_basic.AuthDomainBasic.authCallback] and
+      [soup.auth_domain_basic.AuthDomainBasic.authData] properties, which can also be used to
       set the callback at construct time.
   
       Params:
@@ -135,7 +136,7 @@ class AuthDomainBasicGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderIm
   /**
       Set `authCallback` property.
       Params:
-        propval = The `callback@AuthDomainBasicAuthCallback`.
+        propval = The [soup.types.AuthDomainBasicAuthCallback].
       Returns: Builder instance for fluent chaining
   */
   T authCallback(soup.types.AuthDomainBasicAuthCallback propval)
@@ -146,7 +147,7 @@ class AuthDomainBasicGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderIm
   /**
       Set `authData` property.
       Params:
-        propval = The data to pass to the `callback@AuthDomainBasicAuthCallback`.
+        propval = The data to pass to the [soup.types.AuthDomainBasicAuthCallback].
       Returns: Builder instance for fluent chaining
   */
   T authData(void* propval)

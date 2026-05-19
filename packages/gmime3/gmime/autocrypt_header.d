@@ -1,6 +1,7 @@
 /// Module for [AutocryptHeader] class
 module gmime.autocrypt_header;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.date_time;

@@ -1,6 +1,7 @@
 /// Module for [MetaStore] class
 module gda.meta_store;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

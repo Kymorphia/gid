@@ -1,6 +1,7 @@
 /// Module for [StringFilter] class
 module gtk.string_filter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.c.functions;

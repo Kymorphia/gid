@@ -1,6 +1,7 @@
 /// Module for [DBusObject] interface mixin
 module gio.dbus_object_mixin;
 
+public import gid.basictypes;
 public import gio.dbus_object_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

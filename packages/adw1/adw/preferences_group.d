@@ -1,6 +1,7 @@
 /// Module for [PreferencesGroup] class
 module adw.preferences_group;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -24,17 +25,17 @@ import gtk.widget;
     </picture>
     
     An [adw.preferences_group.PreferencesGroup] represents a group or tightly related preferences,
-    which in turn are represented by `class@PreferencesRow`.
+    which in turn are represented by [adw.preferences_row.PreferencesRow].
     
     To summarize the role of the preferences it gathers, a group can have both a
-    title and a description. The title will be used by `class@PreferencesDialog`
+    title and a description. The title will be used by [adw.preferences_dialog.PreferencesDialog]
     to let the user look for a preference.
     
     ## AdwPreferencesGroup as GtkBuildable
     
     The [adw.preferences_group.PreferencesGroup] implementation of the [gtk.buildable.Buildable] interface
-    supports adding `class@PreferencesRow`s to the list by omitting "type". If "type"
-    is omitted and the widget isn't a `class@PreferencesRow` the child is added to
+    supports adding [adw.preferences_row.PreferencesRow]s to the list by omitting "type". If "type"
+    is omitted and the widget isn't a [adw.preferences_row.PreferencesRow] the child is added to
     a box below the list.
     
     When the "type" attribute of a child is `header-suffix`, the child

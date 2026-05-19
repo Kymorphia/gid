@@ -1,6 +1,7 @@
 /// Module for [Gutter] class
 module gtksource.gutter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -19,12 +20,12 @@ import gtksource.types;
 import gtksource.view;
 
 /**
-    Gutter object for `class@View`.
+    Gutter object for [gtksource.view.View].
     
     The [gtksource.gutter.Gutter] object represents the left or right gutter of the text
-    view. It is used by `class@View` to draw the line numbers and
-    `class@Mark`s that might be present on a line. By packing
-    additional `class@GutterRenderer` objects in the gutter, you can extend the
+    view. It is used by [gtksource.view.View] to draw the line numbers and
+    [gtksource.mark.Mark]s that might be present on a line. By packing
+    additional [gtksource.gutter_renderer.GutterRenderer] objects in the gutter, you can extend the
     gutter with your own custom drawings.
     
     To get a [gtksource.gutter.Gutter], use the [gtksource.view.View.getGutter] function.

@@ -1,6 +1,7 @@
 /// Module for [SingleSelection] class
 module gtk.single_selection;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
@@ -20,7 +21,7 @@ import gtk.types;
     item.
     
     Note that the selection is *persistent* -- if the selected item is removed
-    and re-added in the same `signal@Gio.ListModel::items-changed` emission, it
+    and re-added in the same [gio.list_model.ListModel.itemsChanged] emission, it
     stays selected. In particular, this means that changing the sort order of an
     underlying sort model will preserve the selection.
 */

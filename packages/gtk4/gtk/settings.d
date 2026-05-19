@@ -1,6 +1,7 @@
 /// Module for [Settings] class
 module gtk.settings;
 
+public import gid.basictypes;
 import gdk.display;
 import gid.gid;
 import gobject.gid_builder;
@@ -192,7 +193,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkCursorBlink` property.
       Returns: Whether the cursor should blink.
         
-        Also see the `property@Gtk.Settings:gtk-cursor-blink-timeout` setting,
+        Also see the [gtk.settings.Settings.gtkCursorBlinkTimeout] setting,
         which allows more flexible control over cursor blinking.
   */
   @property bool gtkCursorBlink()
@@ -205,7 +206,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = Whether the cursor should blink.
           
-          Also see the `property@Gtk.Settings:gtk-cursor-blink-timeout` setting,
+          Also see the [gtk.settings.Settings.gtkCursorBlinkTimeout] setting,
           which allows more flexible control over cursor blinking.
   */
   @property void gtkCursorBlink(bool propval)
@@ -239,7 +240,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         The timer is reset after each user interaction.
         
         Setting this to zero has the same effect as setting
-        `property@Gtk.Settings:gtk-cursor-blink` to false.
+        [gtk.settings.Settings.gtkCursorBlink] to false.
   */
   @property int gtkCursorBlinkTimeout()
   {
@@ -254,7 +255,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           The timer is reset after each user interaction.
           
           Setting this to zero has the same effect as setting
-          `property@Gtk.Settings:gtk-cursor-blink` to false.
+          [gtk.settings.Settings.gtkCursorBlink] to false.
   */
   @property void gtkCursorBlinkTimeout(int propval)
   {
@@ -328,7 +329,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
         that can be closed.
         
         Also note that the setting can be overridden with the
-        `property@Gtk.HeaderBar:decoration-layout` property.
+        [gtk.header_bar.HeaderBar.decorationLayout] property.
   */
   @property string gtkDecorationLayout()
   {
@@ -357,7 +358,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
           that can be closed.
           
           Also note that the setting can be overridden with the
-          `property@Gtk.HeaderBar:decoration-layout` property.
+          [gtk.header_bar.HeaderBar.decorationLayout] property.
   */
   @property void gtkDecorationLayout(string propval)
   {
@@ -1511,7 +1512,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
       Params:
         propval = Whether the cursor should blink.
           
-          Also see the `property@Gtk.Settings:gtk-cursor-blink-timeout` setting,
+          Also see the [gtk.settings.Settings.gtkCursorBlinkTimeout] setting,
           which allows more flexible control over cursor blinking.
       Returns: Builder instance for fluent chaining
   */
@@ -1539,7 +1540,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           The timer is reset after each user interaction.
           
           Setting this to zero has the same effect as setting
-          `property@Gtk.Settings:gtk-cursor-blink` to false.
+          [gtk.settings.Settings.gtkCursorBlink] to false.
       Returns: Builder instance for fluent chaining
   */
   T gtkCursorBlinkTimeout(int propval)
@@ -1595,7 +1596,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
           that can be closed.
           
           Also note that the setting can be overridden with the
-          `property@Gtk.HeaderBar:decoration-layout` property.
+          [gtk.header_bar.HeaderBar.decorationLayout] property.
       Returns: Builder instance for fluent chaining
   */
   T gtkDecorationLayout(string propval)

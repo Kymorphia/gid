@@ -1,6 +1,7 @@
 /// Module for [Assistant] class
 module gtk.assistant;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;

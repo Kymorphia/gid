@@ -1,6 +1,7 @@
 /// Module for [ToolItem] class
 module gtk.tool_item;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

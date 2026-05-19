@@ -1,6 +1,7 @@
 /// Module for [TagSetter] interface mixin
 module gst.tag_setter_mixin;
 
+public import gid.basictypes;
 public import gst.tag_setter_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

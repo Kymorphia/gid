@@ -1,6 +1,7 @@
 /// Module for [UnixConnection] class
 module gio.unix_connection;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.c.functions;

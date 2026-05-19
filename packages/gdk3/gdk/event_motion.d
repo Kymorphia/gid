@@ -1,6 +1,7 @@
 /// Module for [EventMotion] class
 module gdk.event_motion;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.device;

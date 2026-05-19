@@ -1,6 +1,7 @@
 /// Module for [Criteria] class
 module arrowflight.criteria;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

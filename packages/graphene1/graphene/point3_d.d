@@ -1,6 +1,7 @@
 /// Module for [Point3D] struct
 module graphene.point3_d;
 
+public import gid.basictypes;
 import gid.gid;
 import graphene.c.functions;
 import graphene.c.types;

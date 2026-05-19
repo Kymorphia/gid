@@ -1,6 +1,7 @@
 /// Module for [ChunkedArrayDatum] class
 module arrow.chunked_array_datum;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.chunked_array;

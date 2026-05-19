@@ -1,6 +1,7 @@
 /// Module for [AttrFloat] class
 module pango.attr_float;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.attribute;
 import pango.c.functions;

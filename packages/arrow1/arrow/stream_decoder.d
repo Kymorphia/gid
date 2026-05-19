@@ -1,6 +1,7 @@
 /// Module for [StreamDecoder] class
 module arrow.stream_decoder;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;

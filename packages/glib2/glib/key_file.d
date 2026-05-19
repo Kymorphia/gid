@@ -1,6 +1,7 @@
 /// Module for [KeyFile] class
 module glib.key_file;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.c.functions;

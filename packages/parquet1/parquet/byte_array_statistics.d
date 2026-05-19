@@ -1,6 +1,7 @@
 /// Module for [ByteArrayStatistics] class
 module parquet.byte_array_statistics;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.gid_builder;

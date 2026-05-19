@@ -1,6 +1,7 @@
 /// Module for [FontsetSimple] class
 module pango.fontset_simple;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import pango.c.functions;

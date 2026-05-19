@@ -236,7 +236,7 @@ enum GdkPixbufRotation
     You can also copy an existing pixbuf with the [gdkpixbuf.pixbuf.Pixbuf.copy]
     function. This is not the same as just acquiring a reference to
     the old pixbuf instance: the copy function will actually duplicate
-    the pixel data in memory and create a new `class@Pixbuf` instance
+    the pixel data in memory and create a new [gdkpixbuf.pixbuf.Pixbuf] instance
     for it.
     
     ## Reference counting
@@ -516,18 +516,18 @@ struct GdkPixbufFormat
     
     The loader will emit three important signals throughout the process:
     
-     - `signal@GdkPixbuf.PixbufLoader::size-prepared` will be emitted as
+     - [gdkpixbuf.pixbuf_loader.PixbufLoader.sizePrepared] will be emitted as
        soon as the image has enough information to determine the size of
        the image to be used. If you want to scale the image while loading
        it, you can call [gdkpixbuf.pixbuf_loader.PixbufLoader.setSize] in
        response to this signal.
-     - `signal@GdkPixbuf.PixbufLoader::area-prepared` will be emitted as
+     - [gdkpixbuf.pixbuf_loader.PixbufLoader.areaPrepared] will be emitted as
        soon as the pixbuf of the desired has been allocated. You can obtain
        the [gdkpixbuf.pixbuf.Pixbuf] instance by calling [gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf].
        If you want to use it, simply acquire a reference to it. You can
        also call `[gdkpixbuf.pixbuf_loader.PixbufLoader.getPixbuf]` later to get the same
        pixbuf.
-     - `signal@GdkPixbuf.PixbufLoader::area-updated` will be emitted every
+     - [gdkpixbuf.pixbuf_loader.PixbufLoader.areaUpdated] will be emitted every
        time a region is updated. This way you can update a partially
        completed image. Note that you do not know anything about the
        completeness of an image from the updated area. For example, in an
@@ -537,7 +537,7 @@ struct GdkPixbufFormat
     ## Loading an animation
     
     Loading an animation is almost as easy as loading an image. Once the
-    first `signal@GdkPixbuf.PixbufLoader::area-prepared` signal has been
+    first [gdkpixbuf.pixbuf_loader.PixbufLoader.areaPrepared] signal has been
     emitted, you can call [gdkpixbuf.pixbuf_loader.PixbufLoader.getAnimation] to
     get the [gdkpixbuf.pixbuf_animation.PixbufAnimation] instance, and then call
     and [gdkpixbuf.pixbuf_animation.PixbufAnimation.getIter] to get a

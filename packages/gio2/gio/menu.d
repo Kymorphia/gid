@@ -1,6 +1,7 @@
 /// Module for [Menu] class
 module gio.menu;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

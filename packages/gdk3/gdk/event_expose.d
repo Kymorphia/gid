@@ -1,6 +1,7 @@
 /// Module for [EventExpose] class
 module gdk.event_expose;
 
+public import gid.basictypes;
 import cairo.region;
 import gdk.c.functions;
 import gdk.c.types;

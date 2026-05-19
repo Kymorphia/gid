@@ -1,6 +1,7 @@
 /// Module for [AudioFilter] class
 module gstaudio.audio_filter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstaudio.c.functions;

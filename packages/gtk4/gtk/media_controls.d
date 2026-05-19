@@ -1,6 +1,7 @@
 /// Module for [MediaControls] class
 module gtk.media_controls;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [AppChooserWidget] class
 module gtk.app_chooser_widget;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.app_info;
 import gobject.dclosure;
@@ -27,17 +28,17 @@ import gtk.widget;
     
     [gtk.app_chooser_widget.AppChooserWidget] offers detailed control over what applications
     are shown, using the
-    `property@Gtk.AppChooserWidget:show-default`,
-    `property@Gtk.AppChooserWidget:show-recommended`,
-    `property@Gtk.AppChooserWidget:show-fallback`,
-    `property@Gtk.AppChooserWidget:show-other` and
-    `property@Gtk.AppChooserWidget:show-all` properties. See the
+    [gtk.app_chooser_widget.AppChooserWidget.showDefault],
+    [gtk.app_chooser_widget.AppChooserWidget.showRecommended],
+    [gtk.app_chooser_widget.AppChooserWidget.showFallback],
+    [gtk.app_chooser_widget.AppChooserWidget.showOther] and
+    [gtk.app_chooser_widget.AppChooserWidget.showAll] properties. See the
     [gtk.app_chooser.AppChooser] documentation for more information about these
     groups of applications.
     
     To keep track of the selected application, use the
-    `signal@Gtk.AppChooserWidget::application-selected` and
-    `signal@Gtk.AppChooserWidget::application-activated` signals.
+    [gtk.app_chooser_widget.AppChooserWidget.applicationSelected] and
+    [gtk.app_chooser_widget.AppChooserWidget.applicationActivated] signals.
     
     ## CSS nodes
     
@@ -253,7 +254,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Returns the text that is shown if there are not applications
       that can handle the content type.
-      Returns: the value of `propertyGtk.AppChooserWidget:default-text`
+      Returns: the value of [gtk.app_chooser_widget.AppChooserWidget.defaultText]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -268,7 +269,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Gets whether the app chooser should show all applications
       in a flat list.
-      Returns: the value of `propertyGtk.AppChooserWidget:show-all`
+      Returns: the value of [gtk.app_chooser_widget.AppChooserWidget.showAll]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -282,7 +283,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Gets whether the app chooser should show the default handler
       for the content type in a separate section.
-      Returns: the value of `propertyGtk.AppChooserWidget:show-default`
+      Returns: the value of [gtk.app_chooser_widget.AppChooserWidget.showDefault]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -296,7 +297,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Gets whether the app chooser should show related applications
       for the content type in a separate section.
-      Returns: the value of `propertyGtk.AppChooserWidget:show-fallback`
+      Returns: the value of [gtk.app_chooser_widget.AppChooserWidget.showFallback]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -310,7 +311,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Gets whether the app chooser should show applications
       which are unrelated to the content type.
-      Returns: the value of `propertyGtk.AppChooserWidget:show-other`
+      Returns: the value of [gtk.app_chooser_widget.AppChooserWidget.showOther]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -324,7 +325,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Gets whether the app chooser should show recommended applications
       for the content type in a separate section.
-      Returns: the value of `propertyGtk.AppChooserWidget:show-recommended`
+      Returns: the value of [gtk.app_chooser_widget.AppChooserWidget.showRecommended]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -340,7 +341,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       that can handle the content type.
   
       Params:
-        text = the new value for `propertyGtk.AppChooserWidget:default-text`
+        text = the new value for [gtk.app_chooser_widget.AppChooserWidget.defaultText]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -355,7 +356,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       in a flat list.
   
       Params:
-        setting = the new value for `propertyGtk.AppChooserWidget:show-all`
+        setting = the new value for [gtk.app_chooser_widget.AppChooserWidget.showAll]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -369,7 +370,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       for the content type in a separate section.
   
       Params:
-        setting = the new value for `propertyGtk.AppChooserWidget:show-default`
+        setting = the new value for [gtk.app_chooser_widget.AppChooserWidget.showDefault]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -383,7 +384,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       for the content type in a separate section.
   
       Params:
-        setting = the new value for `propertyGtk.AppChooserWidget:show-fallback`
+        setting = the new value for [gtk.app_chooser_widget.AppChooserWidget.showFallback]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -397,7 +398,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       which are unrelated to the content type.
   
       Params:
-        setting = the new value for `propertyGtk.AppChooserWidget:show-other`
+        setting = the new value for [gtk.app_chooser_widget.AppChooserWidget.showOther]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -411,7 +412,7 @@ class AppChooserWidget : gtk.widget.Widget, gtk.app_chooser.AppChooser
       for the content type in a separate section.
   
       Params:
-        setting = the new value for `propertyGtk.AppChooserWidget:show-recommended`
+        setting = the new value for [gtk.app_chooser_widget.AppChooserWidget.showRecommended]
   
       Deprecated: This widget will be removed in GTK 5
   */

@@ -1,6 +1,7 @@
 /// Module for [Event] class
 module gst.event;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

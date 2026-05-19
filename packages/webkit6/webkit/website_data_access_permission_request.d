@@ -1,6 +1,7 @@
 /// Module for [WebsiteDataAccessPermissionRequest] class
 module webkit.website_data_access_permission_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

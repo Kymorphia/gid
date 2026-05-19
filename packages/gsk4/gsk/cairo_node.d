@@ -1,6 +1,7 @@
 /// Module for [CairoNode] class
 module gsk.cairo_node;
 
+public import gid.basictypes;
 import cairo.context;
 import cairo.surface;
 import gid.gid;

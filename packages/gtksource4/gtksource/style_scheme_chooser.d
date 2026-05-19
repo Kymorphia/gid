@@ -1,6 +1,7 @@
 /// Module for [StyleSchemeChooser] interface
 module gtksource.style_scheme_chooser;
 
+public import gid.basictypes;
 public import gtksource.style_scheme_chooser_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

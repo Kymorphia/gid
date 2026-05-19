@@ -1,6 +1,7 @@
 /// Module for [ColorChooser] interface
 module gtk.color_chooser;
 
+public import gid.basictypes;
 public import gtk.color_chooser_iface_proxy;
 import gdk.rgba;
 import gid.gid;

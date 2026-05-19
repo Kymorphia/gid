@@ -1,6 +1,7 @@
 /// Module for [DataHandler] interface
 module gda.data_handler;
 
+public import gid.basictypes;
 public import gda.data_handler_iface_proxy;
 import gda.c.functions;
 import gda.c.types;

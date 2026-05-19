@@ -8,7 +8,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 | --- | --- |
 | **Dub Package**          | [gid:gstallocators1](https://code.dlang.org/packages/gid%3Agstallocators1)       |
 | **Library Homepage**     | https://gstreamer.freedesktop.org                                                |
-| **D API Reference**      | https://www.kymorphia.com/gid/gstallocators.html                                 |
+| **D API Reference**      | https://www.kymorphia.com/gid/gid~gstallocators1/                                |
 | **C API Reference**      | https://gstreamer.freedesktop.org/documentation/allocators/index.html#allocators-library |
 
 Consult the [giD README](https://github.com/Kymorphia/gid) for more information on programming with giD and links to examples.

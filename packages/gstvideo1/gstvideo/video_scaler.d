@@ -1,6 +1,7 @@
 /// Module for [VideoScaler] class
 module gstvideo.video_scaler;
 
+public import gid.basictypes;
 import gid.gid;
 import gstvideo.c.functions;
 import gstvideo.c.types;

@@ -1,6 +1,7 @@
 /// Module for [Banner] class
 module adw.banner;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -25,17 +26,17 @@ import gtk.widget;
       <img src="banner.png" alt="banner">
     </picture>
     
-    Banners are hidden by default, use `property@Banner:revealed` to show them.
+    Banners are hidden by default, use [adw.banner.Banner.revealed] to show them.
     
-    Banners have a title, set with `property@Banner:title`. Titles can be marked
-    up with Pango markup, use `property@Banner:use-markup` to enable it.
+    Banners have a title, set with [adw.banner.Banner.title]. Titles can be marked
+    up with Pango markup, use [adw.banner.Banner.useMarkup] to enable it.
     
     The title will be shown centered or left-aligned depending on available
     space.
     
     Banners can optionally have a button with text on it, set through
-    `property@Banner:button-label`. The button can be used with a [gio.action.Action],
-    or with the `signal@Banner::button-clicked` signal.
+    [adw.banner.Banner.buttonLabel]. The button can be used with a [gio.action.Action],
+    or with the [adw.banner.Banner.buttonClicked] signal.
     
     ## CSS nodes
     
@@ -85,7 +86,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
         If set to `""` or `NULL`, the button won't be shown.
         
         The button can be used with a [gio.action.Action], or with the
-        `signal@Banner::button-clicked` signal.
+        [adw.banner.Banner.buttonClicked] signal.
   */
   @property string buttonLabel()
   {
@@ -100,7 +101,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
           If set to `""` or `NULL`, the button won't be shown.
           
           The button can be used with a [gio.action.Action], or with the
-          `signal@Banner::button-clicked` signal.
+          [adw.banner.Banner.buttonClicked] signal.
   */
   @property void buttonLabel(string propval)
   {
@@ -130,7 +131,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
       Get `title` property.
       Returns: The title for this banner.
         
-        See also: `property@Banner:use-markup`.
+        See also: [adw.banner.Banner.useMarkup].
   */
   @property string title()
   {
@@ -142,7 +143,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The title for this banner.
           
-          See also: `property@Banner:use-markup`.
+          See also: [adw.banner.Banner.useMarkup].
   */
   @property void title(string propval)
   {
@@ -241,7 +242,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
       If set to `""` or `NULL`, the button won't be shown.
       
       The button can be used with a [gio.action.Action], or with the
-      `signalBanner::button-clicked` signal.
+      [adw.banner.Banner.buttonClicked] signal.
   
       Params:
         label = the label
@@ -266,7 +267,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Sets the title for this banner.
       
-      See also: `propertyBanner:use-markup`.
+      See also: [adw.banner.Banner.useMarkup].
   
       Params:
         title = the title
@@ -344,7 +345,7 @@ class BannerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
           If set to `""` or `NULL`, the button won't be shown.
           
           The button can be used with a [gio.action.Action], or with the
-          `signal@Banner::button-clicked` signal.
+          [adw.banner.Banner.buttonClicked] signal.
       Returns: Builder instance for fluent chaining
   */
   T buttonLabel(string propval)
@@ -368,7 +369,7 @@ class BannerGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
       Params:
         propval = The title for this banner.
           
-          See also: `property@Banner:use-markup`.
+          See also: [adw.banner.Banner.useMarkup].
       Returns: Builder instance for fluent chaining
   */
   T title(string propval)

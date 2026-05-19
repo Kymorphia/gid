@@ -1,6 +1,7 @@
 /// Module for [HeaderBar] class
 module adw.header_bar;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -25,47 +26,47 @@ import gtk.widget;
     
     [adw.header_bar.HeaderBar] is similar to [gtk.header_bar.HeaderBar], but provides additional
     features compared to it. Refer to [gtk.header_bar.HeaderBar] for details. It is typically
-    used as a top bar within `class@ToolbarView`.
+    used as a top bar within [adw.toolbar_view.ToolbarView].
     
     ## Dialog Integration
     
-    When placed inside an `class@Dialog`, [adw.header_bar.HeaderBar] will display the dialog
+    When placed inside an [adw.dialog.Dialog], [adw.header_bar.HeaderBar] will display the dialog
     title intead of window title. It will also adjust the decoration layout to
     ensure it always has a close button and nothing else. Set
-    `property@HeaderBar:show-start-title-buttons` and
-    `property@HeaderBar:show-end-title-buttons` to `FALSE` to remove it if it's
+    [adw.header_bar.HeaderBar.showStartTitleButtons] and
+    [adw.header_bar.HeaderBar.showEndTitleButtons] to `FALSE` to remove it if it's
     unwanted.
     
     ## Navigation View Integration
     
-    When placed inside an `class@NavigationPage`, [adw.header_bar.HeaderBar] will display the
+    When placed inside an [adw.navigation_page.NavigationPage], [adw.header_bar.HeaderBar] will display the
     page title instead of window title.
     
-    When used together with `class@NavigationView` or `class@NavigationSplitView`,
+    When used together with [adw.navigation_view.NavigationView] or [adw.navigation_split_view.NavigationSplitView],
     it will also display a back button that can be used to go back to the previous
     page. The button also has a context menu, allowing to pop multiple pages at
     once, potentially across multiple navigation views.
     
-    Set `property@HeaderBar:show-back-button` to `FALSE` to disable this behavior
+    Set [adw.header_bar.HeaderBar.showBackButton] to `FALSE` to disable this behavior
     in rare scenarios where it's unwanted.
     
     ## Split View Integration
     
-    When placed inside `class@NavigationSplitView` or `class@OverlaySplitView`,
+    When placed inside [adw.navigation_split_view.NavigationSplitView] or [adw.overlay_split_view.OverlaySplitView],
     [adw.header_bar.HeaderBar] will automatically hide the title buttons other than at the
     edges of the window.
     
     ## Centering Policy
     
-    `property@HeaderBar:centering-policy` allows to enforce strict centering of
-    the title widget. This can be useful for entries inside `class@Clamp`.
+    [adw.header_bar.HeaderBar.centeringPolicy] allows to enforce strict centering of
+    the title widget. This can be useful for entries inside [adw.clamp.Clamp].
     
     ## Title Buttons
     
     Unlike [gtk.header_bar.HeaderBar], [adw.header_bar.HeaderBar] allows to toggle title button
     visibility for each side individually, using the
-    `property@HeaderBar:show-start-title-buttons` and
-    `property@HeaderBar:show-end-title-buttons` properties.
+    [adw.header_bar.HeaderBar.showStartTitleButtons] and
+    [adw.header_bar.HeaderBar.showEndTitleButtons] properties.
     
     ## CSS nodes
     
@@ -96,7 +97,7 @@ import gtk.widget;
     Each of the boxes contains a `windowcontrols` subnode, see
     [gtk.window_controls.WindowControls] for details, as well as other children.
     
-    When `property@HeaderBar:show-back-button` is `TRUE`, the start box also
+    When [adw.header_bar.HeaderBar.showBackButton] is `TRUE`, the start box also
     contains a node with the name `widget` that contains a node with the name
     `button` and `.back` style class.
     
@@ -165,7 +166,7 @@ class HeaderBar : gtk.widget.Widget
       Returns: The decoration layout for buttons.
         
         If this property is not set, the
-        `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+        [gtk.settings.Settings.gtkDecorationLayout] setting is used.
         
         The format of the string is button names, separated by commas. A colon
         separates the buttons that should appear at the start from those at the
@@ -186,7 +187,7 @@ class HeaderBar : gtk.widget.Widget
         propval = The decoration layout for buttons.
           
           If this property is not set, the
-          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          [gtk.settings.Settings.gtkDecorationLayout] setting is used.
           
           The format of the string is button names, separated by commas. A colon
           separates the buttons that should appear at the start from those at the
@@ -206,7 +207,7 @@ class HeaderBar : gtk.widget.Widget
       Returns: Whether the header bar can show the back button.
         
         The back button will never be shown unless the header bar is placed inside an
-        `class@NavigationView`. Usually, there is no reason to set this to `FALSE`.
+        [adw.navigation_view.NavigationView]. Usually, there is no reason to set this to `FALSE`.
   */
   @property bool showBackButton()
   {
@@ -219,7 +220,7 @@ class HeaderBar : gtk.widget.Widget
         propval = Whether the header bar can show the back button.
           
           The back button will never be shown unless the header bar is placed inside an
-          `class@NavigationView`. Usually, there is no reason to set this to `FALSE`.
+          [adw.navigation_view.NavigationView]. Usually, there is no reason to set this to `FALSE`.
   */
   @property void showBackButton(bool propval)
   {
@@ -230,10 +231,10 @@ class HeaderBar : gtk.widget.Widget
       Get `showEndTitleButtons` property.
       Returns: Whether to show title buttons at the end of the header bar.
         
-        See `property@HeaderBar:show-start-title-buttons` for the other side.
+        See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
         
         Which buttons are actually shown and where is determined by the
-        `property@HeaderBar:decoration-layout` property, and by the state of the
+        [adw.header_bar.HeaderBar.decorationLayout] property, and by the state of the
         window (e.g. a close button will not be shown if the window can't be
         closed).
   */
@@ -247,10 +248,10 @@ class HeaderBar : gtk.widget.Widget
       Params:
         propval = Whether to show title buttons at the end of the header bar.
           
-          See `property@HeaderBar:show-start-title-buttons` for the other side.
+          See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
           
           Which buttons are actually shown and where is determined by the
-          `property@HeaderBar:decoration-layout` property, and by the state of the
+          [adw.header_bar.HeaderBar.decorationLayout] property, and by the state of the
           window (e.g. a close button will not be shown if the window can't be
           closed).
   */
@@ -263,10 +264,10 @@ class HeaderBar : gtk.widget.Widget
       Get `showStartTitleButtons` property.
       Returns: Whether to show title buttons at the start of the header bar.
         
-        See `property@HeaderBar:show-end-title-buttons` for the other side.
+        See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
         
         Which buttons are actually shown and where is determined by the
-        `property@HeaderBar:decoration-layout` property, and by the state of the
+        [adw.header_bar.HeaderBar.decorationLayout] property, and by the state of the
         window (e.g. a close button will not be shown if the window can't be
         closed).
   */
@@ -280,10 +281,10 @@ class HeaderBar : gtk.widget.Widget
       Params:
         propval = Whether to show title buttons at the start of the header bar.
           
-          See `property@HeaderBar:show-end-title-buttons` for the other side.
+          See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
           
           Which buttons are actually shown and where is determined by the
-          `property@HeaderBar:decoration-layout` property, and by the state of the
+          [adw.header_bar.HeaderBar.decorationLayout] property, and by the state of the
           window (e.g. a close button will not be shown if the window can't be
           closed).
   */
@@ -318,7 +319,7 @@ class HeaderBar : gtk.widget.Widget
         When set to `NULL`, the header bar will display the title of the window it
         is contained in.
         
-        To use a different title, use `class@WindowTitle`:
+        To use a different title, use [adw.window_title.WindowTitle]:
         
         ```xml
         <object class="AdwHeaderBar">
@@ -343,7 +344,7 @@ class HeaderBar : gtk.widget.Widget
           When set to `NULL`, the header bar will display the title of the window it
           is contained in.
           
-          To use a different title, use `class@WindowTitle`:
+          To use a different title, use [adw.window_title.WindowTitle]:
           
           ```xml
           <object class="AdwHeaderBar">
@@ -477,7 +478,7 @@ class HeaderBar : gtk.widget.Widget
       Removes a child from self.
       
       The child must have been added with [adw.header_bar.HeaderBar.packStart],
-      [adw.header_bar.HeaderBar.packEnd] or `propertyHeaderBar:title-widget`.
+      [adw.header_bar.HeaderBar.packEnd] or [adw.header_bar.HeaderBar.titleWidget].
   
       Params:
         child = the child to remove
@@ -502,7 +503,7 @@ class HeaderBar : gtk.widget.Widget
       Sets the decoration layout for self.
       
       If this property is not set, the
-      `propertyGtk.Settings:gtk-decoration-layout` setting is used.
+      [gtk.settings.Settings.gtkDecorationLayout] setting is used.
       
       The format of the string is button names, separated by commas. A colon
       separates the buttons that should appear at the start from those at the end.
@@ -525,7 +526,7 @@ class HeaderBar : gtk.widget.Widget
       Sets whether self can show the back button.
       
       The back button will never be shown unless the header bar is placed inside an
-      `classNavigationView`. Usually, there is no reason to set it to `FALSE`.
+      [adw.navigation_view.NavigationView]. Usually, there is no reason to set it to `FALSE`.
   
       Params:
         showBackButton = whether to show the back button
@@ -538,10 +539,10 @@ class HeaderBar : gtk.widget.Widget
   /**
       Sets whether to show title buttons at the end of self.
       
-      See `propertyHeaderBar:show-start-title-buttons` for the other side.
+      See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
       
       Which buttons are actually shown and where is determined by the
-      `propertyHeaderBar:decoration-layout` property, and by the state of the
+      [adw.header_bar.HeaderBar.decorationLayout] property, and by the state of the
       window (e.g. a close button will not be shown if the window can't be closed).
   
       Params:
@@ -555,10 +556,10 @@ class HeaderBar : gtk.widget.Widget
   /**
       Sets whether to show title buttons at the start of self.
       
-      See `propertyHeaderBar:show-end-title-buttons` for the other side.
+      See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
       
       Which buttons are actually shown and where is determined by the
-      `propertyHeaderBar:decoration-layout` property, and by the state of the
+      [adw.header_bar.HeaderBar.decorationLayout] property, and by the state of the
       window (e.g. a close button will not be shown if the window can't be closed).
   
       Params:
@@ -586,7 +587,7 @@ class HeaderBar : gtk.widget.Widget
       When set to `NULL`, the header bar will display the title of the window it
       is contained in.
       
-      To use a different title, use `classWindowTitle`:
+      To use a different title, use [adw.window_title.WindowTitle]:
       
       ```xml
       <object class="AdwHeaderBar">
@@ -629,7 +630,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The decoration layout for buttons.
           
           If this property is not set, the
-          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          [gtk.settings.Settings.gtkDecorationLayout] setting is used.
           
           The format of the string is button names, separated by commas. A colon
           separates the buttons that should appear at the start from those at the
@@ -651,7 +652,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the header bar can show the back button.
           
           The back button will never be shown unless the header bar is placed inside an
-          `class@NavigationView`. Usually, there is no reason to set this to `FALSE`.
+          [adw.navigation_view.NavigationView]. Usually, there is no reason to set this to `FALSE`.
       Returns: Builder instance for fluent chaining
   */
   T showBackButton(bool propval)
@@ -664,10 +665,10 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Whether to show title buttons at the end of the header bar.
           
-          See `property@HeaderBar:show-start-title-buttons` for the other side.
+          See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
           
           Which buttons are actually shown and where is determined by the
-          `property@HeaderBar:decoration-layout` property, and by the state of the
+          [adw.header_bar.HeaderBar.decorationLayout] property, and by the state of the
           window (e.g. a close button will not be shown if the window can't be
           closed).
       Returns: Builder instance for fluent chaining
@@ -682,10 +683,10 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Whether to show title buttons at the start of the header bar.
           
-          See `property@HeaderBar:show-end-title-buttons` for the other side.
+          See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
           
           Which buttons are actually shown and where is determined by the
-          `property@HeaderBar:decoration-layout` property, and by the state of the
+          [adw.header_bar.HeaderBar.decorationLayout] property, and by the state of the
           window (e.g. a close button will not be shown if the window can't be
           closed).
       Returns: Builder instance for fluent chaining
@@ -714,7 +715,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           When set to `NULL`, the header bar will display the title of the window it
           is contained in.
           
-          To use a different title, use `class@WindowTitle`:
+          To use a different title, use [adw.window_title.WindowTitle]:
           
           ```xml
           <object class="AdwHeaderBar">

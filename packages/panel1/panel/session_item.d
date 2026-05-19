@@ -1,6 +1,7 @@
 /// Module for [SessionItem] class
 module panel.session_item;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.variant;
 import glib.variant_type;

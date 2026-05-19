@@ -156,13 +156,13 @@ alias AuthDomainFilter = bool delegate(soup.auth_domain.AuthDomain domain, soup.
     
     In general, for security reasons, it is preferable to use the
     auth-domain-specific auth callbacks (eg,
-    `callbackAuthDomainBasicAuthCallback` and
-    `callbackAuthDomainDigestAuthCallback`), because they don't require
+    [soup.types.AuthDomainBasicAuthCallback] and
+    [soup.types.AuthDomainDigestAuthCallback]), because they don't require
     keeping a cleartext password database. Most users will use the same
     password for many different sites, meaning if any site with a
     cleartext password database is compromised, accounts on other
     servers might be compromised as well. For many of the cases where
-    `classServer` is used, this is not really relevant, but it may still
+    [soup.server.Server] is used, this is not really relevant, but it may still
     be worth considering.
 
     Params:
@@ -177,13 +177,13 @@ alias AuthDomainGenericAuthCallback = bool delegate(soup.auth_domain.AuthDomain 
     The prototype for a logging filter.
     
     The filter callback will be invoked for each request or response, and should
-    analyze it and return a `enumLoggerLogLevel` value indicating how much of
+    analyze it and return a [soup.types.LoggerLogLevel] value indicating how much of
     the message to log.
 
     Params:
       logger = the #SoupLogger
       msg = the message being logged
-    Returns: a `enumLoggerLogLevel` value indicating how much of the message to
+    Returns: a [soup.types.LoggerLogLevel] value indicating how much of the message to
         log
 */
 alias LoggerFilter = soup.types.LoggerLogLevel delegate(soup.logger.Logger logger, soup.message.Message msg);
@@ -221,16 +221,16 @@ alias LoggerPrinter = void delegate(soup.logger.Logger logger, soup.types.Logger
 alias MessageHeadersForeachFunc = void delegate(string name, string value);
 
 /**
-    A callback used to handle requests to a `classServer`.
+    A callback used to handle requests to a [soup.server.Server].
     
     path and query contain the likewise-named components of the
     Request-URI, subject to certain assumptions. By default,
-    `classServer` decodes all percent-encoding in the URI path, such that
+    [soup.server.Server] decodes all percent-encoding in the URI path, such that
     `"/foo`2Fbar`"` is treated the same as `"/foo/bar"`. If your
     server is serving resources in some non-POSIX-filesystem namespace,
     you may want to distinguish those as two distinct paths. In that
-    case, you can set the `propertyServer:raw-paths` property when creating
-    the `classServer`, and it will leave those characters undecoded.
+    case, you can set the [soup.server.Server.rawPaths] property when creating
+    the [soup.server.Server], and it will leave those characters undecoded.
     
     query contains the query component of the Request-URI parsed according to
     the rules for HTML form handling. Although this is the only commonly-used
@@ -258,7 +258,7 @@ alias ServerCallback = void delegate(soup.server.Server server, soup.server_mess
     client (and is only invoked if the handshake was successful).
     
     path contains the path of the Request-URI, subject to the same
-    rules as `callbackServerCallback` `(qv)`.
+    rules as [soup.types.ServerCallback] `(qv)`.
 
     Params:
       server = the #SoupServer

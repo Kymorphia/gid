@@ -1,6 +1,7 @@
 /// Module for [BitsetIter] class
 module gtk.bitset_iter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gtk.bitset;

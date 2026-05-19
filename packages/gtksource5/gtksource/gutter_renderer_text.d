@@ -1,6 +1,7 @@
 /// Module for [GutterRendererText] class
 module gtksource.gutter_renderer_text;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -20,7 +21,7 @@ import gtksource.types;
     Renders text in the gutter.
     
     A [gtksource.gutter_renderer_text.GutterRendererText] can be used to render text in a cell of
-    `class@Gutter`.
+    [gtksource.gutter.Gutter].
 */
 class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
 {

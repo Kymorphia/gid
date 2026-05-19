@@ -1,6 +1,7 @@
 /// Module for [GLRenderbuffer] class
 module gstgl.glrenderbuffer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstgl.c.functions;

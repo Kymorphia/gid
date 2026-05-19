@@ -1,6 +1,7 @@
 /// Module for [EventTouchpadPinch] class
 module gdk.event_touchpad_pinch;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

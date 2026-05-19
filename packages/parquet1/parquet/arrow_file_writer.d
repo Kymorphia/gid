@@ -1,6 +1,7 @@
 /// Module for [ArrowFileWriter] class
 module parquet.arrow_file_writer;
 
+public import gid.basictypes;
 import arrow.chunked_array;
 import arrow.output_stream;
 import arrow.record_batch;

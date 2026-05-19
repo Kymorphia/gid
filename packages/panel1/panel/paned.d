@@ -1,6 +1,7 @@
 /// Module for [Paned] class
 module panel.paned;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

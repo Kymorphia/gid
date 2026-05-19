@@ -1,6 +1,7 @@
 /// Module for [Item] class
 module secret.item;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_initable;
 import gio.async_initable_mixin;
@@ -30,7 +31,7 @@ import secret.value;
     
     #SecretItem represents a secret item stored in the Secret Service.
     
-    Each item has a value, represented by a `struct@Value`, which can be
+    Each item has a value, represented by a [secret.value.Value], which can be
     retrieved by [secret.item.Item.getSecret] or set by [secret.item.Item.setSecret].
     The item is only available when the item is not locked.
     
@@ -111,7 +112,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Get `service` property.
-      Returns: The `class@Service` object that this item is associated with and
+      Returns: The [secret.service.Service] object that this item is associated with and
         uses to interact with the actual D-Bus Secret Service.
   */
   @property secret.service.Service service()
@@ -219,7 +220,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   /**
       Load the secret values for a secret item stored in the service.
       
-      The items must all have the same `propertyItem:service` property.
+      The items must all have the same [secret.item.Item.service] property.
       
       This function returns immediately and completes asynchronously.
   
@@ -268,7 +269,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
   /**
       Load the secret values for a secret item stored in the service.
       
-      The items must all have the same `propertyItem:service` property.
+      The items must all have the same [secret.item.Item.service] property.
       
       This method may block indefinitely and should not be used in user interface
       threads.
@@ -817,7 +818,7 @@ class ItemGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T, secret.r
   /**
       Set `service` property.
       Params:
-        propval = The `class@Service` object that this item is associated with and
+        propval = The [secret.service.Service] object that this item is associated with and
           uses to interact with the actual D-Bus Secret Service.
       Returns: Builder instance for fluent chaining
   */

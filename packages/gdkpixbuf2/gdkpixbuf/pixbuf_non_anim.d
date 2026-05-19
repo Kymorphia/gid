@@ -1,6 +1,7 @@
 /// Module for [PixbufNonAnim] class
 module gdkpixbuf.pixbuf_non_anim;
 
+public import gid.basictypes;
 import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf;

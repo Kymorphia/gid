@@ -1,6 +1,7 @@
 /// Module for [DRMDumbAllocator] class
 module gstallocators.drmdumb_allocator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

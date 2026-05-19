@@ -1,6 +1,7 @@
 /// Module for [StyleSchemeManager] class
 module gtksource.style_scheme_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -10,7 +11,7 @@ import gtksource.style_scheme;
 import gtksource.types;
 
 /**
-    Provides access to `class@StyleScheme`s.
+    Provides access to [gtksource.style_scheme.StyleScheme]s.
 */
 class StyleSchemeManager : gobject.object.ObjectWrap
 {

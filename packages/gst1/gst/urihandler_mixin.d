@@ -1,6 +1,7 @@
 /// Module for [URIHandler] interface mixin
 module gst.urihandler_mixin;
 
+public import gid.basictypes;
 public import gst.urihandler_iface_proxy;
 public import gid.gid;
 public import glib.error;

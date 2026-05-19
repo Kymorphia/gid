@@ -1,7 +1,7 @@
 //!gir libxml2-2.0
 //!info description "D binding for the libxml2 library - "
 //!info homepage https://github.com/GNOME/libxml2
-//!info docs https://www.kymorphia.com/gid/libxml2.html
+//!info docs https://www.kymorphia.com/gid/gid~libxml2/
 
 //# Change package name to just libxml2 rather than libxml22
 //!info name libxml2

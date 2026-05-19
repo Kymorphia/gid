@@ -1,6 +1,7 @@
 /// Module for [DevicePad] interface mixin
 module gdk.device_pad_mixin;
 
+public import gid.basictypes;
 public import gdk.device_pad_iface_proxy;
 public import gdk.c.functions;
 public import gdk.c.types;

@@ -1,6 +1,7 @@
 /// Module for [DevicePad] interface
 module gdk.device_pad;
 
+public import gid.basictypes;
 public import gdk.device_pad_iface_proxy;
 import gdk.c.functions;
 import gdk.c.types;

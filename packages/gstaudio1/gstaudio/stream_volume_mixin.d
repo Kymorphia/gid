@@ -1,6 +1,7 @@
 /// Module for [StreamVolume] interface mixin
 module gstaudio.stream_volume_mixin;
 
+public import gid.basictypes;
 public import gstaudio.stream_volume_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

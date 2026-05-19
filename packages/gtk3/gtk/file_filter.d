@@ -1,6 +1,7 @@
 /// Module for [FileFilter] class
 module gtk.file_filter;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.variant;
 import gobject.gid_builder;

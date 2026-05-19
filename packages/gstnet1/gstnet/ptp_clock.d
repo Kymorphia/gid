@@ -1,6 +1,7 @@
 /// Module for [PtpClock] class
 module gstnet.ptp_clock;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

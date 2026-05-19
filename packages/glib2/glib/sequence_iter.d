@@ -1,6 +1,7 @@
 /// Module for [SequenceIter] class
 module glib.sequence_iter;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

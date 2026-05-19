@@ -1,6 +1,7 @@
 /// Module for [CompletionProposal] interface mixin
 module gtksource.completion_proposal_mixin;
 
+public import gid.basictypes;
 public import gtksource.completion_proposal_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;
@@ -12,7 +13,7 @@ public import gtksource.types;
     Interface for completion proposals.
     
     This interface is used to denote that an object is capable of being
-    a completion proposal for `class@Completion`.
+    a completion proposal for [gtksource.completion.Completion].
     
     Currently, no method or functions are required but additional methods
     may be added in the future. Proposals created by

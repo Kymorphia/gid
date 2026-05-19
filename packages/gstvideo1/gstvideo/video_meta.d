@@ -1,6 +1,7 @@
 /// Module for [VideoMeta] class
 module gstvideo.video_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gst.map_info;

@@ -1,6 +1,7 @@
 /// Module for [Field] class
 module arrow.field;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.data_type;

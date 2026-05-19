@@ -1,6 +1,7 @@
 /// Module for [IMContext] class
 module gtk.imcontext;
 
+public import gid.basictypes;
 import gdk.device;
 import gdk.event;
 import gdk.rectangle;
@@ -26,8 +27,8 @@ import pango.attr_list;
     outputting the composed result. This is called *preediting*, and an input
     method may provide feedback about this process by displaying the intermediate
     composition states as preedit text. To do so, the [gtk.imcontext.IMContext] will emit
-    `signal@Gtk.IMContext::preedit-start`, `signal@Gtk.IMContext::preedit-changed`
-    and `signal@Gtk.IMContext::preedit-end` signals.
+    [gtk.imcontext.IMContext.preeditStart], [gtk.imcontext.IMContext.preeditChanged]
+    and [gtk.imcontext.IMContext.preeditEnd] signals.
     
     For instance, the built-in GTK input method [gtk.imcontext_simple.IMContextSimple]
     implements the input of arbitrary Unicode code points by holding down the
@@ -276,7 +277,7 @@ class IMContext : gobject.object.ObjectWrap
       where only some sequences of characters are allowed.
       
       This function is implemented by emitting the
-      `signalGtk.IMContext::retrieve-surrounding` signal on the input method;
+      [gtk.imcontext.IMContext.retrieveSurrounding] signal on the input method;
       in response to this signal, a widget should provide as much context as
       is available, up to an entire paragraph, by calling
       [gtk.imcontext.IMContext.setSurrounding].
@@ -314,7 +315,7 @@ class IMContext : gobject.object.ObjectWrap
       as Thai where only some sequences of characters are allowed.
       
       This function is implemented by emitting the
-      `signalGtk.IMContext::retrieve-surrounding` signal on the input method;
+      [gtk.imcontext.IMContext.retrieveSurrounding] signal on the input method;
       in response to this signal, a widget should provide as much context as
       is available, up to an entire paragraph, by calling
       [gtk.imcontext.IMContext.setSurroundingWithSelection].
@@ -390,7 +391,7 @@ class IMContext : gobject.object.ObjectWrap
       string.
       
       This function is expected to be called in response to the
-      `signalGtk.IMContext::retrieve-surrounding` signal, and will
+      [gtk.imcontext.IMContext.retrieveSurrounding] signal, and will
       likely have no effect if called at other times.
   
       Params:

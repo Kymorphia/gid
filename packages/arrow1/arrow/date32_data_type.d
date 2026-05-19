@@ -1,6 +1,7 @@
 /// Module for [Date32DataType] class
 module arrow.date32_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.temporal_data_type;

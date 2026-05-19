@@ -1,6 +1,7 @@
 /// Module for [CertificateList] class
 module gmime.certificate_list;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

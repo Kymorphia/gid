@@ -1,6 +1,7 @@
 /// Module for [EventTouch] class
 module gdk.event_touch;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.device;

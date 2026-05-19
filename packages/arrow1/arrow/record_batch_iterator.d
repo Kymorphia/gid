@@ -1,6 +1,7 @@
 /// Module for [RecordBatchIterator] class
 module arrow.record_batch_iterator;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.record_batch;

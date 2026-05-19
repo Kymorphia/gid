@@ -1,6 +1,7 @@
 /// Module for [IMMulticontext] class
 module gtk.immulticontext;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.c.functions;
@@ -83,7 +84,7 @@ class IMMulticontext : gtk.imcontext.IMContext
       replaced by the delegate corresponding to the new context id.
       
       Setting this to a non-null value overrides the system-wide
-      IM module setting. See the `propertyGtk.Settings:gtk-im-module`
+      IM module setting. See the [gtk.settings.Settings.gtkImModule]
       property.
   
       Params:

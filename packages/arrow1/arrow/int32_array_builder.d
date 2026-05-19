@@ -1,6 +1,7 @@
 /// Module for [Int32ArrayBuilder] class
 module arrow.int32_array_builder;
 
+public import gid.basictypes;
 import arrow.array_builder;
 import arrow.c.functions;
 import arrow.c.types;

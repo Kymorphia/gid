@@ -1,6 +1,7 @@
 /// Module for [Row] class
 module gda.row;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

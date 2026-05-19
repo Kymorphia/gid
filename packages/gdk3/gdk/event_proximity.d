@@ -1,6 +1,7 @@
 /// Module for [EventProximity] class
 module gdk.event_proximity;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.device;

@@ -1,6 +1,7 @@
 /// Module for [AccessibleList] class
 module gtk.accessible_list;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gobject.object;

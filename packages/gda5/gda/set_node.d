@@ -1,6 +1,7 @@
 /// Module for [SetNode] class
 module gda.set_node;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_model;

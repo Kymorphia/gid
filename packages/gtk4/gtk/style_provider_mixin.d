@@ -1,6 +1,7 @@
 /// Module for [StyleProvider] interface mixin
 module gtk.style_provider_mixin;
 
+public import gid.basictypes;
 public import gtk.style_provider_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;

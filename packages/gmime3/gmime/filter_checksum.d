@@ -1,6 +1,7 @@
 /// Module for [FilterChecksum] class
 module gmime.filter_checksum;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gmime.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [Initable] interface mixin
 module gio.initable_mixin;
 
+public import gid.basictypes;
 public import gio.initable_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [LanguageManager] class
 module gtksource.language_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -10,15 +11,15 @@ import gtksource.language;
 import gtksource.types;
 
 /**
-    Provides access to `class@Language`s.
+    Provides access to [gtksource.language.Language]s.
     
     [gtksource.language_manager.LanguageManager] is an object which processes language description
-    files and creates and stores `class@Language` objects, and provides API to
+    files and creates and stores [gtksource.language.Language] objects, and provides API to
     access them.
     
     Use [gtksource.language_manager.LanguageManager.getDefault] to retrieve the default
     instance of [gtksource.language_manager.LanguageManager], and
-    [gtksource.language_manager.LanguageManager.guessLanguage] to get a `class@Language` for
+    [gtksource.language_manager.LanguageManager.guessLanguage] to get a [gtksource.language.Language] for
     given file name and content type.
 */
 class LanguageManager : gobject.object.ObjectWrap
@@ -101,7 +102,7 @@ class LanguageManager : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the `classLanguage` identified by the given id in the language
+      Gets the [gtksource.language.Language] identified by the given id in the language
       manager.
   
       Params:
@@ -169,7 +170,7 @@ class LanguageManager : gobject.object.ObjectWrap
   }
 
   /**
-      Picks a `classLanguage` for given file name and content type,
+      Picks a [gtksource.language.Language] for given file name and content type,
       according to the information in lang files.
       
       Either filename or content_type may be null. This function can be used as follows:

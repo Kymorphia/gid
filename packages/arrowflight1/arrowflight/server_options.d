@@ -1,6 +1,7 @@
 /// Module for [ServerOptions] class
 module arrowflight.server_options;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.location;

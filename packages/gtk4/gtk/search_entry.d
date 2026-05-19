@@ -1,6 +1,7 @@
 /// Module for [SearchEntry] class
 module gtk.search_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -34,12 +35,12 @@ import gtk.widget;
     To make filtering appear more reactive, it is a good idea to
     not react to every change in the entry text immediately, but
     only after a short delay. To support this, [gtk.search_entry.SearchEntry]
-    emits the `signal@Gtk.SearchEntry::search-changed` signal which
+    emits the [gtk.search_entry.SearchEntry.searchChanged] signal which
     can be used instead of the [gtk.editable.Editable.changed] signal.
     
-    The `signal@Gtk.SearchEntry::previous-match`,
-    `signal@Gtk.SearchEntry::next-match` and
-    `signal@Gtk.SearchEntry::stop-search` signals can be used to
+    The [gtk.search_entry.SearchEntry.previousMatch],
+    [gtk.search_entry.SearchEntry.nextMatch] and
+    [gtk.search_entry.SearchEntry.stopSearch] signals can be used to
     implement moving between search results and ending the search.
     
     Often, [gtk.search_entry.SearchEntry] will be fed events by means of being
@@ -267,7 +268,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
 
   /**
       Get the delay to be used between the last keypress and the
-      `signalGtk.SearchEntry::search-changed` signal being emitted.
+      [gtk.search_entry.SearchEntry.searchChanged] signal being emitted.
       Returns: a delay in milliseconds.
   */
   uint getSearchDelay()
@@ -340,7 +341,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
 
   /**
       Set the delay to be used between the last keypress and the
-      `signalGtk.SearchEntry::search-changed` signal being emitted.
+      [gtk.search_entry.SearchEntry.searchChanged] signal being emitted.
   
       Params:
         delay = a delay in milliseconds
@@ -483,7 +484,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
       Connect to `SearchChanged` signal.
   
       Emitted with a delay. The length of the delay can be
-        changed with the `propertyGtk.SearchEntry:search-delay`
+        changed with the [gtk.search_entry.SearchEntry.searchDelay]
         property.
   
       Params:

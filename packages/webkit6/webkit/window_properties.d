@@ -1,6 +1,7 @@
 /// Module for [WindowProperties] class
 module webkit.window_properties;
 
+public import gid.basictypes;
 import gdk.rectangle;
 import gid.gid;
 import gobject.gid_builder;

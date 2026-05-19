@@ -1,6 +1,7 @@
 /// Module for [Servable] interface
 module arrowflight.servable;
 
+public import gid.basictypes;
 public import arrowflight.servable_iface_proxy;
 import arrowflight.c.functions;
 import arrowflight.c.types;

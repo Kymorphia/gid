@@ -1,6 +1,7 @@
 /// Module for [Switch] class
 module gtk.switch_;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -33,7 +34,7 @@ import gtk.widget;
     
     ![GtkSwitch with delayed state change](switch-state.png)
     
-    See `signal@Gtk.Switch::state-set` for details.
+    See [gtk.switch_.Switch.stateSet] for details.
     
     # CSS nodes
     
@@ -112,7 +113,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       Get `state` property.
       Returns: The backend state that is controlled by the switch.
         
-        See `signal@Gtk.Switch::state-set` for details.
+        See [gtk.switch_.Switch.stateSet] for details.
   */
   @property bool state()
   {
@@ -124,7 +125,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
       Params:
         propval = The backend state that is controlled by the switch.
           
-          See `signal@Gtk.Switch::state-set` for details.
+          See [gtk.switch_.Switch.stateSet] for details.
   */
   @property void state(bool propval)
   {
@@ -180,10 +181,10 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Sets the underlying state of the [gtk.switch_.Switch].
       
-      This function is typically called from a `signalGtk.Switch::state-set`
+      This function is typically called from a [gtk.switch_.Switch.stateSet]
       signal handler in order to set up delayed state changes.
       
-      See `signalGtk.Switch::state-set` for details.
+      See [gtk.switch_.Switch.stateSet] for details.
   
       Params:
         state = the new state
@@ -316,7 +317,7 @@ class SwitchGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.actionabl
       Params:
         propval = The backend state that is controlled by the switch.
           
-          See `signal@Gtk.Switch::state-set` for details.
+          See [gtk.switch_.Switch.stateSet] for details.
       Returns: Builder instance for fluent chaining
   */
   T state(bool propval)

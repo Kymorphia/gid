@@ -1,6 +1,7 @@
 /// Module for [WebContext] class
 module webkit.web_context;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.variant;
 import gobject.dclosure;

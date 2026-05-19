@@ -1,6 +1,7 @@
 /// Module for [TabPage] class
 module adw.tab_page;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -13,7 +14,7 @@ import gtk.accessible_mixin;
 import gtk.widget;
 
 /**
-    An auxiliary class used by `class@TabView`.
+    An auxiliary class used by [adw.tab_view.TabView].
 */
 class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 {
@@ -65,8 +66,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `icon` property.
       Returns: The icon of the page.
         
-        `class@TabBar` and `class@TabOverview` display the icon next to the title,
-        unless `property@TabPage:loading` is set to `TRUE`.
+        [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] display the icon next to the title,
+        unless [adw.tab_page.TabPage.loading] is set to `TRUE`.
         
         [adw.tab_bar.TabBar] also won't show the icon if the page is pinned and
         [propertyTabPage:indicator-icon] is set.
@@ -81,8 +82,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = The icon of the page.
           
-          `class@TabBar` and `class@TabOverview` display the icon next to the title,
-          unless `property@TabPage:loading` is set to `TRUE`.
+          [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] display the icon next to the title,
+          unless [adw.tab_page.TabPage.loading] is set to `TRUE`.
           
           [adw.tab_bar.TabBar] also won't show the icon if the page is pinned and
           [propertyTabPage:indicator-icon] is set.
@@ -96,10 +97,10 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `indicatorActivatable` property.
       Returns: Whether the indicator icon is activatable.
         
-        If set to `TRUE`, `signal@TabView::indicator-activated` will be emitted
+        If set to `TRUE`, [adw.tab_view.TabView.indicatorActivated] will be emitted
         when the indicator icon is clicked.
         
-        If `property@TabPage:indicator-icon` is not set, does nothing.
+        If [adw.tab_page.TabPage.indicatorIcon] is not set, does nothing.
   */
   @property bool indicatorActivatable()
   {
@@ -111,10 +112,10 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = Whether the indicator icon is activatable.
           
-          If set to `TRUE`, `signal@TabView::indicator-activated` will be emitted
+          If set to `TRUE`, [adw.tab_view.TabView.indicatorActivated] will be emitted
           when the indicator icon is clicked.
           
-          If `property@TabPage:indicator-icon` is not set, does nothing.
+          If [adw.tab_page.TabPage.indicatorIcon] is not set, does nothing.
   */
   @property void indicatorActivatable(bool propval)
   {
@@ -127,18 +128,18 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         A common use case is an audio or camera indicator in a web browser.
         
-        `class@TabBar` will show it at the beginning of the tab, alongside icon
-        representing `property@TabPage:icon` or loading spinner.
+        [adw.tab_bar.TabBar] will show it at the beginning of the tab, alongside icon
+        representing [adw.tab_page.TabPage.icon] or loading spinner.
         
         If the page is pinned, the indicator will be shown instead of icon or
         spinner.
         
-        `class@TabOverview` will show it at the at the top part of the thumbnail.
+        [adw.tab_overview.TabOverview] will show it at the at the top part of the thumbnail.
         
-        `property@TabPage:indicator-tooltip` can be used to set the tooltip on the
+        [adw.tab_page.TabPage.indicatorTooltip] can be used to set the tooltip on the
         indicator icon.
         
-        If `property@TabPage:indicator-activatable` is set to `TRUE`, the
+        If [adw.tab_page.TabPage.indicatorActivatable] is set to `TRUE`, the
         indicator icon can act as a button.
   */
   @property gio.icon.Icon indicatorIcon()
@@ -153,18 +154,18 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           
           A common use case is an audio or camera indicator in a web browser.
           
-          `class@TabBar` will show it at the beginning of the tab, alongside icon
-          representing `property@TabPage:icon` or loading spinner.
+          [adw.tab_bar.TabBar] will show it at the beginning of the tab, alongside icon
+          representing [adw.tab_page.TabPage.icon] or loading spinner.
           
           If the page is pinned, the indicator will be shown instead of icon or
           spinner.
           
-          `class@TabOverview` will show it at the at the top part of the thumbnail.
+          [adw.tab_overview.TabOverview] will show it at the at the top part of the thumbnail.
           
-          `property@TabPage:indicator-tooltip` can be used to set the tooltip on the
+          [adw.tab_page.TabPage.indicatorTooltip] can be used to set the tooltip on the
           indicator icon.
           
-          If `property@TabPage:indicator-activatable` is set to `TRUE`, the
+          If [adw.tab_page.TabPage.indicatorActivatable] is set to `TRUE`, the
           indicator icon can act as a button.
   */
   @property void indicatorIcon(gio.icon.Icon propval)
@@ -178,7 +179,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         The tooltip can be marked up with the Pango text markup language.
         
-        See `property@TabPage:indicator-icon`.
+        See [adw.tab_page.TabPage.indicatorIcon].
   */
   @property string indicatorTooltip()
   {
@@ -192,7 +193,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           
           The tooltip can be marked up with the Pango text markup language.
           
-          See `property@TabPage:indicator-icon`.
+          See [adw.tab_page.TabPage.indicatorIcon].
   */
   @property void indicatorTooltip(string propval)
   {
@@ -203,7 +204,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `keyword` property.
       Returns: The search keyboard of the page.
         
-        `class@TabOverview` can search pages by their keywords in addition to their
+        [adw.tab_overview.TabOverview] can search pages by their keywords in addition to their
         titles and tooltips.
         
         Keywords allow to include e.g. page URLs into tab search in a web browser.
@@ -218,7 +219,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = The search keyboard of the page.
           
-          `class@TabOverview` can search pages by their keywords in addition to their
+          [adw.tab_overview.TabOverview] can search pages by their keywords in addition to their
           titles and tooltips.
           
           Keywords allow to include e.g. page URLs into tab search in a web browser.
@@ -232,7 +233,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `liveThumbnail` property.
       Returns: Whether to enable live thumbnail for this page.
         
-        When set to `TRUE`, the page's thumbnail in `class@TabOverview` will update
+        When set to `TRUE`, the page's thumbnail in [adw.tab_overview.TabOverview] will update
         immediately when the page is redrawn or resized.
         
         If it's set to `FALSE`, the thumbnail will only be live when the page is
@@ -250,7 +251,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = Whether to enable live thumbnail for this page.
           
-          When set to `TRUE`, the page's thumbnail in `class@TabOverview` will update
+          When set to `TRUE`, the page's thumbnail in [adw.tab_overview.TabOverview] will update
           immediately when the page is redrawn or resized.
           
           If it's set to `FALSE`, the thumbnail will only be live when the page is
@@ -267,10 +268,10 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `loading` property.
       Returns: Whether the page is loading.
         
-        If set to `TRUE`, `class@TabBar` and `class@TabOverview` will display a
+        If set to `TRUE`, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will display a
         spinner in place of icon.
         
-        If the page is pinned and `property@TabPage:indicator-icon` is set,
+        If the page is pinned and [adw.tab_page.TabPage.indicatorIcon] is set,
         loading status will not be visible with [adw.tab_bar.TabBar].
   */
   @property bool loading()
@@ -283,10 +284,10 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = Whether the page is loading.
           
-          If set to `TRUE`, `class@TabBar` and `class@TabOverview` will display a
+          If set to `TRUE`, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will display a
           spinner in place of icon.
           
-          If the page is pinned and `property@TabPage:indicator-icon` is set,
+          If the page is pinned and [adw.tab_page.TabPage.indicatorIcon] is set,
           loading status will not be visible with [adw.tab_bar.TabBar].
   */
   @property void loading(bool propval)
@@ -298,14 +299,14 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `needsAttention` property.
       Returns: Whether the page needs attention.
         
-        `class@TabBar` will display a line under the tab representing the page if
+        [adw.tab_bar.TabBar] will display a line under the tab representing the page if
         set to `TRUE`. If the tab is not visible, the corresponding edge of the tab
         bar will be highlighted.
         
-        `class@TabOverview` will display a dot in the corner of the thumbnail if set
+        [adw.tab_overview.TabOverview] will display a dot in the corner of the thumbnail if set
         to `TRUE`.
         
-        `class@TabButton` will display a dot if any of the pages that aren't
+        [adw.tab_button.TabButton] will display a dot if any of the pages that aren't
         selected have this property set to `TRUE`.
   */
   @property bool needsAttention()
@@ -318,14 +319,14 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = Whether the page needs attention.
           
-          `class@TabBar` will display a line under the tab representing the page if
+          [adw.tab_bar.TabBar] will display a line under the tab representing the page if
           set to `TRUE`. If the tab is not visible, the corresponding edge of the tab
           bar will be highlighted.
           
-          `class@TabOverview` will display a dot in the corner of the thumbnail if set
+          [adw.tab_overview.TabOverview] will display a dot in the corner of the thumbnail if set
           to `TRUE`.
           
-          `class@TabButton` will display a dot if any of the pages that aren't
+          [adw.tab_button.TabButton] will display a dot if any of the pages that aren't
           selected have this property set to `TRUE`.
   */
   @property void needsAttention(bool propval)
@@ -368,7 +369,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `thumbnailXalign` property.
       Returns: The horizontal alignment of the page thumbnail.
         
-        If the page is so wide that `class@TabOverview` can't display it completely
+        If the page is so wide that [adw.tab_overview.TabOverview] can't display it completely
         and has to crop it, horizontal alignment will determine which part of the
         page will be visible.
         
@@ -387,7 +388,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = The horizontal alignment of the page thumbnail.
           
-          If the page is so wide that `class@TabOverview` can't display it completely
+          If the page is so wide that [adw.tab_overview.TabOverview] can't display it completely
           and has to crop it, horizontal alignment will determine which part of the
           page will be visible.
           
@@ -405,7 +406,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `thumbnailYalign` property.
       Returns: The vertical alignment of the page thumbnail.
         
-        If the page is so tall that `class@TabOverview` can't display it completely
+        If the page is so tall that [adw.tab_overview.TabOverview] can't display it completely
         and has to crop it, vertical alignment will determine which part of the
         page will be visible.
         
@@ -424,7 +425,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = The vertical alignment of the page thumbnail.
           
-          If the page is so tall that `class@TabOverview` can't display it completely
+          If the page is so tall that [adw.tab_overview.TabOverview] can't display it completely
           and has to crop it, vertical alignment will determine which part of the
           page will be visible.
           
@@ -442,12 +443,12 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `title` property.
       Returns: The title of the page.
         
-        `class@TabBar` will display it in the center of the tab unless it's pinned,
-        and will use it as a tooltip unless `property@TabPage:tooltip` is set.
+        [adw.tab_bar.TabBar] will display it in the center of the tab unless it's pinned,
+        and will use it as a tooltip unless [adw.tab_page.TabPage.tooltip] is set.
         
-        `class@TabOverview` will display it below the thumbnail unless it's pinned,
+        [adw.tab_overview.TabOverview] will display it below the thumbnail unless it's pinned,
         or inside the card otherwise, and will use it as a tooltip unless
-        `property@TabPage:tooltip` is set.
+        [adw.tab_page.TabPage.tooltip] is set.
   */
   @property string title()
   {
@@ -459,12 +460,12 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = The title of the page.
           
-          `class@TabBar` will display it in the center of the tab unless it's pinned,
-          and will use it as a tooltip unless `property@TabPage:tooltip` is set.
+          [adw.tab_bar.TabBar] will display it in the center of the tab unless it's pinned,
+          and will use it as a tooltip unless [adw.tab_page.TabPage.tooltip] is set.
           
-          `class@TabOverview` will display it below the thumbnail unless it's pinned,
+          [adw.tab_overview.TabOverview] will display it below the thumbnail unless it's pinned,
           or inside the card otherwise, and will use it as a tooltip unless
-          `property@TabPage:tooltip` is set.
+          [adw.tab_page.TabPage.tooltip] is set.
   */
   @property void title(string propval)
   {
@@ -477,8 +478,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         
         The tooltip can be marked up with the Pango text markup language.
         
-        If not set, `class@TabBar` and `class@TabOverview` will use
-        `property@TabPage:title` as a tooltip instead.
+        If not set, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will use
+        [adw.tab_page.TabPage.title] as a tooltip instead.
   */
   @property string tooltip()
   {
@@ -492,8 +493,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
           
           The tooltip can be marked up with the Pango text markup language.
           
-          If not set, `class@TabBar` and `class@TabOverview` will use
-          `property@TabPage:title` as a tooltip instead.
+          If not set, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will use
+          [adw.tab_page.TabPage.title] as a tooltip instead.
   */
   @property void tooltip(string propval)
   {
@@ -693,10 +694,10 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Invalidates thumbnail for self.
       
-      If an `classTabOverview` is open, the thumbnail representing self will be
+      If an [adw.tab_overview.TabOverview] is open, the thumbnail representing self will be
       immediately updated. Otherwise it will be update when opening the overview.
       
-      Does nothing if `propertyTabPage:live-thumbnail` is set to `TRUE`.
+      Does nothing if [adw.tab_page.TabPage.liveThumbnail] is set to `TRUE`.
       
       See also [adw.tab_view.TabView.invalidateThumbnails].
   */
@@ -708,8 +709,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets the icon of self.
       
-      `classTabBar` and `classTabOverview` display the icon next to the title,
-      unless `propertyTabPage:loading` is set to `TRUE`.
+      [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] display the icon next to the title,
+      unless [adw.tab_page.TabPage.loading] is set to `TRUE`.
       
       [adw.tab_bar.TabBar] also won't show the icon if the page is pinned and
       [propertyTabPage:indicator-icon] is set.
@@ -725,10 +726,10 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets whether the indicator of self is activatable.
       
-      If set to `TRUE`, `signalTabView::indicator-activated` will be emitted
+      If set to `TRUE`, [adw.tab_view.TabView.indicatorActivated] will be emitted
       when the indicator icon is clicked.
       
-      If `propertyTabPage:indicator-icon` is not set, does nothing.
+      If [adw.tab_page.TabPage.indicatorIcon] is not set, does nothing.
   
       Params:
         activatable = whether the indicator is activatable
@@ -743,18 +744,18 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       
       A common use case is an audio or camera indicator in a web browser.
       
-      `classTabBar` will show it at the beginning of the tab, alongside icon
-      representing `propertyTabPage:icon` or loading spinner.
+      [adw.tab_bar.TabBar] will show it at the beginning of the tab, alongside icon
+      representing [adw.tab_page.TabPage.icon] or loading spinner.
       
       If the page is pinned, the indicator will be shown instead of icon or
       spinner.
       
-      `classTabOverview` will show it at the at the top part of the thumbnail.
+      [adw.tab_overview.TabOverview] will show it at the at the top part of the thumbnail.
       
-      `propertyTabPage:indicator-tooltip` can be used to set the tooltip on the
+      [adw.tab_page.TabPage.indicatorTooltip] can be used to set the tooltip on the
       indicator icon.
       
-      If `propertyTabPage:indicator-activatable` is set to `TRUE`, the
+      If [adw.tab_page.TabPage.indicatorActivatable] is set to `TRUE`, the
       indicator icon can act as a button.
   
       Params:
@@ -770,7 +771,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       
       The tooltip can be marked up with the Pango text markup language.
       
-      See `propertyTabPage:indicator-icon`.
+      See [adw.tab_page.TabPage.indicatorIcon].
   
       Params:
         tooltip = the indicator tooltip of self
@@ -784,7 +785,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets the search keyword for self.
       
-      `classTabOverview` can search pages by their keywords in addition to their
+      [adw.tab_overview.TabOverview] can search pages by their keywords in addition to their
       titles and tooltips.
       
       Keywords allow to include e.g. page URLs into tab search in a web browser.
@@ -801,7 +802,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets whether to enable live thumbnail for self.
       
-      When set to `TRUE`, self's thumbnail in `classTabOverview` will update
+      When set to `TRUE`, self's thumbnail in [adw.tab_overview.TabOverview] will update
       immediately when self is redrawn or resized.
       
       If it's set to `FALSE`, the thumbnail will only be live when the self is
@@ -820,10 +821,10 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets whether self is loading.
       
-      If set to `TRUE`, `classTabBar` and `classTabOverview` will display a
+      If set to `TRUE`, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will display a
       spinner in place of icon.
       
-      If the page is pinned and `propertyTabPage:indicator-icon` is set, loading
+      If the page is pinned and [adw.tab_page.TabPage.indicatorIcon] is set, loading
       status will not be visible with [adw.tab_bar.TabBar].
   
       Params:
@@ -837,15 +838,15 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets whether self needs attention.
       
-      `classTabBar` will display a line under the tab representing the page if
+      [adw.tab_bar.TabBar] will display a line under the tab representing the page if
       set to `TRUE`. If the tab is not visible, the corresponding edge of the tab
       bar will be highlighted.
       
-      `classTabOverview` will display a dot in the corner of the thumbnail if set
+      [adw.tab_overview.TabOverview] will display a dot in the corner of the thumbnail if set
       to `TRUE`.
       
-      `classTabButton` will display a dot if any of the pages that aren't
-      selected have `propertyTabPage:needs-attention` set to `TRUE`.
+      [adw.tab_button.TabButton] will display a dot if any of the pages that aren't
+      selected have [adw.tab_page.TabPage.needsAttention] set to `TRUE`.
   
       Params:
         needsAttention = whether self needs attention
@@ -858,7 +859,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets the horizontal alignment of the thumbnail for self.
       
-      If the page is so wide that `classTabOverview` can't display it completely
+      If the page is so wide that [adw.tab_overview.TabOverview] can't display it completely
       and has to crop it, horizontal alignment will determine which part of the
       page will be visible.
       
@@ -878,7 +879,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets the vertical alignment of the thumbnail for self.
       
-      If the page is so tall that `classTabOverview` can't display it completely
+      If the page is so tall that [adw.tab_overview.TabOverview] can't display it completely
       and has to crop it, vertical alignment will determine which part of the page
       will be visible.
       
@@ -896,12 +897,12 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /**
-      `classTabBar` will display it in the center of the tab unless it's pinned,
-      and will use it as a tooltip unless `propertyTabPage:tooltip` is set.
+      [adw.tab_bar.TabBar] will display it in the center of the tab unless it's pinned,
+      and will use it as a tooltip unless [adw.tab_page.TabPage.tooltip] is set.
       
-      `classTabOverview` will display it below the thumbnail unless it's pinned,
+      [adw.tab_overview.TabOverview] will display it below the thumbnail unless it's pinned,
       or inside the card otherwise, and will use it as a tooltip unless
-      `propertyTabPage:tooltip` is set.
+      [adw.tab_page.TabPage.tooltip] is set.
       
       Sets the title of self.
   
@@ -919,8 +920,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       
       The tooltip can be marked up with the Pango text markup language.
       
-      If not set, `classTabBar` and `classTabOverview` will use
-      `propertyTabPage:title` as a tooltip instead.
+      If not set, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will use
+      [adw.tab_page.TabPage.title] as a tooltip instead.
   
       Params:
         tooltip = the tooltip of self
@@ -954,8 +955,8 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
       Params:
         propval = The icon of the page.
           
-          `class@TabBar` and `class@TabOverview` display the icon next to the title,
-          unless `property@TabPage:loading` is set to `TRUE`.
+          [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] display the icon next to the title,
+          unless [adw.tab_page.TabPage.loading] is set to `TRUE`.
           
           [adw.tab_bar.TabBar] also won't show the icon if the page is pinned and
           [propertyTabPage:indicator-icon] is set.
@@ -971,10 +972,10 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
       Params:
         propval = Whether the indicator icon is activatable.
           
-          If set to `TRUE`, `signal@TabView::indicator-activated` will be emitted
+          If set to `TRUE`, [adw.tab_view.TabView.indicatorActivated] will be emitted
           when the indicator icon is clicked.
           
-          If `property@TabPage:indicator-icon` is not set, does nothing.
+          If [adw.tab_page.TabPage.indicatorIcon] is not set, does nothing.
       Returns: Builder instance for fluent chaining
   */
   T indicatorActivatable(bool propval)
@@ -989,18 +990,18 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           
           A common use case is an audio or camera indicator in a web browser.
           
-          `class@TabBar` will show it at the beginning of the tab, alongside icon
-          representing `property@TabPage:icon` or loading spinner.
+          [adw.tab_bar.TabBar] will show it at the beginning of the tab, alongside icon
+          representing [adw.tab_page.TabPage.icon] or loading spinner.
           
           If the page is pinned, the indicator will be shown instead of icon or
           spinner.
           
-          `class@TabOverview` will show it at the at the top part of the thumbnail.
+          [adw.tab_overview.TabOverview] will show it at the at the top part of the thumbnail.
           
-          `property@TabPage:indicator-tooltip` can be used to set the tooltip on the
+          [adw.tab_page.TabPage.indicatorTooltip] can be used to set the tooltip on the
           indicator icon.
           
-          If `property@TabPage:indicator-activatable` is set to `TRUE`, the
+          If [adw.tab_page.TabPage.indicatorActivatable] is set to `TRUE`, the
           indicator icon can act as a button.
       Returns: Builder instance for fluent chaining
   */
@@ -1016,7 +1017,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           
           The tooltip can be marked up with the Pango text markup language.
           
-          See `property@TabPage:indicator-icon`.
+          See [adw.tab_page.TabPage.indicatorIcon].
       Returns: Builder instance for fluent chaining
   */
   T indicatorTooltip(string propval)
@@ -1029,7 +1030,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
       Params:
         propval = The search keyboard of the page.
           
-          `class@TabOverview` can search pages by their keywords in addition to their
+          [adw.tab_overview.TabOverview] can search pages by their keywords in addition to their
           titles and tooltips.
           
           Keywords allow to include e.g. page URLs into tab search in a web browser.
@@ -1045,7 +1046,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
       Params:
         propval = Whether to enable live thumbnail for this page.
           
-          When set to `TRUE`, the page's thumbnail in `class@TabOverview` will update
+          When set to `TRUE`, the page's thumbnail in [adw.tab_overview.TabOverview] will update
           immediately when the page is redrawn or resized.
           
           If it's set to `FALSE`, the thumbnail will only be live when the page is
@@ -1064,10 +1065,10 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
       Params:
         propval = Whether the page is loading.
           
-          If set to `TRUE`, `class@TabBar` and `class@TabOverview` will display a
+          If set to `TRUE`, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will display a
           spinner in place of icon.
           
-          If the page is pinned and `property@TabPage:indicator-icon` is set,
+          If the page is pinned and [adw.tab_page.TabPage.indicatorIcon] is set,
           loading status will not be visible with [adw.tab_bar.TabBar].
       Returns: Builder instance for fluent chaining
   */
@@ -1081,14 +1082,14 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
       Params:
         propval = Whether the page needs attention.
           
-          `class@TabBar` will display a line under the tab representing the page if
+          [adw.tab_bar.TabBar] will display a line under the tab representing the page if
           set to `TRUE`. If the tab is not visible, the corresponding edge of the tab
           bar will be highlighted.
           
-          `class@TabOverview` will display a dot in the corner of the thumbnail if set
+          [adw.tab_overview.TabOverview] will display a dot in the corner of the thumbnail if set
           to `TRUE`.
           
-          `class@TabButton` will display a dot if any of the pages that aren't
+          [adw.tab_button.TabButton] will display a dot if any of the pages that aren't
           selected have this property set to `TRUE`.
       Returns: Builder instance for fluent chaining
   */
@@ -1115,7 +1116,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
       Params:
         propval = The horizontal alignment of the page thumbnail.
           
-          If the page is so wide that `class@TabOverview` can't display it completely
+          If the page is so wide that [adw.tab_overview.TabOverview] can't display it completely
           and has to crop it, horizontal alignment will determine which part of the
           page will be visible.
           
@@ -1135,7 +1136,7 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
       Params:
         propval = The vertical alignment of the page thumbnail.
           
-          If the page is so tall that `class@TabOverview` can't display it completely
+          If the page is so tall that [adw.tab_overview.TabOverview] can't display it completely
           and has to crop it, vertical alignment will determine which part of the
           page will be visible.
           
@@ -1155,12 +1156,12 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
       Params:
         propval = The title of the page.
           
-          `class@TabBar` will display it in the center of the tab unless it's pinned,
-          and will use it as a tooltip unless `property@TabPage:tooltip` is set.
+          [adw.tab_bar.TabBar] will display it in the center of the tab unless it's pinned,
+          and will use it as a tooltip unless [adw.tab_page.TabPage.tooltip] is set.
           
-          `class@TabOverview` will display it below the thumbnail unless it's pinned,
+          [adw.tab_overview.TabOverview] will display it below the thumbnail unless it's pinned,
           or inside the card otherwise, and will use it as a tooltip unless
-          `property@TabPage:tooltip` is set.
+          [adw.tab_page.TabPage.tooltip] is set.
       Returns: Builder instance for fluent chaining
   */
   T title(string propval)
@@ -1175,8 +1176,8 @@ class TabPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk.
           
           The tooltip can be marked up with the Pango text markup language.
           
-          If not set, `class@TabBar` and `class@TabOverview` will use
-          `property@TabPage:title` as a tooltip instead.
+          If not set, [adw.tab_bar.TabBar] and [adw.tab_overview.TabOverview] will use
+          [adw.tab_page.TabPage.title] as a tooltip instead.
       Returns: Builder instance for fluent chaining
   */
   T tooltip(string propval)

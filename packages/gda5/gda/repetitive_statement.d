@@ -1,6 +1,7 @@
 /// Module for [RepetitiveStatement] class
 module gda.repetitive_statement;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.set;

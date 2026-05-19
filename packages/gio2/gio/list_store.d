@@ -1,6 +1,7 @@
 /// Module for [ListStore] class
 module gio.list_store;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

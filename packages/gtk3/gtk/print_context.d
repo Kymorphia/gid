@@ -1,6 +1,7 @@
 /// Module for [PrintContext] class
 module gtk.print_context;
 
+public import gid.basictypes;
 import cairo.context;
 import gid.gid;
 import gobject.gid_builder;

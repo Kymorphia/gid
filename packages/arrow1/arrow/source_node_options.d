@@ -1,6 +1,7 @@
 /// Module for [SourceNodeOptions] class
 module arrow.source_node_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.execute_node_options;

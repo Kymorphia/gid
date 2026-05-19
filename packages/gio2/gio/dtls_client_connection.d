@@ -1,6 +1,7 @@
 /// Module for [DtlsClientConnection] interface
 module gio.dtls_client_connection;
 
+public import gid.basictypes;
 public import gio.dtls_client_connection_iface_proxy;
 import gid.gid;
 import gio.c.functions;

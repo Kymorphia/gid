@@ -1,6 +1,7 @@
 /// Module for [SocketControlMessage] class
 module gio.socket_control_message;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

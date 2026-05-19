@@ -1,6 +1,7 @@
 /// Module for [WebViewBase] class
 module webkit.web_view_base;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;

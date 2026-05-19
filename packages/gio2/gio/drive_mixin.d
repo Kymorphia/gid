@@ -1,6 +1,7 @@
 /// Module for [Drive] interface mixin
 module gio.drive_mixin;
 
+public import gid.basictypes;
 public import gio.drive_iface_proxy;
 public import gid.gid;
 public import gio.async_result;

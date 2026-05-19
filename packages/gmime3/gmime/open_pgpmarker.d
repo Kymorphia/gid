@@ -1,6 +1,7 @@
 /// Module for [OpenPGPMarker] class
 module gmime.open_pgpmarker;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

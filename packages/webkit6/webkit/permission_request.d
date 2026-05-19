@@ -1,6 +1,7 @@
 /// Module for [PermissionRequest] interface
 module webkit.permission_request;
 
+public import gid.basictypes;
 public import webkit.permission_request_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [WindowHandle] class
 module gtk.window_handle;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

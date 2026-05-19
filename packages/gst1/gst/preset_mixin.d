@@ -1,6 +1,7 @@
 /// Module for [Preset] interface mixin
 module gst.preset_mixin;
 
+public import gid.basictypes;
 public import gst.preset_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

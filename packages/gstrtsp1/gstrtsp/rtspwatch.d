@@ -1,6 +1,7 @@
 /// Module for [RTSPWatch] class
 module gstrtsp.rtspwatch;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.main_context;
 import glib.time_val;

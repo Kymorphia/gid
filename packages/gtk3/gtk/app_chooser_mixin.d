@@ -1,6 +1,7 @@
 /// Module for [AppChooser] interface mixin
 module gtk.app_chooser_mixin;
 
+public import gid.basictypes;
 public import gtk.app_chooser_iface_proxy;
 public import gid.gid;
 public import gio.app_info;

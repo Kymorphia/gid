@@ -1,6 +1,7 @@
 /// Module for [ThemingEngine] class
 module gtk.theming_engine;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gdk.screen;
 import gid.gid;

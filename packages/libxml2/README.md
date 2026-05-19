@@ -8,6 +8,6 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 | --- | --- |
 | **Dub Package**          | [gid:libxml2](https://code.dlang.org/packages/gid%3Alibxml2)                     |
 | **Library Homepage**     | https://github.com/GNOME/libxml2                                                 |
-| **D API Reference**      | https://www.kymorphia.com/gid/libxml2.html                                       |
+| **D API Reference**      | https://www.kymorphia.com/gid/gid~libxml2/                                       |
 
 Consult the [giD README](https://github.com/Kymorphia/gid) for more information on programming with giD and links to examples.

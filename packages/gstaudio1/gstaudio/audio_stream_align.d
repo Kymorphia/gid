@@ -1,6 +1,7 @@
 /// Module for [AudioStreamAlign] class
 module gstaudio.audio_stream_align;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.types;

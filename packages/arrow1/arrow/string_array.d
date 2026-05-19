@@ -1,6 +1,7 @@
 /// Module for [StringArray] class
 module arrow.string_array;
 
+public import gid.basictypes;
 import arrow.binary_array;
 import arrow.buffer;
 import arrow.c.functions;

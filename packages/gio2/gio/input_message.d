@@ -1,6 +1,7 @@
 /// Module for [InputMessage] class
 module gio.input_message;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

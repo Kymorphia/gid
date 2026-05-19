@@ -1,6 +1,7 @@
 /// Module for [EventButton] class
 module gdk.event_button;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.device;

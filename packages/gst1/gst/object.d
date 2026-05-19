@@ -1,6 +1,7 @@
 /// Module for [ObjectWrap] class
 module gst.object;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;

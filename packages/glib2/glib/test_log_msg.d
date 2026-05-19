@@ -1,6 +1,7 @@
 /// Module for [TestLogMsg] class
 module glib.test_log_msg;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

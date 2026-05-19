@@ -1,6 +1,7 @@
 /// Module for [CellRendererSpinner] class
 module gtk.cell_renderer_spinner;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [UndoManager] interface
 module gtksource.undo_manager;
 
+public import gid.basictypes;
 public import gtksource.undo_manager_iface_proxy;
 import gid.gid;
 import gobject.dclosure;

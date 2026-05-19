@@ -1,6 +1,7 @@
 /// Module for [SqlStatementDelete] class
 module gda.sql_statement_delete;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

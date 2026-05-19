@@ -1,6 +1,7 @@
 /// Module for [Color] struct
 module pango.color;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.c.functions;
 import pango.c.types;

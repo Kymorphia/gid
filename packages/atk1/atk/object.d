@@ -1,6 +1,7 @@
 /// Module for [ObjectWrap] class
 module atk.object;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.property_values;

@@ -1,6 +1,7 @@
 /// Module for [AudioBaseSink] class
 module gstaudio.audio_base_sink;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [FileChooserWidgetAccessible] class
 module gtk.file_chooser_widget_accessible;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.component;

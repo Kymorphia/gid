@@ -1,6 +1,7 @@
 /// Module for [Language] class
 module gtksource.language;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -14,8 +15,8 @@ import gtksource.types;
     A [gtksource.language.Language] represents a programming or markup language, affecting
     syntax highlighting and [context classes](./class.Buffer.html#context-classes).
     
-    Use `class@LanguageManager` to obtain a [gtksource.language.Language] instance, and
-    [gtksource.buffer.Buffer.setLanguage] to apply it to a `class@Buffer`.
+    Use [gtksource.language_manager.LanguageManager] to obtain a [gtksource.language.Language] instance, and
+    [gtksource.buffer.Buffer.setLanguage] to apply it to a [gtksource.buffer.Buffer].
 */
 class Language : gobject.object.ObjectWrap
 {

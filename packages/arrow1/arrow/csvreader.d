@@ -1,6 +1,7 @@
 /// Module for [CSVReader] class
 module arrow.csvreader;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.csvread_options;

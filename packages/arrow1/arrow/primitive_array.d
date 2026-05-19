@@ -1,6 +1,7 @@
 /// Module for [PrimitiveArray] class
 module arrow.primitive_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.buffer;
 import arrow.c.functions;

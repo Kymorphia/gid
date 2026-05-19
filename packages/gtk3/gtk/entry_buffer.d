@@ -1,6 +1,7 @@
 /// Module for [EntryBuffer] class
 module gtk.entry_buffer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

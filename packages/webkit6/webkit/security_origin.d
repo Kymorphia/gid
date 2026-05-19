@@ -1,6 +1,7 @@
 /// Module for [SecurityOrigin] class
 module webkit.security_origin;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

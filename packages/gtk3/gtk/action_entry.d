@@ -1,6 +1,7 @@
 /// Module for [ActionEntry] class
 module gtk.action_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;

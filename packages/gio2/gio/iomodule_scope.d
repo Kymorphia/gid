@@ -1,6 +1,7 @@
 /// Module for [IOModuleScope] class
 module gio.iomodule_scope;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

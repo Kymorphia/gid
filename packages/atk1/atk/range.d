@@ -1,6 +1,7 @@
 /// Module for [Range] class
 module atk.range;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;

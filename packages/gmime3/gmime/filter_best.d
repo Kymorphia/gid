@@ -1,6 +1,7 @@
 /// Module for [FilterBest] class
 module gmime.filter_best;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

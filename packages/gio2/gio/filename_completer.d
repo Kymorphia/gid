@@ -1,6 +1,7 @@
 /// Module for [FilenameCompleter] class
 module gio.filename_completer;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

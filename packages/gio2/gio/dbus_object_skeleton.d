@@ -1,6 +1,7 @@
 /// Module for [DBusObjectSkeleton] class
 module gio.dbus_object_skeleton;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

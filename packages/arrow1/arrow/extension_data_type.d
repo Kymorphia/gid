@@ -1,6 +1,7 @@
 /// Module for [ExtensionDataType] class
 module arrow.extension_data_type;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;

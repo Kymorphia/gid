@@ -1,6 +1,7 @@
 /// Module for [StrptimeTimestampParser] class
 module arrow.strptime_timestamp_parser;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.timestamp_parser;

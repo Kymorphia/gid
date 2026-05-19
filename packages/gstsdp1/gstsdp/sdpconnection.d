@@ -1,6 +1,7 @@
 /// Module for [SDPConnection] class
 module gstsdp.sdpconnection;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

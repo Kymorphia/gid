@@ -1,6 +1,7 @@
 /// Module for [SpinButton] class
 module gtk.spin_button;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -44,7 +45,7 @@ import gtk.widget;
     Note that [gtk.spin_button.SpinButton] will by default make its entry large enough
     to accommodate the lower and upper bounds of the adjustment. If this
     is not desired, the automatic sizing can be turned off by explicitly
-    setting `property@Gtk.Editable:width-chars` to a value != -1.
+    setting [gtk.editable.Editable.widthChars] to a value != -1.
     
     ## Using a GtkSpinButton to get an integer
     

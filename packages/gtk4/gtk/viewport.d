@@ -1,6 +1,7 @@
 /// Module for [Viewport] class
 module gtk.viewport;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

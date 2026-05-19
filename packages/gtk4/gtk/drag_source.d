@@ -1,6 +1,7 @@
 /// Module for [DragSource] class
 module gtk.drag_source;
 
+public import gid.basictypes;
 import gdk.content_provider;
 import gdk.drag;
 import gdk.paintable;
@@ -41,7 +42,7 @@ import gtk.types;
     Setting up the content provider and icon ahead of time only makes
     sense when the data does not change. More commonly, you will want
     to set them up just in time. To do so, [gtk.drag_source.DragSource] has
-    [gtk.drag_source.DragSource.prepare] and `signal@Gtk.DragSource::drag-begin`
+    [gtk.drag_source.DragSource.prepare] and [gtk.drag_source.DragSource.dragBegin]
     signals.
     
     The ::prepare signal is emitted before a drag is started, and
@@ -89,7 +90,7 @@ import gtk.types;
     but it is not normally necessary to connect to any signals,
     except for one case: when the supported actions include
     [gdk.types.DragAction.Move], you need to listen for the
-    `signal@Gtk.DragSource::drag-end` signal and delete the
+    [gtk.drag_source.DragSource.dragEnd] signal and delete the
     data after it has been transferred.
 */
 class DragSource : gtk.gesture_single.GestureSingle
@@ -133,7 +134,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Get `actions` property.
       Returns: The actions that are supported by drag operations from the source.
         
-        Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
+        Note that you must handle the [gtk.drag_source.DragSource.dragEnd] signal
         if the actions include [gdk.types.DragAction.Move].
   */
   @property gdk.types.DragAction actions()
@@ -146,7 +147,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Params:
         propval = The actions that are supported by drag operations from the source.
           
-          Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
+          Note that you must handle the [gtk.drag_source.DragSource.dragEnd] signal
           if the actions include [gdk.types.DragAction.Move].
   */
   @property void actions(gdk.types.DragAction propval)
@@ -234,7 +235,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       
       During a DND operation, the actions are offered to potential
       drop targets. If actions include [gdk.types.DragAction.Move], you need
-      to listen to the `signalGtk.DragSource::drag-end` signal and
+      to listen to the [gtk.drag_source.DragSource.dragEnd] signal and
       handle delete_data being true.
       
       This function can be called before a drag is started,
@@ -258,7 +259,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       or in a handler for the [gtk.drag_source.DragSource.prepare] signal.
       
       You may consider setting the content provider back to
-      null in a `signalGtk.DragSource::drag-end` signal handler.
+      null in a [gtk.drag_source.DragSource.dragEnd] signal handler.
   
       Params:
         content = a [gdk.content_provider.ContentProvider]
@@ -278,7 +279,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       
       This function can be called before a drag is started, or in
       a [gtk.drag_source.DragSource.prepare] or
-      `signalGtk.DragSource::drag-begin` signal handler.
+      [gtk.drag_source.DragSource.dragBegin] signal handler.
   
       Params:
         paintable = the [gdk.paintable.Paintable] to use as icon
@@ -399,7 +400,7 @@ class DragSource : gtk.gesture_single.GestureSingle
         
         A typical reason to connect to this signal is to undo
         things done in [gtk.drag_source.DragSource.prepare] or
-        `signalGtk.DragSource::drag-begin` handlers.
+        [gtk.drag_source.DragSource.dragBegin] handlers.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -513,7 +514,7 @@ class DragSourceGidBuilderImpl(T) : gtk.gesture_single.GestureSingleGidBuilderIm
       Params:
         propval = The actions that are supported by drag operations from the source.
           
-          Note that you must handle the `signal@Gtk.DragSource::drag-end` signal
+          Note that you must handle the [gtk.drag_source.DragSource.dragEnd] signal
           if the actions include [gdk.types.DragAction.Move].
       Returns: Builder instance for fluent chaining
   */

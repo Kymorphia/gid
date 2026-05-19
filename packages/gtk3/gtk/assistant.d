@@ -1,6 +1,7 @@
 /// Module for [Assistant] class
 module gtk.assistant;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdkpixbuf.pixbuf;

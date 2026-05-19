@@ -1,6 +1,7 @@
 /// Module for [IconTheme] class
 module gtk.icon_theme;
 
+public import gid.basictypes;
 import gdk.display;
 import gid.gid;
 import gio.icon;

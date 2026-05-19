@@ -1,6 +1,7 @@
 /// Module for [ListBoxRow] class
 module gtk.list_box_row;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -284,7 +285,7 @@ class ListBoxRow : gtk.widget.Widget, gtk.actionable.Actionable
       This is a keybinding signal, which will cause this row to be activated.
         
         If you want to be notified when the user activates a row (by key or not),
-        use the `signalGtk.ListBox::row-activated` signal on the row’s parent
+        use the [gtk.list_box.ListBox.rowActivated] signal on the row’s parent
         [gtk.list_box.ListBox].
   
       Params:

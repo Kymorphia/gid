@@ -1,6 +1,7 @@
 /// Module for [BooleanDataType] class
 module arrow.boolean_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.fixed_width_data_type;

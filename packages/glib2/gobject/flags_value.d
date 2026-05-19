@@ -1,6 +1,7 @@
 /// Module for [FlagsValue] struct
 module gobject.flags_value;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

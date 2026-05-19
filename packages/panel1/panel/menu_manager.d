@@ -1,6 +1,7 @@
 /// Module for [MenuManager] class
 module panel.menu_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.menu;
 import gio.menu_model;

@@ -1,6 +1,7 @@
 /// Module for [Servable] interface mixin
 module arrowflight.servable_mixin;
 
+public import gid.basictypes;
 public import arrowflight.servable_iface_proxy;
 public import arrowflight.c.functions;
 public import arrowflight.c.types;

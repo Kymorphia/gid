@@ -1,6 +1,7 @@
 /// Module for [UInt32DataType] class
 module arrow.uint32_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.integer_data_type;

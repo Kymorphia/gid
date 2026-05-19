@@ -1141,14 +1141,14 @@ enum GdkPaintableFlags : uint
 {
   /**
       The size is immutable.
-        The `signal@Gdk.Paintable::invalidate-size` signal will never be
+        The [gdk.paintable.Paintable.invalidateSize] signal will never be
         emitted.
   */
   Size = 1,
 
   /**
       The content is immutable.
-        The `signal@Gdk.Paintable::invalidate-contents` signal will never be
+        The [gdk.paintable.Paintable.invalidateContents] signal will never be
         emitted.
   */
   Contents = 2,
@@ -2308,7 +2308,7 @@ struct GdkPadEvent;
     A [gdk.paintable.Paintable] may change its contents, meaning that it will now produce
     a different output with the same snapshot. Once that happens, it will call
     [gdk.paintable.Paintable.invalidateContents] which will emit the
-    `signal@Gdk.Paintable::invalidate-contents` signal. If a paintable is known
+    [gdk.paintable.Paintable.invalidateContents] signal. If a paintable is known
     to never change its contents, it will set the [gdk.types.PaintableFlags.Contents]
     flag. If a consumer cannot deal with changing contents, it may call
     [gdk.paintable.Paintable.getCurrentImage] which will return a static
@@ -2319,7 +2319,7 @@ struct GdkPadEvent;
     can use this information to layout thepaintable appropriately. Just like the
     contents, the size of a paintable can change. A paintable will indicate this
     by calling [gdk.paintable.Paintable.invalidateSize] which will emit the
-    `signal@Gdk.Paintable::invalidate-size` signal. And just like for contents,
+    [gdk.paintable.Paintable.invalidateSize] signal. And just like for contents,
     if a paintable is known to never change its size, it will set the
     [gdk.types.PaintableFlags.Size] flag.
     

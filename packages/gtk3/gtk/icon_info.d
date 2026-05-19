@@ -1,6 +1,7 @@
 /// Module for [IconInfo] class
 module gtk.icon_info;
 
+public import gid.basictypes;
 import cairo.surface;
 import gdk.rectangle;
 import gdk.rgba;

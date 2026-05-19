@@ -1,6 +1,7 @@
 /// Module for [SnippetManager] class
 module gtksource.snippet_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gobject.gid_builder;
@@ -11,10 +12,10 @@ import gtksource.snippet;
 import gtksource.types;
 
 /**
-    Provides access to `class@Snippet`.
+    Provides access to [gtksource.snippet.Snippet].
     
     [gtksource.snippet_manager.SnippetManager] is an object which processes snippet description
-    files and creates `class@Snippet` objects.
+    files and creates [gtksource.snippet.Snippet] objects.
     
     Use [gtksource.snippet_manager.SnippetManager.getDefault] to retrieve the default
     instance of [gtksource.snippet_manager.SnippetManager].

@@ -1,6 +1,7 @@
 /// Module for [ExpressionWatch] class
 module gtk.expression_watch;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gobject.value;

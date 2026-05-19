@@ -1,6 +1,7 @@
 /// Module for [TextChildAnchor] class
 module gtk.text_child_anchor;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [PasswordEntryBuffer] class
 module gtk.password_entry_buffer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.c.functions;

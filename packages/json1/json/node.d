@@ -1,6 +1,7 @@
 /// Module for [Node] class
 module json.node;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gobject.types;

@@ -1,6 +1,7 @@
 /// Module for [TlsCertificate] class
 module gio.tls_certificate;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

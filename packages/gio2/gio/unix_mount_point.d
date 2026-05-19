@@ -1,6 +1,7 @@
 /// Module for [UnixMountPoint] class
 module gio.unix_mount_point;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

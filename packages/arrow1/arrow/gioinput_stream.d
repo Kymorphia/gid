@@ -1,6 +1,7 @@
 /// Module for [GIOInputStream] class
 module arrow.gioinput_stream;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.file;

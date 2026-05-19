@@ -1,6 +1,7 @@
 /// Module for [SectionModel] interface mixin
 module gtk.section_model_mixin;
 
+public import gid.basictypes;
 public import gtk.section_model_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
@@ -20,10 +21,10 @@ public import gtk.types;
     of a model they are wrapping.
     
     When the section groupings of a model change, the model will emit the
-    `signal@Gtk.SectionModel::sections-changed` signal by calling the
+    [gtk.section_model.SectionModel.sectionsChanged] signal by calling the
     [gtk.section_model.SectionModel.sectionsChanged] function. All sections in the given range
     then need to be queried again.
-    The `signal@Gio.ListModel::items-changed` signal has the same effect, all sections in
+    The [gio.list_model.ListModel.itemsChanged] signal has the same effect, all sections in
     that range are invalidated, too.
 */
 template SectionModelT()
@@ -63,8 +64,8 @@ template SectionModelT()
         a model to change the section state of any of the items in the section
         model, though it would be rather useless to emit such a signal.
         
-        The `signalGio.ListModel::items-changed` implies the effect of the
-        `signalGtk.SectionModel::sections-changed` signal for all the items
+        The [gio.list_model.ListModel.itemsChanged] implies the effect of the
+        [gtk.section_model.SectionModel.sectionsChanged] signal for all the items
         it covers.
   
       Params:

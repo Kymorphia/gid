@@ -1,6 +1,7 @@
 /// Module for [NetControlMessageMeta] class
 module gstnet.net_control_message_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.socket_control_message;
 import gst.meta;

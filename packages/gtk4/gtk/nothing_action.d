@@ -1,6 +1,7 @@
 /// Module for [NothingAction] class
 module gtk.nothing_action;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

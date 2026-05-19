@@ -1,6 +1,7 @@
 /// Module for [CSVFileFormat] class
 module arrowdataset.csvfile_format;
 
+public import gid.basictypes;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.file_format;

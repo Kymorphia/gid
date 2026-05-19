@@ -1,6 +1,7 @@
 /// Module for [RangeAccessible] class
 module gtk.range_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.value;

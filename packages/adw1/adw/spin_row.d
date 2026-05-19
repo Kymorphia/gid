@@ -1,6 +1,7 @@
 /// Module for [SpinRow] class
 module adw.spin_row;
 
+public import gid.basictypes;
 import adw.action_row;
 import adw.c.functions;
 import adw.c.types;
@@ -23,7 +24,7 @@ import gtk.editable_mixin;
 import gtk.types;
 
 /**
-    An `class@ActionRow` with an embedded spin button.
+    An [adw.action_row.ActionRow] with an embedded spin button.
     
     <picture>
       <source srcset="spin-row-dark.png" media="(prefers-color-scheme: dark)">
@@ -51,7 +52,7 @@ import gtk.types;
     
     ## CSS nodes
     
-    [adw.spin_row.SpinRow] has the same structure as `class@ActionRow`, as well as the
+    [adw.spin_row.SpinRow] has the same structure as [adw.action_row.ActionRow], as well as the
     `.spin` style class on the main node.
     
     ## Accessibility

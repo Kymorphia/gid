@@ -1,6 +1,7 @@
 /// Module for [FlowBoxChildAccessible] class
 module gtk.flow_box_child_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;

@@ -1,6 +1,7 @@
 /// Module for [Uri] class
 module glib.uri;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [XaTransactionId] struct
 module gda.xa_transaction_id;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

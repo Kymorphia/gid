@@ -1,6 +1,7 @@
 /// Module for [MountOperationHandlerSkeleton] class
 module gtk.__mount_operation_handler_skeleton;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;

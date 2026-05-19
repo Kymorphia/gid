@@ -1,6 +1,7 @@
 /// Module for [TabView] class
 module adw.tab_view;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.tab_page;
@@ -26,9 +27,9 @@ import gtk.widget;
     [adw.tab_view.TabView] is a container which shows one child at a time. While it
     provides keyboard shortcuts for switching between pages, it does not provide
     a visible tab switcher and relies on external widgets for that, such as
-    `class@TabBar`, `class@TabOverview` and `class@TabButton`.
+    [adw.tab_bar.TabBar], [adw.tab_overview.TabOverview] and [adw.tab_button.TabButton].
     
-    [adw.tab_view.TabView] maintains a `class@TabPage` object for each page, which holds
+    [adw.tab_view.TabView] maintains a [adw.tab_page.TabPage] object for each page, which holds
     additional per-page properties. You can obtain the [adw.tab_page.TabPage] for a page
     with [adw.tab_view.TabView.getPage], and as the return value for
     [adw.tab_view.TabView.append] and other functions for adding children.
@@ -41,9 +42,9 @@ import gtk.widget;
     As such, it does not support disabling page reordering or detaching.
     
     [adw.tab_view.TabView] adds a number of global page switching and reordering shortcuts.
-    The `property@TabView:shortcuts` property can be used to manage them.
+    The [adw.tab_view.TabView.shortcuts] property can be used to manage them.
     
-    See `flags@TabViewShortcuts` for the list of the available shortcuts. All of
+    See [adw.types.TabViewShortcuts] for the list of the available shortcuts. All of
     the shortcuts are enabled by default.
     
     [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts] can be
@@ -104,15 +105,15 @@ class TabView : gtk.widget.Widget
       Get `defaultIcon` property.
       Returns: Default page icon.
         
-        If a page doesn't provide its own icon via `property@TabPage:icon`, a
+        If a page doesn't provide its own icon via [adw.tab_page.TabPage.icon], a
         default icon may be used instead for contexts where having an icon is
         necessary.
         
-        `class@TabBar` will use default icon for pinned tabs in case the page is
+        [adw.tab_bar.TabBar] will use default icon for pinned tabs in case the page is
         not loading, doesn't have an icon and an indicator. Default icon is never
         used for tabs that aren't pinned.
         
-        `class@TabOverview` will use default icon for pages with missing
+        [adw.tab_overview.TabOverview] will use default icon for pages with missing
         thumbnails.
         
         By default, the `adw-tab-icon-missing-symbolic` icon is used.
@@ -127,15 +128,15 @@ class TabView : gtk.widget.Widget
       Params:
         propval = Default page icon.
           
-          If a page doesn't provide its own icon via `property@TabPage:icon`, a
+          If a page doesn't provide its own icon via [adw.tab_page.TabPage.icon], a
           default icon may be used instead for contexts where having an icon is
           necessary.
           
-          `class@TabBar` will use default icon for pinned tabs in case the page is
+          [adw.tab_bar.TabBar] will use default icon for pinned tabs in case the page is
           not loading, doesn't have an icon and an indicator. Default icon is never
           used for tabs that aren't pinned.
           
-          `class@TabOverview` will use default icon for pages with missing
+          [adw.tab_overview.TabOverview] will use default icon for pages with missing
           thumbnails.
           
           By default, the `adw-tab-icon-missing-symbolic` icon is used.
@@ -165,7 +166,7 @@ class TabView : gtk.widget.Widget
       Returns: Tab context menu model.
         
         When a context menu is shown for a tab, it will be constructed from the
-        provided menu model. Use the `signal@TabView::setup-menu` signal to set up
+        provided menu model. Use the [adw.tab_view.TabView.setupMenu] signal to set up
         the menu actions for the particular tab.
   */
   @property gio.menu_model.MenuModel menuModel()
@@ -179,7 +180,7 @@ class TabView : gtk.widget.Widget
         propval = Tab context menu model.
           
           When a context menu is shown for a tab, it will be constructed from the
-          provided menu model. Use the `signal@TabView::setup-menu` signal to set up
+          provided menu model. Use the [adw.tab_view.TabView.setupMenu] signal to set up
           the menu actions for the particular tab.
   */
   @property void menuModel(gio.menu_model.MenuModel propval)
@@ -243,7 +244,7 @@ class TabView : gtk.widget.Widget
       Get `shortcuts` property.
       Returns: The enabled shortcuts.
         
-        See `flags@TabViewShortcuts` for the list of the available shortcuts. All
+        See [adw.types.TabViewShortcuts] for the list of the available shortcuts. All
         of the shortcuts are enabled by default.
         
         [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
@@ -259,7 +260,7 @@ class TabView : gtk.widget.Widget
       Params:
         propval = The enabled shortcuts.
           
-          See `flags@TabViewShortcuts` for the list of the available shortcuts. All
+          See [adw.types.TabViewShortcuts] for the list of the available shortcuts. All
           of the shortcuts are enabled by default.
           
           [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]
@@ -306,7 +307,7 @@ class TabView : gtk.widget.Widget
   /**
       Adds shortcuts for self.
       
-      See `propertyTabView:shortcuts` for details.
+      See [adw.tab_view.TabView.shortcuts] for details.
   
       Params:
         shortcuts = the shortcuts to add
@@ -360,20 +361,20 @@ class TabView : gtk.widget.Widget
   /**
       Requests to close page.
       
-      Calling this function will result in the `signalTabView::close-page` signal
+      Calling this function will result in the [adw.tab_view.TabView.closePage] signal
       being emitted for page. Closing the page can then be confirmed or
       denied via [adw.tab_view.TabView.closePageFinish].
       
       If the page is waiting for a [adw.tab_view.TabView.closePageFinish] call, this
       function will do nothing.
       
-      The default handler for `signalTabView::close-page` will immediately confirm
+      The default handler for [adw.tab_view.TabView.closePage] will immediately confirm
       closing the page if it's non-pinned, or reject it if it's pinned. This
       behavior can be changed by registering your own handler for that signal.
       
       If page was selected, another page will be selected instead:
       
-      If the `propertyTabPage:parent` value is `NULL`, the next page will be
+      If the [adw.tab_page.TabPage.parent] value is `NULL`, the next page will be
       selected when possible, or if the page was already last, the previous page
       will be selected instead.
       
@@ -397,7 +398,7 @@ class TabView : gtk.widget.Widget
       for it again.
       
       This function should not be called unless a custom handler for
-      `signalTabView::close-page` is used.
+      [adw.tab_view.TabView.closePage] is used.
   
       Params:
         page = a page of self
@@ -496,7 +497,7 @@ class TabView : gtk.widget.Widget
   }
 
   /**
-      Gets the `classTabPage` representing the child at position.
+      Gets the [adw.tab_page.TabPage] representing the child at position.
   
       Params:
         position = the index of the page in self, starting from 0
@@ -511,7 +512,7 @@ class TabView : gtk.widget.Widget
   }
 
   /**
-      Gets the `classTabPage` object representing child.
+      Gets the [adw.tab_page.TabPage] object representing child.
   
       Params:
         child = a child in self
@@ -661,7 +662,7 @@ class TabView : gtk.widget.Widget
   /**
       Removes shortcuts from self.
       
-      See `propertyTabView:shortcuts` for details.
+      See [adw.tab_view.TabView.shortcuts] for details.
   
       Params:
         shortcuts = the shortcuts to reomve
@@ -774,14 +775,14 @@ class TabView : gtk.widget.Widget
   /**
       Sets the default page icon for self.
       
-      If a page doesn't provide its own icon via `propertyTabPage:icon`, a default
+      If a page doesn't provide its own icon via [adw.tab_page.TabPage.icon], a default
       icon may be used instead for contexts where having an icon is necessary.
       
-      `classTabBar` will use default icon for pinned tabs in case the page is not
+      [adw.tab_bar.TabBar] will use default icon for pinned tabs in case the page is not
       loading, doesn't have an icon and an indicator. Default icon is never used
       for tabs that aren't pinned.
       
-      `classTabOverview` will use default icon for pages with missing thumbnails.
+      [adw.tab_overview.TabOverview] will use default icon for pages with missing thumbnails.
       
       By default, the `adw-tab-icon-missing-symbolic` icon is used.
   
@@ -797,7 +798,7 @@ class TabView : gtk.widget.Widget
       Sets the tab context menu model for self.
       
       When a context menu is shown for a tab, it will be constructed from the
-      provided menu model. Use the `signalTabView::setup-menu` signal to set up
+      provided menu model. Use the [adw.tab_view.TabView.setupMenu] signal to set up
       the menu actions for the particular tab.
   
       Params:
@@ -812,7 +813,7 @@ class TabView : gtk.widget.Widget
       Pins or unpins page.
       
       Pinned pages are guaranteed to be placed before all non-pinned pages; at any
-      given moment the first `propertyTabView:n-pinned-pages` pages in self are
+      given moment the first [adw.tab_view.TabView.nPinnedPages] pages in self are
       guaranteed to be pinned.
       
       When a page is pinned or unpinned, it's automatically reordered: pinning a
@@ -821,23 +822,23 @@ class TabView : gtk.widget.Widget
       
       Pinned pages can still be reordered between each other.
       
-      `classTabBar` will display pinned pages in a compact form, never showing the
+      [adw.tab_bar.TabBar] will display pinned pages in a compact form, never showing the
       title or close button, and only showing a single icon, selected in the
       following order:
       
-      1. `propertyTabPage:indicator-icon`
-      2. A spinner if `propertyTabPage:loading` is `TRUE`
-      3. `propertyTabPage:icon`
-      4. `propertyTabView:default-icon`
+      1. [adw.tab_page.TabPage.indicatorIcon]
+      2. A spinner if [adw.tab_page.TabPage.loading] is `TRUE`
+      3. [adw.tab_page.TabPage.icon]
+      4. [adw.tab_view.TabView.defaultIcon]
       
-      `classTabOverview` will not show a thumbnail for pinned pages, and replace
+      [adw.tab_overview.TabOverview] will not show a thumbnail for pinned pages, and replace
       the close button with an unpin button. Unlike [adw.tab_bar.TabBar], it will still
       display the page's title, icon and indicator separately.
       
-      Pinned pages cannot be closed by default, see `signalTabView::close-page`
+      Pinned pages cannot be closed by default, see [adw.tab_view.TabView.closePage]
       for how to override that behavior.
       
-      Changes the value of the `propertyTabPage:pinned` property.
+      Changes the value of the [adw.tab_page.TabPage.pinned] property.
   
       Params:
         page = a page of self
@@ -862,7 +863,7 @@ class TabView : gtk.widget.Widget
   /**
       Sets the enabled shortcuts for self.
       
-      See `flagsTabViewShortcuts` for the list of the available shortcuts. All of
+      See [adw.types.TabViewShortcuts] for the list of the available shortcuts. All of
       the shortcuts are enabled by default.
       
       [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts] provide
@@ -1018,8 +1019,8 @@ class TabView : gtk.widget.Widget
   
       Emitted after the indicator icon on page has been activated.
         
-        See `propertyTabPage:indicator-icon` and
-        `propertyTabPage:indicator-activatable`.
+        See [adw.tab_page.TabPage.indicatorIcon] and
+        [adw.tab_page.TabPage.indicatorActivatable].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1117,7 +1118,7 @@ class TabView : gtk.widget.Widget
       Emitted when a page has been removed or transferred to another view.
         
         A typical reason to connect to this signal would be to disconnect signal
-        handlers connected in the `signalTabView::page-attached` handler.
+        handlers connected in the [adw.tab_view.TabView.pageAttached] handler.
         
         It is important not to try and destroy the page child in the handler of
         this function as the child might merely be moved to another window; use
@@ -1276,15 +1277,15 @@ class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Default page icon.
           
-          If a page doesn't provide its own icon via `property@TabPage:icon`, a
+          If a page doesn't provide its own icon via [adw.tab_page.TabPage.icon], a
           default icon may be used instead for contexts where having an icon is
           necessary.
           
-          `class@TabBar` will use default icon for pinned tabs in case the page is
+          [adw.tab_bar.TabBar] will use default icon for pinned tabs in case the page is
           not loading, doesn't have an icon and an indicator. Default icon is never
           used for tabs that aren't pinned.
           
-          `class@TabOverview` will use default icon for pages with missing
+          [adw.tab_overview.TabOverview] will use default icon for pages with missing
           thumbnails.
           
           By default, the `adw-tab-icon-missing-symbolic` icon is used.
@@ -1301,7 +1302,7 @@ class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Tab context menu model.
           
           When a context menu is shown for a tab, it will be constructed from the
-          provided menu model. Use the `signal@TabView::setup-menu` signal to set up
+          provided menu model. Use the [adw.tab_view.TabView.setupMenu] signal to set up
           the menu actions for the particular tab.
       Returns: Builder instance for fluent chaining
   */
@@ -1326,7 +1327,7 @@ class TabViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The enabled shortcuts.
           
-          See `flags@TabViewShortcuts` for the list of the available shortcuts. All
+          See [adw.types.TabViewShortcuts] for the list of the available shortcuts. All
           of the shortcuts are enabled by default.
           
           [adw.tab_view.TabView.addShortcuts] and [adw.tab_view.TabView.removeShortcuts]

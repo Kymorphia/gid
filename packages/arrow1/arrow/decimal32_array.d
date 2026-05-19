@@ -1,6 +1,7 @@
 /// Module for [Decimal32Array] class
 module arrow.decimal32_array;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.decimal32;

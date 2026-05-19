@@ -1,6 +1,7 @@
 /// Module for [Holder] class
 module gda.holder;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_handler;

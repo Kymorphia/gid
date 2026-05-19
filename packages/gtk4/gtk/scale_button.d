@@ -1,6 +1,7 @@
 /// Module for [ScaleButton] class
 module gtk.scale_button;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -311,7 +312,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       If the value is outside the minimum or maximum range values,
       it will be clamped to fit inside them.
       
-      The scale button emits the `signalGtk.ScaleButton::value-changed`
+      The scale button emits the [gtk.scale_button.ScaleButton.valueChanged]
       signal if the value changes.
   
       Params:

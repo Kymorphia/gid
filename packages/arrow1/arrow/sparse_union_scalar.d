@@ -1,6 +1,7 @@
 /// Module for [SparseUnionScalar] class
 module arrow.sparse_union_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;

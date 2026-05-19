@@ -1,6 +1,7 @@
 /// Module for [SDPOrigin] class
 module gstsdp.sdporigin;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

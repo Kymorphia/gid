@@ -1,6 +1,7 @@
 /// Module for [ActionRow] class
 module adw.action_row;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.preferences_row;
@@ -103,11 +104,11 @@ class ActionRow : adw.preferences_row.PreferencesRow
         
         The row can be activated either by clicking on it, calling
         [adw.action_row.ActionRow.activate], or via mnemonics in the title.
-        See the `property@PreferencesRow:use-underline` property to enable
+        See the [adw.preferences_row.PreferencesRow.useUnderline] property to enable
         mnemonics.
         
         The target widget will be activated by emitting the
-        `signal@Gtk.Widget::mnemonic-activate` signal on it.
+        [gtk.widget.Widget.mnemonicActivate] signal on it.
   */
   @property gtk.widget.Widget activatableWidget()
   {
@@ -121,11 +122,11 @@ class ActionRow : adw.preferences_row.PreferencesRow
           
           The row can be activated either by clicking on it, calling
           [adw.action_row.ActionRow.activate], or via mnemonics in the title.
-          See the `property@PreferencesRow:use-underline` property to enable
+          See the [adw.preferences_row.PreferencesRow.useUnderline] property to enable
           mnemonics.
           
           The target widget will be activated by emitting the
-          `signal@Gtk.Widget::mnemonic-activate` signal on it.
+          [gtk.widget.Widget.mnemonicActivate] signal on it.
   */
   @property void activatableWidget(gtk.widget.Widget propval)
   {
@@ -160,7 +161,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Returns: The subtitle for this row.
         
         The subtitle is interpreted as Pango markup unless
-        `property@PreferencesRow:use-markup` is set to `FALSE`.
+        [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
   @property string subtitle()
   {
@@ -173,7 +174,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
         propval = The subtitle for this row.
           
           The subtitle is interpreted as Pango markup unless
-          `property@PreferencesRow:use-markup` is set to `FALSE`.
+          [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
   @property void subtitle(string propval)
   {
@@ -385,10 +386,10 @@ class ActionRow : adw.preferences_row.PreferencesRow
       
       The row can be activated either by clicking on it, calling
       [adw.action_row.ActionRow.activate], or via mnemonics in the title.
-      See the `propertyPreferencesRow:use-underline` property to enable mnemonics.
+      See the [adw.preferences_row.PreferencesRow.useUnderline] property to enable mnemonics.
       
       The target widget will be activated by emitting the
-      `signalGtk.Widget::mnemonic-activate` signal on it.
+      [gtk.widget.Widget.mnemonicActivate] signal on it.
   
       Params:
         widget = the target widget
@@ -416,7 +417,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
       Sets the subtitle for self.
       
       The subtitle is interpreted as Pango markup unless
-      `propertyPreferencesRow:use-markup` is set to `FALSE`.
+      [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   
       Params:
         subtitle = the subtitle
@@ -518,11 +519,11 @@ class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderI
           
           The row can be activated either by clicking on it, calling
           [adw.action_row.ActionRow.activate], or via mnemonics in the title.
-          See the `property@PreferencesRow:use-underline` property to enable
+          See the [adw.preferences_row.PreferencesRow.useUnderline] property to enable
           mnemonics.
           
           The target widget will be activated by emitting the
-          `signal@Gtk.Widget::mnemonic-activate` signal on it.
+          [gtk.widget.Widget.mnemonicActivate] signal on it.
       Returns: Builder instance for fluent chaining
   */
   T activatableWidget(gtk.widget.Widget propval)
@@ -549,7 +550,7 @@ class ActionRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilderI
         propval = The subtitle for this row.
           
           The subtitle is interpreted as Pango markup unless
-          `property@PreferencesRow:use-markup` is set to `FALSE`.
+          [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
       Returns: Builder instance for fluent chaining
   */
   T subtitle(string propval)

@@ -1,6 +1,7 @@
 /// Module for [DataModelImport] class
 module gda.data_model_import;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_model;

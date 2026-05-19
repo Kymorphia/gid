@@ -1,6 +1,7 @@
 /// Module for [InternetAddressGroup] class
 module gmime.internet_address_group;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

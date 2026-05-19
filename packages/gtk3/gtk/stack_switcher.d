@@ -1,6 +1,7 @@
 /// Module for [StackSwitcher] class
 module gtk.stack_switcher;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

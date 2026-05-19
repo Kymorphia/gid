@@ -1,6 +1,7 @@
 /// Module for [ViewSwitcher] class
 module adw.view_switcher;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -25,15 +26,15 @@ import gtk.widget;
     </picture>
     
     An adaptive view switcher designed to switch between multiple views
-    contained in a `class@ViewStack` in a similar fashion to
+    contained in a [adw.view_stack.ViewStack] in a similar fashion to
     [gtk.stack_switcher.StackSwitcher].
     
     [adw.view_switcher.ViewSwitcher] buttons always have an icon and a label. They can be
     displayed side by side, or icon on top of the label. This can be controlled
-    via the `property@ViewSwitcher:policy` property.
+    via the [adw.view_switcher.ViewSwitcher.policy] property.
     
     [adw.view_switcher.ViewSwitcher] is intended to be used in a header bar together with
-    `class@ViewSwitcherBar` at the bottom of the window, and a `class@Breakpoint`
+    [adw.view_switcher_bar.ViewSwitcherBar] at the bottom of the window, and a [adw.breakpoint.Breakpoint]
     showing the view switcher bar on narrow sizes, while removing the view
     switcher from the header bar, as follows:
     
@@ -73,7 +74,7 @@ import gtk.widget;
     </object>
     ```
     
-    It's recommended to set `property@ViewSwitcher:policy` to
+    It's recommended to set [adw.view_switcher.ViewSwitcher.policy] to
     [adw.types.ViewSwitcherPolicy.Wide] in this case.
     
     You may have to adjust the breakpoint condition for your specific pages.

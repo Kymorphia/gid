@@ -1,6 +1,7 @@
 /// Module for [DenseUnionArray] class
 module arrow.dense_union_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;

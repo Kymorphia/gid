@@ -1,6 +1,7 @@
 /// Module for [ClientOptions] class
 module arrowflight.client_options;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

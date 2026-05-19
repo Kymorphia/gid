@@ -1,6 +1,7 @@
 /// Module for [Shortcut] class
 module gtk.shortcut;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.variant;
 import gobject.gid_builder;

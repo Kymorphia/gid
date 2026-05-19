@@ -1,6 +1,7 @@
 /// Module for [PopoverMenu] class
 module gtk.popover_menu;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

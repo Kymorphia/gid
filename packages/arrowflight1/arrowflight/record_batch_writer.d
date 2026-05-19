@@ -1,6 +1,7 @@
 /// Module for [RecordBatchWriter] class
 module arrowflight.record_batch_writer;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.record_batch;
 import arrow.record_batch_writer;

@@ -1,6 +1,7 @@
 /// Module for [SharedTaskPool] class
 module gst.shared_task_pool;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.c.functions;

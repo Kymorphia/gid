@@ -1,6 +1,7 @@
 /// Module for [AsyncInitable] interface
 module gio.async_initable;
 
+public import gid.basictypes;
 public import gio.async_initable_iface_proxy;
 import gid.gid;
 import gio.async_result;

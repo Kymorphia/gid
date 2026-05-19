@@ -1,6 +1,7 @@
 /// Module for [CastOptions] class
 module arrow.cast_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.data_type;

@@ -1,6 +1,7 @@
 /// Module for [TreeManager] class
 module gda.tree_manager;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.tree_node;

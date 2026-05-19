@@ -1,6 +1,7 @@
 /// Module for [CompletionProvider] interface mixin
 module gtksource.completion_provider_mixin;
 
+public import gid.basictypes;
 public import gtksource.completion_provider_iface_proxy;
 public import gdkpixbuf.pixbuf;
 public import gid.gid;

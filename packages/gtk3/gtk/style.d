@@ -1,6 +1,7 @@
 /// Module for [Style] class
 module gtk.style;
 
+public import gid.basictypes;
 import cairo.context;
 import gdk.color;
 import gdk.window;

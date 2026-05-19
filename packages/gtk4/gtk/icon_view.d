@@ -1,6 +1,7 @@
 /// Module for [IconView] class
 module gtk.icon_view;
 
+public import gid.basictypes;
 import gdk.content_formats;
 import gdk.paintable;
 import gdk.rectangle;

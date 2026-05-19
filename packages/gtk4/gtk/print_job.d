@@ -1,6 +1,7 @@
 /// Module for [PrintJob] class
 module gtk.print_job;
 
+public import gid.basictypes;
 import cairo.surface;
 import gid.gid;
 import glib.error;

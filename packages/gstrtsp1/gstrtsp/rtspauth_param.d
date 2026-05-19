@@ -1,6 +1,7 @@
 /// Module for [RTSPAuthParam] class
 module gstrtsp.rtspauth_param;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstrtsp.c.functions;

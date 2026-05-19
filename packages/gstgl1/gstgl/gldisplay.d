@@ -1,6 +1,7 @@
 /// Module for [GLDisplay] class
 module gstgl.gldisplay;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.thread;

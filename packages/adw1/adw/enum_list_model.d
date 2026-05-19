@@ -1,6 +1,7 @@
 /// Module for [EnumListModel] class
 module adw.enum_list_model;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -14,7 +15,7 @@ import gobject.types;
 /**
     A [gio.list_model.ListModel] representing values of a given enum.
     
-    [adw.enum_list_model.EnumListModel] contains objects of type `class@EnumListItem`.
+    [adw.enum_list_model.EnumListModel] contains objects of type [adw.enum_list_item.EnumListItem].
 */
 class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {

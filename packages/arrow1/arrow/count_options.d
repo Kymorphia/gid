@@ -1,6 +1,7 @@
 /// Module for [CountOptions] class
 module arrow.count_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.function_options;

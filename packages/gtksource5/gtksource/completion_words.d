@@ -1,6 +1,7 @@
 /// Module for [CompletionWords] class
 module gtksource.completion_words;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -12,10 +13,10 @@ import gtksource.completion_provider_mixin;
 import gtksource.types;
 
 /**
-    A `iface@CompletionProvider` for the completion of words.
+    A [gtksource.completion_provider.CompletionProvider] for the completion of words.
     
     The [gtksource.completion_words.CompletionWords] is an example of an implementation of
-    the `iface@CompletionProvider` interface. The proposals are words
+    the [gtksource.completion_provider.CompletionProvider] interface. The proposals are words
     appearing in the registered [gtk.text_buffer.TextBuffer]s.
 */
 class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider.CompletionProvider

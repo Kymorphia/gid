@@ -1,6 +1,7 @@
 /// Module for [SymbolicPaintable] interface
 module gtk.symbolic_paintable;
 
+public import gid.basictypes;
 public import gtk.symbolic_paintable_iface_proxy;
 import gdk.rgba;
 import gdk.snapshot;

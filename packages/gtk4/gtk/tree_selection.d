@@ -1,6 +1,7 @@
 /// Module for [TreeSelection] class
 module gtk.tree_selection;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

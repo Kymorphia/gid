@@ -1,6 +1,7 @@
 /// Module for [VimIMContext] class
 module gtksource.vim_imcontext;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -15,7 +16,7 @@ import gtksource.view;
     Vim emulation.
     
     The [gtksource.vim_imcontext.VimIMContext] is a [gtk.imcontext.IMContext] implementation that can
-    be used to provide Vim-like editing controls within a `class@View`.
+    be used to provide Vim-like editing controls within a [gtksource.view.View].
     
     The `GtkSourceViMIMContext` will process incoming [gdk.key_event.KeyEvent] as the
     user types. It should be used in conjunction with a [gtk.event_controller_key.EventControllerKey].
@@ -33,8 +34,8 @@ import gtksource.view;
      - Some commonly used Vim commands
     
     It is recommended that applications display the contents of
-    `property@VimIMContext:command-bar-text` and
-    `property@VimIMContext:command-text` to the user as they represent the
+    [gtksource.vim_imcontext.VimIMContext.commandBarText] and
+    [gtksource.vim_imcontext.VimIMContext.commandText] to the user as they represent the
     command-bar and current command preview found in Vim.
     
     [gtksource.vim_imcontext.VimIMContext] attempts to work with additional [gtk.imcontext.IMContext]
@@ -119,7 +120,7 @@ class VimIMContext : gtk.imcontext.IMContext
   /**
       Executes command as if it was typed into the command bar by the
       user except that this does not emit the
-      `signalVimIMContext::execute-command` signal.
+      [gtksource.vim_imcontext.VimIMContext.executeCommand] signal.
   
       Params:
         command = the command text

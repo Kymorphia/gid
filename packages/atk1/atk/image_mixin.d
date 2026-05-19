@@ -1,6 +1,7 @@
 /// Module for [Image] interface mixin
 module atk.image_mixin;
 
+public import gid.basictypes;
 public import atk.image_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

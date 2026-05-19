@@ -1,6 +1,7 @@
 /// Module for [RecordBatchFileWriter] class
 module arrow.record_batch_file_writer;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.output_stream;

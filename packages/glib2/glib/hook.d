@@ -1,6 +1,7 @@
 /// Module for [Hook] class
 module glib.hook;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

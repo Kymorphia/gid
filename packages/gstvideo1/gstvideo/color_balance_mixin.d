@@ -1,6 +1,7 @@
 /// Module for [ColorBalance] interface mixin
 module gstvideo.color_balance_mixin;
 
+public import gid.basictypes;
 public import gstvideo.color_balance_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;

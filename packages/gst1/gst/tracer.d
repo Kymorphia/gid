@@ -1,6 +1,7 @@
 /// Module for [Tracer] class
 module gst.tracer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

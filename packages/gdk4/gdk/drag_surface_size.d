@@ -1,6 +1,7 @@
 /// Module for [DragSurfaceSize] class
 module gdk.drag_surface_size;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

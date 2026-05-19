@@ -1,6 +1,7 @@
 /// Module for [ArrayBuilder] class
 module arrow.array_builder;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;

@@ -1,6 +1,7 @@
 /// Module for [Buffer] class
 module gtksource.buffer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

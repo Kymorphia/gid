@@ -1,6 +1,7 @@
 /// Module for [UriLauncher] class
 module gtk.uri_launcher;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

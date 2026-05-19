@@ -1,6 +1,7 @@
 /// Module for [VideoDither] class
 module gstvideo.video_dither;
 
+public import gid.basictypes;
 import gid.gid;
 import gstvideo.c.functions;
 import gstvideo.c.types;

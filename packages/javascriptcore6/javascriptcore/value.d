@@ -1,6 +1,7 @@
 /// Module for [Value] class
 module javascriptcore.value;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.types;

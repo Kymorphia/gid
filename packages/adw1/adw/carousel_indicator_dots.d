@@ -1,6 +1,7 @@
 /// Module for [CarouselIndicatorDots] class
 module adw.carousel_indicator_dots;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.carousel;
@@ -19,7 +20,7 @@ import gtk.orientable_mixin;
 import gtk.widget;
 
 /**
-    A dots indicator for `class@Carousel`.
+    A dots indicator for [adw.carousel.Carousel].
     
     <picture>
       <source srcset="carousel-indicator-dots-dark.png" media="(prefers-color-scheme: dark)">
@@ -27,11 +28,11 @@ import gtk.widget;
     </picture>
     
     The [adw.carousel_indicator_dots.CarouselIndicatorDots] widget shows a set of dots for each page of a
-    given `class@Carousel`. The dot representing the carousel's active page is
+    given [adw.carousel.Carousel]. The dot representing the carousel's active page is
     larger and more opaque than the others, the transition to the active and
     inactive state is gradual to match the carousel's position.
     
-    See also `class@CarouselIndicatorLines`.
+    See also [adw.carousel_indicator_lines.CarouselIndicatorLines].
     
     ## CSS nodes
     

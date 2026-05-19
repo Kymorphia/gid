@@ -1,6 +1,7 @@
 /// Module for [MarkupParseContext] class
 module glib.markup_parse_context;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

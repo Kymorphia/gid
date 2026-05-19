@@ -1,6 +1,7 @@
 /// Module for [HandlerBin] class
 module gda.handler_bin;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_handler;

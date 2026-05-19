@@ -1,6 +1,7 @@
 /// Module for [Parser] class
 module gmime.parser;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

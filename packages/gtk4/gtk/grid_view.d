@@ -1,6 +1,7 @@
 /// Module for [GridView] class
 module gtk.grid_view;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -33,7 +34,7 @@ import gtk.types;
     [gtk.grid_view.GridView] allows the user to select items according to the selection
     characteristics of the model. For models that allow multiple selected items,
     it is possible to turn on _rubberband selection_, using
-    `property@Gtk.GridView:enable-rubberband`.
+    [gtk.grid_view.GridView.enableRubberband].
     
     To learn more about the list widget framework, see the
     [overview](section-list-widget.html).
@@ -139,7 +140,7 @@ class GridView : gtk.list_base.ListBase
       Get `maxColumns` property.
       Returns: Maximum number of columns per row.
         
-        If this number is smaller than `property@Gtk.GridView:min-columns`,
+        If this number is smaller than [gtk.grid_view.GridView.minColumns],
         that value is used instead.
   */
   @property uint maxColumns()
@@ -152,7 +153,7 @@ class GridView : gtk.list_base.ListBase
       Params:
         propval = Maximum number of columns per row.
           
-          If this number is smaller than `property@Gtk.GridView:min-columns`,
+          If this number is smaller than [gtk.grid_view.GridView.minColumns],
           that value is used instead.
   */
   @property void maxColumns(uint propval)
@@ -529,7 +530,7 @@ class GridViewGidBuilderImpl(T) : gtk.list_base.ListBaseGidBuilderImpl!T
       Params:
         propval = Maximum number of columns per row.
           
-          If this number is smaller than `property@Gtk.GridView:min-columns`,
+          If this number is smaller than [gtk.grid_view.GridView.minColumns],
           that value is used instead.
       Returns: Builder instance for fluent chaining
   */

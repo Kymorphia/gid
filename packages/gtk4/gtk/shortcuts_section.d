@@ -1,6 +1,7 @@
 /// Module for [ShortcutsSection] class
 module gtk.shortcuts_section;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -24,11 +25,11 @@ import gtk.types;
     for a major application mode.
     
     If your application needs multiple sections, you should give each
-    section a unique `property@Gtk.ShortcutsSection:section-name` and
+    section a unique [gtk.shortcuts_section.ShortcutsSection.sectionName] and
     a [gtk.shortcuts_section.ShortcutsSection.title] that can be shown in the
     section selector of the [gtk.shortcuts_window.ShortcutsWindow].
     
-    The `property@Gtk.ShortcutsSection:max-height` property can be used
+    The [gtk.shortcuts_section.ShortcutsSection.maxHeight] property can be used
     to influence how the groups in the section are distributed over pages
     and columns.
     
@@ -112,7 +113,7 @@ class ShortcutsSection : gtk.box.Box
       Returns: A unique name to identify this section among the sections
         added to the [gtk.shortcuts_window.ShortcutsWindow].
         
-        Setting the `property@Gtk.ShortcutsWindow:section-name` property
+        Setting the [gtk.shortcuts_window.ShortcutsWindow.sectionName] property
         to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
   */
   @property string sectionName()
@@ -126,7 +127,7 @@ class ShortcutsSection : gtk.box.Box
         propval = A unique name to identify this section among the sections
           added to the [gtk.shortcuts_window.ShortcutsWindow].
           
-          Setting the `property@Gtk.ShortcutsWindow:section-name` property
+          Setting the [gtk.shortcuts_window.ShortcutsWindow.sectionName] property
           to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
   */
   @property void sectionName(string propval)
@@ -168,7 +169,7 @@ class ShortcutsSection : gtk.box.Box
         See [gtk.shortcuts_group.ShortcutsGroup.view].
         
         Applications are expected to use the
-        `property@Gtk.ShortcutsWindow:view-name` property
+        [gtk.shortcuts_window.ShortcutsWindow.viewName] property
         for this purpose.
   */
   @property string viewName()
@@ -184,7 +185,7 @@ class ShortcutsSection : gtk.box.Box
           See [gtk.shortcuts_group.ShortcutsGroup.view].
           
           Applications are expected to use the
-          `property@Gtk.ShortcutsWindow:view-name` property
+          [gtk.shortcuts_window.ShortcutsWindow.viewName] property
           for this purpose.
   */
   @property void viewName(string propval)
@@ -282,7 +283,7 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
         propval = A unique name to identify this section among the sections
           added to the [gtk.shortcuts_window.ShortcutsWindow].
           
-          Setting the `property@Gtk.ShortcutsWindow:section-name` property
+          Setting the [gtk.shortcuts_window.ShortcutsWindow.sectionName] property
           to this string will make this section shown in the [gtk.shortcuts_window.ShortcutsWindow].
       Returns: Builder instance for fluent chaining
   */
@@ -314,7 +315,7 @@ class ShortcutsSectionGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
           See [gtk.shortcuts_group.ShortcutsGroup.view].
           
           Applications are expected to use the
-          `property@Gtk.ShortcutsWindow:view-name` property
+          [gtk.shortcuts_window.ShortcutsWindow.viewName] property
           for this purpose.
       Returns: Builder instance for fluent chaining
   */

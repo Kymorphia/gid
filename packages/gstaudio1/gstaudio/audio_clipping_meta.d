@@ -1,6 +1,7 @@
 /// Module for [AudioClippingMeta] class
 module gstaudio.audio_clipping_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

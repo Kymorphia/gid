@@ -1,6 +1,7 @@
 /// Module for [LargeStringArrayBuilder] class
 module arrow.large_string_array_builder;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.large_binary_array_builder;

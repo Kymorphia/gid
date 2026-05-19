@@ -1,6 +1,7 @@
 /// Module for [Builder] class
 module gtk.builder;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.closure;

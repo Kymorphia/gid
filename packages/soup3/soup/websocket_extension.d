@@ -1,6 +1,7 @@
 /// Module for [WebsocketExtension] class
 module soup.websocket_extension;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.error;

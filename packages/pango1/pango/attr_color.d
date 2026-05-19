@@ -1,6 +1,7 @@
 /// Module for [AttrColor] class
 module pango.attr_color;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.attribute;
 import pango.c.functions;

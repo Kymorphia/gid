@@ -1,6 +1,7 @@
 /// Module for [EventCrossing] class
 module gdk.event_crossing;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

@@ -1,6 +1,7 @@
 /// Module for [Scale] class
 module gtk.scale;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

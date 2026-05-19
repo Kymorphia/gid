@@ -1,6 +1,7 @@
 /// Module for [Pad] class
 module gst.pad;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

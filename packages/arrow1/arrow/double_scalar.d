@@ -1,6 +1,7 @@
 /// Module for [DoubleScalar] class
 module arrow.double_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;

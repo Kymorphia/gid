@@ -1,6 +1,7 @@
 /// Module for [ListItem] class
 module gtk.list_item;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

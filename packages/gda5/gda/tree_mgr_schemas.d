@@ -1,6 +1,7 @@
 /// Module for [TreeMgrSchemas] class
 module gda.tree_mgr_schemas;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

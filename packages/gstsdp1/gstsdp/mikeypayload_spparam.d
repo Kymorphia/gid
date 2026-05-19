@@ -1,6 +1,7 @@
 /// Module for [MIKEYPayloadSPParam] class
 module gstsdp.mikeypayload_spparam;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

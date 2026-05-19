@@ -1,6 +1,7 @@
 /// Module for [Image] class
 module gtk.image;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gdkpixbuf.pixbuf;
 import gid.gid;
@@ -53,7 +54,7 @@ import gtk.widget;
     
     [gtk.image.Image] has a single CSS node with the name `image`. The style classes
     `.normal-icons` or `.large-icons` may appear, depending on the
-    `property@Gtk.Image:icon-size` property.
+    [gtk.image.Image.iconSize] property.
     
     ## Accessibility
     
@@ -206,7 +207,7 @@ class Image : gtk.widget.Widget
       Returns: The size in pixels to display icons at.
         
         If set to a value != -1, this property overrides the
-        `property@Gtk.Image:icon-size` property for images of type
+        [gtk.image.Image.iconSize] property for images of type
         [gtk.types.ImageType.IconName].
   */
   @property int pixelSize()
@@ -220,7 +221,7 @@ class Image : gtk.widget.Widget
         propval = The size in pixels to display icons at.
           
           If set to a value != -1, this property overrides the
-          `property@Gtk.Image:icon-size` property for images of type
+          [gtk.image.Image.iconSize] property for images of type
           [gtk.types.ImageType.IconName].
   */
   @property void pixelSize(int propval)
@@ -722,7 +723,7 @@ class ImageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The size in pixels to display icons at.
           
           If set to a value != -1, this property overrides the
-          `property@Gtk.Image:icon-size` property for images of type
+          [gtk.image.Image.iconSize] property for images of type
           [gtk.types.ImageType.IconName].
       Returns: Builder instance for fluent chaining
   */

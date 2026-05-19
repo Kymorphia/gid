@@ -1,6 +1,7 @@
 /// Module for [EncodingVideoProfile] class
 module gstpbutils.encoding_video_profile;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.caps;

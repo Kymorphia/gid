@@ -1,6 +1,7 @@
 /// Module for [MountOperation] class
 module gio.mount_operation;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

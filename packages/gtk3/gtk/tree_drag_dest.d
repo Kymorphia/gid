@@ -1,6 +1,7 @@
 /// Module for [TreeDragDest] interface
 module gtk.tree_drag_dest;
 
+public import gid.basictypes;
 public import gtk.tree_drag_dest_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

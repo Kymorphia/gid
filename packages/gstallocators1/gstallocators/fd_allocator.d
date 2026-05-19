@@ -1,6 +1,7 @@
 /// Module for [FdAllocator] class
 module gstallocators.fd_allocator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.allocator;

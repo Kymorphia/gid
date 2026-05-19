@@ -1,6 +1,7 @@
 /// Module for [Action] class
 module gtk.action;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.icon;
 import gobject.closure;

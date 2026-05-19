@@ -1,6 +1,7 @@
 /// Module for [URIHandler] interface
 module gst.urihandler;
 
+public import gid.basictypes;
 public import gst.urihandler_iface_proxy;
 import gid.gid;
 import glib.error;

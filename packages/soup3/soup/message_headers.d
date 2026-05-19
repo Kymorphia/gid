@@ -1,6 +1,7 @@
 /// Module for [MessageHeaders] class
 module soup.message_headers;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import soup.c.functions;
@@ -47,7 +48,7 @@ class MessageHeaders : gobject.boxed.Boxed
   /**
       Creates a #SoupMessageHeaders.
       
-      (`classMessage` does this automatically for its own headers. You would only
+      ([soup.message.Message] does this automatically for its own headers. You would only
       need to use this method if you are manually parsing or generating message
       headers.)
   
@@ -158,7 +159,7 @@ class MessageHeaders : gobject.boxed.Boxed
       test this yourself.)
       
       Content-Disposition is also used in "multipart/form-data", however
-      this is handled automatically by `structMultipart` and the associated
+      this is handled automatically by [soup.multipart.Multipart] and the associated
       form methods.
   
       Params:
@@ -345,7 +346,7 @@ class MessageHeaders : gobject.boxed.Boxed
       returned ranges to have explicit start and end values, and the
       returned ranges will be sorted and non-overlapping. If
       total_length is 0, then some ranges may have an end value of -1,
-      as described under `structRange`, and some of the ranges may be
+      as described under [soup.types.Range], and some of the ranges may be
       redundant.
       
       Beware that even if given a total_length, this function does not
@@ -505,7 +506,7 @@ class MessageHeaders : gobject.boxed.Boxed
       (Note that total_length is the total length of the entire resource
       that this is a range of, not simply end - start + 1.)
       
-      `classServer` has built-in handling for range requests, and you do
+      [soup.server.Server] has built-in handling for range requests, and you do
       not normally need to call this function youself. See
       [soup.message_headers.MessageHeaders.getRanges] for more details.
   
@@ -573,7 +574,7 @@ class MessageHeaders : gobject.boxed.Boxed
   /**
       Sets hdrs's Range header to request the indicated range.
       
-      start and end are interpreted as in a `structRange`.
+      start and end are interpreted as in a [soup.types.Range].
       
       If you need to request multiple ranges, use
       [soup.message_headers.MessageHeaders.setRanges].

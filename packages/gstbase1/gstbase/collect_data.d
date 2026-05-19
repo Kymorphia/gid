@@ -1,6 +1,7 @@
 /// Module for [CollectData] class
 module gstbase.collect_data;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gst.pad;

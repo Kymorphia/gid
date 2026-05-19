@@ -1,6 +1,7 @@
 /// Module for [Seat] class
 module gdk.seat;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.device;
@@ -235,7 +236,7 @@ class Seat : gobject.object.ObjectWrap
         
         The tool may later be assigned to a device (i.e. on
         proximity with a tablet). The device will emit the
-        `signalGdk.Device::tool-changed` signal accordingly.
+        [gdk.device.Device.toolChanged] signal accordingly.
         
         A same tool may be used by several devices.
   

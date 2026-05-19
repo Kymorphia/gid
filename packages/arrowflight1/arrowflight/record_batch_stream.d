@@ -1,6 +1,7 @@
 /// Module for [RecordBatchStream] class
 module arrowflight.record_batch_stream;
 
+public import gid.basictypes;
 import arrow.record_batch_reader;
 import arrow.write_options;
 import arrowflight.c.functions;

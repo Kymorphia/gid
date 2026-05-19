@@ -1,6 +1,7 @@
 /// Module for [StringChunk] class
 module glib.string_chunk;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

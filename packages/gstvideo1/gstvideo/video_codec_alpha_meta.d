@@ -1,6 +1,7 @@
 /// Module for [VideoCodecAlphaMeta] class
 module gstvideo.video_codec_alpha_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gst.meta;

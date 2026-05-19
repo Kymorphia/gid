@@ -1,6 +1,7 @@
 /// Module for [VideoBufferPool] class
 module gstvideo.video_buffer_pool;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.buffer_pool;

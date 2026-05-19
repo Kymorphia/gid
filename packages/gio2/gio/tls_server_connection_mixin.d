@@ -1,6 +1,7 @@
 /// Module for [TlsServerConnection] interface mixin
 module gio.tls_server_connection_mixin;
 
+public import gid.basictypes;
 public import gio.tls_server_connection_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

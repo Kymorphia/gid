@@ -1,6 +1,7 @@
 /// Module for [AncillaryMeta] class
 module gstvideo.ancillary_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

@@ -1,6 +1,7 @@
 /// Module for [ControlPoint] class
 module gstcontroller.control_point;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.types;

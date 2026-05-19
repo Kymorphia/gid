@@ -1,6 +1,7 @@
 /// Module for [ShortcutsWindow] class
 module gtk.shortcuts_window;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [RTPBasePayload] class
 module gstrtp.rtpbase_payload;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

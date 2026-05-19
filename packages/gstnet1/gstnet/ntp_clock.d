@@ -1,6 +1,7 @@
 /// Module for [NtpClock] class
 module gstnet.ntp_clock;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.types;

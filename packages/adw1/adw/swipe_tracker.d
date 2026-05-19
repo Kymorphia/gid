@@ -1,6 +1,7 @@
 /// Module for [SwipeTracker] class
 module adw.swipe_tracker;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.swipeable;
@@ -13,16 +14,16 @@ import gtk.orientable;
 import gtk.orientable_mixin;
 
 /**
-    A swipe tracker used in `class@Carousel`, `class@NavigationView` and
-    `class@OverlaySplitView`.
+    A swipe tracker used in [adw.carousel.Carousel], [adw.navigation_view.NavigationView] and
+    [adw.overlay_split_view.OverlaySplitView].
     
     The [adw.swipe_tracker.SwipeTracker] object can be used for implementing widgets with swipe
     gestures. It supports touch-based swipes, pointer dragging, and touchpad
     scrolling.
     
-    The widgets will probably want to expose the `property@SwipeTracker:enabled`
+    The widgets will probably want to expose the [adw.swipe_tracker.SwipeTracker.enabled]
     property. If they expect to use horizontal orientation,
-    `property@SwipeTracker:reversed` can be used for supporting RTL text
+    [adw.swipe_tracker.SwipeTracker.reversed] can be used for supporting RTL text
     direction.
 */
 class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
@@ -478,7 +479,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
         
         The user is expected to animate the deceleration from the current progress
         value to to with an animation using velocity as the initial velocity,
-        provided in pixels per second. `classSpringAnimation` is usually a good
+        provided in pixels per second. [adw.spring_animation.SpringAnimation] is usually a good
         fit for this.
   
       Params:

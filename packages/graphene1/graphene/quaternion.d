@@ -1,6 +1,7 @@
 /// Module for [Quaternion] struct
 module graphene.quaternion;
 
+public import gid.basictypes;
 import gid.gid;
 import graphene.c.functions;
 import graphene.c.types;

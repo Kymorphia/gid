@@ -1,6 +1,7 @@
 /// Module for [Connection] class
 module gda.connection;
 
+public import gid.basictypes;
 import gda.batch;
 import gda.c.functions;
 import gda.c.types;

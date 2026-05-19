@@ -1,6 +1,7 @@
 /// Module for [TimeVal] struct
 module glib.time_val;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

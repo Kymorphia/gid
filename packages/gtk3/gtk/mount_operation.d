@@ -1,6 +1,7 @@
 /// Module for [MountOperation] class
 module gtk.mount_operation;
 
+public import gid.basictypes;
 import gdk.screen;
 import gid.gid;
 import gio.mount_operation;

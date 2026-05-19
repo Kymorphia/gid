@@ -1,6 +1,7 @@
 /// Module for [CompletionSnippets] class
 module gtksource.completion_snippets;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -11,11 +12,11 @@ import gtksource.completion_provider_mixin;
 import gtksource.types;
 
 /**
-    A `iface@CompletionProvider` for the completion of snippets.
+    A [gtksource.completion_provider.CompletionProvider] for the completion of snippets.
     
     The [gtksource.completion_snippets.CompletionSnippets] is an example of an implementation of
-    the `iface@CompletionProvider` interface. The proposals are snippets
-    registered with the `class@SnippetManager`.
+    the [gtksource.completion_provider.CompletionProvider] interface. The proposals are snippets
+    registered with the [gtksource.snippet_manager.SnippetManager].
 */
 class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provider.CompletionProvider
 {

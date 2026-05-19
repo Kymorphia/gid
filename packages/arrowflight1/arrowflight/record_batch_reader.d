@@ -1,6 +1,7 @@
 /// Module for [RecordBatchReader] class
 module arrowflight.record_batch_reader;
 
+public import gid.basictypes;
 import arrow.table;
 import arrowflight.c.functions;
 import arrowflight.c.types;

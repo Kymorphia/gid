@@ -1,6 +1,7 @@
 /// Module for [ParamSpecPointer] class
 module gobject.param_spec_pointer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

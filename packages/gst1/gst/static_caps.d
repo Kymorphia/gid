@@ -1,6 +1,7 @@
 /// Module for [StaticCaps] class
 module gst.static_caps;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

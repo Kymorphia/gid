@@ -1,6 +1,7 @@
 /// Module for [StreamChunk] class
 module arrowflight.stream_chunk;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.record_batch;
 import arrowflight.c.functions;

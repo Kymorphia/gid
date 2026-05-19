@@ -1,6 +1,7 @@
 /// Module for [CompletionContext] class
 module gtksource.completion_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

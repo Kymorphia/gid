@@ -1,6 +1,7 @@
 /// Module for [MIKEYPayloadKEMAC] class
 module gstsdp.mikeypayload_kemac;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

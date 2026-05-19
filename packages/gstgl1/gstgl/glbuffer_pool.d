@@ -1,6 +1,7 @@
 /// Module for [GLBufferPool] class
 module gstgl.glbuffer_pool;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.buffer_pool;

@@ -1,6 +1,7 @@
 /// Module for [Proxy] interface mixin
 module gio.proxy_mixin;
 
+public import gid.basictypes;
 public import gio.proxy_iface_proxy;
 public import gid.gid;
 public import gio.async_result;

@@ -1,6 +1,7 @@
 /// Module for [Event] class
 module gdk.event;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.device;

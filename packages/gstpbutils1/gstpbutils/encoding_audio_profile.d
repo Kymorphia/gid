@@ -1,6 +1,7 @@
 /// Module for [EncodingAudioProfile] class
 module gstpbutils.encoding_audio_profile;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.caps;

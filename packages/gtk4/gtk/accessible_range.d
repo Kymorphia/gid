@@ -1,6 +1,7 @@
 /// Module for [AccessibleRange] interface
 module gtk.accessible_range;
 
+public import gid.basictypes;
 public import gtk.accessible_range_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [AppChooserButton] class
 module gtk.app_chooser_button;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.icon;
 import gobject.dclosure;
@@ -26,19 +27,19 @@ import gtk.widget;
     
     Initially, a [gtk.app_chooser_button.AppChooserButton] selects the first application
     in its list, which will either be the most-recently used application
-    or, if `property@Gtk.AppChooserButton:show-default-item` is true, the
+    or, if [gtk.app_chooser_button.AppChooserButton.showDefaultItem] is true, the
     default application.
     
     The list of applications shown in a [gtk.app_chooser_button.AppChooserButton] includes
     the recommended applications for the given content type. When
-    `property@Gtk.AppChooserButton:show-default-item` is set, the default
+    [gtk.app_chooser_button.AppChooserButton.showDefaultItem] is set, the default
     application is also included. To let the user chooser other applications,
-    you can set the `property@Gtk.AppChooserButton:show-dialog-item` property,
+    you can set the [gtk.app_chooser_button.AppChooserButton.showDialogItem] property,
     which allows to open a full [gtk.app_chooser_dialog.AppChooserDialog].
     
     It is possible to add custom items to the list, using
     [gtk.app_chooser_button.AppChooserButton.appendCustomItem]. These items cause
-    the `signal@Gtk.AppChooserButton::custom-item-activated` signal to be
+    the [gtk.app_chooser_button.AppChooserButton.customItemActivated] signal to be
     emitted when they are selected.
     
     To track changes in the selected application, use the
@@ -201,7 +202,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       
       The item name must be unique per-widget. Clients can use the
       provided name as a detail for the
-      `signalGtk.AppChooserButton::custom-item-activated` signal, to add a
+      [gtk.app_chooser_button.AppChooserButton.customItemActivated] signal, to add a
       callback for the activation of a particular custom item in the list.
       
       See also [gtk.app_chooser_button.AppChooserButton.appendSeparator].
@@ -262,7 +263,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Returns whether the dropdown menu should show the default
       application at the top.
-      Returns: the value of `propertyGtk.AppChooserButton:show-default-item`
+      Returns: the value of [gtk.app_chooser_button.AppChooserButton.showDefaultItem]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -276,7 +277,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   /**
       Returns whether the dropdown menu shows an item
       for a [gtk.app_chooser_dialog.AppChooserDialog].
-      Returns: the value of `propertyGtk.AppChooserButton:show-dialog-item`
+      Returns: the value of [gtk.app_chooser_button.AppChooserButton.showDialogItem]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -340,7 +341,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       default application for the given content type at top.
   
       Params:
-        setting = the new value for `propertyGtk.AppChooserButton:show-default-item`
+        setting = the new value for [gtk.app_chooser_button.AppChooserButton.showDefaultItem]
   
       Deprecated: This widget will be removed in GTK 5
   */
@@ -354,7 +355,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
       entry to trigger a [gtk.app_chooser_dialog.AppChooserDialog].
   
       Params:
-        setting = the new value for `propertyGtk.AppChooserButton:show-dialog-item`
+        setting = the new value for [gtk.app_chooser_button.AppChooserButton.showDialogItem]
   
       Deprecated: This widget will be removed in GTK 5
   */

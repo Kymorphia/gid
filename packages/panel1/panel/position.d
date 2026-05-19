@@ -1,6 +1,7 @@
 /// Module for [Position] class
 module panel.position;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.variant;
 import gobject.gid_builder;

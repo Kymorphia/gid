@@ -1,6 +1,7 @@
 /// Module for [File] interface mixin
 module gio.file_mixin;
 
+public import gid.basictypes;
 public import gio.file_iface_proxy;
 public import gid.gid;
 public import gio.app_info;

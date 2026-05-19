@@ -1,6 +1,7 @@
 /// Module for [Serializable] interface mixin
 module json.serializable_mixin;
 
+public import gid.basictypes;
 public import json.serializable_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

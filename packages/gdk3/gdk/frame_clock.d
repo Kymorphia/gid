@@ -1,6 +1,7 @@
 /// Module for [FrameClock] class
 module gdk.frame_clock;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.frame_timings;

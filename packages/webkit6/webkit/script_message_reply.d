@@ -1,6 +1,7 @@
 /// Module for [ScriptMessageReply] class
 module webkit.script_message_reply;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import javascriptcore.value;

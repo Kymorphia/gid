@@ -1,6 +1,7 @@
 /// Module for [Service] class
 module secret.service;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_initable;
 import gio.async_initable_mixin;
@@ -50,7 +51,7 @@ import secret.value;
     To search for items, use the [secret.service.Service.search] method.
     
     Multiple collections can exist in the Secret Service, each of which contains
-    secret items. In order to instantiate `class@Collection` objects which
+    secret items. In order to instantiate [secret.collection.Collection] objects which
     represent those collections while initializing a #SecretService then pass
     the [secret.types.ServiceFlags.LoadCollections] flag to the [secret.service.Service.get] or
     [secret.service.Service.open] functions. In order to establish a session on an already
@@ -59,7 +60,7 @@ import secret.value;
     
     Certain actions on the Secret Service require user prompting to complete,
     such as creating a collection, or unlocking a collection. When such a prompt
-    is necessary, then a `class@Prompt` object is created by this library, and
+    is necessary, then a [secret.prompt.Prompt] object is created by this library, and
     passed to the [secret.service.Service.prompt] method. In this way it is handled
     automatically.
     
@@ -302,7 +303,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       The attributes should be a set of key and value string pairs.
       
       If service is null, then [secret.service.Service.get] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method will return immediately and complete asynchronously.
   
@@ -353,7 +354,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       The attributes should be a set of key and value string pairs.
       
       If service is null, then [secret.service.Service.getSync] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method may block indefinitely and should not be used in user interface
       threads.
@@ -378,12 +379,12 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 
   /**
-      Decode a `structValue` into [glib.variant.Variant] received with the Secret Service
+      Decode a [secret.value.Value] into [glib.variant.Variant] received with the Secret Service
       DBus API.
       
       The [glib.variant.Variant] should have a `(oayays)` signature.
       
-      A session must have already been established by the `classService`, and
+      A session must have already been established by the [secret.service.Service], and
       the encoded secret must be valid for that session.
   
       Params:
@@ -399,12 +400,12 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 
   /**
-      Encodes a `structValue` into [glib.variant.Variant] for use with the Secret
+      Encodes a [secret.value.Value] into [glib.variant.Variant] for use with the Secret
       Service DBus API.
       
       The resulting [glib.variant.Variant] will have a `(oayays)` signature.
       
-      A session must have already been established by the `classService`.
+      A session must have already been established by the [secret.service.Service].
   
       Params:
         value = the secret value
@@ -500,7 +501,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   /**
       Get the GObject type for collections instantiated by this service.
       
-      This will always be either `classCollection` or derived from it.
+      This will always be either [secret.collection.Collection] or derived from it.
       Returns: the gobject type for collections
   */
   gobject.types.GType getCollectionGtype()
@@ -511,7 +512,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 
   /**
-      Get a list of `classCollection` objects representing all the collections
+      Get a list of [secret.collection.Collection] objects representing all the collections
       in the secret service.
       
       If the [secret.types.ServiceFlags.LoadCollections] flag was not specified when
@@ -549,7 +550,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   /**
       Get the GObject type for items instantiated by this service.
       
-      This will always be either `classItem` or derived from it.
+      This will always be either [secret.item.Item] or derived from it.
       Returns: the gobject type for items
   */
   gobject.types.GType getItemGtype()
@@ -677,7 +678,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       lock an entire collection instead.
       
       If service is null, then [secret.service.Service.get] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method returns immediately and completes asynchronously. The secret
       service may prompt the user. [secret.service.Service.prompt] will be used to handle
@@ -736,7 +737,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       lock an entire collection instead.
       
       If service is null, then [secret.service.Service.getSync] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method may block indefinitely and should not be used in user
       interface threads. The secret service may prompt the user.
@@ -769,7 +770,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       The attributes should be a set of key and value string pairs.
       
       If service is null, then [secret.service.Service.get] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method will return immediately and complete asynchronously.
   
@@ -802,7 +803,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   
       Params:
         result = the asynchronous result passed to the callback
-      Returns: a newly allocated `structValue`, which should be
+      Returns: a newly allocated [secret.value.Value], which should be
           released with [secret.value.Value.unref], or null if no secret found
       Throws: [ErrorWrap]
   */
@@ -823,7 +824,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       The attributes should be a set of key and value string pairs.
       
       If service is null, then [secret.service.Service.getSync] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method may block indefinitely and should not be used in user interface
       threads.
@@ -832,7 +833,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         schema = the schema for the attributes
         attributes = the attribute keys and values
         cancellable = optional cancellation object
-      Returns: a newly allocated `structValue`, which should be
+      Returns: a newly allocated [secret.value.Value], which should be
           released with [secret.value.Value.unref], or null if no secret found
       Throws: [ErrorWrap]
   */
@@ -850,7 +851,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 
   /**
-      Perform prompting for a `classPrompt`.
+      Perform prompting for a [secret.prompt.Prompt].
       
       This function is called by other parts of this library to handle prompts
       for the various actions that can require prompting.
@@ -880,7 +881,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 
   /**
-      Complete asynchronous operation to perform prompting for a `classPrompt`.
+      Complete asynchronous operation to perform prompting for a [secret.prompt.Prompt].
       
       Returns a variant result if the prompt was completed and not dismissed. The
       type of result depends on the action the prompt is completing, and is defined
@@ -904,7 +905,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 
   /**
-      Perform prompting for a `classPrompt`.
+      Perform prompting for a [secret.prompt.Prompt].
       
       Runs a prompt and performs the prompting. Returns a variant result if the
       prompt was completed and not dismissed. The type of result depends on the
@@ -944,7 +945,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       keys and string values.
       
       If service is null, then [secret.service.Service.get] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       If [secret.types.SearchFlags.All] is set in flags, then all the items matching the
       search will be returned. Otherwise only the first item will be returned.
@@ -1008,7 +1009,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       keys and string values.
       
       If service is null, then [secret.service.Service.getSync] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       If [secret.types.SearchFlags.All] is set in flags, then all the items matching the
       search will be returned. Otherwise only the first item will be returned.
@@ -1053,7 +1054,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Aliases help determine well known collections, such as 'default'.
       
       If service is null, then [secret.service.Service.get] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method will return immediately and complete asynchronously.
   
@@ -1101,7 +1102,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       well known collections, such as 'default'.
       
       If service is null, then [secret.service.Service.getSync] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method may block and should not be used in user interface threads.
   
@@ -1132,10 +1133,10 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       the item will be updated with these new values.
       
       If service is null, then [secret.service.Service.get] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       If collection is not specified, then the default collection will be
-      used. Use `constCOLLECTION_SESSION` to store the password in the session
+      used. Use [secret.types.COLLECTION_SESSION] to store the password in the session
       collection, which doesn't get stored across login sessions.
       
       This method will return immediately and complete asynchronously.
@@ -1195,11 +1196,11 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       the item will be updated with these new values.
       
       If collection is null, then the default collection will be
-      used. Use `constCOLLECTION_SESSION` to store the password in the session
+      used. Use [secret.types.COLLECTION_SESSION] to store the password in the session
       collection, which doesn't get stored across login sessions.
       
       If service is null, then [secret.service.Service.getSync] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method may block indefinitely and should not be used in user interface
       threads.
@@ -1236,7 +1237,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       unlock an entire collection instead.
       
       If service is null, then [secret.service.Service.get] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method may block indefinitely and should not be used in user
       interface threads. The secret service may prompt the user.
@@ -1295,7 +1296,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       unlock an entire collection instead.
       
       If service is null, then [secret.service.Service.getSync] will be called to get
-      the default `classService` proxy.
+      the default [secret.service.Service] proxy.
       
       This method may block indefinitely and should not be used in user
       interface threads. The secret service may prompt the user.

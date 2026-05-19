@@ -1,6 +1,7 @@
 /// Module for [Terminal] class
 module vte.terminal;
 
+public import gid.basictypes;
 import cairo.font_options;
 import gdk.cursor;
 import gdk.rectangle;

@@ -1,6 +1,7 @@
 /// Module for [BindingGroup] class
 module gobject.binding_group;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

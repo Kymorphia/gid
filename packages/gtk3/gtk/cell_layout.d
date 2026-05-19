@@ -1,6 +1,7 @@
 /// Module for [CellLayout] interface
 module gtk.cell_layout;
 
+public import gid.basictypes;
 public import gtk.cell_layout_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [PropertyExpression] class
 module gtk.property_expression;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.param_spec;
 import gobject.types;

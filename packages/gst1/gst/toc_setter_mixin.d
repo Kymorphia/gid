@@ -1,6 +1,7 @@
 /// Module for [TocSetter] interface mixin
 module gst.toc_setter_mixin;
 
+public import gid.basictypes;
 public import gst.toc_setter_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

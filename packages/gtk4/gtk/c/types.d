@@ -114,7 +114,7 @@ enum GtkAccessiblePlatformState
 }
 
 /**
-    The possible accessible properties of a `iface@Accessible`.
+    The possible accessible properties of a [gtk.accessible.Accessible].
 */
 enum GtkAccessibleProperty
 {
@@ -122,7 +122,7 @@ enum GtkAccessibleProperty
       Indicates whether inputting text
          could trigger display of one or more predictions of the user's intended
          value for a combobox, searchbox, or textbox and specifies how predictions
-         would be presented if they were made. Value type: `enum@AccessibleAutocomplete`
+         would be presented if they were made. Value type: [gtk.types.AccessibleAutocomplete]
   */
   Autocomplete = 0,
 
@@ -180,7 +180,7 @@ enum GtkAccessibleProperty
   /**
       Indicates whether the element's
          orientation is horizontal, vertical, or unknown/ambiguous. Value type:
-         `enum@Orientation`
+         [gtk.types.Orientation]
   */
   Orientation = 9,
 
@@ -212,7 +212,7 @@ enum GtkAccessibleProperty
 
   /**
       Indicates if items in a table or grid are
-         sorted in ascending or descending order. Value type: `enum@AccessibleSort`
+         sorted in ascending or descending order. Value type: [gtk.types.AccessibleSort]
   */
   Sort = 14,
 
@@ -242,7 +242,7 @@ enum GtkAccessibleProperty
 }
 
 /**
-    The possible accessible relations of a `iface@Accessible`.
+    The possible accessible relations of a [gtk.accessible.Accessible].
     
     Accessible relations can be references to other widgets,
     integers or strings.
@@ -366,7 +366,7 @@ enum GtkAccessibleRelation
 }
 
 /**
-    The accessible role for a `iface@Accessible` implementation.
+    The accessible role for a [gtk.accessible.Accessible] implementation.
     
     Abstract roles are only used as part of the ontology; application
     developers must not use abstract roles in their code.
@@ -856,7 +856,7 @@ enum GtkAccessibleSort
 }
 
 /**
-    The possible accessible states of a `iface@Accessible`.
+    The possible accessible states of a [gtk.accessible.Accessible].
 */
 enum GtkAccessibleState
 {
@@ -867,27 +867,27 @@ enum GtkAccessibleState
 
   /**
       A “checked” state; indicates the current
-        state of a `class@CheckButton`. Value type: `enum@AccessibleTristate`
+        state of a [gtk.check_button.CheckButton]. Value type: [gtk.types.AccessibleTristate]
   */
   Checked = 1,
 
   /**
       A “disabled” state; corresponds to the
-        `property@Widget:sensitive` property. It indicates a UI element
+        [gtk.widget.Widget.sensitive] property. It indicates a UI element
         that is perceivable, but not editable or operable. Value type: boolean
   */
   Disabled = 2,
 
   /**
       An “expanded” state; corresponds to the
-        `property@Expander:expanded` property. Value type: boolean
+        [gtk.expander.Expander.expanded] property. Value type: boolean
         or undefined
   */
   Expanded = 3,
 
   /**
       A “hidden” state; corresponds to the
-        `property@Widget:visible` property. You can use this state
+        [gtk.widget.Widget.visible] property. You can use this state
         explicitly on UI elements that should not be exposed to an assistive
         technology. Value type: boolean
         See also: [gtk.types.AccessibleState.Disabled]
@@ -896,13 +896,13 @@ enum GtkAccessibleState
 
   /**
       An “invalid” state; set when a widget
-        is showing an error. Value type: `enum@AccessibleInvalidState`
+        is showing an error. Value type: [gtk.types.AccessibleInvalidState]
   */
   Invalid = 5,
 
   /**
       A “pressed” state; indicates the current
-        state of a `class@ToggleButton`. Value type: `enum@AccessibleTristate`
+        state of a [gtk.toggle_button.ToggleButton]. Value type: [gtk.types.AccessibleTristate]
         enumeration
   */
   Pressed = 6,
@@ -1010,7 +1010,7 @@ enum GtkAccessibleTristate
     
     Alignment only matters if the widget receives a “too large” allocation,
     for example if you packed the widget with the [gtk.widget.Widget.hexpand]
-    property inside a `class@Box`, then the widget might get extra space.
+    property inside a [gtk.box.Box], then the widget might get extra space.
     If you have for example a 16x16 icon inside a 32x32 space, the icon
     could be scaled and stretched, it could be centered, or it could be
     positioned to one side of the space.
@@ -1418,7 +1418,7 @@ enum GtkButtonsType
 }
 
 /**
-    The available modes for `property@Gtk.CellRendererAccel:accel-mode`.
+    The available modes for [gtk.cell_renderer_accel.CellRendererAccel.accelMode].
 */
 enum GtkCellRendererAccelMode
 {
@@ -1525,7 +1525,7 @@ enum GtkCollation
 }
 
 /**
-    The widget attributes that can be used when creating a `class@Constraint`.
+    The widget attributes that can be used when creating a [gtk.constraint.Constraint].
 */
 enum GtkConstraintAttribute
 {
@@ -1623,7 +1623,7 @@ enum GtkConstraintRelation
 /**
     The strength of a constraint, expressed as a symbolic constant.
     
-    The strength of a `class@Constraint` can be expressed with any positive
+    The strength of a [gtk.constraint.Constraint] can be expressed with any positive
     integer; the values of this enumeration can be used for readability.
 */
 enum GtkConstraintStrength
@@ -2068,12 +2068,12 @@ enum GtkEditableProperties
   PropText = 0,
 
   /**
-      the property id for `property@Gtk.Editable:cursor-position`
+      the property id for [gtk.editable.Editable.cursorPosition]
   */
   PropCursorPosition = 1,
 
   /**
-      the property id for `property@Gtk.Editable:selection-bound`
+      the property id for [gtk.editable.Editable.selectionBound]
   */
   PropSelectionBound = 2,
 
@@ -2083,12 +2083,12 @@ enum GtkEditableProperties
   PropEditable = 3,
 
   /**
-      the property id for `property@Gtk.Editable:width-chars`
+      the property id for [gtk.editable.Editable.widthChars]
   */
   PropWidthChars = 4,
 
   /**
-      the property id for `property@Gtk.Editable:max-width-chars`
+      the property id for [gtk.editable.Editable.maxWidthChars]
   */
   PropMaxWidthChars = 5,
 
@@ -2098,7 +2098,7 @@ enum GtkEditableProperties
   PropXalign = 6,
 
   /**
-      the property id for `property@Gtk.Editable:enable-undo`
+      the property id for [gtk.editable.Editable.enableUndo]
   */
   PropEnableUndo = 7,
 
@@ -2161,7 +2161,7 @@ enum GtkEventControllerScrollFlags : uint
 }
 
 /**
-    Describes the state of a [gdk.event_sequence.EventSequence] in a `class@Gesture`.
+    Describes the state of a [gdk.event_sequence.EventSequence] in a [gtk.gesture.Gesture].
 */
 enum GtkEventSequenceState
 {
@@ -2520,7 +2520,7 @@ enum GtkImageType
     or applications.
     
     Note that input methods may already tailor their behaviour according
-    to the `enum@InputPurpose` of the entry.
+    to the [gtk.types.InputPurpose] of the entry.
     
     Some common sense is expected when using these flags - mixing
     [gtk.types.InputHints.Lowercase] with any of the uppercase hints makes no sense.
@@ -2707,7 +2707,7 @@ enum GtkInscriptionOverflow
 }
 
 /**
-    Used for justifying the text inside a `class@Label` widget.
+    Used for justifying the text inside a [gtk.label.Label] widget.
 */
 enum GtkJustification
 {
@@ -2733,7 +2733,7 @@ enum GtkJustification
 }
 
 /**
-    Describes how `class@LevelBar` contents should be rendered.
+    Describes how [gtk.level_bar.LevelBar] contents should be rendered.
     
     Note that this enumeration could be extended with additional modes
     in the future.
@@ -2908,7 +2908,7 @@ enum GtkListTabBehavior
 }
 
 /**
-    The type of message being displayed in a `class@MessageDialog`.
+    The type of message being displayed in a [gtk.message_dialog.MessageDialog].
 */
 enum GtkMessageType
 {
@@ -2999,7 +2999,7 @@ enum GtkMovementStep
     Options for selecting a different wrap mode for natural size
     requests.
     
-    See for example the `property@Gtk.Label:natural-wrap-mode` property.
+    See for example the [gtk.label.Label.naturalWrapMode] property.
 */
 enum GtkNaturalWrapMode
 {
@@ -3116,7 +3116,7 @@ enum GtkOrdering
 /**
     Represents the orientation of widgets and other objects.
     
-    Typical examples are `class@Box` or `class@GesturePan`.
+    Typical examples are [gtk.box.Box] or [gtk.gesture_pan.GesturePan].
 */
 enum GtkOrientation
 {
@@ -3156,7 +3156,7 @@ enum GtkOverflow
 /**
     Represents the packing location of a children in its parent.
     
-    See `class@WindowControls` for example.
+    See [gtk.window_controls.WindowControls] for example.
 */
 enum GtkPackType
 {
@@ -3240,7 +3240,7 @@ enum GtkPageSet
 }
 
 /**
-    Describes the panning direction of a `class@GesturePan`.
+    Describes the panning direction of a [gtk.gesture_pan.GesturePan].
 */
 enum GtkPanDirection
 {
@@ -3281,7 +3281,7 @@ enum GtkPickFlags : uint
   Insensitive = 1,
 
   /**
-      Include widgets that are marked as non-targetable. See `property@Widget:can-target`
+      Include widgets that are marked as non-targetable. See [gtk.widget.Widget.canTarget]
   */
   NonTargetable = 2,
 }
@@ -3339,8 +3339,8 @@ enum GtkPopoverMenuFlags : uint
 /**
     Describes which edge of a widget a certain feature is positioned at.
     
-    For examples, see the tabs of a `class@Notebook`, or the label
-    of a `class@Scale`.
+    For examples, see the tabs of a [gtk.notebook.Notebook], or the label
+    of a [gtk.scale.Scale].
 */
 enum GtkPositionType
 {
@@ -3649,7 +3649,7 @@ enum GtkPrintStatus
 }
 
 /**
-    Describes limits of a `class@EventController` for handling events
+    Describes limits of a [gtk.event_controller.EventController] for handling events
     targeting other widgets.
 */
 enum GtkPropagationLimit
@@ -3662,14 +3662,14 @@ enum GtkPropagationLimit
 
   /**
       Events are only handled if their target
-        is in the same `iface@Native` as the event controllers widget. Note
+        is in the same [gtk.native.Native] as the event controllers widget. Note
         that some event types have two targets (origin and destination).
   */
   SameNative = 1,
 }
 
 /**
-    Describes the stage at which events are fed into a `class@EventController`.
+    Describes the stage at which events are fed into a [gtk.event_controller.EventController].
 */
 enum GtkPropagationPhase
 {
@@ -4081,8 +4081,8 @@ enum GtkShortcutActionFlags : uint
 }
 
 /**
-    Describes where `class@Shortcut`s added to a
-    `class@ShortcutController` get handled.
+    Describes where [gtk.shortcut.Shortcut]s added to a
+    [gtk.shortcut_controller.ShortcutController] get handled.
 */
 enum GtkShortcutScope
 {
@@ -4094,7 +4094,7 @@ enum GtkShortcutScope
 
   /**
       Shortcuts are handled by
-        the first ancestor that is a `iface@ShortcutManager`
+        the first ancestor that is a [gtk.shortcut_manager.ShortcutManager]
   */
   Managed = 1,
 
@@ -4654,30 +4654,30 @@ enum GtkSymbolicColor
     The values indicate which system setting has changed.
     Widgets may need to drop caches, or react otherwise.
     
-    Most of the values correspond to `class@Settings` properties.
+    Most of the values correspond to [gtk.settings.Settings] properties.
     
     More values may be added over time.
 */
 enum GtkSystemSetting
 {
   /**
-      the `property@Gtk.Settings:gtk-xft-dpi` setting has changed
+      the [gtk.settings.Settings.gtkXftDpi] setting has changed
   */
   Dpi = 0,
 
   /**
-      The `property@Gtk.Settings:gtk-font-name` setting has changed
+      The [gtk.settings.Settings.gtkFontName] setting has changed
   */
   FontName = 1,
 
   /**
       The font configuration has changed in a way that
         requires text to be redrawn. This can be any of the
-        `property@Gtk.Settings:gtk-xft-antialias`,
-        `property@Gtk.Settings:gtk-xft-hinting`,
-        `property@Gtk.Settings:gtk-xft-hintstyle`,
-        `property@Gtk.Settings:gtk-xft-rgba` or
-        `property@Gtk.Settings:gtk-fontconfig-timestamp` settings
+        [gtk.settings.Settings.gtkXftAntialias],
+        [gtk.settings.Settings.gtkXftHinting],
+        [gtk.settings.Settings.gtkXftHintstyle],
+        [gtk.settings.Settings.gtkXftRgba] or
+        [gtk.settings.Settings.gtkFontconfigTimestamp] settings
   */
   FontConfig = 2,
 
@@ -4996,7 +4996,7 @@ struct GtkATContextClass;
     About dialogs often contain links and email addresses. [gtk.about_dialog.AboutDialog]
     displays these as clickable links. By default, it calls [gtk.file_launcher.FileLauncher.launch]
     when a user clicks one. The behaviour can be overridden with the
-    `signal@Gtk.AboutDialog::activate-link` signal.
+    [gtk.about_dialog.AboutDialog.activateLink] signal.
     
     To specify a person with an email address, use a string like
     `Edgar Allan Poe <edgar@poe.com>`. To specify a website with a title,
@@ -5237,8 +5237,8 @@ struct GtkActionBar;
     The [gtk.actionable.Actionable] interface provides a convenient way of associating
     widgets with actions.
     
-    It primarily consists of two properties: `property@Gtk.Actionable:action-name`
-    and `property@Gtk.Actionable:action-target`. There are also some convenience
+    It primarily consists of two properties: [gtk.actionable.Actionable.actionName]
+    and [gtk.actionable.Actionable.actionTarget]. There are also some convenience
     APIs for setting these properties.
     
     The action will be looked up in action groups that are found among
@@ -5407,19 +5407,19 @@ struct GtkAppChooser;
     
     Initially, a [gtk.app_chooser_button.AppChooserButton] selects the first application
     in its list, which will either be the most-recently used application
-    or, if `property@Gtk.AppChooserButton:show-default-item` is true, the
+    or, if [gtk.app_chooser_button.AppChooserButton.showDefaultItem] is true, the
     default application.
     
     The list of applications shown in a [gtk.app_chooser_button.AppChooserButton] includes
     the recommended applications for the given content type. When
-    `property@Gtk.AppChooserButton:show-default-item` is set, the default
+    [gtk.app_chooser_button.AppChooserButton.showDefaultItem] is set, the default
     application is also included. To let the user chooser other applications,
-    you can set the `property@Gtk.AppChooserButton:show-dialog-item` property,
+    you can set the [gtk.app_chooser_button.AppChooserButton.showDialogItem] property,
     which allows to open a full [gtk.app_chooser_dialog.AppChooserDialog].
     
     It is possible to add custom items to the list, using
     [gtk.app_chooser_button.AppChooserButton.appendCustomItem]. These items cause
-    the `signal@Gtk.AppChooserButton::custom-item-activated` signal to be
+    the [gtk.app_chooser_button.AppChooserButton.customItemActivated] signal to be
     emitted when they are selected.
     
     To track changes in the selected application, use the
@@ -5469,17 +5469,17 @@ struct GtkAppChooserDialog;
     
     [gtk.app_chooser_widget.AppChooserWidget] offers detailed control over what applications
     are shown, using the
-    `property@Gtk.AppChooserWidget:show-default`,
-    `property@Gtk.AppChooserWidget:show-recommended`,
-    `property@Gtk.AppChooserWidget:show-fallback`,
-    `property@Gtk.AppChooserWidget:show-other` and
-    `property@Gtk.AppChooserWidget:show-all` properties. See the
+    [gtk.app_chooser_widget.AppChooserWidget.showDefault],
+    [gtk.app_chooser_widget.AppChooserWidget.showRecommended],
+    [gtk.app_chooser_widget.AppChooserWidget.showFallback],
+    [gtk.app_chooser_widget.AppChooserWidget.showOther] and
+    [gtk.app_chooser_widget.AppChooserWidget.showAll] properties. See the
     [gtk.app_chooser.AppChooser] documentation for more information about these
     groups of applications.
     
     To keep track of the selected application, use the
-    `signal@Gtk.AppChooserWidget::application-selected` and
-    `signal@Gtk.AppChooserWidget::application-activated` signals.
+    [gtk.app_chooser_widget.AppChooserWidget.applicationSelected] and
+    [gtk.app_chooser_widget.AppChooserWidget.applicationActivated] signals.
     
     ## CSS nodes
     
@@ -5543,7 +5543,7 @@ struct GtkAppChooserWidget;
     is available in the GTK source code repository
     
     [gtk.application.Application] optionally registers with a session manager of the
-    users session (if you set the `property@Gtk.Application:register-session`
+    users session (if you set the [gtk.application.Application.registerSession]
     property) and offers various functionality related to the session
     life-cycle.
     
@@ -5609,8 +5609,8 @@ struct GtkApplicationClass
     can also activate these actions, if they implement the
     [gtk.actionable.Actionable] interface.
     
-    The settings `property@Gtk.Settings:gtk-shell-shows-app-menu` and
-    `property@Gtk.Settings:gtk-shell-shows-menubar` tell GTK whether the
+    The settings [gtk.settings.Settings.gtkShellShowsAppMenu] and
+    [gtk.settings.Settings.gtkShellShowsMenubar] tell GTK whether the
     desktop environment is showing the application menu and menubar
     models outside the application as part of the desktop shell.
     For instance, on OS X, both menus will be displayed remotely;
@@ -5619,7 +5619,7 @@ struct GtkApplicationClass
     If the desktop environment does not display the menubar, then
     [gtk.application_window.ApplicationWindow] will automatically show a menubar for it.
     This behaviour can be overridden with the
-    `property@Gtk.ApplicationWindow:show-menubar` property. If the
+    [gtk.application_window.ApplicationWindow.showMenubar] property. If the
     desktop environment does not display the application menu, then
     it will automatically be included in the menubar or in the windows
     client-side decorations.
@@ -6894,8 +6894,8 @@ struct GtkCallbackActionClass;
     API as they come in. Usually [gtk.cell_area.CellArea] is only interested in
     button events, however some customized derived areas can be implemented
     who are interested in handling other events. Handling an event can
-    trigger the `signal@Gtk.CellArea::focus-changed` signal to fire; as well
-    as `signal@Gtk.CellArea::add-editable` in the case that an editable cell
+    trigger the [gtk.cell_area.CellArea.focusChanged] signal to fire; as well
+    as [gtk.cell_area.CellArea.addEditable] in the case that an editable cell
     was clicked and needs to start editing. You can call
     [gtk.cell_area.CellArea.stopEditing] at any time to cancel any cell editing
     that is currently in progress.
@@ -8074,14 +8074,14 @@ struct GtkColorDialogClass
     each column, for each visible item and displays them together as the row for
     this item.
     
-    The `property@Gtk.ColumnView:show-row-separators` and
-    `property@Gtk.ColumnView:show-column-separators` properties offer a simple way
+    The [gtk.column_view.ColumnView.showRowSeparators] and
+    [gtk.column_view.ColumnView.showColumnSeparators] properties offer a simple way
     to display separators between the rows or columns.
     
     [gtk.column_view.ColumnView] allows the user to select items according to the selection
     characteristics of the model. For models that allow multiple selected items,
     it is possible to turn on *rubberband selection*, using
-    `property@Gtk.ColumnView:enable-rubberband`.
+    [gtk.column_view.ColumnView.enableRubberband].
     
     The column view supports sorting that can be customized by the user by
     clicking on column headers. To set this up, the [gtk.sorter.Sorter] returned by
@@ -8114,11 +8114,11 @@ struct GtkColorDialogClass
     ```
     
     [gtk.column_view.ColumnView] uses a single CSS node named columnview. It may carry the
-    .column-separators style class, when `property@Gtk.ColumnView:show-column-separators`
+    .column-separators style class, when [gtk.column_view.ColumnView.showColumnSeparators]
     property is set. Header widgets appear below a node with name header.
     The rows are contained in a [gtk.list_view.ListView] widget, so there is a listview
     node with the same structure as for a standalone [gtk.list_view.ListView] widget.
-    If `property@Gtk.ColumnView:show-row-separators` is set, it will be passed
+    If [gtk.column_view.ColumnView.showRowSeparators] is set, it will be passed
     on to the list view, causing its CSS node to carry the .separators style class.
     For rubberband selection, a node with name rubberband is used.
     
@@ -8205,8 +8205,8 @@ struct GtkColumnViewRowClass;
     
     If you are only interested in the primary sort column (i.e. the
     column where a sort indicator is shown in the header), then
-    you can just look at `property@Gtk.ColumnViewSorter:primary-sort-column`
-    and `property@Gtk.ColumnViewSorter:primary-sort-order`.
+    you can just look at [gtk.column_view_sorter.ColumnViewSorter.primarySortColumn]
+    and [gtk.column_view_sorter.ColumnViewSorter.primarySortOrder].
     
     If you want to store the full sort configuration, including
     secondary sort columns that are used for tie breaking, then
@@ -8252,7 +8252,7 @@ struct GtkColumnViewSorterClass
     popup will reflect the tree structure.
     
     To allow the user to enter values not in the model, the
-    `property@Gtk.ComboBox:has-entry` property allows the [gtk.combo_box.ComboBox] to
+    [gtk.combo_box.ComboBox.hasEntry] property allows the [gtk.combo_box.ComboBox] to
     contain a [gtk.entry.Entry]. This entry can be accessed by calling
     [gtk.combo_box.ComboBox.getChild] on the combo box.
     
@@ -8348,7 +8348,7 @@ struct GtkComboBoxClass
     [gtk.combo_box_text.ComboBoxText.remove].
     
     If the [gtk.combo_box_text.ComboBoxText] contains an entry (via the
-    `property@Gtk.ComboBox:has-entry` property), its contents can be retrieved
+    [gtk.combo_box.ComboBox.hasEntry] property), its contents can be retrieved
     using [gtk.combo_box_text.ComboBoxText.getActiveText].
     
     You should not call [gtk.combo_box.ComboBox.setModel] or attempt to pack more
@@ -8682,16 +8682,16 @@ struct GtkCssLocation
     `$XDG_DATA_DIRS/themes/THEME/gtk-VERSION/gtk-VARIANT.css` and
     `DATADIR/share/themes/THEME/gtk-VERSION/gtk-VARIANT.css`,
     where `THEME` is the name of the current theme (see the
-    `property@Gtk.Settings:gtk-theme-name` setting), `VARIANT` is the
+    [gtk.settings.Settings.gtkThemeName] setting), `VARIANT` is the
     variant to load (see the
-    `property@Gtk.Settings:gtk-application-prefer-dark-theme` setting),
+    [gtk.settings.Settings.gtkApplicationPreferDarkTheme] setting),
     `DATADIR` is the prefix configured when GTK was compiled (unless
     overridden by the `GTK_DATA_PREFIX` environment variable), and
     `VERSION` is the GTK version number. If no file is found for the
     current version, GTK tries older versions all the way back to 4.0.
     
     To track errors while loading CSS, connect to the
-    `signal@Gtk.CssProvider::parsing-error` signal.
+    [gtk.css_provider.CssProvider.parsingError] signal.
 */
 struct GtkCssProvider
 {
@@ -8993,7 +8993,7 @@ struct GtkDragIconClass
     Setting up the content provider and icon ahead of time only makes
     sense when the data does not change. More commonly, you will want
     to set them up just in time. To do so, [gtk.drag_source.DragSource] has
-    [gtk.drag_source.DragSource.prepare] and `signal@Gtk.DragSource::drag-begin`
+    [gtk.drag_source.DragSource.prepare] and [gtk.drag_source.DragSource.dragBegin]
     signals.
     
     The ::prepare signal is emitted before a drag is started, and
@@ -9041,7 +9041,7 @@ struct GtkDragIconClass
     but it is not normally necessary to connect to any signals,
     except for one case: when the supported actions include
     [gdk.types.DragAction.Move], you need to listen for the
-    `signal@Gtk.DragSource::drag-end` signal and delete the
+    [gtk.drag_source.DragSource.dragEnd] signal and delete the
     data after it has been transferred.
 */
 struct GtkDragSource;
@@ -9325,10 +9325,10 @@ struct GtkDropTarget;
     a compatible data format and an action that is supported on both sides.
     
     If it is, and the widget becomes a target, you will receive a
-    `signal@Gtk.DropTargetAsync::drag-enter` signal, followed by
-    `signal@Gtk.DropTargetAsync::drag-motion` signals as the pointer moves,
+    [gtk.drop_target_async.DropTargetAsync.dragEnter] signal, followed by
+    [gtk.drop_target_async.DropTargetAsync.dragMotion] signals as the pointer moves,
     optionally a [gtk.drop_target_async.DropTargetAsync.drop] signal when a drop happens,
-    and finally a `signal@Gtk.DropTargetAsync::drag-leave` signal when the
+    and finally a [gtk.drop_target_async.DropTargetAsync.dragLeave] signal when the
     pointer moves off the widget.
     
     The ::drag-enter and ::drag-motion handler return a [gdk.types.DragAction]
@@ -9359,7 +9359,7 @@ struct GtkDropTargetClass;
     of a widget.
     
     As an example of the latter usage, by connecting the following handler to
-    `signal@Gtk.Editable::insert-text`, an application can convert all entry
+    [gtk.editable.Editable.insertText], an application can convert all entry
     into a widget into uppercase.
     
     ## Forcing entry to uppercase.
@@ -9471,12 +9471,12 @@ struct GtkDropTargetClass;
     ```
     
     It is important to note that if you create a [gtk.editable.Editable] that uses
-    a delegate, the low level `signal@Gtk.Editable::insert-text` and
-    `signal@Gtk.Editable::delete-text` signals will be propagated from the
+    a delegate, the low level [gtk.editable.Editable.insertText] and
+    [gtk.editable.Editable.deleteText] signals will be propagated from the
     "wrapper" editable to the delegate, but they will not be propagated from
     the delegate to the "wrapper" editable, as they would cause an infinite
-    recursion. If you wish to connect to the `signal@Gtk.Editable::insert-text`
-    and `signal@Gtk.Editable::delete-text` signals, you will need to connect
+    recursion. If you wish to connect to the [gtk.editable.Editable.insertText]
+    and [gtk.editable.Editable.deleteText] signals, you will need to connect
     to them on the delegate obtained via [gtk.editable.Editable.getDelegate].
 */
 struct GtkEditable;
@@ -9560,7 +9560,7 @@ struct GtkEditableLabelClass
     
     ![An example GtkEmojiChooser](emojichooser.png)
     
-    [gtk.emoji_chooser.EmojiChooser] emits the `signal@Gtk.EmojiChooser::emoji-picked`
+    [gtk.emoji_chooser.EmojiChooser] emits the [gtk.emoji_chooser.EmojiChooser.emojiPicked]
     signal when an Emoji is selected.
     
     # CSS nodes
@@ -9615,7 +9615,7 @@ struct GtkEmojiChooserClass;
     and can have tooltips. To add an icon, use
     [gtk.entry.Entry.setIconFromGicon] or one of the various other functions
     that set an icon from an icon name or a paintable. To trigger an action when
-    the user clicks an icon, connect to the `signal@Gtk.Entry::icon-press` signal.
+    the user clicks an icon, connect to the [gtk.entry.Entry.iconPress] signal.
     To allow DND operations from an icon, use
     [gtk.entry.Entry.setIconDragSource]. To set a tooltip on an icon, use
     [gtk.entry.Entry.setIconTooltipText] or the corresponding function
@@ -9793,7 +9793,7 @@ struct GtkEntryClass
     When the user selects a completion, the content of the entry is
     updated. By default, the content of the entry is replaced by the
     text column of the model, but this can be overridden by connecting
-    to the `signal@Gtk.EntryCompletion::match-selected` signal and updating the
+    to the [gtk.entry_completion.EntryCompletion.matchSelected] signal and updating the
     entry in the signal handler. Note that you should return true from
     the signal handler to suppress the default behaviour.
     
@@ -9803,11 +9803,11 @@ struct GtkEntryClass
     [gtk.entry_completion.EntryCompletion] uses a [gtk.tree_model_filter.TreeModelFilter] model to
     represent the subset of the entire model that is currently matching.
     While the [gtk.entry_completion.EntryCompletion] signals
-    `signal@Gtk.EntryCompletion::match-selected` and
-    `signal@Gtk.EntryCompletion::cursor-on-match` take the original model
+    [gtk.entry_completion.EntryCompletion.matchSelected] and
+    [gtk.entry_completion.EntryCompletion.cursorOnMatch] take the original model
     and an iter pointing to that model as arguments, other callbacks and
     signals (such as [gtk.types.CellLayoutDataFunc] or
-    `signal@Gtk.CellArea::apply-attributes)`
+    [gtk.cell_area.CellArea.applyAttributes]
     will generally take the filter model as argument. As long as you are
     only calling [gtk.tree_model.TreeModel.get], this will make no difference to
     you. If for some reason, you need the original model, use
@@ -9842,8 +9842,8 @@ struct GtkEventControllerClass;
     
     The event controller offers [gtk.event_controller_focus.EventControllerFocus.enter]
     and [gtk.event_controller_focus.EventControllerFocus.leave] signals, as well as
-    `property@Gtk.EventControllerFocus:is-focus` and
-    `property@Gtk.EventControllerFocus:contains-focus` properties
+    [gtk.event_controller_focus.EventControllerFocus.isFocus] and
+    [gtk.event_controller_focus.EventControllerFocus.containsFocus] properties
     which are updated to reflect focus changes inside the widget hierarchy
     that is rooted at the controllers widget.
 */
@@ -9879,8 +9879,8 @@ struct GtkEventControllerLegacyClass;
     
     The event controller offers [gtk.event_controller_motion.EventControllerMotion.enter]
     and [gtk.event_controller_motion.EventControllerMotion.leave] signals, as well as
-    `property@Gtk.EventControllerMotion:is-pointer` and
-    `property@Gtk.EventControllerMotion:contains-pointer` properties
+    [gtk.event_controller_motion.EventControllerMotion.isPointer] and
+    [gtk.event_controller_motion.EventControllerMotion.containsPointer] properties
     which are updated to reflect changes in the pointer position as it
     moves over the widget.
 */
@@ -9900,8 +9900,8 @@ struct GtkEventControllerMotionClass;
     
     In the case of continuous scroll events, [gtk.event_controller_scroll.EventControllerScroll]
     encloses all [gtk.event_controller_scroll.EventControllerScroll.scroll] emissions
-    between two [gtk.event_controller_scroll.EventControllerScroll.scroll] and
-    [gtk.event_controller_scroll.EventControllerScroll.scroll] signals.
+    between two [gtk.event_controller_scroll.EventControllerScroll.scrollBegin] and
+    [gtk.event_controller_scroll.EventControllerScroll.scrollEnd] signals.
     
     The behavior of the event controller can be modified by the flags
     given at creation time, or modified at a later point through
@@ -11311,7 +11311,7 @@ struct GtkFrameClass
     ```
     
     If you need to change the options for creating the [gdk.glcontext.GLContext]
-    you should use the `signal@Gtk.GLArea::create-context` signal.
+    you should use the [gtk.glarea.GLArea.createContext] signal.
 */
 struct GtkGLArea
 {
@@ -11355,7 +11355,7 @@ struct GtkGLAreaClass
     value for these).
     
     The number of touches that a [gtk.gesture.Gesture] need to be recognized is
-    controlled by the `property@Gtk.Gesture:n-points` property, if a
+    controlled by the [gtk.gesture.Gesture.nPoints] property, if a
     gesture is keeping track of less or more than that number of sequences,
     it won't check whether the gesture is recognized.
     
@@ -11460,9 +11460,9 @@ struct GtkGestureClickClass;
     [gtk.gesture_drag.GestureDrag] is a [gtk.gesture.Gesture] implementation for drags.
     
     The drag operation itself can be tracked throughout the
-    `signal@Gtk.GestureDrag::drag-begin`,
-    `signal@Gtk.GestureDrag::drag-update` and
-    `signal@Gtk.GestureDrag::drag-end` signals, and the relevant
+    [gtk.gesture_drag.GestureDrag.dragBegin],
+    [gtk.gesture_drag.GestureDrag.dragUpdate] and
+    [gtk.gesture_drag.GestureDrag.dragEnd] signals, and the relevant
     coordinates can be extracted through
     [gtk.gesture_drag.GestureDrag.getOffset] and
     [gtk.gesture_drag.GestureDrag.getStartPoint].
@@ -11485,8 +11485,8 @@ struct GtkGestureDragClass;
     [gtk.gesture_long_press.GestureLongPress.cancelled] signal will be emitted.
     
     How long the timeout is before the ::pressed signal gets emitted is
-    determined by the `property@Gtk.Settings:gtk-long-press-time` setting.
-    It can be modified by the `property@Gtk.GestureLongPress:delay-factor`
+    determined by the [gtk.settings.Settings.gtkLongPressTime] setting.
+    It can be modified by the [gtk.gesture_long_press.GestureLongPress.delayFactor]
     property.
 */
 struct GtkGestureLongPress;
@@ -11519,7 +11519,7 @@ struct GtkGesturePanClass;
     [gtk.gesture_rotate.GestureRotate] is a [gtk.gesture.Gesture] for 2-finger rotations.
     
     Whenever the angle between both handled sequences changes, the
-    `signal@Gtk.GestureRotate::angle-changed` signal is emitted.
+    [gtk.gesture_rotate.GestureRotate.angleChanged] signal is emitted.
 */
 struct GtkGestureRotate;
 
@@ -11581,7 +11581,7 @@ struct GtkGestureSwipeClass;
     [gtk.gesture_zoom.GestureZoom] is a [gtk.gesture.Gesture] for 2-finger pinch/zoom gestures.
     
     Whenever the distance between both tracked sequences changes, the
-    `signal@Gtk.GestureZoom::scale-changed` signal is emitted to report
+    [gtk.gesture_zoom.GestureZoom.scaleChanged] signal is emitted to report
     the scale factor.
 */
 struct GtkGestureZoom;
@@ -11787,7 +11787,7 @@ struct GtkGridLayoutClass
     [gtk.grid_view.GridView] allows the user to select items according to the selection
     characteristics of the model. For models that allow multiple selected items,
     it is possible to turn on _rubberband selection_, using
-    `property@Gtk.GridView:enable-rubberband`.
+    [gtk.grid_view.GridView.enableRubberband].
     
     To learn more about the list widget framework, see the
     [overview](section-list-widget.html).
@@ -11904,8 +11904,8 @@ struct GtkHeaderBar;
     outputting the composed result. This is called *preediting*, and an input
     method may provide feedback about this process by displaying the intermediate
     composition states as preedit text. To do so, the [gtk.imcontext.IMContext] will emit
-    `signal@Gtk.IMContext::preedit-start`, `signal@Gtk.IMContext::preedit-changed`
-    and `signal@Gtk.IMContext::preedit-end` signals.
+    [gtk.imcontext.IMContext.preeditStart], [gtk.imcontext.IMContext.preeditChanged]
+    and [gtk.imcontext.IMContext.preeditEnd] signals.
     
     For instance, the built-in GTK input method [gtk.imcontext_simple.IMContextSimple]
     implements the input of arbitrary Unicode code points by holding down the
@@ -11938,17 +11938,17 @@ struct GtkIMContextClass
   GObjectClass parentClass;
 
   /**
-      Default handler of the `signal@Gtk.IMContext::preedit-start` signal.
+      Default handler of the [gtk.imcontext.IMContext.preeditStart] signal.
   */
   extern(C) void function(GtkIMContext* context) preeditStart;
 
   /**
-      Default handler of the `signal@Gtk.IMContext::preedit-end` signal.
+      Default handler of the [gtk.imcontext.IMContext.preeditEnd] signal.
   */
   extern(C) void function(GtkIMContext* context) preeditEnd;
 
   /**
-      Default handler of the `signal@Gtk.IMContext::preedit-changed`
+      Default handler of the [gtk.imcontext.IMContext.preeditChanged]
         signal.
   */
   extern(C) void function(GtkIMContext* context) preeditChanged;
@@ -11960,13 +11960,13 @@ struct GtkIMContextClass
 
   /**
       Default handler of the
-        `signal@Gtk.IMContext::retrieve-surrounding` signal.
+        [gtk.imcontext.IMContext.retrieveSurrounding] signal.
   */
   extern(C) gboolean function(GtkIMContext* context) retrieveSurrounding;
 
   /**
       Default handler of the
-        `signal@Gtk.IMContext::delete-surrounding` signal.
+        [gtk.imcontext.IMContext.deleteSurrounding] signal.
   */
   extern(C) gboolean function(GtkIMContext* context, int offset, int nChars) deleteSurrounding;
 
@@ -12037,7 +12037,7 @@ struct GtkIMContextClass
 
   /**
       Called via [gtk.imcontext.IMContext.setSurrounding] in
-        response to `signal@Gtk.IMContext::retrieve-surrounding` signal to update
+        response to [gtk.imcontext.IMContext.retrieveSurrounding] signal to update
         the input method’s idea of the context around the cursor. It is not necessary
         to override this method even with input methods which implement
         context-dependent behavior. The base implementation is sufficient for
@@ -12049,7 +12049,7 @@ struct GtkIMContextClass
       Called via [gtk.imcontext.IMContext.getSurrounding] to update
         the context around the cursor location. It is not necessary to override this
         method even with input methods which implement context-dependent behavior.
-        The base implementation emits `signal@Gtk.IMContext::retrieve-surrounding`
+        The base implementation emits [gtk.imcontext.IMContext.retrieveSurrounding]
         and records the context received by the subsequent invocation of
         `vfunc@Gtk.IMContext.get_surrounding`.
   */
@@ -12058,7 +12058,7 @@ struct GtkIMContextClass
   /**
       Called via
         [gtk.imcontext.IMContext.setSurroundingWithSelection] in response to the
-        `signal@Gtk.IMContext::retrieve-surrounding` signal to update the input
+        [gtk.imcontext.IMContext.retrieveSurrounding] signal to update the input
         method’s idea of the context around the cursor. It is not necessary to
         override this method even with input methods which implement
         context-dependent behavior. The base implementation is sufficient for
@@ -12072,7 +12072,7 @@ struct GtkIMContextClass
         context around the cursor location. It is not necessary to override
         this method even with input methods which implement context-dependent
         behavior. The base implementation emits
-        `signal@Gtk.IMContext::retrieve-surrounding` and records the context
+        [gtk.imcontext.IMContext.retrieveSurrounding] and records the context
         received by the subsequent invocation of `vfunc@Gtk.IMContext.get_surrounding`.
   */
   extern(C) gboolean function(GtkIMContext* context, char** text, int* cursorIndex, int* anchorIndex) getSurroundingWithSelection;
@@ -12298,7 +12298,7 @@ struct GtkIconView;
     
     [gtk.image.Image] has a single CSS node with the name `image`. The style classes
     `.normal-icons` or `.large-icons` may appear, depending on the
-    `property@Gtk.Image:icon-size` property.
+    [gtk.image.Image.iconSize] property.
     
     ## Accessibility
     
@@ -12423,7 +12423,7 @@ struct GtkKeyvalTriggerClass;
     The [gtk.label.Label] widget displays a small amount of text.
     
     As the name implies, most labels are used to label another widget
-    such as a `class@Button`.
+    such as a [gtk.button.Button].
     
     ![An example GtkLabel](label.png)
     
@@ -12569,7 +12569,7 @@ struct GtkKeyvalTriggerClass;
     in its available space, see the [gtk.widget.Widget.halign] and
     [gtk.widget.Widget.valign] properties.
     
-    The `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+    The [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
     properties can be used to control the size allocation of ellipsized or
     wrapped labels. For ellipsizing labels, if either is specified (and less
     than the actual text size), it is used as the minimum width, and the actual
@@ -12599,7 +12599,7 @@ struct GtkKeyvalTriggerClass;
     ```
     
     It is possible to implement custom handling for links and their tooltips
-    with the `signal@Gtk.Label::activate-link` signal and the
+    with the [gtk.label.Label.activateLink] signal and the
     [gtk.label.Label.getCurrentUri] function.
 */
 struct GtkLabel;
@@ -12665,8 +12665,8 @@ struct GtkLayoutChildClass
     }
     ```
     
-    The `property@Gtk.LayoutChild:layout-manager` and
-    `property@Gtk.LayoutChild:child-widget` properties
+    The [gtk.layout_child.LayoutChild.layoutManager] and
+    [gtk.layout_child.LayoutChild.childWidget] properties
     on the newly created [gtk.layout_child.LayoutChild] instance are mandatory. The
     [gtk.layout_manager.LayoutManager] will cache the newly created [gtk.layout_child.LayoutChild] instance
     until the widget is removed from its parent, or the parent removes the
@@ -12857,7 +12857,7 @@ struct GtkLevelBar;
     
     By default, [gtk.link_button.LinkButton] calls [gtk.file_launcher.FileLauncher.launch] when the button
     is clicked. This behaviour can be overridden by connecting to the
-    `signal@Gtk.LinkButton::activate-link` signal and returning true from
+    [gtk.link_button.LinkButton.activateLink] signal and returning true from
     the signal handler.
     
     # CSS nodes
@@ -12899,7 +12899,7 @@ struct GtkListBaseClass;
     and the widget.
     
     `GtkListBoxRows` can be marked as activatable or selectable. If a row is
-    activatable, `signal@Gtk.ListBox::row-activated` will be emitted for it when
+    activatable, [gtk.list_box.ListBox.rowActivated] will be emitted for it when
     the user tries to activate it. If it is selectable, the row will be marked
     as selected when the user tries to select it.
     
@@ -12918,7 +12918,7 @@ struct GtkListBaseClass;
     ```
     
     [gtk.list_box.ListBox] uses a single CSS node named list. It may carry the .separators
-    style class, when the `property@Gtk.ListBox:show-separators` property is set.
+    style class, when the [gtk.list_box.ListBox.showSeparators] property is set.
     Each [gtk.list_box_row.ListBoxRow] uses a single CSS node named row. The row nodes get the
     .activatable style class added when appropriate.
     
@@ -13225,13 +13225,13 @@ struct GtkListStorePrivate;
     [gtk.list_view.ListView] uses its factory to generate one row widget for each visible
     item and shows them in a linear display, either vertically or horizontally.
     
-    The `property@Gtk.ListView:show-separators` property offers a simple way to
+    The [gtk.list_view.ListView.showSeparators] property offers a simple way to
     display separators between the rows.
     
     [gtk.list_view.ListView] allows the user to select items according to the selection
     characteristics of the model. For models that allow multiple selected items,
     it is possible to turn on _rubberband selection_, using
-    `property@Gtk.ListView:enable-rubberband`.
+    [gtk.list_view.ListView.enableRubberband].
     
     If you need multiple columns with headers, see [gtk.column_view.ColumnView].
     
@@ -13303,7 +13303,7 @@ struct GtkListStorePrivate;
     ```
     
     [gtk.list_view.ListView] uses a single CSS node named `listview`. It may carry the
-    `.separators` style class, when `property@Gtk.ListView:show-separators`
+    `.separators` style class, when [gtk.list_view.ListView.showSeparators]
     property is set. Each child widget uses a single CSS node named `row`.
     If the [gtk.list_item.ListItem.activatable] property is set, the
     corresponding row will have the `.activatable` style class. For
@@ -13356,11 +13356,11 @@ struct GtkListViewClass;
     If the user has the permission and cannot drop it, the button is hidden.
     
     The text (and tooltips) that are shown in the various cases can be adjusted
-    with the `property@Gtk.LockButton:text-lock`,
-    `property@Gtk.LockButton:text-unlock`,
-    `property@Gtk.LockButton:tooltip-lock`,
-    `property@Gtk.LockButton:tooltip-unlock` and
-    `property@Gtk.LockButton:tooltip-not-authorized` properties.
+    with the [gtk.lock_button.LockButton.textLock],
+    [gtk.lock_button.LockButton.textUnlock],
+    [gtk.lock_button.LockButton.tooltipLock],
+    [gtk.lock_button.LockButton.tooltipUnlock] and
+    [gtk.lock_button.LockButton.tooltipNotAuthorized] properties.
 
     Deprecated: This widget will be removed in GTK 5
 */
@@ -13546,7 +13546,7 @@ struct GtkMediaStreamClass
     [gio.menu_model.MenuModel].
     
     The [gtk.menu_button.MenuButton] widget can show either an icon (set with the
-    `property@Gtk.MenuButton:icon-name` property) or a label (set with the
+    [gtk.menu_button.MenuButton.iconName] property) or a label (set with the
     [gtk.menu_button.MenuButton.label] property). If neither is explicitly set,
     a [gtk.image.Image] is automatically created, using an arrow image oriented
     according to [gtk.menu_button.MenuButton.direction] or the generic
@@ -14056,7 +14056,7 @@ struct GtkOrientableIface
     properties of the child to non-zero values.
     
     More complicated placement of overlays is possible by connecting
-    to the `signal@Gtk.Overlay::get-child-position` signal.
+    to the [gtk.overlay.Overlay.getChildPosition] signal.
     
     An overlay’s minimum and natural sizes are those of its main child.
     The sizes of overlay children are not considered when measuring these
@@ -14454,8 +14454,8 @@ struct GtkPasswordEntryClass;
     ## Sizing the paintable
     
     You can influence how the paintable is displayed inside the [gtk.picture.Picture]
-    by changing `property@Gtk.Picture:content-fit`. See [gtk.types.ContentFit]
-    for details. `property@Gtk.Picture:can-shrink` can be unset to make sure
+    by changing [gtk.picture.Picture.contentFit]. See [gtk.types.ContentFit]
+    for details. [gtk.picture.Picture.canShrink] can be unset to make sure
     that paintables are never made smaller than their ideal size - but
     be careful if you do not know the size of the paintable in use (like
     when displaying user-loaded images). This can easily cause the picture to
@@ -14740,10 +14740,10 @@ struct GtkPrintBackend;
     [pango.context.Context] objects that match the font metrics of the cairo surface.
     
     [gtk.print_context.PrintContext] objects get passed to the
-    `signal@Gtk.PrintOperation::begin-print`,
-    `signal@Gtk.PrintOperation::end-print`,
-    `signal@Gtk.PrintOperation::request-page-setup` and
-    `signal@Gtk.PrintOperation::draw-page` signals on the
+    [gtk.print_operation.PrintOperation.beginPrint],
+    [gtk.print_operation.PrintOperation.endPrint],
+    [gtk.print_operation.PrintOperation.requestPageSetup] and
+    [gtk.print_operation.PrintOperation.drawPage] signals on the
     [gtk.print_operation.PrintOperation] object.
     
     ## Using GtkPrintContext in a ::draw-page callback
@@ -14857,7 +14857,7 @@ struct GtkPrintJob;
     It will then show a dialog, let the user select a printer and options.
     When the user finished the dialog, various signals will be emitted on
     the [gtk.print_operation.PrintOperation], the main one being
-    `signal@Gtk.PrintOperation::draw-page`, which you are supposed to handle
+    [gtk.print_operation.PrintOperation.drawPage], which you are supposed to handle
     and render the page on the provided [gtk.print_context.PrintContext] using Cairo.
     
     # The high-level printing API
@@ -15354,7 +15354,7 @@ struct GtkRecentInfo;
     [gtk.recent_info.RecentInfo].
     
     Note that the maximum age of the recently used files list is
-    controllable through the `property@Gtk.Settings:gtk-recent-files-max-age`
+    controllable through the [gtk.settings.Settings.gtkRecentFilesMaxAge]
     property.
 */
 struct GtkRecentManager
@@ -15440,7 +15440,7 @@ struct GtkRequisition
     The style of transition can be controlled with
     [gtk.revealer.Revealer.setTransitionType].
     
-    These animations respect the `property@Gtk.Settings:gtk-enable-animations`
+    These animations respect the [gtk.settings.Settings.gtkEnableAnimations]
     setting.
     
     # CSS nodes
@@ -15448,7 +15448,7 @@ struct GtkRequisition
     [gtk.revealer.Revealer] has a single CSS node with name revealer.
     When styling [gtk.revealer.Revealer] using CSS, remember that it only hides its contents,
     not itself. That means applied margin, padding and borders will be visible even
-    when the `property@Gtk.Revealer:reveal-child` property is set to false.
+    when the [gtk.revealer.Revealer.revealChild] property is set to false.
     
     # Accessibility
     
@@ -15488,7 +15488,7 @@ struct GtkRootInterface;
     class, [gtk.range.Range], in addition to the methods for [gtk.scale.Scale] itself.
     To set the value of a scale, you would normally use [gtk.range.Range.setValue].
     To detect changes to the value, you would normally use the
-    `signal@Gtk.Range::value-changed` signal.
+    [gtk.range.Range.valueChanged] signal.
     
     Note that using the same upper and lower bounds for the [gtk.scale.Scale] (through
     the [gtk.range.Range] methods) will hide the slider itself. This is useful for
@@ -15553,7 +15553,7 @@ struct GtkRootInterface;
     The main CSS node gets the 'marks-before' and/or 'marks-after' style classes
     added depending on what marks are present.
     
-    If the scale is displaying the value (see `property@Gtk.Scale:draw-value`),
+    If the scale is displaying the value (see [gtk.scale.Scale.drawValue]),
     there is subnode with name value. This node will get the .top or .bottom style
     classes similar to the marks node.
     
@@ -15638,7 +15638,7 @@ struct GtkScrollInfo;
     All scrollable widgets should do the following.
     
     - When a parent widget sets the scrollable child widget’s adjustments,
-      the widget should connect to the `signal@Gtk.Adjustment::value-changed`
+      the widget should connect to the [gtk.adjustment.Adjustment.valueChanged]
       signal. The child widget should then populate the adjustments’ properties
       as soon as possible, which usually means queueing an allocation right away
       and populating the properties in the `vfunc@Gtk.Widget.size_allocate`
@@ -15653,7 +15653,7 @@ struct GtkScrollInfo;
       the widget must ensure the adjustments’ property values are correct and up
       to date, for example using [gtk.adjustment.Adjustment.configure].
     
-    - When any of the adjustments emits the `signal@Gtk.Adjustment::value-changed`
+    - When any of the adjustments emits the [gtk.adjustment.Adjustment.valueChanged]
       signal, the scrollable widget should scroll its contents.
 */
 struct GtkScrollable;
@@ -15677,12 +15677,12 @@ struct GtkScrollableInterface
     or created by [gtk.scrollbar.Scrollbar.new_]. See [gtk.adjustment.Adjustment] for more
     details. The [gtk.adjustment.Adjustment.value] field sets the position of the
     thumb and must be between [gtk.adjustment.Adjustment.lower] and
-    [gtk.adjustment.Adjustment.upper] - `property@Gtk.Adjustment:page-size`.
-    The `property@Gtk.Adjustment:page-size` represents the size of the visible
+    [gtk.adjustment.Adjustment.upper] - [gtk.adjustment.Adjustment.pageSize].
+    The [gtk.adjustment.Adjustment.pageSize] represents the size of the visible
     scrollable area.
     
-    The fields `property@Gtk.Adjustment:step-increment` and
-    `property@Gtk.Adjustment:page-increment` fields are added to or subtracted
+    The fields [gtk.adjustment.Adjustment.stepIncrement] and
+    [gtk.adjustment.Adjustment.pageIncrement] fields are added to or subtracted
     from the [gtk.adjustment.Adjustment.value] when the user asks to move by a step
     (using e.g. the cursor arrow keys) or by a page (using e.g. the Page Down/Up
     keys).
@@ -15730,8 +15730,8 @@ struct GtkScrollbar;
     
     If [gtk.scrolled_window.ScrolledWindow.setChild] has added a [gtk.viewport.Viewport] for you,
     it will be automatically removed when you unset the child.
-    Unless `property@Gtk.ScrolledWindow:hscrollbar-policy` and
-    `property@Gtk.ScrolledWindow:vscrollbar-policy` are [gtk.types.PolicyType.Never] or
+    Unless [gtk.scrolled_window.ScrolledWindow.hscrollbarPolicy] and
+    [gtk.scrolled_window.ScrolledWindow.vscrollbarPolicy] are [gtk.types.PolicyType.Never] or
     [gtk.types.PolicyType.External], [gtk.scrolled_window.ScrolledWindow] adds internal [gtk.scrollbar.Scrollbar] widgets
     around its child. The scroll position of the child, and if applicable the
     scrollbars, is controlled by the [gtk.scrolled_window.ScrolledWindow.hadjustment]
@@ -15749,22 +15749,22 @@ struct GtkScrollbar;
     [gtk.scrolled_window.ScrolledWindow] has built-in support for touch devices. When a
     touchscreen is used, swiping will move the scrolled window, and will
     expose 'kinetic' behavior. This can be turned off with the
-    `property@Gtk.ScrolledWindow:kinetic-scrolling` property if it is undesired.
+    [gtk.scrolled_window.ScrolledWindow.kineticScrolling] property if it is undesired.
     
     [gtk.scrolled_window.ScrolledWindow] also displays visual 'overshoot' indication when
     the content is pulled beyond the end, and this situation can be
-    captured with the `signal@Gtk.ScrolledWindow::edge-overshot` signal.
+    captured with the [gtk.scrolled_window.ScrolledWindow.edgeOvershot] signal.
     
     If no mouse device is present, the scrollbars will overlaid as
     narrow, auto-hiding indicators over the content. If traditional
     scrollbars are desired although no mouse is present, this behaviour
-    can be turned off with the `property@Gtk.ScrolledWindow:overlay-scrolling`
+    can be turned off with the [gtk.scrolled_window.ScrolledWindow.overlayScrolling]
     property.
     
     # CSS nodes
     
     [gtk.scrolled_window.ScrolledWindow] has a main CSS node with name scrolledwindow.
-    It gets a .frame style class added when `property@Gtk.ScrolledWindow:has-frame`
+    It gets a .frame style class added when [gtk.scrolled_window.ScrolledWindow.hasFrame]
     is true.
     
     It uses subnodes with names overshoot and undershoot to draw the overflow
@@ -15850,12 +15850,12 @@ struct GtkSearchBar;
     To make filtering appear more reactive, it is a good idea to
     not react to every change in the entry text immediately, but
     only after a short delay. To support this, [gtk.search_entry.SearchEntry]
-    emits the `signal@Gtk.SearchEntry::search-changed` signal which
+    emits the [gtk.search_entry.SearchEntry.searchChanged] signal which
     can be used instead of the [gtk.editable.Editable.changed] signal.
     
-    The `signal@Gtk.SearchEntry::previous-match`,
-    `signal@Gtk.SearchEntry::next-match` and
-    `signal@Gtk.SearchEntry::stop-search` signals can be used to
+    The [gtk.search_entry.SearchEntry.previousMatch],
+    [gtk.search_entry.SearchEntry.nextMatch] and
+    [gtk.search_entry.SearchEntry.stopSearch] signals can be used to
     implement moving between search results and ending the search.
     
     Often, [gtk.search_entry.SearchEntry] will be fed events by means of being
@@ -15893,10 +15893,10 @@ struct GtkSearchEntry;
     of a model they are wrapping.
     
     When the section groupings of a model change, the model will emit the
-    `signal@Gtk.SectionModel::sections-changed` signal by calling the
+    [gtk.section_model.SectionModel.sectionsChanged] signal by calling the
     [gtk.section_model.SectionModel.sectionsChanged] function. All sections in the given range
     then need to be queried again.
-    The `signal@Gio.ListModel::items-changed` signal has the same effect, all sections in
+    The [gio.list_model.ListModel.itemsChanged] signal has the same effect, all sections in
     that range are invalidated, too.
 */
 struct GtkSectionModel;
@@ -15945,15 +15945,15 @@ struct GtkSelectionFilterModelClass
     A [gtk.selection_model.SelectionModel] supports a single boolean per item indicating if an item is
     selected or not. This can be queried via [gtk.selection_model.SelectionModel.isSelected].
     When the selected state of one or more items changes, the model will emit the
-    `signal@Gtk.SelectionModel::selection-changed` signal by calling the
+    [gtk.selection_model.SelectionModel.selectionChanged] signal by calling the
     [gtk.selection_model.SelectionModel.selectionChanged] function. The positions given
     in that signal may have their selection state changed, though that is not a
     requirement. If new items added to the model via the
-    `signal@Gio.ListModel::items-changed` signal are selected or not is up to the
+    [gio.list_model.ListModel.itemsChanged] signal are selected or not is up to the
     implementation.
     
-    Note that items added via `signal@Gio.ListModel::items-changed` may already
-    be selected and no `signal@Gtk.SelectionModel::selection-changed` will be
+    Note that items added via [gio.list_model.ListModel.itemsChanged] may already
+    be selected and no [gtk.selection_model.SelectionModel.selectionChanged] will be
     emitted for them. So to track which items are selected, it is necessary to
     listen to both signals.
     
@@ -16304,11 +16304,11 @@ struct GtkShortcutsGroupClass;
     for a major application mode.
     
     If your application needs multiple sections, you should give each
-    section a unique `property@Gtk.ShortcutsSection:section-name` and
+    section a unique [gtk.shortcuts_section.ShortcutsSection.sectionName] and
     a [gtk.shortcuts_section.ShortcutsSection.title] that can be shown in the
     section selector of the [gtk.shortcuts_window.ShortcutsWindow].
     
-    The `property@Gtk.ShortcutsSection:max-height` property can be used
+    The [gtk.shortcuts_section.ShortcutsSection.maxHeight] property can be used
     to influence how the groups in the section are distributed over pages
     and columns.
     
@@ -16457,7 +16457,7 @@ struct GtkSignalListItemFactoryClass;
     item.
     
     Note that the selection is *persistent* -- if the selected item is removed
-    and re-added in the same `signal@Gio.ListModel::items-changed` emission, it
+    and re-added in the same [gio.list_model.ListModel.itemsChanged] emission, it
     stays selected. In particular, this means that changing the sort order of an
     underlying sort model will preserve the selection.
 */
@@ -16513,7 +16513,7 @@ struct GtkSingleSelectionClass
     width for height widgets.
     
     Widgets that trade height-for-width should set a reasonably large minimum
-    width by way of `property@Gtk.Label:width-chars` for instance. Widgets with
+    width by way of [gtk.label.Label.widthChars] for instance. Widgets with
     static sizes as well as widgets that grow (such as ellipsizing text) need no
     such considerations.
     
@@ -16601,7 +16601,7 @@ struct GtkSnapshotClass;
     model.
     
     [gtk.sort_list_model.SortListModel] allows sorting the items into sections. It
-    implements [gtk.section_model.SectionModel] and when `property@Gtk.SortListModel:section-sorter`
+    implements [gtk.section_model.SectionModel] and when [gtk.sort_list_model.SortListModel.sectionSorter]
     is set, it will sort all items with that sorter and items comparing
     equal with it will be put into the same section.
     The [gtk.sort_list_model.SortListModel.sorter] will then be used to sort items
@@ -16707,7 +16707,7 @@ struct GtkSorterClass
     Note that [gtk.spin_button.SpinButton] will by default make its entry large enough
     to accommodate the lower and upper bounds of the adjustment. If this
     is not desired, the automatic sizing can be turned off by explicitly
-    setting `property@Gtk.Editable:width-chars` to a value != -1.
+    setting [gtk.editable.Editable.widthChars] to a value != -1.
     
     ## Using a GtkSpinButton to get an integer
     
@@ -16834,7 +16834,7 @@ struct GtkSpinner;
     
     Transitions between pages can be animated as slides or fades. This
     can be controlled with [gtk.stack.Stack.setTransitionType].
-    These animations respect the `property@Gtk.Settings:gtk-enable-animations`
+    These animations respect the [gtk.settings.Settings.gtkEnableAnimations]
     setting.
     
     [gtk.stack.Stack] maintains a [gtk.stack_page.StackPage] object for each added
@@ -17174,7 +17174,7 @@ struct GtkStyleProvider;
     
     ![GtkSwitch with delayed state change](switch-state.png)
     
-    See `signal@Gtk.Switch::state-set` for details.
+    See [gtk.switch_.Switch.stateSet] for details.
     
     # CSS nodes
     
@@ -17877,11 +17877,11 @@ struct GtkToggleButtonClass
     contents per [gtk.tree_view.TreeView] row or cell, you will have to do a
     little more work:
     
-    - Set the `property@Gtk.Widget:has-tooltip` property to true.
+    - Set the [gtk.widget.Widget.hasTooltip] property to true.
       This will make GTK monitor the widget for motion and related events
       which are needed to determine when and where to show a tooltip.
     
-    - Connect to the `signal@Gtk.Widget::query-tooltip` signal.
+    - Connect to the [gtk.widget.Widget.queryTooltip] signal.
       This signal will be emitted when a tooltip is supposed to be shown.
       One of the arguments passed to the signal handler is a [gtk.tooltip.Tooltip]
       object. This is the object that we are about to display as a tooltip,
@@ -17981,11 +17981,11 @@ struct GtkTreeDragSourceIface
     the actual row contents.
     
     [gtk.tree_expander.TreeExpander] can be modified with properties such as
-    `property@Gtk.TreeExpander:indent-for-icon`,
-    `property@Gtk.TreeExpander:indent-for-depth`, and
-    `property@Gtk.TreeExpander:hide-expander` to achieve a different appearance.
+    [gtk.tree_expander.TreeExpander.indentForIcon],
+    [gtk.tree_expander.TreeExpander.indentForDepth], and
+    [gtk.tree_expander.TreeExpander.hideExpander] to achieve a different appearance.
     This can even be done to influence individual rows, for example by binding
-    the `property@Gtk.TreeExpander:hide-expander` property to the item count of
+    the [gtk.tree_expander.TreeExpander.hideExpander] property to the item count of
     the model of the treelistrow, to hide the expander for rows without children,
     even if the row is expandable.
     
@@ -19656,16 +19656,16 @@ struct GtkWidgetClassPrivate;
     report no size in that case.
     
     Of course, [gtk.widget_paintable.WidgetPaintable] allows you to monitor widgets for size
-    changes by emitting the `signal@Gdk.Paintable::invalidate-size` signal
+    changes by emitting the [gdk.paintable.Paintable.invalidateSize] signal
     whenever the size of the widget changes as well as for visual changes by
-    emitting the `signal@Gdk.Paintable::invalidate-contents` signal whenever
+    emitting the [gdk.paintable.Paintable.invalidateContents] signal whenever
     the widget changes.
     
     You can use a [gtk.widget_paintable.WidgetPaintable] everywhere a [gdk.paintable.Paintable] is allowed,
     including using it on a [gtk.picture.Picture] (or one of its parents) that it was
     set on itself via [gtk.picture.Picture.setPaintable]. The paintable will take care
     of recursion when this happens. If you do this however, ensure that the
-    `property@Gtk.Picture:can-shrink` property is set to true or you might
+    [gtk.picture.Picture.canShrink] property is set to true or you might
     end up with an infinitely growing widget.
 */
 struct GtkWidgetPaintable;
@@ -19827,7 +19827,7 @@ struct GtkWindowClass
     A [gtk.window_controls.WindowControls]' CSS node is called windowcontrols. It contains
     subnodes corresponding to each title button. Which of the title buttons
     exist and where they are placed exactly depends on the desktop environment
-    and `property@Gtk.WindowControls:decoration-layout` value.
+    and [gtk.window_controls.WindowControls.decorationLayout] value.
     
     When [gtk.window_controls.WindowControls.empty] is true, it gets the .empty
     style class.

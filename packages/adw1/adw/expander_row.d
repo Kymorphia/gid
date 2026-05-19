@@ -1,6 +1,7 @@
 /// Module for [ExpanderRow] class
 module adw.expander_row;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.preferences_row;
@@ -169,7 +170,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Returns: The subtitle for this row.
         
         The subtitle is interpreted as Pango markup unless
-        `property@PreferencesRow:use-markup` is set to `FALSE`.
+        [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
   @property string subtitle()
   {
@@ -182,7 +183,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
         propval = The subtitle for this row.
           
           The subtitle is interpreted as Pango markup unless
-          `property@PreferencesRow:use-markup` is set to `FALSE`.
+          [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   */
   @property void subtitle(string propval)
   {
@@ -443,7 +444,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
       Sets the subtitle for self.
       
       The subtitle is interpreted as Pango markup unless
-      `propertyPreferencesRow:use-markup` is set to `FALSE`.
+      [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
   
       Params:
         subtitle = the subtitle
@@ -540,7 +541,7 @@ class ExpanderRowGidBuilderImpl(T) : adw.preferences_row.PreferencesRowGidBuilde
         propval = The subtitle for this row.
           
           The subtitle is interpreted as Pango markup unless
-          `property@PreferencesRow:use-markup` is set to `FALSE`.
+          [adw.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
       Returns: Builder instance for fluent chaining
   */
   T subtitle(string propval)

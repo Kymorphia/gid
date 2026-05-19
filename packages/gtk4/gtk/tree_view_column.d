@@ -1,6 +1,7 @@
 /// Module for [TreeViewColumn] class
 module gtk.tree_view_column;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

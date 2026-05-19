@@ -1,6 +1,7 @@
 /// Module for [Time64Array] class
 module arrow.time64_array;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;

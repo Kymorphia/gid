@@ -1,6 +1,7 @@
 /// Module for [Widget] class
 module gtk.widget;
 
+public import gid.basictypes;
 import cairo.font_options;
 import gdk.clipboard;
 import gdk.cursor;
@@ -617,7 +618,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Returns: Enables or disables the emission of the ::query-tooltip signal on @widget.
         
         A value of true indicates that @widget can have a tooltip, in this case
-        the widget will be queried using `signal@Gtk.Widget::query-tooltip` to
+        the widget will be queried using [gtk.widget.Widget.queryTooltip] to
         determine whether it will provide a tooltip or not.
   */
   @property bool hasTooltip()
@@ -631,7 +632,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         propval = Enables or disables the emission of the ::query-tooltip signal on @widget.
           
           A value of true indicates that @widget can have a tooltip, in this case
-          the widget will be queried using `signal@Gtk.Widget::query-tooltip` to
+          the widget will be queried using [gtk.widget.Widget.queryTooltip] to
           determine whether it will provide a tooltip or not.
   */
   @property void hasTooltip(bool propval)
@@ -986,12 +987,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         
         This is a convenience property which will take care of getting the
         tooltip shown if the given string is not null:
-        `property@Gtk.Widget:has-tooltip` will automatically be set to true
-        and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+        [gtk.widget.Widget.hasTooltip] will automatically be set to true
+        and there will be taken care of [gtk.widget.Widget.queryTooltip] in
         the default signal handler.
         
-        Note that if both `property@Gtk.Widget:tooltip-text` and
-        `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+        Note that if both [gtk.widget.Widget.tooltipText] and
+        [gtk.widget.Widget.tooltipMarkup] are set, the last one wins.
   */
   @property string tooltipMarkup()
   {
@@ -1008,12 +1009,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
           
           This is a convenience property which will take care of getting the
           tooltip shown if the given string is not null:
-          `property@Gtk.Widget:has-tooltip` will automatically be set to true
-          and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+          [gtk.widget.Widget.hasTooltip] will automatically be set to true
+          and there will be taken care of [gtk.widget.Widget.queryTooltip] in
           the default signal handler.
           
-          Note that if both `property@Gtk.Widget:tooltip-text` and
-          `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+          Note that if both [gtk.widget.Widget.tooltipText] and
+          [gtk.widget.Widget.tooltipMarkup] are set, the last one wins.
   */
   @property void tooltipMarkup(string propval)
   {
@@ -1028,12 +1029,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
         
         This is a convenience property which will take care of getting the
         tooltip shown if the given string is not null:
-        `property@Gtk.Widget:has-tooltip` will automatically be set to true
-        and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+        [gtk.widget.Widget.hasTooltip] will automatically be set to true
+        and there will be taken care of [gtk.widget.Widget.queryTooltip] in
         the default signal handler.
         
-        Note that if both `property@Gtk.Widget:tooltip-text` and
-        `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+        Note that if both [gtk.widget.Widget.tooltipText] and
+        [gtk.widget.Widget.tooltipMarkup] are set, the last one wins.
   */
   @property string tooltipText()
   {
@@ -1049,12 +1050,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
           
           This is a convenience property which will take care of getting the
           tooltip shown if the given string is not null:
-          `property@Gtk.Widget:has-tooltip` will automatically be set to true
-          and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+          [gtk.widget.Widget.hasTooltip] will automatically be set to true
+          and there will be taken care of [gtk.widget.Widget.queryTooltip] in
           the default signal handler.
           
-          Note that if both `property@Gtk.Widget:tooltip-text` and
-          `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+          Note that if both [gtk.widget.Widget.tooltipText] and
+          [gtk.widget.Widget.tooltipMarkup] are set, the last one wins.
   */
   @property void tooltipText(string propval)
   {
@@ -1651,7 +1652,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Notifies the user about an input-related error on this widget.
       
-      If the `propertyGtk.Settings:gtk-error-bell` setting is true,
+      If the [gtk.settings.Settings.gtkErrorBell] setting is true,
       it calls [gdk.surface.Surface.beep], otherwise it does nothing.
       
       Note that the effect of [gdk.surface.Surface.beep] can be configured
@@ -2975,8 +2976,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       Determines if the widget is the focus widget within its
       toplevel.
       
-      This does not mean that the `propertyGtk.Widget:has-focus`
-      property is necessarily set; `propertyGtk.Widget:has-focus`
+      This does not mean that the [gtk.widget.Widget.hasFocus]
+      property is necessarily set; [gtk.widget.Widget.hasFocus]
       will only be set if the toplevel widget additionally has the
       global input focus.
       Returns: true if the widget is the focus widget.
@@ -3034,7 +3035,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       keyboard navigation outside the widget, e.g. by calling
       [gtk.widget.Widget.childFocus] on the widget’s toplevel.
       
-      The default `signalGtk.Widget::keynav-failed` handler returns
+      The default [gtk.widget.Widget.keynavFailed] handler returns
       false for [gtk.types.DirectionType.TabForward] and [gtk.types.DirectionType.TabBackward].
       For the other values of [gtk.types.DirectionType] it returns true.
       
@@ -3127,7 +3128,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Emits the ::mnemonic-activate signal.
       
-      See `signalGtk.Widget::mnemonic-activate`.
+      See [gtk.widget.Widget.mnemonicActivate].
   
       Params:
         groupCycling = true if there are other widgets with the same mnemonic
@@ -3637,7 +3638,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   /**
       Sets whether the hexpand flag will be used.
       
-      The [gtk.widget.Widget.hexpand] property will be set
+      The [gtk.widget.Widget.hexpandSet] property will be set
       automatically when you call [gtk.widget.Widget.setHexpand]
       to set hexpand, so the most likely reason to use this function
       would be to unset an explicit expand flag.
@@ -3864,10 +3865,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       
       The size request set here does not include any margin from the
       properties
-      `propertyGtk.Widget:margin-start`,
-      `propertyGtk.Widget:margin-end`,
-      `propertyGtk.Widget:margin-top`, and
-      `propertyGtk.Widget:margin-bottom`, but it does include pretty
+      [gtk.widget.Widget.marginStart],
+      [gtk.widget.Widget.marginEnd],
+      [gtk.widget.Widget.marginTop], and
+      [gtk.widget.Widget.marginBottom], but it does include pretty
       much all other padding or border properties set by any subclass
       of [gtk.widget.Widget].
   
@@ -3905,8 +3906,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       up with Pango markup.
       
       This function will take care of setting the
-      `propertyGtk.Widget:has-tooltip` as a side effect, and of the
-      default handler for the `signalGtk.Widget::query-tooltip` signal.
+      [gtk.widget.Widget.hasTooltip] as a side effect, and of the
+      default handler for the [gtk.widget.Widget.queryTooltip] signal.
       
       See also [gtk.tooltip.Tooltip.setMarkup].
   
@@ -3925,9 +3926,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
       If text contains any markup, it will be escaped.
       
       This function will take care of setting
-      `propertyGtk.Widget:has-tooltip` as a side effect,
+      [gtk.widget.Widget.hasTooltip] as a side effect,
       and of the default handler for the
-      `signalGtk.Widget::query-tooltip` signal.
+      [gtk.widget.Widget.queryTooltip] signal.
       
       See also [gtk.tooltip.Tooltip.setText].
   
@@ -4471,7 +4472,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
   
       Emitted when the widget’s tooltip is about to be shown.
         
-        This happens when the `propertyGtk.Widget:has-tooltip` property
+        This happens when the [gtk.widget.Widget.hasTooltip] property
         is true and the hover timeout has expired with the cursor hovering
         "above" widget; or emitted when widget got focus in keyboard mode.
         
@@ -4869,7 +4870,7 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
         propval = Enables or disables the emission of the ::query-tooltip signal on @widget.
           
           A value of true indicates that @widget can have a tooltip, in this case
-          the widget will be queried using `signal@Gtk.Widget::query-tooltip` to
+          the widget will be queried using [gtk.widget.Widget.queryTooltip] to
           determine whether it will provide a tooltip or not.
       Returns: Builder instance for fluent chaining
   */
@@ -5062,12 +5063,12 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           
           This is a convenience property which will take care of getting the
           tooltip shown if the given string is not null:
-          `property@Gtk.Widget:has-tooltip` will automatically be set to true
-          and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+          [gtk.widget.Widget.hasTooltip] will automatically be set to true
+          and there will be taken care of [gtk.widget.Widget.queryTooltip] in
           the default signal handler.
           
-          Note that if both `property@Gtk.Widget:tooltip-text` and
-          `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+          Note that if both [gtk.widget.Widget.tooltipText] and
+          [gtk.widget.Widget.tooltipMarkup] are set, the last one wins.
       Returns: Builder instance for fluent chaining
   */
   T tooltipMarkup(string propval)
@@ -5084,12 +5085,12 @@ class WidgetGidBuilderImpl(T) : gobject.initially_unowned.InitiallyUnownedGidBui
           
           This is a convenience property which will take care of getting the
           tooltip shown if the given string is not null:
-          `property@Gtk.Widget:has-tooltip` will automatically be set to true
-          and there will be taken care of `signal@Gtk.Widget::query-tooltip` in
+          [gtk.widget.Widget.hasTooltip] will automatically be set to true
+          and there will be taken care of [gtk.widget.Widget.queryTooltip] in
           the default signal handler.
           
-          Note that if both `property@Gtk.Widget:tooltip-text` and
-          `property@Gtk.Widget:tooltip-markup` are set, the last one wins.
+          Note that if both [gtk.widget.Widget.tooltipText] and
+          [gtk.widget.Widget.tooltipMarkup] are set, the last one wins.
       Returns: Builder instance for fluent chaining
   */
   T tooltipText(string propval)

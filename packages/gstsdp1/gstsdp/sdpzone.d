@@ -1,6 +1,7 @@
 /// Module for [SDPZone] class
 module gstsdp.sdpzone;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

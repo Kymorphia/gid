@@ -1,6 +1,7 @@
 /// Module for [ParentBufferMeta] class
 module gst.parent_buffer_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gst.c.functions;

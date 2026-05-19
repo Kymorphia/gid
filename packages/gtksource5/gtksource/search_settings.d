@@ -1,6 +1,7 @@
 /// Module for [SearchSettings] class
 module gtksource.search_settings;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -13,7 +14,7 @@ import gtksource.types;
     
     A [gtksource.search_settings.SearchSettings] object represents the settings of a search. The
     search settings can be associated with one or several
-    `class@SearchContext`s.
+    [gtksource.search_context.SearchContext]s.
 */
 class SearchSettings : gobject.object.ObjectWrap
 {
@@ -95,7 +96,7 @@ class SearchSettings : gobject.object.ObjectWrap
   /**
       Get `regexEnabled` property.
       Returns: Search by regular expressions with
-        `property@SearchSettings:search-text` as the pattern.
+        [gtksource.search_settings.SearchSettings.searchText] as the pattern.
   */
   @property bool regexEnabled()
   {
@@ -106,7 +107,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Set `regexEnabled` property.
       Params:
         propval = Search by regular expressions with
-          `property@SearchSettings:search-text` as the pattern.
+          [gtksource.search_settings.SearchSettings.searchText] as the pattern.
   */
   @property void regexEnabled(bool propval)
   {
@@ -117,7 +118,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Get `searchText` property.
       Returns: A search string, or null if the search is disabled.
         
-        If the regular expression search is enabled, `property@SearchSettings:search-text` is
+        If the regular expression search is enabled, [gtksource.search_settings.SearchSettings.searchText] is
         the pattern.
   */
   @property string searchText()
@@ -130,7 +131,7 @@ class SearchSettings : gobject.object.ObjectWrap
       Params:
         propval = A search string, or null if the search is disabled.
           
-          If the regular expression search is enabled, `property@SearchSettings:search-text` is
+          If the regular expression search is enabled, [gtksource.search_settings.SearchSettings.searchText] is
           the pattern.
   */
   @property void searchText(string propval)
@@ -279,10 +280,10 @@ class SearchSettings : gobject.object.ObjectWrap
   /**
       Enables or disables whether to search by regular expressions.
       
-      If enabled, the `propertySearchSettings:search-text` property contains the
+      If enabled, the [gtksource.search_settings.SearchSettings.searchText] property contains the
       pattern of the regular expression.
       
-      `classSearchContext` uses #GRegex when regex search is enabled. See the
+      [gtksource.search_context.SearchContext] uses #GRegex when regex search is enabled. See the
       [Regular expression syntax](https://developer.gnome.org/glib/stable/glib-regex-syntax.html)
       page in the GLib reference manual.
   
@@ -373,7 +374,7 @@ class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
       Set `regexEnabled` property.
       Params:
         propval = Search by regular expressions with
-          `property@SearchSettings:search-text` as the pattern.
+          [gtksource.search_settings.SearchSettings.searchText] as the pattern.
       Returns: Builder instance for fluent chaining
   */
   T regexEnabled(bool propval)
@@ -386,7 +387,7 @@ class SearchSettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
       Params:
         propval = A search string, or null if the search is disabled.
           
-          If the regular expression search is enabled, `property@SearchSettings:search-text` is
+          If the regular expression search is enabled, [gtksource.search_settings.SearchSettings.searchText] is
           the pattern.
       Returns: Builder instance for fluent chaining
   */

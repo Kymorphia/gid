@@ -8,7 +8,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 | --- | --- |
 | **Dub Package**          | [gid:gstcheck1](https://code.dlang.org/packages/gid%3Agstcheck1)                 |
 | **Library Homepage**     | https://gstreamer.freedesktop.org                                                |
-| **D API Reference**      | https://www.kymorphia.com/gid/gstcheck.html                                      |
+| **D API Reference**      | https://www.kymorphia.com/gid/gid~gstcheck1/                                     |
 | **C API Reference**      | https://gstreamer.freedesktop.org/documentation/check/index.html                 |
 
 Consult the [giD README](https://github.com/Kymorphia/gid) for more information on programming with giD and links to examples.

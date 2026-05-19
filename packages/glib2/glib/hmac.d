@@ -1,6 +1,7 @@
 /// Module for [Hmac] class
 module glib.hmac;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

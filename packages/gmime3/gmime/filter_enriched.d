@@ -1,6 +1,7 @@
 /// Module for [FilterEnriched] class
 module gmime.filter_enriched;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

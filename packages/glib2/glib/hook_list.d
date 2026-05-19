@@ -1,6 +1,7 @@
 /// Module for [HookList] class
 module glib.hook_list;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

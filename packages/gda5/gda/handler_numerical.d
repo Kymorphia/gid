@@ -1,6 +1,7 @@
 /// Module for [HandlerNumerical] class
 module gda.handler_numerical;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_handler;

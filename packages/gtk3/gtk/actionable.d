@@ -1,6 +1,7 @@
 /// Module for [Actionable] interface
 module gtk.actionable;
 
+public import gid.basictypes;
 public import gtk.actionable_iface_proxy;
 import gid.gid;
 import glib.variant;

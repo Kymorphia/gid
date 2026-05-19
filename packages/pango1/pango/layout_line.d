@@ -1,6 +1,7 @@
 /// Module for [LayoutLine] class
 module pango.layout_line;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.c.functions;

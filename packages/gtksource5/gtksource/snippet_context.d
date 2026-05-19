@@ -1,6 +1,7 @@
 /// Module for [SnippetContext] class
 module gtksource.snippet_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -10,14 +11,14 @@ import gtksource.c.types;
 import gtksource.types;
 
 /**
-    Context for expanding `class@SnippetChunk`.
+    Context for expanding [gtksource.snippet_chunk.SnippetChunk].
     
     This class is currently used primary as a hashtable. However, the longer
     term goal is to have it hold onto a `GjsContext` as well as other languages
-    so that `class@SnippetChunk` can expand themselves by executing
+    so that [gtksource.snippet_chunk.SnippetChunk] can expand themselves by executing
     script within the context.
     
-    The `class@Snippet` will build the context and then expand each of the
+    The [gtksource.snippet.Snippet] will build the context and then expand each of the
     chunks during the insertion/edit phase.
 */
 class SnippetContext : gobject.object.ObjectWrap

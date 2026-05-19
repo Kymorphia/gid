@@ -1,6 +1,7 @@
 /// Module for [DesktopAppInfo] class
 module gio.desktop_app_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.app_info;
 import gio.app_info_mixin;

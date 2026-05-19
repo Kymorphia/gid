@@ -1,6 +1,7 @@
 /// Module for [Editable] interface
 module gtk.editable;
 
+public import gid.basictypes;
 public import gtk.editable_iface_proxy;
 import gid.gid;
 import gobject.dclosure;

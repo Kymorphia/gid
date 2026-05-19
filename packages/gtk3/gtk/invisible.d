@@ -1,6 +1,7 @@
 /// Module for [Invisible] class
 module gtk.invisible;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.screen;

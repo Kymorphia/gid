@@ -1,6 +1,7 @@
 /// Module for [FlowCombiner] class
 module gstbase.flow_combiner;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.pad;

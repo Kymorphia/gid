@@ -1,6 +1,7 @@
 /// Module for [VideoOverlayCompositionMeta] class
 module gstvideo.video_overlay_composition_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

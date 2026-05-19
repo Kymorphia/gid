@@ -1,6 +1,7 @@
 /// Module for [ColorSelection] class
 module gtk.color_selection;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.color;

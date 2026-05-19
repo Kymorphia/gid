@@ -1,6 +1,7 @@
 /// Module for [AudioCdSrc] class
 module gstaudio.audio_cd_src;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

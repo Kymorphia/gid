@@ -1,6 +1,7 @@
 /// Module for [Window] interface mixin
 module atk.window_mixin;
 
+public import gid.basictypes;
 public import atk.window_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

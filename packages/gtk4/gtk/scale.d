@@ -1,6 +1,7 @@
 /// Module for [Scale] class
 module gtk.scale;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -30,7 +31,7 @@ import pango.layout;
     class, [gtk.range.Range], in addition to the methods for [gtk.scale.Scale] itself.
     To set the value of a scale, you would normally use [gtk.range.Range.setValue].
     To detect changes to the value, you would normally use the
-    `signal@Gtk.Range::value-changed` signal.
+    [gtk.range.Range.valueChanged] signal.
     
     Note that using the same upper and lower bounds for the [gtk.scale.Scale] (through
     the [gtk.range.Range] methods) will hide the slider itself. This is useful for
@@ -95,7 +96,7 @@ import pango.layout;
     The main CSS node gets the 'marks-before' and/or 'marks-after' style classes
     added depending on what marks are present.
     
-    If the scale is displaying the value (see `property@Gtk.Scale:draw-value`),
+    If the scale is displaying the value (see [gtk.scale.Scale.drawValue]),
     there is subnode with name value. This node will get the .top or .bottom style
     classes similar to the marks node.
     
@@ -334,7 +335,7 @@ class Scale : gtk.range.Range
       The returned object is owned by the scale so does not need
       to be freed by the caller.
       Returns: the [pango.layout.Layout]
-          for this scale, or null if the `propertyGtk.Scale:draw-value`
+          for this scale, or null if the [gtk.scale.Scale.drawValue]
           property is false.
   */
   pango.layout.Layout getLayout()
@@ -352,7 +353,7 @@ class Scale : gtk.range.Range
       Remember when using the [pango.layout.Layout] function you need to
       convert to and from pixels using `PANGO_PIXELS()` or [pango.types.SCALE].
       
-      If the `propertyGtk.Scale:draw-value` property is false, the return
+      If the [gtk.scale.Scale.drawValue] property is false, the return
       values are undefined.
   
       Params:
@@ -381,9 +382,9 @@ class Scale : gtk.range.Range
       
       Also causes the value of the adjustment to be rounded to this number
       of digits, so the retrieved value matches the displayed one, if
-      `propertyGtk.Scale:draw-value` is true when the value changes. If
-      you want to enforce rounding the value when `propertyGtk.Scale:draw-value`
-      is false, you can set `propertyGtk.Range:round-digits` instead.
+      [gtk.scale.Scale.drawValue] is true when the value changes. If
+      you want to enforce rounding the value when [gtk.scale.Scale.drawValue]
+      is false, you can set [gtk.range.Range.roundDigits] instead.
       
       Note that rounding to a small number of digits can interfere with
       the smooth autoscrolling that is built into [gtk.scale.Scale]. As an alternative,
@@ -445,7 +446,7 @@ class Scale : gtk.range.Range
   /**
       Sets whether the scale has an origin.
       
-      If `propertyGtk.Scale:has-origin` is set to true (the default),
+      If [gtk.scale.Scale.hasOrigin] is set to true (the default),
       the scale will highlight the part of the trough between the origin
       (bottom or left side) and the current value.
   

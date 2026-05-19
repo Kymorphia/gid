@@ -1,6 +1,7 @@
 /// Module for [SortListModel] class
 module gtk.sort_list_model;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
@@ -36,7 +37,7 @@ import gtk.types;
     model.
     
     [gtk.sort_list_model.SortListModel] allows sorting the items into sections. It
-    implements [gtk.section_model.SectionModel] and when `property@Gtk.SortListModel:section-sorter`
+    implements [gtk.section_model.SectionModel] and when [gtk.sort_list_model.SortListModel.sectionSorter]
     is set, it will sort all items with that sorter and items comparing
     equal with it will be put into the same section.
     The [gtk.sort_list_model.SortListModel.sorter] will then be used to sort items

@@ -1,6 +1,7 @@
 /// Module for [ScaleButton] class
 module gtk.scale_button;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

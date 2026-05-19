@@ -1,6 +1,7 @@
 /// Module for [TimeDataType] class
 module arrow.time_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.temporal_data_type;

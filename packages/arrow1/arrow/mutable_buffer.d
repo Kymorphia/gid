@@ -1,6 +1,7 @@
 /// Module for [MutableBuffer] class
 module arrow.mutable_buffer;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;

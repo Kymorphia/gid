@@ -1,6 +1,7 @@
 /// Module for [MetaStoreChange] class
 module gda.meta_store_change;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

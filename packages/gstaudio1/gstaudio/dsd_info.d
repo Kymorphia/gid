@@ -1,6 +1,7 @@
 /// Module for [DsdInfo] struct
 module gstaudio.dsd_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.caps;
 import gstaudio.c.functions;

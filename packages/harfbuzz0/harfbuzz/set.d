@@ -1,6 +1,7 @@
 /// Module for [Set] class
 module harfbuzz.set;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;

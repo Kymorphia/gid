@@ -1,6 +1,7 @@
 /// Module for [UnionArray] class
 module arrow.union_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;

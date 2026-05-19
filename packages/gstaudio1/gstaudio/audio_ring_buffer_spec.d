@@ -1,6 +1,7 @@
 /// Module for [AudioRingBufferSpec] class
 module gstaudio.audio_ring_buffer_spec;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.caps;
 import gstaudio.audio_info;

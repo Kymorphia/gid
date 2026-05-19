@@ -1,6 +1,7 @@
 /// Module for [SqlFunction] class
 module gda.sql_function;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

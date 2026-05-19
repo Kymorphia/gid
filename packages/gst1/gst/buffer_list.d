@@ -1,6 +1,7 @@
 /// Module for [BufferList] class
 module gst.buffer_list;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.buffer;

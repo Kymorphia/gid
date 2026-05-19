@@ -1,6 +1,7 @@
 /// Module for [ParamSpecFloat] class
 module gobject.param_spec_float;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

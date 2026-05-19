@@ -1,6 +1,7 @@
 /// Module for [AccessibleText] interface mixin
 module gtk.accessible_text_mixin;
 
+public import gid.basictypes;
 public import gtk.accessible_text_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

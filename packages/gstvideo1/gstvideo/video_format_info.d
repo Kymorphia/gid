@@ -1,6 +1,7 @@
 /// Module for [VideoFormatInfo] class
 module gstvideo.video_format_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gstvideo.c.functions;
 import gstvideo.c.types;

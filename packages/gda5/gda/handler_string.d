@@ -1,6 +1,7 @@
 /// Module for [HandlerString] class
 module gda.handler_string;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

@@ -1,6 +1,7 @@
 /// Module for [Expression] class
 module gtk.expression;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.object;
 import gobject.types;

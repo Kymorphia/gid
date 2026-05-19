@@ -1,6 +1,7 @@
 /// Module for [RTSPExtension] interface mixin
 module gstrtsp.rtspextension_mixin;
 
+public import gid.basictypes;
 public import gstrtsp.rtspextension_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;

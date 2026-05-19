@@ -1,6 +1,7 @@
 /// Module for [BaseParse] class
 module gstbase.base_parse;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [MediaKeySystemPermissionRequest] class
 module webkit.media_key_system_permission_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

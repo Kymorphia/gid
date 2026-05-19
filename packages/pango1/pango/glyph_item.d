@@ -1,6 +1,7 @@
 /// Module for [GlyphItem] class
 module pango.glyph_item;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.attr_list;

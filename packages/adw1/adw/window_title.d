@@ -1,6 +1,7 @@
 /// Module for [WindowTitle] class
 module adw.window_title;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -23,7 +24,7 @@ import gtk.widget;
     </picture>
     
     [adw.window_title.WindowTitle] shows a title and subtitle. It's intended to be used as the
-    title child of [gtk.header_bar.HeaderBar] or `class@HeaderBar`.
+    title child of [gtk.header_bar.HeaderBar] or [adw.header_bar.HeaderBar].
     
     ## CSS nodes
     

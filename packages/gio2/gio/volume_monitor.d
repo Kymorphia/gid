@@ -1,6 +1,7 @@
 /// Module for [VolumeMonitor] class
 module gio.volume_monitor;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

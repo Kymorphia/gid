@@ -1,6 +1,7 @@
 /// Module for [UserScript] class
 module webkit.user_script;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

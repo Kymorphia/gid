@@ -1,6 +1,7 @@
 /// Module for [MemoryMappedInputStream] class
 module arrow.memory_mapped_input_stream;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.file;

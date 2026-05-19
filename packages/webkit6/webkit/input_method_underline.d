@@ -1,6 +1,7 @@
 /// Module for [InputMethodUnderline] class
 module webkit.input_method_underline;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gobject.boxed;

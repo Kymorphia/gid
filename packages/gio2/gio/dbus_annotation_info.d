@@ -1,6 +1,7 @@
 /// Module for [DBusAnnotationInfo] class
 module gio.dbus_annotation_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

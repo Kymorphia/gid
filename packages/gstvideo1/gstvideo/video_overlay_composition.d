@@ -1,6 +1,7 @@
 /// Module for [VideoOverlayComposition] class
 module gstvideo.video_overlay_composition;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstvideo.c.functions;

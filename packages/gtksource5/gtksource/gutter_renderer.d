@@ -1,6 +1,7 @@
 /// Module for [GutterRenderer] class
 module gtksource.gutter_renderer;
 
+public import gid.basictypes;
 import gdk.rectangle;
 import gdk.types;
 import gid.gid;
@@ -26,10 +27,10 @@ import gtksource.view;
 /**
     Gutter cell renderer.
     
-    A [gtksource.gutter_renderer.GutterRenderer] represents a column in a `class@Gutter`. The
+    A [gtksource.gutter_renderer.GutterRenderer] represents a column in a [gtksource.gutter.Gutter]. The
     column contains one cell for each visible line of the [gtk.text_buffer.TextBuffer]. Due to
     text wrapping, a cell can thus span multiple lines of the [gtk.text_view.TextView]. In
-    this case, `enum@GutterRendererAlignmentMode` controls the alignment of
+    this case, [gtksource.types.GutterRendererAlignmentMode] controls the alignment of
     the cell.
     
     The gutter renderer is a [gtk.widget.Widget] and is measured using the normal widget
@@ -42,7 +43,7 @@ import gtksource.view;
     be printed, even if only the first 20 lines are shown. Another strategy is to
     take into account only the visible lines.  In this case, only two digits are
     necessary to display the line numbers of the first 20 lines. To take another
-    example, the gutter renderer for `class@Mark`s doesn't need to take
+    example, the gutter renderer for [gtksource.mark.Mark]s doesn't need to take
     into account the text buffer to announce its width. It only depends on the
     icons size displayed in the gutter column.
     
@@ -230,8 +231,8 @@ class GutterRenderer : gtk.widget.Widget
   alias activate = gtk.widget.Widget.activate;
 
   /**
-      Emits the `signalGutterRenderer::activate` signal of the renderer. This is
-      called from `classGutter` and should never have to be called manually.
+      Emits the [gtksource.gutter_renderer.GutterRenderer.activate] signal of the renderer. This is
+      called from [gtksource.gutter.Gutter] and should never have to be called manually.
   
       Params:
         iter = a #GtkTextIter at the start of the line where the renderer is activated
@@ -271,8 +272,8 @@ class GutterRenderer : gtk.widget.Widget
       Get the alignment mode.
       
       The alignment mode describes the manner in which the
-      renderer is aligned (see `propertyGutterRenderer:xalign` and
-      `propertyGutterRenderer:yalign`).
+      renderer is aligned (see [gtksource.gutter_renderer.GutterRenderer.xalign] and
+      [gtksource.gutter_renderer.GutterRenderer.yalign]).
       Returns: a #GtkSourceGutterRendererAlignmentMode
   */
   gtksource.types.GutterRendererAlignmentMode getAlignmentMode()
@@ -284,7 +285,7 @@ class GutterRenderer : gtk.widget.Widget
   }
 
   /**
-      Gets the `classBuffer` for which the gutter renderer is drawing.
+      Gets the [gtksource.buffer.Buffer] for which the gutter renderer is drawing.
       Returns: a #GtkTextBuffer or null
   */
   gtksource.buffer.Buffer getBuffer()
@@ -361,7 +362,7 @@ class GutterRenderer : gtk.widget.Widget
 
   /**
       Get whether the renderer is activatable at the location provided. This is
-      called from `classGutter` to determine whether a renderer is activatable
+      called from [gtksource.gutter.Gutter] to determine whether a renderer is activatable
       using the mouse pointer.
   
       Params:
@@ -378,8 +379,8 @@ class GutterRenderer : gtk.widget.Widget
 
   /**
       Set the alignment mode. The alignment mode describes the manner in which the
-      renderer is aligned (see `propertyGutterRenderer:xalign` and
-      `propertyGutterRenderer:yalign`).
+      renderer is aligned (see [gtksource.gutter_renderer.GutterRenderer.xalign] and
+      [gtksource.gutter_renderer.GutterRenderer.yalign]).
   
       Params:
         mode = a #GtkSourceGutterRendererAlignmentMode

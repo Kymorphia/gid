@@ -1,6 +1,7 @@
 /// Module for [Proxy] interface
 module gio.proxy;
 
+public import gid.basictypes;
 public import gio.proxy_iface_proxy;
 import gid.gid;
 import gio.async_result;

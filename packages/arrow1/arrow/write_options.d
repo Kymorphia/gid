@@ -1,6 +1,7 @@
 /// Module for [WriteOptions] class
 module arrow.write_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.codec;

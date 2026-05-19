@@ -1,6 +1,7 @@
 /// Module for [Checksum] class
 module glib.checksum;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

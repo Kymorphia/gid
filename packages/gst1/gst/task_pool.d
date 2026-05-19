@@ -1,6 +1,7 @@
 /// Module for [TaskPool] class
 module gst.task_pool;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;

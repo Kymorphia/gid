@@ -1,6 +1,7 @@
 /// Module for [Auth] class
 module soup.auth;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.uri;
 import gobject.gid_builder;
@@ -19,7 +20,7 @@ import soup.types;
     used.
     
     #SoupAuth objects store the authentication data associated with a given bit
-    of web space. They are created automatically by `class@Session`.
+    of web space. They are created automatically by [soup.session.Session].
 */
 class Auth : gobject.object.ObjectWrap
 {
@@ -109,7 +110,7 @@ class Auth : gobject.object.ObjectWrap
       Creates a new #SoupAuth of type type with the information from
       msg and auth_header.
       
-      This is called by `classSession`; you will normally not create auths
+      This is called by [soup.session.Session]; you will normally not create auths
       yourself.
   
       Params:
@@ -321,7 +322,7 @@ class Auth : gobject.object.ObjectWrap
       Updates auth with the information from msg and auth_header,
       possibly un-authenticating it.
       
-      As with [soup.auth.Auth.new_], this is normally only used by `classSession`.
+      As with [soup.auth.Auth.new_], this is normally only used by [soup.session.Session].
   
       Params:
         msg = the #SoupMessage auth is being updated for

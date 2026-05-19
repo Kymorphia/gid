@@ -1,6 +1,7 @@
 /// Module for [PollFD] struct
 module gst.poll_fd;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

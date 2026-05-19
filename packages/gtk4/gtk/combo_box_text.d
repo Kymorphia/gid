@@ -1,6 +1,7 @@
 /// Module for [ComboBoxText] class
 module gtk.combo_box_text;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -37,7 +38,7 @@ import gtk.types;
     [gtk.combo_box_text.ComboBoxText.remove].
     
     If the [gtk.combo_box_text.ComboBoxText] contains an entry (via the
-    `property@Gtk.ComboBox:has-entry` property), its contents can be retrieved
+    [gtk.combo_box.ComboBox.hasEntry] property), its contents can be retrieved
     using [gtk.combo_box_text.ComboBoxText.getActiveText].
     
     You should not call [gtk.combo_box.ComboBox.setModel] or attempt to pack more
@@ -206,7 +207,7 @@ class ComboBoxText : gtk.combo_box.ComboBox
       Inserts text at position in the list of strings stored in combo_box.
       
       If id is non-null then it is used as the ID of the row.
-      See `propertyGtk.ComboBox:id-column`.
+      See [gtk.combo_box.ComboBox.idColumn].
       
       If position is negative then text is appended.
   

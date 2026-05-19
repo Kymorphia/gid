@@ -1,6 +1,7 @@
 /// Module for [ParamFraction] class
 module gst.param_fraction;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.param_spec;
 import gst.c.functions;

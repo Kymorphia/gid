@@ -1,6 +1,7 @@
 /// Module for [RoundToMultipleOptions] class
 module arrow.round_to_multiple_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.function_options;

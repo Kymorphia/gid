@@ -1,6 +1,7 @@
 /// Module for [Array] class
 module json.array;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import json.c.functions;

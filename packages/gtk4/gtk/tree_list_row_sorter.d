@@ -1,6 +1,7 @@
 /// Module for [TreeListRowSorter] class
 module gtk.tree_list_row_sorter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

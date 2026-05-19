@@ -1,6 +1,7 @@
 /// Module for [Calendar] class
 module gtk.calendar;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.date_time;
 import gobject.dclosure;
@@ -300,7 +301,7 @@ class Calendar : gtk.widget.Widget
       Returns whether self is currently showing the names
       of the week days.
       
-      This is the value of the `propertyGtk.Calendar:show-day-names`
+      This is the value of the [gtk.calendar.Calendar.showDayNames]
       property.
       Returns: Whether the calendar shows day names.
   */
@@ -314,7 +315,7 @@ class Calendar : gtk.widget.Widget
   /**
       Returns whether self is currently showing the heading.
       
-      This is the value of the `propertyGtk.Calendar:show-heading`
+      This is the value of the [gtk.calendar.Calendar.showHeading]
       property.
       Returns: Whether the calendar is showing a heading.
   */
@@ -329,7 +330,7 @@ class Calendar : gtk.widget.Widget
       Returns whether self is showing week numbers right
       now.
       
-      This is the value of the `propertyGtk.Calendar:show-week-numbers`
+      This is the value of the [gtk.calendar.Calendar.showWeekNumbers]
       property.
       Returns: Whether the calendar is showing week numbers.
   */

@@ -1,6 +1,7 @@
 /// Module for [GutterRendererPixbuf] class
 module gtksource.gutter_renderer_pixbuf;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gdkpixbuf.pixbuf;
 import gid.gid;
@@ -22,7 +23,7 @@ import gtksource.types;
     Renders a pixbuf in the gutter.
     
     A [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf] can be used to render an image in a cell of
-    `class@Gutter`.
+    [gtksource.gutter.Gutter].
 */
 class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 {

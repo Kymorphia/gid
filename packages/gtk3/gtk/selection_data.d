@@ -1,6 +1,7 @@
 /// Module for [SelectionData] class
 module gtk.selection_data;
 
+public import gid.basictypes;
 import gdk.atom;
 import gdk.display;
 import gdkpixbuf.pixbuf;

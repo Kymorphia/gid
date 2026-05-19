@@ -1,6 +1,7 @@
 /// Module for [Writable] interface mixin
 module arrow.writable_mixin;
 
+public import gid.basictypes;
 public import arrow.writable_iface_proxy;
 public import arrow.c.functions;
 public import arrow.c.types;

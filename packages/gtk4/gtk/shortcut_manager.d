@@ -1,6 +1,7 @@
 /// Module for [ShortcutManager] interface
 module gtk.shortcut_manager;
 
+public import gid.basictypes;
 public import gtk.shortcut_manager_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

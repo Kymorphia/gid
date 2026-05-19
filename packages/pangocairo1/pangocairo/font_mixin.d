@@ -1,6 +1,7 @@
 /// Module for [Font] interface mixin
 module pangocairo.font_mixin;
 
+public import gid.basictypes;
 public import pangocairo.font_iface_proxy;
 public import cairo.scaled_font;
 public import gid.gid;

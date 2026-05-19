@@ -1,6 +1,7 @@
 /// Module for [FrameHeaderBar] class
 module panel.frame_header_bar;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

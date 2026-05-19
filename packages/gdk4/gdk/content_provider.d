@@ -1,6 +1,7 @@
 /// Module for [ContentProvider] class
 module gdk.content_provider;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_formats;

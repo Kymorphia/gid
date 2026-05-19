@@ -1,6 +1,7 @@
 /// Module for [UInt8Scalar] class
 module arrow.uint8_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;

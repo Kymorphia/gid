@@ -1,6 +1,7 @@
 /// Module for [MetaStruct] class
 module gda.meta_struct;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.meta_db_object;

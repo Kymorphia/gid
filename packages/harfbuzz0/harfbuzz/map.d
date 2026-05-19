@@ -1,6 +1,7 @@
 /// Module for [Map] class
 module harfbuzz.map;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;

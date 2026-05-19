@@ -1,6 +1,7 @@
 /// Module for [HyperlinkImpl] interface mixin
 module atk.hyperlink_impl_mixin;
 
+public import gid.basictypes;
 public import atk.hyperlink_impl_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

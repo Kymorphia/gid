@@ -1,6 +1,7 @@
 /// Module for [CustomMeta] class
 module gst.custom_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

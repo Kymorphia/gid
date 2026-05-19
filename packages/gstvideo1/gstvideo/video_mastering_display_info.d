@@ -1,6 +1,7 @@
 /// Module for [VideoMasteringDisplayInfo] class
 module gstvideo.video_mastering_display_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.caps;
 import gstvideo.c.functions;

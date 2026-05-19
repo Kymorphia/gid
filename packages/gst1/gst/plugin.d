@@ -1,6 +1,7 @@
 /// Module for [Plugin] class
 module gst.plugin;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;

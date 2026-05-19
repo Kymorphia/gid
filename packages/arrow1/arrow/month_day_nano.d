@@ -1,6 +1,7 @@
 /// Module for [MonthDayNano] class
 module arrow.month_day_nano;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

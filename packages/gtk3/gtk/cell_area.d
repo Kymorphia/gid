@@ -1,6 +1,7 @@
 /// Module for [CellArea] class
 module gtk.cell_area;
 
+public import gid.basictypes;
 import cairo.context;
 import gdk.event;
 import gdk.rectangle;

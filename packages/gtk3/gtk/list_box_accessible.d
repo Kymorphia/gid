@@ -1,6 +1,7 @@
 /// Module for [ListBoxAccessible] class
 module gtk.list_box_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.selection;

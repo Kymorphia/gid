@@ -1,6 +1,7 @@
 /// Module for [Charset] struct
 module gmime.charset;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

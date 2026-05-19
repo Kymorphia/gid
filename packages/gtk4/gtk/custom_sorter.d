@@ -1,6 +1,7 @@
 /// Module for [CustomSorter] class
 module gtk.custom_sorter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.c.functions;

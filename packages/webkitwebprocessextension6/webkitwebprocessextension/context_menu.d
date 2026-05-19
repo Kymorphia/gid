@@ -1,6 +1,7 @@
 /// Module for [ContextMenu] class
 module webkitwebprocessextension.context_menu;
 
+public import gid.basictypes;
 import gdk.event;
 import gid.gid;
 import glib.variant;

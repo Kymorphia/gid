@@ -1,6 +1,7 @@
 /// Module for [VideoAlignment] struct
 module gstvideo.video_alignment;
 
+public import gid.basictypes;
 import gid.gid;
 import gstvideo.c.functions;
 import gstvideo.c.types;

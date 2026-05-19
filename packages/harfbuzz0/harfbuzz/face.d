@@ -1,6 +1,7 @@
 /// Module for [Face] class
 module harfbuzz.face;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [ColorMatrixNode] class
 module gsk.color_matrix_node;
 
+public import gid.basictypes;
 import gid.gid;
 import graphene.matrix;
 import graphene.vec4;

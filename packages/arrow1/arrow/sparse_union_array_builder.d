@@ -1,6 +1,7 @@
 /// Module for [SparseUnionArrayBuilder] class
 module arrow.sparse_union_array_builder;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.sparse_union_data_type;

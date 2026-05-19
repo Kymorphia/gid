@@ -1,6 +1,7 @@
 /// Module for [WebViewSessionState] class
 module webkit.web_view_session_state;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.boxed;

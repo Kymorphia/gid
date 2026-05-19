@@ -1,6 +1,7 @@
 /// Module for [CellRendererPixbuf] class
 module gtk.cell_renderer_pixbuf;
 
+public import gid.basictypes;
 import gdk.texture;
 import gdkpixbuf.pixbuf;
 import gid.gid;

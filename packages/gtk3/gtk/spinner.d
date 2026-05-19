@@ -1,6 +1,7 @@
 /// Module for [Spinner] class
 module gtk.spinner;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

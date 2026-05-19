@@ -1,6 +1,7 @@
 /// Module for [DataModel] interface
 module gda.data_model;
 
+public import gid.basictypes;
 public import gda.data_model_iface_proxy;
 import gda.c.functions;
 import gda.c.types;

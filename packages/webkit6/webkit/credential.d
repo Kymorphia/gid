@@ -1,6 +1,7 @@
 /// Module for [Credential] class
 module webkit.credential;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.tls_certificate;
 import gobject.boxed;

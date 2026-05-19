@@ -1,6 +1,7 @@
 /// Module for [RcProperty] class
 module gtk.rc_property;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.string_;
 import glib.types;

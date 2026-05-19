@@ -1,6 +1,7 @@
 /// Module for [Reader] class
 module json.reader;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;

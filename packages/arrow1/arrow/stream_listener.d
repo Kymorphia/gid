@@ -1,6 +1,7 @@
 /// Module for [StreamListener] class
 module arrow.stream_listener;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.record_batch;

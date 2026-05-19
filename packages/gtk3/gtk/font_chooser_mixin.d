@@ -1,6 +1,7 @@
 /// Module for [FontChooser] interface mixin
 module gtk.font_chooser_mixin;
 
+public import gid.basictypes;
 public import gtk.font_chooser_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;

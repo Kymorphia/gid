@@ -1,6 +1,7 @@
 /// Module for [DragIcon] class
 module gtk.drag_icon;
 
+public import gid.basictypes;
 import gdk.drag;
 import gdk.paintable;
 import gid.gid;

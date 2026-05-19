@@ -1,6 +1,7 @@
 /// Module for [Segment] struct
 module gst.segment;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

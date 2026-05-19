@@ -1,6 +1,7 @@
 /// Module for [MiniObject] class
 module gst.mini_object;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

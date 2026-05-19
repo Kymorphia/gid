@@ -1,6 +1,7 @@
 /// Module for [Drag] class
 module gdk.drag;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_formats;
@@ -158,7 +159,7 @@ class Drag : gobject.object.ObjectWrap
       is going on.
       
       Note: if actions include [gdk.types.DragAction.Move], you need to listen for
-      the `signalGdk.Drag::dnd-finished` signal and delete the data at
+      the [gdk.drag.Drag.dndFinished] signal and delete the data at
       the source if [gdk.drag.Drag.getSelectedAction] returns
       [gdk.types.DragAction.Move].
   

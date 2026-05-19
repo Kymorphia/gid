@@ -1,6 +1,7 @@
 /// Module for [FontChooserWidget] class
 module gtk.font_chooser_widget;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action;
 import gobject.gid_builder;

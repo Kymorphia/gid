@@ -1,6 +1,7 @@
 /// Module for [FilterListModel] class
 module gtk.filter_list_model;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;

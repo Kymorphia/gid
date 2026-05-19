@@ -1,6 +1,7 @@
 /// Module for [Surface] class
 module gdk.surface;
 
+public import gid.basictypes;
 import cairo.region;
 import cairo.surface;
 import cairo.types;

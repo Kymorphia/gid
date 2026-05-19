@@ -1,6 +1,7 @@
 /// Module for [FontMap] interface mixin
 module pangocairo.font_map_mixin;
 
+public import gid.basictypes;
 public import pangocairo.font_map_iface_proxy;
 public import cairo.types;
 public import gid.gid;

@@ -1,6 +1,7 @@
 /// Module for [Schema] class
 module secret.schema;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import secret.c.functions;
@@ -34,7 +35,7 @@ import secret.types;
     items that are not stored by the libsecret library. Other libraries such as
     libgnome-keyring don't store the schema name.
     
-    Additional schemas can be defined via the `struct@Schema` structure like this:
+    Additional schemas can be defined via the [secret.schema.Schema] structure like this:
     
     ```c
     // in a header:

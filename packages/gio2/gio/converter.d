@@ -1,6 +1,7 @@
 /// Module for [Converter] interface
 module gio.converter;
 
+public import gid.basictypes;
 public import gio.converter_iface_proxy;
 import gid.gid;
 import gio.c.functions;

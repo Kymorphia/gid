@@ -1,6 +1,7 @@
 /// Module for [HeaderBar] class
 module gtk.header_bar;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -130,7 +131,7 @@ class HeaderBar : gtk.widget.Widget
       Returns: The decoration layout for buttons.
         
         If this property is not set, the
-        `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+        [gtk.settings.Settings.gtkDecorationLayout] setting is used.
   */
   @property string decorationLayout()
   {
@@ -143,7 +144,7 @@ class HeaderBar : gtk.widget.Widget
         propval = The decoration layout for buttons.
           
           If this property is not set, the
-          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          [gtk.settings.Settings.gtkDecorationLayout] setting is used.
   */
   @property void decorationLayout(string propval)
   {
@@ -155,7 +156,7 @@ class HeaderBar : gtk.widget.Widget
       Returns: Whether to show title buttons like close, minimize, maximize.
         
         Which buttons are actually shown and where is determined
-        by the `property@Gtk.HeaderBar:decoration-layout` property,
+        by the [gtk.header_bar.HeaderBar.decorationLayout] property,
         and by the state of the window (e.g. a close button will not
         be shown if the window can't be closed).
   */
@@ -170,7 +171,7 @@ class HeaderBar : gtk.widget.Widget
         propval = Whether to show title buttons like close, minimize, maximize.
           
           Which buttons are actually shown and where is determined
-          by the `property@Gtk.HeaderBar:decoration-layout` property,
+          by the [gtk.header_bar.HeaderBar.decorationLayout] property,
           and by the state of the window (e.g. a close button will not
           be shown if the window can't be closed).
   */
@@ -284,7 +285,7 @@ class HeaderBar : gtk.widget.Widget
       Sets the decoration layout for this header bar.
       
       This property overrides the
-      `propertyGtk.Settings:gtk-decoration-layout` setting.
+      [gtk.settings.Settings.gtkDecorationLayout] setting.
       
       There can be valid reasons for overriding the setting, such
       as a header bar design that does not allow for buttons to take
@@ -353,7 +354,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The decoration layout for buttons.
           
           If this property is not set, the
-          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          [gtk.settings.Settings.gtkDecorationLayout] setting is used.
       Returns: Builder instance for fluent chaining
   */
   T decorationLayout(string propval)
@@ -367,7 +368,7 @@ class HeaderBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to show title buttons like close, minimize, maximize.
           
           Which buttons are actually shown and where is determined
-          by the `property@Gtk.HeaderBar:decoration-layout` property,
+          by the [gtk.header_bar.HeaderBar.decorationLayout] property,
           and by the state of the window (e.g. a close button will not
           be shown if the window can't be closed).
       Returns: Builder instance for fluent chaining

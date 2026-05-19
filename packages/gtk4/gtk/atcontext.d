@@ -1,6 +1,7 @@
 /// Module for [ATContext] class
 module gtk.atcontext;
 
+public import gid.basictypes;
 import gdk.display;
 import gid.gid;
 import gobject.dclosure;

@@ -1,6 +1,7 @@
 /// Module for [Structure] class
 module gst.structure;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.date;
 import glib.types;

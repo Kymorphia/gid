@@ -1,6 +1,7 @@
 /// Module for [FileSaver] class
 module gtksource.file_saver;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;
@@ -17,9 +18,9 @@ import gtksource.file;
 import gtksource.types;
 
 /**
-    Save a `class@Buffer` into a file.
+    Save a [gtksource.buffer.Buffer] into a file.
     
-    A [gtksource.file_saver.FileSaver] object permits to save a `class@Buffer` into a
+    A [gtksource.file_saver.FileSaver] object permits to save a [gtksource.buffer.Buffer] into a
     [gio.file.File].
     
     A file saver should be used only for one save operation, including errors
@@ -171,10 +172,10 @@ class FileSaver : gobject.object.ObjectWrap
 
   /**
       Creates a new #GtkSourceFileSaver object. The buffer will be saved to the
-      `classFile`'s location.
+      [gtksource.file.File]'s location.
       
       This constructor is suitable for a simple "save" operation, when the file
-      already contains a non-null `propertyFile:location`.
+      already contains a non-null [gtksource.file.File.location].
   
       Params:
         buffer = the #GtkSourceBuffer to save.
@@ -192,8 +193,8 @@ class FileSaver : gobject.object.ObjectWrap
       Creates a new #GtkSourceFileSaver object with a target location.
       
       When the file saving is finished successfully, target_location is set to the file's
-      `propertyFile:location` property. If an error occurs, the previous valid
-      location is still available in `classFile`.
+      [gtksource.file.File.location] property. If an error occurs, the previous valid
+      location is still available in [gtksource.file.File].
       
       This constructor is suitable for a "save as" operation, or for saving a new
       buffer for the first time.
@@ -315,7 +316,7 @@ class FileSaver : gobject.object.ObjectWrap
   /**
       Finishes a file saving started with [gtksource.file_saver.FileSaver.saveAsync].
       
-      If the file has been saved successfully, the following `classFile`
+      If the file has been saved successfully, the following [gtksource.file.File]
       properties will be updated: the location, the encoding, the newline type and
       the compression type.
       

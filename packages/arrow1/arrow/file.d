@@ -1,6 +1,7 @@
 /// Module for [File] interface
 module arrow.file;
 
+public import gid.basictypes;
 public import arrow.file_iface_proxy;
 import arrow.c.functions;
 import arrow.c.types;

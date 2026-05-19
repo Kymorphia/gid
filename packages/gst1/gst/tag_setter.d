@@ -1,6 +1,7 @@
 /// Module for [TagSetter] interface
 module gst.tag_setter;
 
+public import gid.basictypes;
 public import gst.tag_setter_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

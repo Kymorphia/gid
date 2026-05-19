@@ -1,6 +1,7 @@
 /// Module for [GLRenderer] class
 module gsk.glrenderer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gsk.c.functions;

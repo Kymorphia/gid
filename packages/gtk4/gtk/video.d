@@ -1,6 +1,7 @@
 /// Module for [Video] class
 module gtk.video;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.file;
 import gobject.gid_builder;

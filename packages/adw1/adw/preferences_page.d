@@ -1,6 +1,7 @@
 /// Module for [PreferencesPage] class
 module adw.preferences_page;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.preferences_group;
@@ -16,7 +17,7 @@ import gtk.constraint_target_mixin;
 import gtk.widget;
 
 /**
-    A page from `class@PreferencesDialog`.
+    A page from [adw.preferences_dialog.PreferencesDialog].
     
     <picture>
       <source srcset="preferences-page-dark.png" media="(prefers-color-scheme: dark)">

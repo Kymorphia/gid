@@ -1,6 +1,7 @@
 /// Module for [Application] class
 module gtk.application;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;
@@ -70,7 +71,7 @@ import gtk.window;
     is available in the GTK source code repository
     
     [gtk.application.Application] optionally registers with a session manager of the
-    users session (if you set the `property@Gtk.Application:register-session`
+    users session (if you set the [gtk.application.Application.registerSession]
     property) and offers various functionality related to the session
     life-cycle.
     
@@ -157,7 +158,7 @@ class Application : gio.application.Application
       Returns: Set this property to `TRUE` to register with the session manager.
         
         This will make GTK track the session state (such as the
-        `property@Gtk.Application:screensaver-active` property).
+        [gtk.application.Application.screensaverActive] property).
   */
   @property bool registerSession()
   {
@@ -170,7 +171,7 @@ class Application : gio.application.Application
         propval = Set this property to `TRUE` to register with the session manager.
           
           This will make GTK track the session state (such as the
-          `property@Gtk.Application:screensaver-active` property).
+          [gtk.application.Application.screensaverActive] property).
   */
   @property void registerSession(bool propval)
   {
@@ -183,7 +184,7 @@ class Application : gio.application.Application
         currently active.
         
         GTK only tracks session state (including this) when
-        `property@Gtk.Application:register-session` is set to true.
+        [gtk.application.Application.registerSession] is set to true.
         
         Tracking the screensaver state is currently only supported on
         Linux.
@@ -577,7 +578,7 @@ class Application : gio.application.Application
   
       Emitted when the session manager is about to end the session.
         
-        This signal is only emitted if `propertyGtk.Application:register-session`
+        This signal is only emitted if [gtk.application.Application.registerSession]
         is `TRUE`. Applications can connect to this signal and call
         [gtk.application.Application.inhibit] with [gtk.types.ApplicationInhibitFlags.Logout]
         to delay the end of the session until state has been saved.
@@ -727,7 +728,7 @@ class ApplicationGidBuilderImpl(T) : gio.application.ApplicationGidBuilderImpl!T
         propval = Set this property to `TRUE` to register with the session manager.
           
           This will make GTK track the session state (such as the
-          `property@Gtk.Application:screensaver-active` property).
+          [gtk.application.Application.screensaverActive] property).
       Returns: Builder instance for fluent chaining
   */
   T registerSession(bool propval)

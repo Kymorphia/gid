@@ -1,6 +1,7 @@
 /// Module for [WebsocketConnection] class
 module soup.websocket_connection;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.iostream;
 import glib.bytes;
@@ -20,9 +21,9 @@ import soup.websocket_extension;
     Provides support for the [WebSocket](http://tools.ietf.org/html/rfc6455)
     protocol.
     
-    To connect to a WebSocket server, create a `class@Session` and call
+    To connect to a WebSocket server, create a [soup.session.Session] and call
     [soup.session.Session.websocketConnectAsync]. To accept WebSocket
-    connections, create a `class@Server` and add a handler to it with
+    connections, create a [soup.server.Server] and add a handler to it with
     [soup.server.Server.addWebsocketHandler].
     
     (Lower-level support is available via
@@ -34,7 +35,7 @@ import soup.websocket_extension;
     #SoupWebsocketConnection handles the details of WebSocket communication. You
     can use [soup.websocket_connection.WebsocketConnection.sendText] and
     [soup.websocket_connection.WebsocketConnection.sendBinary] to send data, and the
-    `signal@WebsocketConnection::message` signal to receive data.
+    [soup.websocket_connection.WebsocketConnection.message] signal to receive data.
     (#SoupWebsocketConnection currently only supports asynchronous I/O.)
 */
 class WebsocketConnection : gobject.object.ObjectWrap
@@ -85,7 +86,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
 
   /**
       Get `extensions` property.
-      Returns: List of `class@WebsocketExtension` objects that are active in the connection.
+      Returns: List of [soup.websocket_extension.WebsocketExtension] objects that are active in the connection.
   */
   @property void* extensions()
   {
@@ -195,7 +196,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   /**
       Close the connection in an orderly fashion.
       
-      Note that until the `signalWebsocketConnection::closed` signal fires, the connection
+      Note that until the [soup.websocket_connection.WebsocketConnection.closed] signal fires, the connection
       is not yet completely closed. The close message is not even sent until the
       main loop runs.
       
@@ -219,7 +220,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       
       This only becomes valid once the WebSocket is in the
       [soup.types.WebsocketState.Closed] state. The value will often be in the
-      `enumWebsocketCloseCode` enumeration, but may also be an application
+      [soup.types.WebsocketCloseCode] enumeration, but may also be an application
       defined close code.
       Returns: the close code or zero.
   */
@@ -523,7 +524,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       Emitted when an error occurred on the WebSocket.
         
         This may be fired multiple times. Fatal errors will be followed by
-        the `signalWebsocketConnection::closed` signal being emitted.
+        the [soup.websocket_connection.WebsocketConnection.closed] signal being emitted.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -683,7 +684,7 @@ class WebsocketConnectionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilder
   /**
       Set `extensions` property.
       Params:
-        propval = List of `class@WebsocketExtension` objects that are active in the connection.
+        propval = List of [soup.websocket_extension.WebsocketExtension] objects that are active in the connection.
       Returns: Builder instance for fluent chaining
   */
   T extensions(void* propval)

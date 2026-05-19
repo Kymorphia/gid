@@ -1,6 +1,7 @@
 /// Module for [Table] class
 module arrow.table;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.boolean_array;
 import arrow.c.functions;

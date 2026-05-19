@@ -1,6 +1,7 @@
 /// Module for [ServerOperation] class
 module gda.server_operation;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

@@ -1,6 +1,7 @@
 /// Module for [LayoutManager] class
 module gtk.layout_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -47,8 +48,8 @@ import gtk.widget;
     }
     ```
     
-    The `property@Gtk.LayoutChild:layout-manager` and
-    `property@Gtk.LayoutChild:child-widget` properties
+    The [gtk.layout_child.LayoutChild.layoutManager] and
+    [gtk.layout_child.LayoutChild.childWidget] properties
     on the newly created [gtk.layout_child.LayoutChild] instance are mandatory. The
     [gtk.layout_manager.LayoutManager] will cache the newly created [gtk.layout_child.LayoutChild] instance
     until the widget is removed from its parent, or the parent removes the

@@ -1,6 +1,7 @@
 /// Module for [WeakRef] class
 module gobject.weak_ref;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

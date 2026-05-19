@@ -1,6 +1,7 @@
 /// Module for [UndoManager] interface mixin
 module gtksource.undo_manager_mixin;
 
+public import gid.basictypes;
 public import gtksource.undo_manager_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;

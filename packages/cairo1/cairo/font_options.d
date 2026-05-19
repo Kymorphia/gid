@@ -1,6 +1,7 @@
 /// Module for [FontOptions] class
 module cairo.font_options;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;

@@ -1,6 +1,7 @@
 /// Module for [SDPBandwidth] class
 module gstsdp.sdpbandwidth;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

@@ -1,6 +1,7 @@
 /// Module for [LockButton] class
 module gtk.lock_button;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.permission;
 import gobject.gid_builder;
@@ -51,11 +52,11 @@ import gtk.types;
     If the user has the permission and cannot drop it, the button is hidden.
     
     The text (and tooltips) that are shown in the various cases can be adjusted
-    with the `property@Gtk.LockButton:text-lock`,
-    `property@Gtk.LockButton:text-unlock`,
-    `property@Gtk.LockButton:tooltip-lock`,
-    `property@Gtk.LockButton:tooltip-unlock` and
-    `property@Gtk.LockButton:tooltip-not-authorized` properties.
+    with the [gtk.lock_button.LockButton.textLock],
+    [gtk.lock_button.LockButton.textUnlock],
+    [gtk.lock_button.LockButton.tooltipLock],
+    [gtk.lock_button.LockButton.tooltipUnlock] and
+    [gtk.lock_button.LockButton.tooltipNotAuthorized] properties.
 
     Deprecated: This widget will be removed in GTK 5
 */

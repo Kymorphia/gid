@@ -1,6 +1,7 @@
 /// Module for [FontFace] class
 module pango.font_face;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

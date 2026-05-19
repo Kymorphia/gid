@@ -1,6 +1,7 @@
 /// Module for [Color] struct
 module gdk.color;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

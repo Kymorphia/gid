@@ -1,6 +1,7 @@
 /// Module for [FileDescriptorBased] interface
 module gio.file_descriptor_based;
 
+public import gid.basictypes;
 public import gio.file_descriptor_based_iface_proxy;
 import gid.gid;
 import gio.c.functions;

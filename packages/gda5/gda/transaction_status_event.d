@@ -1,6 +1,7 @@
 /// Module for [TransactionStatusEvent] class
 module gda.transaction_status_event;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection_event;

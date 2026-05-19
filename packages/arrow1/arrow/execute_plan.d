@@ -1,6 +1,7 @@
 /// Module for [ExecutePlan] class
 module arrow.execute_plan;
 
+public import gid.basictypes;
 import arrow.aggregate_node_options;
 import arrow.c.functions;
 import arrow.c.types;

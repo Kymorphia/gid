@@ -1,6 +1,7 @@
 /// Module for [VideoInfoDmaDrm] class
 module gstvideo.video_info_dma_drm;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.caps;

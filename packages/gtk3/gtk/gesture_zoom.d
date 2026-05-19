@@ -1,6 +1,7 @@
 /// Module for [GestureZoom] class
 module gtk.gesture_zoom;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [MainContext] class
 module glib.main_context;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

@@ -1,6 +1,7 @@
 /// Module for [UserContentFilter] class
 module webkit.user_content_filter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [Endpoint] class
 module arrowflight.endpoint;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.location;

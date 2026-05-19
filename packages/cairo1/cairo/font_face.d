@@ -1,6 +1,7 @@
 /// Module for [FontFace] class
 module cairo.font_face;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;

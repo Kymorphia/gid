@@ -1,6 +1,7 @@
 /// Module for [MetaContext] class
 module gda.meta_context;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

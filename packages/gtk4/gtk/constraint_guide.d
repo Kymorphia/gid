@@ -1,6 +1,7 @@
 /// Module for [ConstraintGuide] class
 module gtk.constraint_guide;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

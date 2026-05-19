@@ -1,6 +1,7 @@
 /// Module for [gid] class
 module gid.gid;
 
+public import gid.basictypes;
 
 public import std.typecons : Flag, No, Tuple, Yes;
 public import std.traits : isCallable, Parameters, ParameterStorageClass, ParameterStorageClassTuple, ReturnType;

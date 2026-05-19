@@ -1,6 +1,7 @@
 /// Module for [PushSrc] class
 module gstbase.push_src;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstbase.base_src;

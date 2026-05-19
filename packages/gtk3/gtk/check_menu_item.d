@@ -1,6 +1,7 @@
 /// Module for [CheckMenuItem] class
 module gtk.check_menu_item;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

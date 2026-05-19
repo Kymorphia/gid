@@ -1,7 +1,7 @@
 //!gir GMime-3.0
 //!info GMime "Provides a core library and set of utilities which may be used for the creation and parsing of messages using the Multipurpose Internet Mail Extension (MIME)."
 //!info homepage https://github.com/jstedfast/gmime/
-//!info docs https://www.kymorphia.com/gid/gmime.html
+//!info docs https://www.kymorphia.com/gid/gid~gmime3/
 //!info capi https://lazka.github.io/pgi-docs/GMime-3.0/index.html
 
 //!kind StreamIOVector StructAlias

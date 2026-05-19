@@ -1,6 +1,7 @@
 /// Module for [WebsocketExtensionDeflate] class
 module soup.websocket_extension_deflate;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import soup.c.functions;
@@ -9,11 +10,11 @@ import soup.types;
 import soup.websocket_extension;
 
 /**
-    A SoupWebsocketExtensionDeflate is a `class@WebsocketExtension`
+    A SoupWebsocketExtensionDeflate is a [soup.websocket_extension.WebsocketExtension]
     implementing permessage-deflate (RFC 7692).
     
-    This extension is used by default in a `class@Session` when `class@WebsocketExtensionManager`
-    feature is present, and always used by `class@Server`.
+    This extension is used by default in a [soup.session.Session] when [soup.websocket_extension_manager.WebsocketExtensionManager]
+    feature is present, and always used by [soup.server.Server].
 */
 class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
 {

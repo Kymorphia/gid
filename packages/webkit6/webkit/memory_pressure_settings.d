@@ -1,6 +1,7 @@
 /// Module for [MemoryPressureSettings] class
 module webkit.memory_pressure_settings;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

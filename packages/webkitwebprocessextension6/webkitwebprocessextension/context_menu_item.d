@@ -1,6 +1,7 @@
 /// Module for [ContextMenuItem] class
 module webkitwebprocessextension.context_menu_item;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action;
 import glib.variant;

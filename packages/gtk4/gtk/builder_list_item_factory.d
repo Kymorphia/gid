@@ -1,6 +1,7 @@
 /// Module for [BuilderListItemFactory] class
 module gtk.builder_list_item_factory;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.gid_builder;

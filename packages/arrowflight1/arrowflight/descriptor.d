@@ -1,6 +1,7 @@
 /// Module for [Descriptor] class
 module arrowflight.descriptor;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

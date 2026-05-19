@@ -1,6 +1,7 @@
 /// Module for [Download] class
 module webkit.download;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;

@@ -1,6 +1,7 @@
 /// Module for [OmniBar] class
 module panel.omni_bar;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.menu_model;
 import gobject.gid_builder;

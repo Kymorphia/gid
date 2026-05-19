@@ -1,6 +1,7 @@
 /// Module for [FileLoader] class
 module gtksource.file_loader;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

@@ -1,6 +1,7 @@
 /// Module for [FontChooser] interface
 module gtk.font_chooser;
 
+public import gid.basictypes;
 public import gtk.font_chooser_iface_proxy;
 import gid.gid;
 import gobject.dclosure;

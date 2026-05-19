@@ -1,6 +1,7 @@
 /// Module for [HandleBox] class
 module gtk.handle_box;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

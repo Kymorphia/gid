@@ -1,6 +1,7 @@
 /// Module for [AuthDomain] class
 module soup.auth_domain;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -13,7 +14,7 @@ import soup.types;
     Server-side authentication.
     
     A #SoupAuthDomain manages authentication for all or part of a
-    `class@Server`. To make a server require authentication, first create
+    [soup.server.Server]. To make a server require authentication, first create
     an appropriate subclass of #SoupAuthDomain, and then add it to the
     server with [soup.server.Server.addAuthDomain].
     
@@ -67,7 +68,7 @@ class AuthDomain : gobject.object.ObjectWrap
 
   /**
       Get `filter` property.
-      Returns: The `callback@AuthDomainFilter` for the domain.
+      Returns: The [soup.types.AuthDomainFilter] for the domain.
   */
   @property soup.types.AuthDomainFilter filter()
   {
@@ -77,7 +78,7 @@ class AuthDomain : gobject.object.ObjectWrap
   /**
       Set `filter` property.
       Params:
-        propval = The `callback@AuthDomainFilter` for the domain.
+        propval = The [soup.types.AuthDomainFilter] for the domain.
   */
   @property void filter(soup.types.AuthDomainFilter propval)
   {
@@ -86,7 +87,7 @@ class AuthDomain : gobject.object.ObjectWrap
 
   /**
       Get `filterData` property.
-      Returns: Data to pass to the `callback@AuthDomainFilter`.
+      Returns: Data to pass to the [soup.types.AuthDomainFilter].
   */
   @property void* filterData()
   {
@@ -96,7 +97,7 @@ class AuthDomain : gobject.object.ObjectWrap
   /**
       Set `filterData` property.
       Params:
-        propval = Data to pass to the `callback@AuthDomainFilter`.
+        propval = Data to pass to the [soup.types.AuthDomainFilter].
   */
   @property void filterData(void* propval)
   {
@@ -105,7 +106,7 @@ class AuthDomain : gobject.object.ObjectWrap
 
   /**
       Get `genericAuthCallback` property.
-      Returns: The `callback@AuthDomainGenericAuthCallback`.
+      Returns: The [soup.types.AuthDomainGenericAuthCallback].
   */
   @property soup.types.AuthDomainGenericAuthCallback genericAuthCallback()
   {
@@ -115,7 +116,7 @@ class AuthDomain : gobject.object.ObjectWrap
   /**
       Set `genericAuthCallback` property.
       Params:
-        propval = The `callback@AuthDomainGenericAuthCallback`.
+        propval = The [soup.types.AuthDomainGenericAuthCallback].
   */
   @property void genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval)
   {
@@ -124,7 +125,7 @@ class AuthDomain : gobject.object.ObjectWrap
 
   /**
       Get `genericAuthData` property.
-      Returns: The data to pass to the `callback@AuthDomainGenericAuthCallback`.
+      Returns: The data to pass to the [soup.types.AuthDomainGenericAuthCallback].
   */
   @property void* genericAuthData()
   {
@@ -134,7 +135,7 @@ class AuthDomain : gobject.object.ObjectWrap
   /**
       Set `genericAuthData` property.
       Params:
-        propval = The data to pass to the `callback@AuthDomainGenericAuthCallback`.
+        propval = The data to pass to the [soup.types.AuthDomainGenericAuthCallback].
   */
   @property void genericAuthData(void* propval)
   {
@@ -166,7 +167,7 @@ class AuthDomain : gobject.object.ObjectWrap
       Mirroring [soup.auth_domain.AuthDomain.covers], this does not check whether or not
       domain *cares* if msg is authorized.
       
-      This is used by `classServer` internally and is probably of no use to
+      This is used by [soup.server.Server] internally and is probably of no use to
       anyone else.
   
       Params:
@@ -203,7 +204,7 @@ class AuthDomain : gobject.object.ObjectWrap
       
       It requests that the client authenticate, and sets msg's status accordingly.
       
-      This is used by `classServer` internally and is probably of no use to
+      This is used by [soup.server.Server] internally and is probably of no use to
       anyone else.
   
       Params:
@@ -219,7 +220,7 @@ class AuthDomain : gobject.object.ObjectWrap
       password.
       
       This would normally be called from a
-      `callbackAuthDomainGenericAuthCallback`.
+      [soup.types.AuthDomainGenericAuthCallback].
   
       Params:
         msg = a #SoupServerMessage
@@ -243,7 +244,7 @@ class AuthDomain : gobject.object.ObjectWrap
       This does not actually look at whether msg *is* authenticated, merely
       whether or not it needs to be.
       
-      This is used by `classServer` internally and is probably of no use to
+      This is used by [soup.server.Server] internally and is probably of no use to
       anyone else.
   
       Params:
@@ -316,7 +317,7 @@ class AuthDomain : gobject.object.ObjectWrap
       unauthenticated users.
       
       You can also set the filter by setting the SoupAuthDomain:filter
-      and `propertyAuthDomain:filter-data properties`, which can also be
+      and [soup.auth_domain.AuthDomain.filterData], which can also be
       used to set the filter at construct time.
   
       Params:
@@ -344,9 +345,9 @@ class AuthDomain : gobject.object.ObjectWrap
       Sets auth_callback as an authentication-handling callback for domain.
       
       Whenever a request comes in to domain which cannot be authenticated via a
-      domain-specific auth callback (eg, `callbackAuthDomainDigestAuthCallback`),
+      domain-specific auth callback (eg, [soup.types.AuthDomainDigestAuthCallback]),
       the generic auth callback will be invoked. See
-      `callbackAuthDomainGenericAuthCallback` for information on what the callback
+      [soup.types.AuthDomainGenericAuthCallback] for information on what the callback
       should do.
   
       Params:
@@ -379,7 +380,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `filter` property.
       Params:
-        propval = The `callback@AuthDomainFilter` for the domain.
+        propval = The [soup.types.AuthDomainFilter] for the domain.
       Returns: Builder instance for fluent chaining
   */
   T filter(soup.types.AuthDomainFilter propval)
@@ -390,7 +391,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `filterData` property.
       Params:
-        propval = Data to pass to the `callback@AuthDomainFilter`.
+        propval = Data to pass to the [soup.types.AuthDomainFilter].
       Returns: Builder instance for fluent chaining
   */
   T filterData(void* propval)
@@ -401,7 +402,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `genericAuthCallback` property.
       Params:
-        propval = The `callback@AuthDomainGenericAuthCallback`.
+        propval = The [soup.types.AuthDomainGenericAuthCallback].
       Returns: Builder instance for fluent chaining
   */
   T genericAuthCallback(soup.types.AuthDomainGenericAuthCallback propval)
@@ -412,7 +413,7 @@ class AuthDomainGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `genericAuthData` property.
       Params:
-        propval = The data to pass to the `callback@AuthDomainGenericAuthCallback`.
+        propval = The data to pass to the [soup.types.AuthDomainGenericAuthCallback].
       Returns: Builder instance for fluent chaining
   */
   T genericAuthData(void* propval)

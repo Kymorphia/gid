@@ -1,6 +1,7 @@
 /// Module for [GLBaseMemory] class
 module gstgl.glbase_memory;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

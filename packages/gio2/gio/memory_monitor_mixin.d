@@ -1,6 +1,7 @@
 /// Module for [MemoryMonitor] interface mixin
 module gio.memory_monitor_mixin;
 
+public import gid.basictypes;
 public import gio.memory_monitor_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;
@@ -57,7 +58,7 @@ public import gobject.object;
     }
     ```
     
-    Don’t forget to disconnect the `signal@Gio.MemoryMonitor::low-memory-warning`
+    Don’t forget to disconnect the [gio.memory_monitor.MemoryMonitor.lowMemoryWarning]
     signal, and unref the [gio.memory_monitor.MemoryMonitor] itself when exiting.
 */
 template MemoryMonitorT()

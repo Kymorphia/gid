@@ -1,6 +1,7 @@
 /// Module for [AppInfo] interface mixin
 module gio.app_info_mixin;
 
+public import gid.basictypes;
 public import gio.app_info_iface_proxy;
 public import gid.gid;
 public import gio.app_launch_context;

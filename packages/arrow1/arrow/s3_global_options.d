@@ -1,6 +1,7 @@
 /// Module for [S3GlobalOptions] class
 module arrow.s3_global_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

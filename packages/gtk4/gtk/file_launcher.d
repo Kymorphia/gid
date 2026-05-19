@@ -1,6 +1,7 @@
 /// Module for [FileLauncher] class
 module gtk.file_launcher;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

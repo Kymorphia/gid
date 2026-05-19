@@ -1,6 +1,7 @@
 /// Module for [UserContentManager] class
 module webkit.user_content_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

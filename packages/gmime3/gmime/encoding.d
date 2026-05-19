@@ -1,6 +1,7 @@
 /// Module for [Encoding] struct
 module gmime.encoding;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

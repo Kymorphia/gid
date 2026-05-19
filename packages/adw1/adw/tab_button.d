@@ -1,6 +1,7 @@
 /// Module for [TabButton] class
 module adw.tab_button;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.tab_view;
@@ -20,7 +21,7 @@ import gtk.constraint_target_mixin;
 import gtk.widget;
 
 /**
-    A button that displays the number of `class@TabView` pages.
+    A button that displays the number of [adw.tab_view.TabView] pages.
     
     <picture>
       <source srcset="tab-button-dark.png" media="(prefers-color-scheme: dark)">
@@ -31,7 +32,7 @@ import gtk.widget;
     [adw.tab_view.TabView], as well as whether one of the inactive pages needs attention.
     
     It's intended to be used as a visible indicator when there's no visible tab
-    bar, typically opening an `class@TabOverview` on click, e.g. via the
+    bar, typically opening an [adw.tab_overview.TabOverview] on click, e.g. via the
     `overview.open` action name:
     
     ```xml
@@ -147,7 +148,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
       Emitted to animate press then release.
         
         This is an action signal. Applications should never connect to this signal,
-        but use the `signalTabButton::clicked` signal.
+        but use the [adw.tab_button.TabButton.clicked] signal.
   
       Params:
         callback = signal callback delegate or function to connect

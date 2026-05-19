@@ -1,6 +1,7 @@
 /// Module for [Registry] class
 module atk.registry;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.object_factory;

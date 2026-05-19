@@ -1,6 +1,7 @@
 /// Module for [MetaTable] class
 module gda.meta_table;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

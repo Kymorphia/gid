@@ -1,6 +1,7 @@
 /// Module for [TabBar] class
 module adw.tab_bar;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.tab_page;
@@ -22,7 +23,7 @@ import gtk.constraint_target_mixin;
 import gtk.widget;
 
 /**
-    A tab bar for `class@TabView`.
+    A tab bar for [adw.tab_view.TabView].
     
     <picture>
       <source srcset="tab-bar-dark.png" media="(prefers-color-scheme: dark)">
@@ -30,7 +31,7 @@ import gtk.widget;
     </picture>
     
     The [adw.tab_bar.TabBar] widget is a tab bar that can be used with conjunction with
-    [adw.tab_view.TabView]. It is typically used as a top bar within `class@ToolbarView`.
+    [adw.tab_view.TabView]. It is typically used as a top bar within [adw.toolbar_view.ToolbarView].
     
     [adw.tab_bar.TabBar] can autohide and can optionally contain action widgets on both
     sides of the tabs.
@@ -84,10 +85,10 @@ class TabBar : gtk.widget.Widget
       Get `autohide` property.
       Returns: Whether the tabs automatically hide.
         
-        If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
+        If set to `TRUE`, the tab bar disappears when [adw.tab_bar.TabBar.view] has 0
         or 1 tab, no pinned tabs, and no tab is being transferred.
         
-        See `property@TabBar:tabs-revealed`.
+        See [adw.tab_bar.TabBar.tabsRevealed].
   */
   @property bool autohide()
   {
@@ -99,10 +100,10 @@ class TabBar : gtk.widget.Widget
       Params:
         propval = Whether the tabs automatically hide.
           
-          If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
+          If set to `TRUE`, the tab bar disappears when [adw.tab_bar.TabBar.view] has 0
           or 1 tab, no pinned tabs, and no tab is being transferred.
           
-          See `property@TabBar:tabs-revealed`.
+          See [adw.tab_bar.TabBar.tabsRevealed].
   */
   @property void autohide(bool propval)
   {
@@ -156,9 +157,9 @@ class TabBar : gtk.widget.Widget
   /**
       Get `extraDragPreferredAction` property.
       Returns: The unique action on the `current-drop` of the
-        `signal@TabBar::extra-drag-drop`.
+        [adw.tab_bar.TabBar.extraDragDrop].
         
-        This property should only be used during a `signal@TabBar::extra-drag-drop`
+        This property should only be used during a [adw.tab_bar.TabBar.extraDragDrop]
         and is always a subset of what was originally passed to
         [adw.tab_bar.TabBar.setupExtraDropTarget].
   */
@@ -249,7 +250,7 @@ class TabBar : gtk.widget.Widget
       Get `tabsRevealed` property.
       Returns: Whether the tabs are currently revealed.
         
-        See `property@TabBar:autohide`.
+        See [adw.tab_bar.TabBar.autohide].
   */
   @property bool tabsRevealed()
   {
@@ -382,7 +383,7 @@ class TabBar : gtk.widget.Widget
   /**
       Gets whether the tabs are currently revealed.
       
-      See `propertyTabBar:autohide`.
+      See [adw.tab_bar.TabBar.autohide].
       Returns: whether the tabs are currently revealed
   */
   bool getTabsRevealed()
@@ -407,10 +408,10 @@ class TabBar : gtk.widget.Widget
   /**
       Sets whether the tabs automatically hide.
       
-      If set to `TRUE`, the tab bar disappears when `propertyTabBar:view` has 0
+      If set to `TRUE`, the tab bar disappears when [adw.tab_bar.TabBar.view] has 0
       or 1 tab, no pinned tabs, and no tab is being transferred.
       
-      See `propertyTabBar:tabs-revealed`.
+      See [adw.tab_bar.TabBar.tabsRevealed].
   
       Params:
         autohide = whether the tabs automatically hide
@@ -505,7 +506,7 @@ class TabBar : gtk.widget.Widget
       If a tab is hovered for a certain period of time while dragging the content,
       it will be automatically selected.
       
-      The `signalTabBar::extra-drag-drop` signal can be used to handle the drop.
+      The [adw.tab_bar.TabBar.extraDragDrop] signal can be used to handle the drop.
   
       Params:
         actions = the supported actions
@@ -583,7 +584,7 @@ class TabBar : gtk.widget.Widget
   
       This signal is emitted when the dropped content is preloaded.
         
-        In order for data to be preloaded, `propertyTabBar:extra-drag-preload`
+        In order for data to be preloaded, [adw.tab_bar.TabBar.extraDragPreload]
         must be set to `TRUE`.
         
         The content must be of one of the types set up via
@@ -649,10 +650,10 @@ class TabBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Whether the tabs automatically hide.
           
-          If set to `TRUE`, the tab bar disappears when `property@TabBar:view` has 0
+          If set to `TRUE`, the tab bar disappears when [adw.tab_bar.TabBar.view] has 0
           or 1 tab, no pinned tabs, and no tab is being transferred.
           
-          See `property@TabBar:tabs-revealed`.
+          See [adw.tab_bar.TabBar.tabsRevealed].
       Returns: Builder instance for fluent chaining
   */
   T autohide(bool propval)

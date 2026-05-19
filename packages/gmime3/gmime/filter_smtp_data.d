@@ -1,6 +1,7 @@
 /// Module for [FilterSmtpData] class
 module gmime.filter_smtp_data;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

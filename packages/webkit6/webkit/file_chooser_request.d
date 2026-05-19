@@ -1,6 +1,7 @@
 /// Module for [FileChooserRequest] class
 module webkit.file_chooser_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

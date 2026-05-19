@@ -1,6 +1,7 @@
 /// Module for [Path] class
 module gsk.path;
 
+public import gid.basictypes;
 import cairo.context;
 import gid.gid;
 import glib.string_;

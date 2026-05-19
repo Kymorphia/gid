@@ -1,6 +1,7 @@
 /// Module for [WidgetAccessible] class
 module gtk.widget_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;

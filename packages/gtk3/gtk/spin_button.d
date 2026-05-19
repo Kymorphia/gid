@@ -1,6 +1,7 @@
 /// Module for [SpinButton] class
 module gtk.spin_button;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

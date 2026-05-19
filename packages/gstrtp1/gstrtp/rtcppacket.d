@@ -1,6 +1,7 @@
 /// Module for [RTCPPacket] class
 module gstrtp.rtcppacket;
 
+public import gid.basictypes;
 import gid.gid;
 import gstrtp.c.functions;
 import gstrtp.c.types;

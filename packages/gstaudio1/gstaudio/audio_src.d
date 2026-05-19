@@ -1,6 +1,7 @@
 /// Module for [AudioSrc] class
 module gstaudio.audio_src;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstaudio.audio_base_src;

@@ -1,6 +1,7 @@
 /// Module for [Tuples] struct
 module glib.tuples;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

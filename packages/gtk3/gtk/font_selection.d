@@ -1,6 +1,7 @@
 /// Module for [FontSelection] class
 module gtk.font_selection;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

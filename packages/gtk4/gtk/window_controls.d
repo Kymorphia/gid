@@ -1,6 +1,7 @@
 /// Module for [WindowControls] class
 module gtk.window_controls;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;
@@ -57,7 +58,7 @@ import gtk.widget;
     A [gtk.window_controls.WindowControls]' CSS node is called windowcontrols. It contains
     subnodes corresponding to each title button. Which of the title buttons
     exist and where they are placed exactly depends on the desktop environment
-    and `property@Gtk.WindowControls:decoration-layout` value.
+    and [gtk.window_controls.WindowControls.decorationLayout] value.
     
     When [gtk.window_controls.WindowControls.empty] is true, it gets the .empty
     style class.
@@ -108,7 +109,7 @@ class WindowControls : gtk.widget.Widget
       Returns: The decoration layout for window buttons.
         
         If this property is not set, the
-        `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+        [gtk.settings.Settings.gtkDecorationLayout] setting is used.
   */
   @property string decorationLayout()
   {
@@ -121,7 +122,7 @@ class WindowControls : gtk.widget.Widget
         propval = The decoration layout for window buttons.
           
           If this property is not set, the
-          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          [gtk.settings.Settings.gtkDecorationLayout] setting is used.
   */
   @property void decorationLayout(string propval)
   {
@@ -212,7 +213,7 @@ class WindowControls : gtk.widget.Widget
   /**
       Sets the decoration layout for the title buttons.
       
-      This overrides the `propertyGtk.Settings:gtk-decoration-layout`
+      This overrides the [gtk.settings.Settings.gtkDecorationLayout]
       setting.
       
       The format of the string is button names, separated by commas.
@@ -238,7 +239,7 @@ class WindowControls : gtk.widget.Widget
   /**
       Determines which part of decoration layout the [gtk.window_controls.WindowControls] uses.
       
-      See `propertyGtk.WindowControls:decoration-layout`.
+      See [gtk.window_controls.WindowControls.decorationLayout].
   
       Params:
         side = a side
@@ -260,7 +261,7 @@ class WindowControlsGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The decoration layout for window buttons.
           
           If this property is not set, the
-          `property@Gtk.Settings:gtk-decoration-layout` setting is used.
+          [gtk.settings.Settings.gtkDecorationLayout] setting is used.
       Returns: Builder instance for fluent chaining
   */
   T decorationLayout(string propval)

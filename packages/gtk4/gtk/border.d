@@ -1,6 +1,7 @@
 /// Module for [Border] struct
 module gtk.border;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;

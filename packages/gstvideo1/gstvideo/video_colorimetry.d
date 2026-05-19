@@ -1,6 +1,7 @@
 /// Module for [VideoColorimetry] struct
 module gstvideo.video_colorimetry;
 
+public import gid.basictypes;
 import gid.gid;
 import gstvideo.c.functions;
 import gstvideo.c.types;

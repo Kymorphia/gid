@@ -1,6 +1,7 @@
 /// Module for [FilterHTML] class
 module gmime.filter_html;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

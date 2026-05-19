@@ -1,6 +1,7 @@
 /// Module for [ApplicationWindow] class
 module adw.application_window;
 
+public import gid.basictypes;
 import adw.breakpoint;
 import adw.c.functions;
 import adw.c.types;
@@ -39,9 +40,9 @@ import gtk.widget;
     </picture>
     
     [adw.application_window.ApplicationWindow] is a [gtk.application_window.ApplicationWindow] subclass providing
-    the same features as `class@Window`.
+    the same features as [adw.window.Window].
     
-    See `class@Window` for details.
+    See [adw.window.Window] for details.
     
     Example of an [adw.application_window.ApplicationWindow] UI definition:
     

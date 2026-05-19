@@ -1,6 +1,7 @@
 /// Module for [PermissionRequest] interface mixin
 module webkit.permission_request_mixin;
 
+public import gid.basictypes;
 public import webkit.permission_request_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

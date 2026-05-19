@@ -1,6 +1,7 @@
 /// Module for [LevelBarAccessible] class
 module gtk.level_bar_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.value;

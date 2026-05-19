@@ -1,6 +1,7 @@
 /// Module for [Regex] class
 module glib.regex;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

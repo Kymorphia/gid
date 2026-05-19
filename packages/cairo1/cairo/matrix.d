@@ -1,6 +1,7 @@
 /// Module for [Matrix] struct
 module cairo.matrix;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;

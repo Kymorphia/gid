@@ -1,6 +1,7 @@
 /// Module for [ShortcutController] class
 module gtk.shortcut_controller;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import gio.list_model;

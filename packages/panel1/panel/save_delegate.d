@@ -1,6 +1,7 @@
 /// Module for [SaveDelegate] class
 module panel.save_delegate;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

@@ -1,6 +1,7 @@
 /// Module for [GLBaseMemoryAllocator] class
 module gstgl.glbase_memory_allocator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.allocator;

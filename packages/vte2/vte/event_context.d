@@ -1,6 +1,7 @@
 /// Module for [EventContext] class
 module vte.event_context;
 
+public import gid.basictypes;
 import gdk.event;
 import gid.gid;
 import vte.c.functions;

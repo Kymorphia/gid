@@ -1,6 +1,7 @@
 /// Module for [FileInputStream] class
 module arrow.file_input_stream;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.file;

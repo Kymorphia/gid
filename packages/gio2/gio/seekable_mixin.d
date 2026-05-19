@@ -1,6 +1,7 @@
 /// Module for [Seekable] interface mixin
 module gio.seekable_mixin;
 
+public import gid.basictypes;
 public import gio.seekable_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [AudioCdSrcTrack] class
 module gstaudio.audio_cd_src_track;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.tag_list;
 import gstaudio.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [EditableText] interface mixin
 module atk.editable_text_mixin;
 
+public import gid.basictypes;
 public import atk.editable_text_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

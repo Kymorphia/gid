@@ -1,6 +1,7 @@
 /// Module for [Icon] interface mixin
 module gio.icon_mixin;
 
+public import gid.basictypes;
 public import gio.icon_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

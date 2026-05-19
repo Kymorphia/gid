@@ -1,6 +1,7 @@
 /// Module for [NetAddressMeta] class
 module gstnet.net_address_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.socket_address;
 import gst.meta;

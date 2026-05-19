@@ -1,6 +1,7 @@
 /// Module for [PathDescriptor] class
 module arrowflight.path_descriptor;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.descriptor;

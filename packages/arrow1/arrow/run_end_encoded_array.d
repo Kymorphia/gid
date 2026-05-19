@@ -1,6 +1,7 @@
 /// Module for [RunEndEncodedArray] class
 module arrow.run_end_encoded_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;

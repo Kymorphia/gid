@@ -1,6 +1,7 @@
 /// Module for [TabArray] class
 module pango.tab_array;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.c.functions;

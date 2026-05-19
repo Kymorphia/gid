@@ -1,6 +1,7 @@
 /// Module for [ByteWriter] class
 module gstbase.byte_writer;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gstbase.byte_reader;

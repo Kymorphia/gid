@@ -1,6 +1,7 @@
 /// Module for [ShortcutsGroup] class
 module gtk.shortcuts_group;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -132,7 +133,7 @@ class ShortcutsGroup : gtk.box.Box
       Get `view` property.
       Returns: An optional view that the shortcuts in this group are relevant for.
         
-        The group will be hidden if the `property@Gtk.ShortcutsWindow:view-name`
+        The group will be hidden if the [gtk.shortcuts_window.ShortcutsWindow.viewName]
         property does not match the view of this group.
         
         Set this to null to make the group always visible.
@@ -147,7 +148,7 @@ class ShortcutsGroup : gtk.box.Box
       Params:
         propval = An optional view that the shortcuts in this group are relevant for.
           
-          The group will be hidden if the `property@Gtk.ShortcutsWindow:view-name`
+          The group will be hidden if the [gtk.shortcuts_window.ShortcutsWindow.viewName]
           property does not match the view of this group.
           
           Set this to null to make the group always visible.
@@ -220,7 +221,7 @@ class ShortcutsGroupGidBuilderImpl(T) : gtk.box.BoxGidBuilderImpl!T
       Params:
         propval = An optional view that the shortcuts in this group are relevant for.
           
-          The group will be hidden if the `property@Gtk.ShortcutsWindow:view-name`
+          The group will be hidden if the [gtk.shortcuts_window.ShortcutsWindow.viewName]
           property does not match the view of this group.
           
           Set this to null to make the group always visible.

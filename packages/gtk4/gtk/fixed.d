@@ -1,6 +1,7 @@
 /// Module for [Fixed] class
 module gtk.fixed;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gsk.transform;

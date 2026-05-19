@@ -1,6 +1,7 @@
 /// Module for [StaticResource] class
 module gio.static_resource;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

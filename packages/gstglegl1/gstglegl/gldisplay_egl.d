@@ -1,6 +1,7 @@
 /// Module for [GLDisplayEGL] class
 module gstglegl.gldisplay_egl;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

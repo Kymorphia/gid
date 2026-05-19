@@ -1,6 +1,7 @@
 /// Module for [AsyncResult] interface
 module gio.async_result;
 
+public import gid.basictypes;
 public import gio.async_result_iface_proxy;
 import gid.gid;
 import gio.c.functions;

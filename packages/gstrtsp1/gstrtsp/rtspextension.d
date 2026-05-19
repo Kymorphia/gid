@@ -1,6 +1,7 @@
 /// Module for [RTSPExtension] interface
 module gstrtsp.rtspextension;
 
+public import gid.basictypes;
 public import gstrtsp.rtspextension_iface_proxy;
 import gid.gid;
 import gobject.dclosure;

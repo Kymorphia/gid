@@ -1,6 +1,7 @@
 /// Module for [DBusPropertyInfo] class
 module gio.dbus_property_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

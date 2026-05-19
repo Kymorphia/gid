@@ -1,6 +1,7 @@
 /// Module for [WriterProperties] class
 module parquet.writer_properties;
 
+public import gid.basictypes;
 import arrow.types;
 import gid.gid;
 import gobject.gid_builder;

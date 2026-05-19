@@ -1,6 +1,7 @@
 /// Module for [SelectionModel] interface
 module gtk.selection_model;
 
+public import gid.basictypes;
 public import gtk.selection_model_iface_proxy;
 import gid.gid;
 import gobject.dclosure;
@@ -23,15 +24,15 @@ import gtk.types;
     A [gtk.selection_model.SelectionModel] supports a single boolean per item indicating if an item is
     selected or not. This can be queried via [gtk.selection_model.SelectionModel.isSelected].
     When the selected state of one or more items changes, the model will emit the
-    `signal@Gtk.SelectionModel::selection-changed` signal by calling the
+    [gtk.selection_model.SelectionModel.selectionChanged] signal by calling the
     [gtk.selection_model.SelectionModel.selectionChanged] function. The positions given
     in that signal may have their selection state changed, though that is not a
     requirement. If new items added to the model via the
-    `signal@Gio.ListModel::items-changed` signal are selected or not is up to the
+    [gio.list_model.ListModel.itemsChanged] signal are selected or not is up to the
     implementation.
     
-    Note that items added via `signal@Gio.ListModel::items-changed` may already
-    be selected and no `signal@Gtk.SelectionModel::selection-changed` will be
+    Note that items added via [gio.list_model.ListModel.itemsChanged] may already
+    be selected and no [gtk.selection_model.SelectionModel.selectionChanged] will be
     emitted for them. So to track which items are selected, it is necessary to
     listen to both signals.
     
@@ -77,7 +78,7 @@ interface SelectionModel
       This function is an optimization for
       [gtk.selection_model.SelectionModel.getSelection] when you are only
       interested in part of the model's selected state. A common use
-      case is in response to the `signalGtk.SelectionModel::selection-changed`
+      case is in response to the [gtk.selection_model.SelectionModel.selectionChanged]
       signal.
   
       Params:
@@ -132,7 +133,7 @@ interface SelectionModel
       Helper function for implementations of [gtk.selection_model.SelectionModel].
       
       Call this when the selection changes to emit the
-      `signalGtk.SelectionModel::selection-changed` signal.
+      [gtk.selection_model.SelectionModel.selectionChanged] signal.
   
       Params:
         position = the first changed item

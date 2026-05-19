@@ -1,6 +1,7 @@
 /// Module for [CellAccessibleParent] interface mixin
 module gtk.cell_accessible_parent_mixin;
 
+public import gid.basictypes;
 public import gtk.cell_accessible_parent_iface_proxy;
 public import atk.object;
 public import atk.relation_set;

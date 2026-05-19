@@ -1,6 +1,7 @@
 /// Module for [PrintOperationPreview] interface
 module gtk.print_operation_preview;
 
+public import gid.basictypes;
 public import gtk.print_operation_preview_iface_proxy;
 import gid.gid;
 import gobject.dclosure;

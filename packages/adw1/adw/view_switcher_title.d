@@ -1,6 +1,7 @@
 /// Module for [ViewSwitcherTitle] class
 module adw.view_switcher_title;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -25,21 +26,21 @@ import gtk.widget;
     </picture>
     
     A widget letting you switch between multiple views contained by a
-    `class@ViewStack` via an `class@ViewSwitcher`.
+    [adw.view_stack.ViewStack] via an [adw.view_switcher.ViewSwitcher].
     
-    It is designed to be used as the title widget of a `class@HeaderBar`, and
+    It is designed to be used as the title widget of a [adw.header_bar.HeaderBar], and
     will display the window's title when the window is too narrow to fit the view
     switcher e.g. on mobile phones, or if there are less than two views.
     
     In order to center the title in narrow windows, the header bar should have
-    `property@HeaderBar:centering-policy` set to
+    [adw.header_bar.HeaderBar.centeringPolicy] set to
     [adw.types.CenteringPolicy.Strict].
     
     [adw.view_switcher_title.ViewSwitcherTitle] is intended to be used together with
-    `class@ViewSwitcherBar`.
+    [adw.view_switcher_bar.ViewSwitcherBar].
     
-    A common use case is to bind the `property@ViewSwitcherBar:reveal` property
-    to `property@ViewSwitcherTitle:title-visible` to automatically reveal the
+    A common use case is to bind the [adw.view_switcher_bar.ViewSwitcherBar.reveal] property
+    to [adw.view_switcher_title.ViewSwitcherTitle.titleVisible] to automatically reveal the
     view switcher bar when the title label is displayed in place of the view
     switcher, as follows:
     
@@ -200,7 +201,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
       Returns: Whether the title is currently visible.
         
         If the title is visible, it means the view switcher is hidden an it may be
-        wanted to show an alternative switcher, e.g. a `class@ViewSwitcherBar`.
+        wanted to show an alternative switcher, e.g. a [adw.view_switcher_bar.ViewSwitcherBar].
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
   */
@@ -305,7 +306,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
       Gets whether the title of self is currently visible.
       
       If the title is visible, it means the view switcher is hidden an it may be
-      wanted to show an alternative switcher, e.g. a `classViewSwitcherBar`.
+      wanted to show an alternative switcher, e.g. a [adw.view_switcher_bar.ViewSwitcherBar].
       Returns: whether the title of self is currently visible
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)

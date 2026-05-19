@@ -1,6 +1,7 @@
 /// Module for [NetTimePacket] struct
 module gstnet.net_time_packet;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.socket;
 import gio.socket_address;

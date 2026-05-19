@@ -1,6 +1,7 @@
 /// Module for [FrameHeader] interface
 module panel.frame_header;
 
+public import gid.basictypes;
 public import panel.frame_header_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

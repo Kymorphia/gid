@@ -1,6 +1,7 @@
 /// Module for [Value] class
 module gobject.value;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.variant;
 import gobject.boxed;

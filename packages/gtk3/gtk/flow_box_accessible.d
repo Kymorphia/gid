@@ -1,6 +1,7 @@
 /// Module for [FlowBoxAccessible] class
 module gtk.flow_box_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.selection;

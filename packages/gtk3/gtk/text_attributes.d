@@ -1,6 +1,7 @@
 /// Module for [TextAttributes] class
 module gtk.text_attributes;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;

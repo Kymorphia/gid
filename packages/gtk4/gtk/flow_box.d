@@ -1,6 +1,7 @@
 /// Module for [FlowBox] class
 module gtk.flow_box;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;

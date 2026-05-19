@@ -1,6 +1,7 @@
 /// Module for [FileFilterInfo] class
 module gtk.file_filter_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;

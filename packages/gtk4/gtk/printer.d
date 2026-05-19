@@ -1,6 +1,7 @@
 /// Module for [Printer] class
 module gtk.printer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -438,7 +439,7 @@ class Printer : gobject.object.ObjectWrap
       Requests the printer details.
       
       When the details are available, the
-      `signalGtk.Printer::details-acquired` signal
+      [gtk.printer.Printer.detailsAcquired] signal
       will be emitted on printer.
   */
   void requestDetails()

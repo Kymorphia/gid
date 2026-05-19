@@ -1,6 +1,7 @@
 /// Module for [NetworkProxySettings] class
 module webkit.network_proxy_settings;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

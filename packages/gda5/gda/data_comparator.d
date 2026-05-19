@@ -1,6 +1,7 @@
 /// Module for [DataComparator] class
 module gda.data_comparator;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_model;

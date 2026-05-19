@@ -1,6 +1,7 @@
 /// Module for [VideoOrientation] interface
 module gstvideo.video_orientation;
 
+public import gid.basictypes;
 public import gstvideo.video_orientation_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

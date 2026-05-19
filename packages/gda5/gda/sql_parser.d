@@ -1,6 +1,7 @@
 /// Module for [SqlParser] class
 module gda.sql_parser;
 
+public import gid.basictypes;
 import gda.batch;
 import gda.c.functions;
 import gda.c.types;

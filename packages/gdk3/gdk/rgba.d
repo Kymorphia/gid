@@ -1,6 +1,7 @@
 /// Module for [RGBA] struct
 module gdk.rgba;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

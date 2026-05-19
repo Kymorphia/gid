@@ -1,6 +1,7 @@
 /// Module for [CryptoContext] class
 module gmime.crypto_context;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gmime.c.functions;

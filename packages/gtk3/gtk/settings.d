@@ -1,6 +1,7 @@
 /// Module for [Settings] class
 module gtk.settings;
 
+public import gid.basictypes;
 import gdk.screen;
 import gid.gid;
 import glib.string_;

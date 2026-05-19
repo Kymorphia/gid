@@ -1,6 +1,7 @@
 /// Module for [MessageHeadersIter] class
 module soup.message_headers_iter;
 
+public import gid.basictypes;
 import gid.gid;
 import soup.c.functions;
 import soup.c.types;
@@ -39,7 +40,7 @@ class MessageHeadersIter
   }
 
   /**
-      Yields the next name/value pair in the `structMessageHeaders` being
+      Yields the next name/value pair in the [soup.message_headers.MessageHeaders] being
       iterated by iter.
       
       If iter has already yielded the last header, then

@@ -1,6 +1,7 @@
 /// Module for [Language] class
 module pango.language;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.c.functions;

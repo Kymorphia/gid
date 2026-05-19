@@ -1,6 +1,7 @@
 /// Module for [Column] class
 module gda.column;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

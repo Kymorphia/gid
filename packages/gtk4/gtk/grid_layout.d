@@ -1,6 +1,7 @@
 /// Module for [GridLayout] class
 module gtk.grid_layout;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

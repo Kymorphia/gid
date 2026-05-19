@@ -1,6 +1,7 @@
 /// Module for [StreamNull] class
 module gmime.stream_null;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

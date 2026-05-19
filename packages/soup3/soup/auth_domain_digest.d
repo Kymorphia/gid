@@ -1,6 +1,7 @@
 /// Module for [AuthDomainDigest] class
 module soup.auth_domain_digest;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -55,7 +56,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
 
   /**
       Get `authCallback` property.
-      Returns: The `callback@AuthDomainDigestAuthCallback`.
+      Returns: The [soup.types.AuthDomainDigestAuthCallback].
   */
   @property soup.types.AuthDomainDigestAuthCallback authCallback()
   {
@@ -65,7 +66,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
   /**
       Set `authCallback` property.
       Params:
-        propval = The `callback@AuthDomainDigestAuthCallback`.
+        propval = The [soup.types.AuthDomainDigestAuthCallback].
   */
   @property void authCallback(soup.types.AuthDomainDigestAuthCallback propval)
   {
@@ -74,7 +75,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
 
   /**
       Get `authData` property.
-      Returns: The data to pass to the `callback@AuthDomainDigestAuthCallback`.
+      Returns: The data to pass to the [soup.types.AuthDomainDigestAuthCallback].
   */
   @property void* authData()
   {
@@ -84,7 +85,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
   /**
       Set `authData` property.
       Params:
-        propval = The data to pass to the `callback@AuthDomainDigestAuthCallback`.
+        propval = The data to pass to the [soup.types.AuthDomainDigestAuthCallback].
   */
   @property void authData(void* propval)
   {
@@ -134,8 +135,8 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       based on callback's return value.
       
       You can also set the auth callback by setting the
-      `propertyAuthDomainDigest:auth-callback` and
-      `propertyAuthDomainDigest:auth-data` properties, which can also be used to
+      [soup.auth_domain_digest.AuthDomainDigest.authCallback] and
+      [soup.auth_domain_digest.AuthDomainDigest.authData] properties, which can also be used to
       set the callback at construct time.
   
       Params:
@@ -168,7 +169,7 @@ class AuthDomainDigestGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderI
   /**
       Set `authCallback` property.
       Params:
-        propval = The `callback@AuthDomainDigestAuthCallback`.
+        propval = The [soup.types.AuthDomainDigestAuthCallback].
       Returns: Builder instance for fluent chaining
   */
   T authCallback(soup.types.AuthDomainDigestAuthCallback propval)
@@ -179,7 +180,7 @@ class AuthDomainDigestGidBuilderImpl(T) : soup.auth_domain.AuthDomainGidBuilderI
   /**
       Set `authData` property.
       Params:
-        propval = The data to pass to the `callback@AuthDomainDigestAuthCallback`.
+        propval = The data to pass to the [soup.types.AuthDomainDigestAuthCallback].
       Returns: Builder instance for fluent chaining
   */
   T authData(void* propval)

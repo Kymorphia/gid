@@ -1,6 +1,7 @@
 /// Module for [RecordBatchReader] class
 module arrow.record_batch_reader;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.record_batch;

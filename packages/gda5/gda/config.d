@@ -1,6 +1,7 @@
 /// Module for [Config] class
 module gda.config;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_model;

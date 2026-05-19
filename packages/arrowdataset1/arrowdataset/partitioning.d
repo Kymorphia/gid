@@ -1,6 +1,7 @@
 /// Module for [Partitioning] class
 module arrowdataset.partitioning;
 
+public import gid.basictypes;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;

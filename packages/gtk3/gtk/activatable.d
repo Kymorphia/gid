@@ -1,6 +1,7 @@
 /// Module for [Activatable] interface
 module gtk.activatable;
 
+public import gid.basictypes;
 public import gtk.activatable_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

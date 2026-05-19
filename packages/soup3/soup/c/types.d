@@ -71,7 +71,7 @@ enum SoupCookieJarAcceptPolicy
         http://www.third-party.com is loaded from that page reject any cookie that
         it could try to set. For libsoup to be able to tell apart first party
         cookies from the rest, the application must call
-        [soup.message.Message.setFirstParty] on each outgoing `class@Message`, setting
+        [soup.message.Message.setFirstParty] on each outgoing [soup.message.Message], setting
         the [glib.uri.Uri] of the main document. If no first party is set in a
         message when this policy is in effect, cookies will be assumed to be third
         party by default.
@@ -264,25 +264,25 @@ enum SoupMessageFlags : uint
       Requests that the message should be
         sent on a newly-created connection, not reusing an existing
         persistent connection. Note that messages with non-idempotent
-        `property@Message:method`s behave this way by default, unless
+        [soup.message.Message.method]s behave this way by default, unless
         #SOUP_MESSAGE_IDEMPOTENT is set.
   */
   NewConnection = 4,
 
   /**
       The message is considered idempotent,
-        regardless its `property@Message:method`, and allows reuse of existing
+        regardless its [soup.message.Message.method], and allows reuse of existing
         idle connections, instead of always requiring a new one, unless
         #SOUP_MESSAGE_NEW_CONNECTION is set.
   */
   Idempotent = 8,
 
   /**
-      The `class@AuthManager` should not use
+      The [soup.auth_manager.AuthManager] should not use
         the credentials cache for this message, neither to use cached credentials
         to automatically authenticate this message nor to cache the credentials
         after the message is successfully authenticated. This applies to both server
-        and proxy authentication. Note that `signal@Message::authenticate` signal will
+        and proxy authentication. Note that [soup.message.Message.authenticate] signal will
         be emitted, if you want to disable authentication for a message use
         [soup.message.Message.disableFeature] passing #SOUP_TYPE_AUTH_MANAGER instead.
   */
@@ -317,7 +317,7 @@ enum SoupMessageHeadersType
 }
 
 /**
-    Priorities that can be set on a `class@Message` to instruct the message queue
+    Priorities that can be set on a [soup.message.Message] to instruct the message queue
     to process it before any other message with lower priority.
 */
 enum SoupMessagePriority
@@ -923,7 +923,7 @@ enum SoupWebsocketCloseCode
 }
 
 /**
-    The type of a `class@WebsocketConnection`.
+    The type of a [soup.websocket_connection.WebsocketConnection].
 */
 enum SoupWebsocketConnectionType
 {
@@ -944,7 +944,7 @@ enum SoupWebsocketConnectionType
 }
 
 /**
-    The type of data contained in a `signal@WebsocketConnection::message` signal.
+    The type of data contained in a [soup.websocket_connection.WebsocketConnection.message] signal.
 */
 enum SoupWebsocketDataType
 {
@@ -1018,7 +1018,7 @@ enum SoupWebsocketState
     used.
     
     #SoupAuth objects store the authentication data associated with a given bit
-    of web space. They are created automatically by `class@Session`.
+    of web space. They are created automatically by [soup.session.Session].
 */
 struct SoupAuth
 {
@@ -1029,7 +1029,7 @@ struct SoupAuth
 /**
     HTTP "Basic" authentication.
     
-    `class@Session`s support this by default; if you want to disable
+    [soup.session.Session]s support this by default; if you want to disable
     support for it, call [soup.session.Session.removeFeatureByType],
     passing `SOUP_TYPE_AUTH_BASIC`.
 */
@@ -1075,7 +1075,7 @@ struct SoupAuthClass
 /**
     HTTP "Digest" authentication.
     
-    `class@Session`s support this by default; if you want to disable
+    [soup.session.Session]s support this by default; if you want to disable
     support for it, call [soup.session.Session.removeFeatureByType]
     passing `SOUP_TYPE_AUTH_DIGEST`.
 */
@@ -1085,7 +1085,7 @@ struct SoupAuthDigest;
     Server-side authentication.
     
     A #SoupAuthDomain manages authentication for all or part of a
-    `class@Server`. To make a server require authentication, first create
+    [soup.server.Server]. To make a server require authentication, first create
     an appropriate subclass of #SoupAuthDomain, and then add it to the
     server with [soup.server.Server.addAuthDomain].
     
@@ -1158,8 +1158,8 @@ struct SoupAuthDomainDigestClass
 /**
     HTTP client-side authentication handler.
     
-    #SoupAuthManager is the `iface@SessionFeature` that handles HTTP
-    authentication for a `class@Session`.
+    #SoupAuthManager is the [soup.session_feature.SessionFeature] that handles HTTP
+    authentication for a [soup.session.Session].
     
     A #SoupAuthManager is added to the session by default, and normally
     you don't need to worry about it at all. However, if you want to
@@ -1186,7 +1186,7 @@ struct SoupAuthManagerClass
 /**
     HTTP-based NTLM authentication.
     
-    `class@Session`s do not support this type by default; if you want to
+    [soup.session.Session]s do not support this type by default; if you want to
     enable support for it, call [soup.session.Session.addFeatureByType],
     passing `SOUP_TYPE_AUTH_NTLM`.
 */
@@ -1196,7 +1196,7 @@ struct SoupAuthNTLM;
     HTTP-based GSS-Negotiate authentication, as defined by
     [RFC 4559](https://datatracker.ietf.org/doc/html/rfc4559).
     
-    `class@Session`s do not support this type by default; if you want to
+    [soup.session.Session]s do not support this type by default; if you want to
     enable support for it, call [soup.session.Session.addFeatureByType],
     passing `SOUP_TYPE_AUTH_NEGOTIATE`.
     
@@ -1268,8 +1268,8 @@ struct SoupContentDecoderClass
     
     A #SoupContentSniffer tries to detect the actual content type of
     the files that are being downloaded by looking at some of the data
-    before the `class@Message` emits its `signal@Message::got-headers` signal.
-    #SoupContentSniffer implements `iface@SessionFeature`, so you can add
+    before the [soup.message.Message] emits its [soup.message.Message.gotHeaders] signal.
+    #SoupContentSniffer implements [soup.session_feature.SessionFeature], so you can add
     content sniffing to a session with [soup.session.Session.addFeature] or
     [soup.session.Session.addFeatureByType].
 */
@@ -1286,8 +1286,8 @@ struct SoupContentSnifferClass
     Implements HTTP cookies, as described by
     [RFC 6265](http://tools.ietf.org/html/rfc6265.txt).
     
-    To have a `class@Session` handle cookies for your appliction
-    automatically, use a `class@CookieJar`.
+    To have a [soup.session.Session] handle cookies for your appliction
+    automatically, use a [soup.cookie_jar.CookieJar].
     
     @name and @value will be set for all cookies. If the cookie is
     generated from a string that appears to have no name, then @name
@@ -1313,9 +1313,9 @@ struct SoupCookie;
 /**
     Automatic cookie handling for SoupSession.
     
-    A #SoupCookieJar stores `struct@Cookie`s and arrange for them to be sent with
-    the appropriate `class@Message`s. #SoupCookieJar implements
-    `iface@SessionFeature`, so you can add a cookie jar to a session with
+    A #SoupCookieJar stores [soup.cookie.Cookie]s and arrange for them to be sent with
+    the appropriate [soup.message.Message]s. #SoupCookieJar implements
+    [soup.session_feature.SessionFeature], so you can add a cookie jar to a session with
     [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
     
     Note that the base #SoupCookieJar class does not support any form
@@ -1349,7 +1349,7 @@ struct SoupCookieJarClass
 /**
     Database-based Cookie Jar.
     
-    #SoupCookieJarDB is a `class@CookieJar` that reads cookies from and writes
+    #SoupCookieJarDB is a [soup.cookie_jar.CookieJar] that reads cookies from and writes
     them to a sqlite database in the new Mozilla format.
     
     (This is identical to `SoupCookieJarSqlite` in
@@ -1368,7 +1368,7 @@ struct SoupCookieJarDBClass
 /**
     Text-file-based ("cookies.txt") Cookie Jar
     
-    #SoupCookieJarText is a `class@CookieJar` that reads cookies from and writes
+    #SoupCookieJarText is a [soup.cookie_jar.CookieJar] that reads cookies from and writes
     them to a text file in format similar to Mozilla's "cookies.txt".
 */
 struct SoupCookieJarText;
@@ -1381,10 +1381,10 @@ struct SoupCookieJarTextClass
 }
 
 /**
-    Automatic HTTP Strict Transport Security enforcing for `class@Session`.
+    Automatic HTTP Strict Transport Security enforcing for [soup.session.Session].
     
     A #SoupHSTSEnforcer stores HSTS policies and enforces them when
-    required. #SoupHSTSEnforcer implements `iface@SessionFeature`, so you
+    required. #SoupHSTSEnforcer implements [soup.session_feature.SessionFeature], so you
     can add an HSTS enforcer to a session with
     [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
     
@@ -1393,15 +1393,15 @@ struct SoupCookieJarTextClass
     valid values. #SoupHSTSEnforcer will forget those destinations
     upon expiry or when the server requests it.
     
-    When the `class@Session` the #SoupHSTSEnforcer is attached to queues or
+    When the [soup.session.Session] the #SoupHSTSEnforcer is attached to queues or
     restarts a message, the #SoupHSTSEnforcer will rewrite the URI to HTTPS if
     the destination is a known HSTS host and is contacted over an insecure
     transport protocol (HTTP). Users of #SoupHSTSEnforcer are advised to listen
-    to changes in the `property@Message:uri` property in order to be aware of
+    to changes in the [soup.message.Message.uri] property in order to be aware of
     changes in the message URI.
     
     Note that #SoupHSTSEnforcer does not support any form of long-term
-    HSTS policy persistence. See `class@HSTSEnforcerDB` for a persistent
+    HSTS policy persistence. See [soup.hstsenforcer_db.HSTSEnforcerDB] for a persistent
     enforcer.
 */
 struct SoupHSTSEnforcer
@@ -1422,7 +1422,7 @@ struct SoupHSTSEnforcerClass
 
   /**
       The @is_persistent function advertises whether the enforcer is persistent or
-      whether changes made to it will be lost when the underlying `class@Session` is finished.
+      whether changes made to it will be lost when the underlying [soup.session.Session] is finished.
   */
   extern(C) gboolean function(SoupHSTSEnforcer* hstsEnforcer) isPersistent;
 
@@ -1447,7 +1447,7 @@ struct SoupHSTSEnforcerClass
 /**
     Persistent HTTP Strict Transport Security enforcer.
     
-    #SoupHSTSEnforcerDB is a `class@HSTSEnforcer` that uses a SQLite
+    #SoupHSTSEnforcerDB is a [soup.hstsenforcer.HSTSEnforcer] that uses a SQLite
     database as a backend for persistency.
 */
 struct SoupHSTSEnforcerDB;
@@ -1483,7 +1483,7 @@ struct SoupHSTSPolicy;
 /**
     Debug logging support
     
-    #SoupLogger watches a `class@Session` and logs the HTTP traffic that
+    #SoupLogger watches a [soup.session.Session] and logs the HTTP traffic that
     it generates, for debugging purposes. Many applications use an
     environment variable to determine whether or not to use
     #SoupLogger, and to determine the amount of debugging output.
@@ -1516,7 +1516,7 @@ struct SoupHSTSPolicy;
     request was sent, or the response fully received.
     
     The `Soup-Debug` line gives further debugging information about the
-    `class@Session`, `class@Message`, and [gio.socket.Socket] involved; the hex
+    [soup.session.Session], [soup.message.Message], and [gio.socket.Socket] involved; the hex
     numbers are the addresses of the objects in question (which may be useful if
     you are running in a debugger). The decimal IDs are simply counters that
     uniquely identify objects across the lifetime of the #SoupLogger. In
@@ -1525,19 +1525,19 @@ struct SoupHSTSPolicy;
     
     Currently, the request half of the message is logged just before
     the first byte of the request gets written to the network (from the
-    `signal@Message::starting` signal).
+    [soup.message.Message.starting] signal).
     
     The response is logged just after the last byte of the response body is read
-    from the network (from the `signal@Message::got-body` or
-    `signal@Message::got-informational` signal), which means that the
-    `signal@Message::got-headers` signal, and anything triggered off it (such as
+    from the network (from the [soup.message.Message.gotBody] or
+    [soup.message.Message.gotInformational] signal), which means that the
+    [soup.message.Message.gotHeaders] signal, and anything triggered off it (such as
     #SoupMessage::authenticate) will be emitted *before* the response headers are
     actually logged.
     
-    If the response doesn't happen to trigger the `signal@Message::got-body` nor
-    `signal@Message::got-informational` signals due to, for example, a
+    If the response doesn't happen to trigger the [soup.message.Message.gotBody] nor
+    [soup.message.Message.gotInformational] signals due to, for example, a
     cancellation before receiving the last byte of the response body, the
-    response will still be logged on the event of the `signal@Message::finished`
+    response will still be logged on the event of the [soup.message.Message.finished]
     signal.
 */
 struct SoupLogger;
@@ -1558,14 +1558,14 @@ struct SoupLoggerClass
     You would create a #SoupMessage with [soup.message.Message.new_] or
     [soup.message.Message.newFromUri], set up its fields appropriately, and send it.
     
-    `property@Message:status-code` will normally be a `enum@Status` value, eg,
+    [soup.message.Message.statusCode] will normally be a [soup.types.Status] value, eg,
     [soup.types.Status.Ok], though of course it might actually be an unknown status
-    code. `property@Message:reason-phrase` is the actual text returned from the
+    code. [soup.message.Message.reasonPhrase] is the actual text returned from the
     server, which may or may not correspond to the "standard" description of
     @status_code. At any rate, it is almost certainly not localized, and not very
     descriptive even if it is in the user's language; you should not use
-    `property@Message:reason-phrase` in user-visible messages. Rather, you should
-    look at `property@Message:status-code`, and determine an end-user-appropriate
+    [soup.message.Message.reasonPhrase] in user-visible messages. Rather, you should
+    look at [soup.message.Message.statusCode], and determine an end-user-appropriate
     message based on that and on what you were trying to do.
     
     Note that libsoup's terminology here does not quite match the HTTP
@@ -1577,7 +1577,7 @@ struct SoupMessage;
 
 /**
     #SoupMessageBody represents the request or response body of a
-    `class@Message`.
+    [soup.message.Message].
     
     Note that while @length always reflects the full length of the
     message body, @data is normally null, and will only be filled in
@@ -1631,10 +1631,10 @@ struct SoupMessageHeadersIter
 }
 
 /**
-    Contains metrics collected while loading a `class@Message` either from the
+    Contains metrics collected while loading a [soup.message.Message] either from the
     network or the disk cache.
     
-    Metrics are not collected by default for a `class@Message`, you need to add the
+    Metrics are not collected by default for a [soup.message.Message], you need to add the
     flag [soup.types.MessageFlags.CollectMetrics] to enable the feature.
     
     Temporal metrics are expressed as a monotonic time and always start with a
@@ -1642,8 +1642,8 @@ struct SoupMessageHeadersIter
     An event can be 0 because it hasn't happened yet, because it's optional or
     because the load failed before the event reached.
     
-    Size metrics are expressed in bytes and are updated while the `class@Message` is
-    being loaded. You can connect to different `class@Message` signals to get the
+    Size metrics are expressed in bytes and are updated while the [soup.message.Message] is
+    being loaded. You can connect to different [soup.message.Message] signals to get the
     final result of every value.
 */
 struct SoupMessageMetrics;
@@ -1669,7 +1669,7 @@ struct SoupMultipart;
     
     This adds support for the multipart responses. For handling the
     multiple parts the user needs to wrap the [gio.input_stream.InputStream] obtained by
-    sending the request with a `class@MultipartInputStream` and use
+    sending the request with a [soup.multipart_input_stream.MultipartInputStream] and use
     [soup.multipart_input_stream.MultipartInputStream.nextPart] before reading. Responses
     which are not wrapped will be treated like non-multipart responses.
     
@@ -1729,16 +1729,16 @@ struct SoupRange
     
     When a new connection is accepted (or a new request is started on
     an existing persistent connection), the #SoupServer will emit
-    `signal@Server::request-started` and then begin processing the request
+    [soup.server.Server.requestStarted] and then begin processing the request
     as described below, but note that once the message is assigned a
     status-code, then callbacks after that point will be
     skipped. Note also that it is not defined when the callbacks happen
-    relative to various `class@ServerMessage` signals.
+    relative to various [soup.server_message.ServerMessage] signals.
     
     Once the headers have been read, #SoupServer will check if there is
-    a `class@AuthDomain` `(qv)` covering the Request-URI; if so, and if the
+    a [soup.auth_domain.AuthDomain] `(qv)` covering the Request-URI; if so, and if the
     message does not contain suitable authorization, then the
-    `class@AuthDomain` will set a status of [soup.types.Status.Unauthorized] on
+    [soup.auth_domain.AuthDomain] will set a status of [soup.types.Status.Unauthorized] on
     the message.
     
     After checking for authorization, #SoupServer will look for "early"
@@ -1776,8 +1776,8 @@ struct SoupRange
     given a status of [soup.types.Status.InternalServerError] (because at
     least one handler ran, but returned without assigning a status).
     
-    Finally, the server will emit `signal@Server::request-finished` (or
-    `signal@Server::request-aborted` if an I/O error occurred before
+    Finally, the server will emit [soup.server.Server.requestFinished] (or
+    [soup.server.Server.requestAborted] if an I/O error occurred before
     handling was completed).
     
     If you want to handle the special "*" URI (eg, "OPTIONS *"), you
@@ -1785,7 +1785,7 @@ struct SoupRange
     will not be used for that case.
     
     If you want to process https connections in addition to (or instead
-    of) http connections, you can set the `property@Server:tls-certificate`
+    of) http connections, you can set the [soup.server.Server.tlsCertificate]
     property.
     
     Once the server is set up, make one or more calls to
@@ -1833,9 +1833,9 @@ struct SoupServerClass
     An HTTP server request and response pair.
     
     A SoupServerMessage represents an HTTP message that is being sent or
-    received on a `class@Server`.
+    received on a [soup.server.Server].
     
-    `class@Server` will create [soup.server_message.ServerMessage]s automatically for
+    [soup.server.Server] will create [soup.server_message.ServerMessage]s automatically for
     incoming requests, which your application will receive via handlers.
     
     Note that libsoup's terminology here does not quite match the HTTP
@@ -1865,25 +1865,25 @@ struct SoupServerMessageClass
     reason you might need multiple sessions is if you need to have
     multiple independent authentication contexts. (Eg, you are
     connecting to a server and authenticating as two different users at
-    different times; the easiest way to ensure that each `class@Message`
+    different times; the easiest way to ensure that each [soup.message.Message]
     is sent with the authentication information you intended is to use
     one session for the first user, and a second session for the other
     user.)
     
     Additional #SoupSession functionality is provided by
-    `iface@SessionFeature` objects, which can be added to a session with
+    [soup.session_feature.SessionFeature] objects, which can be added to a session with
     [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType]
-    For example, `class@Logger` provides support for
-    logging HTTP traffic, `class@ContentDecoder` provides support for
-    compressed response handling, and `class@ContentSniffer` provides
+    For example, [soup.logger.Logger] provides support for
+    logging HTTP traffic, [soup.content_decoder.ContentDecoder] provides support for
+    compressed response handling, and [soup.content_sniffer.ContentSniffer] provides
     support for HTML5-style response body content sniffing.
-    Additionally, subtypes of `class@Auth` can be added
+    Additionally, subtypes of [soup.auth.Auth] can be added
     as features, to add support for additional authentication types.
     
-    All [soup.session.Session]s are created with a `class@AuthManager`, and support
+    All [soup.session.Session]s are created with a [soup.auth_manager.AuthManager], and support
     for `SOUP_TYPE_AUTH_BASIC` and `SOUP_TYPE_AUTH_DIGEST`. Additionally,
     sessions using the plain #SoupSession class (rather than one of its deprecated
-    subtypes) have a `class@ContentDecoder` by default.
+    subtypes) have a [soup.content_decoder.ContentDecoder] by default.
     
     Note that all async methods will invoke their callbacks on the thread-default
     context at the time of the function call.
@@ -1932,20 +1932,20 @@ struct SoupSessionClass
 }
 
 /**
-    Interface for miscellaneous `class@Session` features.
+    Interface for miscellaneous [soup.session.Session] features.
     
     #SoupSessionFeature is the interface used by classes that extend
-    the functionality of a `class@Session`. Some features like HTTP
+    the functionality of a [soup.session.Session]. Some features like HTTP
     authentication handling are implemented internally via
     [soup.session_feature.SessionFeature]s. Other features can be added to the session
-    by the application. (Eg, `class@Logger`, `class@CookieJar`.)
+    by the application. (Eg, [soup.logger.Logger], [soup.cookie_jar.CookieJar].)
     
     See [soup.session.Session.addFeature], etc, to add a feature to a session.
 */
 struct SoupSessionFeature;
 
 /**
-    The interface implemented by `iface@SessionFeature`s.
+    The interface implemented by [soup.session_feature.SessionFeature]s.
 */
 struct SoupSessionFeatureInterface;
 
@@ -1955,9 +1955,9 @@ struct SoupSessionFeatureInterface;
     Provides support for the [WebSocket](http://tools.ietf.org/html/rfc6455)
     protocol.
     
-    To connect to a WebSocket server, create a `class@Session` and call
+    To connect to a WebSocket server, create a [soup.session.Session] and call
     [soup.session.Session.websocketConnectAsync]. To accept WebSocket
-    connections, create a `class@Server` and add a handler to it with
+    connections, create a [soup.server.Server] and add a handler to it with
     [soup.server.Server.addWebsocketHandler].
     
     (Lower-level support is available via
@@ -1969,13 +1969,13 @@ struct SoupSessionFeatureInterface;
     #SoupWebsocketConnection handles the details of WebSocket communication. You
     can use [soup.websocket_connection.WebsocketConnection.sendText] and
     [soup.websocket_connection.WebsocketConnection.sendBinary] to send data, and the
-    `signal@WebsocketConnection::message` signal to receive data.
+    [soup.websocket_connection.WebsocketConnection.message] signal to receive data.
     (#SoupWebsocketConnection currently only supports asynchronous I/O.)
 */
 struct SoupWebsocketConnection;
 
 /**
-    The abstract base class for `class@WebsocketConnection`.
+    The abstract base class for [soup.websocket_connection.WebsocketConnection].
 */
 struct SoupWebsocketConnectionClass
 {
@@ -2043,11 +2043,11 @@ struct SoupWebsocketExtensionClass
 }
 
 /**
-    A SoupWebsocketExtensionDeflate is a `class@WebsocketExtension`
+    A SoupWebsocketExtensionDeflate is a [soup.websocket_extension.WebsocketExtension]
     implementing permessage-deflate (RFC 7692).
     
-    This extension is used by default in a `class@Session` when `class@WebsocketExtensionManager`
-    feature is present, and always used by `class@Server`.
+    This extension is used by default in a [soup.session.Session] when [soup.websocket_extension_manager.WebsocketExtensionManager]
+    feature is present, and always used by [soup.server.Server].
 */
 struct SoupWebsocketExtensionDeflate;
 
@@ -2059,8 +2059,8 @@ struct SoupWebsocketExtensionDeflateClass
 }
 
 /**
-    SoupWebsocketExtensionManager is the `iface@SessionFeature` that handles WebSockets
-    extensions for a `class@Session`.
+    SoupWebsocketExtensionManager is the [soup.session_feature.SessionFeature] that handles WebSockets
+    extensions for a [soup.session.Session].
     
     A #SoupWebsocketExtensionManager is added to the session by default, and normally
     you don't need to worry about it at all. However, if you want to

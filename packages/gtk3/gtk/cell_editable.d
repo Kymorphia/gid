@@ -1,6 +1,7 @@
 /// Module for [CellEditable] interface
 module gtk.cell_editable;
 
+public import gid.basictypes;
 public import gtk.cell_editable_iface_proxy;
 import gdk.event;
 import gid.gid;

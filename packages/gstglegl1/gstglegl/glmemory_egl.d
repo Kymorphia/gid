@@ -1,6 +1,7 @@
 /// Module for [GLMemoryEGL] class
 module gstglegl.glmemory_egl;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstglegl.c.functions;

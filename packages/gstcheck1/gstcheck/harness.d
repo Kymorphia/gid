@@ -1,6 +1,7 @@
 /// Module for [Harness] class
 module gstcheck.harness;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [SocketConnectable] interface mixin
 module gio.socket_connectable_mixin;
 
+public import gid.basictypes;
 public import gio.socket_connectable_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

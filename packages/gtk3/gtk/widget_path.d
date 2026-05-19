@@ -1,6 +1,7 @@
 /// Module for [WidgetPath] class
 module gtk.widget_path;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

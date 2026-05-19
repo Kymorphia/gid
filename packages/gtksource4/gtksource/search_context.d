@@ -1,6 +1,7 @@
 /// Module for [SearchContext] class
 module gtksource.search_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

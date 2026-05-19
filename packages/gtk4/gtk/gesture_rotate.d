@@ -1,6 +1,7 @@
 /// Module for [GestureRotate] class
 module gtk.gesture_rotate;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -13,7 +14,7 @@ import gtk.types;
     [gtk.gesture_rotate.GestureRotate] is a [gtk.gesture.Gesture] for 2-finger rotations.
     
     Whenever the angle between both handled sequences changes, the
-    `signal@Gtk.GestureRotate::angle-changed` signal is emitted.
+    [gtk.gesture_rotate.GestureRotate.angleChanged] signal is emitted.
 */
 class GestureRotate : gtk.gesture.Gesture
 {

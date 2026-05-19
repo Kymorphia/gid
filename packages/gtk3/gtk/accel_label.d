@@ -1,6 +1,7 @@
 /// Module for [AccelLabel] class
 module gtk.accel_label;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.types;

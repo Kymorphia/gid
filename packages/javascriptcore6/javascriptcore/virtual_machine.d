@@ -1,6 +1,7 @@
 /// Module for [VirtualMachine] class
 module javascriptcore.virtual_machine;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [ContentDeserializer] class
 module gdk.content_deserializer;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

@@ -1,6 +1,7 @@
 /// Module for [AudioDownmixMeta] class
 module gstaudio.audio_downmix_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

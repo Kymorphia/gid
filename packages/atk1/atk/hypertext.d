@@ -1,6 +1,7 @@
 /// Module for [Hypertext] interface
 module atk.hypertext;
 
+public import gid.basictypes;
 public import atk.hypertext_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

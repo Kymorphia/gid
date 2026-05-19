@@ -1,6 +1,7 @@
 /// Module for [InetAddressMask] class
 module gio.inet_address_mask;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

@@ -1,6 +1,7 @@
 /// Module for [SDPMessage] class
 module gstsdp.sdpmessage;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.caps;

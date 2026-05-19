@@ -1,6 +1,7 @@
 /// Module for [EGLImage] class
 module gstglegl.eglimage;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstgl.glcontext;

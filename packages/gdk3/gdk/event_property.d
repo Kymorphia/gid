@@ -1,6 +1,7 @@
 /// Module for [EventProperty] class
 module gdk.event_property;
 
+public import gid.basictypes;
 import gdk.atom;
 import gdk.c.functions;
 import gdk.c.types;

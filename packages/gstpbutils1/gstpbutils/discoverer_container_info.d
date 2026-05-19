@@ -1,6 +1,7 @@
 /// Module for [DiscovererContainerInfo] class
 module gstpbutils.discoverer_container_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.tag_list;

@@ -1,6 +1,7 @@
 /// Module for [VideoConverter] class
 module gstvideo.video_converter;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.structure;
 import gstvideo.c.functions;

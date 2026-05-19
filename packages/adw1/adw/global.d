@@ -31,7 +31,7 @@ bool getEnableAnimations(gtk.widget.Widget widget)
     For example, in libadwaita version 1.2.3 this is 1.
     
     This function is in the library, so it represents the libadwaita library your
-    code is running against. Contrast with the `constMAJOR_VERSION` constant,
+    code is running against. Contrast with the [adw.types.MAJOR_VERSION] constant,
     which represents the major version of the libadwaita headers you have
     included when compiling your code.
     Returns: the major version number of the Adwaita library
@@ -49,7 +49,7 @@ uint getMajorVersion()
     For example, in libadwaita version 1.2.3 this is 3.
     
     This function is in the library, so it represents the libadwaita library your
-    code is running against. Contrast with the `constMAJOR_VERSION` constant,
+    code is running against. Contrast with the [adw.types.MAJOR_VERSION] constant,
     which represents the micro version of the libadwaita headers you have
     included when compiling your code.
     Returns: the micro version number of the Adwaita library
@@ -67,7 +67,7 @@ uint getMicroVersion()
     For example, in libadwaita version 1.2.3 this is 2.
     
     This function is in the library, so it represents the libadwaita library your
-    code is running against. Contrast with the `constMAJOR_VERSION` constant,
+    code is running against. Contrast with the [adw.types.MAJOR_VERSION] constant,
     which represents the minor version of the libadwaita headers you have
     included when compiling your code.
     Returns: the minor version number of the Adwaita library
@@ -85,7 +85,7 @@ uint getMinorVersion()
     This function can be used instead of `funcGtk.init` as it initializes GTK
     implicitly.
     
-    There's no need to call this function if you're using `classApplication`.
+    There's no need to call this function if you're using [adw.application.Application].
     
     If Libadwaita has already been initialized, the function will simply return.
     

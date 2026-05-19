@@ -1,6 +1,7 @@
 /// Module for [CompletionWords] class
 module gtksource.completion_words;
 
+public import gid.basictypes;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gobject.gid_builder;

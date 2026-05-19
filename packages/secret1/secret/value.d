@@ -1,6 +1,7 @@
 /// Module for [Value] class
 module secret.value;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

@@ -1,6 +1,7 @@
 /// Module for [Atom] class
 module gdk.atom;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

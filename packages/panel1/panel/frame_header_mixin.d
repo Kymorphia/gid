@@ -1,6 +1,7 @@
 /// Module for [FrameHeader] interface mixin
 module panel.frame_header_mixin;
 
+public import gid.basictypes;
 public import panel.frame_header_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

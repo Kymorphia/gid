@@ -1,6 +1,7 @@
 /// Module for [TypeFindFactory] class
 module gst.type_find_factory;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [ChunkedArray] class
 module arrow.chunked_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.boolean_array;
 import arrow.c.functions;

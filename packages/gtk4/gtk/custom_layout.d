@@ -1,6 +1,7 @@
 /// Module for [CustomLayout] class
 module gtk.custom_layout;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

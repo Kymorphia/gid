@@ -1,6 +1,7 @@
 /// Module for [Schema] class
 module arrow.schema;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.field;

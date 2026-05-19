@@ -1,6 +1,7 @@
 /// Module for [DClosure] class
 module gobject.dclosure;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

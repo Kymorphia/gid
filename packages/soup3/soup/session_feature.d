@@ -1,6 +1,7 @@
 /// Module for [SessionFeature] interface
 module soup.session_feature;
 
+public import gid.basictypes;
 public import soup.session_feature_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;
@@ -9,13 +10,13 @@ import soup.c.types;
 import soup.types;
 
 /**
-    Interface for miscellaneous `class@Session` features.
+    Interface for miscellaneous [soup.session.Session] features.
     
     #SoupSessionFeature is the interface used by classes that extend
-    the functionality of a `class@Session`. Some features like HTTP
+    the functionality of a [soup.session.Session]. Some features like HTTP
     authentication handling are implemented internally via
     [soup.session_feature.SessionFeature]s. Other features can be added to the session
-    by the application. (Eg, `class@Logger`, `class@CookieJar`.)
+    by the application. (Eg, [soup.logger.Logger], [soup.cookie_jar.CookieJar].)
     
     See [soup.session.Session.addFeature], etc, to add a feature to a session.
 */

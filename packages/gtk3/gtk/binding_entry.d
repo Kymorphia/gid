@@ -1,6 +1,7 @@
 /// Module for [BindingEntry] class
 module gtk.binding_entry;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import glib.types;

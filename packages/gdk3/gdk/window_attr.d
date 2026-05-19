@@ -1,6 +1,7 @@
 /// Module for [WindowAttr] class
 module gdk.window_attr;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.cursor;

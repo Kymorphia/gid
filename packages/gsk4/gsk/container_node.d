@@ -1,6 +1,7 @@
 /// Module for [ContainerNode] class
 module gsk.container_node;
 
+public import gid.basictypes;
 import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;

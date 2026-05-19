@@ -1,6 +1,7 @@
 /// Module for [HeaderBarAccessible] class
 module gtk.header_bar_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;

@@ -1,6 +1,7 @@
 /// Module for [Animation] class
 module adw.animation;
 
+public import gid.basictypes;
 import adw.animation_target;
 import adw.c.functions;
 import adw.c.types;
@@ -19,13 +20,13 @@ import gtk.widget;
     animation hasn't been started yet, is playing, paused or finished.
     
     Currently there are two concrete animation types:
-    `class@TimedAnimation` and `class@SpringAnimation`.
+    [adw.timed_animation.TimedAnimation] and [adw.spring_animation.SpringAnimation].
     
     [adw.animation.Animation] will automatically skip the animation if
-    `property@Animation:widget` is unmapped, or if
-    `property@Gtk.Settings:gtk-enable-animations` is `FALSE`.
+    [adw.animation.Animation.widget] is unmapped, or if
+    [gtk.settings.Settings.gtkEnableAnimations] is `FALSE`.
     
-    The `signal@Animation::done` signal can be used to perform an action after
+    The [adw.animation.Animation.done] signal can be used to perform an action after
     the animation ends, for example hiding a widget after animating its
     [gtk.widget.Widget.opacity] to 0.
     
@@ -105,7 +106,7 @@ class Animation : gobject.object.ObjectWrap
         This can be useful for cases where animation is essential, like spinners,
         or in demo applications. Most other animations should keep it enabled.
         
-        See `property@Gtk.Settings:gtk-enable-animations`.
+        See [gtk.settings.Settings.gtkEnableAnimations].
   */
   @property bool followEnableAnimationsSetting()
   {
@@ -123,7 +124,7 @@ class Animation : gobject.object.ObjectWrap
           This can be useful for cases where animation is essential, like spinners,
           or in demo applications. Most other animations should keep it enabled.
           
-          See `property@Gtk.Settings:gtk-enable-animations`.
+          See [gtk.settings.Settings.gtkEnableAnimations].
   */
   @property void followEnableAnimationsSetting(bool propval)
   {
@@ -259,7 +260,7 @@ class Animation : gobject.object.ObjectWrap
       
       Does nothing if the current state of self isn't [adw.types.AnimationState.Playing].
       
-      Sets `propertyAnimation:state` to [adw.types.AnimationState.Paused].
+      Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Paused].
   */
   void pause()
   {
@@ -273,10 +274,10 @@ class Animation : gobject.object.ObjectWrap
       the beginning. This allows to easily play an animation regardless of whether
       it's already playing or not.
       
-      Sets `propertyAnimation:state` to [adw.types.AnimationState.Playing].
+      Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Playing].
       
-      The animation will be automatically skipped if `propertyAnimation:widget` is
-      unmapped, or if `propertyGtk.Settings:gtk-enable-animations` is `FALSE`.
+      The animation will be automatically skipped if [adw.animation.Animation.widget] is
+      unmapped, or if [gtk.settings.Settings.gtkEnableAnimations] is `FALSE`.
       
       As such, it's not guaranteed that the animation will actually run. For
       example, when using `funcGLib.idle_add` and starting an animation
@@ -291,7 +292,7 @@ class Animation : gobject.object.ObjectWrap
   /**
       Resets the animation for self.
       
-      Sets `propertyAnimation:state` to [adw.types.AnimationState.Idle].
+      Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Idle].
   */
   void reset()
   {
@@ -304,7 +305,7 @@ class Animation : gobject.object.ObjectWrap
       This function must only be used if the animation has been paused with
       [adw.animation.Animation.pause].
       
-      Sets `propertyAnimation:state` to [adw.types.AnimationState.Playing].
+      Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Playing].
   */
   void resume()
   {
@@ -320,7 +321,7 @@ class Animation : gobject.object.ObjectWrap
       This can be useful for cases where animation is essential, like spinners, or
       in demo applications. Most other animations should keep it enabled.
       
-      See `propertyGtk.Settings:gtk-enable-animations`.
+      See [gtk.settings.Settings.gtkEnableAnimations].
   
       Params:
         setting = whether to follow the global setting
@@ -345,10 +346,10 @@ class Animation : gobject.object.ObjectWrap
       Skips the animation for self.
       
       If the animation hasn't been started yet, is playing, or is paused, instantly
-      skips the animation to the end and causes `signalAnimation::done` to be
+      skips the animation to the end and causes [adw.animation.Animation.done] to be
       emitted.
       
-      Sets `propertyAnimation:state` to [adw.types.AnimationState.Finished].
+      Sets [adw.animation.Animation.state] to [adw.types.AnimationState.Finished].
   */
   void skip()
   {
@@ -409,7 +410,7 @@ class AnimationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           This can be useful for cases where animation is essential, like spinners,
           or in demo applications. Most other animations should keep it enabled.
           
-          See `property@Gtk.Settings:gtk-enable-animations`.
+          See [gtk.settings.Settings.gtkEnableAnimations].
       Returns: Builder instance for fluent chaining
   */
   T followEnableAnimationsSetting(bool propval)

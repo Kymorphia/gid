@@ -1,6 +1,7 @@
 /// Module for [PrintSetup] class
 module gtk.print_setup;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gobject.object;

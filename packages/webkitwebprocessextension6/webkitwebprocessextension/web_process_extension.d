@@ -1,6 +1,7 @@
 /// Module for [WebProcessExtension] class
 module webkitwebprocessextension.web_process_extension;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

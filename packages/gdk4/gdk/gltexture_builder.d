@@ -1,6 +1,7 @@
 /// Module for [GLTextureBuilder] class
 module gdk.gltexture_builder;
 
+public import gid.basictypes;
 import cairo.region;
 import gdk.c.functions;
 import gdk.c.types;
@@ -182,7 +183,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
 
   /**
       Get `updateRegion` property.
-      Returns: The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+      Returns: The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
   */
   @property cairo.region.Region updateRegion()
   {
@@ -192,7 +193,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   /**
       Set `updateRegion` property.
       Params:
-        propval = The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+        propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
   */
   @property void updateRegion(cairo.region.Region propval)
   {
@@ -201,7 +202,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
 
   /**
       Get `updateTexture` property.
-      Returns: The texture `property@Gdk.GLTextureBuilder:update-region` is an update for.
+      Returns: The texture [gdk.gltexture_builder.GLTextureBuilder.updateRegion] is an update for.
   */
   @property gdk.texture.Texture updateTexture()
   {
@@ -211,7 +212,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   /**
       Set `updateTexture` property.
       Params:
-        propval = The texture `property@Gdk.GLTextureBuilder:update-region` is an update for.
+        propval = The texture [gdk.gltexture_builder.GLTextureBuilder.updateRegion] is an update for.
   */
   @property void updateTexture(gdk.texture.Texture propval)
   {
@@ -495,7 +496,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
 
   /**
       Sets the region to be updated by this texture. Together with
-      `propertyGdk.GLTextureBuilder:update-texture` this describes an
+      [gdk.gltexture_builder.GLTextureBuilder.updateTexture] this describes an
       update of a previous texture.
       
       When rendering animations of large textures, it is possible that
@@ -614,7 +615,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
   /**
       Set `updateRegion` property.
       Params:
-        propval = The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+        propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
       Returns: Builder instance for fluent chaining
   */
   T updateRegion(cairo.region.Region propval)
@@ -625,7 +626,7 @@ class GLTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImp
   /**
       Set `updateTexture` property.
       Params:
-        propval = The texture `property@Gdk.GLTextureBuilder:update-region` is an update for.
+        propval = The texture [gdk.gltexture_builder.GLTextureBuilder.updateRegion] is an update for.
       Returns: Builder instance for fluent chaining
   */
   T updateTexture(gdk.texture.Texture propval)

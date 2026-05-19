@@ -1,6 +1,7 @@
 /// Module for [Completion] class
 module gtksource.completion;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -24,25 +25,25 @@ import pango.attr_list;
     documentation), that is displayed when the "Details" button is
     clicked.
     
-    Proposals are created via a `iface@CompletionProvider`. There can
-    be for example a provider to complete words (see `class@CompletionWords`),
+    Proposals are created via a [gtksource.completion_provider.CompletionProvider]. There can
+    be for example a provider to complete words (see [gtksource.completion_words.CompletionWords]),
     another provider for the completion of
     function names, etc. To add a provider, call
     [gtksource.completion.Completion.addProvider].
     
-    The `iface@CompletionProposal` interface represents a proposal.
+    The [gtksource.completion_proposal.CompletionProposal] interface represents a proposal.
     
     If a proposal contains extra information (see
     [gtksource.types.CompletionColumn.Details]), it will be
     displayed in a supplemental details window, which appears when
     the "Details" button is clicked.
     
-    Each `class@View` object is associated with a `class@Completion`
+    Each [gtksource.view.View] object is associated with a [gtksource.completion.Completion]
     instance. This instance can be obtained with
-    [gtksource.view.View.getCompletion]. The `class@View` class contains also the
-    `signal@View::show-completion` signal.
+    [gtksource.view.View.getCompletion]. The [gtksource.view.View] class contains also the
+    [gtksource.view.View.showCompletion] signal.
     
-    A same `iface@CompletionProvider` object can be used for several
+    A same [gtksource.completion_provider.CompletionProvider] object can be used for several
     [gtksource.completion.Completion]'s.
 */
 class Completion : gobject.object.ObjectWrap
@@ -229,7 +230,7 @@ class Completion : gobject.object.ObjectWrap
   }
 
   /**
-      Adds a `ifaceCompletionProvider` to the list of providers to be queried
+      Adds a [gtksource.completion_provider.CompletionProvider] to the list of providers to be queried
       for completion results.
   
       Params:
@@ -247,7 +248,7 @@ class Completion : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the connected `classView`'s `classBuffer`
+      Gets the connected [gtksource.view.View]'s [gtksource.buffer.Buffer]
       Returns: A #GtkSourceBuffer
   */
   gtksource.buffer.Buffer getBuffer()
@@ -267,7 +268,7 @@ class Completion : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the `classView` that owns the `classCompletion`.
+      Gets the [gtksource.view.View] that owns the [gtksource.completion.Completion].
       Returns: A #GtkSourceView
   */
   gtksource.view.View getView()
@@ -290,7 +291,7 @@ class Completion : gobject.object.ObjectWrap
   }
 
   /**
-      Removes a `ifaceCompletionProvider` previously added with
+      Removes a [gtksource.completion_provider.CompletionProvider] previously added with
       [gtksource.completion.Completion.addProvider].
   
       Params:

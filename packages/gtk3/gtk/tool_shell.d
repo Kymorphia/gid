@@ -1,6 +1,7 @@
 /// Module for [ToolShell] interface
 module gtk.tool_shell;
 
+public import gid.basictypes;
 public import gtk.tool_shell_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

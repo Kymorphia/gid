@@ -1,6 +1,7 @@
 /// Module for [UnixInputStream] class
 module gio.unix_input_stream;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

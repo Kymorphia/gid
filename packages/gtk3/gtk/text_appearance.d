@@ -1,6 +1,7 @@
 /// Module for [TextAppearance] class
 module gtk.text_appearance;
 
+public import gid.basictypes;
 import gdk.color;
 import gid.gid;
 import gtk.c.functions;

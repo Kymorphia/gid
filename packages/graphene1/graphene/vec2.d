@@ -1,6 +1,7 @@
 /// Module for [Vec2] class
 module graphene.vec2;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import graphene.c.functions;

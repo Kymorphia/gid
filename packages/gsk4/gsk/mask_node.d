@@ -1,6 +1,7 @@
 /// Module for [MaskNode] class
 module gsk.mask_node;
 
+public import gid.basictypes;
 import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;

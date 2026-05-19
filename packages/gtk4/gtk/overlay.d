@@ -1,6 +1,7 @@
 /// Module for [Overlay] class
 module gtk.overlay;
 
+public import gid.basictypes;
 import gdk.rectangle;
 import gid.gid;
 import gobject.dclosure;
@@ -33,7 +34,7 @@ import gtk.widget;
     properties of the child to non-zero values.
     
     More complicated placement of overlays is possible by connecting
-    to the `signal@Gtk.Overlay::get-child-position` signal.
+    to the [gtk.overlay.Overlay.getChildPosition] signal.
     
     An overlay’s minimum and natural sizes are those of its main child.
     The sizes of overlay children are not considered when measuring these

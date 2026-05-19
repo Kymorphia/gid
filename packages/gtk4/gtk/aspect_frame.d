@@ -1,6 +1,7 @@
 /// Module for [AspectFrame] class
 module gtk.aspect_frame;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -111,7 +112,7 @@ class AspectFrame : gtk.widget.Widget
       Returns: The aspect ratio to be used by the [gtk.aspect_frame.AspectFrame].
         
         This property is only used if
-        `property@Gtk.AspectFrame:obey-child` is set to false.
+        [gtk.aspect_frame.AspectFrame.obeyChild] is set to false.
   */
   @property float ratio()
   {
@@ -124,7 +125,7 @@ class AspectFrame : gtk.widget.Widget
         propval = The aspect ratio to be used by the [gtk.aspect_frame.AspectFrame].
           
           This property is only used if
-          `property@Gtk.AspectFrame:obey-child` is set to false.
+          [gtk.aspect_frame.AspectFrame.obeyChild] is set to false.
   */
   @property void ratio(float propval)
   {
@@ -342,7 +343,7 @@ class AspectFrameGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The aspect ratio to be used by the [gtk.aspect_frame.AspectFrame].
           
           This property is only used if
-          `property@Gtk.AspectFrame:obey-child` is set to false.
+          [gtk.aspect_frame.AspectFrame.obeyChild] is set to false.
       Returns: Builder instance for fluent chaining
   */
   T ratio(float propval)

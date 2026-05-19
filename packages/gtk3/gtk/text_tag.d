@@ -1,6 +1,7 @@
 /// Module for [TextTag] class
 module gtk.text_tag;
 
+public import gid.basictypes;
 import gdk.color;
 import gdk.event;
 import gdk.rgba;

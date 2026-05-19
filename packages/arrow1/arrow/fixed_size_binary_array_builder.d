@@ -1,6 +1,7 @@
 /// Module for [FixedSizeBinaryArrayBuilder] class
 module arrow.fixed_size_binary_array_builder;
 
+public import gid.basictypes;
 import arrow.array_builder;
 import arrow.c.functions;
 import arrow.c.types;

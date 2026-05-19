@@ -1,6 +1,7 @@
 /// Module for [VScrollbar] class
 module gtk.vscrollbar;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

@@ -1,6 +1,7 @@
 /// Module for [TreeRowReference] class
 module gtk.tree_row_reference;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gobject.object;

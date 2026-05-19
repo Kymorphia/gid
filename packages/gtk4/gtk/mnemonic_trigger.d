@@ -1,6 +1,7 @@
 /// Module for [MnemonicTrigger] class
 module gtk.mnemonic_trigger;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.c.functions;

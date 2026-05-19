@@ -1,6 +1,7 @@
 /// Module for [OutputStream] class
 module arrow.output_stream;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.file;

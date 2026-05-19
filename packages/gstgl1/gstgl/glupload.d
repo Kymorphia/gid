@@ -1,6 +1,7 @@
 /// Module for [GLUpload] class
 module gstgl.glupload;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.buffer;

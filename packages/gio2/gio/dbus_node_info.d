@@ -1,6 +1,7 @@
 /// Module for [DBusNodeInfo] class
 module gio.dbus_node_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

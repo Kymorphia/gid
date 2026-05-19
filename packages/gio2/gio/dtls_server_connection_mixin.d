@@ -1,6 +1,7 @@
 /// Module for [DtlsServerConnection] interface mixin
 module gio.dtls_server_connection_mixin;
 
+public import gid.basictypes;
 public import gio.dtls_server_connection_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

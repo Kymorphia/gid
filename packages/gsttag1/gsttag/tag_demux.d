@@ -1,6 +1,7 @@
 /// Module for [TagDemux] class
 module gsttag.tag_demux;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.element;

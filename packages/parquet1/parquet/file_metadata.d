@@ -1,6 +1,7 @@
 /// Module for [FileMetadata] class
 module parquet.file_metadata;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;

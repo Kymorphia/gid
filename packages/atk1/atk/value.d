@@ -1,6 +1,7 @@
 /// Module for [Value] interface
 module atk.value;
 
+public import gid.basictypes;
 public import atk.value_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

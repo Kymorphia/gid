@@ -1,6 +1,7 @@
 /// Module for [ImplementorIface] interface mixin
 module atk.implementor_iface_mixin;
 
+public import gid.basictypes;
 public import atk.implementor_iface_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

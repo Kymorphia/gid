@@ -1,6 +1,7 @@
 /// Module for [ProgressBar] class
 module gtk.progress_bar;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

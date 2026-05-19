@@ -1,6 +1,7 @@
 /// Module for [CairoContext] class
 module gdk.cairo_context;
 
+public import gid.basictypes;
 import cairo.context;
 import gdk.c.functions;
 import gdk.c.types;

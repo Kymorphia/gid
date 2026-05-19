@@ -1,6 +1,7 @@
 /// Module for [RTSPTimeRange] class
 module gstrtsp.rtsptime_range;
 
+public import gid.basictypes;
 import gid.gid;
 import gstrtsp.c.functions;
 import gstrtsp.c.types;

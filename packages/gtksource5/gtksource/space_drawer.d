@@ -1,6 +1,7 @@
 /// Module for [SpaceDrawer] class
 module gtksource.space_drawer;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.settings;
 import gio.types;
@@ -18,18 +19,18 @@ import gtksource.types;
     symbols.
     
     Call [gtksource.view.View.getSpaceDrawer] to get the [gtksource.space_drawer.SpaceDrawer]
-    instance of a certain `class@View`.
+    instance of a certain [gtksource.view.View].
     
     By default, no white spaces are drawn because the
-    `property@SpaceDrawer:enable-matrix` is false.
+    [gtksource.space_drawer.SpaceDrawer.enableMatrix] is false.
     
     To draw white spaces, [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] can
-    be called to set the `property@SpaceDrawer:matrix` property (by default all
+    be called to set the [gtksource.space_drawer.SpaceDrawer.matrix] property (by default all
     space types are enabled at all locations). Then call
     [gtksource.space_drawer.SpaceDrawer.setEnableMatrix].
     
-    For a finer-grained method, there is also the `class@Tag`'s
-    `property@Tag:draw-spaces` property.
+    For a finer-grained method, there is also the [gtksource.tag.Tag]'s
+    [gtksource.tag.Tag.drawSpaces] property.
     
     # Example
     
@@ -97,7 +98,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
 
   /**
       Get `enableMatrix` property.
-      Returns: Whether the `property@SpaceDrawer:matrix` property is enabled.
+      Returns: Whether the [gtksource.space_drawer.SpaceDrawer.matrix] property is enabled.
   */
   @property bool enableMatrix()
   {
@@ -107,7 +108,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   /**
       Set `enableMatrix` property.
       Params:
-        propval = Whether the `property@SpaceDrawer:matrix` property is enabled.
+        propval = Whether the [gtksource.space_drawer.SpaceDrawer.matrix] property is enabled.
   */
   @property void enableMatrix(bool propval)
   {
@@ -120,8 +121,8 @@ class SpaceDrawer : gobject.object.ObjectWrap
         what kind of white spaces to draw.
         
         The [glib.variant.Variant] is of type `"au"`, an array of unsigned integers. Each
-        integer is a combination of `flags@SpaceTypeFlags`. There is one
-        integer for each `flags@SpaceLocationFlags`, in the same order as
+        integer is a combination of [gtksource.types.SpaceTypeFlags]. There is one
+        integer for each [gtksource.types.SpaceLocationFlags], in the same order as
         they are defined in the enum ([gtksource.types.SpaceLocationFlags.None] and
         [gtksource.types.SpaceLocationFlags.All] are not taken into account).
         
@@ -142,8 +143,8 @@ class SpaceDrawer : gobject.object.ObjectWrap
           what kind of white spaces to draw.
           
           The [glib.variant.Variant] is of type `"au"`, an array of unsigned integers. Each
-          integer is a combination of `flags@SpaceTypeFlags`. There is one
-          integer for each `flags@SpaceLocationFlags`, in the same order as
+          integer is a combination of [gtksource.types.SpaceTypeFlags]. There is one
+          integer for each [gtksource.types.SpaceLocationFlags], in the same order as
           they are defined in the enum ([gtksource.types.SpaceLocationFlags.None] and
           [gtksource.types.SpaceLocationFlags.All] are not taken into account).
           
@@ -160,7 +161,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   /**
       Creates a new #GtkSourceSpaceDrawer object.
       
-      Useful for storing space drawing settings independently of a `classView`.
+      Useful for storing space drawing settings independently of a [gtksource.view.View].
       Returns: a new #GtkSourceSpaceDrawer.
   */
   this()
@@ -171,10 +172,10 @@ class SpaceDrawer : gobject.object.ObjectWrap
   }
 
   /**
-      Binds the `propertySpaceDrawer:matrix` property to a [gio.settings.Settings] key.
+      Binds the [gtksource.space_drawer.SpaceDrawer.matrix] property to a [gio.settings.Settings] key.
       
       The [gio.settings.Settings] key must be of the same type as the
-      `propertySpaceDrawer:matrix` property, that is, `"au"`.
+      [gtksource.space_drawer.SpaceDrawer.matrix] property, that is, `"au"`.
       
       The [gio.settings.Settings.bind] function cannot be used, because the default GIO
       mapping functions don't support [glib.variant.Variant] properties (maybe it will be
@@ -201,7 +202,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the value of the `propertySpaceDrawer:matrix` property, as a [glib.variant.Variant].
+      Gets the value of the [gtksource.space_drawer.SpaceDrawer.matrix] property, as a [glib.variant.Variant].
       
       An empty array can be returned in case the matrix is a zero matrix.
       
@@ -222,7 +223,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
       If only one location is specified, this function returns what kind of
       white spaces are drawn at that location.
       
-      The value is retrieved from the `propertySpaceDrawer:matrix` property.
+      The value is retrieved from the [gtksource.space_drawer.SpaceDrawer.matrix] property.
       
       If several locations are specified, this function returns the logical AND for
       those locations. Which means that if a certain kind of white space is present
@@ -242,7 +243,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   }
 
   /**
-      Sets whether the `propertySpaceDrawer:matrix` property is enabled.
+      Sets whether the [gtksource.space_drawer.SpaceDrawer.matrix] property is enabled.
   
       Params:
         enableMatrix = the new value.
@@ -253,7 +254,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   }
 
   /**
-      Sets a new value to the `propertySpaceDrawer:matrix` property, as a [glib.variant.Variant].
+      Sets a new value to the [gtksource.space_drawer.SpaceDrawer.matrix] property, as a [glib.variant.Variant].
       
       If matrix is null, then an empty array is set.
       
@@ -271,7 +272,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   }
 
   /**
-      Modifies the `propertySpaceDrawer:matrix` property at the specified
+      Modifies the [gtksource.space_drawer.SpaceDrawer.matrix] property at the specified
       locations.
   
       Params:
@@ -291,7 +292,7 @@ class SpaceDrawerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `enableMatrix` property.
       Params:
-        propval = Whether the `property@SpaceDrawer:matrix` property is enabled.
+        propval = Whether the [gtksource.space_drawer.SpaceDrawer.matrix] property is enabled.
       Returns: Builder instance for fluent chaining
   */
   T enableMatrix(bool propval)
@@ -306,8 +307,8 @@ class SpaceDrawerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           what kind of white spaces to draw.
           
           The [glib.variant.Variant] is of type `"au"`, an array of unsigned integers. Each
-          integer is a combination of `flags@SpaceTypeFlags`. There is one
-          integer for each `flags@SpaceLocationFlags`, in the same order as
+          integer is a combination of [gtksource.types.SpaceTypeFlags]. There is one
+          integer for each [gtksource.types.SpaceLocationFlags], in the same order as
           they are defined in the enum ([gtksource.types.SpaceLocationFlags.None] and
           [gtksource.types.SpaceLocationFlags.All] are not taken into account).
           

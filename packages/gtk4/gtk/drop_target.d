@@ -1,6 +1,7 @@
 /// Module for [DropTarget] class
 module gtk.drop_target;
 
+public import gid.basictypes;
 import gdk.content_formats;
 import gdk.drop;
 import gdk.types;
@@ -354,7 +355,7 @@ class DropTarget : gtk.event_controller.EventController
   /**
       Rejects the ongoing drop operation.
       
-      If no drop operation is ongoing, i.e when `propertyGtk.DropTarget:current-drop`
+      If no drop operation is ongoing, i.e when [gtk.drop_target.DropTarget.currentDrop]
       is null, this function does nothing.
       
       This function should be used when delaying the decision

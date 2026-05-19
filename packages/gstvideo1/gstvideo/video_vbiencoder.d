@@ -1,6 +1,7 @@
 /// Module for [VideoVBIEncoder] class
 module gstvideo.video_vbiencoder;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstvideo.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [ClampLayout] class
 module adw.clamp_layout;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -31,9 +32,9 @@ import gtk.orientable_mixin;
     allocated the minimum size it can fit in instead.
     
     [adw.clamp_layout.ClampLayout] can scale with the text scale factor, use the
-    `property@ClampLayout:unit` property to enable that behavior.
+    [adw.clamp_layout.ClampLayout.unit] property to enable that behavior.
     
-    See also: `class@Clamp`, `class@ClampScrollable`.
+    See also: [adw.clamp.Clamp], [adw.clamp_scrollable.ClampScrollable].
 */
 class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
 {

@@ -1,6 +1,7 @@
 /// Module for [RTPPayloadInfo] class
 module gstrtp.rtppayload_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gstrtp.c.functions;
 import gstrtp.c.types;

@@ -1,6 +1,7 @@
 /// Module for [BackForwardList] class
 module webkit.back_forward_list;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

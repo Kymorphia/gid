@@ -1,6 +1,7 @@
 /// Module for [FilterBasic] class
 module gmime.filter_basic;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

@@ -1,6 +1,7 @@
 /// Module for [NumericArray] class
 module arrow.numeric_array;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.primitive_array;

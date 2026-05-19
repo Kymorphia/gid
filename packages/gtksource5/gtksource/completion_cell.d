@@ -1,6 +1,7 @@
 /// Module for [CompletionCell] class
 module gtksource.completion_cell;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gid.gid;
 import gio.icon;
@@ -30,9 +31,9 @@ import pango.attr_list;
     function name and "parameters". They may also optionally set an icon to
     signify the kind of result.
     
-    A `iface@CompletionProvider` should implement the
+    A [gtksource.completion_provider.CompletionProvider] should implement the
     `vfunc@CompletionProvider.display` virtual function to control
-    how to convert data from their `iface@CompletionProposal` to content for
+    how to convert data from their [gtksource.completion_proposal.CompletionProposal] to content for
     the [gtksource.completion_cell.CompletionCell].
 */
 class CompletionCell : gtk.widget.Widget

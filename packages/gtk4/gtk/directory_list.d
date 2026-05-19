@@ -1,6 +1,7 @@
 /// Module for [DirectoryList] class
 module gtk.directory_list;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.file;
 import gio.list_model;

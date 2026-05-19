@@ -1,6 +1,7 @@
 /// Module for [Date32ArrayBuilder] class
 module arrow.date32_array_builder;
 
+public import gid.basictypes;
 import arrow.array_builder;
 import arrow.c.functions;
 import arrow.c.types;

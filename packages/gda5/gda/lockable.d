@@ -1,6 +1,7 @@
 /// Module for [Lockable] interface
 module gda.lockable;
 
+public import gid.basictypes;
 public import gda.lockable_iface_proxy;
 import gda.c.functions;
 import gda.c.types;

@@ -1,6 +1,7 @@
 /// Module for [Settings] class
 module webkit.settings;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.key_file;
@@ -975,7 +976,7 @@ class Settings : gobject.object.ObjectWrap
       Get `enableWebrtc` property.
       Returns: Enable WebRTC support for loaded pages.
         
-        Enabling this setting implies that `property@Settings:enable-media-stream`
+        Enabling this setting implies that [webkit.settings.Settings.enableMediaStream]
         will be enabled as well.
         
         See also https://www.w3.org/TR/webrtc/
@@ -990,7 +991,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Enable WebRTC support for loaded pages.
           
-          Enabling this setting implies that `property@Settings:enable-media-stream`
+          Enabling this setting implies that [webkit.settings.Settings.enableMediaStream]
           will be enabled as well.
           
           See also https://www.w3.org/TR/webrtc/
@@ -1486,7 +1487,7 @@ class Settings : gobject.object.ObjectWrap
       The returned features are a subset of those returned by
       [webkit.settings.Settings.getAllFeatures], and includes those which
       web and WebKit developers might find useful, but in general should
-      *not* be exposed to end users; see `enumFeatureStatus` for
+      *not* be exposed to end users; see [webkit.types.FeatureStatus] for
       more details.
       Returns: List of development features.
   */
@@ -1504,7 +1505,7 @@ class Settings : gobject.object.ObjectWrap
       The returned features are a subset of those returned by
       [webkit.settings.Settings.getAllFeatures], and includes those which
       certain applications may want to expose to end users; see
-      `enumFeatureStatus` for more details.
+      [webkit.types.FeatureStatus] for more details.
       Returns: List of experimental features.
   */
   static webkit.feature_list.FeatureList getExperimentalFeatures()
@@ -1965,7 +1966,7 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Get the `propertySettings:enable-webrtc` property.
+      Get the [webkit.settings.Settings.enableWebrtc] property.
       Returns: true If WebRTC support is enabled or false otherwise.
   */
   bool getEnableWebrtc()
@@ -2177,7 +2178,7 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Get the `propertySettings:webrtc-udp-ports-range` property.
+      Get the [webkit.settings.Settings.webrtcUdpPortsRange] property.
       Returns: The WebRTC UDP ports range, or null if un-set.
   */
   string getWebrtcUdpPortsRange()
@@ -2622,7 +2623,7 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Set the `propertySettings:enable-webrtc` property.
+      Set the [webkit.settings.Settings.enableWebrtc] property.
       
       Setting this property to true implies the media-stream web-setting will also be enabled.
   
@@ -2853,7 +2854,7 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Set the `propertySettings:webrtc-udp-ports-range` property.
+      Set the [webkit.settings.Settings.webrtcUdpPortsRange] property.
   
       Params:
         udpPortRange = Value to be set
@@ -3396,7 +3397,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = Enable WebRTC support for loaded pages.
           
-          Enabling this setting implies that `property@Settings:enable-media-stream`
+          Enabling this setting implies that [webkit.settings.Settings.enableMediaStream]
           will be enabled as well.
           
           See also https://www.w3.org/TR/webrtc/

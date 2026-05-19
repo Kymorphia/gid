@@ -1,6 +1,7 @@
 /// Module for [Activatable] interface mixin
 module gtk.activatable_mixin;
 
+public import gid.basictypes;
 public import gtk.activatable_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

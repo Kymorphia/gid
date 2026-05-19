@@ -1,6 +1,7 @@
 /// Module for [GLSLStage] class
 module gstgl.glslstage;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [CookieJar] class
 module soup.cookie_jar;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.uri;
 import gobject.dclosure;
@@ -16,9 +17,9 @@ import soup.types;
 /**
     Automatic cookie handling for SoupSession.
     
-    A #SoupCookieJar stores `struct@Cookie`s and arrange for them to be sent with
-    the appropriate `class@Message`s. #SoupCookieJar implements
-    `iface@SessionFeature`, so you can add a cookie jar to a session with
+    A #SoupCookieJar stores [soup.cookie.Cookie]s and arrange for them to be sent with
+    the appropriate [soup.message.Message]s. #SoupCookieJar implements
+    [soup.session_feature.SessionFeature], so you can add a cookie jar to a session with
     [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
     
     Note that the base #SoupCookieJar class does not support any form
@@ -108,7 +109,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   /**
       Adds cookie to jar.
       
-      Emits the `signalCookieJar::changed` signal if we are modifying
+      Emits the [soup.cookie_jar.CookieJar.changed] signal if we are modifying
       an existing cookie or adding a valid new cookie ('valid' means
       that the cookie's expire date is not in the past).
       
@@ -125,7 +126,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   /**
       Adds cookie to jar.
       
-      Emits the `signalCookieJar::changed` signal if we are modifying an existing
+      Emits the [soup.cookie_jar.CookieJar.changed] signal if we are modifying an existing
       cookie or adding a valid new cookie ('valid' means that the cookie's expire
       date is not in the past).
       
@@ -150,7 +151,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   /**
       Adds cookie to jar.
       
-      Emits the `signalCookieJar::changed` signal if we are modifying
+      Emits the [soup.cookie_jar.CookieJar.changed] signal if we are modifying
       an existing cookie or adding a valid new cookie ('valid' means
       that the cookie's expire date is not in the past).
       
@@ -190,7 +191,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   /**
       Deletes cookie from jar.
       
-      Emits the `signalCookieJar::changed` signal.
+      Emits the [soup.cookie_jar.CookieJar.changed] signal.
   
       Params:
         cookie = a #SoupCookie
@@ -201,7 +202,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 
   /**
-      Gets jar's `enumCookieJarAcceptPolicy`.
+      Gets jar's [soup.types.CookieJarAcceptPolicy].
       Returns: the #SoupCookieJarAcceptPolicy set in the jar
   */
   soup.types.CookieJarAcceptPolicy getAcceptPolicy()
@@ -320,7 +321,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       Adds cookie to jar, exactly as though it had appeared in a
       Set-Cookie header returned from a request to uri.
       
-      Keep in mind that if the `enumCookieJarAcceptPolicy` set is either
+      Keep in mind that if the [soup.types.CookieJarAcceptPolicy] set is either
       [soup.types.CookieJarAcceptPolicy.NoThirdParty] or
       [soup.types.CookieJarAcceptPolicy.GrandfatheredThirdParty] you'll need to use
       [soup.cookie_jar.CookieJar.setCookieWithFirstParty], otherwise the jar

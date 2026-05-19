@@ -1,6 +1,7 @@
 /// Module for [Spinner] class
 module gtk.spinner;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;

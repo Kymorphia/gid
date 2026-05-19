@@ -1,6 +1,7 @@
 /// Module for [StreamableContent] interface
 module atk.streamable_content;
 
+public import gid.basictypes;
 public import atk.streamable_content_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

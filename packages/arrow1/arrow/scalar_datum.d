@@ -1,6 +1,7 @@
 /// Module for [ScalarDatum] class
 module arrow.scalar_datum;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.datum;

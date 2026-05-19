@@ -1,6 +1,7 @@
 /// Module for [Diff] class
 module gda.diff;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

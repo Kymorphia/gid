@@ -1,6 +1,7 @@
 /// Module for [AccelMap] class
 module gtk.accel_map;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import glib.scanner;

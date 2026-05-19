@@ -1,6 +1,7 @@
 /// Module for [MetaTableForeignKey] class
 module gda.meta_table_foreign_key;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.meta_db_object;

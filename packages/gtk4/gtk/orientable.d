@@ -1,6 +1,7 @@
 /// Module for [Orientable] interface
 module gtk.orientable;
 
+public import gid.basictypes;
 public import gtk.orientable_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

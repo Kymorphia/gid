@@ -1,6 +1,7 @@
 /// Module for [OptionMenuItem] class
 module webkit.option_menu_item;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

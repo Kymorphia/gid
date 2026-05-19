@@ -1,6 +1,7 @@
 /// Module for [DataAccessWrapper] class
 module gda.data_access_wrapper;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_model;

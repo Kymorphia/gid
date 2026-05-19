@@ -1,6 +1,7 @@
 /// Module for [DrawFuncs] class
 module harfbuzz.draw_funcs;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [Regex] class
 module vte.regex;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.boxed;

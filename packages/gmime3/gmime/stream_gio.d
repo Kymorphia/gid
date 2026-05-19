@@ -1,6 +1,7 @@
 /// Module for [StreamGIO] class
 module gmime.stream_gio;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.file;
 import gmime.c.functions;

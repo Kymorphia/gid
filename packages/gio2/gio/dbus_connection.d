@@ -1,6 +1,7 @@
 /// Module for [DBusConnection] class
 module gio.dbus_connection;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action_group;
 import gio.async_initable;

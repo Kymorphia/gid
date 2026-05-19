@@ -1,6 +1,7 @@
 /// Module for [UserStyleSheet] class
 module webkit.user_style_sheet;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

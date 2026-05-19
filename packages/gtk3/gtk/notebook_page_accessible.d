@@ -1,6 +1,7 @@
 /// Module for [NotebookPageAccessible] class
 module gtk.notebook_page_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.object;

@@ -1,6 +1,7 @@
 /// Module for [Date32Scalar] class
 module arrow.date32_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;

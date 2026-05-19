@@ -1,6 +1,7 @@
 /// Module for [VideoResampler] class
 module gstvideo.video_resampler;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.structure;
 import gstvideo.c.functions;

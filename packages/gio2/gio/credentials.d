@@ -1,6 +1,7 @@
 /// Module for [Credentials] class
 module gio.credentials;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

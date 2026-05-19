@@ -1,6 +1,7 @@
 /// Module for [CellRendererAccel] class
 module gtk.cell_renderer_accel;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;

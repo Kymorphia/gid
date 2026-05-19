@@ -1,6 +1,7 @@
 /// Module for [RegionIter] class
 module gtksource.region_iter;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.text_iter;
 import gtksource.c.functions;

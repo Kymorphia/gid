@@ -1,6 +1,7 @@
 /// Module for [Implementor] class
 module atk.implementor;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.object;

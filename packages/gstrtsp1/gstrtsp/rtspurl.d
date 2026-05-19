@@ -1,6 +1,7 @@
 /// Module for [RTSPUrl] class
 module gstrtsp.rtspurl;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstrtsp.c.functions;

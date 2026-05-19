@@ -1,6 +1,7 @@
 /// Module for [SignatureList] class
 module gmime.signature_list;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

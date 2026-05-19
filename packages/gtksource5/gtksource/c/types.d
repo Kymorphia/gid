@@ -158,7 +158,7 @@ enum GtkSourceFileSaverError
 }
 
 /**
-    Flags to define the behavior of a `flags@FileSaverFlags`.
+    Flags to define the behavior of a [gtksource.types.FileSaverFlags].
 */
 enum GtkSourceFileSaverFlags : uint
 {
@@ -370,14 +370,14 @@ enum GtkSourceViewGutterPosition
 /**
     Subclass of [gtk.text_buffer.TextBuffer].
     
-    A [gtksource.buffer.Buffer] object is the model for `class@View` widgets.
+    A [gtksource.buffer.Buffer] object is the model for [gtksource.view.View] widgets.
     It extends the [gtk.text_buffer.TextBuffer] class by adding features useful to display
     and edit source code such as syntax highlighting and bracket matching.
     
     To create a [gtksource.buffer.Buffer] use [gtksource.buffer.Buffer.new_] or
     [gtksource.buffer.Buffer.newWithLanguage]. The second form is just a convenience
-    function which allows you to initially set a `class@Language`. You can also
-    directly create a `class@View` and get its `class@Buffer` with
+    function which allows you to initially set a [gtksource.language.Language]. You can also
+    directly create a [gtksource.view.View] and get its [gtksource.buffer.Buffer] with
     [gtk.text_view.TextView.getBuffer].
     
     The highlighting is enabled by default, but you can disable it with
@@ -404,7 +404,7 @@ enum GtkSourceViewGutterPosition
     [gtksource.buffer.Buffer.iterForwardToContextClassToggle] and
     [gtksource.buffer.Buffer.iterBackwardToContextClassToggle].
     
-    And the `signal@GtkSource.Buffer::highlight-updated` signal permits to be notified
+    And the [gtksource.buffer.Buffer.highlightUpdated] signal permits to be notified
     when a context class region changes.
     
     Each context class has also an associated [gtk.text_tag.TextTag] with the name
@@ -424,9 +424,9 @@ enum GtkSourceViewGutterPosition
     convenient than the [gtksource.buffer.Buffer] API, because:
     
      - The tag doesn't always exist, you need to listen to the
-       `signal@Gtk.TextTagTable::tag-added` and `signal@Gtk.TextTagTable::tag-removed` signals.
-     - Instead of the `signal@GtkSource.Buffer::highlight-updated` signal, you can listen
-       to the `signal@Gtk.TextBuffer::apply-tag` and `signal@Gtk.TextBuffer::remove-tag` signals.
+       [gtk.text_tag_table.TextTagTable.tagAdded] and [gtk.text_tag_table.TextTagTable.tagRemoved] signals.
+     - Instead of the [gtksource.buffer.Buffer.highlightUpdated] signal, you can listen
+       to the [gtk.text_buffer.TextBuffer.applyTag] and [gtk.text_buffer.TextBuffer.removeTag] signals.
     
     A possible use-case for accessing a context class via the associated
     [gtk.text_tag.TextTag] is to read the region but without adding a hard dependency on the
@@ -462,25 +462,25 @@ struct GtkSourceBufferClass
     documentation), that is displayed when the "Details" button is
     clicked.
     
-    Proposals are created via a `iface@CompletionProvider`. There can
-    be for example a provider to complete words (see `class@CompletionWords`),
+    Proposals are created via a [gtksource.completion_provider.CompletionProvider]. There can
+    be for example a provider to complete words (see [gtksource.completion_words.CompletionWords]),
     another provider for the completion of
     function names, etc. To add a provider, call
     [gtksource.completion.Completion.addProvider].
     
-    The `iface@CompletionProposal` interface represents a proposal.
+    The [gtksource.completion_proposal.CompletionProposal] interface represents a proposal.
     
     If a proposal contains extra information (see
     [gtksource.types.CompletionColumn.Details]), it will be
     displayed in a supplemental details window, which appears when
     the "Details" button is clicked.
     
-    Each `class@View` object is associated with a `class@Completion`
+    Each [gtksource.view.View] object is associated with a [gtksource.completion.Completion]
     instance. This instance can be obtained with
-    [gtksource.view.View.getCompletion]. The `class@View` class contains also the
-    `signal@View::show-completion` signal.
+    [gtksource.view.View.getCompletion]. The [gtksource.view.View] class contains also the
+    [gtksource.view.View.showCompletion] signal.
     
-    A same `iface@CompletionProvider` object can be used for several
+    A same [gtksource.completion_provider.CompletionProvider] object can be used for several
     [gtksource.completion.Completion]'s.
 */
 struct GtkSourceCompletion;
@@ -497,9 +497,9 @@ struct GtkSourceCompletion;
     function name and "parameters". They may also optionally set an icon to
     signify the kind of result.
     
-    A `iface@CompletionProvider` should implement the
+    A [gtksource.completion_provider.CompletionProvider] should implement the
     `vfunc@CompletionProvider.display` virtual function to control
-    how to convert data from their `iface@CompletionProposal` to content for
+    how to convert data from their [gtksource.completion_proposal.CompletionProposal] to content for
     the [gtksource.completion_cell.CompletionCell].
 */
 struct GtkSourceCompletionCell;
@@ -522,18 +522,18 @@ struct GtkSourceCompletionClass
     The context of a completion.
     
     [gtksource.completion_context.CompletionContext] contains information about an attept to display
-    completion proposals to the user based on typed text in the `class@View`.
+    completion proposals to the user based on typed text in the [gtksource.view.View].
     
-    When typing, `class@Completion` may use registered
-    `iface@CompletionProvider` to determine if there may be results which
+    When typing, [gtksource.completion.Completion] may use registered
+    [gtksource.completion_provider.CompletionProvider] to determine if there may be results which
     could be displayed. If so, a [gtksource.completion_context.CompletionContext] is created with
-    information that is provided to the `iface@CompletionProvider` to populate
+    information that is provided to the [gtksource.completion_provider.CompletionProvider] to populate
     results which might be useful to the user.
     
-    `iface@CompletionProvider` are expected to provide [gio.list_model.ListModel] with
-    `iface@CompletionProposal` which may be joined together in a list of
+    [gtksource.completion_provider.CompletionProvider] are expected to provide [gio.list_model.ListModel] with
+    [gtksource.completion_proposal.CompletionProposal] which may be joined together in a list of
     results for the user. They are also responsible for how the contents are
-    displayed using `class@CompletionCell` which allows for some level of
+    displayed using [gtksource.completion_cell.CompletionCell] which allows for some level of
     customization.
 */
 struct GtkSourceCompletionContext;
@@ -549,7 +549,7 @@ struct GtkSourceCompletionContextClass
     Interface for completion proposals.
     
     This interface is used to denote that an object is capable of being
-    a completion proposal for `class@Completion`.
+    a completion proposal for [gtksource.completion.Completion].
     
     Currently, no method or functions are required but additional methods
     may be added in the future. Proposals created by
@@ -571,7 +571,7 @@ struct GtkSourceCompletionProposalInterface
 /**
     Completion provider interface.
     
-    You must implement this interface to provide proposals to `class@Completion`.
+    You must implement this interface to provide proposals to [gtksource.completion.Completion].
     
     In most cases, implementations of this interface will want to use
     `vfunc@CompletionProvider.populate_async` to asynchronously populate the results
@@ -620,11 +620,11 @@ struct GtkSourceCompletionProviderInterface
 }
 
 /**
-    A `iface@CompletionProvider` for the completion of snippets.
+    A [gtksource.completion_provider.CompletionProvider] for the completion of snippets.
     
     The [gtksource.completion_snippets.CompletionSnippets] is an example of an implementation of
-    the `iface@CompletionProvider` interface. The proposals are snippets
-    registered with the `class@SnippetManager`.
+    the [gtksource.completion_provider.CompletionProvider] interface. The proposals are snippets
+    registered with the [gtksource.snippet_manager.SnippetManager].
 */
 struct GtkSourceCompletionSnippets
 {
@@ -643,10 +643,10 @@ struct GtkSourceCompletionSnippetsClass
 }
 
 /**
-    A `iface@CompletionProvider` for the completion of words.
+    A [gtksource.completion_provider.CompletionProvider] for the completion of words.
     
     The [gtksource.completion_words.CompletionWords] is an example of an implementation of
-    the `iface@CompletionProvider` interface. The proposals are words
+    the [gtksource.completion_provider.CompletionProvider] interface. The proposals are words
     appearing in the registered [gtk.text_buffer.TextBuffer]s.
 */
 struct GtkSourceCompletionWords
@@ -675,11 +675,11 @@ struct GtkSourceCompletionWordsClass
 struct GtkSourceEncoding;
 
 /**
-    On-disk representation of a `class@Buffer`.
+    On-disk representation of a [gtksource.buffer.Buffer].
     
-    A [gtksource.file.File] object is the on-disk representation of a `class@Buffer`.
-    With a [gtksource.file.File], you can create and configure a `class@FileLoader`
-    and `class@FileSaver` which take by default the values of the
+    A [gtksource.file.File] object is the on-disk representation of a [gtksource.buffer.Buffer].
+    With a [gtksource.file.File], you can create and configure a [gtksource.file_loader.FileLoader]
+    and [gtksource.file_saver.FileSaver] which take by default the values of the
     [gtksource.file.File] properties (except for the file loader which auto-detect some
     properties). On a successful load or save operation, the [gtksource.file.File]
     properties are updated. If an operation fails, the [gtksource.file.File] properties
@@ -705,14 +705,14 @@ struct GtkSourceFileClass
     Load a file into a GtkSourceBuffer.
     
     A [gtksource.file_loader.FileLoader] object permits to load the contents of a [gio.file.File] or a
-    [gio.input_stream.InputStream] into a `class@Buffer`.
+    [gio.input_stream.InputStream] into a [gtksource.buffer.Buffer].
     
     A file loader should be used only for one load operation, including errors
     handling. If an error occurs, you can reconfigure the loader and relaunch the
     operation with [gtksource.file_loader.FileLoader.loadAsync].
     
     Running a [gtksource.file_loader.FileLoader] is an undoable action for the
-    `class@Buffer`.
+    [gtksource.buffer.Buffer].
     
     After a file loading, the buffer is reset to the contents provided by the
     [gio.file.File] or [gio.input_stream.InputStream], so the buffer is set as “unmodified”, that is,
@@ -731,9 +731,9 @@ struct GtkSourceFileLoaderClass
 }
 
 /**
-    Save a `class@Buffer` into a file.
+    Save a [gtksource.buffer.Buffer] into a file.
     
-    A [gtksource.file_saver.FileSaver] object permits to save a `class@Buffer` into a
+    A [gtksource.file_saver.FileSaver] object permits to save a [gtksource.buffer.Buffer] into a
     [gio.file.File].
     
     A file saver should be used only for one save operation, including errors
@@ -750,12 +750,12 @@ struct GtkSourceFileSaverClass
 }
 
 /**
-    Gutter object for `class@View`.
+    Gutter object for [gtksource.view.View].
     
     The [gtksource.gutter.Gutter] object represents the left or right gutter of the text
-    view. It is used by `class@View` to draw the line numbers and
-    `class@Mark`s that might be present on a line. By packing
-    additional `class@GutterRenderer` objects in the gutter, you can extend the
+    view. It is used by [gtksource.view.View] to draw the line numbers and
+    [gtksource.mark.Mark]s that might be present on a line. By packing
+    additional [gtksource.gutter_renderer.GutterRenderer] objects in the gutter, you can extend the
     gutter with your own custom drawings.
     
     To get a [gtksource.gutter.Gutter], use the [gtksource.view.View.getGutter] function.
@@ -783,7 +783,7 @@ struct GtkSourceGutterClass
     The [gtksource.gutter_lines.GutterLines] object is used to collect information about
     visible lines.
     
-    Use this from your `signal@GutterRenderer::query-data` to collect the
+    Use this from your [gtksource.gutter_renderer.GutterRenderer.queryData] to collect the
     necessary information on visible lines. Doing so reduces the number of
     passes through the text btree allowing GtkSourceView to reach more
     frames-per-second while performing kinetic scrolling.
@@ -800,10 +800,10 @@ struct GtkSourceGutterLinesClass
 /**
     Gutter cell renderer.
     
-    A [gtksource.gutter_renderer.GutterRenderer] represents a column in a `class@Gutter`. The
+    A [gtksource.gutter_renderer.GutterRenderer] represents a column in a [gtksource.gutter.Gutter]. The
     column contains one cell for each visible line of the [gtk.text_buffer.TextBuffer]. Due to
     text wrapping, a cell can thus span multiple lines of the [gtk.text_view.TextView]. In
-    this case, `enum@GutterRendererAlignmentMode` controls the alignment of
+    this case, [gtksource.types.GutterRendererAlignmentMode] controls the alignment of
     the cell.
     
     The gutter renderer is a [gtk.widget.Widget] and is measured using the normal widget
@@ -816,7 +816,7 @@ struct GtkSourceGutterLinesClass
     be printed, even if only the first 20 lines are shown. Another strategy is to
     take into account only the visible lines.  In this case, only two digits are
     necessary to display the line numbers of the first 20 lines. To take another
-    example, the gutter renderer for `class@Mark`s doesn't need to take
+    example, the gutter renderer for [gtksource.mark.Mark]s doesn't need to take
     into account the text buffer to announce its width. It only depends on the
     icons size displayed in the gutter column.
     
@@ -875,7 +875,7 @@ struct GtkSourceGutterRendererClass
     Renders a pixbuf in the gutter.
     
     A [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf] can be used to render an image in a cell of
-    `class@Gutter`.
+    [gtksource.gutter.Gutter].
 */
 struct GtkSourceGutterRendererPixbuf
 {
@@ -897,7 +897,7 @@ struct GtkSourceGutterRendererPixbufClass
     Renders text in the gutter.
     
     A [gtksource.gutter_renderer_text.GutterRendererText] can be used to render text in a cell of
-    `class@Gutter`.
+    [gtksource.gutter.Gutter].
 */
 struct GtkSourceGutterRendererText
 {
@@ -918,17 +918,17 @@ struct GtkSourceGutterRendererTextClass
 /**
     Interactive tooltips.
     
-    [gtksource.hover.Hover] allows a `class@View` to provide contextual information.
+    [gtksource.hover.Hover] allows a [gtksource.view.View] to provide contextual information.
     When enabled, if the user hovers over a word in the text editor, a series
-    of registered `iface@HoverProvider` can populate a `class@HoverDisplay`
+    of registered [gtksource.hover_provider.HoverProvider] can populate a [gtksource.hover_display.HoverDisplay]
     with useful information.
     
-    To enable call [gtksource.view.View.getHover] and add `iface@HoverProvider`
+    To enable call [gtksource.view.View.getHover] and add [gtksource.hover_provider.HoverProvider]
     using [gtksource.hover.Hover.addProvider]. To disable, remove all registered
     providers with [gtksource.hover.Hover.removeProvider].
     
     You can change how long to wait to display the interactive tooltip by
-    setting the `property@Hover:hover-delay` property in milliseconds.
+    setting the [gtksource.hover.Hover.hoverDelay] property in milliseconds.
 */
 struct GtkSourceHover;
 
@@ -940,12 +940,12 @@ struct GtkSourceHoverClass
 }
 
 /**
-    Context for populating `class@HoverDisplay` contents.
+    Context for populating [gtksource.hover_display.HoverDisplay] contents.
     
     [gtksource.hover_context.HoverContext] contains information about the request to populate
-    contents for a `class@HoverDisplay`.
+    contents for a [gtksource.hover_display.HoverDisplay].
     
-    It can be used to retrieve the `class@View`, `class@Buffer`, and
+    It can be used to retrieve the [gtksource.view.View], [gtksource.buffer.Buffer], and
     [gtk.text_iter.TextIter] for the regions of text which are being displayed.
     
     Use [gtksource.hover_context.HoverContext.getBounds] to get the word that was
@@ -968,7 +968,7 @@ struct GtkSourceHoverContextClass
     to be displayed to the user in interactive tooltips. The children widgets
     are packed vertically using a [gtk.box.Box].
     
-    Implement the `iface@HoverProvider` interface to be notified of when
+    Implement the [gtksource.hover_provider.HoverProvider] interface to be notified of when
     to populate a [gtksource.hover_display.HoverDisplay] on behalf of the user.
 */
 struct GtkSourceHoverDisplay;
@@ -984,10 +984,10 @@ struct GtkSourceHoverDisplayClass
     Interface to populate interactive tooltips.
     
     [gtksource.hover_provider.HoverProvider] is an interface that should be implemented to extend
-    the contents of a `class@HoverDisplay`. This is typical in editors that
+    the contents of a [gtksource.hover_display.HoverDisplay]. This is typical in editors that
     interact external tooling such as those utilizing Language Server Protocol.
     
-    If you can populate the `class@HoverDisplay` synchronously, use
+    If you can populate the [gtksource.hover_display.HoverDisplay] synchronously, use
     `vfunc@HoverProvider.populate`. Otherwise, interface implementations that
     may take additional time should use `vfunc@HoverProvider.populate_async`
     to avoid blocking the main loop.
@@ -1013,12 +1013,12 @@ struct GtkSourceHoverProviderInterface
 /**
     Auto-indentation interface.
     
-    By default, `class@View` can auto-indent as you type when
-    `property@View:auto-indent` is enabled. The indentation simply copies the
+    By default, [gtksource.view.View] can auto-indent as you type when
+    [gtksource.view.View.autoIndent] is enabled. The indentation simply copies the
     previous lines indentation.
     
     This can be changed by implementing [gtksource.indenter.Indenter] and setting the
-    `property@View:indenter` property.
+    [gtksource.view.View.indenter] property.
     
     Implementors of this interface should implement both
     `vfunc@Indenter.is_trigger` and `vfunc@Indenter.indent`.
@@ -1029,7 +1029,7 @@ struct GtkSourceHoverProviderInterface
     [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.ShiftMask] set.
     
     `vfunc@Indenter.indent` is called after text has been
-    inserted into `class@Buffer` when
+    inserted into [gtksource.buffer.Buffer] when
     `vfunc@Indenter.is_trigger` returned true. The [gtk.text_iter.TextIter]
     is placed directly after the inserted character or characters.
     
@@ -1067,8 +1067,8 @@ struct GtkSourceIndenterInterface
     A [gtksource.language.Language] represents a programming or markup language, affecting
     syntax highlighting and [context classes](./class.Buffer.html#context-classes).
     
-    Use `class@LanguageManager` to obtain a [gtksource.language.Language] instance, and
-    [gtksource.buffer.Buffer.setLanguage] to apply it to a `class@Buffer`.
+    Use [gtksource.language_manager.LanguageManager] to obtain a [gtksource.language.Language] instance, and
+    [gtksource.buffer.Buffer.setLanguage] to apply it to a [gtksource.buffer.Buffer].
 */
 struct GtkSourceLanguage;
 
@@ -1080,15 +1080,15 @@ struct GtkSourceLanguageClass
 }
 
 /**
-    Provides access to `class@Language`s.
+    Provides access to [gtksource.language.Language]s.
     
     [gtksource.language_manager.LanguageManager] is an object which processes language description
-    files and creates and stores `class@Language` objects, and provides API to
+    files and creates and stores [gtksource.language.Language] objects, and provides API to
     access them.
     
     Use [gtksource.language_manager.LanguageManager.getDefault] to retrieve the default
     instance of [gtksource.language_manager.LanguageManager], and
-    [gtksource.language_manager.LanguageManager.guessLanguage] to get a `class@Language` for
+    [gtksource.language_manager.LanguageManager.guessLanguage] to get a [gtksource.language.Language] for
     given file name and content type.
 */
 struct GtkSourceLanguageManager;
@@ -1101,21 +1101,21 @@ struct GtkSourceLanguageManagerClass
 }
 
 /**
-    Widget that displays a map for a specific `class@View`.
+    Widget that displays a map for a specific [gtksource.view.View].
     
-    [gtksource.map.Map] is a widget that maps the content of a `class@View` into
+    [gtksource.map.Map] is a widget that maps the content of a [gtksource.view.View] into
     a smaller view so the user can have a quick overview of the whole document.
     
-    This works by connecting a `class@View` to to the [gtksource.map.Map] using
-    the `property@Map:view` property or [gtksource.map.Map.setView].
+    This works by connecting a [gtksource.view.View] to to the [gtksource.map.Map] using
+    the [gtksource.map.Map.view] property or [gtksource.map.Map.setView].
     
-    [gtksource.map.Map] is a `class@View` object. This means that you can add a
-    `class@GutterRenderer` to a gutter in the same way you would for a
-    `class@View`. One example might be a `class@GutterRenderer` that shows
+    [gtksource.map.Map] is a [gtksource.view.View] object. This means that you can add a
+    [gtksource.gutter_renderer.GutterRenderer] to a gutter in the same way you would for a
+    [gtksource.view.View]. One example might be a [gtksource.gutter_renderer.GutterRenderer] that shows
     which lines have changed in the document.
     
     Additionally, it is desirable to match the font of the [gtksource.map.Map] and
-    the `class@View` used for editing. Therefore, `property@Map:font-desc`
+    the [gtksource.view.View] used for editing. Therefore, [gtksource.map.Map.fontDesc]
     should be used to set the target font. You will need to adjust this to the
     desired font size for the map. A 1pt font generally seems to be an
     appropriate font size. "Monospace 1" is the default. See
@@ -1142,7 +1142,7 @@ struct GtkSourceMapClass
 }
 
 /**
-    Mark object for `class@Buffer`.
+    Mark object for [gtksource.buffer.Buffer].
     
     A [gtksource.mark.Mark] marks a position in the text where you want to display
     additional info. It is based on [gtk.text_mark.TextMark] and thus is still valid after
@@ -1152,7 +1152,7 @@ struct GtkSourceMapClass
     when you create the mark. Each category can have a priority, a pixbuf and
     other associated attributes. See [gtksource.view.View.setMarkAttributes].
     The pixbuf will be displayed in the margin at the line where the mark
-    residents if the `property@View:show-line-marks` property is set to true. If
+    residents if the [gtksource.view.View.showLineMarks] property is set to true. If
     there are multiple marks in the same line, the pixbufs will be drawn on top
     of each other. The mark with the highest priority will be drawn on top.
 */
@@ -1166,7 +1166,7 @@ struct GtkSourceMark
     The source mark attributes object.
     
     [gtksource.mark_attributes.MarkAttributes] is an object specifying attributes used by
-    a `class@View` to visually show lines marked with `class@Mark`s
+    a [gtksource.view.View] to visually show lines marked with [gtksource.mark.Mark]s
     of a specific category. It allows you to define a background color of a line,
     an icon shown in gutter and tooltips.
     
@@ -1191,8 +1191,8 @@ struct GtkSourceMark
     value, but it is just not used when rendering the proper icon.
     
     To provide meaningful tooltips for a given mark of a category, you should
-    connect to `signal@MarkAttributes::query-tooltip-text` or
-    `signal@MarkAttributes::query-tooltip-markup` where the latter
+    connect to [gtksource.mark_attributes.MarkAttributes.queryTooltipText] or
+    [gtksource.mark_attributes.MarkAttributes.queryTooltipMarkup] where the latter
     takes precedence.
 */
 struct GtkSourceMarkAttributes;
@@ -1215,9 +1215,9 @@ struct GtkSourceMarkClass
 }
 
 /**
-    Compose a `class@Buffer` for printing.
+    Compose a [gtksource.buffer.Buffer] for printing.
     
-    The [gtksource.print_compositor.PrintCompositor] object is used to compose a `class@Buffer`
+    The [gtksource.print_compositor.PrintCompositor] object is used to compose a [gtksource.buffer.Buffer]
     for printing. You can set various configuration options to customize the
     printed output. [gtksource.print_compositor.PrintCompositor] is designed to be used with the
     high-level printing API of gtk+, i.e. [gtk.print_operation.PrintOperation].
@@ -1260,11 +1260,11 @@ struct GtkSourcePrintCompositorClass
     The typical use-case of [gtksource.region.Region] is to scan a [gtk.text_buffer.TextBuffer] chunk by
     chunk, not the whole buffer at once to not block the user interface. The
     [gtksource.region.Region] represents in that case the remaining region to scan. You
-    can listen to the `signal@Gtk.TextBuffer::insert-text` and
-    `signal@Gtk.TextBuffer::delete-range` signals to update the [gtksource.region.Region]
+    can listen to the [gtk.text_buffer.TextBuffer.insertText] and
+    [gtk.text_buffer.TextBuffer.deleteRange] signals to update the [gtksource.region.Region]
     accordingly.
     
-    To iterate through the subregions, you need to use a `struct@RegionIter`,
+    To iterate through the subregions, you need to use a [gtksource.region_iter.RegionIter],
     for example:
     ```c
     GtkSourceRegion *region;
@@ -1327,8 +1327,8 @@ struct GtkSourceRegionIter
     Search context.
     
     A [gtksource.search_context.SearchContext] is used for the search and replace in a
-    `class@Buffer`. The search settings are represented by a
-    `class@SearchSettings` object. There can be a many-to-many relationship
+    [gtksource.buffer.Buffer]. The search settings are represented by a
+    [gtksource.search_settings.SearchSettings] object. There can be a many-to-many relationship
     between buffers and search settings, with the search contexts in-between: a
     search settings object can be shared between several search contexts; and a
     buffer can contain several search contexts at the same time.
@@ -1352,14 +1352,14 @@ struct GtkSourceRegionIter
     highlighting for several [gtksource.search_context.SearchContext]s attached to the
     same buffer. Moreover, each of those [gtksource.search_context.SearchContext]s can
     have a different text style associated. Use
-    [gtksource.search_context.SearchContext.setMatchStyle] to specify the `class@Style`
+    [gtksource.search_context.SearchContext.setMatchStyle] to specify the [gtksource.style.Style]
     to apply on search matches.
     
-    Note that the `property@SearchContext:highlight` and
-    `property@SearchContext:match-style` properties are in the
-    [gtksource.search_context.SearchContext] class, not `class@SearchSettings`. Appearance
+    Note that the [gtksource.search_context.SearchContext.highlight] and
+    [gtksource.search_context.SearchContext.matchStyle] properties are in the
+    [gtksource.search_context.SearchContext] class, not [gtksource.search_settings.SearchSettings]. Appearance
     settings should be tied to one, and only one buffer, as different buffers can
-    have different style scheme associated (a `class@SearchSettings` object
+    have different style scheme associated (a [gtksource.search_settings.SearchSettings] object
     can be bound indirectly to several buffers).
     
     The concept of "current match" doesn't exist yet. A way to highlight
@@ -1392,7 +1392,7 @@ struct GtkSourceSearchContextClass
     
     A [gtksource.search_settings.SearchSettings] object represents the settings of a search. The
     search settings can be associated with one or several
-    `class@SearchContext`s.
+    [gtksource.search_context.SearchContext]s.
 */
 struct GtkSourceSearchSettings
 {
@@ -1414,11 +1414,11 @@ struct GtkSourceSearchSettingsClass
     Quick insertion code snippets.
     
     The [gtksource.snippet.Snippet] represents a series of chunks that can quickly be
-    inserted into the `class@View`.
+    inserted into the [gtksource.view.View].
     
     Snippets are defined in XML files which are loaded by the
-    `class@SnippetManager`. Alternatively, applications can create snippets
-    on demand and insert them into the `class@View` using
+    [gtksource.snippet_manager.SnippetManager]. Alternatively, applications can create snippets
+    on demand and insert them into the [gtksource.view.View] using
     [gtksource.view.View.pushSnippet].
     
     Snippet chunks can reference other snippet chunks as well as post-process
@@ -1432,7 +1432,7 @@ struct GtkSourceSnippet;
     The [gtksource.snippet_chunk.SnippetChunk] represents a single chunk of text that
     may or may not be an edit point within the snippet. Chunks that are
     an edit point (also called a tab stop) have the
-    `property@SnippetChunk:focus-position` property set.
+    [gtksource.snippet_chunk.SnippetChunk.focusPosition] property set.
 */
 struct GtkSourceSnippetChunk;
 
@@ -1451,14 +1451,14 @@ struct GtkSourceSnippetClass
 }
 
 /**
-    Context for expanding `class@SnippetChunk`.
+    Context for expanding [gtksource.snippet_chunk.SnippetChunk].
     
     This class is currently used primary as a hashtable. However, the longer
     term goal is to have it hold onto a `GjsContext` as well as other languages
-    so that `class@SnippetChunk` can expand themselves by executing
+    so that [gtksource.snippet_chunk.SnippetChunk] can expand themselves by executing
     script within the context.
     
-    The `class@Snippet` will build the context and then expand each of the
+    The [gtksource.snippet.Snippet] will build the context and then expand each of the
     chunks during the insertion/edit phase.
 */
 struct GtkSourceSnippetContext;
@@ -1471,10 +1471,10 @@ struct GtkSourceSnippetContextClass
 }
 
 /**
-    Provides access to `class@Snippet`.
+    Provides access to [gtksource.snippet.Snippet].
     
     [gtksource.snippet_manager.SnippetManager] is an object which processes snippet description
-    files and creates `class@Snippet` objects.
+    files and creates [gtksource.snippet.Snippet] objects.
     
     Use [gtksource.snippet_manager.SnippetManager.getDefault] to retrieve the default
     instance of [gtksource.snippet_manager.SnippetManager].
@@ -1498,18 +1498,18 @@ struct GtkSourceSnippetManagerClass
     symbols.
     
     Call [gtksource.view.View.getSpaceDrawer] to get the [gtksource.space_drawer.SpaceDrawer]
-    instance of a certain `class@View`.
+    instance of a certain [gtksource.view.View].
     
     By default, no white spaces are drawn because the
-    `property@SpaceDrawer:enable-matrix` is false.
+    [gtksource.space_drawer.SpaceDrawer.enableMatrix] is false.
     
     To draw white spaces, [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] can
-    be called to set the `property@SpaceDrawer:matrix` property (by default all
+    be called to set the [gtksource.space_drawer.SpaceDrawer.matrix] property (by default all
     space types are enabled at all locations). Then call
     [gtksource.space_drawer.SpaceDrawer.setEnableMatrix].
     
-    For a finer-grained method, there is also the `class@Tag`'s
-    `property@Tag:draw-spaces` property.
+    For a finer-grained method, there is also the [gtksource.tag.Tag]'s
+    [gtksource.tag.Tag.drawSpaces] property.
     
     # Example
     
@@ -1563,10 +1563,10 @@ struct GtkSourceStyleClass
 }
 
 /**
-    Controls the appearance of `class@View`.
+    Controls the appearance of [gtksource.view.View].
     
     #GtkSourceStyleScheme contains all the text styles to be used in
-    `class@View` and `class@Buffer`. For instance, it contains text styles
+    [gtksource.view.View] and [gtksource.buffer.Buffer]. For instance, it contains text styles
     for syntax highlighting, it may contain foreground and background color for
     non-highlighted text, color for the line numbers, current line highlighting,
     bracket matching, etc.
@@ -1586,7 +1586,7 @@ struct GtkSourceStyleScheme;
     for choosing style schemes.
     
     In GtkSourceView, the main widgets that implement this interface are
-    `class@StyleSchemeChooserWidget` and `class@StyleSchemeChooserButton`.
+    [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget] and [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton].
 */
 struct GtkSourceStyleSchemeChooser;
 
@@ -1598,7 +1598,7 @@ struct GtkSourceStyleSchemeChooser;
     selection dialog to change the style scheme.
     It is suitable widget for selecting a style scheme in a preference dialog.
     
-    In [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton], a `class@StyleSchemeChooserWidget`
+    In [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton], a [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
     is used to provide a dialog for selecting style schemes.
 */
 struct GtkSourceStyleSchemeChooserButton
@@ -1669,7 +1669,7 @@ struct GtkSourceStyleSchemeClass
 }
 
 /**
-    Provides access to `class@StyleScheme`s.
+    Provides access to [gtksource.style_scheme.StyleScheme]s.
 */
 struct GtkSourceStyleSchemeManager;
 
@@ -1681,11 +1681,11 @@ struct GtkSourceStyleSchemeManagerClass
 }
 
 /**
-    A preview widget for `class@StyleScheme`.
+    A preview widget for [gtksource.style_scheme.StyleScheme].
     
-    This widget provides a convenient [gtk.widget.Widget] to preview a `class@StyleScheme`.
+    This widget provides a convenient [gtk.widget.Widget] to preview a [gtksource.style_scheme.StyleScheme].
     
-    The `property@StyleSchemePreview:selected` property can be used to manage
+    The [gtksource.style_scheme_preview.StyleSchemePreview.selected] property can be used to manage
     the selection state of a single preview widget.
 */
 struct GtkSourceStyleSchemePreview;
@@ -1698,13 +1698,13 @@ struct GtkSourceStyleSchemePreviewClass
 }
 
 /**
-    A tag that can be applied to text in a `class@Buffer`.
+    A tag that can be applied to text in a [gtksource.buffer.Buffer].
     
     [gtksource.tag.Tag] is a subclass of [gtk.text_tag.TextTag] that adds properties useful for
     the GtkSourceView library.
     
     If, for a certain tag, [gtk.text_tag.TextTag] is sufficient, it's better that you create
-    a [gtk.text_tag.TextTag], not a `class@Tag`.
+    a [gtk.text_tag.TextTag], not a [gtksource.tag.Tag].
 */
 struct GtkSourceTag
 {
@@ -1726,7 +1726,7 @@ struct GtkSourceTagClass
     Subclass of [gtk.text_view.TextView].
     
     [gtksource.view.View] is the main class of the GtkSourceView library.
-    Use a `class@Buffer` to display text with a [gtksource.view.View].
+    Use a [gtksource.buffer.Buffer] to display text with a [gtksource.view.View].
     
     This class provides:
     
@@ -1744,7 +1744,7 @@ struct GtkSourceTagClass
     # GtkSourceView as GtkBuildable
     
     The GtkSourceView implementation of the [gtk.buildable.Buildable] interface exposes the
-    `property@View:completion` object with the internal-child "completion".
+    [gtksource.view.View.completion] object with the internal-child "completion".
     
     An example of a UI definition fragment with GtkSourceView:
     ```xml
@@ -1762,7 +1762,7 @@ struct GtkSourceTagClass
     # Changing the Font
     
     Gtk CSS provides the best way to change the font for a [gtksource.view.View] in a
-    manner that allows for components like `class@Map` to scale the desired
+    manner that allows for components like [gtksource.map.Map] to scale the desired
     font.
     
     ```c
@@ -1817,7 +1817,7 @@ struct GtkSourceViewClass
     Vim emulation.
     
     The [gtksource.vim_imcontext.VimIMContext] is a [gtk.imcontext.IMContext] implementation that can
-    be used to provide Vim-like editing controls within a `class@View`.
+    be used to provide Vim-like editing controls within a [gtksource.view.View].
     
     The `GtkSourceViMIMContext` will process incoming [gdk.key_event.KeyEvent] as the
     user types. It should be used in conjunction with a [gtk.event_controller_key.EventControllerKey].
@@ -1835,8 +1835,8 @@ struct GtkSourceViewClass
      - Some commonly used Vim commands
     
     It is recommended that applications display the contents of
-    `property@VimIMContext:command-bar-text` and
-    `property@VimIMContext:command-text` to the user as they represent the
+    [gtksource.vim_imcontext.VimIMContext.commandBarText] and
+    [gtksource.vim_imcontext.VimIMContext.commandText] to the user as they represent the
     command-bar and current command preview found in Vim.
     
     [gtksource.vim_imcontext.VimIMContext] attempts to work with additional [gtk.imcontext.IMContext]

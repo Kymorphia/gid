@@ -1,6 +1,7 @@
 /// Module for [WebsocketExtensionManager] class
 module soup.websocket_extension_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -11,8 +12,8 @@ import soup.session_feature_mixin;
 import soup.types;
 
 /**
-    SoupWebsocketExtensionManager is the `iface@SessionFeature` that handles WebSockets
-    extensions for a `class@Session`.
+    SoupWebsocketExtensionManager is the [soup.session_feature.SessionFeature] that handles WebSockets
+    extensions for a [soup.session.Session].
     
     A #SoupWebsocketExtensionManager is added to the session by default, and normally
     you don't need to worry about it at all. However, if you want to

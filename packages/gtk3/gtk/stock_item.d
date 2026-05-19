@@ -1,6 +1,7 @@
 /// Module for [StockItem] class
 module gtk.stock_item;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import gtk.c.functions;

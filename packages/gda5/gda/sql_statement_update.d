@@ -1,6 +1,7 @@
 /// Module for [SqlStatementUpdate] class
 module gda.sql_statement_update;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

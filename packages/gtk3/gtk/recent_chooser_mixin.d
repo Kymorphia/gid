@@ -1,6 +1,7 @@
 /// Module for [RecentChooser] interface mixin
 module gtk.recent_chooser_mixin;
 
+public import gid.basictypes;
 public import gtk.recent_chooser_iface_proxy;
 public import gid.gid;
 public import glib.error;

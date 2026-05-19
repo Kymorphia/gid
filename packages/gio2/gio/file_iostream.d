@@ -1,6 +1,7 @@
 /// Module for [FileIOStream] class
 module gio.file_iostream;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [Range] class
 module gtk.range;
 
+public import gid.basictypes;
 import gdk.rectangle;
 import gid.gid;
 import gobject.dclosure;
@@ -153,7 +154,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Returns: The number of digits to round the value to when
         it changes.
         
-        See `signal@Gtk.Range::change-value`.
+        See [gtk.range.Range.changeValue].
   */
   @property int roundDigits()
   {
@@ -166,7 +167,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         propval = The number of digits to round the value to when
           it changes.
           
-          See `signal@Gtk.Range::change-value`.
+          See [gtk.range.Range.changeValue].
   */
   @property void roundDigits(int propval)
   {
@@ -275,7 +276,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Gets the number of digits to round the value to when
       it changes.
       
-      See `signalGtk.Range::change-value`.
+      See [gtk.range.Range.changeValue].
       Returns: the number of digits to round to
   */
   int getRoundDigits()
@@ -463,7 +464,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Sets the number of digits to round the value to when
       it changes.
       
-      See `signalGtk.Range::change-value`.
+      See [gtk.range.Range.changeValue].
   
       Params:
         roundDigits = the precision in digits, or -1
@@ -506,7 +507,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       
       If the value is outside the minimum or maximum range values,
       it will be clamped to fit inside them. The range emits the
-      `signalGtk.Range::value-changed` signal if the value changes.
+      [gtk.range.Range.valueChanged] signal if the value changes.
   
       Params:
         value = new value of the range
@@ -574,7 +575,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
         The value parameter is unrounded. An application that overrides
         the ::change-value signal is responsible for clamping the value
         to the desired number of decimal digits; the default GTK
-        handler clamps the value based on `propertyGtk.Range:round-digits`.
+        handler clamps the value based on [gtk.range.Range.roundDigits].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -765,7 +766,7 @@ class RangeGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = The number of digits to round the value to when
           it changes.
           
-          See `signal@Gtk.Range::change-value`.
+          See [gtk.range.Range.changeValue].
       Returns: Builder instance for fluent chaining
   */
   T roundDigits(int propval)

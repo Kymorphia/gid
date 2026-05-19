@@ -1,6 +1,7 @@
 /// Module for [Datum] class
 module arrow.datum;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

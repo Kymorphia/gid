@@ -1,6 +1,7 @@
 /// Module for [RecentInfo] class
 module gtk.recent_info;
 
+public import gid.basictypes;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.app_info;

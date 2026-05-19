@@ -1,6 +1,7 @@
 /// Module for [Adjustment] class
 module gtk.adjustment;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -214,7 +215,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       If the range is larger than the page size, then only the
       start of it will be in the current page.
       
-      A `signalGtk.Adjustment::value-changed` signal will be emitted
+      A [gtk.adjustment.Adjustment.valueChanged] signal will be emitted
       if the value is changed.
   
       Params:
@@ -420,7 +421,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
       Note that for adjustments which are used in a [gtk.scrollbar.Scrollbar],
       the effective range of allowed values goes from
       [gtk.adjustment.Adjustment.lower] to
-      [gtk.adjustment.Adjustment.upper] - `propertyGtk.Adjustment:page-size`.
+      [gtk.adjustment.Adjustment.upper] - [gtk.adjustment.Adjustment.pageSize].
   
       Params:
         value = the new value
@@ -437,7 +438,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
         changed.
         
         Note that the [gtk.adjustment.Adjustment.value] property is
-        covered by the `signalGtk.Adjustment::value-changed` signal.
+        covered by the [gtk.adjustment.Adjustment.valueChanged] signal.
   
       Params:
         callback = signal callback delegate or function to connect

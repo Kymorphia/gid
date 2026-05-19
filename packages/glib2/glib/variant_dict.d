@@ -1,6 +1,7 @@
 /// Module for [VariantDict] class
 module glib.variant_dict;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

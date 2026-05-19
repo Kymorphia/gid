@@ -1,6 +1,7 @@
 /// Module for [PhysMemoryAllocator] interface
 module gstallocators.phys_memory_allocator;
 
+public import gid.basictypes;
 public import gstallocators.phys_memory_allocator_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

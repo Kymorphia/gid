@@ -1,6 +1,7 @@
 /// Module for [CClosureExpression] class
 module gtk.cclosure_expression;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;

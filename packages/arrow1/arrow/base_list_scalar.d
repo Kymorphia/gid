@@ -1,6 +1,7 @@
 /// Module for [BaseListScalar] class
 module arrow.base_list_scalar;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;

@@ -1,6 +1,7 @@
 /// Module for [NavigationView] class
 module adw.navigation_view;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.navigation_page;
@@ -31,7 +32,7 @@ import gtk.widget;
     [adw.navigation_view.NavigationView] presents one child at a time, similar to
     [gtk.stack.Stack].
     
-    [adw.navigation_view.NavigationView] can only contain `class@NavigationPage` children.
+    [adw.navigation_view.NavigationView] can only contain [adw.navigation_page.NavigationPage] children.
     
     It maintains a navigation stack that can be controlled with
     [adw.navigation_view.NavigationView.push] and [adw.navigation_view.NavigationView.pop]. The whole
@@ -55,18 +56,18 @@ import gtk.widget;
     ## Tags
     
     Static pages, as well as any pages in the navigation stack, can be accessed
-    by their `property@NavigationPage:tag`. For example,
+    by their [adw.navigation_page.NavigationPage.tag]. For example,
     [adw.navigation_view.NavigationView.pushByTag] can be used to push a static page that's
     not in the navigation stack without having to keep a reference to it manually.
     
     ## Header Bar Integration
     
-    When used inside [adw.navigation_view.NavigationView], `class@HeaderBar` will automatically
+    When used inside [adw.navigation_view.NavigationView], [adw.header_bar.HeaderBar] will automatically
     display a back button that can be used to go back to the previous page when
     possible. The button also has a context menu, allowing to pop multiple pages
     at once, potentially across multiple navigation views.
     
-    Set `property@HeaderBar:show-back-button` to `FALSE` to disable this behavior
+    Set [adw.header_bar.HeaderBar.showBackButton] to `FALSE` to disable this behavior
     in rare scenarios where it's unwanted.
     
     [adw.header_bar.HeaderBar] will also display the title of the [adw.navigation_page.NavigationPage] it's
@@ -77,7 +78,7 @@ import gtk.widget;
     [adw.navigation_view.NavigationView] supports the following shortcuts for going to the
     previous page:
     
-    - <kbd>Escape</kbd> (unless `property@NavigationView:pop-on-escape` is set to
+    - <kbd>Escape</kbd> (unless [adw.navigation_view.NavigationView.popOnEscape] is set to
       `FALSE`)
     - <kbd>Alt</kbd>+<kbd>←</kbd>
     - Back mouse button
@@ -88,10 +89,10 @@ import gtk.widget;
     - Scrolling towards the right on touchpads (usually two-finger swipe)
     
     These gestures have transitions enabled regardless of the
-    `property@NavigationView:animate-transitions` value.
+    [adw.navigation_view.NavigationView.animateTransitions] value.
     
     Applications can also enable shortcuts for pushing another page onto the
-    navigation stack via connecting to the `signal@NavigationView::get-next-page`
+    navigation stack via connecting to the [adw.navigation_view.NavigationView.getNextPage]
     signal, in that case the following shortcuts are supported:
     
     - <kbd>Alt</kbd>+<kbd>→</kbd>
@@ -100,7 +101,7 @@ import gtk.widget;
     
     For right-to-left locales, the gestures and shortcuts are reversed.
     
-    `property@NavigationPage:can-pop` can be used to disable them, along with the
+    [adw.navigation_page.NavigationPage.canPop] can be used to disable them, along with the
     header bar back buttons.
     
     ## Actions
@@ -321,7 +322,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Finds a page in self by its tag.
       
-      See `propertyNavigationPage:tag`.
+      See [adw.navigation_page.NavigationPage.tag].
   
       Params:
         tag = a page tag
@@ -414,7 +415,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       If [adw.navigation_view.NavigationView.add] hasn't been called, the page is automatically
       removed.
       
-      `signalNavigationView::popped` will be emitted for the current visible page.
+      [adw.navigation_view.NavigationView.popped] will be emitted for the current visible page.
       
       See [adw.navigation_view.NavigationView.popToPage] and
       [adw.navigation_view.NavigationView.popToTag].
@@ -435,7 +436,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       If [adw.navigation_view.NavigationView.add] hasn't been called for any of the popped pages,
       they are automatically removed.
       
-      `signalNavigationView::popped` will be be emitted for each of the popped
+      [adw.navigation_view.NavigationView.popped] will be be emitted for each of the popped
       pages.
       
       See [adw.navigation_view.NavigationView.pop] and [adw.navigation_view.NavigationView.popToTag].
@@ -459,9 +460,9 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       If [adw.navigation_view.NavigationView.add] hasn't been called for any of the popped pages,
       they are automatically removed.
       
-      `signalNavigationView::popped` will be emitted for each of the popped pages.
+      [adw.navigation_view.NavigationView.popped] will be emitted for each of the popped pages.
       
-      See [adw.navigation_view.NavigationView.popToPage] and `propertyNavigationPage:tag`.
+      See [adw.navigation_view.NavigationView.popToPage] and [adw.navigation_page.NavigationPage.tag].
   
       Params:
         tag = a page tag
@@ -481,7 +482,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       If [adw.navigation_view.NavigationView.add] hasn't been called, the page is automatically
       removed once it's popped.
       
-      `signalNavigationView::pushed` will be emitted for page.
+      [adw.navigation_view.NavigationView.pushed] will be emitted for page.
       
       See [adw.navigation_view.NavigationView.pushByTag].
   
@@ -499,9 +500,9 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       If [adw.navigation_view.NavigationView.add] hasn't been called, the page is automatically
       removed once it's popped.
       
-      `signalNavigationView::pushed` will be emitted for the page.
+      [adw.navigation_view.NavigationView.pushed] will be emitted for the page.
       
-      See [adw.navigation_view.NavigationView.push] and `propertyNavigationPage:tag`.
+      See [adw.navigation_view.NavigationView.push] and [adw.navigation_page.NavigationPage.tag].
   
       Params:
         tag = the page tag
@@ -541,7 +542,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       n_pages can be 0, in that case no page will be visible after calling this
       method. This can be useful for removing all pages from self.
       
-      The `signalNavigationView::replaced` signal will be emitted.
+      The [adw.navigation_view.NavigationView.replaced] signal will be emitted.
       
       See [adw.navigation_view.NavigationView.replaceWithTags].
   
@@ -575,9 +576,9 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
       n_tags can be 0, in that case no page will be visible after calling this
       method. This can be useful for removing all pages from self.
       
-      The `signalNavigationView::replaced` signal will be emitted.
+      The [adw.navigation_view.NavigationView.replaced] signal will be emitted.
       
-      See [adw.navigation_view.NavigationView.replace] and `propertyNavigationPage:tag`.
+      See [adw.navigation_view.NavigationView.replace] and [adw.navigation_page.NavigationPage.tag].
   
       Params:
         tags = tags of the pages in the
@@ -637,7 +638,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
         not make any irreversible changes in the handler, such as removing the page
         from a forward stack.
         
-        Instead, it should be done in the `signalNavigationView::pushed` handler.
+        Instead, it should be done in the [adw.navigation_view.NavigationView.pushed] handler.
   
       Params:
         callback = signal callback delegate or function to connect

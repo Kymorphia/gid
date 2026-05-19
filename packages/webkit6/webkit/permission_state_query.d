@@ -1,6 +1,7 @@
 /// Module for [PermissionStateQuery] class
 module webkit.permission_state_query;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

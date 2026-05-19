@@ -1,6 +1,7 @@
 /// Module for [Int8ArrayBuilder] class
 module arrow.int8_array_builder;
 
+public import gid.basictypes;
 import arrow.array_builder;
 import arrow.c.functions;
 import arrow.c.types;

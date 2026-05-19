@@ -1,6 +1,7 @@
 /// Module for [AudioFormatInfo] class
 module gstaudio.audio_format_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gstaudio.c.functions;
 import gstaudio.c.types;

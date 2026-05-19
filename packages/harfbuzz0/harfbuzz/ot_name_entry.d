@@ -1,6 +1,7 @@
 /// Module for [OtNameEntry] class
 module harfbuzz.ot_name_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;

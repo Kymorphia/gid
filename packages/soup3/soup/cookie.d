@@ -1,6 +1,7 @@
 /// Module for [Cookie] class
 module soup.cookie;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.date_time;
 import glib.uri;
@@ -13,8 +14,8 @@ import soup.types;
     Implements HTTP cookies, as described by
     [RFC 6265](http://tools.ietf.org/html/rfc6265.txt).
     
-    To have a `class@Session` handle cookies for your appliction
-    automatically, use a `class@CookieJar`.
+    To have a [soup.session.Session] handle cookies for your appliction
+    automatically, use a [soup.cookie_jar.CookieJar].
     
     @name and @value will be set for all cookies. If the cookie is
     generated from a string that appears to have no name, then @name
@@ -399,7 +400,7 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Serializes cookie in the format used by the Cookie header (ie, for
-      returning a cookie from a `classSession` to a server).
+      returning a cookie from a [soup.session.Session] to a server).
       Returns: the header
   */
   string toCookieHeader()
@@ -413,7 +414,7 @@ class Cookie : gobject.boxed.Boxed
   /**
       Serializes cookie in the format used by the Set-Cookie header.
       
-      i.e. for sending a cookie from a `classServer` to a client.
+      i.e. for sending a cookie from a [soup.server.Server] to a client.
       Returns: the header
   */
   string toSetCookieHeader()

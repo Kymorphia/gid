@@ -1,6 +1,7 @@
 /// Module for [HivePartitioningOptions] class
 module arrowdataset.hive_partitioning_options;
 
+public import gid.basictypes;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.key_value_partitioning_options;

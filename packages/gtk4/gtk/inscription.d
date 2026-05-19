@@ -1,6 +1,7 @@
 /// Module for [Inscription] class
 module gtk.inscription;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;
@@ -187,7 +188,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         This influences the requested width, not the width actually given to the widget.
         The widget might turn out larger as well as smaller.
         
-        If this property is set to a value smaller than `property@Gtk.Inscription:min-chars`,
+        If this property is set to a value smaller than [gtk.inscription.Inscription.minChars],
         that value will be used. In particular, for the default value of 0, this will always
         be the case.
   */
@@ -204,7 +205,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           This influences the requested width, not the width actually given to the widget.
           The widget might turn out larger as well as smaller.
           
-          If this property is set to a value smaller than `property@Gtk.Inscription:min-chars`,
+          If this property is set to a value smaller than [gtk.inscription.Inscription.minChars],
           that value will be used. In particular, for the default value of 0, this will always
           be the case.
   */
@@ -220,7 +221,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         This influences the requested height, not the height actually given to the widget.
         The widget might turn out larger as well as smaller.
         
-        If this property is set to a value smaller than `property@Gtk.Inscription:min-lines`,
+        If this property is set to a value smaller than [gtk.inscription.Inscription.minLines],
         that value will be used. In particular, for the default value of 0, this will always
         be the case.
   */
@@ -237,7 +238,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           This influences the requested height, not the height actually given to the widget.
           The widget might turn out larger as well as smaller.
           
-          If this property is set to a value smaller than `property@Gtk.Inscription:min-lines`,
+          If this property is set to a value smaller than [gtk.inscription.Inscription.minLines],
           that value will be used. In particular, for the default value of 0, this will always
           be the case.
   */
@@ -389,7 +390,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Gets the `min-chars` of the inscription.
       
-      See the `propertyGtk.Inscription:min-chars` property.
+      See the [gtk.inscription.Inscription.minChars] property.
       Returns: the min-chars property
   */
   uint getMinChars()
@@ -402,7 +403,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Gets the `min-lines` of the inscription.
       
-      See the `propertyGtk.Inscription:min-lines` property.
+      See the [gtk.inscription.Inscription.minLines] property.
       Returns: the min-lines property
   */
   uint getMinLines()
@@ -415,7 +416,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Gets the `nat-chars` of the inscription.
       
-      See the `propertyGtk.Inscription:nat-chars` property.
+      See the [gtk.inscription.Inscription.natChars] property.
       Returns: the nat-chars property
   */
   uint getNatChars()
@@ -428,7 +429,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Gets the `nat-lines` of the inscription.
       
-      See the `propertyGtk.Inscription:nat-lines` property.
+      See the [gtk.inscription.Inscription.natLines] property.
       Returns: the nat-lines property
   */
   uint getNatLines()
@@ -532,7 +533,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Sets the `min-chars` of the inscription.
       
-      See the `propertyGtk.Inscription:min-chars` property.
+      See the [gtk.inscription.Inscription.minChars] property.
   
       Params:
         minChars = the minimum number of characters that should fit, approximately
@@ -545,7 +546,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Sets the `min-lines` of the inscription.
       
-      See the `propertyGtk.Inscription:min-lines` property.
+      See the [gtk.inscription.Inscription.minLines] property.
   
       Params:
         minLines = the minimum number of lines that should fit, approximately
@@ -558,7 +559,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Sets the `nat-chars` of the inscription.
       
-      See the `propertyGtk.Inscription:nat-chars` property.
+      See the [gtk.inscription.Inscription.natChars] property.
   
       Params:
         natChars = the number of characters that should ideally fit, approximately
@@ -571,7 +572,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   /**
       Sets the `nat-lines` of the inscription.
       
-      See the `propertyGtk.Inscription:nat-lines` property.
+      See the [gtk.inscription.Inscription.natLines] property.
   
       Params:
         natLines = the number of lines that should ideally fit
@@ -725,7 +726,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           This influences the requested width, not the width actually given to the widget.
           The widget might turn out larger as well as smaller.
           
-          If this property is set to a value smaller than `property@Gtk.Inscription:min-chars`,
+          If this property is set to a value smaller than [gtk.inscription.Inscription.minChars],
           that value will be used. In particular, for the default value of 0, this will always
           be the case.
       Returns: Builder instance for fluent chaining
@@ -743,7 +744,7 @@ class InscriptionGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           This influences the requested height, not the height actually given to the widget.
           The widget might turn out larger as well as smaller.
           
-          If this property is set to a value smaller than `property@Gtk.Inscription:min-lines`,
+          If this property is set to a value smaller than [gtk.inscription.Inscription.minLines],
           that value will be used. In particular, for the default value of 0, this will always
           be the case.
       Returns: Builder instance for fluent chaining

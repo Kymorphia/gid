@@ -1,6 +1,7 @@
 /// Module for [StringDictionaryArrayBuilder] class
 module arrow.string_dictionary_array_builder;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.array_builder;
 import arrow.c.functions;

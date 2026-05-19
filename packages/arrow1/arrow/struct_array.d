@@ -1,6 +1,7 @@
 /// Module for [StructArray] class
 module arrow.struct_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.buffer;
 import arrow.c.functions;

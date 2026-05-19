@@ -1,6 +1,7 @@
 /// Module for [ParamSpecEnum] class
 module gobject.param_spec_enum;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

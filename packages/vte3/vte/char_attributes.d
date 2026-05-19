@@ -1,6 +1,7 @@
 /// Module for [CharAttributes] class
 module vte.char_attributes;
 
+public import gid.basictypes;
 import gid.gid;
 import vte.c.functions;
 import vte.c.types;

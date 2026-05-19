@@ -1,6 +1,7 @@
 /// Module for [Dock] class
 module panel.dock;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

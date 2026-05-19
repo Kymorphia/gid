@@ -1,6 +1,7 @@
 /// Module for [VideoSEIUserDataUnregisteredMeta] class
 module gstvideo.video_seiuser_data_unregistered_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

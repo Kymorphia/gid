@@ -1,6 +1,7 @@
 /// Module for [StackSidebar] class
 module gtk.stack_sidebar;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

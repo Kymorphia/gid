@@ -1,6 +1,7 @@
 /// Module for [Tag] class
 module gtksource.tag;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -10,13 +11,13 @@ import gtksource.c.types;
 import gtksource.types;
 
 /**
-    A tag that can be applied to text in a `class@Buffer`.
+    A tag that can be applied to text in a [gtksource.buffer.Buffer].
     
     [gtksource.tag.Tag] is a subclass of [gtk.text_tag.TextTag] that adds properties useful for
     the GtkSourceView library.
     
     If, for a certain tag, [gtk.text_tag.TextTag] is sufficient, it's better that you create
-    a [gtk.text_tag.TextTag], not a `class@Tag`.
+    a [gtk.text_tag.TextTag], not a [gtksource.tag.Tag].
 */
 class Tag : gtk.text_tag.TextTag
 {
@@ -59,10 +60,10 @@ class Tag : gtk.text_tag.TextTag
       Get `drawSpaces` property.
       Returns: Whether to draw white spaces.
         
-        This property takes precedence over the value defined by the `class@SpaceDrawer`'s
-        `property@SpaceDrawer:matrix` property (only where the tag is applied).
+        This property takes precedence over the value defined by the [gtksource.space_drawer.SpaceDrawer]'s
+        [gtksource.space_drawer.SpaceDrawer.matrix] property (only where the tag is applied).
         
-        Setting this property also changes `property@Tag:draw-spaces-set` to
+        Setting this property also changes [gtksource.tag.Tag.drawSpacesSet] to
         true.
   */
   @property bool drawSpaces()
@@ -75,10 +76,10 @@ class Tag : gtk.text_tag.TextTag
       Params:
         propval = Whether to draw white spaces.
           
-          This property takes precedence over the value defined by the `class@SpaceDrawer`'s
-          `property@SpaceDrawer:matrix` property (only where the tag is applied).
+          This property takes precedence over the value defined by the [gtksource.space_drawer.SpaceDrawer]'s
+          [gtksource.space_drawer.SpaceDrawer.matrix] property (only where the tag is applied).
           
-          Setting this property also changes `property@Tag:draw-spaces-set` to
+          Setting this property also changes [gtksource.tag.Tag.drawSpacesSet] to
           true.
   */
   @property void drawSpaces(bool propval)
@@ -88,7 +89,7 @@ class Tag : gtk.text_tag.TextTag
 
   /**
       Get `drawSpacesSet` property.
-      Returns: Whether the `property@Tag:draw-spaces` property is set and must be
+      Returns: Whether the [gtksource.tag.Tag.drawSpaces] property is set and must be
         taken into account.
   */
   @property bool drawSpacesSet()
@@ -99,7 +100,7 @@ class Tag : gtk.text_tag.TextTag
   /**
       Set `drawSpacesSet` property.
       Params:
-        propval = Whether the `property@Tag:draw-spaces` property is set and must be
+        propval = Whether the [gtksource.tag.Tag.drawSpaces] property is set and must be
           taken into account.
   */
   @property void drawSpacesSet(bool propval)
@@ -137,10 +138,10 @@ class TagGidBuilderImpl(T) : gtk.text_tag.TextTagGidBuilderImpl!T
       Params:
         propval = Whether to draw white spaces.
           
-          This property takes precedence over the value defined by the `class@SpaceDrawer`'s
-          `property@SpaceDrawer:matrix` property (only where the tag is applied).
+          This property takes precedence over the value defined by the [gtksource.space_drawer.SpaceDrawer]'s
+          [gtksource.space_drawer.SpaceDrawer.matrix] property (only where the tag is applied).
           
-          Setting this property also changes `property@Tag:draw-spaces-set` to
+          Setting this property also changes [gtksource.tag.Tag.drawSpacesSet] to
           true.
       Returns: Builder instance for fluent chaining
   */
@@ -152,7 +153,7 @@ class TagGidBuilderImpl(T) : gtk.text_tag.TextTagGidBuilderImpl!T
   /**
       Set `drawSpacesSet` property.
       Params:
-        propval = Whether the `property@Tag:draw-spaces` property is set and must be
+        propval = Whether the [gtksource.tag.Tag.drawSpaces] property is set and must be
           taken into account.
       Returns: Builder instance for fluent chaining
   */

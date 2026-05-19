@@ -1,6 +1,7 @@
 /// Module for [Image] interface
 module atk.image;
 
+public import gid.basictypes;
 public import atk.image_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

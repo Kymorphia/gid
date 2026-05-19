@@ -1,6 +1,7 @@
 /// Module for [FormatOptions] class
 module gmime.format_options;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

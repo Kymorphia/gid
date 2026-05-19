@@ -1,6 +1,7 @@
 /// Module for [BitReader] class
 module gstbase.bit_reader;
 
+public import gid.basictypes;
 import gid.gid;
 import gstbase.c.functions;
 import gstbase.c.types;

@@ -1,6 +1,7 @@
 /// Module for [TocEntry] class
 module gst.toc_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.c.functions;

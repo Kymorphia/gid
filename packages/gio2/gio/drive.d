@@ -1,6 +1,7 @@
 /// Module for [Drive] interface
 module gio.drive;
 
+public import gid.basictypes;
 public import gio.drive_iface_proxy;
 import gid.gid;
 import gio.async_result;

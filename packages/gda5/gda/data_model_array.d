@@ -1,6 +1,7 @@
 /// Module for [DataModelArray] class
 module gda.data_model_array;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_model;

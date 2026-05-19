@@ -1,6 +1,7 @@
 /// Module for [Buffer] class
 module gst.buffer;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.types;

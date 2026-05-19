@@ -1,6 +1,7 @@
 /// Module for [Rect] class
 module graphene.rect;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import graphene.c.functions;

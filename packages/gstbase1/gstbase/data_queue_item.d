@@ -1,6 +1,7 @@
 /// Module for [DataQueueItem] class
 module gstbase.data_queue_item;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.mini_object;
 import gstbase.c.functions;

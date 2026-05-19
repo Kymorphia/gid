@@ -1,6 +1,7 @@
 /// Module for [SignalListItemFactory] class
 module gtk.signal_list_item_factory;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

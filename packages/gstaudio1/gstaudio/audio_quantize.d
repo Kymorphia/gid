@@ -1,6 +1,7 @@
 /// Module for [AudioQuantize] class
 module gstaudio.audio_quantize;
 
+public import gid.basictypes;
 import gid.gid;
 import gstaudio.c.functions;
 import gstaudio.c.types;

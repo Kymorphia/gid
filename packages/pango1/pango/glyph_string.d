@@ -1,6 +1,7 @@
 /// Module for [GlyphString] class
 module pango.glyph_string;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.analysis;

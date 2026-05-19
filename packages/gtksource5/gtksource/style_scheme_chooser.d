@@ -1,6 +1,7 @@
 /// Module for [StyleSchemeChooser] interface
 module gtksource.style_scheme_chooser;
 
+public import gid.basictypes;
 public import gtksource.style_scheme_chooser_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;
@@ -17,7 +18,7 @@ import gtksource.types;
     for choosing style schemes.
     
     In GtkSourceView, the main widgets that implement this interface are
-    `class@StyleSchemeChooserWidget` and `class@StyleSchemeChooserButton`.
+    [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget] and [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton].
 */
 interface StyleSchemeChooser
 {

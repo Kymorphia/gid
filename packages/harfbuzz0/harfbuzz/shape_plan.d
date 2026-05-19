@@ -1,6 +1,7 @@
 /// Module for [ShapePlan] class
 module harfbuzz.shape_plan;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;

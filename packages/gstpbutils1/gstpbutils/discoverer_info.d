@@ -1,6 +1,7 @@
 /// Module for [DiscovererInfo] class
 module gstpbutils.discoverer_info;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.variant;
 import gobject.gid_builder;

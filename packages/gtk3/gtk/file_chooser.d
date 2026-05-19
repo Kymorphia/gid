@@ -1,6 +1,7 @@
 /// Module for [FileChooser] interface
 module gtk.file_chooser;
 
+public import gid.basictypes;
 public import gtk.file_chooser_iface_proxy;
 import gid.gid;
 import gio.file;

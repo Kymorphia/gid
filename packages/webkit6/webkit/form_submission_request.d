@@ -1,6 +1,7 @@
 /// Module for [FormSubmissionRequest] class
 module webkit.form_submission_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

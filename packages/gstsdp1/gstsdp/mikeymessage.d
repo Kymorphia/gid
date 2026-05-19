@@ -1,6 +1,7 @@
 /// Module for [MIKEYMessage] class
 module gstsdp.mikeymessage;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.error;

@@ -1,6 +1,7 @@
 /// Module for [CheckButton] class
 module gtk.check_button;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -291,7 +292,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-      Gets the child widget of button or `NULL` if `propertyCheckButton:label` is set.
+      Gets the child widget of button or `NULL` if [gtk.check_button.CheckButton.label] is set.
       Returns: the child widget of button
   */
   gtk.widget.Widget getChild()
@@ -314,7 +315,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-      Returns the label of the check button or `NULL` if `propertyCheckButton:child` is set.
+      Returns the label of the check button or `NULL` if [gtk.check_button.CheckButton.child] is set.
       Returns: The label self shows next
           to the indicator. If no label is shown, null will be returned.
   */
@@ -328,7 +329,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Returns whether underlines in the label indicate mnemonics.
-      Returns: The value of the `propertyGtk.CheckButton:use-underline` property.
+      Returns: The value of the [gtk.check_button.CheckButton.useUnderline] property.
           See [gtk.check_button.CheckButton.setUseUnderline] for details on how to set
           a new value.
   */
@@ -410,7 +411,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   /**
       Sets the text of self.
       
-      If `propertyGtk.CheckButton:use-underline` is true, an underscore
+      If [gtk.check_button.CheckButton.useUnderline] is true, an underscore
       in label is interpreted as mnemonic indicator, see
       [gtk.check_button.CheckButton.setUseUnderline] for details on this behavior.
   
@@ -429,7 +430,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
       
       If setting is true, an underscore character in self's label
       indicates a mnemonic accelerator key. This behavior is similar
-      to `propertyGtk.Label:use-underline`.
+      to [gtk.label.Label.useUnderline].
   
       Params:
         setting = the new value to set

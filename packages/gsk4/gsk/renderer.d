@@ -1,6 +1,7 @@
 /// Module for [Renderer] class
 module gsk.renderer;
 
+public import gid.basictypes;
 import cairo.region;
 import gdk.display;
 import gdk.surface;

@@ -1,6 +1,7 @@
 /// Module for [TextSelection] class
 module atk.text_selection;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.object;

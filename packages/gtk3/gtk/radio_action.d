@@ -1,6 +1,7 @@
 /// Module for [RadioAction] class
 module gtk.radio_action;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

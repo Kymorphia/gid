@@ -1,6 +1,7 @@
 /// Module for [ObjectExpression] class
 module gtk.object_expression;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.object;
 import gtk.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [PartIter] class
 module gmime.part_iter;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

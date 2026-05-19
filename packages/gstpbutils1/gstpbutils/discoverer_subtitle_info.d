@@ -1,6 +1,7 @@
 /// Module for [DiscovererSubtitleInfo] class
 module gstpbutils.discoverer_subtitle_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstpbutils.c.functions;

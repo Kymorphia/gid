@@ -1,6 +1,7 @@
 /// Module for [RepeatNode] class
 module gsk.repeat_node;
 
+public import gid.basictypes;
 import gid.gid;
 import graphene.rect;
 import gsk.c.functions;

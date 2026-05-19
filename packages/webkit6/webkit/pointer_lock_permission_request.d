@@ -1,6 +1,7 @@
 /// Module for [PointerLockPermissionRequest] class
 module webkit.pointer_lock_permission_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

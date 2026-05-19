@@ -1,6 +1,7 @@
 /// Module for [ArrowAccessible] class
 module gtk.arrow_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.image;

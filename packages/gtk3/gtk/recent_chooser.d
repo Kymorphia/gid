@@ -1,6 +1,7 @@
 /// Module for [RecentChooser] interface
 module gtk.recent_chooser;
 
+public import gid.basictypes;
 public import gtk.recent_chooser_iface_proxy;
 import gid.gid;
 import glib.error;

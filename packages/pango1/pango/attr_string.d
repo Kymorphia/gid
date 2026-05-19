@@ -1,6 +1,7 @@
 /// Module for [AttrString] class
 module pango.attr_string;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.attribute;
 import pango.c.functions;

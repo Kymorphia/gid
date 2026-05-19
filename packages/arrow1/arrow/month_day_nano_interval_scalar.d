@@ -1,6 +1,7 @@
 /// Module for [MonthDayNanoIntervalScalar] class
 module arrow.month_day_nano_interval_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.month_day_nano;

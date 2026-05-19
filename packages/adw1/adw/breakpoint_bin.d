@@ -1,6 +1,7 @@
 /// Module for [BreakpointBin] class
 module adw.breakpoint_bin;
 
+public import gid.basictypes;
 import adw.breakpoint;
 import adw.c.functions;
 import adw.c.types;
@@ -24,23 +25,23 @@ import gtk.widget;
       <img src="breakpoint-bin.png" alt="breakpoint-bin">
     </picture>
     
-    [adw.breakpoint_bin.BreakpointBin] provides a way to use breakpoints without `class@Window`,
-    `class@ApplicationWindow` or `class@Dialog`. It can be useful for limiting
+    [adw.breakpoint_bin.BreakpointBin] provides a way to use breakpoints without [adw.window.Window],
+    [adw.application_window.ApplicationWindow] or [adw.dialog.Dialog]. It can be useful for limiting
     breakpoints to a single page and similar purposes. Most applications
     shouldn't need it.
     
-    [adw.breakpoint_bin.BreakpointBin] is similar to `class@Bin`. It has one child, set via the
-    `property@BreakpointBin:child` property.
+    [adw.breakpoint_bin.BreakpointBin] is similar to [adw.bin.Bin]. It has one child, set via the
+    [adw.breakpoint_bin.BreakpointBin.child] property.
     
     When [adw.breakpoint_bin.BreakpointBin] is resized, its child widget can rearrange its layout
     at specific thresholds.
     
-    The thresholds and layout changes are defined via `class@Breakpoint` objects.
+    The thresholds and layout changes are defined via [adw.breakpoint.Breakpoint] objects.
     They can be added using [adw.breakpoint_bin.BreakpointBin.addBreakpoint].
     
     Each breakpoint has a condition, specifying the bin's size and/or aspect
     ratio, and setters that automatically set object properties when that
-    happens. The `signal@Breakpoint::apply` and `signal@Breakpoint::unapply` can
+    happens. The [adw.breakpoint.Breakpoint.apply] and [adw.breakpoint.Breakpoint.unapply] can
     be used instead for more complex scenarios.
     
     Breakpoints are only allowed to modify widgets inside the [adw.breakpoint_bin.BreakpointBin],
@@ -48,7 +49,7 @@ import gtk.widget;
     
     If multiple breakpoints can be used for the current size, the last one is
     always picked. The current breakpoint can be tracked using the
-    `property@BreakpointBin:current-breakpoint` property.
+    [adw.breakpoint_bin.BreakpointBin.currentBreakpoint] property.
     
     If none of the breakpoints can be used, that property will be set to `NULL`,
     and the original property values will be used instead.
@@ -56,8 +57,8 @@ import gtk.widget;
     ## Minimum Size
     
     Adding a breakpoint to [adw.breakpoint_bin.BreakpointBin] will result in it having no minimum
-    size. The `property@Gtk.Widget:width-request` and
-    `property@Gtk.Widget:height-request` properties must always be set when using
+    size. The [gtk.widget.Widget.widthRequest] and
+    [gtk.widget.Widget.heightRequest] properties must always be set when using
     breakpoints, indicating the smallest size you want to support.
     
     The minimum size and breakpoint conditions must be carefully selected so that
@@ -69,11 +70,11 @@ import gtk.widget;
     ellipsizing or wrapping if they might not fit.
     
     For [gtk.label.Label] this can be done via [gtk.label.Label.ellipsize], or
-    via [gtk.label.Label.wrap] together with [gtk.label.Label.wrap].
+    via [gtk.label.Label.wrap] together with [gtk.label.Label.wrapMode].
     
-    For buttons, use `property@Gtk.Button:can-shrink`,
-    `property@Gtk.MenuButton:can-shrink`, `property@Adw.SplitButton:can-shrink`,
-    or `property@Adw.ButtonContent:can-shrink`.
+    For buttons, use [gtk.button.Button.canShrink],
+    [gtk.menu_button.MenuButton.canShrink], [adw.split_button.SplitButton.canShrink],
+    or [adw.button_content.ButtonContent.canShrink].
     
     ## Example
     
@@ -127,7 +128,7 @@ import gtk.widget;
     </object>
     ```
     
-    See `class@Breakpoint` documentation for details.
+    See [adw.breakpoint.Breakpoint] documentation for details.
 */
 class BreakpointBin : gtk.widget.Widget
 {

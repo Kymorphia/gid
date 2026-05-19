@@ -1,6 +1,7 @@
 /// Module for [TreeExpander] class
 module gtk.tree_expander;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -41,11 +42,11 @@ import gtk.widget;
     the actual row contents.
     
     [gtk.tree_expander.TreeExpander] can be modified with properties such as
-    `property@Gtk.TreeExpander:indent-for-icon`,
-    `property@Gtk.TreeExpander:indent-for-depth`, and
-    `property@Gtk.TreeExpander:hide-expander` to achieve a different appearance.
+    [gtk.tree_expander.TreeExpander.indentForIcon],
+    [gtk.tree_expander.TreeExpander.indentForDepth], and
+    [gtk.tree_expander.TreeExpander.hideExpander] to achieve a different appearance.
     This can even be done to influence individual rows, for example by binding
-    the `property@Gtk.TreeExpander:hide-expander` property to the item count of
+    the [gtk.tree_expander.TreeExpander.hideExpander] property to the item count of
     the model of the treelistrow, to hide the expander for rows without children,
     even if the row is expandable.
     

@@ -1,6 +1,7 @@
 /// Module for [Tooltip] class
 module gtk.tooltip;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gdk.rectangle;
 import gid.gid;
@@ -25,11 +26,11 @@ import gtk.widget;
     contents per [gtk.tree_view.TreeView] row or cell, you will have to do a
     little more work:
     
-    - Set the `property@Gtk.Widget:has-tooltip` property to true.
+    - Set the [gtk.widget.Widget.hasTooltip] property to true.
       This will make GTK monitor the widget for motion and related events
       which are needed to determine when and where to show a tooltip.
     
-    - Connect to the `signal@Gtk.Widget::query-tooltip` signal.
+    - Connect to the [gtk.widget.Widget.queryTooltip] signal.
       This signal will be emitted when a tooltip is supposed to be shown.
       One of the arguments passed to the signal handler is a [gtk.tooltip.Tooltip]
       object. This is the object that we are about to display as a tooltip,

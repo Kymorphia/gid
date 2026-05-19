@@ -1,6 +1,7 @@
 /// Module for [AttrShape] class
 module pango.attr_shape;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.attribute;
 import pango.c.functions;

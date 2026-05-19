@@ -1,6 +1,7 @@
 /// Module for [SnippetChunk] class
 module gtksource.snippet_chunk;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.initially_unowned;
@@ -16,7 +17,7 @@ import gtksource.types;
     The [gtksource.snippet_chunk.SnippetChunk] represents a single chunk of text that
     may or may not be an edit point within the snippet. Chunks that are
     an edit point (also called a tab stop) have the
-    `property@SnippetChunk:focus-position` property set.
+    [gtksource.snippet_chunk.SnippetChunk.focusPosition] property set.
 */
 class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
 {
@@ -129,7 +130,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
 
   /**
       Create a new [gtksource.snippet_chunk.SnippetChunk] that can be added to
-      a `classSnippet`.
+      a [gtksource.snippet.Snippet].
       Returns: 
   */
   this()
@@ -164,7 +165,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-      Gets the `propertySnippetChunk:focus-position`.
+      Gets the [gtksource.snippet_chunk.SnippetChunk.focusPosition].
       
       The focus-position is used to determine how many tabs it takes for the
       snippet to advanced to this chunk.
@@ -187,7 +188,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       
       The specification is evaluated for variables when other chunks are edited
       within the snippet context. If the user has changed the text, the
-      `propertySnippetChunk:text` and `propertySnippetChunk:text-set` properties
+      [gtksource.snippet_chunk.SnippetChunk.text] and [gtksource.snippet_chunk.SnippetChunk.textSet] properties
       are updated.
       Returns: the specification, if any
   */
@@ -200,10 +201,10 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-      Gets the `propertySnippetChunk:text` property.
+      Gets the [gtksource.snippet_chunk.SnippetChunk.text] property.
       
       The text property is updated when the user edits the text of the chunk.
-      If it has not been edited, the `propertySnippetChunk:spec` property is
+      If it has not been edited, the [gtksource.snippet_chunk.SnippetChunk.spec] property is
       returned.
       Returns: the text of the chunk
   */
@@ -216,7 +217,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-      Gets the `propertySnippetChunk:text-set` property.
+      Gets the [gtksource.snippet_chunk.SnippetChunk.textSet] property.
       
       This is typically set when the user has edited a snippet chunk.
       Returns: 
@@ -244,7 +245,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-      Sets the `propertySnippetChunk:focus-position` property.
+      Sets the [gtksource.snippet_chunk.SnippetChunk.focusPosition] property.
       
       The focus-position is used to determine how many tabs it takes for the
       snippet to advanced to this chunk.
@@ -267,7 +268,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
       
       The specification is evaluated for variables when other chunks are edited
       within the snippet context. If the user has changed the text, the
-      `propertySnippetChunk:text and` `propertySnippetChunk:text-set` properties
+      [gtksource.snippet_chunk.SnippetChunk.text] [gtksource.snippet_chunk.SnippetChunk.textSet] properties
       are updated.
   
       Params:
@@ -296,7 +297,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 
   /**
-      Sets the `propertySnippetChunk:text-set` property.
+      Sets the [gtksource.snippet_chunk.SnippetChunk.textSet] property.
       
       This is typically set when the user has edited a snippet chunk by the
       snippet engine.

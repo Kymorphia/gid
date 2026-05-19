@@ -1,6 +1,7 @@
 /// Module for [ViewStackPage] class
 module adw.view_stack_page;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -12,7 +13,7 @@ import gtk.accessible_mixin;
 import gtk.widget;
 
 /**
-    An auxiliary class used by `class@ViewStack`.
+    An auxiliary class used by [adw.view_stack.ViewStack].
 */
 class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 {
@@ -55,10 +56,10 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `badgeNumber` property.
       Returns: The badge number for this page.
         
-        `class@ViewSwitcher` can display it as a badge next to the page icon. It is
+        [adw.view_switcher.ViewSwitcher] can display it as a badge next to the page icon. It is
         commonly used to display a number of unread items within the page.
         
-        It can be used together with `property@ViewStack{age}:needs-attention`.
+        It can be used together with [adw.view_stack.ViewStack].
   */
   @property uint badgeNumber()
   {
@@ -70,10 +71,10 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = The badge number for this page.
           
-          `class@ViewSwitcher` can display it as a badge next to the page icon. It is
+          [adw.view_switcher.ViewSwitcher] can display it as a badge next to the page icon. It is
           commonly used to display a number of unread items within the page.
           
-          It can be used together with `property@ViewStack{age}:needs-attention`.
+          It can be used together with [adw.view_stack.ViewStack].
   */
   @property void badgeNumber(uint propval)
   {
@@ -131,7 +132,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Get `needsAttention` property.
       Returns: Whether the page requires the user attention.
         
-        `class@ViewSwitcher` will display it as a dot next to the page icon.
+        [adw.view_switcher.ViewSwitcher] will display it as a dot next to the page icon.
   */
   @property bool needsAttention()
   {
@@ -143,7 +144,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Params:
         propval = Whether the page requires the user attention.
           
-          `class@ViewSwitcher` will display it as a dot next to the page icon.
+          [adw.view_switcher.ViewSwitcher] will display it as a dot next to the page icon.
   */
   @property void needsAttention(bool propval)
   {
@@ -193,7 +194,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Returns: Whether this page is visible.
         
         This is independent from the [gtk.widget.Widget.visible] property of
-        `property@ViewStackPage:child`.
+        [adw.view_stack_page.ViewStackPage.child].
   */
   @property bool visible()
   {
@@ -206,7 +207,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
         propval = Whether this page is visible.
           
           This is independent from the [gtk.widget.Widget.visible] property of
-          `property@ViewStackPage:child`.
+          [adw.view_stack_page.ViewStackPage.child].
   */
   @property void visible(bool propval)
   {
@@ -313,10 +314,10 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets the badge number for this page.
       
-      `classViewSwitcher` can display it as a badge next to the page icon. It is
+      [adw.view_switcher.ViewSwitcher] can display it as a badge next to the page icon. It is
       commonly used to display a number of unread items within the page.
       
-      It can be used together with `propertyViewStack{age}:needs-attention`.
+      It can be used together with [adw.view_stack.ViewStack].
   
       Params:
         badgeNumber = the new value to set
@@ -353,7 +354,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   /**
       Sets whether the page requires the user attention.
       
-      `classViewSwitcher` will display it as a dot next to the page icon.
+      [adw.view_switcher.ViewSwitcher] will display it as a dot next to the page icon.
   
       Params:
         needsAttention = the new value to set
@@ -390,7 +391,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
       Sets whether page is visible in its [adw.view_stack.ViewStack].
       
       This is independent from the [gtk.widget.Widget.visible] property of
-      `propertyViewStackPage:child`.
+      [adw.view_stack_page.ViewStackPage.child].
   
       Params:
         visible = whether self is visible
@@ -412,10 +413,10 @@ class ViewStackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = The badge number for this page.
           
-          `class@ViewSwitcher` can display it as a badge next to the page icon. It is
+          [adw.view_switcher.ViewSwitcher] can display it as a badge next to the page icon. It is
           commonly used to display a number of unread items within the page.
           
-          It can be used together with `property@ViewStack{age}:needs-attention`.
+          It can be used together with [adw.view_stack.ViewStack].
       Returns: Builder instance for fluent chaining
   */
   T badgeNumber(uint propval)
@@ -461,7 +462,7 @@ class ViewStackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = Whether the page requires the user attention.
           
-          `class@ViewSwitcher` will display it as a dot next to the page icon.
+          [adw.view_switcher.ViewSwitcher] will display it as a dot next to the page icon.
       Returns: Builder instance for fluent chaining
   */
   T needsAttention(bool propval)
@@ -497,7 +498,7 @@ class ViewStackPageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether this page is visible.
           
           This is independent from the [gtk.widget.Widget.visible] property of
-          `property@ViewStackPage:child`.
+          [adw.view_stack_page.ViewStackPage.child].
       Returns: Builder instance for fluent chaining
   */
   T visible(bool propval)

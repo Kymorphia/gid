@@ -1,6 +1,7 @@
 /// Module for [LocalFileSystemOptions] class
 module arrow.local_file_system_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

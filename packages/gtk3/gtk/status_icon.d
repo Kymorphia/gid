@@ -1,6 +1,7 @@
 /// Module for [StatusIcon] class
 module gtk.status_icon;
 
+public import gid.basictypes;
 import gdk.event_button;
 import gdk.event_scroll;
 import gdk.rectangle;

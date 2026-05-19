@@ -1,6 +1,7 @@
 /// Module for [BorderNode] class
 module gsk.border_node;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gsk.c.functions;

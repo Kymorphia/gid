@@ -1,6 +1,7 @@
 /// Module for [GlyphPosition] class
 module harfbuzz.glyph_position;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [EventSelection] class
 module gdk.event_selection;
 
+public import gid.basictypes;
 import gdk.atom;
 import gdk.c.functions;
 import gdk.c.types;

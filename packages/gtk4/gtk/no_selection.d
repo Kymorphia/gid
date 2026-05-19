@@ -1,6 +1,7 @@
 /// Module for [NoSelection] class
 module gtk.no_selection;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;

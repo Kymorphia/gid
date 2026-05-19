@@ -1,6 +1,7 @@
 /// Module for [AccelGroup] class
 module gtk.accel_group;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import glib.types;

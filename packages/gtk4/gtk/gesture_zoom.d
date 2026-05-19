@@ -1,6 +1,7 @@
 /// Module for [GestureZoom] class
 module gtk.gesture_zoom;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -13,7 +14,7 @@ import gtk.types;
     [gtk.gesture_zoom.GestureZoom] is a [gtk.gesture.Gesture] for 2-finger pinch/zoom gestures.
     
     Whenever the distance between both tracked sequences changes, the
-    `signal@Gtk.GestureZoom::scale-changed` signal is emitted to report
+    [gtk.gesture_zoom.GestureZoom.scaleChanged] signal is emitted to report
     the scale factor.
 */
 class GestureZoom : gtk.gesture.Gesture

@@ -1,6 +1,7 @@
 /// Module for [FileDialog] class
 module gtk.file_dialog;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;
@@ -123,7 +124,7 @@ class FileDialog : gobject.object.ObjectWrap
       Get `filters` property.
       Returns: The list of filters.
         
-        See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
+        See [gtk.file_dialog.FileDialog.defaultFilter] about how those two properties interact.
   */
   @property gio.list_model.ListModel filters()
   {
@@ -135,7 +136,7 @@ class FileDialog : gobject.object.ObjectWrap
       Params:
         propval = The list of filters.
           
-          See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
+          See [gtk.file_dialog.FileDialog.defaultFilter] about how those two properties interact.
   */
   @property void filters(gio.list_model.ListModel propval)
   {
@@ -147,8 +148,8 @@ class FileDialog : gobject.object.ObjectWrap
       Returns: The initial file, that is, the file that is initially selected
         in the file chooser dialog
         
-        This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
-        `property@Gtk.FileDialog:initial-name`.
+        This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder] and
+        [gtk.file_dialog.FileDialog.initialName].
   */
   @property gio.file.File initialFile()
   {
@@ -161,8 +162,8 @@ class FileDialog : gobject.object.ObjectWrap
         propval = The initial file, that is, the file that is initially selected
           in the file chooser dialog
           
-          This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
-          `property@Gtk.FileDialog:initial-name`.
+          This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder] and
+          [gtk.file_dialog.FileDialog.initialName].
   */
   @property void initialFile(gio.file.File propval)
   {
@@ -413,7 +414,7 @@ class FileDialog : gobject.object.ObjectWrap
       presenting a file chooser dialog to the user.
       
       The file chooser will initially be opened in the directory
-      `propertyGtk.FileDialog:initial-folder`.
+      [gtk.file_dialog.FileDialog.initialFolder].
       
       The callback will be called when the dialog is dismissed.
       It should call [gtk.file_dialog.FileDialog.openMultipleFinish]
@@ -514,7 +515,7 @@ class FileDialog : gobject.object.ObjectWrap
       
       If you pass initial_folder, the file chooser will initially be
       opened in the parent directory of that folder, otherwise, it
-      will be in the directory `propertyGtk.FileDialog:initial-folder`.
+      will be in the directory [gtk.file_dialog.FileDialog.initialFolder].
       
       The callback will be called when the dialog is dismissed.
       It should call [gtk.file_dialog.FileDialog.selectFolderFinish]
@@ -565,7 +566,7 @@ class FileDialog : gobject.object.ObjectWrap
       presenting a file chooser dialog to the user.
       
       The file chooser will initially be opened in the directory
-      `propertyGtk.FileDialog:initial-folder`.
+      [gtk.file_dialog.FileDialog.initialFolder].
       
       The callback will be called when the dialog is dismissed.
       It should call [gtk.file_dialog.FileDialog.selectMultipleFoldersFinish]
@@ -689,7 +690,7 @@ class FileDialog : gobject.object.ObjectWrap
       For saving dialogs, this will usually be pre-entered into the name field.
       
       If a file with this name already exists in the directory set via
-      `propertyGtk.FileDialog:initial-folder`, the dialog should preselect it.
+      [gtk.file_dialog.FileDialog.initialFolder], the dialog should preselect it.
   
       Params:
         name = a UTF8 string
@@ -766,7 +767,7 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = The list of filters.
           
-          See `property@Gtk.FileDialog:default-filter` about how those two properties interact.
+          See [gtk.file_dialog.FileDialog.defaultFilter] about how those two properties interact.
       Returns: Builder instance for fluent chaining
   */
   T filters(gio.list_model.ListModel propval)
@@ -780,8 +781,8 @@ class FileDialogGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The initial file, that is, the file that is initially selected
           in the file chooser dialog
           
-          This is a utility property that sets both `property@Gtk.FileDialog:initial-folder` and
-          `property@Gtk.FileDialog:initial-name`.
+          This is a utility property that sets both [gtk.file_dialog.FileDialog.initialFolder] and
+          [gtk.file_dialog.FileDialog.initialName].
       Returns: Builder instance for fluent chaining
   */
   T initialFile(gio.file.File propval)

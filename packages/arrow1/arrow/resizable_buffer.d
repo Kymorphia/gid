@@ -1,6 +1,7 @@
 /// Module for [ResizableBuffer] class
 module arrow.resizable_buffer;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.mutable_buffer;

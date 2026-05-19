@@ -1,6 +1,7 @@
 /// Module for [DoPutResult] class
 module arrowflight.do_put_result;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.metadata_reader;

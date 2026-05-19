@@ -1,6 +1,7 @@
 /// Module for [SqlRenderingContext] class
 module gda.sql_rendering_context;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

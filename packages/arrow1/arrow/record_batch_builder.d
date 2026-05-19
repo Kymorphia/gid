@@ -1,6 +1,7 @@
 /// Module for [RecordBatchBuilder] class
 module arrow.record_batch_builder;
 
+public import gid.basictypes;
 import arrow.array_builder;
 import arrow.c.functions;
 import arrow.c.types;

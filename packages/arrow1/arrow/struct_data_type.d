@@ -1,6 +1,7 @@
 /// Module for [StructDataType] class
 module arrow.struct_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.data_type;

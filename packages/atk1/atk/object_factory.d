@@ -1,6 +1,7 @@
 /// Module for [ObjectFactory] class
 module atk.object_factory;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.object;

@@ -1,6 +1,7 @@
 /// Module for [ListBox] class
 module gtk.list_box;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
@@ -39,7 +40,7 @@ import gtk.widget;
     and the widget.
     
     `GtkListBoxRows` can be marked as activatable or selectable. If a row is
-    activatable, `signal@Gtk.ListBox::row-activated` will be emitted for it when
+    activatable, [gtk.list_box.ListBox.rowActivated] will be emitted for it when
     the user tries to activate it. If it is selectable, the row will be marked
     as selected when the user tries to select it.
     
@@ -58,7 +59,7 @@ import gtk.widget;
     ```
     
     [gtk.list_box.ListBox] uses a single CSS node named list. It may carry the .separators
-    style class, when the `property@Gtk.ListBox:show-separators` property is set.
+    style class, when the [gtk.list_box.ListBox.showSeparators] property is set.
     Each [gtk.list_box_row.ListBoxRow] uses a single CSS node named row. The row nodes get the
     .activatable style class added when appropriate.
     
@@ -870,7 +871,7 @@ class ListBox : gtk.widget.Widget
         
         When the box is using [gtk.types.SelectionMode.Multiple], this signal will not
         give you the full picture of selection changes, and you should use
-        the `signalGtk.ListBox::selected-rows-changed` signal instead.
+        the [gtk.list_box.ListBox.selectedRowsChanged] signal instead.
   
       Params:
         callback = signal callback delegate or function to connect

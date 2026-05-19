@@ -1,6 +1,7 @@
 /// Module for [VideoAFDMeta] class
 module gstvideo.video_afdmeta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

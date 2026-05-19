@@ -1,6 +1,7 @@
 /// Module for [Task] class
 module gst.task;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.thread;
 import gobject.gid_builder;

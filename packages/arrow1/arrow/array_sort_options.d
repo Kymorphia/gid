@@ -1,6 +1,7 @@
 /// Module for [ArraySortOptions] class
 module arrow.array_sort_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.function_options;

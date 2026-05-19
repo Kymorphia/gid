@@ -1,6 +1,7 @@
 /// Module for [TreeNode] class
 module gda.tree_node;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

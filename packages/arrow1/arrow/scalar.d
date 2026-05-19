@@ -1,6 +1,7 @@
 /// Module for [Scalar] class
 module arrow.scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.cast_options;

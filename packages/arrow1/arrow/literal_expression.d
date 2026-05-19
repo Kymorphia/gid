@@ -1,6 +1,7 @@
 /// Module for [LiteralExpression] class
 module arrow.literal_expression;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.datum;

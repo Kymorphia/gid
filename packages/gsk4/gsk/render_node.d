@@ -1,6 +1,7 @@
 /// Module for [RenderNode] class
 module gsk.render_node;
 
+public import gid.basictypes;
 import cairo.context;
 import gid.gid;
 import glib.bytes;

@@ -1,6 +1,7 @@
 /// Module for [MultipartEncrypted] class
 module gmime.multipart_encrypted;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gmime.c.functions;

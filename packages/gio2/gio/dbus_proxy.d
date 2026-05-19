@@ -1,6 +1,7 @@
 /// Module for [DBusProxy] class
 module gio.dbus_proxy;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_initable;
 import gio.async_initable_mixin;
@@ -35,7 +36,7 @@ import gobject.object;
     vanishes and reloaded when a name owner appears.
     
     The unique name owner of the proxy’s name is tracked and can be read from
-    `property@Gio.DBusProxy:g-name-owner`. Connect to the
+    [gio.dbus_proxy.DBusProxy.gNameOwner]. Connect to the
     [gobject.object.ObjectWrap.notify] signal to get notified of changes.
     Additionally, only signals and property changes emitted from the current name
     owner are considered and calls are always sent to the current name owner.
@@ -47,22 +48,22 @@ import gobject.object;
     
     If the proxy is for a stateless D-Bus service, where the name owner may
     be started and stopped between calls, the
-    `property@Gio.DBusProxy:g-name-owner` tracking of [gio.dbus_proxy.DBusProxy] will cause the
+    [gio.dbus_proxy.DBusProxy.gNameOwner] tracking of [gio.dbus_proxy.DBusProxy] will cause the
     proxy to drop signal and property changes from the service after it has
     restarted for the first time. When interacting with a stateless D-Bus
     service, do not use [gio.dbus_proxy.DBusProxy] — use direct D-Bus method calls and signal
     connections.
     
-    The generic `signal@Gio.DBusProxy::g-properties-changed` and
-    `signal@Gio.DBusProxy::g-signal` signals are not very convenient to work
+    The generic [gio.dbus_proxy.DBusProxy.gPropertiesChanged] and
+    [gio.dbus_proxy.DBusProxy.gSignal] signals are not very convenient to work
     with. Therefore, the recommended way of working with proxies is to subclass
     [gio.dbus_proxy.DBusProxy], and have more natural properties and signals in your derived
     class. This [example](migrating-gdbus.html#using-gdbus-codegen) shows how
     this can easily be done using the [`gdbus-codegen`](gdbus-codegen.html) tool.
     
     A [gio.dbus_proxy.DBusProxy] instance can be used from multiple threads but note
-    that all signals (e.g. `signal@Gio.DBusProxy::g-signal`,
-    `signal@Gio.DBusProxy::g-properties-changed` and
+    that all signals (e.g. [gio.dbus_proxy.DBusProxy.gSignal],
+    [gio.dbus_proxy.DBusProxy.gPropertiesChanged] and
     [gobject.object.ObjectWrap.notify]) are emitted in the thread-default main
     context (see [glib.main_context.MainContext.pushThreadDefault]) of the thread
     where the instance was constructed.

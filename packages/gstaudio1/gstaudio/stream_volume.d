@@ -1,6 +1,7 @@
 /// Module for [StreamVolume] interface
 module gstaudio.stream_volume;
 
+public import gid.basictypes;
 public import gstaudio.stream_volume_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

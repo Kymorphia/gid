@@ -1,6 +1,7 @@
 /// Module for [AudioAggregator] class
 module gstaudio.audio_aggregator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

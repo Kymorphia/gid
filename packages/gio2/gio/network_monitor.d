@@ -1,6 +1,7 @@
 /// Module for [NetworkMonitor] interface
 module gio.network_monitor;
 
+public import gid.basictypes;
 public import gio.network_monitor_iface_proxy;
 import gid.gid;
 import gio.async_result;

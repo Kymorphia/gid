@@ -1,6 +1,7 @@
 /// Module for [InsetShadowNode] class
 module gsk.inset_shadow_node;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gsk.c.functions;

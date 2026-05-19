@@ -1,6 +1,7 @@
 /// Module for [BookmarkFile] class
 module glib.bookmark_file;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

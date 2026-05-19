@@ -1,6 +1,7 @@
 /// Module for [UnixMountMonitor] class
 module gio.unix_mount_monitor;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

@@ -1,6 +1,7 @@
 /// Module for [SqlStatementInsert] class
 module gda.sql_statement_insert;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

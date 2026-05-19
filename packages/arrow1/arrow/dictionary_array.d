@@ -1,6 +1,7 @@
 /// Module for [DictionaryArray] class
 module arrow.dictionary_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.c.functions;
 import arrow.c.types;

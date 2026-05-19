@@ -1,6 +1,7 @@
 /// Module for [Bytes] class
 module glib.bytes;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

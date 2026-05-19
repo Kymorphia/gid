@@ -1,6 +1,7 @@
 /// Module for [Toast] class
 module adw.toast;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -12,7 +13,7 @@ import gobject.object;
 import gtk.widget;
 
 /**
-    A helper object for `class@ToastOverlay`.
+    A helper object for [adw.toast_overlay.ToastOverlay].
     
     Toasts are meant to be passed into [adw.toast_overlay.ToastOverlay.addToast] as
     follows:
@@ -26,17 +27,17 @@ import gtk.widget;
       <img src="toast-simple.png" alt="toast-simple">
     </picture>
     
-    Toasts always have a close button. They emit the `signal@Toast::dismissed`
+    Toasts always have a close button. They emit the [adw.toast.Toast.dismissed]
     signal when disappearing.
     
-    `property@Toast:timeout` determines how long the toast stays on screen, while
-    `property@Toast:priority` determines how it behaves if another toast is
+    [adw.toast.Toast.timeout] determines how long the toast stays on screen, while
+    [adw.toast.Toast.priority] determines how it behaves if another toast is
     already being displayed.
     
-    Toast titles use Pango markup by default, set `property@Toast:use-markup` to
+    Toast titles use Pango markup by default, set [adw.toast.Toast.useMarkup] to
     `FALSE` if this is unwanted.
     
-    `property@Toast:custom-title` can be used to replace the title label with a
+    [adw.toast.Toast.customTitle] can be used to replace the title label with a
     custom widget.
     
     ## Actions
@@ -177,7 +178,7 @@ class Toast : gobject.object.ObjectWrap
         
         It will be activated when clicking the button.
         
-        See `property@Toast:action-target`.
+        See [adw.toast.Toast.actionTarget].
   */
   @property string actionName()
   {
@@ -191,7 +192,7 @@ class Toast : gobject.object.ObjectWrap
           
           It will be activated when clicking the button.
           
-          See `property@Toast:action-target`.
+          See [adw.toast.Toast.actionTarget].
   */
   @property void actionName(string propval)
   {
@@ -225,7 +226,7 @@ class Toast : gobject.object.ObjectWrap
         
         If set to `NULL`, the button won't be shown.
         
-        See `property@Toast:action-name`.
+        See [adw.toast.Toast.actionName].
   */
   @property string buttonLabel()
   {
@@ -241,7 +242,7 @@ class Toast : gobject.object.ObjectWrap
           
           If set to `NULL`, the button won't be shown.
           
-          See `property@Toast:action-name`.
+          See [adw.toast.Toast.actionName].
   */
   @property void buttonLabel(string propval)
   {
@@ -253,9 +254,9 @@ class Toast : gobject.object.ObjectWrap
       Returns: The custom title widget.
         
         It will be displayed instead of the title if set. In this case,
-        `property@Toast:title` is ignored.
+        [adw.toast.Toast.title] is ignored.
         
-        Setting a custom title will unset `property@Toast:title`.
+        Setting a custom title will unset [adw.toast.Toast.title].
   */
   @property gtk.widget.Widget customTitle()
   {
@@ -268,9 +269,9 @@ class Toast : gobject.object.ObjectWrap
         propval = The custom title widget.
           
           It will be displayed instead of the title if set. In this case,
-          `property@Toast:title` is ignored.
+          [adw.toast.Toast.title] is ignored.
           
-          Setting a custom title will unset `property@Toast:title`.
+          Setting a custom title will unset [adw.toast.Toast.title].
   */
   @property void customTitle(gtk.widget.Widget propval)
   {
@@ -349,9 +350,9 @@ class Toast : gobject.object.ObjectWrap
         
         The title can be marked up with the Pango text markup language.
         
-        Setting a title will unset `property@Toast:custom-title`.
+        Setting a title will unset [adw.toast.Toast.customTitle].
         
-        If `property@Toast:custom-title` is set, it will be used instead.
+        If [adw.toast.Toast.customTitle] is set, it will be used instead.
   */
   @property string title()
   {
@@ -365,9 +366,9 @@ class Toast : gobject.object.ObjectWrap
           
           The title can be marked up with the Pango text markup language.
           
-          Setting a title will unset `property@Toast:custom-title`.
+          Setting a title will unset [adw.toast.Toast.customTitle].
           
-          If `property@Toast:custom-title` is set, it will be used instead.
+          If [adw.toast.Toast.customTitle] is set, it will be used instead.
   */
   @property void title(string propval)
   {
@@ -420,7 +421,7 @@ class Toast : gobject.object.ObjectWrap
       Dismisses self.
       
       Does nothing if self has already been dismissed, or hasn't been added to an
-      `classToastOverlay`.
+      [adw.toast_overlay.ToastOverlay].
   */
   void dismiss()
   {
@@ -529,7 +530,7 @@ class Toast : gobject.object.ObjectWrap
       
       It will be activated when clicking the button.
       
-      See `propertyToast:action-target`.
+      See [adw.toast.Toast.actionTarget].
   
       Params:
         actionName = the action name
@@ -561,7 +562,7 @@ class Toast : gobject.object.ObjectWrap
       
       If set to `NULL`, the button won't be shown.
       
-      See `propertyToast:action-name`.
+      See [adw.toast.Toast.actionName].
   
       Params:
         buttonLabel = a button label
@@ -576,9 +577,9 @@ class Toast : gobject.object.ObjectWrap
       Sets the custom title widget of self.
       
       It will be displayed instead of the title if set. In this case,
-      `propertyToast:title` is ignored.
+      [adw.toast.Toast.title] is ignored.
       
-      Setting a custom title will unset `propertyToast:title`.
+      Setting a custom title will unset [adw.toast.Toast.title].
   
       Params:
         widget = the custom title widget
@@ -644,9 +645,9 @@ class Toast : gobject.object.ObjectWrap
       
       The title can be marked up with the Pango text markup language.
       
-      Setting a title will unset `propertyToast:custom-title`.
+      Setting a title will unset [adw.toast.Toast.customTitle].
       
-      If `propertyToast:custom-title` is set, it will be used instead.
+      If [adw.toast.Toast.customTitle] is set, it will be used instead.
   
       Params:
         title = a title
@@ -758,7 +759,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           
           It will be activated when clicking the button.
           
-          See `property@Toast:action-target`.
+          See [adw.toast.Toast.actionTarget].
       Returns: Builder instance for fluent chaining
   */
   T actionName(string propval)
@@ -786,7 +787,7 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           
           If set to `NULL`, the button won't be shown.
           
-          See `property@Toast:action-name`.
+          See [adw.toast.Toast.actionName].
       Returns: Builder instance for fluent chaining
   */
   T buttonLabel(string propval)
@@ -800,9 +801,9 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = The custom title widget.
           
           It will be displayed instead of the title if set. In this case,
-          `property@Toast:title` is ignored.
+          [adw.toast.Toast.title] is ignored.
           
-          Setting a custom title will unset `property@Toast:title`.
+          Setting a custom title will unset [adw.toast.Toast.title].
       Returns: Builder instance for fluent chaining
   */
   T customTitle(gtk.widget.Widget propval)
@@ -853,9 +854,9 @@ class ToastGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           
           The title can be marked up with the Pango text markup language.
           
-          Setting a title will unset `property@Toast:custom-title`.
+          Setting a title will unset [adw.toast.Toast.customTitle].
           
-          If `property@Toast:custom-title` is set, it will be used instead.
+          If [adw.toast.Toast.customTitle] is set, it will be used instead.
       Returns: Builder instance for fluent chaining
   */
   T title(string propval)

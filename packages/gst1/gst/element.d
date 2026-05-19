@@ -1,6 +1,7 @@
 /// Module for [Element] class
 module gst.element;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.types;

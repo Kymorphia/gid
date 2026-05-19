@@ -1,6 +1,7 @@
 /// Module for [MIKEYPayloadSP] class
 module gstsdp.mikeypayload_sp;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

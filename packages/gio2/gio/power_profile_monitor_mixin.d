@@ -1,6 +1,7 @@
 /// Module for [PowerProfileMonitor] interface mixin
 module gio.power_profile_monitor_mixin;
 
+public import gid.basictypes;
 public import gio.power_profile_monitor_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;
@@ -31,7 +32,7 @@ public import gobject.object;
     profile GPU usage.
     
     Don’t forget to disconnect the [gobject.object.ObjectWrap.notify] signal for
-    `property@Gio.PowerProfileMonitor:power-saver-enabled`, and unref the
+    [gio.power_profile_monitor.PowerProfileMonitor.powerSaverEnabled], and unref the
     [gio.power_profile_monitor.PowerProfileMonitor] itself when exiting.
 */
 template PowerProfileMonitorT()

@@ -1,6 +1,7 @@
 /// Module for [MIKEYPayloadKeyData] class
 module gstsdp.mikeypayload_key_data;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

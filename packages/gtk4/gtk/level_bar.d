@@ -1,6 +1,7 @@
 /// Module for [LevelBar] class
 module gtk.level_bar;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -229,8 +230,8 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
         that area; when the value is [gtk.types.LevelBarMode.Discrete],
         the widget will draw a succession of separate blocks filling the
         draw area, with the number of blocks being equal to the units separating
-        the integral roundings of `property@Gtk.LevelBar:min-value` and
-        `property@Gtk.LevelBar:max-value`.
+        the integral roundings of [gtk.level_bar.LevelBar.minValue] and
+        [gtk.level_bar.LevelBar.maxValue].
   */
   @property gtk.types.LevelBarMode mode()
   {
@@ -248,8 +249,8 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
           that area; when the value is [gtk.types.LevelBarMode.Discrete],
           the widget will draw a succession of separate blocks filling the
           draw area, with the number of blocks being equal to the units separating
-          the integral roundings of `property@Gtk.LevelBar:min-value` and
-          `property@Gtk.LevelBar:max-value`.
+          the integral roundings of [gtk.level_bar.LevelBar.minValue] and
+          [gtk.level_bar.LevelBar.maxValue].
   */
   @property void mode(gtk.types.LevelBarMode propval)
   {
@@ -309,7 +310,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
       Adds a new offset marker on self at the position specified by value.
       
       When the bar value is in the interval topped by value (or between value
-      and `propertyGtk.LevelBar:max-value` in case the offset is the last one
+      and [gtk.level_bar.LevelBar.maxValue] in case the offset is the last one
       on the bar) a style class named `level-`name will be applied
       when rendering the level bar fill.
       
@@ -390,7 +391,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   /**
       Returns the `value` of the [gtk.level_bar.LevelBar].
       Returns: a value in the interval between
-          `propertyGtk.LevelBar:min-value` and `propertyGtk.LevelBar:max-value`
+          [gtk.level_bar.LevelBar.minValue] and [gtk.level_bar.LevelBar.maxValue]
   */
   double getValue()
   {
@@ -469,7 +470,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   
       Params:
         value = a value in the interval between
-            `propertyGtk.LevelBar:min-value` and `propertyGtk.LevelBar:max-value`
+            [gtk.level_bar.LevelBar.minValue] and [gtk.level_bar.LevelBar.maxValue]
   */
   void setValue(double value)
   {
@@ -582,8 +583,8 @@ class LevelBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
           that area; when the value is [gtk.types.LevelBarMode.Discrete],
           the widget will draw a succession of separate blocks filling the
           draw area, with the number of blocks being equal to the units separating
-          the integral roundings of `property@Gtk.LevelBar:min-value` and
-          `property@Gtk.LevelBar:max-value`.
+          the integral roundings of [gtk.level_bar.LevelBar.minValue] and
+          [gtk.level_bar.LevelBar.maxValue].
       Returns: Builder instance for fluent chaining
   */
   T mode(gtk.types.LevelBarMode propval)

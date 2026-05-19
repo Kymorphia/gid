@@ -1,6 +1,7 @@
 /// Module for [Fragment] class
 module arrowdataset.fragment;
 
+public import gid.basictypes;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;

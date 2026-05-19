@@ -1,6 +1,7 @@
 /// Module for [GLShader] class
 module gstgl.glshader;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;

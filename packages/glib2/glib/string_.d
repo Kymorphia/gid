@@ -1,6 +1,7 @@
 /// Module for [String] class
 module glib.string_;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.c.functions;

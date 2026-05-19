@@ -1,6 +1,7 @@
 /// Module for [PasswordEntry] class
 module gtk.password_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;

@@ -1,6 +1,7 @@
 /// Module for [ObjectWrap] class
 module json.object;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import json.array;

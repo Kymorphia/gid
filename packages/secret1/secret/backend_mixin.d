@@ -1,6 +1,7 @@
 /// Module for [Backend] interface mixin
 module secret.backend_mixin;
 
+public import gid.basictypes;
 public import secret.backend_iface_proxy;
 public import gid.gid;
 public import gio.async_result;

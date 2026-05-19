@@ -1,6 +1,7 @@
 /// Module for [TreeNode] class
 module glib.tree_node;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

@@ -1,6 +1,7 @@
 /// Module for [File] interface mixin
 module arrow.file_mixin;
 
+public import gid.basictypes;
 public import arrow.file_iface_proxy;
 public import arrow.c.functions;
 public import arrow.c.types;

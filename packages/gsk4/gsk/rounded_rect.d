@@ -1,6 +1,7 @@
 /// Module for [RoundedRect] class
 module gsk.rounded_rect;
 
+public import gid.basictypes;
 import gid.gid;
 import graphene.point;
 import graphene.rect;

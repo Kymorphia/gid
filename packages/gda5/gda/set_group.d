@@ -1,6 +1,7 @@
 /// Module for [SetGroup] class
 module gda.set_group;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.set_node;

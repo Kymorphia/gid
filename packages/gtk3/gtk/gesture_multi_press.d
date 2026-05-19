@@ -1,6 +1,7 @@
 /// Module for [GestureMultiPress] class
 module gtk.gesture_multi_press;
 
+public import gid.basictypes;
 import gdk.rectangle;
 import gid.gid;
 import gobject.dclosure;

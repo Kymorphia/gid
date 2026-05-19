@@ -1,6 +1,7 @@
 /// Module for [ThreadPool] class
 module glib.thread_pool;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

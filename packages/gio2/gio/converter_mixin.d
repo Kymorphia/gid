@@ -1,6 +1,7 @@
 /// Module for [Converter] interface mixin
 module gio.converter_mixin;
 
+public import gid.basictypes;
 public import gio.converter_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [Relation] class
 module glib.relation;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

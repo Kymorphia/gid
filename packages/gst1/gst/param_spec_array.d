@@ -1,6 +1,7 @@
 /// Module for [ParamSpecArray] class
 module gst.param_spec_array;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.param_spec;
 import gst.c.functions;

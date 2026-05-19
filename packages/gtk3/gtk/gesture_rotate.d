@@ -1,6 +1,7 @@
 /// Module for [GestureRotate] class
 module gtk.gesture_rotate;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

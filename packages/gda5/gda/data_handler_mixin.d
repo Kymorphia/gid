@@ -1,6 +1,7 @@
 /// Module for [DataHandler] interface mixin
 module gda.data_handler_mixin;
 
+public import gid.basictypes;
 public import gda.data_handler_iface_proxy;
 public import gda.c.functions;
 public import gda.c.types;

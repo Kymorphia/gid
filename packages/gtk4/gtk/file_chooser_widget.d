@@ -1,6 +1,7 @@
 /// Module for [FileChooserWidget] class
 module gtk.file_chooser_widget;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

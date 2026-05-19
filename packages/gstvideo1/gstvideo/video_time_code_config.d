@@ -1,6 +1,7 @@
 /// Module for [VideoTimeCodeConfig] class
 module gstvideo.video_time_code_config;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.date_time;
 import gstvideo.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [IconPaintable] class
 module gtk.icon_paintable;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gid.gid;

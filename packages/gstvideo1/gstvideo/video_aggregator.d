@@ -1,6 +1,7 @@
 /// Module for [VideoAggregator] class
 module gstvideo.video_aggregator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

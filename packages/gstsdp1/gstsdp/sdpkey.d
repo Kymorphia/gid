@@ -1,6 +1,7 @@
 /// Module for [SDPKey] class
 module gstsdp.sdpkey;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

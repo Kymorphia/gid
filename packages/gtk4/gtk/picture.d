@@ -1,6 +1,7 @@
 /// Module for [Picture] class
 module gtk.picture;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gdkpixbuf.pixbuf;
 import gid.gid;
@@ -49,8 +50,8 @@ import gtk.widget;
     ## Sizing the paintable
     
     You can influence how the paintable is displayed inside the [gtk.picture.Picture]
-    by changing `property@Gtk.Picture:content-fit`. See [gtk.types.ContentFit]
-    for details. `property@Gtk.Picture:can-shrink` can be unset to make sure
+    by changing [gtk.picture.Picture.contentFit]. See [gtk.types.ContentFit]
+    for details. [gtk.picture.Picture.canShrink] can be unset to make sure
     that paintables are never made smaller than their ideal size - but
     be careful if you do not know the size of the paintable in use (like
     when displaying user-loaded images). This can easily cause the picture to
@@ -184,7 +185,7 @@ class Picture : gtk.widget.Widget
       Returns: Whether the GtkPicture will render its contents trying to preserve the aspect
         ratio.
   
-      Deprecated: Use `property@Gtk.Picture:content-fit` instead.
+      Deprecated: Use [gtk.picture.Picture.contentFit] instead.
   */
   @property bool keepAspectRatio()
   {
@@ -197,7 +198,7 @@ class Picture : gtk.widget.Widget
         propval = Whether the GtkPicture will render its contents trying to preserve the aspect
           ratio.
   
-      Deprecated: Use `property@Gtk.Picture:content-fit` instead.
+      Deprecated: Use [gtk.picture.Picture.contentFit] instead.
   */
   @property void keepAspectRatio(bool propval)
   {
@@ -394,7 +395,7 @@ class Picture : gtk.widget.Widget
       Returns: true if the self tries to keep the contents' aspect ratio
   
       Deprecated: Use [gtk.picture.Picture.getContentFit] instead. This will
-          now return `FALSE` only if `propertyGtk.Picture:content-fit` is
+          now return `FALSE` only if [gtk.picture.Picture.contentFit] is
           [gtk.types.ContentFit.Fill]. Returns `TRUE` otherwise.
   */
   bool getKeepAspectRatio()
@@ -508,7 +509,7 @@ class Picture : gtk.widget.Widget
         keepAspectRatio = whether to keep aspect ratio
   
       Deprecated: Use [gtk.picture.Picture.setContentFit] instead. If still
-          used, this method will always set the `propertyGtk.Picture:content-fit`
+          used, this method will always set the [gtk.picture.Picture.contentFit]
           property to [gtk.types.ContentFit.Contain] if keep_aspect_ratio is true,
           otherwise it will set it to [gtk.types.ContentFit.Fill].
   */
@@ -621,7 +622,7 @@ class PictureGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           ratio.
       Returns: Builder instance for fluent chaining
   
-      Deprecated: Use `property@Gtk.Picture:content-fit` instead.
+      Deprecated: Use [gtk.picture.Picture.contentFit] instead.
   */
   T keepAspectRatio(bool propval)
   {

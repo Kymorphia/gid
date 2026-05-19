@@ -1,6 +1,7 @@
 /// Module for [AlertDialog] class
 module gtk.alert_dialog;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;
@@ -225,7 +226,7 @@ class AlertDialog : gobject.object.ObjectWrap
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: the index of the button that was clicked, or -1 if
-          the dialog was cancelled and `propertyGtk.AlertDialog:cancel-button`
+          the dialog was cancelled and [gtk.alert_dialog.AlertDialog.cancelButton]
           is not set
       Throws: [ErrorWrap]
   */
@@ -339,7 +340,7 @@ class AlertDialog : gobject.object.ObjectWrap
   /**
       Sets the index of the cancel button.
       
-      See `propertyGtk.AlertDialog:cancel-button` for
+      See [gtk.alert_dialog.AlertDialog.cancelButton] for
       details of how this value is used.
   
       Params:
@@ -353,7 +354,7 @@ class AlertDialog : gobject.object.ObjectWrap
   /**
       Sets the index of the default button.
       
-      See `propertyGtk.AlertDialog:default-button` for
+      See [gtk.alert_dialog.AlertDialog.defaultButton] for
       details of how this value is used.
   
       Params:

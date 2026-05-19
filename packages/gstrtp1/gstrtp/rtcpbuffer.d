@@ -1,6 +1,7 @@
 /// Module for [RTCPBuffer] class
 module gstrtp.rtcpbuffer;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gst.map_info;

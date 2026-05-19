@@ -1,6 +1,7 @@
 /// Module for [Encoding] class
 module gtksource.encoding;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gtksource.c.functions;

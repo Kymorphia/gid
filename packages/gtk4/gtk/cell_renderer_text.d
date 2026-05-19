@@ -1,6 +1,7 @@
 /// Module for [CellRendererText] class
 module gtk.cell_renderer_text;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;

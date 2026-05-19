@@ -1,6 +1,7 @@
 /// Module for [DBusObjectProxy] class
 module gio.dbus_object_proxy;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

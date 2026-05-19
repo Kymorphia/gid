@@ -76,7 +76,7 @@ alias ViewSwitcherPolicy = AdwViewSwitcherPolicy;
 alias AnimationTargetFunc = void delegate(double value);
 
 /**
-    Indicates an `class@Animation` with an infinite duration.
+    Indicates an [adw.animation.Animation] with an infinite duration.
     
     This value is mostly used internally.
 */

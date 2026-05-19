@@ -1,6 +1,7 @@
 /// Module for [RendererCellAccessible] class
 module gtk.renderer_cell_accessible;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.component;

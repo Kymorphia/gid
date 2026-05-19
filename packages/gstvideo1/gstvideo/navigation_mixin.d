@@ -1,6 +1,7 @@
 /// Module for [Navigation] interface mixin
 module gstvideo.navigation_mixin;
 
+public import gid.basictypes;
 public import gstvideo.navigation_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

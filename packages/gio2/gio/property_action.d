@@ -1,6 +1,7 @@
 /// Module for [PropertyAction] class
 module gio.property_action;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action;
 import gio.action_mixin;

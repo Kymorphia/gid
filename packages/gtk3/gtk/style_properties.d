@@ -1,6 +1,7 @@
 /// Module for [StyleProperties] class
 module gtk.style_properties;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

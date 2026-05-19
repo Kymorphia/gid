@@ -1,6 +1,7 @@
 /// Module for [Buildable] interface
 module gtk.buildable;
 
+public import gid.basictypes;
 public import gtk.buildable_iface_proxy;
 import gid.gid;
 import glib.types;

@@ -1,6 +1,7 @@
 /// Module for [CompletionProposal] interface mixin
 module gtksource.completion_proposal_mixin;
 
+public import gid.basictypes;
 public import gtksource.completion_proposal_iface_proxy;
 public import gdkpixbuf.pixbuf;
 public import gid.gid;

@@ -1,6 +1,7 @@
 /// Module for [Subprocess] class
 module gio.subprocess;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.c.functions;

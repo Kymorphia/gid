@@ -1,6 +1,7 @@
 /// Module for [TreeListRow] class
 module gtk.tree_list_row;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [CollectPads] class
 module gstbase.collect_pads;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

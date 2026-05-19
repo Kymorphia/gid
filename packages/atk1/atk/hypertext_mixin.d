@@ -1,6 +1,7 @@
 /// Module for [Hypertext] interface mixin
 module atk.hypertext_mixin;
 
+public import gid.basictypes;
 public import atk.hypertext_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

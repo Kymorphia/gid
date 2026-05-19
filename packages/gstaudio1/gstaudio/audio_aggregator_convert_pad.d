@@ -1,6 +1,7 @@
 /// Module for [AudioAggregatorConvertPad] class
 module gstaudio.audio_aggregator_convert_pad;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

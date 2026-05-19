@@ -1,6 +1,7 @@
 /// Module for [AudioRingBuffer] class
 module gstaudio.audio_ring_buffer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [GestureLongPress] class
 module gtk.gesture_long_press;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -22,8 +23,8 @@ import gtk.types;
     [gtk.gesture_long_press.GestureLongPress.cancelled] signal will be emitted.
     
     How long the timeout is before the ::pressed signal gets emitted is
-    determined by the `property@Gtk.Settings:gtk-long-press-time` setting.
-    It can be modified by the `property@Gtk.GestureLongPress:delay-factor`
+    determined by the [gtk.settings.Settings.gtkLongPressTime] setting.
+    It can be modified by the [gtk.gesture_long_press.GestureLongPress.delayFactor]
     property.
 */
 class GestureLongPress : gtk.gesture_single.GestureSingle

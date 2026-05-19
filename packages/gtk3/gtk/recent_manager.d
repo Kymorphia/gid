@@ -1,6 +1,7 @@
 /// Module for [RecentManager] class
 module gtk.recent_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;

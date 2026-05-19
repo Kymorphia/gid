@@ -1,6 +1,7 @@
 /// Module for [DataModel] interface mixin
 module gda.data_model_mixin;
 
+public import gid.basictypes;
 public import gda.data_model_iface_proxy;
 public import gda.c.functions;
 public import gda.c.types;

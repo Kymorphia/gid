@@ -1,6 +1,7 @@
 /// Module for [TargetList] class
 module gtk.target_list;
 
+public import gid.basictypes;
 import gdk.atom;
 import gid.gid;
 import gobject.boxed;

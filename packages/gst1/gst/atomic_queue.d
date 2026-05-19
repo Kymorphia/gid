@@ -1,6 +1,7 @@
 /// Module for [AtomicQueue] class
 module gst.atomic_queue;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.c.functions;

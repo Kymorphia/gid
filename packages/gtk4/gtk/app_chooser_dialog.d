@@ -1,6 +1,7 @@
 /// Module for [AppChooserDialog] class
 module gtk.app_chooser_dialog;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.file;
 import gobject.gid_builder;

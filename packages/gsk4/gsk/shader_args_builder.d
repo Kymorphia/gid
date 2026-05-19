@@ -1,6 +1,7 @@
 /// Module for [ShaderArgsBuilder] class
 module gsk.shader_args_builder;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.boxed;

@@ -1,6 +1,7 @@
 /// Module for [SqlTable] class
 module gda.sql_table;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.meta_db_object;

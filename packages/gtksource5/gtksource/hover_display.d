@@ -1,6 +1,7 @@
 /// Module for [HoverDisplay] class
 module gtksource.hover_display;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;
@@ -21,7 +22,7 @@ import gtksource.types;
     to be displayed to the user in interactive tooltips. The children widgets
     are packed vertically using a [gtk.box.Box].
     
-    Implement the `iface@HoverProvider` interface to be notified of when
+    Implement the [gtksource.hover_provider.HoverProvider] interface to be notified of when
     to populate a [gtksource.hover_display.HoverDisplay] on behalf of the user.
 */
 class HoverDisplay : gtk.widget.Widget

@@ -1,6 +1,7 @@
 /// Module for [StackAccessible] class
 module gtk.stack_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;

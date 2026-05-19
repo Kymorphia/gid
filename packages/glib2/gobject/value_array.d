@@ -1,6 +1,7 @@
 /// Module for [ValueArray] class
 module gobject.value_array;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

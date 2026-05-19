@@ -1,6 +1,7 @@
 /// Module for [WebExtensionMatchPattern] class
 module webkit.web_extension_match_pattern;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.boxed;

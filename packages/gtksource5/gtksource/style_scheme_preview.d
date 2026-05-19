@@ -1,6 +1,7 @@
 /// Module for [StyleSchemePreview] class
 module gtksource.style_scheme_preview;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -20,11 +21,11 @@ import gtksource.style_scheme;
 import gtksource.types;
 
 /**
-    A preview widget for `class@StyleScheme`.
+    A preview widget for [gtksource.style_scheme.StyleScheme].
     
-    This widget provides a convenient [gtk.widget.Widget] to preview a `class@StyleScheme`.
+    This widget provides a convenient [gtk.widget.Widget] to preview a [gtksource.style_scheme.StyleScheme].
     
-    The `property@StyleSchemePreview:selected` property can be used to manage
+    The [gtksource.style_scheme_preview.StyleSchemePreview.selected] property can be used to manage
     the selection state of a single preview widget.
 */
 class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable

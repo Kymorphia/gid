@@ -1,6 +1,7 @@
 /// Module for [PathBuilder] class
 module gsk.path_builder;
 
+public import gid.basictypes;
 import cairo.path;
 import gid.gid;
 import gobject.boxed;

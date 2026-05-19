@@ -1,6 +1,7 @@
 /// Module for [WebHitTestResult] class
 module webkitwebprocessextension.web_hit_test_result;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [Language] class
 module gtksource.language;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

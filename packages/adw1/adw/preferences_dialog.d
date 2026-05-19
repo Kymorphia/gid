@@ -1,6 +1,7 @@
 /// Module for [PreferencesDialog] class
 module adw.preferences_dialog;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.dialog;
@@ -263,7 +264,7 @@ class PreferencesDialog : adw.dialog.Dialog
   /**
       Makes the page with the given name visible.
       
-      See `propertyPreferencesDialog:visible-page`.
+      See [adw.preferences_dialog.PreferencesDialog.visiblePage].
   
       Params:
         name = the name of the page to make visible

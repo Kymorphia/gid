@@ -1,6 +1,7 @@
 /// Module for [NetworkService] class
 module gio.network_service;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

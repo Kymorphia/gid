@@ -1,6 +1,7 @@
 /// Module for [LargeBinaryArray] class
 module arrow.large_binary_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.buffer;
 import arrow.c.functions;

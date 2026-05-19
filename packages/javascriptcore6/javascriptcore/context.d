@@ -1,6 +1,7 @@
 /// Module for [Context] class
 module javascriptcore.context;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.gid_builder;

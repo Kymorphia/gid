@@ -1,6 +1,7 @@
 /// Module for [ComboRow] class
 module adw.combo_row;
 
+public import gid.basictypes;
 import adw.action_row;
 import adw.c.functions;
 import adw.c.types;
@@ -48,7 +49,7 @@ import gtk.list_item_factory;
     </object>
     ```
     
-    The `property@ComboRow:selected` and `property@ComboRow:selected-item`
+    The [adw.combo_row.ComboRow.selected] and [adw.combo_row.ComboRow.selectedItem]
     properties can be used to keep track of the selected item and react to their
     changes.
     
@@ -113,7 +114,7 @@ class ComboRow : adw.action_row.ActionRow
         If set to `TRUE`, a search entry will be shown in the popup that
         allows to search for items in the list.
         
-        Search requires `property@ComboRow:expression` to be set.
+        Search requires [adw.combo_row.ComboRow.expression] to be set.
   */
   @property bool enableSearch()
   {
@@ -128,7 +129,7 @@ class ComboRow : adw.action_row.ActionRow
           If set to `TRUE`, a search entry will be shown in the popup that
           allows to search for items in the list.
           
-          Search requires `property@ComboRow:expression` to be set.
+          Search requires [adw.combo_row.ComboRow.expression] to be set.
   */
   @property void enableSearch(bool propval)
   {
@@ -142,8 +143,8 @@ class ComboRow : adw.action_row.ActionRow
         The expression must have a value type of `G_TYPE_STRING`.
         
         It's used to bind strings to labels produced by the default factory if
-        `property@ComboRow:factory` is not set, or when
-        `property@ComboRow:use-subtitle` is set to `TRUE`.
+        [adw.combo_row.ComboRow.factory] is not set, or when
+        [adw.combo_row.ComboRow.useSubtitle] is set to `TRUE`.
   */
   @property gtk.expression.Expression expression()
   {
@@ -158,8 +159,8 @@ class ComboRow : adw.action_row.ActionRow
           The expression must have a value type of `G_TYPE_STRING`.
           
           It's used to bind strings to labels produced by the default factory if
-          `property@ComboRow:factory` is not set, or when
-          `property@ComboRow:use-subtitle` is set to `TRUE`.
+          [adw.combo_row.ComboRow.factory] is not set, or when
+          [adw.combo_row.ComboRow.useSubtitle] is set to `TRUE`.
   */
   @property void expression(gtk.expression.Expression propval)
   {
@@ -171,7 +172,7 @@ class ComboRow : adw.action_row.ActionRow
       Returns: Factory for populating list items.
         
         This factory is always used for the item in the row. It is also used for
-        items in the popup unless `property@ComboRow:list-factory` is set.
+        items in the popup unless [adw.combo_row.ComboRow.listFactory] is set.
   */
   @property gtk.list_item_factory.ListItemFactory factory()
   {
@@ -184,7 +185,7 @@ class ComboRow : adw.action_row.ActionRow
         propval = Factory for populating list items.
           
           This factory is always used for the item in the row. It is also used for
-          items in the popup unless `property@ComboRow:list-factory` is set.
+          items in the popup unless [adw.combo_row.ComboRow.listFactory] is set.
   */
   @property void factory(gtk.list_item_factory.ListItemFactory propval)
   {
@@ -195,7 +196,7 @@ class ComboRow : adw.action_row.ActionRow
       Get `listFactory` property.
       Returns: The factory for populating list items in the popup.
         
-        If this is not set, `property@ComboRow:factory` is used.
+        If this is not set, [adw.combo_row.ComboRow.factory] is used.
   */
   @property gtk.list_item_factory.ListItemFactory listFactory()
   {
@@ -207,7 +208,7 @@ class ComboRow : adw.action_row.ActionRow
       Params:
         propval = The factory for populating list items in the popup.
           
-          If this is not set, `property@ComboRow:factory` is used.
+          If this is not set, [adw.combo_row.ComboRow.factory] is used.
   */
   @property void listFactory(gtk.list_item_factory.ListItemFactory propval)
   {
@@ -272,12 +273,12 @@ class ComboRow : adw.action_row.ActionRow
       Returns: Whether to use the current value as the subtitle.
         
         If you use a custom list item factory, you will need to give the row a
-        name conversion expression with `property@ComboRow:expression`.
+        name conversion expression with [adw.combo_row.ComboRow.expression].
         
-        If set to `TRUE`, you should not access `property@ActionRow:subtitle`.
+        If set to `TRUE`, you should not access [adw.action_row.ActionRow.subtitle].
         
         The subtitle is interpreted as Pango markup if
-        `property@PreferencesRow:use-markup` is set to `TRUE`.
+        [adw.preferences_row.PreferencesRow.useMarkup] is set to `TRUE`.
   */
   @property bool useSubtitle()
   {
@@ -290,12 +291,12 @@ class ComboRow : adw.action_row.ActionRow
         propval = Whether to use the current value as the subtitle.
           
           If you use a custom list item factory, you will need to give the row a
-          name conversion expression with `property@ComboRow:expression`.
+          name conversion expression with [adw.combo_row.ComboRow.expression].
           
-          If set to `TRUE`, you should not access `property@ActionRow:subtitle`.
+          If set to `TRUE`, you should not access [adw.action_row.ActionRow.subtitle].
           
           The subtitle is interpreted as Pango markup if
-          `property@PreferencesRow:use-markup` is set to `TRUE`.
+          [adw.preferences_row.PreferencesRow.useMarkup] is set to `TRUE`.
   */
   @property void useSubtitle(bool propval)
   {
@@ -319,7 +320,7 @@ class ComboRow : adw.action_row.ActionRow
       If set to `TRUE`, a search entry will be shown in the popup that
       allows to search for items in the list.
       
-      Search requires `propertyComboRow:expression` to be set.
+      Search requires [adw.combo_row.ComboRow.expression] to be set.
       Returns: whether the popup includes a search entry
   */
   bool getEnableSearch()
@@ -418,7 +419,7 @@ class ComboRow : adw.action_row.ActionRow
       If set to `TRUE`, a search entry will be shown in the popup that
       allows to search for items in the list.
       
-      Search requires `propertyComboRow:expression` to be set.
+      Search requires [adw.combo_row.ComboRow.expression] to be set.
   
       Params:
         enableSearch = whether to enable search
@@ -434,8 +435,8 @@ class ComboRow : adw.action_row.ActionRow
       The expression must have a value type of `G_TYPE_STRING`.
       
       It's used to bind strings to labels produced by the default factory if
-      `propertyComboRow:factory` is not set, or when
-      `propertyComboRow:use-subtitle` is set to `TRUE`.
+      [adw.combo_row.ComboRow.factory] is not set, or when
+      [adw.combo_row.ComboRow.useSubtitle] is set to `TRUE`.
   
       Params:
         expression = an expression
@@ -449,7 +450,7 @@ class ComboRow : adw.action_row.ActionRow
       Sets the factory for populating list items.
       
       This factory is always used for the item in the row. It is also used for
-      items in the popup unless `propertyComboRow:list-factory` is set.
+      items in the popup unless [adw.combo_row.ComboRow.listFactory] is set.
   
       Params:
         factory = the factory to use
@@ -462,7 +463,7 @@ class ComboRow : adw.action_row.ActionRow
   /**
       Sets the factory for populating list items in the popup.
       
-      If this is not set, `propertyComboRow:factory` is used.
+      If this is not set, [adw.combo_row.ComboRow.factory] is used.
   
       Params:
         factory = the factory to use
@@ -499,12 +500,12 @@ class ComboRow : adw.action_row.ActionRow
       Sets whether to use the current value as the subtitle.
       
       If you use a custom list item factory, you will need to give the row a
-      name conversion expression with `propertyComboRow:expression`.
+      name conversion expression with [adw.combo_row.ComboRow.expression].
       
-      If set to `TRUE`, you should not access `propertyActionRow:subtitle`.
+      If set to `TRUE`, you should not access [adw.action_row.ActionRow.subtitle].
       
       The subtitle is interpreted as Pango markup if
-      `propertyPreferencesRow:use-markup` is set to `TRUE`.
+      [adw.preferences_row.PreferencesRow.useMarkup] is set to `TRUE`.
   
       Params:
         useSubtitle = whether to use the current value as the subtitle
@@ -528,7 +529,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
           If set to `TRUE`, a search entry will be shown in the popup that
           allows to search for items in the list.
           
-          Search requires `property@ComboRow:expression` to be set.
+          Search requires [adw.combo_row.ComboRow.expression] to be set.
       Returns: Builder instance for fluent chaining
   */
   T enableSearch(bool propval)
@@ -544,8 +545,8 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
           The expression must have a value type of `G_TYPE_STRING`.
           
           It's used to bind strings to labels produced by the default factory if
-          `property@ComboRow:factory` is not set, or when
-          `property@ComboRow:use-subtitle` is set to `TRUE`.
+          [adw.combo_row.ComboRow.factory] is not set, or when
+          [adw.combo_row.ComboRow.useSubtitle] is set to `TRUE`.
       Returns: Builder instance for fluent chaining
   */
   T expression(gtk.expression.Expression propval)
@@ -559,7 +560,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
         propval = Factory for populating list items.
           
           This factory is always used for the item in the row. It is also used for
-          items in the popup unless `property@ComboRow:list-factory` is set.
+          items in the popup unless [adw.combo_row.ComboRow.listFactory] is set.
       Returns: Builder instance for fluent chaining
   */
   T factory(gtk.list_item_factory.ListItemFactory propval)
@@ -572,7 +573,7 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
       Params:
         propval = The factory for populating list items in the popup.
           
-          If this is not set, `property@ComboRow:factory` is used.
+          If this is not set, [adw.combo_row.ComboRow.factory] is used.
       Returns: Builder instance for fluent chaining
   */
   T listFactory(gtk.list_item_factory.ListItemFactory propval)
@@ -611,12 +612,12 @@ class ComboRowGidBuilderImpl(T) : adw.action_row.ActionRowGidBuilderImpl!T
         propval = Whether to use the current value as the subtitle.
           
           If you use a custom list item factory, you will need to give the row a
-          name conversion expression with `property@ComboRow:expression`.
+          name conversion expression with [adw.combo_row.ComboRow.expression].
           
-          If set to `TRUE`, you should not access `property@ActionRow:subtitle`.
+          If set to `TRUE`, you should not access [adw.action_row.ActionRow.subtitle].
           
           The subtitle is interpreted as Pango markup if
-          `property@PreferencesRow:use-markup` is set to `TRUE`.
+          [adw.preferences_row.PreferencesRow.useMarkup] is set to `TRUE`.
       Returns: Builder instance for fluent chaining
   */
   T useSubtitle(bool propval)

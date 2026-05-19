@@ -1,6 +1,7 @@
 /// Module for [StateSet] class
 module atk.state_set;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;

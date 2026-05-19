@@ -1,6 +1,7 @@
 /// Module for [PrintContext] class
 module gtk.print_context;
 
+public import gid.basictypes;
 import cairo.context;
 import gid.gid;
 import gobject.gid_builder;
@@ -22,10 +23,10 @@ import pango.layout;
     [pango.context.Context] objects that match the font metrics of the cairo surface.
     
     [gtk.print_context.PrintContext] objects get passed to the
-    `signal@Gtk.PrintOperation::begin-print`,
-    `signal@Gtk.PrintOperation::end-print`,
-    `signal@Gtk.PrintOperation::request-page-setup` and
-    `signal@Gtk.PrintOperation::draw-page` signals on the
+    [gtk.print_operation.PrintOperation.beginPrint],
+    [gtk.print_operation.PrintOperation.endPrint],
+    [gtk.print_operation.PrintOperation.requestPageSetup] and
+    [gtk.print_operation.PrintOperation.drawPage] signals on the
     [gtk.print_operation.PrintOperation] object.
     
     ## Using GtkPrintContext in a ::draw-page callback

@@ -1,6 +1,7 @@
 /// Module for [Icon] interface
 module gio.icon;
 
+public import gid.basictypes;
 public import gio.icon_iface_proxy;
 import gid.gid;
 import gio.c.functions;

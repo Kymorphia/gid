@@ -1,6 +1,7 @@
 /// Module for [Scrollable] interface mixin
 module gtk.scrollable_mixin;
 
+public import gid.basictypes;
 public import gtk.scrollable_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;
@@ -23,7 +24,7 @@ public import gtk.types;
     All scrollable widgets should do the following.
     
     - When a parent widget sets the scrollable child widget’s adjustments,
-      the widget should connect to the `signal@Gtk.Adjustment::value-changed`
+      the widget should connect to the [gtk.adjustment.Adjustment.valueChanged]
       signal. The child widget should then populate the adjustments’ properties
       as soon as possible, which usually means queueing an allocation right away
       and populating the properties in the `vfunc@Gtk.Widget.size_allocate`
@@ -38,7 +39,7 @@ public import gtk.types;
       the widget must ensure the adjustments’ property values are correct and up
       to date, for example using [gtk.adjustment.Adjustment.configure].
     
-    - When any of the adjustments emits the `signal@Gtk.Adjustment::value-changed`
+    - When any of the adjustments emits the [gtk.adjustment.Adjustment.valueChanged]
       signal, the scrollable widget should scroll its contents.
 */
 template ScrollableT()

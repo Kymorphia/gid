@@ -1,6 +1,7 @@
 /// Module for [File] class
 module gtksource.file;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.file;
 import gobject.gid_builder;
@@ -11,11 +12,11 @@ import gtksource.encoding;
 import gtksource.types;
 
 /**
-    On-disk representation of a `class@Buffer`.
+    On-disk representation of a [gtksource.buffer.Buffer].
     
-    A [gtksource.file.File] object is the on-disk representation of a `class@Buffer`.
-    With a [gtksource.file.File], you can create and configure a `class@FileLoader`
-    and `class@FileSaver` which take by default the values of the
+    A [gtksource.file.File] object is the on-disk representation of a [gtksource.buffer.Buffer].
+    With a [gtksource.file.File], you can create and configure a [gtksource.file_loader.FileLoader]
+    and [gtksource.file_saver.FileSaver] which take by default the values of the
     [gtksource.file.File] properties (except for the file loader which auto-detect some
     properties). On a successful load or save operation, the [gtksource.file.File]
     properties are updated. If an operation fails, the [gtksource.file.File] properties
@@ -181,7 +182,7 @@ class File : gobject.object.ObjectWrap
 
   /**
       Returns whether the file has been deleted. If the
-      `propertyFile:location` is null, returns false.
+      [gtksource.file.File.location] is null, returns false.
       
       To have an up-to-date value, you must first call
       [gtksource.file.File.checkFileOnDisk].
@@ -196,7 +197,7 @@ class File : gobject.object.ObjectWrap
 
   /**
       Returns whether the file is externally modified. If the
-      `propertyFile:location` is null, returns false.
+      [gtksource.file.File.location] is null, returns false.
       
       To have an up-to-date value, you must first call
       [gtksource.file.File.checkFileOnDisk].
@@ -210,7 +211,7 @@ class File : gobject.object.ObjectWrap
   }
 
   /**
-      Returns whether the file is local. If the `propertyFile:location` is null,
+      Returns whether the file is local. If the [gtksource.file.File.location] is null,
       returns false.
       Returns: whether the file is local.
   */
@@ -223,7 +224,7 @@ class File : gobject.object.ObjectWrap
 
   /**
       Returns whether the file is read-only. If the
-      `propertyFile:location` is null, returns false.
+      [gtksource.file.File.location] is null, returns false.
       
       To have an up-to-date value, you must first call
       [gtksource.file.File.checkFileOnDisk].

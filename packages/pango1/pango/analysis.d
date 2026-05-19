@@ -1,6 +1,7 @@
 /// Module for [Analysis] class
 module pango.analysis;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.c.functions;
 import pango.c.types;

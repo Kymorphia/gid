@@ -1,6 +1,7 @@
 /// Module for [Relation] class
 module atk.relation;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.object;

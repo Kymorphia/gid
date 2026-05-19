@@ -1,6 +1,7 @@
 /// Module for [Batch] class
 module gda.batch;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.set;

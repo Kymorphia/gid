@@ -1,6 +1,7 @@
 /// Module for [MemChunk] class
 module glib.mem_chunk;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

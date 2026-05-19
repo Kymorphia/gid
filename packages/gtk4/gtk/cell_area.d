@@ -1,6 +1,7 @@
 /// Module for [CellArea] class
 module gtk.cell_area;
 
+public import gid.basictypes;
 import gdk.event;
 import gdk.rectangle;
 import gid.gid;
@@ -237,8 +238,8 @@ import gtk.widget;
     API as they come in. Usually [gtk.cell_area.CellArea] is only interested in
     button events, however some customized derived areas can be implemented
     who are interested in handling other events. Handling an event can
-    trigger the `signal@Gtk.CellArea::focus-changed` signal to fire; as well
-    as `signal@Gtk.CellArea::add-editable` in the case that an editable cell
+    trigger the [gtk.cell_area.CellArea.focusChanged] signal to fire; as well
+    as [gtk.cell_area.CellArea.addEditable] in the case that an editable cell
     was clicked and needs to start editing. You can call
     [gtk.cell_area.CellArea.stopEditing] at any time to cancel any cell editing
     that is currently in progress.

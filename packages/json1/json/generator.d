@@ -1,6 +1,7 @@
 /// Module for [Generator] class
 module json.generator;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.cancellable;
 import gio.output_stream;
@@ -229,7 +230,7 @@ class Generator : gobject.object.ObjectWrap
       Sets whether the generated JSON should be pretty printed.
       
       Pretty printing will use indentation character specified in the
-      [json.generator.Generator.indent] property and the spacing
+      [json.generator.Generator.indentChar] property and the spacing
       specified in the [json.generator.Generator.indent] property.
   
       Params:

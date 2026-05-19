@@ -1,6 +1,7 @@
 /// Module for [ColorLine] class
 module harfbuzz.color_line;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;

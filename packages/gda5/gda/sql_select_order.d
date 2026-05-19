@@ -1,6 +1,7 @@
 /// Module for [SqlSelectOrder] class
 module gda.sql_select_order;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.sql_expr;

@@ -1,6 +1,7 @@
 /// Module for [Util] class
 module atk.util;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;

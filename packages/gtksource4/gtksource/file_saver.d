@@ -1,6 +1,7 @@
 /// Module for [FileSaver] class
 module gtksource.file_saver;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

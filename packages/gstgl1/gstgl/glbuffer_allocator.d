@@ -1,6 +1,7 @@
 /// Module for [GLBufferAllocator] class
 module gstgl.glbuffer_allocator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstgl.c.functions;

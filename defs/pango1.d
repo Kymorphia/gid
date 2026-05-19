@@ -1,7 +1,7 @@
 //!gir Pango-1.0
 //!info description "D binding for the Pango library - internationalized text layout and rendering"
 //!info homepage https://gitlab.gnome.org/GNOME/pango
-//!info docs https://www.kymorphia.com/gid/pango.html
+//!info docs https://www.kymorphia.com/gid/gid~pango1/
 //!info capi https://docs.gtk.org/Pango
 
 //# Disable a method which depends on AttrClass

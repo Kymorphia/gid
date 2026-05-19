@@ -1,6 +1,7 @@
 /// Module for [DmabufTextureBuilder] class
 module gdk.dmabuf_texture_builder;
 
+public import gid.basictypes;
 import cairo.region;
 import gdk.c.functions;
 import gdk.c.types;
@@ -235,7 +236,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
 
   /**
       Get `updateRegion` property.
-      Returns: The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+      Returns: The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
   */
   @property cairo.region.Region updateRegion()
   {
@@ -245,7 +246,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   /**
       Set `updateRegion` property.
       Params:
-        propval = The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+        propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
   */
   @property void updateRegion(cairo.region.Region propval)
   {
@@ -254,7 +255,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
 
   /**
       Get `updateTexture` property.
-      Returns: The texture `property@Gdk.DmabufTextureBuilder:update-region` is an update for.
+      Returns: The texture [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateRegion] is an update for.
   */
   @property gdk.texture.Texture updateTexture()
   {
@@ -264,7 +265,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
   /**
       Set `updateTexture` property.
       Params:
-        propval = The texture `property@Gdk.DmabufTextureBuilder:update-region` is an update for.
+        propval = The texture [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateRegion] is an update for.
   */
   @property void updateTexture(gdk.texture.Texture propval)
   {
@@ -619,7 +620,7 @@ class DmabufTextureBuilder : gobject.object.ObjectWrap
 
   /**
       Sets the region to be updated by this texture. Together with
-      `propertyGdk.DmabufTextureBuilder:update-texture` this describes an
+      [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateTexture] this describes an
       update of a previous texture.
       
       When rendering animations of large textures, it is possible that
@@ -741,7 +742,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
   /**
       Set `updateRegion` property.
       Params:
-        propval = The update region for `property@Gdk.GLTextureBuilder:update-texture`.
+        propval = The update region for [gdk.gltexture_builder.GLTextureBuilder.updateTexture].
       Returns: Builder instance for fluent chaining
   */
   T updateRegion(cairo.region.Region propval)
@@ -752,7 +753,7 @@ class DmabufTextureBuilderGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilde
   /**
       Set `updateTexture` property.
       Params:
-        propval = The texture `property@Gdk.DmabufTextureBuilder:update-region` is an update for.
+        propval = The texture [gdk.dmabuf_texture_builder.DmabufTextureBuilder.updateRegion] is an update for.
       Returns: Builder instance for fluent chaining
   */
   T updateTexture(gdk.texture.Texture propval)

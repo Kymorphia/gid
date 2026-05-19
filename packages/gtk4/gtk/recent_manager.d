@@ -1,6 +1,7 @@
 /// Module for [RecentManager] class
 module gtk.recent_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
@@ -67,7 +68,7 @@ import gtk.types;
     [gtk.recent_info.RecentInfo].
     
     Note that the maximum age of the recently used files list is
-    controllable through the `property@Gtk.Settings:gtk-recent-files-max-age`
+    controllable through the [gtk.settings.Settings.gtkRecentFilesMaxAge]
     property.
 */
 class RecentManager : gobject.object.ObjectWrap

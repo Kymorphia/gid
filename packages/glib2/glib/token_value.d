@@ -1,6 +1,7 @@
 /// Module for [TokenValue] class
 module glib.token_value;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

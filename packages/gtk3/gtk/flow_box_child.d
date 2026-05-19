@@ -1,6 +1,7 @@
 /// Module for [FlowBoxChild] class
 module gtk.flow_box_child;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

@@ -1,7 +1,7 @@
 //!gir GstPbutils-1.0
 //!info description "D binding for the GstPbutils library - Base utils library for the GStreamer multimedia framework"
 //!info homepage https://gstreamer.freedesktop.org
-//!info docs https://www.kymorphia.com/gid/gstpbutils.html
+//!info docs https://www.kymorphia.com/gid/gid~gstpbutils1/
 //!info capi https://gstreamer.freedesktop.org/documentation/pbutils/index.html
 
 //# Disable methods with arrays with sizes not described by parameters (FIXME)

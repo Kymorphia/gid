@@ -1,6 +1,7 @@
 /// Module for [WebsiteDataManager] class
 module webkit.website_data_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

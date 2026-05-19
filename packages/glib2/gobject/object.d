@@ -1,6 +1,7 @@
 /// Module for [ObjectWrap] class
 module gobject.object;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.binding;

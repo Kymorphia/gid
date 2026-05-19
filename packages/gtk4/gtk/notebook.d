@@ -1,6 +1,7 @@
 /// Module for [Notebook] class
 module gtk.notebook;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;

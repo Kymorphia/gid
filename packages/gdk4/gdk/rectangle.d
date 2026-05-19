@@ -1,6 +1,7 @@
 /// Module for [Rectangle] struct
 module gdk.rectangle;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

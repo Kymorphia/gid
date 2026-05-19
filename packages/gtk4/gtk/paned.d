@@ -1,6 +1,7 @@
 /// Module for [Paned] class
 module gtk.paned;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -378,7 +379,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-      Returns whether the `propertyGtk.Paned:end-child` can be resized.
+      Returns whether the [gtk.paned.Paned.endChild] can be resized.
       Returns: true if the end child is resizable
   */
   bool getResizeEndChild()
@@ -389,7 +390,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-      Returns whether the `propertyGtk.Paned:start-child` can be resized.
+      Returns whether the [gtk.paned.Paned.startChild] can be resized.
       Returns: true if the start child is resizable
   */
   bool getResizeStartChild()
@@ -400,7 +401,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-      Returns whether the `propertyGtk.Paned:end-child` can shrink.
+      Returns whether the [gtk.paned.Paned.endChild] can shrink.
       Returns: true if the end child is shrinkable
   */
   bool getShrinkEndChild()
@@ -411,7 +412,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-      Returns whether the `propertyGtk.Paned:start-child` can shrink.
+      Returns whether the [gtk.paned.Paned.startChild] can shrink.
       Returns: true if the start child is shrinkable
   */
   bool getShrinkStartChild()
@@ -470,7 +471,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-      Sets whether the `propertyGtk.Paned:end-child` can be resized.
+      Sets whether the [gtk.paned.Paned.endChild] can be resized.
   
       Params:
         resize = true to let the end child be resized
@@ -481,7 +482,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-      Sets whether the `propertyGtk.Paned:start-child` can be resized.
+      Sets whether the [gtk.paned.Paned.startChild] can be resized.
   
       Params:
         resize = true to let the start child be resized
@@ -492,7 +493,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-      Sets whether the `propertyGtk.Paned:end-child` can shrink.
+      Sets whether the [gtk.paned.Paned.endChild] can shrink.
   
       Params:
         resize = true to let the end child be shrunk
@@ -503,7 +504,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /**
-      Sets whether the `propertyGtk.Paned:start-child` can shrink.
+      Sets whether the [gtk.paned.Paned.startChild] can shrink.
   
       Params:
         resize = true to let the start child be shrunk
@@ -530,7 +531,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
       Sets whether the separator should be wide.
   
       Params:
-        wide = the new value for the `propertyGtk.Paned:wide-handle` property
+        wide = the new value for the [gtk.paned.Paned.wideHandle] property
   */
   void setWideHandle(bool wide)
   {

@@ -1,6 +1,7 @@
 /// Module for [RTSPRange] struct
 module gstrtsp.rtsprange;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.types;
 import gstrtsp.c.functions;

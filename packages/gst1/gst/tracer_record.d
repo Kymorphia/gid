@@ -1,6 +1,7 @@
 /// Module for [TracerRecord] class
 module gst.tracer_record;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.c.functions;

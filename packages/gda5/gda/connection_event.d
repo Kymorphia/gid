@@ -1,6 +1,7 @@
 /// Module for [ConnectionEvent] class
 module gda.connection_event;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

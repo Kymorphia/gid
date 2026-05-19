@@ -1,6 +1,7 @@
 /// Module for [Clipboard] class
 module gtk.clipboard;
 
+public import gid.basictypes;
 import gdk.atom;
 import gdk.display;
 import gdk.event_owner_change;

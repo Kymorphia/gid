@@ -1,6 +1,7 @@
 /// Module for [OptionMenu] class
 module webkit.option_menu;
 
+public import gid.basictypes;
 import gdk.event;
 import gid.gid;
 import gobject.dclosure;

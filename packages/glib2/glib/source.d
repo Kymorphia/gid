@@ -1,6 +1,7 @@
 /// Module for [Source] class
 module glib.source;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

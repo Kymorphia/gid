@@ -1,6 +1,7 @@
 /// Module for [SegmentProperties] class
 module harfbuzz.segment_properties;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;

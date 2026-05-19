@@ -1,6 +1,7 @@
 /// Module for [FileLoader] class
 module gtksource.file_loader;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;
@@ -21,14 +22,14 @@ import gtksource.types;
     Load a file into a GtkSourceBuffer.
     
     A [gtksource.file_loader.FileLoader] object permits to load the contents of a [gio.file.File] or a
-    [gio.input_stream.InputStream] into a `class@Buffer`.
+    [gio.input_stream.InputStream] into a [gtksource.buffer.Buffer].
     
     A file loader should be used only for one load operation, including errors
     handling. If an error occurs, you can reconfigure the loader and relaunch the
     operation with [gtksource.file_loader.FileLoader.loadAsync].
     
     Running a [gtksource.file_loader.FileLoader] is an undoable action for the
-    `class@Buffer`.
+    [gtksource.buffer.Buffer].
     
     After a file loading, the buffer is reset to the contents provided by the
     [gio.file.File] or [gio.input_stream.InputStream], so the buffer is set as “unmodified”, that is,
@@ -117,7 +118,7 @@ class FileLoader : gobject.object.ObjectWrap
 
   /**
       Creates a new [gtksource.file_loader.FileLoader] object. The contents is read from the
-      `classFile`'s location.
+      [gtksource.file.File]'s location.
       
       If not already done, call [gtksource.file.File.setLocation] before calling this constructor.
       The previous location is anyway not needed, because as soon as the file loading begins,
@@ -216,7 +217,7 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /**
-      Loads asynchronously the file or input stream contents into the `classBuffer`.
+      Loads asynchronously the file or input stream contents into the [gtksource.buffer.Buffer].
       
       See the [gio.async_result.AsyncResult] documentation to know how to use this
       function.
@@ -256,7 +257,7 @@ class FileLoader : gobject.object.ObjectWrap
   /**
       Finishes a file loading started with [gtksource.file_loader.FileLoader.loadAsync].
       
-      If the contents has been loaded, the following `classFile` properties will
+      If the contents has been loaded, the following [gtksource.file.File] properties will
       be updated: the location, the encoding, the newline type and the compression
       type.
   
@@ -285,7 +286,7 @@ class FileLoader : gobject.object.ObjectWrap
       
       By default the candidate encodings are (in that order in the list):
       
-      1. If set, the `classFile`'s encoding as returned by [gtksource.file.File.getEncoding].
+      1. If set, the [gtksource.file.File]'s encoding as returned by [gtksource.file.File.getEncoding].
       2. The default candidates as returned by [gtksource.encoding.Encoding.getDefaultCandidates].
   
       Params:

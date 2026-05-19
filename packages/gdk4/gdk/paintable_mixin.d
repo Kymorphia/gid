@@ -1,6 +1,7 @@
 /// Module for [Paintable] interface mixin
 module gdk.paintable_mixin;
 
+public import gid.basictypes;
 public import gdk.paintable_iface_proxy;
 public import gdk.c.functions;
 public import gdk.c.types;
@@ -37,7 +38,7 @@ public import gobject.object;
     A [gdk.paintable.Paintable] may change its contents, meaning that it will now produce
     a different output with the same snapshot. Once that happens, it will call
     [gdk.paintable.Paintable.invalidateContents] which will emit the
-    `signal@Gdk.Paintable::invalidate-contents` signal. If a paintable is known
+    [gdk.paintable.Paintable.invalidateContents] signal. If a paintable is known
     to never change its contents, it will set the [gdk.types.PaintableFlags.Contents]
     flag. If a consumer cannot deal with changing contents, it may call
     [gdk.paintable.Paintable.getCurrentImage] which will return a static
@@ -48,7 +49,7 @@ public import gobject.object;
     can use this information to layout thepaintable appropriately. Just like the
     contents, the size of a paintable can change. A paintable will indicate this
     by calling [gdk.paintable.Paintable.invalidateSize] which will emit the
-    `signal@Gdk.Paintable::invalidate-size` signal. And just like for contents,
+    [gdk.paintable.Paintable.invalidateSize] signal. And just like for contents,
     if a paintable is known to never change its size, it will set the
     [gdk.types.PaintableFlags.Size] flag.
     
@@ -198,7 +199,7 @@ template PaintableT()
       Unless the contents are invalidated, implementations must guarantee that
       multiple calls of [gdk.paintable.Paintable.snapshot] produce the same output.
       
-      This function will emit the `signalGdk.Paintable::invalidate-contents`
+      This function will emit the [gdk.paintable.Paintable.invalidateContents]
       signal.
       
       If a paintable reports the [gdk.types.PaintableFlags.Contents] flag,
@@ -215,7 +216,7 @@ template PaintableT()
       As long as the size is not invalidated, paintable must return the same
       values for its intrinsic width, height and aspect ratio.
       
-      This function will emit the `signalGdk.Paintable::invalidate-size`
+      This function will emit the [gdk.paintable.Paintable.invalidateSize]
       signal.
       
       If a paintable reports the [gdk.types.PaintableFlags.Size] flag,

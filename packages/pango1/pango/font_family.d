@@ -1,6 +1,7 @@
 /// Module for [FontFamily] class
 module pango.font_family;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;

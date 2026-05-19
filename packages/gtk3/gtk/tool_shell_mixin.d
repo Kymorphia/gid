@@ -1,6 +1,7 @@
 /// Module for [ToolShell] interface mixin
 module gtk.tool_shell_mixin;
 
+public import gid.basictypes;
 public import gtk.tool_shell_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [PrintCompositor] class
 module gtksource.print_compositor;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -14,9 +15,9 @@ import gtksource.types;
 import gtksource.view;
 
 /**
-    Compose a `class@Buffer` for printing.
+    Compose a [gtksource.buffer.Buffer] for printing.
     
-    The [gtksource.print_compositor.PrintCompositor] object is used to compose a `class@Buffer`
+    The [gtksource.print_compositor.PrintCompositor] object is used to compose a [gtksource.buffer.Buffer]
     for printing. You can set various configuration options to customize the
     printed output. [gtksource.print_compositor.PrintCompositor] is designed to be used with the
     high-level printing API of gtk+, i.e. [gtk.print_operation.PrintOperation].
@@ -101,7 +102,7 @@ class PrintCompositor : gobject.object.ObjectWrap
 
   /**
       Get `buffer` property.
-      Returns: The `class@Buffer` object to print.
+      Returns: The [gtksource.buffer.Buffer] object to print.
   */
   @property gtksource.buffer.Buffer buffer()
   {
@@ -417,9 +418,9 @@ class PrintCompositor : gobject.object.ObjectWrap
       
       This constructor sets some configuration properties to make the
       printed output match view as much as possible.  The properties set are
-      `propertyPrintCompositor:tab-width`, `propertyPrintCompositor:highlight-syntax`,
-      `propertyPrintCompositor:wrap-mode`, `propertyPrintCompositor:body-font-name` and
-      `propertyPrintCompositor:print-line-numbers`.
+      [gtksource.print_compositor.PrintCompositor.tabWidth], [gtksource.print_compositor.PrintCompositor.highlightSyntax],
+      [gtksource.print_compositor.PrintCompositor.wrapMode], [gtksource.print_compositor.PrintCompositor.bodyFontName] and
+      [gtksource.print_compositor.PrintCompositor.printLineNumbers].
   
       Params:
         view = a #GtkSourceView to get configuration from.
@@ -498,7 +499,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the `classBuffer` associated with the compositor.
+      Gets the [gtksource.buffer.Buffer] associated with the compositor.
       
       The returned object reference is owned by the compositor object and
       should not be unreferenced.
@@ -755,7 +756,7 @@ class PrintCompositor : gobject.object.ObjectWrap
       ```
       
       If you don't need to do pagination in chunks, you can simply do it all in the
-      `signalGtk.PrintOperation::begin-print` handler, and set the number of pages from there, like
+      [gtk.print_operation.PrintOperation.beginPrint] handler, and set the number of pages from there, like
       in the following example:
       
       ```c
@@ -1113,7 +1114,7 @@ class PrintCompositorGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
   /**
       Set `buffer` property.
       Params:
-        propval = The `class@Buffer` object to print.
+        propval = The [gtksource.buffer.Buffer] object to print.
       Returns: Builder instance for fluent chaining
   */
   T buffer(gtksource.buffer.Buffer propval)

@@ -1,6 +1,7 @@
 /// Module for [ComboBox] class
 module gtk.combo_box;
 
+public import gid.basictypes;
 import gdk.device;
 import gid.gid;
 import gobject.dclosure;
@@ -41,7 +42,7 @@ import gtk.widget;
     popup will reflect the tree structure.
     
     To allow the user to enter values not in the model, the
-    `property@Gtk.ComboBox:has-entry` property allows the [gtk.combo_box.ComboBox] to
+    [gtk.combo_box.ComboBox.hasEntry] property allows the [gtk.combo_box.ComboBox] to
     contain a [gtk.entry.Entry]. This entry can be accessed by calling
     [gtk.combo_box.ComboBox.getChild] on the combo box.
     
@@ -217,7 +218,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Returns: The model column to associate with strings from the entry.
         
         This is property only relevant if the combo was created with
-        `property@Gtk.ComboBox:has-entry` is true.
+        [gtk.combo_box.ComboBox.hasEntry] is true.
   */
   @property int entryTextColumn()
   {
@@ -230,7 +231,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
         propval = The model column to associate with strings from the entry.
           
           This is property only relevant if the combo was created with
-          `property@Gtk.ComboBox:has-entry` is true.
+          [gtk.combo_box.ComboBox.hasEntry] is true.
   */
   @property void entryTextColumn(int propval)
   {
@@ -431,14 +432,14 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       Returns the ID of the active row of combo_box.
       
       This value is taken from the active row and the column specified
-      by the `propertyGtk.ComboBox:id-column` property of combo_box
+      by the [gtk.combo_box.ComboBox.idColumn] property of combo_box
       (see [gtk.combo_box.ComboBox.setIdColumn]).
       
       The returned value is an interned string which means that you can
       compare the pointer by value to other interned strings and that you
       must not free it.
       
-      If the `propertyGtk.ComboBox:id-column` property of combo_box is
+      If the [gtk.combo_box.ComboBox.idColumn] property of combo_box is
       not set, or if no row is active, or if the active row has a null
       ID value, then null is returned.
       Returns: the ID of the active row
@@ -642,7 +643,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       If active_id is null, the active row is unset. Rows having
       a null ID string cannot be made active by this function.
       
-      If the `propertyGtk.ComboBox:id-column` property of combo_box is
+      If the [gtk.combo_box.ComboBox.idColumn] property of combo_box is
       unset or if no row has the given ID then the function does nothing
       and returns false.
   
@@ -715,7 +716,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
       type `G_TYPE_STRING`.
       
       This is only relevant if combo_box has been created with
-      `propertyGtk.ComboBox:has-entry` as true.
+      [gtk.combo_box.ComboBox.hasEntry] as true.
   
       Params:
         textColumn = A column in model to get the strings from for
@@ -897,12 +898,12 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
   
       Emitted to allow changing how the text in a combo box's entry is displayed.
         
-        See `propertyGtk.ComboBox:has-entry`.
+        See [gtk.combo_box.ComboBox.hasEntry].
         
         Connect a signal handler which returns an allocated string representing
         path. That string will then be used to set the text in the combo box's
         entry. The default signal handler uses the text from the
-        `propertyGtk.ComboBox:entry-text-column` model column.
+        [gtk.combo_box.ComboBox.entryTextColumn] model column.
         
         Here's an example signal handler which fetches data from the model and
         displays it in the entry.
@@ -1164,7 +1165,7 @@ class ComboBoxGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_ed
         propval = The model column to associate with strings from the entry.
           
           This is property only relevant if the combo was created with
-          `property@Gtk.ComboBox:has-entry` is true.
+          [gtk.combo_box.ComboBox.hasEntry] is true.
       Returns: Builder instance for fluent chaining
   */
   T entryTextColumn(int propval)

@@ -1,6 +1,7 @@
 /// Module for [EventPadButton] class
 module gdk.event_pad_button;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

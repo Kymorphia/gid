@@ -1,6 +1,7 @@
 /// Module for [DrawingArea] class
 module gtk.drawing_area;
 
+public import gid.basictypes;
 import cairo.context;
 import gid.gid;
 import gobject.dclosure;

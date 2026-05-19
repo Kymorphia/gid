@@ -1,6 +1,7 @@
 /// Module for [RTSPConnection] class
 module gstrtsp.rtspconnection;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.cancellable;
 import gio.socket;

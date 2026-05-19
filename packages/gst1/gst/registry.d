@@ -1,6 +1,7 @@
 /// Module for [Registry] class
 module gst.registry;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [Int32Statistics] class
 module parquet.int32_statistics;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import parquet.c.functions;

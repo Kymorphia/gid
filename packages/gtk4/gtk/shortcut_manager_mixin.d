@@ -1,6 +1,7 @@
 /// Module for [ShortcutManager] interface mixin
 module gtk.shortcut_manager_mixin;
 
+public import gid.basictypes;
 public import gtk.shortcut_manager_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

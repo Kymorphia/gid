@@ -1,6 +1,7 @@
 /// Module for [ActionMap] interface mixin
 module gio.action_map_mixin;
 
+public import gid.basictypes;
 public import gio.action_map_iface_proxy;
 public import gid.gid;
 public import gio.action;

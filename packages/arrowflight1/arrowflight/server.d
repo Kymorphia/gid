@@ -1,6 +1,7 @@
 /// Module for [Server] class
 module arrowflight.server;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.criteria;

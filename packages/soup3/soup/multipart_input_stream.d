@@ -1,6 +1,7 @@
 /// Module for [MultipartInputStream] class
 module soup.multipart_input_stream;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;
@@ -23,7 +24,7 @@ import soup.types;
     
     This adds support for the multipart responses. For handling the
     multiple parts the user needs to wrap the [gio.input_stream.InputStream] obtained by
-    sending the request with a `class@MultipartInputStream` and use
+    sending the request with a [soup.multipart_input_stream.MultipartInputStream] and use
     [soup.multipart_input_stream.MultipartInputStream.nextPart] before reading. Responses
     which are not wrapped will be treated like non-multipart responses.
     
@@ -70,7 +71,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
 
   /**
       Get `message` property.
-      Returns: The `class@Message`.
+      Returns: The [soup.message.Message].
   */
   @property soup.message.Message message()
   {
@@ -81,7 +82,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
 
   /**
       Creates a new #SoupMultipartInputStream that wraps the
-      [gio.input_stream.InputStream] obtained by sending the `classMessage`.
+      [gio.input_stream.InputStream] obtained by sending the [soup.message.Message].
       
       Reads should not be done directly through this object, use the input streams
       returned by [soup.multipart_input_stream.MultipartInputStream.nextPart] or its async
@@ -102,12 +103,12 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   /**
       Obtains the headers for the part currently being processed.
       
-      Note that the `structMessageHeaders` that are returned are owned by the
+      Note that the [soup.message_headers.MessageHeaders] that are returned are owned by the
       #SoupMultipartInputStream and will be replaced when a call is made to
       [soup.multipart_input_stream.MultipartInputStream.nextPart] or its async counterpart, so if
       keeping the headers is required, a copy must be made.
       
-      Note that if a part had no headers at all an empty `structMessageHeaders`
+      Note that if a part had no headers at all an empty [soup.message_headers.MessageHeaders]
       will be returned.
       Returns: a #SoupMessageHeaders
           containing the headers for the part currently being processed or
@@ -206,7 +207,7 @@ class MultipartInputStreamGidBuilderImpl(T) : gio.filter_input_stream.FilterInpu
   /**
       Set `message` property.
       Params:
-        propval = The `class@Message`.
+        propval = The [soup.message.Message].
       Returns: Builder instance for fluent chaining
   */
   T message(soup.message.Message propval)

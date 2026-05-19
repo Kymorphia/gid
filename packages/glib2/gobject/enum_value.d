@@ -1,6 +1,7 @@
 /// Module for [EnumValue] struct
 module gobject.enum_value;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

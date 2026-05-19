@@ -1,6 +1,7 @@
 /// Module for [Parser] class
 module json.parser;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

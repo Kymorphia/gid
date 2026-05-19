@@ -1,6 +1,7 @@
 /// Module for [Timer] class
 module glib.timer;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

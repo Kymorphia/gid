@@ -1,6 +1,7 @@
 /// Module for [AttrIterator] class
 module pango.attr_iterator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.attribute;

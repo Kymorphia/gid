@@ -1,6 +1,7 @@
 /// Module for [ColumnViewColumn] class
 module gtk.column_view_column;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.menu_model;
 import gobject.gid_builder;

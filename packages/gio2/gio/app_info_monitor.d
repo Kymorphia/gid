@@ -1,6 +1,7 @@
 /// Module for [AppInfoMonitor] class
 module gio.app_info_monitor;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

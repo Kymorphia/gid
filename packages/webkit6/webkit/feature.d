@@ -1,6 +1,7 @@
 /// Module for [Feature] class
 module webkit.feature;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;
@@ -18,7 +19,7 @@ import webkit.types;
     - A “default value”, which indicates whether the option is enabled
       automatically: [webkit.feature.Feature.getDefaultValue].
     - Its “status”, which determines whether it should be considered
-      user-settable and its development stage (see `enum@FeatureStatus`
+      user-settable and its development stage (see [webkit.types.FeatureStatus]
       for details): [webkit.feature.Feature.getStatus].
     - A category, which may be used to group features together:
       [webkit.feature.Feature.getCategory].

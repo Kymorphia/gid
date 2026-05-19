@@ -1,6 +1,7 @@
 /// Module for [DebugKey] class
 module glib.debug_key;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

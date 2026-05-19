@@ -1,6 +1,7 @@
 /// Module for [DataPivot] class
 module gda.data_pivot;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_model;

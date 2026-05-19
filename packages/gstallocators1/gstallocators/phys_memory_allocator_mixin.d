@@ -1,6 +1,7 @@
 /// Module for [PhysMemoryAllocator] interface mixin
 module gstallocators.phys_memory_allocator_mixin;
 
+public import gid.basictypes;
 public import gstallocators.phys_memory_allocator_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

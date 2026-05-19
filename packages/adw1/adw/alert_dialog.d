@@ -1,6 +1,7 @@
 /// Module for [AlertDialog] class
 module adw.alert_dialog;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.dialog;
@@ -36,10 +37,10 @@ import gtk.widget;
     appearance.
     
     When one of the responses is activated, or the dialog is closed, the
-    `signal@AlertDialog::response` signal will be emitted. This signal is
+    [adw.alert_dialog.AlertDialog.response] signal will be emitted. This signal is
     detailed, and the detail, as well as the `response` parameter will be set to
     the ID of the activated response, or to the value of the
-    `property@AlertDialog:close-response` property if the dialog had been closed
+    [adw.alert_dialog.AlertDialog.closeResponse] property if the dialog had been closed
     without activating any of the responses.
     
     Response buttons can be presented horizontally or vertically depending on
@@ -236,7 +237,7 @@ class AlertDialog : adw.dialog.Dialog
       Get `closeResponse` property.
       Returns: The ID of the close response.
         
-        It will be passed to `signal@AlertDialog::response` if the dialog is
+        It will be passed to [adw.alert_dialog.AlertDialog.response] if the dialog is
         closed by pressing <kbd>Escape</kbd> or with a system action.
         
         It doesn't have to correspond to any of the responses in the dialog.
@@ -253,7 +254,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         propval = The ID of the close response.
           
-          It will be passed to `signal@AlertDialog::response` if the dialog is
+          It will be passed to [adw.alert_dialog.AlertDialog.response] if the dialog is
           closed by pressing <kbd>Escape</kbd> or with a system action.
           
           It doesn't have to correspond to any of the responses in the dialog.
@@ -394,7 +395,7 @@ class AlertDialog : adw.dialog.Dialog
       
       Responses are represented as buttons in the dialog.
       
-      Response ID must be unique. It will be used in `signalAlertDialog::response`
+      Response ID must be unique. It will be used in [adw.alert_dialog.AlertDialog.response]
       to tell which response had been activated, as well as to inspect and modify
       the response later.
       
@@ -424,7 +425,7 @@ class AlertDialog : adw.dialog.Dialog
       The callback will be called when the alert is dismissed. It should call
       [adw.alert_dialog.AlertDialog.chooseFinish] to obtain the result.
       
-      If the window is an `classWindow` or `classApplicationWindow`, the dialog
+      If the window is an [adw.window.Window] or [adw.application_window.ApplicationWindow], the dialog
       will be shown within it. Otherwise, it will be a separate window.
   
       Params:
@@ -452,7 +453,7 @@ class AlertDialog : adw.dialog.Dialog
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: the ID of the response that was selected, or
-          `propertyAlertDialog:close-response` if the call was cancelled.
+          [adw.alert_dialog.AlertDialog.closeResponse] if the call was cancelled.
   */
   string chooseFinish(gio.async_result.AsyncResult result)
   {
@@ -652,7 +653,7 @@ class AlertDialog : adw.dialog.Dialog
   /**
       Sets the ID of the close response of self.
       
-      It will be passed to `signalAlertDialog::response` if the dialog is closed
+      It will be passed to [adw.alert_dialog.AlertDialog.response] if the dialog is closed
       by pressing <kbd>Escape</kbd> or with a system action.
       
       It doesn't have to correspond to any of the responses in the dialog.
@@ -759,7 +760,7 @@ class AlertDialog : adw.dialog.Dialog
       [gtk.widget.Widget.sensitive] set to `FALSE` and it can't be activated as
       a default response.
       
-      response can still be used as `propertyAlertDialog:close-response` while
+      response can still be used as [adw.alert_dialog.AlertDialog.closeResponse] while
       it's not enabled.
       
       Responses are enabled by default.
@@ -801,7 +802,7 @@ class AlertDialog : adw.dialog.Dialog
         
         if the dialog was closed by pressing <kbd>Escape</kbd> or with a system
         action, response will be set to the value of
-        `propertyAlertDialog:close-response`.
+        [adw.alert_dialog.AlertDialog.closeResponse].
   
       Params:
         detail = Signal detail or null (default)
@@ -877,7 +878,7 @@ class AlertDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
       Params:
         propval = The ID of the close response.
           
-          It will be passed to `signal@AlertDialog::response` if the dialog is
+          It will be passed to [adw.alert_dialog.AlertDialog.response] if the dialog is
           closed by pressing <kbd>Escape</kbd> or with a system action.
           
           It doesn't have to correspond to any of the responses in the dialog.

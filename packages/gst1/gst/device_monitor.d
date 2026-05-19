@@ -1,6 +1,7 @@
 /// Module for [DeviceMonitor] class
 module gst.device_monitor;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

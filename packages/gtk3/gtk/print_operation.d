@@ -1,6 +1,7 @@
 /// Module for [PrintOperation] class
 module gtk.print_operation;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;

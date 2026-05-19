@@ -1,6 +1,7 @@
 /// Module for [TimedValueControlSource] class
 module gstcontroller.timed_value_control_source;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.sequence_iter;
 import gobject.dclosure;

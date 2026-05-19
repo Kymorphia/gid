@@ -1,6 +1,7 @@
 /// Module for [TextNode] class
 module gsk.text_node;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gobject.object;

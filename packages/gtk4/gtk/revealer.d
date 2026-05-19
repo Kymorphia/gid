@@ -1,6 +1,7 @@
 /// Module for [Revealer] class
 module gtk.revealer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -21,7 +22,7 @@ import gtk.widget;
     The style of transition can be controlled with
     [gtk.revealer.Revealer.setTransitionType].
     
-    These animations respect the `property@Gtk.Settings:gtk-enable-animations`
+    These animations respect the [gtk.settings.Settings.gtkEnableAnimations]
     setting.
     
     # CSS nodes
@@ -29,7 +30,7 @@ import gtk.widget;
     [gtk.revealer.Revealer] has a single CSS node with name revealer.
     When styling [gtk.revealer.Revealer] using CSS, remember that it only hides its contents,
     not itself. That means applied margin, padding and borders will be visible even
-    when the `property@Gtk.Revealer:reveal-child` property is set to false.
+    when the [gtk.revealer.Revealer.revealChild] property is set to false.
     
     # Accessibility
     

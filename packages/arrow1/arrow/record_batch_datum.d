@@ -1,6 +1,7 @@
 /// Module for [RecordBatchDatum] class
 module arrow.record_batch_datum;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.datum;

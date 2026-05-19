@@ -1,6 +1,7 @@
 /// Module for [DropDown] class
 module gtk.drop_down;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
@@ -144,7 +145,7 @@ class DropDown : gtk.widget.Widget
       Returns: An expression to evaluate to obtain strings to match against the search
         term.
         
-        See `property@Gtk.DropDown:enable-search` for how to enable search.
+        See [gtk.drop_down.DropDown.enableSearch] for how to enable search.
         If [gtk.drop_down.DropDown.factory] is not set, the expression is also
         used to bind strings to labels produced by a default factory.
   */
@@ -159,7 +160,7 @@ class DropDown : gtk.widget.Widget
         propval = An expression to evaluate to obtain strings to match against the search
           term.
           
-          See `property@Gtk.DropDown:enable-search` for how to enable search.
+          See [gtk.drop_down.DropDown.enableSearch] for how to enable search.
           If [gtk.drop_down.DropDown.factory] is not set, the expression is also
           used to bind strings to labels produced by a default factory.
   */
@@ -390,7 +391,7 @@ class DropDown : gtk.widget.Widget
       
       The factory returned by this function is always used for the
       item in the button. It is also used for items in the popup
-      if `propertyGtk.DropDown:list-factory` is not set.
+      if [gtk.drop_down.DropDown.listFactory] is not set.
       Returns: The factory in use
   */
   gtk.list_item_factory.ListItemFactory getFactory()
@@ -656,7 +657,7 @@ class DropDownGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = An expression to evaluate to obtain strings to match against the search
           term.
           
-          See `property@Gtk.DropDown:enable-search` for how to enable search.
+          See [gtk.drop_down.DropDown.enableSearch] for how to enable search.
           If [gtk.drop_down.DropDown.factory] is not set, the expression is also
           used to bind strings to labels produced by a default factory.
       Returns: Builder instance for fluent chaining

@@ -1,6 +1,7 @@
 /// Module for [BaseBinaryScalar] class
 module arrow.base_binary_scalar;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;

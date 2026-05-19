@@ -1,6 +1,7 @@
 /// Module for [ColorChooserDialog] class
 module gtk.color_chooser_dialog;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

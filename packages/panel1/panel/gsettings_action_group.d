@@ -1,6 +1,7 @@
 /// Module for [GSettingsActionGroup] class
 module panel.gsettings_action_group;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;

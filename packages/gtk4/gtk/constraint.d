@@ -1,6 +1,7 @@
 /// Module for [Constraint] class
 module gtk.constraint;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -65,7 +66,7 @@ class Constraint : gobject.object.ObjectWrap
 
   /**
       Get `constant` property.
-      Returns: The constant value to be added to the [gtk.constraint.Constraint.source].
+      Returns: The constant value to be added to the [gtk.constraint.Constraint.sourceAttribute].
   */
   @property double constant()
   {
@@ -75,7 +76,7 @@ class Constraint : gobject.object.ObjectWrap
   /**
       Get `multiplier` property.
       Returns: The multiplication factor to be applied to
-        the [gtk.constraint.Constraint.source].
+        the [gtk.constraint.Constraint.sourceAttribute].
   */
   @property double multiplier()
   {
@@ -95,8 +96,8 @@ class Constraint : gobject.object.ObjectWrap
       Get `source` property.
       Returns: The source of the constraint.
         
-        The constraint will set the [gtk.constraint.Constraint.target]
-        property of the target using the [gtk.constraint.Constraint.source]
+        The constraint will set the [gtk.constraint.Constraint.targetAttribute]
+        property of the target using the [gtk.constraint.Constraint.sourceAttribute]
         property of the source.
   */
   @property gtk.constraint_target.ConstraintTarget source()
@@ -131,8 +132,8 @@ class Constraint : gobject.object.ObjectWrap
       Get `target` property.
       Returns: The target of the constraint.
         
-        The constraint will set the [gtk.constraint.Constraint.target]
-        property of the target using the [gtk.constraint.Constraint.source]
+        The constraint will set the [gtk.constraint.Constraint.targetAttribute]
+        property of the target using the [gtk.constraint.Constraint.sourceAttribute]
         property of the source widget.
   */
   @property gtk.constraint_target.ConstraintTarget target()
@@ -337,7 +338,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `constant` property.
       Params:
-        propval = The constant value to be added to the [gtk.constraint.Constraint.source].
+        propval = The constant value to be added to the [gtk.constraint.Constraint.sourceAttribute].
       Returns: Builder instance for fluent chaining
   */
   T constant(double propval)
@@ -349,7 +350,7 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Set `multiplier` property.
       Params:
         propval = The multiplication factor to be applied to
-          the [gtk.constraint.Constraint.source].
+          the [gtk.constraint.Constraint.sourceAttribute].
       Returns: Builder instance for fluent chaining
   */
   T multiplier(double propval)
@@ -373,8 +374,8 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = The source of the constraint.
           
-          The constraint will set the [gtk.constraint.Constraint.target]
-          property of the target using the [gtk.constraint.Constraint.source]
+          The constraint will set the [gtk.constraint.Constraint.targetAttribute]
+          property of the target using the [gtk.constraint.Constraint.sourceAttribute]
           property of the source.
       Returns: Builder instance for fluent chaining
   */
@@ -415,8 +416,8 @@ class ConstraintGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = The target of the constraint.
           
-          The constraint will set the [gtk.constraint.Constraint.target]
-          property of the target using the [gtk.constraint.Constraint.source]
+          The constraint will set the [gtk.constraint.Constraint.targetAttribute]
+          property of the target using the [gtk.constraint.Constraint.sourceAttribute]
           property of the source widget.
       Returns: Builder instance for fluent chaining
   */

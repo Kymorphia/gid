@@ -1,6 +1,7 @@
 /// Module for [AppChooser] interface
 module gtk.app_chooser;
 
+public import gid.basictypes;
 public import gtk.app_chooser_iface_proxy;
 import gid.gid;
 import gio.app_info;

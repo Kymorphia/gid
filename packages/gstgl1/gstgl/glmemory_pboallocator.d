@@ -1,6 +1,7 @@
 /// Module for [GLMemoryPBOAllocator] class
 module gstgl.glmemory_pboallocator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstgl.c.functions;

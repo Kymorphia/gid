@@ -1,6 +1,7 @@
 /// Module for [TimeZone] class
 module glib.time_zone;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

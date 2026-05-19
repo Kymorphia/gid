@@ -1,6 +1,7 @@
 /// Module for [LocalFileSystem] class
 module arrow.local_file_system;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.file_system;

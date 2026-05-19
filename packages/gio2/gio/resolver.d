@@ -1,6 +1,7 @@
 /// Module for [Resolver] class
 module gio.resolver;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [KeyValuePartitioningOptions] class
 module arrowdataset.key_value_partitioning_options;
 
+public import gid.basictypes;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;

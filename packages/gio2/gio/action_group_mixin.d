@@ -1,6 +1,7 @@
 /// Module for [ActionGroup] interface mixin
 module gio.action_group_mixin;
 
+public import gid.basictypes;
 public import gio.action_group_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

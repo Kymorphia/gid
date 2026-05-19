@@ -1,6 +1,7 @@
 /// Module for [EventControllerFocus] class
 module gtk.event_controller_focus;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -15,8 +16,8 @@ import gtk.types;
     
     The event controller offers [gtk.event_controller_focus.EventControllerFocus.enter]
     and [gtk.event_controller_focus.EventControllerFocus.leave] signals, as well as
-    `property@Gtk.EventControllerFocus:is-focus` and
-    `property@Gtk.EventControllerFocus:contains-focus` properties
+    [gtk.event_controller_focus.EventControllerFocus.isFocus] and
+    [gtk.event_controller_focus.EventControllerFocus.containsFocus] properties
     which are updated to reflect focus changes inside the widget hierarchy
     that is rooted at the controllers widget.
 */
@@ -101,7 +102,7 @@ class EventControllerFocus : gtk.event_controller.EventController
         certain cases (such as when the focus moves from a descendent
         of the widget to the widget itself). If you are interested
         in these cases, you can monitor the
-        `propertyGtk.EventControllerFocus:is-focus`
+        [gtk.event_controller_focus.EventControllerFocus.isFocus]
         property for changes.
   
       Params:
@@ -146,7 +147,7 @@ class EventControllerFocus : gtk.event_controller.EventController
         even though the focus moves away from the widget, in
         certain cases (such as when the focus moves from the widget
         to a descendent). If you are interested in these cases, you
-        can monitor the `propertyGtk.EventControllerFocus:is-focus`
+        can monitor the [gtk.event_controller_focus.EventControllerFocus.isFocus]
         property for changes.
   
       Params:

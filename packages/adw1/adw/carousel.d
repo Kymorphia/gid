@@ -1,6 +1,7 @@
 /// Module for [Carousel] class
 module adw.carousel;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.spring_params;
@@ -32,7 +33,7 @@ import gtk.widget;
     The [adw.carousel.Carousel] widget can be used to display a set of pages with
     swipe-based navigation between them.
     
-    `class@CarouselIndicatorDots` and `class@CarouselIndicatorLines` can be used
+    [adw.carousel_indicator_dots.CarouselIndicatorDots] and [adw.carousel_indicator_lines.CarouselIndicatorLines] can be used
     to provide page indicators for [adw.carousel.Carousel].
     
     ## CSS nodes

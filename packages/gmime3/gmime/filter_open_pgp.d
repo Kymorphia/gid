@@ -1,6 +1,7 @@
 /// Module for [FilterOpenPGP] class
 module gmime.filter_open_pgp;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

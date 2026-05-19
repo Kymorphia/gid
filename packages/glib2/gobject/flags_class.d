@@ -1,6 +1,7 @@
 /// Module for [FlagsClass] struct
 module gobject.flags_class;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

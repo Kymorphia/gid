@@ -1,6 +1,7 @@
 /// Module for [PrintSettings] class
 module gtk.print_settings;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.key_file;

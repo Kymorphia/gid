@@ -1,6 +1,7 @@
 /// Module for [TimestampScalar] class
 module arrow.timestamp_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;

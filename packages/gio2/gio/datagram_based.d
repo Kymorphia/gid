@@ -1,6 +1,7 @@
 /// Module for [DatagramBased] interface
 module gio.datagram_based;
 
+public import gid.basictypes;
 public import gio.datagram_based_iface_proxy;
 import gid.gid;
 import gio.c.functions;

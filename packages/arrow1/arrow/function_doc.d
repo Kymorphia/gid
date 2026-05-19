@@ -1,6 +1,7 @@
 /// Module for [FunctionDoc] class
 module arrow.function_doc;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

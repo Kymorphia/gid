@@ -1,6 +1,7 @@
 /// Module for [DebugControllerDBus] class
 module gio.debug_controller_dbus;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
@@ -30,7 +31,7 @@ import gobject.object;
     This D-Bus object can be used by remote processes to enable or disable debug
     output in this process. Remote processes calling
     `org.gtk.Debugging.SetDebugEnabled()` will affect the value of
-    `property@Gio.DebugController:debug-enabled` and, by default,
+    [gio.debug_controller.DebugController.debugEnabled] and, by default,
     `func@GLib.log_get_debug_enabled`.
     
     By default, no processes are allowed to call `SetDebugEnabled()` unless a

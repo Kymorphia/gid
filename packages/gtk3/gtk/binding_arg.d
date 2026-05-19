@@ -1,6 +1,7 @@
 /// Module for [BindingArg] class
 module gtk.binding_arg;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.types;
 import gtk.c.functions;

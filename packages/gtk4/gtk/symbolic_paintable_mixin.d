@@ -1,6 +1,7 @@
 /// Module for [SymbolicPaintable] interface mixin
 module gtk.symbolic_paintable_mixin;
 
+public import gid.basictypes;
 public import gtk.symbolic_paintable_iface_proxy;
 public import gdk.rgba;
 public import gdk.snapshot;

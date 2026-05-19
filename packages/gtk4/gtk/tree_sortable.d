@@ -1,6 +1,7 @@
 /// Module for [TreeSortable] interface
 module gtk.tree_sortable;
 
+public import gid.basictypes;
 public import gtk.tree_sortable_iface_proxy;
 import gid.gid;
 import gobject.dclosure;

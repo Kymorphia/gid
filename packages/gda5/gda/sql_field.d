@@ -1,6 +1,7 @@
 /// Module for [SqlField] class
 module gda.sql_field;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.meta_table_column;

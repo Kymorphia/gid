@@ -1,6 +1,7 @@
 /// Module for [ExecuteContext] class
 module arrow.execute_context;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

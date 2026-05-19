@@ -1,6 +1,7 @@
 /// Module for [TextPart] class
 module gmime.text_part;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

@@ -1,6 +1,7 @@
 /// Module for [Array] class
 module arrow.array;
 
+public import gid.basictypes;
 import arrow.boolean_array;
 import arrow.buffer;
 import arrow.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [Shadow] class
 module gsk.shadow;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gsk.c.functions;

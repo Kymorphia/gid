@@ -1,6 +1,7 @@
 /// Module for [FontDialog] class
 module gtk.font_dialog;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

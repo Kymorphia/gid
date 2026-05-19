@@ -1,6 +1,7 @@
 /// Module for [Buffer] class
 module arrow.buffer;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

@@ -1,6 +1,7 @@
 /// Module for [Readable] interface
 module arrow.readable;
 
+public import gid.basictypes;
 public import arrow.readable_iface_proxy;
 import arrow.buffer;
 import arrow.c.functions;

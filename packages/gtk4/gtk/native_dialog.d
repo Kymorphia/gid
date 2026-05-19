@@ -1,6 +1,7 @@
 /// Module for [NativeDialog] class
 module gtk.native_dialog;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

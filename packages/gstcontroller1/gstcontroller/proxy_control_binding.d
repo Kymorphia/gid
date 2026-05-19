@@ -1,6 +1,7 @@
 /// Module for [ProxyControlBinding] class
 module gstcontroller.proxy_control_binding;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.control_binding;

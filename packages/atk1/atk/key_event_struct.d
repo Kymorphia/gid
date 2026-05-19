@@ -1,6 +1,7 @@
 /// Module for [KeyEventStruct] class
 module atk.key_event_struct;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;

@@ -1,6 +1,7 @@
 /// Module for [Table] interface mixin
 module atk.table_mixin;
 
+public import gid.basictypes;
 public import atk.table_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

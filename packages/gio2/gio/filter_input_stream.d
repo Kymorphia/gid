@@ -1,6 +1,7 @@
 /// Module for [FilterInputStream] class
 module gio.filter_input_stream;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

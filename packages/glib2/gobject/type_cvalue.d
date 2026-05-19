@@ -1,6 +1,7 @@
 /// Module for [TypeCValue] class
 module gobject.type_cvalue;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

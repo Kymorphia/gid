@@ -1,6 +1,7 @@
 /// Module for [GeometricPoint] struct
 module gda.geometric_point;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

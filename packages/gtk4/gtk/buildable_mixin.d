@@ -1,6 +1,7 @@
 /// Module for [Buildable] interface mixin
 module gtk.buildable_mixin;
 
+public import gid.basictypes;
 public import gtk.buildable_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

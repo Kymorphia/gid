@@ -1,6 +1,7 @@
 /// Module for [AudioVisualizer] class
 module gstpbutils.audio_visualizer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

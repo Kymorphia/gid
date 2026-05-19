@@ -1,6 +1,7 @@
 /// Module for [TypeFind] class
 module gst.type_find;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

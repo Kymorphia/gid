@@ -1,6 +1,7 @@
 /// Module for [ButtonContent] class
 module adw.button_content;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -25,7 +26,7 @@ import gtk.widget;
     [adw.button_content.ButtonContent] is a box-like widget with an icon and a label.
     
     It's intended to be used as a direct child of [gtk.button.Button],
-    [gtk.menu_button.MenuButton] or `class@SplitButton`, when they need to have both an
+    [gtk.menu_button.MenuButton] or [adw.split_button.SplitButton], when they need to have both an
     icon and a label, as follows:
     
     ```xml
@@ -106,7 +107,7 @@ class ButtonContent : gtk.widget.Widget
         
         If set to `TRUE`, the label will ellipsize.
         
-        See `property@Gtk.Button:can-shrink`.
+        See [gtk.button.Button.canShrink].
   */
   @property bool canShrink()
   {
@@ -120,7 +121,7 @@ class ButtonContent : gtk.widget.Widget
           
           If set to `TRUE`, the label will ellipsize.
           
-          See `property@Gtk.Button:can-shrink`.
+          See [gtk.button.Button.canShrink].
   */
   @property void canShrink(bool propval)
   {
@@ -175,7 +176,7 @@ class ButtonContent : gtk.widget.Widget
         
         The mnemonic can be used to activate the parent button.
         
-        See `property@ButtonContent:label`.
+        See [adw.button_content.ButtonContent.label].
   */
   @property bool useUnderline()
   {
@@ -189,7 +190,7 @@ class ButtonContent : gtk.widget.Widget
           
           The mnemonic can be used to activate the parent button.
           
-          See `property@ButtonContent:label`.
+          See [adw.button_content.ButtonContent.label].
   */
   @property void useUnderline(bool propval)
   {
@@ -299,7 +300,7 @@ class ButtonContent : gtk.widget.Widget
       
       The mnemonic can be used to activate the parent button.
       
-      See `propertyButtonContent:label`.
+      See [adw.button_content.ButtonContent.label].
   
       Params:
         useUnderline = whether an underline in the text indicates a mnemonic
@@ -322,7 +323,7 @@ class ButtonContentGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           If set to `TRUE`, the label will ellipsize.
           
-          See `property@Gtk.Button:can-shrink`.
+          See [gtk.button.Button.canShrink].
       Returns: Builder instance for fluent chaining
   */
   T canShrink(bool propval)
@@ -361,7 +362,7 @@ class ButtonContentGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           
           The mnemonic can be used to activate the parent button.
           
-          See `property@ButtonContent:label`.
+          See [adw.button_content.ButtonContent.label].
       Returns: Builder instance for fluent chaining
   */
   T useUnderline(bool propval)

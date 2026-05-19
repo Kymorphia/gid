@@ -1,6 +1,7 @@
 /// Module for [AboutDialog] class
 module gtk.about_dialog;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gid.gid;
 import gobject.dclosure;
@@ -39,7 +40,7 @@ import gtk.window;
     About dialogs often contain links and email addresses. [gtk.about_dialog.AboutDialog]
     displays these as clickable links. By default, it calls [gtk.file_launcher.FileLauncher.launch]
     when a user clicks one. The behaviour can be overridden with the
-    `signal@Gtk.AboutDialog::activate-link` signal.
+    [gtk.about_dialog.AboutDialog.activateLink] signal.
     
     To specify a person with an email address, use a string like
     `Edgar Allan Poe <edgar@poe.com>`. To specify a website with a title,
@@ -165,7 +166,7 @@ class AboutDialog : gtk.window.Window
         otherwise the text itself must contain the intended linebreaks.
         
         When setting this property to a non-`NULL` value, the
-        [gtk.about_dialog.AboutDialog.license] property is set to
+        [gtk.about_dialog.AboutDialog.licenseType] property is set to
         [gtk.types.License.Custom] as a side effect.
         
         The text may contain links in this format `<http://www.some.place/>`
@@ -188,7 +189,7 @@ class AboutDialog : gtk.window.Window
           otherwise the text itself must contain the intended linebreaks.
           
           When setting this property to a non-`NULL` value, the
-          [gtk.about_dialog.AboutDialog.license] property is set to
+          [gtk.about_dialog.AboutDialog.licenseType] property is set to
           [gtk.types.License.Custom] as a side effect.
           
           The text may contain links in this format `<http://www.some.place/>`
@@ -885,7 +886,7 @@ class AboutDialog : gtk.window.Window
       If `system_information` is `NULL`, the system information
       page is hidden.
       
-      See `propertyGtk.AboutDialog:system-information`.
+      See [gtk.about_dialog.AboutDialog.systemInformation].
   
       Params:
         systemInformation = system information
@@ -1065,7 +1066,7 @@ class AboutDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           otherwise the text itself must contain the intended linebreaks.
           
           When setting this property to a non-`NULL` value, the
-          [gtk.about_dialog.AboutDialog.license] property is set to
+          [gtk.about_dialog.AboutDialog.licenseType] property is set to
           [gtk.types.License.Custom] as a side effect.
           
           The text may contain links in this format `<http://www.some.place/>`

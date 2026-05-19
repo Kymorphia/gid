@@ -1,6 +1,7 @@
 /// Module for [Font] interface
 module pangocairo.font;
 
+public import gid.basictypes;
 public import pangocairo.font_iface_proxy;
 import cairo.scaled_font;
 import gid.gid;

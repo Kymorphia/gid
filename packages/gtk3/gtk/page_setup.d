@@ -1,6 +1,7 @@
 /// Module for [PageSetup] class
 module gtk.page_setup;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.key_file;

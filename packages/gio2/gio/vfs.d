@@ -1,6 +1,7 @@
 /// Module for [Vfs] class
 module gio.vfs;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

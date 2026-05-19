@@ -1,6 +1,7 @@
 /// Module for [SpringParams] class
 module adw.spring_params;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -8,7 +9,7 @@ import gid.gid;
 import gobject.boxed;
 
 /**
-    Physical parameters of a spring for `class@SpringAnimation`.
+    Physical parameters of a spring for [adw.spring_animation.SpringAnimation].
     
     Any spring can be described by three parameters: mass, stiffness and damping.
     

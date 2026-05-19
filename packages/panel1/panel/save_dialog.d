@@ -1,6 +1,7 @@
 /// Module for [SaveDialog] class
 module panel.save_dialog;
 
+public import gid.basictypes;
 import adw.message_dialog;
 import gid.gid;
 import gio.async_result;

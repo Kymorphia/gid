@@ -1,6 +1,7 @@
 /// Module for [CharsetConverter] class
 module gio.charset_converter;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

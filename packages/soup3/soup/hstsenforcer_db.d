@@ -1,6 +1,7 @@
 /// Module for [HSTSEnforcerDB] class
 module soup.hstsenforcer_db;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -14,7 +15,7 @@ import soup.types;
 /**
     Persistent HTTP Strict Transport Security enforcer.
     
-    #SoupHSTSEnforcerDB is a `class@HSTSEnforcer` that uses a SQLite
+    #SoupHSTSEnforcerDB is a [soup.hstsenforcer.HSTSEnforcer] that uses a SQLite
     database as a backend for persistency.
 */
 class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
@@ -71,7 +72,7 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
       policies. If the file doesn't exist, a new database will be created
       and initialized. Changes to the policies during the lifetime of a
       #SoupHSTSEnforcerDB will be written to filename when
-      `signalHSTSEnforcer::changed` is emitted.
+      [soup.hstsenforcer.HSTSEnforcer.changed] is emitted.
   
       Params:
         filename = the filename of the database to read/write from.

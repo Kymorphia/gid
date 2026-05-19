@@ -1,6 +1,7 @@
 /// Module for [Poll] class
 module gst.poll;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gst.c.functions;

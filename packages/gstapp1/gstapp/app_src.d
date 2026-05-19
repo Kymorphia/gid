@@ -1,6 +1,7 @@
 /// Module for [AppSrc] class
 module gstapp.app_src;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [Action] interface mixin
 module atk.action_mixin;
 
+public import gid.basictypes;
 public import atk.action_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

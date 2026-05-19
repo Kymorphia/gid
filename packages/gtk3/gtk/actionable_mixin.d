@@ -1,6 +1,7 @@
 /// Module for [Actionable] interface mixin
 module gtk.actionable_mixin;
 
+public import gid.basictypes;
 public import gtk.actionable_iface_proxy;
 public import gid.gid;
 public import glib.variant;

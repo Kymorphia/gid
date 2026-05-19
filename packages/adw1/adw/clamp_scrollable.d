@@ -1,6 +1,7 @@
 /// Module for [ClampScrollable] class
 module adw.clamp_scrollable;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -20,15 +21,15 @@ import gtk.scrollable_mixin;
 import gtk.widget;
 
 /**
-    A scrollable `class@Clamp`.
+    A scrollable [adw.clamp.Clamp].
     
-    [adw.clamp_scrollable.ClampScrollable] is a variant of `class@Clamp` that implements the
+    [adw.clamp_scrollable.ClampScrollable] is a variant of [adw.clamp.Clamp] that implements the
     [gtk.scrollable.Scrollable] interface.
     
     The primary use case for [adw.clamp_scrollable.ClampScrollable] is clamping
     [gtk.list_view.ListView].
     
-    See also: `class@ClampLayout`.
+    See also: [adw.clamp_layout.ClampLayout].
 */
 class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Scrollable
 {

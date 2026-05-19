@@ -1,6 +1,7 @@
 /// Module for [DiscovererAudioInfo] class
 module gstpbutils.discoverer_audio_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstpbutils.c.functions;

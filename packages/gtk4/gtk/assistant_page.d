@@ -1,6 +1,7 @@
 /// Module for [AssistantPage] class
 module gtk.assistant_page;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

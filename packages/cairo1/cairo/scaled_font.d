@@ -1,6 +1,7 @@
 /// Module for [ScaledFont] class
 module cairo.scaled_font;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.font_face;

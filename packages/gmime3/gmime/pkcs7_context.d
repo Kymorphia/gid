@@ -1,6 +1,7 @@
 /// Module for [Pkcs7Context] class
 module gmime.pkcs7_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

@@ -1,6 +1,7 @@
 /// Module for [BinaryDictionaryArrayBuilder] class
 module arrow.binary_dictionary_array_builder;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.array_builder;
 import arrow.binary_array;

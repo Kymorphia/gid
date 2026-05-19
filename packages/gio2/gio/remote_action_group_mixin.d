@@ -1,6 +1,7 @@
 /// Module for [RemoteActionGroup] interface mixin
 module gio.remote_action_group_mixin;
 
+public import gid.basictypes;
 public import gio.remote_action_group_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

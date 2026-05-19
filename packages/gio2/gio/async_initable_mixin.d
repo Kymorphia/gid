@@ -1,6 +1,7 @@
 /// Module for [AsyncInitable] interface mixin
 module gio.async_initable_mixin;
 
+public import gid.basictypes;
 public import gio.async_initable_iface_proxy;
 public import gid.gid;
 public import gio.async_result;

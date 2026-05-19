@@ -1,6 +1,7 @@
 /// Module for [Native] interface mixin
 module gtk.native_mixin;
 
+public import gid.basictypes;
 public import gtk.native_iface_proxy;
 public import gdk.surface;
 public import gid.gid;

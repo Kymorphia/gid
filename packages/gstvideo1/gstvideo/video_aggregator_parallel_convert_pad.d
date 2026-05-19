@@ -1,6 +1,7 @@
 /// Module for [VideoAggregatorParallelConvertPad] class
 module gstvideo.video_aggregator_parallel_convert_pad;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstvideo.c.functions;

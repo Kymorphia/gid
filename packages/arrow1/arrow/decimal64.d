@@ -1,6 +1,7 @@
 /// Module for [Decimal64] class
 module arrow.decimal64;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

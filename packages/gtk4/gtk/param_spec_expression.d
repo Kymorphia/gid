@@ -1,6 +1,7 @@
 /// Module for [ParamSpecExpression] class
 module gtk.param_spec_expression;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.param_spec;
 import gtk.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [MetadataWriter] class
 module arrowflight.metadata_writer;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrowflight.c.functions;
 import arrowflight.c.types;

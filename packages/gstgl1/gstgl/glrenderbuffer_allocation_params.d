@@ -1,6 +1,7 @@
 /// Module for [GLRenderbufferAllocationParams] class
 module gstgl.glrenderbuffer_allocation_params;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

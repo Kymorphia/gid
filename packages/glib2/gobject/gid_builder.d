@@ -1,6 +1,7 @@
 /// Module for [GidBuilder] class
 module gobject.gid_builder;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

@@ -1,6 +1,7 @@
 /// Module for [WindowAccessible] class
 module gtk.window_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.window;

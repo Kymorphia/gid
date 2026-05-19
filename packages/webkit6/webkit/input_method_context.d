@@ -1,6 +1,7 @@
 /// Module for [InputMethodContext] class
 module webkit.input_method_context;
 
+public import gid.basictypes;
 import gdk.event;
 import gid.gid;
 import gobject.dclosure;

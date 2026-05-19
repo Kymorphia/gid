@@ -1,6 +1,7 @@
 /// Module for [MediaFile] class
 module gtk.media_file;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gid.gid;

@@ -1,6 +1,7 @@
 /// Module for [SizeGroup] class
 module gtk.size_group;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -54,7 +55,7 @@ import gtk.widget;
     width for height widgets.
     
     Widgets that trade height-for-width should set a reasonably large minimum
-    width by way of `property@Gtk.Label:width-chars` for instance. Widgets with
+    width by way of [gtk.label.Label.widthChars] for instance. Widgets with
     static sizes as well as widgets that grow (such as ellipsizing text) need no
     such considerations.
     

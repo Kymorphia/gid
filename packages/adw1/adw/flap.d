@@ -1,6 +1,7 @@
 /// Module for [Flap] class
 module adw.flap;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.spring_params;
@@ -35,34 +36,34 @@ import gtk.widget;
     
     The [adw.flap.Flap] widget can display its children like a [gtk.box.Box] does or
     like a [gtk.overlay.Overlay] does, according to the
-    `property@Flap:fold-policy` value.
+    [adw.flap.Flap.foldPolicy] value.
     
-    [adw.flap.Flap] has at most three children: `property@Flap:content`,
-    `property@Flap:flap` and `property@Flap:separator`. Content is the primary
+    [adw.flap.Flap] has at most three children: [adw.flap.Flap.content],
+    [adw.flap.Flap.flap] and [adw.flap.Flap.separator]. Content is the primary
     child, flap is displayed next to it when unfolded, or overlays it when
     folded. Flap can be shown or hidden by changing the
-    `property@Flap:reveal-flap` value, as well as via swipe gestures if
-    `property@Flap:swipe-to-open` and/or `property@Flap:swipe-to-close` are set
+    [adw.flap.Flap.revealFlap] value, as well as via swipe gestures if
+    [adw.flap.Flap.swipeToOpen] and/or [adw.flap.Flap.swipeToClose] are set
     to `TRUE`.
     
     Optionally, a separator can be provided, which would be displayed between
     the content and the flap when there's no shadow to separate them, depending
     on the transition type.
     
-    `property@Flap:flap` is transparent by default; add the
+    [adw.flap.Flap.flap] is transparent by default; add the
     [`.background`](style-classes.html#background) style class to it if this is
     unwanted.
     
-    If `property@Flap:modal` is set to `TRUE`, content becomes completely
+    If [adw.flap.Flap.modal] is set to `TRUE`, content becomes completely
     inaccessible when the flap is revealed while folded.
     
     The position of the flap and separator children relative to the content is
-    determined by orientation, as well as the `property@Flap:flap-position`
+    determined by orientation, as well as the [adw.flap.Flap.flapPosition]
     value.
     
     Folding the flap will automatically hide the flap widget, and unfolding it
     will automatically reveal it. If this behavior is not desired, the
-    `property@Flap:locked` property can be used to override it.
+    [adw.flap.Flap.locked] property can be used to override it.
     
     Common use cases include sidebars, header bars that need to be able to
     overlap the window content (for example, in fullscreen mode) and bottom
@@ -150,7 +151,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Get `flap` property.
       Returns: The flap widget.
         
-        It's only visible when `property@Flap:reveal-progress` is greater than 0.
+        It's only visible when [adw.flap.Flap.revealProgress] is greater than 0.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
@@ -164,7 +165,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Params:
         propval = The flap widget.
           
-          It's only visible when `property@Flap:reveal-progress` is greater than 0.
+          It's only visible when [adw.flap.Flap.revealProgress] is greater than 0.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
@@ -289,7 +290,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Get `folded` property.
       Returns: Whether the flap is currently folded.
         
-        See `property@Flap:fold-policy`.
+        See [adw.flap.Flap.foldPolicy].
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
@@ -304,7 +305,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
         
         If `FALSE`, folding when the flap is revealed automatically closes it, and
         unfolding it when the flap is not revealed opens it. If `TRUE`,
-        `property@Flap:reveal-flap` value never changes on its own.
+        [adw.flap.Flap.revealFlap] value never changes on its own.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
@@ -320,7 +321,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
           
           If `FALSE`, folding when the flap is revealed automatically closes it, and
           unfolding it when the flap is not revealed opens it. If `TRUE`,
-          `property@Flap:reveal-flap` value never changes on its own.
+          [adw.flap.Flap.revealFlap] value never changes on its own.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
@@ -424,7 +425,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
         
         0 means fully hidden, 1 means fully revealed.
         
-        See `property@Flap:reveal-flap`.
+        See [adw.flap.Flap.revealFlap].
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
   */
@@ -438,7 +439,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Returns: The separator widget.
         
         It's displayed between content and flap when there's no shadow to display.
-        When exactly it's visible depends on the `property@Flap:transition-type`
+        When exactly it's visible depends on the [adw.flap.Flap.transitionType]
         value.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -454,7 +455,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
         propval = The separator widget.
           
           It's displayed between content and flap when there's no shadow to display.
-          When exactly it's visible depends on the `property@Flap:transition-type`
+          When exactly it's visible depends on the [adw.flap.Flap.transitionType]
           value.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -468,7 +469,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Get `swipeToClose` property.
       Returns: Whether the flap can be closed with a swipe gesture.
         
-        The area that can be swiped depends on the `property@Flap:transition-type`
+        The area that can be swiped depends on the [adw.flap.Flap.transitionType]
         value.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -483,7 +484,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Params:
         propval = Whether the flap can be closed with a swipe gesture.
           
-          The area that can be swiped depends on the `property@Flap:transition-type`
+          The area that can be swiped depends on the [adw.flap.Flap.transitionType]
           value.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -497,7 +498,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Get `swipeToOpen` property.
       Returns: Whether the flap can be opened with a swipe gesture.
         
-        The area that can be swiped depends on the `property@Flap:transition-type`
+        The area that can be swiped depends on the [adw.flap.Flap.transitionType]
         value.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -512,7 +513,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Params:
         propval = Whether the flap can be opened with a swipe gesture.
           
-          The area that can be swiped depends on the `property@Flap:transition-type`
+          The area that can be swiped depends on the [adw.flap.Flap.transitionType]
           value.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -526,7 +527,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Get `transitionType` property.
       Returns: the type of animation used for reveal and fold transitions.
         
-        `property@Flap:flap` is transparent by default, which means the content
+        [adw.flap.Flap.flap] is transparent by default, which means the content
         will be seen through it with [adw.types.FlapTransitionType.Over] transitions;
         add the [`.background`](style-classes.html#background) style class to it if
         this is unwanted.
@@ -543,7 +544,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Params:
         propval = the type of animation used for reveal and fold transitions.
           
-          `property@Flap:flap` is transparent by default, which means the content
+          [adw.flap.Flap.flap] is transparent by default, which means the content
           will be seen through it with [adw.types.FlapTransitionType.Over] transitions;
           add the [`.background`](style-classes.html#background) style class to it if
           this is unwanted.
@@ -657,7 +658,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   /**
       Gets whether self is currently folded.
       
-      See `propertyFlap:fold-policy`.
+      See [adw.flap.Flap.foldPolicy].
       Returns: `TRUE` if self is currently folded
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -727,7 +728,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       
       0 means fully hidden, 1 means fully revealed.
       
-      See `propertyFlap:reveal-flap`.
+      See [adw.flap.Flap.revealFlap].
       Returns: the current reveal progress for self
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -811,7 +812,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   /**
       Sets the flap widget for self.
       
-      It's only visible when `propertyFlap:reveal-progress` is greater than 0.
+      It's only visible when [adw.flap.Flap.revealProgress] is greater than 0.
   
       Params:
         flap = the flap widget
@@ -890,7 +891,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       
       If `FALSE`, folding when the flap is revealed automatically closes it, and
       unfolding it when the flap is not revealed opens it. If `TRUE`,
-      `propertyFlap:reveal-flap` value never changes on its own.
+      [adw.flap.Flap.revealFlap] value never changes on its own.
   
       Params:
         locked = the new value
@@ -955,7 +956,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
       Sets the separator widget for self.
       
       It's displayed between content and flap when there's no shadow to display.
-      When exactly it's visible depends on the `propertyFlap:transition-type`
+      When exactly it's visible depends on the [adw.flap.Flap.transitionType]
       value.
   
       Params:
@@ -971,7 +972,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   /**
       Sets whether self can be closed with a swipe gesture.
       
-      The area that can be swiped depends on the `propertyFlap:transition-type`
+      The area that can be swiped depends on the [adw.flap.Flap.transitionType]
       value.
   
       Params:
@@ -987,7 +988,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   /**
       Sets whether self can be opened with a swipe gesture.
       
-      The area that can be swiped depends on the `propertyFlap:transition-type`
+      The area that can be swiped depends on the [adw.flap.Flap.transitionType]
       value.
   
       Params:
@@ -1003,7 +1004,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   /**
       Sets the type of animation used for reveal and fold transitions in self.
       
-      `propertyFlap:flap` is transparent by default, which means the content will
+      [adw.flap.Flap.flap] is transparent by default, which means the content will
       be seen through it with [adw.types.FlapTransitionType.Over] transitions; add the
       [`.background`](style-classes.html#background) style class to it if this is
       unwanted.
@@ -1046,7 +1047,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
       Params:
         propval = The flap widget.
           
-          It's only visible when `property@Flap:reveal-progress` is greater than 0.
+          It's only visible when [adw.flap.Flap.revealProgress] is greater than 0.
       Returns: Builder instance for fluent chaining
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -1125,7 +1126,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
           
           If `FALSE`, folding when the flap is revealed automatically closes it, and
           unfolding it when the flap is not revealed opens it. If `TRUE`,
-          `property@Flap:reveal-flap` value never changes on its own.
+          [adw.flap.Flap.revealFlap] value never changes on its own.
       Returns: Builder instance for fluent chaining
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
@@ -1190,7 +1191,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
         propval = The separator widget.
           
           It's displayed between content and flap when there's no shadow to display.
-          When exactly it's visible depends on the `property@Flap:transition-type`
+          When exactly it's visible depends on the [adw.flap.Flap.transitionType]
           value.
       Returns: Builder instance for fluent chaining
   
@@ -1206,7 +1207,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
       Params:
         propval = Whether the flap can be closed with a swipe gesture.
           
-          The area that can be swiped depends on the `property@Flap:transition-type`
+          The area that can be swiped depends on the [adw.flap.Flap.transitionType]
           value.
       Returns: Builder instance for fluent chaining
   
@@ -1222,7 +1223,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
       Params:
         propval = Whether the flap can be opened with a swipe gesture.
           
-          The area that can be swiped depends on the `property@Flap:transition-type`
+          The area that can be swiped depends on the [adw.flap.Flap.transitionType]
           value.
       Returns: Builder instance for fluent chaining
   
@@ -1238,7 +1239,7 @@ class FlapGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeable.S
       Params:
         propval = the type of animation used for reveal and fold transitions.
           
-          `property@Flap:flap` is transparent by default, which means the content
+          [adw.flap.Flap.flap] is transparent by default, which means the content
           will be seen through it with [adw.types.FlapTransitionType.Over] transitions;
           add the [`.background`](style-classes.html#background) style class to it if
           this is unwanted.

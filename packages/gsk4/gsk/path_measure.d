@@ -1,6 +1,7 @@
 /// Module for [PathMeasure] class
 module gsk.path_measure;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gsk.c.functions;

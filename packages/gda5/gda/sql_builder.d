@@ -1,6 +1,7 @@
 /// Module for [SqlBuilder] class
 module gda.sql_builder;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_handler;

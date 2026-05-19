@@ -1,6 +1,7 @@
 /// Module for [LabelAccessible] class
 module gtk.label_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.hypertext;

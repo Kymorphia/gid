@@ -405,7 +405,7 @@ struct SecretCollectionPrivate;
     
     #SecretItem represents a secret item stored in the Secret Service.
     
-    Each item has a value, represented by a `struct@Value`, which can be
+    Each item has a value, represented by a [secret.value.Value], which can be
     retrieved by [secret.item.Item.getSecret] or set by [secret.item.Item.setSecret].
     The item is only available when the item is not locked.
     
@@ -462,7 +462,7 @@ struct SecretItemPrivate;
     
     In order to customize prompt handling, override the
     `vfunc@Service.prompt_async` and `vfunc@Service.prompt_finish` virtual
-    methods of the `class@Service` class.
+    methods of the [secret.service.Service] class.
 */
 struct SecretPrompt
 {
@@ -496,7 +496,7 @@ struct SecretPromptPrivate;
     #SecretRetrievable provides a read-only view of a secret item
     stored in the Secret Service.
     
-    Each item has a value, represented by a `struct@Value`, which can be
+    Each item has a value, represented by a [secret.value.Value], which can be
     retrieved by [secret.retrievable.Retrievable.retrieveSecret] and
     [secret.retrievable.Retrievable.retrieveSecretFinish].
 */
@@ -546,7 +546,7 @@ struct SecretRetrievableInterface
     items that are not stored by the libsecret library. Other libraries such as
     libgnome-keyring don't store the schema name.
     
-    Additional schemas can be defined via the `struct@Schema` structure like this:
+    Additional schemas can be defined via the [secret.schema.Schema] structure like this:
     
     ```c
     // in a header:
@@ -653,7 +653,7 @@ struct SecretSchemaAttribute
     To search for items, use the [secret.service.Service.search] method.
     
     Multiple collections can exist in the Secret Service, each of which contains
-    secret items. In order to instantiate `class@Collection` objects which
+    secret items. In order to instantiate [secret.collection.Collection] objects which
     represent those collections while initializing a #SecretService then pass
     the [secret.types.ServiceFlags.LoadCollections] flag to the [secret.service.Service.get] or
     [secret.service.Service.open] functions. In order to establish a session on an already
@@ -662,7 +662,7 @@ struct SecretSchemaAttribute
     
     Certain actions on the Secret Service require user prompting to complete,
     such as creating a collection, or unlocking a collection. When such a prompt
-    is necessary, then a `class@Prompt` object is created by this library, and
+    is necessary, then a [secret.prompt.Prompt] object is created by this library, and
     passed to the [secret.service.Service.prompt] method. In this way it is handled
     automatically.
     
@@ -690,13 +690,13 @@ struct SecretServiceClass
   GDBusProxyClass parentClass;
 
   /**
-      the `alias@GLib.Type` of the `class@Collection` objects instantiated
+      the `alias@GLib.Type` of the [secret.collection.Collection] objects instantiated
         by the #SecretService proxy
   */
   GType collectionGtype;
 
   /**
-      the `alias@GLib.Type` of the `class@Item` objects instantiated by the
+      the `alias@GLib.Type` of the [secret.item.Item] objects instantiated by the
         #SecretService proxy
   */
   GType itemGtype;

@@ -1,6 +1,7 @@
 /// Module for [SpinButtonAccessible] class
 module gtk.spin_button_accessible;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.component;

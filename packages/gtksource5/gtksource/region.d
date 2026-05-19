@@ -1,6 +1,7 @@
 /// Module for [Region] class
 module gtksource.region;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -25,11 +26,11 @@ import gtksource.types;
     The typical use-case of [gtksource.region.Region] is to scan a [gtk.text_buffer.TextBuffer] chunk by
     chunk, not the whole buffer at once to not block the user interface. The
     [gtksource.region.Region] represents in that case the remaining region to scan. You
-    can listen to the `signal@Gtk.TextBuffer::insert-text` and
-    `signal@Gtk.TextBuffer::delete-range` signals to update the [gtksource.region.Region]
+    can listen to the [gtk.text_buffer.TextBuffer.insertText] and
+    [gtk.text_buffer.TextBuffer.deleteRange] signals to update the [gtksource.region.Region]
     accordingly.
     
-    To iterate through the subregions, you need to use a `struct@RegionIter`,
+    To iterate through the subregions, you need to use a [gtksource.region_iter.RegionIter],
     for example:
     ```c
     GtkSourceRegion *region;
@@ -167,7 +168,7 @@ class Region : gobject.object.ObjectWrap
   }
 
   /**
-      Initializes a `structRegionIter` to the first subregion of region.
+      Initializes a [gtksource.region_iter.RegionIter] to the first subregion of region.
       
       If region is empty, iter will be initialized to the end iterator.
   

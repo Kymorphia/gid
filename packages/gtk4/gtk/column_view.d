@@ -1,6 +1,7 @@
 /// Module for [ColumnView] class
 module gtk.column_view;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gobject.dclosure;
@@ -32,14 +33,14 @@ import gtk.widget;
     each column, for each visible item and displays them together as the row for
     this item.
     
-    The `property@Gtk.ColumnView:show-row-separators` and
-    `property@Gtk.ColumnView:show-column-separators` properties offer a simple way
+    The [gtk.column_view.ColumnView.showRowSeparators] and
+    [gtk.column_view.ColumnView.showColumnSeparators] properties offer a simple way
     to display separators between the rows or columns.
     
     [gtk.column_view.ColumnView] allows the user to select items according to the selection
     characteristics of the model. For models that allow multiple selected items,
     it is possible to turn on *rubberband selection*, using
-    `property@Gtk.ColumnView:enable-rubberband`.
+    [gtk.column_view.ColumnView.enableRubberband].
     
     The column view supports sorting that can be customized by the user by
     clicking on column headers. To set this up, the [gtk.sorter.Sorter] returned by
@@ -72,11 +73,11 @@ import gtk.widget;
     ```
     
     [gtk.column_view.ColumnView] uses a single CSS node named columnview. It may carry the
-    .column-separators style class, when `property@Gtk.ColumnView:show-column-separators`
+    .column-separators style class, when [gtk.column_view.ColumnView.showColumnSeparators]
     property is set. Header widgets appear below a node with name header.
     The rows are contained in a [gtk.list_view.ListView] widget, so there is a listview
     node with the same structure as for a standalone [gtk.list_view.ListView] widget.
-    If `property@Gtk.ColumnView:show-row-separators` is set, it will be passed
+    If [gtk.column_view.ColumnView.showRowSeparators] is set, it will be passed
     on to the list view, causing its CSS node to carry the .separators style class.
     For rubberband selection, a node with name rubberband is used.
     

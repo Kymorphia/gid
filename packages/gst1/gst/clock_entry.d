@@ -1,6 +1,7 @@
 /// Module for [ClockEntry] class
 module gst.clock_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

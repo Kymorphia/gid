@@ -1,6 +1,7 @@
 /// Module for [TlsFileDatabase] interface
 module gio.tls_file_database;
 
+public import gid.basictypes;
 public import gio.tls_file_database_iface_proxy;
 import gid.gid;
 import gio.c.functions;

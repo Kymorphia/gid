@@ -1,6 +1,7 @@
 /// Module for [EventWindowState] class
 module gdk.event_window_state;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

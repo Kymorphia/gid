@@ -1,6 +1,7 @@
 /// Module for [StringViewDataType] class
 module arrow.string_view_data_type;
 
+public import gid.basictypes;
 import arrow.binary_view_data_type;
 import arrow.c.functions;
 import arrow.c.types;

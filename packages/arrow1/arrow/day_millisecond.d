@@ -1,6 +1,7 @@
 /// Module for [DayMillisecond] class
 module arrow.day_millisecond;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

@@ -1,6 +1,7 @@
 /// Module for [DocumentWorkspace] class
 module panel.document_workspace;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;

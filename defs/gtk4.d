@@ -1,7 +1,7 @@
 //!gir Gtk-4.0
 //!info description "D binding for the Gtk4 library - Gtk4 graphics toolkit library"
 //!info homepage https://gtk.org
-//!info docs https://www.kymorphia.com/gid/gtk.html
+//!info docs https://www.kymorphia.com/gid/gid~gtk4/
 //!info capi https://docs.gtk.org/gtk4/
 
 //!kind BitsetIter Boxed

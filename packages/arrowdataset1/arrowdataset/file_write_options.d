@@ -1,6 +1,7 @@
 /// Module for [FileWriteOptions] class
 module arrowdataset.file_write_options;
 
+public import gid.basictypes;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;
 import arrowdataset.types;

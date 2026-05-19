@@ -1,6 +1,7 @@
 /// Module for [FeatureList] class
 module webkit.feature_list;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;
@@ -11,7 +12,7 @@ import webkit.types;
 /**
     Contains a set of toggle-able web engine features.
     
-    The list supports passing around a set of `struct@Feature` objects and
+    The list supports passing around a set of [webkit.feature.Feature] objects and
     iterating over them:
     
     ```c

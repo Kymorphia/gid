@@ -1,6 +1,7 @@
 /// Module for [Mount] interface
 module gio.mount;
 
+public import gid.basictypes;
 public import gio.mount_iface_proxy;
 import gid.gid;
 import gio.async_result;

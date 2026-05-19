@@ -1,6 +1,7 @@
 /// Module for [UIManager] class
 module gtk.uimanager;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;

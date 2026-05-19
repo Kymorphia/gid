@@ -1,6 +1,7 @@
 /// Module for [Surface] class
 module cairo.surface;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.device;

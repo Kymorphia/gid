@@ -1,6 +1,7 @@
 /// Module for [OverlayLayout] class
 module gtk.overlay_layout;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.c.functions;

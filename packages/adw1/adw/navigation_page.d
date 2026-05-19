@@ -1,6 +1,7 @@
 /// Module for [NavigationPage] class
 module adw.navigation_page;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -17,22 +18,22 @@ import gtk.constraint_target_mixin;
 import gtk.widget;
 
 /**
-    A page within `class@NavigationView` or `class@NavigationSplitView`.
+    A page within [adw.navigation_view.NavigationView] or [adw.navigation_split_view.NavigationSplitView].
     
     Each page has a child widget, a title and optionally a tag.
     
-    The `signal@NavigationPage::showing`, `signal@NavigationPage::shown`,
-    `signal@NavigationPage::hiding` and `signal@NavigationPage::hidden` signals
+    The [adw.navigation_page.NavigationPage.showing], [adw.navigation_page.NavigationPage.shown],
+    [adw.navigation_page.NavigationPage.hiding] and [adw.navigation_page.NavigationPage.hidden] signals
     can be used to track the page's visibility within its [adw.navigation_view.NavigationView].
     
     ## Header Bar Integration
     
-    When placed inside [adw.navigation_page.NavigationPage], `class@HeaderBar` will display the
+    When placed inside [adw.navigation_page.NavigationPage], [adw.header_bar.HeaderBar] will display the
     page title instead of window title.
     
-    When used together with `class@NavigationView`, it will also display a back
+    When used together with [adw.navigation_view.NavigationView], it will also display a back
     button that can be used to go back to the previous page. Set
-    `property@HeaderBar:show-back-button` to `FALSE` to disable that behavior if
+    [adw.header_bar.HeaderBar.showBackButton] to `FALSE` to disable that behavior if
     it's unwanted.
     
     ## CSS Nodes
@@ -86,12 +87,12 @@ class NavigationPage : gtk.widget.Widget
       Returns: Whether the page can be popped from navigation stack.
         
         Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
-        back button from `class@HeaderBar`.
+        back button from [adw.header_bar.HeaderBar].
         
         Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
         action will still work.
         
-        See `property@HeaderBar:show-back-button` for removing only the back
+        See [adw.header_bar.HeaderBar.showBackButton] for removing only the back
         button, but not shortcuts.
   */
   @property bool canPop()
@@ -105,12 +106,12 @@ class NavigationPage : gtk.widget.Widget
         propval = Whether the page can be popped from navigation stack.
           
           Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
-          back button from `class@HeaderBar`.
+          back button from [adw.header_bar.HeaderBar].
           
           Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
           action will still work.
           
-          See `property@HeaderBar:show-back-button` for removing only the back
+          See [adw.header_bar.HeaderBar.showBackButton] for removing only the back
           button, but not shortcuts.
   */
   @property void canPop(bool propval)
@@ -146,7 +147,7 @@ class NavigationPage : gtk.widget.Widget
         [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
         [adw.navigation_view.NavigationView.replaceWithTags].
         
-        Tags must be unique within each `class@NavigationView`.
+        Tags must be unique within each [adw.navigation_view.NavigationView].
         
         The tag also must be set to use the `navigation.push` action.
   */
@@ -165,7 +166,7 @@ class NavigationPage : gtk.widget.Widget
           [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
           [adw.navigation_view.NavigationView.replaceWithTags].
           
-          Tags must be unique within each `class@NavigationView`.
+          Tags must be unique within each [adw.navigation_view.NavigationView].
           
           The tag also must be set to use the `navigation.push` action.
   */
@@ -178,7 +179,7 @@ class NavigationPage : gtk.widget.Widget
       Get `title` property.
       Returns: The page title.
         
-        It's displayed in `class@HeaderBar` instead of the window title, and used
+        It's displayed in [adw.header_bar.HeaderBar] instead of the window title, and used
         as the tooltip on the next page's back button, as well as by screen reader.
   */
   @property string title()
@@ -191,7 +192,7 @@ class NavigationPage : gtk.widget.Widget
       Params:
         propval = The page title.
           
-          It's displayed in `class@HeaderBar` instead of the window title, and used
+          It's displayed in [adw.header_bar.HeaderBar] instead of the window title, and used
           as the tooltip on the next page's back button, as well as by screen reader.
   */
   @property void title(string propval)
@@ -285,12 +286,12 @@ class NavigationPage : gtk.widget.Widget
       Sets whether self can be popped from navigation stack.
       
       Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
-      back button from `classHeaderBar`.
+      back button from [adw.header_bar.HeaderBar].
       
       Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
       action will still work.
       
-      See `propertyHeaderBar:show-back-button` for removing only the back button,
+      See [adw.header_bar.HeaderBar.showBackButton] for removing only the back button,
       but not shortcuts.
   
       Params:
@@ -320,7 +321,7 @@ class NavigationPage : gtk.widget.Widget
       [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
       [adw.navigation_view.NavigationView.replaceWithTags].
       
-      Tags must be unique within each `classNavigationView`.
+      Tags must be unique within each [adw.navigation_view.NavigationView].
       
       The tag also must be set to use the `navigation.push` action.
   
@@ -336,7 +337,7 @@ class NavigationPage : gtk.widget.Widget
   /**
       Sets the title of self.
       
-      It's displayed in `classHeaderBar` instead of the window title, and used as
+      It's displayed in [adw.header_bar.HeaderBar] instead of the window title, and used as
       the tooltip on the next page's back button, as well as by screen reader.
   
       Params:
@@ -354,8 +355,8 @@ class NavigationPage : gtk.widget.Widget
       Emitted when the navigation view transition has been completed and the page
         is fully hidden.
         
-        It will always be preceded by `signalNavigationPage::hiding` or
-        `signalNavigationPage::showing`.
+        It will always be preceded by [adw.navigation_page.NavigationPage.hiding] or
+        [adw.navigation_page.NavigationPage.showing].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -395,8 +396,8 @@ class NavigationPage : gtk.widget.Widget
       Emitted when the page starts hiding at the beginning of the navigation view
         transition.
         
-        It will always be followed by `signalNavigationPage::hidden` or
-        `signalNavigationPage::shown`.
+        It will always be followed by [adw.navigation_page.NavigationPage.hidden] or
+        [adw.navigation_page.NavigationPage.shown].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -436,8 +437,8 @@ class NavigationPage : gtk.widget.Widget
       Emitted when the page shows at the beginning of the navigation view
         transition.
         
-        It will always be followed by `signalNavigationPage::shown` or
-        `signalNavigationPage::hidden`.
+        It will always be followed by [adw.navigation_page.NavigationPage.shown] or
+        [adw.navigation_page.NavigationPage.hidden].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -477,8 +478,8 @@ class NavigationPage : gtk.widget.Widget
       Emitted when the navigation view transition has been completed and the page
         is fully shown.
         
-        It will always be preceded by `signalNavigationPage::showing` or
-        `signalNavigationPage::hiding`.
+        It will always be preceded by [adw.navigation_page.NavigationPage.showing] or
+        [adw.navigation_page.NavigationPage.hiding].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -524,12 +525,12 @@ class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether the page can be popped from navigation stack.
           
           Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
-          back button from `class@HeaderBar`.
+          back button from [adw.header_bar.HeaderBar].
           
           Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
           action will still work.
           
-          See `property@HeaderBar:show-back-button` for removing only the back
+          See [adw.header_bar.HeaderBar.showBackButton] for removing only the back
           button, but not shortcuts.
       Returns: Builder instance for fluent chaining
   */
@@ -559,7 +560,7 @@ class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
           [adw.navigation_view.NavigationView.replaceWithTags].
           
-          Tags must be unique within each `class@NavigationView`.
+          Tags must be unique within each [adw.navigation_view.NavigationView].
           
           The tag also must be set to use the `navigation.push` action.
       Returns: Builder instance for fluent chaining
@@ -574,7 +575,7 @@ class NavigationPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The page title.
           
-          It's displayed in `class@HeaderBar` instead of the window title, and used
+          It's displayed in [adw.header_bar.HeaderBar] instead of the window title, and used
           as the tooltip on the next page's back button, as well as by screen reader.
       Returns: Builder instance for fluent chaining
   */

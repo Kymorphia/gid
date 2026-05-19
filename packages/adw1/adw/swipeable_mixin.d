@@ -1,6 +1,7 @@
 /// Module for [Swipeable] interface mixin
 module adw.swipeable_mixin;
 
+public import gid.basictypes;
 public import adw.swipeable_iface_proxy;
 public import adw.c.functions;
 public import adw.c.types;
@@ -14,7 +15,7 @@ public import gobject.gid_builder;
     
     The [adw.swipeable.Swipeable] interface is implemented by all swipeable widgets.
     
-    See `class@SwipeTracker` for details about implementing it.
+    See [adw.swipe_tracker.SwipeTracker] for details about implementing it.
 */
 template SwipeableT()
 {

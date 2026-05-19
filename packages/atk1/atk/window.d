@@ -1,6 +1,7 @@
 /// Module for [Window] interface
 module atk.window;
 
+public import gid.basictypes;
 public import atk.window_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

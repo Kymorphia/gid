@@ -1,6 +1,7 @@
 /// Module for [PathData] class
 module cairo.path_data;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;

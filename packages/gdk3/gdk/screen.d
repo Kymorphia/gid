@@ -1,6 +1,7 @@
 /// Module for [Screen] class
 module gdk.screen;
 
+public import gid.basictypes;
 import cairo.font_options;
 import gdk.c.functions;
 import gdk.c.types;

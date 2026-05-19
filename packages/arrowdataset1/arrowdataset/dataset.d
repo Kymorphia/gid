@@ -1,6 +1,7 @@
 /// Module for [Dataset] class
 module arrowdataset.dataset;
 
+public import gid.basictypes;
 import arrow.record_batch_reader;
 import arrow.table;
 import arrowdataset.c.functions;

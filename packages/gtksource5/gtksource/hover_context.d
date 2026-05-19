@@ -1,6 +1,7 @@
 /// Module for [HoverContext] class
 module gtksource.hover_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -12,12 +13,12 @@ import gtksource.types;
 import gtksource.view;
 
 /**
-    Context for populating `class@HoverDisplay` contents.
+    Context for populating [gtksource.hover_display.HoverDisplay] contents.
     
     [gtksource.hover_context.HoverContext] contains information about the request to populate
-    contents for a `class@HoverDisplay`.
+    contents for a [gtksource.hover_display.HoverDisplay].
     
-    It can be used to retrieve the `class@View`, `class@Buffer`, and
+    It can be used to retrieve the [gtksource.view.View], [gtksource.buffer.Buffer], and
     [gtk.text_iter.TextIter] for the regions of text which are being displayed.
     
     Use [gtksource.hover_context.HoverContext.getBounds] to get the word that was

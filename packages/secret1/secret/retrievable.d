@@ -1,6 +1,7 @@
 /// Module for [Retrievable] interface
 module secret.retrievable;
 
+public import gid.basictypes;
 public import secret.retrievable_iface_proxy;
 import gid.gid;
 import gio.async_result;
@@ -20,7 +21,7 @@ import secret.value;
     #SecretRetrievable provides a read-only view of a secret item
     stored in the Secret Service.
     
-    Each item has a value, represented by a `struct@Value`, which can be
+    Each item has a value, represented by a [secret.value.Value], which can be
     retrieved by [secret.retrievable.Retrievable.retrieveSecret] and
     [secret.retrievable.Retrievable.retrieveSecretFinish].
 */

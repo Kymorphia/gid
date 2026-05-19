@@ -1,6 +1,7 @@
 /// Module for [ProtectionMeta] class
 module gst.protection_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

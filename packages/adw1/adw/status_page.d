@@ -1,6 +1,7 @@
 /// Module for [StatusPage] class
 module adw.status_page;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -114,7 +115,7 @@ class StatusPage : gtk.widget.Widget
       Get `iconName` property.
       Returns: The name of the icon to be used.
         
-        Changing this will set `property@StatusPage:paintable` to `NULL`.
+        Changing this will set [adw.status_page.StatusPage.paintable] to `NULL`.
   */
   @property string iconName()
   {
@@ -126,7 +127,7 @@ class StatusPage : gtk.widget.Widget
       Params:
         propval = The name of the icon to be used.
           
-          Changing this will set `property@StatusPage:paintable` to `NULL`.
+          Changing this will set [adw.status_page.StatusPage.paintable] to `NULL`.
   */
   @property void iconName(string propval)
   {
@@ -137,7 +138,7 @@ class StatusPage : gtk.widget.Widget
       Get `paintable` property.
       Returns: The paintable to be used.
         
-        Changing this will set `property@StatusPage:icon-name` to `NULL`.
+        Changing this will set [adw.status_page.StatusPage.iconName] to `NULL`.
   */
   @property gdk.paintable.Paintable paintable()
   {
@@ -149,7 +150,7 @@ class StatusPage : gtk.widget.Widget
       Params:
         propval = The paintable to be used.
           
-          Changing this will set `property@StatusPage:icon-name` to `NULL`.
+          Changing this will set [adw.status_page.StatusPage.iconName] to `NULL`.
   */
   @property void paintable(gdk.paintable.Paintable propval)
   {
@@ -278,7 +279,7 @@ class StatusPage : gtk.widget.Widget
   /**
       Sets the icon name for self.
       
-      Changing this will set `propertyStatusPage:paintable` to `NULL`.
+      Changing this will set [adw.status_page.StatusPage.paintable] to `NULL`.
   
       Params:
         iconName = the icon name
@@ -292,7 +293,7 @@ class StatusPage : gtk.widget.Widget
   /**
       Sets the paintable for self.
       
-      Changing this will set `propertyStatusPage:icon-name` to `NULL`.
+      Changing this will set [adw.status_page.StatusPage.iconName] to `NULL`.
   
       Params:
         paintable = the paintable
@@ -349,7 +350,7 @@ class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The name of the icon to be used.
           
-          Changing this will set `property@StatusPage:paintable` to `NULL`.
+          Changing this will set [adw.status_page.StatusPage.paintable] to `NULL`.
       Returns: Builder instance for fluent chaining
   */
   T iconName(string propval)
@@ -362,7 +363,7 @@ class StatusPageGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The paintable to be used.
           
-          Changing this will set `property@StatusPage:icon-name` to `NULL`.
+          Changing this will set [adw.status_page.StatusPage.iconName] to `NULL`.
       Returns: Builder instance for fluent chaining
   */
   T paintable(gdk.paintable.Paintable propval)

@@ -1,6 +1,7 @@
 /// Module for [BreakpointCondition] class
 module adw.breakpoint_condition;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -8,7 +9,7 @@ import gid.gid;
 import gobject.boxed;
 
 /**
-    Describes condition for an `class@Breakpoint`.
+    Describes condition for an [adw.breakpoint.Breakpoint].
 */
 class BreakpointCondition : gobject.boxed.Boxed
 {

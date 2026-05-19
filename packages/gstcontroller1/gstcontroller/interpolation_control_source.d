@@ -1,6 +1,7 @@
 /// Module for [InterpolationControlSource] class
 module gstcontroller.interpolation_control_source;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [ApplicationPkcs7Mime] class
 module gmime.application_pkcs7_mime;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gmime.c.functions;

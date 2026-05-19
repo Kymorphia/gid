@@ -1,6 +1,7 @@
 /// Module for [GLTexture] class
 module gdk.gltexture;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.glcontext;

@@ -1,6 +1,7 @@
 /// Module for [AllocationParams] struct
 module gst.allocation_params;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

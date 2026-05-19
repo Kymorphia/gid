@@ -1,6 +1,7 @@
 /// Module for [SimpleActionGroup] class
 module gio.simple_action_group;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action;
 import gio.action_group;

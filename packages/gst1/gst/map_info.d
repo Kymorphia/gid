@@ -1,6 +1,7 @@
 /// Module for [MapInfo] class
 module gst.map_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

@@ -1,6 +1,7 @@
 /// Module for [File] interface
 module gio.file;
 
+public import gid.basictypes;
 public import gio.file_iface_proxy;
 import gid.gid;
 import gio.app_info;

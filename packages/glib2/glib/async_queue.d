@@ -1,6 +1,7 @@
 /// Module for [AsyncQueue] class
 module glib.async_queue;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

@@ -1,6 +1,7 @@
 /// Module for [TreeModel] interface mixin
 module gtk.tree_model_mixin;
 
+public import gid.basictypes;
 public import gtk.tree_model_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;
@@ -582,7 +583,7 @@ template TreeModelT()
   /**
       Emits the ::row-changed signal on tree_model.
       
-      See `signalGtk.TreeModel::row-changed`.
+      See [gtk.tree_model.TreeModel.rowChanged].
   
       Params:
         path = a [gtk.tree_path.TreePath] pointing to the changed row
@@ -596,7 +597,7 @@ template TreeModelT()
   /**
       Emits the ::row-deleted signal on tree_model.
       
-      See `signalGtk.TreeModel::row-deleted`.
+      See [gtk.tree_model.TreeModel.rowDeleted].
       
       This should be called by models after a row has been removed.
       The location pointed to by path should be the location that
@@ -617,7 +618,7 @@ template TreeModelT()
   /**
       Emits the ::row-has-child-toggled signal on tree_model.
       
-      See `signalGtk.TreeModel::row-has-child-toggled`.
+      See [gtk.tree_model.TreeModel.rowHasChildToggled].
       
       This should be called by models after the child
       state of a node changes.
@@ -634,7 +635,7 @@ template TreeModelT()
   /**
       Emits the ::row-inserted signal on tree_model.
       
-      See `signalGtk.TreeModel::row-inserted`.
+      See [gtk.tree_model.TreeModel.rowInserted].
   
       Params:
         path = a [gtk.tree_path.TreePath] pointing to the inserted row
@@ -648,7 +649,7 @@ template TreeModelT()
   /**
       Emits the ::rows-reordered signal on tree_model.
       
-      See `signalGtk.TreeModel::rows-reordered`.
+      See [gtk.tree_model.TreeModel.rowsReordered].
       
       This should be called by models when their rows have been
       reordered.

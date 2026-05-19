@@ -1,6 +1,7 @@
 /// Module for [TcpConnection] class
 module gio.tcp_connection;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

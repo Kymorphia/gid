@@ -1,6 +1,7 @@
 /// Module for [PrintOperationPreview] interface mixin
 module gtk.print_operation_preview_mixin;
 
+public import gid.basictypes;
 public import gtk.print_operation_preview_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;

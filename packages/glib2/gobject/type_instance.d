@@ -1,6 +1,7 @@
 /// Module for [TypeInstance] class
 module gobject.type_instance;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

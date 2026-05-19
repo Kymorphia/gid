@@ -1,6 +1,7 @@
 /// Module for [AuthManager] class
 module soup.auth_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.uri;
 import gobject.gid_builder;
@@ -15,8 +16,8 @@ import soup.types;
 /**
     HTTP client-side authentication handler.
     
-    #SoupAuthManager is the `iface@SessionFeature` that handles HTTP
-    authentication for a `class@Session`.
+    #SoupAuthManager is the [soup.session_feature.SessionFeature] that handles HTTP
+    authentication for a [soup.session.Session].
     
     A #SoupAuthManager is added to the session by default, and normally
     you don't need to worry about it at all. However, if you want to

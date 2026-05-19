@@ -1,6 +1,7 @@
 /// Module for [Layout] class
 module gtk.layout;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.window;

@@ -1,6 +1,7 @@
 /// Module for [GutterRenderer] class
 module gtksource.gutter_renderer;
 
+public import gid.basictypes;
 import cairo.context;
 import gdk.event;
 import gdk.rectangle;

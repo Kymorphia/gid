@@ -1,6 +1,7 @@
 /// Module for [ScrolledWindowAccessible] class
 module gtk.scrolled_window_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import gid.gid;

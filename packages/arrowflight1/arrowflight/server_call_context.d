@@ -1,6 +1,7 @@
 /// Module for [ServerCallContext] class
 module arrowflight.server_call_context;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

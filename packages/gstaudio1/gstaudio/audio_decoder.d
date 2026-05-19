@@ -1,6 +1,7 @@
 /// Module for [AudioDecoder] class
 module gstaudio.audio_decoder;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

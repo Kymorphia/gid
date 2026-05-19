@@ -1,6 +1,7 @@
 /// Module for [Item] class
 module pango.item;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.analysis;

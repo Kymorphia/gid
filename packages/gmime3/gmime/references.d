@@ -1,6 +1,7 @@
 /// Module for [References] class
 module gmime.references;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

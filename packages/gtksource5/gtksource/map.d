@@ -1,6 +1,7 @@
 /// Module for [Map] class
 module gtksource.map;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -21,21 +22,21 @@ import gtksource.view;
 import pango.font_description;
 
 /**
-    Widget that displays a map for a specific `class@View`.
+    Widget that displays a map for a specific [gtksource.view.View].
     
-    [gtksource.map.Map] is a widget that maps the content of a `class@View` into
+    [gtksource.map.Map] is a widget that maps the content of a [gtksource.view.View] into
     a smaller view so the user can have a quick overview of the whole document.
     
-    This works by connecting a `class@View` to to the [gtksource.map.Map] using
-    the `property@Map:view` property or [gtksource.map.Map.setView].
+    This works by connecting a [gtksource.view.View] to to the [gtksource.map.Map] using
+    the [gtksource.map.Map.view] property or [gtksource.map.Map.setView].
     
-    [gtksource.map.Map] is a `class@View` object. This means that you can add a
-    `class@GutterRenderer` to a gutter in the same way you would for a
-    `class@View`. One example might be a `class@GutterRenderer` that shows
+    [gtksource.map.Map] is a [gtksource.view.View] object. This means that you can add a
+    [gtksource.gutter_renderer.GutterRenderer] to a gutter in the same way you would for a
+    [gtksource.view.View]. One example might be a [gtksource.gutter_renderer.GutterRenderer] that shows
     which lines have changed in the document.
     
     Additionally, it is desirable to match the font of the [gtksource.map.Map] and
-    the `class@View` used for editing. Therefore, `property@Map:font-desc`
+    the [gtksource.view.View] used for editing. Therefore, [gtksource.map.Map.fontDesc]
     should be used to set the target font. You will need to adjust this to the
     desired font size for the map. A 1pt font generally seems to be an
     appropriate font size. "Monospace 1" is the default. See
@@ -118,7 +119,7 @@ class Map : gtksource.view.View
   }
 
   /**
-      Gets the `propertyMap:view` property, which is the view this widget is mapping.
+      Gets the [gtksource.map.Map.view] property, which is the view this widget is mapping.
       Returns: a #GtkSourceView or null.
   */
   gtksource.view.View getView()

@@ -1,6 +1,7 @@
 /// Module for [DiscovererStreamInfo] class
 module gstpbutils.discoverer_stream_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

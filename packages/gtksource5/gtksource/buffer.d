@@ -1,6 +1,7 @@
 /// Module for [Buffer] class
 module gtksource.buffer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -19,14 +20,14 @@ import gtksource.types;
 /**
     Subclass of [gtk.text_buffer.TextBuffer].
     
-    A [gtksource.buffer.Buffer] object is the model for `class@View` widgets.
+    A [gtksource.buffer.Buffer] object is the model for [gtksource.view.View] widgets.
     It extends the [gtk.text_buffer.TextBuffer] class by adding features useful to display
     and edit source code such as syntax highlighting and bracket matching.
     
     To create a [gtksource.buffer.Buffer] use [gtksource.buffer.Buffer.new_] or
     [gtksource.buffer.Buffer.newWithLanguage]. The second form is just a convenience
-    function which allows you to initially set a `class@Language`. You can also
-    directly create a `class@View` and get its `class@Buffer` with
+    function which allows you to initially set a [gtksource.language.Language]. You can also
+    directly create a [gtksource.view.View] and get its [gtksource.buffer.Buffer] with
     [gtk.text_view.TextView.getBuffer].
     
     The highlighting is enabled by default, but you can disable it with
@@ -53,7 +54,7 @@ import gtksource.types;
     [gtksource.buffer.Buffer.iterForwardToContextClassToggle] and
     [gtksource.buffer.Buffer.iterBackwardToContextClassToggle].
     
-    And the `signal@GtkSource.Buffer::highlight-updated` signal permits to be notified
+    And the [gtksource.buffer.Buffer.highlightUpdated] signal permits to be notified
     when a context class region changes.
     
     Each context class has also an associated [gtk.text_tag.TextTag] with the name
@@ -73,9 +74,9 @@ import gtksource.types;
     convenient than the [gtksource.buffer.Buffer] API, because:
     
      - The tag doesn't always exist, you need to listen to the
-       `signal@Gtk.TextTagTable::tag-added` and `signal@Gtk.TextTagTable::tag-removed` signals.
-     - Instead of the `signal@GtkSource.Buffer::highlight-updated` signal, you can listen
-       to the `signal@Gtk.TextBuffer::apply-tag` and `signal@Gtk.TextBuffer::remove-tag` signals.
+       [gtk.text_tag_table.TextTagTable.tagAdded] and [gtk.text_tag_table.TextTagTable.tagRemoved] signals.
+     - Instead of the [gtksource.buffer.Buffer.highlightUpdated] signal, you can listen
+       to the [gtk.text_buffer.TextBuffer.applyTag] and [gtk.text_buffer.TextBuffer.removeTag] signals.
     
     A possible use-case for accessing a context class via the associated
     [gtk.text_tag.TextTag] is to read the region but without adding a hard dependency on the
@@ -260,7 +261,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /**
-      Moves `iter` to the position of the previous `classMark` of the given
+      Moves `iter` to the position of the previous [gtksource.mark.Mark] of the given
       category.
       
       Returns true if `iter` was moved. If `category` is NULL, the
@@ -302,7 +303,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Depending on the category a pixbuf can be specified that will be displayed
       along the line of the mark.
       
-      Like a [gtk.text_mark.TextMark], a `classMark` can be anonymous if the
+      Like a [gtk.text_mark.TextMark], a [gtksource.mark.Mark] can be anonymous if the
       passed `name` is null.  Also, the buffer owns the marks so you
       shouldn't unreference it.
       
@@ -316,7 +317,7 @@ class Buffer : gtk.text_buffer.TextBuffer
         name = the name of the mark, or null.
         category = a string defining the mark category.
         where = location to place the mark.
-      Returns: a new `classMark`, owned by the buffer.
+      Returns: a new [gtksource.mark.Mark], owned by the buffer.
   */
   gtksource.mark.Mark createSourceMark(string name, string category, gtk.text_iter.TextIter where)
   {
@@ -347,7 +348,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /**
-      Moves `iter` to the position of the next `classMark` of the given
+      Moves `iter` to the position of the next [gtksource.mark.Mark] of the given
       `category`.
       
       Returns true if `iter` was moved. If `category` is NULL, the
@@ -369,7 +370,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   /**
       Get all defined context classes at iter.
       
-      See the `classBuffer` description for the list of default context classes.
+      See the [gtksource.buffer.Buffer] description for the list of default context classes.
   
       Params:
         iter = a #GtkTextIter.
@@ -430,11 +431,11 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /**
-      Returns the `classLanguage` associated with the buffer,
+      Returns the [gtksource.language.Language] associated with the buffer,
       see [gtksource.buffer.Buffer.setLanguage].
       
       The returned object should not be unreferenced by the user.
-      Returns: the `classLanguage` associated
+      Returns: the [gtksource.language.Language] associated
         with the buffer, or null.
   */
   gtksource.language.Language getLanguage()
@@ -492,11 +493,11 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /**
-      Returns the `classStyleScheme` associated with the buffer,
+      Returns the [gtksource.style_scheme.StyleScheme] associated with the buffer,
       see [gtksource.buffer.Buffer.setStyleScheme].
       
       The returned object should not be unreferenced by the user.
-      Returns: the `classStyleScheme`
+      Returns: the [gtksource.style_scheme.StyleScheme]
         associated with the buffer, or null.
   */
   gtksource.style_scheme.StyleScheme getStyleScheme()
@@ -515,7 +516,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       iter to the location of the toggle, or to the end of the buffer if no
       toggle is found.
       
-      See the `classBuffer` description for the list of default context classes.
+      See the [gtksource.buffer.Buffer] description for the list of default context classes.
   
       Params:
         iter = a #GtkTextIter.
@@ -538,7 +539,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       iter to the location of the toggle, or to the end of the buffer if no
       toggle is found.
       
-      See the `classBuffer` description for the list of default context classes.
+      See the [gtksource.buffer.Buffer] description for the list of default context classes.
   
       Params:
         iter = a #GtkTextIter.
@@ -556,7 +557,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   /**
       Check if the class context_class is set on iter.
       
-      See the `classBuffer` description for the list of default context classes.
+      See the [gtksource.buffer.Buffer] description for the list of default context classes.
   
       Params:
         iter = a #GtkTextIter.
@@ -618,7 +619,7 @@ class Buffer : gtk.text_buffer.TextBuffer
       Controls whether syntax is highlighted in the buffer.
       
       If highlight is true, the text will be highlighted according to the syntax
-      patterns specified in the `classLanguage` set with [gtksource.buffer.Buffer.setLanguage].
+      patterns specified in the [gtksource.language.Language] set with [gtksource.buffer.Buffer.setLanguage].
       
       If highlight is false, syntax highlighting is disabled and all the
       [gtk.text_tag.TextTag] objects that have been added by the syntax highlighting engine
@@ -639,10 +640,10 @@ class Buffer : gtk.text_buffer.TextBuffer
       shows it as an empty line. This is generally not what the user expects.
       
       If implicit_trailing_newline is true (the default value):
-       - when a `classFileLoader` loads the content of a file into the buffer,
+       - when a [gtksource.file_loader.FileLoader] loads the content of a file into the buffer,
          the trailing newline (if present in the file) is not inserted into the
          buffer.
-       - when a `classFileSaver` saves the content of the buffer into a file, a
+       - when a [gtksource.file_saver.FileSaver] saves the content of the buffer into a file, a
          trailing newline is added to the file.
       
       On the other hand, if implicit_trailing_newline is false, the file's
@@ -658,9 +659,9 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /**
-      Associates a `classLanguage` with the buffer.
+      Associates a [gtksource.language.Language] with the buffer.
       
-      Note that a `classLanguage` affects not only the syntax highlighting, but
+      Note that a [gtksource.language.Language] affects not only the syntax highlighting, but
       also the [context classes](./class.Buffer.html#context-classes). If you want to disable just the
       syntax highlighting, see [gtksource.buffer.Buffer.setHighlightSyntax].
       
@@ -675,15 +676,15 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /**
-      Sets a `classStyleScheme` to be used by the buffer and the view.
+      Sets a [gtksource.style_scheme.StyleScheme] to be used by the buffer and the view.
       
-      Note that a `classStyleScheme` affects not only the syntax highlighting,
-      but also other `classView` features such as highlighting the current line,
+      Note that a [gtksource.style_scheme.StyleScheme] affects not only the syntax highlighting,
+      but also other [gtksource.view.View] features such as highlighting the current line,
       matching brackets, the line numbers, etc.
       
       Instead of setting a null scheme, it is better to disable syntax
       highlighting with [gtksource.buffer.Buffer.setHighlightSyntax], and setting the
-      `classStyleScheme` with the "classic" or "tango" ID, because those two
+      [gtksource.style_scheme.StyleScheme] with the "classic" or "tango" ID, because those two
       style schemes follow more closely the GTK theme (for example for the
       background color).
       
@@ -866,7 +867,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   
           `void callback(gtk.text_mark.TextMark mark, gtksource.buffer.Buffer buffer)`
   
-          `mark` the `classMark` (optional)
+          `mark` the [gtksource.mark.Mark] (optional)
   
           `buffer` the instance the signal is connected to (optional)
   

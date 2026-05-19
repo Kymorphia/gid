@@ -1,6 +1,7 @@
 /// Module for [DisplayManager] class
 module gdk.display_manager;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.display;

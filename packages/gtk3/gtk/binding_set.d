@@ -1,6 +1,7 @@
 /// Module for [BindingSet] class
 module gtk.binding_set;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import gobject.object;

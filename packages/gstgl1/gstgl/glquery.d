@@ -1,6 +1,7 @@
 /// Module for [GLQuery] class
 module gstgl.glquery;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.element;
 import gst.types;

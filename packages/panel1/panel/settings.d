@@ -1,6 +1,7 @@
 /// Module for [Settings] class
 module panel.settings;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;

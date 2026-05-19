@@ -1,6 +1,7 @@
 /// Module for [Hyperlink] class
 module atk.hyperlink;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.c.functions;

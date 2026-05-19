@@ -1,6 +1,7 @@
 /// Module for [MnemonicAction] class
 module gtk.mnemonic_action;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

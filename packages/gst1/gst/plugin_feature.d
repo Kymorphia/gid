@@ -1,6 +1,7 @@
 /// Module for [PluginFeature] class
 module gst.plugin_feature;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

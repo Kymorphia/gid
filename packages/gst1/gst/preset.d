@@ -1,6 +1,7 @@
 /// Module for [Preset] interface
 module gst.preset;
 
+public import gid.basictypes;
 public import gst.preset_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

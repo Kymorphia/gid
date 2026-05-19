@@ -1,6 +1,7 @@
 /// Module for [SwitchRow] class
 module adw.switch_row;
 
+public import gid.basictypes;
 import adw.action_row;
 import adw.c.functions;
 import adw.c.types;
@@ -41,7 +42,7 @@ import gtk.constraint_target_mixin;
     </object>
     ```
     
-    The `property@SwitchRow:active` property should be connected to in order to
+    The [adw.switch_row.SwitchRow.active] property should be connected to in order to
     monitor changes to the active state.
     
     ## Accessibility

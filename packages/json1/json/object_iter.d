@@ -1,6 +1,7 @@
 /// Module for [ObjectIter] class
 module json.object_iter;
 
+public import gid.basictypes;
 import gid.gid;
 import json.c.functions;
 import json.c.types;

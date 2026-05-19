@@ -1,6 +1,7 @@
 /// Module for [ShortcutAction] class
 module gtk.shortcut_action;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.string_;
 import glib.variant;

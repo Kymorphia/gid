@@ -1,6 +1,7 @@
 /// Module for [TreeMgrColumns] class
 module gda.tree_mgr_columns;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

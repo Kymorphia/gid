@@ -1,6 +1,7 @@
 /// Module for [AppLaunchContext] class
 module gdk.app_launch_context;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.display;

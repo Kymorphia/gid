@@ -1,6 +1,7 @@
 /// Module for [SDPMedia] class
 module gstsdp.sdpmedia;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.caps;
 import gstsdp.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [TextViewAccessible] class
 module gtk.text_view_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.editable_text;

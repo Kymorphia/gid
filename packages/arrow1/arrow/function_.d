@@ -1,6 +1,7 @@
 /// Module for [Function] class
 module arrow.function_;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.datum;

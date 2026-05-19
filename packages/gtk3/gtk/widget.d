@@ -1,6 +1,7 @@
 /// Module for [Widget] class
 module gtk.widget;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import atk.object;

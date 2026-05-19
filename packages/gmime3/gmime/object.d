@@ -1,6 +1,7 @@
 /// Module for [ObjectWrap] class
 module gmime.object;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.date_time;
 import gmime.autocrypt_header_list;

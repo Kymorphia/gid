@@ -1,6 +1,7 @@
 /// Module for [GLShaderNode] class
 module gsk.glshader_node;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.object;

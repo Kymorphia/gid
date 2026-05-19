@@ -1,6 +1,7 @@
 /// Module for [Seekable] interface
 module gio.seekable;
 
+public import gid.basictypes;
 public import gio.seekable_iface_proxy;
 import gid.gid;
 import gio.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [GLBaseMixer] class
 module gstgl.glbase_mixer;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

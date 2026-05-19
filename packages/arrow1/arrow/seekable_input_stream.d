@@ -1,6 +1,7 @@
 /// Module for [SeekableInputStream] class
 module arrow.seekable_input_stream;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;

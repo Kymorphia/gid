@@ -1,6 +1,7 @@
 /// Module for [Editable] interface mixin
 module gtk.editable_mixin;
 
+public import gid.basictypes;
 public import gtk.editable_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;

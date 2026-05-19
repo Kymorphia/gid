@@ -1,6 +1,7 @@
 /// Module for [WebPage] class
 module webkitwebprocessextension.web_page;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

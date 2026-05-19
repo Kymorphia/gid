@@ -1,6 +1,7 @@
 /// Module for [ColorChooserWidget] class
 module gtk.color_chooser_widget;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

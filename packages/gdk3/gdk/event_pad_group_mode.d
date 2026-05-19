@@ -1,6 +1,7 @@
 /// Module for [EventPadGroupMode] class
 module gdk.event_pad_group_mode;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

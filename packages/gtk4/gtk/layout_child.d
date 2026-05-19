@@ -1,6 +1,7 @@
 /// Module for [LayoutChild] class
 module gtk.layout_child;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

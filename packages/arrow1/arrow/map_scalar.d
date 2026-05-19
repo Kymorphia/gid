@@ -1,6 +1,7 @@
 /// Module for [MapScalar] class
 module arrow.map_scalar;
 
+public import gid.basictypes;
 import arrow.base_list_scalar;
 import arrow.c.functions;
 import arrow.c.types;

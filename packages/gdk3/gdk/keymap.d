@@ -1,6 +1,7 @@
 /// Module for [Keymap] class
 module gdk.keymap;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.display;

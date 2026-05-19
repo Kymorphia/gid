@@ -1,6 +1,7 @@
 /// Module for [MessageBody] class
 module soup.message_body;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.boxed;
@@ -10,7 +11,7 @@ import soup.types;
 
 /**
     #SoupMessageBody represents the request or response body of a
-    `class@Message`.
+    [soup.message.Message].
     
     Note that while @length always reflects the full length of the
     message body, @data is normally null, and will only be filled in
@@ -79,7 +80,7 @@ class MessageBody : gobject.boxed.Boxed
   /**
       Creates a new #SoupMessageBody.
       
-      `classMessage` uses this internally; you
+      [soup.message.Message] uses this internally; you
       will not normally need to call it yourself.
       Returns: a new #SoupMessageBody.
   */
@@ -197,11 +198,11 @@ class MessageBody : gobject.boxed.Boxed
       be filled in after the body is fully sent/received, and the chunks that make
       up body may be discarded when they are no longer needed.
       
-      If you set the flag to false on the `classMessage` request_body of a
+      If you set the flag to false on the [soup.message.Message] request_body of a
       client-side message, it will block the accumulation of chunks into
       body's data field, but it will not normally cause the chunks to
       be discarded after being written like in the server-side
-      `classMessage` response_body case, because the request body needs to
+      [soup.message.Message] response_body case, because the request body needs to
       be kept around in case the request needs to be sent a second time
       due to redirection or authentication.
   

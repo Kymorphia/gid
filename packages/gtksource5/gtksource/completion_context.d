@@ -1,6 +1,7 @@
 /// Module for [CompletionContext] class
 module gtksource.completion_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;
@@ -21,18 +22,18 @@ import gtksource.view;
     The context of a completion.
     
     [gtksource.completion_context.CompletionContext] contains information about an attept to display
-    completion proposals to the user based on typed text in the `class@View`.
+    completion proposals to the user based on typed text in the [gtksource.view.View].
     
-    When typing, `class@Completion` may use registered
-    `iface@CompletionProvider` to determine if there may be results which
+    When typing, [gtksource.completion.Completion] may use registered
+    [gtksource.completion_provider.CompletionProvider] to determine if there may be results which
     could be displayed. If so, a [gtksource.completion_context.CompletionContext] is created with
-    information that is provided to the `iface@CompletionProvider` to populate
+    information that is provided to the [gtksource.completion_provider.CompletionProvider] to populate
     results which might be useful to the user.
     
-    `iface@CompletionProvider` are expected to provide [gio.list_model.ListModel] with
-    `iface@CompletionProposal` which may be joined together in a list of
+    [gtksource.completion_provider.CompletionProvider] are expected to provide [gio.list_model.ListModel] with
+    [gtksource.completion_proposal.CompletionProposal] which may be joined together in a list of
     results for the user. They are also responsible for how the contents are
-    displayed using `class@CompletionCell` which allows for some level of
+    displayed using [gtksource.completion_cell.CompletionCell] which allows for some level of
     customization.
 */
 class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel

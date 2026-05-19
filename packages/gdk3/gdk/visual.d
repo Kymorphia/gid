@@ -1,6 +1,7 @@
 /// Module for [Visual] class
 module gdk.visual;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.screen;

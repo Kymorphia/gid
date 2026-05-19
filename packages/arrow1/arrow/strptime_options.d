@@ -1,6 +1,7 @@
 /// Module for [StrptimeOptions] class
 module arrow.strptime_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.function_options;

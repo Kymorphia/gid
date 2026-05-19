@@ -1,6 +1,7 @@
 /// Module for [GestureStylus] class
 module gtk.gesture_stylus;
 
+public import gid.basictypes;
 import gdk.device_tool;
 import gdk.types;
 import gid.gid;

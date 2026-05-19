@@ -1,6 +1,7 @@
 /// Module for [CellRendererCombo] class
 module gtk.cell_renderer_combo;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

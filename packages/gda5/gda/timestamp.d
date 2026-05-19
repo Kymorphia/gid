@@ -1,6 +1,7 @@
 /// Module for [Timestamp] struct
 module gda.timestamp;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

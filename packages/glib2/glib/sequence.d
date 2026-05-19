@@ -1,6 +1,7 @@
 /// Module for [Sequence] class
 module glib.sequence;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

@@ -1,6 +1,7 @@
 /// Module for [Prompt] class
 module secret.prompt;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_initable;
 import gio.async_initable_mixin;
@@ -35,7 +36,7 @@ import secret.types;
     
     In order to customize prompt handling, override the
     `vfunc@Service.prompt_async` and `vfunc@Service.prompt_finish` virtual
-    methods of the `class@Service` class.
+    methods of the [secret.service.Service] class.
 */
 class Prompt : gio.dbus_proxy.DBusProxy
 {

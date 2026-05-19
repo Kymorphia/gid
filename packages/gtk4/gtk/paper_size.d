@@ -1,6 +1,7 @@
 /// Module for [PaperSize] class
 module gtk.paper_size;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.key_file;

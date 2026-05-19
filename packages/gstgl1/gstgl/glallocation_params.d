@@ -1,6 +1,7 @@
 /// Module for [GLAllocationParams] class
 module gstgl.glallocation_params;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

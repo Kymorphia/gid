@@ -1,6 +1,7 @@
 /// Module for [DBusObjectManager] interface
 module gio.dbus_object_manager;
 
+public import gid.basictypes;
 public import gio.dbus_object_manager_iface_proxy;
 import gid.gid;
 import gio.c.functions;

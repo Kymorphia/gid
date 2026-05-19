@@ -1,6 +1,7 @@
 /// Module for [Gesture] class
 module gtk.gesture;
 
+public import gid.basictypes;
 import gdk.device;
 import gdk.event;
 import gdk.event_sequence;

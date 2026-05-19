@@ -1,6 +1,7 @@
 /// Module for [Sphere] class
 module graphene.sphere;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import graphene.box;

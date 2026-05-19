@@ -1,6 +1,7 @@
 /// Module for [GestureClick] class
 module gtk.gesture_click;
 
+public import gid.basictypes;
 import gdk.event_sequence;
 import gid.gid;
 import gobject.dclosure;

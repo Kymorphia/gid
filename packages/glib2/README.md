@@ -8,7 +8,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 | --- | --- |
 | **Dub Package**          | [gid:glib2](https://code.dlang.org/packages/gid%3Aglib2)                         |
 | **Library Homepage**     | https://gtk.org                                                                  |
-| **D API Reference**      | https://www.kymorphia.com/gid/glib.html                                          |
+| **D API Reference**      | https://www.kymorphia.com/gid/gid~glib2/                                         |
 | **C API Reference**      | https://docs.gtk.org/glib/                                                       |
 
 Consult the [giD README](https://github.com/Kymorphia/gid) for more information on programming with giD and links to examples.

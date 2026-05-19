@@ -1,6 +1,7 @@
 /// Module for [BitWriter] class
 module gstbase.bit_writer;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gstbase.c.functions;

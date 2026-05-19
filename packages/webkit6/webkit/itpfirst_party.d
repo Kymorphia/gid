@@ -1,6 +1,7 @@
 /// Module for [ITPFirstParty] class
 module webkit.itpfirst_party;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.date_time;
 import gobject.boxed;

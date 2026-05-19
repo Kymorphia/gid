@@ -1,6 +1,7 @@
 /// Module for [StrvBuilder] class
 module glib.strv_builder;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

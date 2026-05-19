@@ -1,6 +1,7 @@
 /// Module for [VideoBarMeta] class
 module gstvideo.video_bar_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

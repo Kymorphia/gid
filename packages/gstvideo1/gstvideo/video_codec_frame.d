@@ -1,6 +1,7 @@
 /// Module for [VideoCodecFrame] class
 module gstvideo.video_codec_frame;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.boxed;

@@ -1,6 +1,7 @@
 /// Module for [Time64DataType] class
 module arrow.time64_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.time_data_type;

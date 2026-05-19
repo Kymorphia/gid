@@ -1,6 +1,7 @@
 /// Module for [QuarkList] class
 module gda.quark_list;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

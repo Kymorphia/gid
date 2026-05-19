@@ -1,6 +1,7 @@
 /// Module for [ApplicationCommandLine] class
 module gio.application_command_line;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
@@ -17,7 +18,7 @@ import gobject.object;
     an application.
     
     It is created by [gio.application.Application] and emitted
-    in the `signal@Gio.Application::command-line` signal and virtual function.
+    in the [gio.application.Application.commandLine] signal and virtual function.
     
     The class contains the list of arguments that the program was invoked
     with. It is also possible to query if the commandline invocation was
@@ -39,7 +40,7 @@ import gobject.object;
     also automatically called when the object is disposed.
     
     The main use for [gio.application_command_line.ApplicationCommandLine] (and the
-    `signal@Gio.Application::command-line` signal) is 'Emacs server' like use cases:
+    [gio.application.Application.commandLine] signal) is 'Emacs server' like use cases:
     You can set the `EDITOR` environment variable to have e.g. git use
     your favourite editor to edit commit messages, and if you already
     have an instance of the editor running, the editing will happen
@@ -48,7 +49,7 @@ import gobject.object;
     does not return until the editing is done.
     
     Normally, the commandline is completely handled in the
-    `signal@Gio.Application::command-line` handler. The launching instance exits
+    [gio.application.Application.commandLine] handler. The launching instance exits
     once the signal handler in the primary instance has returned, and
     the return value of the signal handler becomes the exit status
     of the launching instance.
@@ -133,7 +134,7 @@ import gobject.object;
     
     In this example of split commandline handling, options that start
     with `--local-` are handled locally, all other options are passed
-    to the `signal@Gio.Application::command-line` handler which runs in the primary
+    to the [gio.application.Application.commandLine] handler which runs in the primary
     instance.
     
     The complete example can be found here:
@@ -174,7 +175,7 @@ import gobject.object;
     ```
     
     In this example the commandline is not completely handled before
-    the `signal@Gio.Application::command-line` handler returns. Instead, we keep
+    the [gio.application.Application.commandLine] handler returns. Instead, we keep
     a reference to the [gio.application_command_line.ApplicationCommandLine] object and handle it
     later (in this example, in an idle). Note that it is necessary to
     hold the application until you are done with the commandline.
@@ -256,7 +257,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
       
       For local invocation, it does nothing.
       
-      This method should be called in the `signalGio.Application::command-line`
+      This method should be called in the [gio.application.Application.commandLine]
       handler, after the exit status is set and all messages are printed.
       
       After this call, [gio.application_command_line.ApplicationCommandLine.setExitStatus] has no effect.
@@ -546,7 +547,7 @@ class ApplicationCommandLineGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuil
   /**
       Set `arguments` property.
       Params:
-        propval = The commandline that caused this `signal@Gio.Application::command-line`
+        propval = The commandline that caused this [gio.application.Application.commandLine]
           signal emission.
       Returns: Builder instance for fluent chaining
   */

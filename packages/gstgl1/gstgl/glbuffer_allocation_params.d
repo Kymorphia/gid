@@ -1,6 +1,7 @@
 /// Module for [GLBufferAllocationParams] class
 module gstgl.glbuffer_allocation_params;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.allocation_params;

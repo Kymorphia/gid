@@ -1,6 +1,7 @@
 /// Module for [TextureDownloader] class
 module gdk.texture_downloader;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.texture;

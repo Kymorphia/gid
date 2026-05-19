@@ -1724,7 +1724,7 @@ struct WebKitFaviconDatabaseClass
     - A “default value”, which indicates whether the option is enabled
       automatically: [webkit.feature.Feature.getDefaultValue].
     - Its “status”, which determines whether it should be considered
-      user-settable and its development stage (see `enum@FeatureStatus`
+      user-settable and its development stage (see [webkit.types.FeatureStatus]
       for details): [webkit.feature.Feature.getStatus].
     - A category, which may be used to group features together:
       [webkit.feature.Feature.getCategory].
@@ -1753,7 +1753,7 @@ struct WebKitFeature;
 /**
     Contains a set of toggle-able web engine features.
     
-    The list supports passing around a set of `struct@Feature` objects and
+    The list supports passing around a set of [webkit.feature.Feature] objects and
     iterating over them:
     
     ```c

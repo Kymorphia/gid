@@ -1,6 +1,7 @@
 /// Module for [CompletionProvider] interface
 module gtksource.completion_provider;
 
+public import gid.basictypes;
 public import gtksource.completion_provider_iface_proxy;
 import gdkpixbuf.pixbuf;
 import gid.gid;

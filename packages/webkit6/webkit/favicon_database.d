@@ -1,6 +1,7 @@
 /// Module for [FaviconDatabase] class
 module webkit.favicon_database;
 
+public import gid.basictypes;
 import gdk.texture;
 import gid.gid;
 import gio.async_result;

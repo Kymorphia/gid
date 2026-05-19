@@ -1,6 +1,7 @@
 /// Module for [ContentDisposition] class
 module gmime.content_disposition;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

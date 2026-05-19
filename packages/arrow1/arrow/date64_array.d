@@ -1,6 +1,7 @@
 /// Module for [Date64Array] class
 module arrow.date64_array;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;

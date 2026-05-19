@@ -1,6 +1,7 @@
 /// Module for [RecentFilter] class
 module gtk.recent_filter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.initially_unowned;

@@ -1,6 +1,7 @@
 /// Module for [NetTimeProvider] class
 module gstnet.net_time_provider;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.initable;
 import gio.initable_mixin;

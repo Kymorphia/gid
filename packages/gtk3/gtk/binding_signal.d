@@ -1,6 +1,7 @@
 /// Module for [BindingSignal] class
 module gtk.binding_signal;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;

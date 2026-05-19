@@ -1,6 +1,7 @@
 /// Module for [ViewSwitcherBar] class
 module adw.view_switcher_bar;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -25,12 +26,12 @@ import gtk.widget;
     </picture>
     
     An action bar letting you switch between multiple views contained in a
-    `class@ViewStack`, via an `class@ViewSwitcher`. It is designed to be put at
+    [adw.view_stack.ViewStack], via an [adw.view_switcher.ViewSwitcher]. It is designed to be put at
     the bottom of a window and to be revealed only on really narrow windows, e.g.
     on mobile phones. It can't be revealed if there are less than two pages.
     
     [adw.view_switcher_bar.ViewSwitcherBar] is intended to be used together with
-    [adw.view_switcher.ViewSwitcher] in a header bar, and a `class@Breakpoint` showing the view
+    [adw.view_switcher.ViewSwitcher] in a header bar, and a [adw.breakpoint.Breakpoint] showing the view
     switcher bar on narrow sizes, while removing the view switcher from the
     header bar, as follows:
     
@@ -70,7 +71,7 @@ import gtk.widget;
     </object>
     ```
     
-    It's recommended to set `property@ViewSwitcher:policy` to
+    It's recommended to set [adw.view_switcher.ViewSwitcher.policy] to
     [adw.types.ViewSwitcherPolicy.Wide] in this case.
     
     You may have to adjust the breakpoint condition for your specific pages.

@@ -1,6 +1,7 @@
 /// Module for [MenuButton] class
 module gtk.menu_button;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
@@ -27,7 +28,7 @@ import gtk.widget;
     [gio.menu_model.MenuModel].
     
     The [gtk.menu_button.MenuButton] widget can show either an icon (set with the
-    `property@Gtk.MenuButton:icon-name` property) or a label (set with the
+    [gtk.menu_button.MenuButton.iconName] property) or a label (set with the
     [gtk.menu_button.MenuButton.label] property). If neither is explicitly set,
     a [gtk.image.Image] is automatically created, using an arrow image oriented
     according to [gtk.menu_button.MenuButton.direction] or the generic
@@ -584,9 +585,9 @@ class MenuButton : gtk.widget.Widget
       Sets the child widget of menu_button.
       
       Setting a child resets [gtk.menu_button.MenuButton.label] and
-      `propertyGtk.MenuButton:icon-name`.
+      [gtk.menu_button.MenuButton.iconName].
       
-      If `propertyGtk.MenuButton:always-show-arrow` is set to `TRUE` and
+      If [gtk.menu_button.MenuButton.alwaysShowArrow] is set to `TRUE` and
       [gtk.menu_button.MenuButton.direction] is not [gtk.types.ArrowType.None], a dropdown arrow
       will be shown next to the child.
   
@@ -670,7 +671,7 @@ class MenuButton : gtk.widget.Widget
       Setting icon name resets [gtk.menu_button.MenuButton.label] and
       [gtk.menu_button.MenuButton.child].
       
-      If `propertyGtk.MenuButton:always-show-arrow` is set to `TRUE` and
+      If [gtk.menu_button.MenuButton.alwaysShowArrow] is set to `TRUE` and
       [gtk.menu_button.MenuButton.direction] is not [gtk.types.ArrowType.None], a dropdown arrow
       will be shown next to the icon.
   
@@ -686,7 +687,7 @@ class MenuButton : gtk.widget.Widget
   /**
       Sets the label to show inside the menu button.
       
-      Setting a label resets `propertyGtk.MenuButton:icon-name` and
+      Setting a label resets [gtk.menu_button.MenuButton.iconName] and
       [gtk.menu_button.MenuButton.child].
       
       If [gtk.menu_button.MenuButton.direction] is not [gtk.types.ArrowType.None], a dropdown
@@ -727,7 +728,7 @@ class MenuButton : gtk.widget.Widget
       
       If popover is null, the button is disabled.
       
-      If `propertyGtk.MenuButton:menu-model` is set, the menu model is dissociated
+      If [gtk.menu_button.MenuButton.menuModel] is set, the menu model is dissociated
       from the menu_button, and the property is set to null.
   
       Params:

@@ -1,6 +1,7 @@
 /// Module for [MessageDialog] class
 module adw.message_dialog;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -42,10 +43,10 @@ import gtk.window;
     appearance.
     
     When one of the responses is activated, or the dialog is closed, the
-    `signal@MessageDialog::response` signal will be emitted. This signal is
+    [adw.message_dialog.MessageDialog.response] signal will be emitted. This signal is
     detailed, and the detail, as well as the `response` parameter will be set to
     the ID of the activated response, or to the value of the
-    `property@MessageDialog:close-response` property if the dialog had been
+    [adw.message_dialog.MessageDialog.closeResponse] property if the dialog had been
     closed without activating any of the responses.
     
     Response buttons can be presented horizontally or vertically depending on
@@ -241,7 +242,7 @@ class MessageDialog : gtk.window.Window
       Get `closeResponse` property.
       Returns: The ID of the close response.
         
-        It will be passed to `signal@MessageDialog::response` if the window is
+        It will be passed to [adw.message_dialog.MessageDialog.response] if the window is
         closed by pressing <kbd>Escape</kbd> or with a system action.
         
         It doesn't have to correspond to any of the responses in the dialog.
@@ -258,7 +259,7 @@ class MessageDialog : gtk.window.Window
       Params:
         propval = The ID of the close response.
           
-          It will be passed to `signal@MessageDialog::response` if the window is
+          It will be passed to [adw.message_dialog.MessageDialog.response] if the window is
           closed by pressing <kbd>Escape</kbd> or with a system action.
           
           It doesn't have to correspond to any of the responses in the dialog.
@@ -401,7 +402,7 @@ class MessageDialog : gtk.window.Window
       Responses are represented as buttons in the dialog.
       
       Response ID must be unique. It will be used in
-      `signalMessageDialog::response` to tell which response had been activated,
+      [adw.message_dialog.MessageDialog.response] to tell which response had been activated,
       as well as to inspect and modify the response later.
       
       An embedded underline in label indicates a mnemonic.
@@ -454,7 +455,7 @@ class MessageDialog : gtk.window.Window
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: the ID of the response that was selected, or
-          `propertyMessageDialog:close-response` if the call was cancelled.
+          [adw.message_dialog.MessageDialog.closeResponse] if the call was cancelled.
   */
   string chooseFinish(gio.async_result.AsyncResult result)
   {
@@ -627,7 +628,7 @@ class MessageDialog : gtk.window.Window
   }
 
   /**
-      Emits the `signalMessageDialog::response` signal with the given response ID.
+      Emits the [adw.message_dialog.MessageDialog.response] signal with the given response ID.
       
       Used to indicate that the user has responded to the dialog in some way.
   
@@ -668,7 +669,7 @@ class MessageDialog : gtk.window.Window
   /**
       Sets the ID of the close response of self.
       
-      It will be passed to `signalMessageDialog::response` if the window is
+      It will be passed to [adw.message_dialog.MessageDialog.response] if the window is
       closed by pressing <kbd>Escape</kbd> or with a system action.
       
       It doesn't have to correspond to any of the responses in the dialog.
@@ -775,7 +776,7 @@ class MessageDialog : gtk.window.Window
       [gtk.widget.Widget.sensitive] set to `FALSE` and it can't be activated as
       a default response.
       
-      response can still be used as `propertyMessageDialog:close-response` while
+      response can still be used as [adw.message_dialog.MessageDialog.closeResponse] while
       it's not enabled.
       
       Responses are enabled by default.
@@ -817,7 +818,7 @@ class MessageDialog : gtk.window.Window
         
         if the dialog was closed by pressing <kbd>Escape</kbd> or with a system
         action, response will be set to the value of
-        `propertyMessageDialog:close-response`.
+        [adw.message_dialog.MessageDialog.closeResponse].
   
       Params:
         detail = Signal detail or null (default)
@@ -893,7 +894,7 @@ class MessageDialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
       Params:
         propval = The ID of the close response.
           
-          It will be passed to `signal@MessageDialog::response` if the window is
+          It will be passed to [adw.message_dialog.MessageDialog.response] if the window is
           closed by pressing <kbd>Escape</kbd> or with a system action.
           
           It doesn't have to correspond to any of the responses in the dialog.

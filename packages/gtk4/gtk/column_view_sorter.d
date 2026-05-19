@@ -1,6 +1,7 @@
 /// Module for [ColumnViewSorter] class
 module gtk.column_view_sorter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -24,8 +25,8 @@ import gtk.types;
     
     If you are only interested in the primary sort column (i.e. the
     column where a sort indicator is shown in the header), then
-    you can just look at `property@Gtk.ColumnViewSorter:primary-sort-column`
-    and `property@Gtk.ColumnViewSorter:primary-sort-order`.
+    you can just look at [gtk.column_view_sorter.ColumnViewSorter.primarySortColumn]
+    and [gtk.column_view_sorter.ColumnViewSorter.primarySortOrder].
     
     If you want to store the full sort configuration, including
     secondary sort columns that are used for tie breaking, then

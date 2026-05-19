@@ -1,6 +1,7 @@
 /// Module for [SqlStatementCheckValidityData] class
 module gda.sql_statement_check_validity_data;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

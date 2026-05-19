@@ -1,6 +1,7 @@
 /// Module for [SearchContext] class
 module gtksource.search_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;
@@ -20,8 +21,8 @@ import gtksource.types;
     Search context.
     
     A [gtksource.search_context.SearchContext] is used for the search and replace in a
-    `class@Buffer`. The search settings are represented by a
-    `class@SearchSettings` object. There can be a many-to-many relationship
+    [gtksource.buffer.Buffer]. The search settings are represented by a
+    [gtksource.search_settings.SearchSettings] object. There can be a many-to-many relationship
     between buffers and search settings, with the search contexts in-between: a
     search settings object can be shared between several search contexts; and a
     buffer can contain several search contexts at the same time.
@@ -45,14 +46,14 @@ import gtksource.types;
     highlighting for several [gtksource.search_context.SearchContext]s attached to the
     same buffer. Moreover, each of those [gtksource.search_context.SearchContext]s can
     have a different text style associated. Use
-    [gtksource.search_context.SearchContext.setMatchStyle] to specify the `class@Style`
+    [gtksource.search_context.SearchContext.setMatchStyle] to specify the [gtksource.style.Style]
     to apply on search matches.
     
-    Note that the `property@SearchContext:highlight` and
-    `property@SearchContext:match-style` properties are in the
-    [gtksource.search_context.SearchContext] class, not `class@SearchSettings`. Appearance
+    Note that the [gtksource.search_context.SearchContext.highlight] and
+    [gtksource.search_context.SearchContext.matchStyle] properties are in the
+    [gtksource.search_context.SearchContext] class, not [gtksource.search_settings.SearchSettings]. Appearance
     settings should be tied to one, and only one buffer, as different buffers can
-    have different style scheme associated (a `class@SearchSettings` object
+    have different style scheme associated (a [gtksource.search_settings.SearchSettings] object
     can be bound indirectly to several buffers).
     
     The concept of "current match" doesn't exist yet. A way to highlight
@@ -110,7 +111,7 @@ class SearchContext : gobject.object.ObjectWrap
 
   /**
       Get `buffer` property.
-      Returns: The `class@Buffer` associated to the search context.
+      Returns: The [gtksource.buffer.Buffer] associated to the search context.
   */
   @property gtksource.buffer.Buffer buffer()
   {
@@ -138,7 +139,7 @@ class SearchContext : gobject.object.ObjectWrap
 
   /**
       Get `matchStyle` property.
-      Returns: A `class@Style`, or null for theme's scheme default style.
+      Returns: A [gtksource.style.Style], or null for theme's scheme default style.
   */
   @property gtksource.style.Style matchStyle()
   {
@@ -148,7 +149,7 @@ class SearchContext : gobject.object.ObjectWrap
   /**
       Set `matchStyle` property.
       Params:
-        propval = A `class@Style`, or null for theme's scheme default style.
+        propval = A [gtksource.style.Style], or null for theme's scheme default style.
   */
   @property void matchStyle(gtksource.style.Style propval)
   {
@@ -181,7 +182,7 @@ class SearchContext : gobject.object.ObjectWrap
 
   /**
       Get `settings` property.
-      Returns: The `class@SearchSettings` associated to the search context.
+      Returns: The [gtksource.search_settings.SearchSettings] associated to the search context.
         
         This property is construct-only since version 4.0.
   */
@@ -194,7 +195,7 @@ class SearchContext : gobject.object.ObjectWrap
       Creates a new search context, associated with buffer, and customized with
       settings.
       
-      If settings is null, a new `classSearchSettings` object will
+      If settings is null, a new [gtksource.search_settings.SearchSettings] object will
       be created, that you can retrieve with [gtksource.search_context.SearchContext.getSettings].
   
       Params:
@@ -215,12 +216,12 @@ class SearchContext : gobject.object.ObjectWrap
       It is recommended to use the asynchronous functions instead, to not block the user interface.
       However, if you are sure that the buffer is small, this function is more convenient to use.
       
-      If the `propertySearchSettings:wrap-around` property is false, this function
+      If the [gtksource.search_settings.SearchSettings.wrapAround] property is false, this function
       doesn't try to wrap around.
       
       The has_wrapped_around out parameter is set independently of whether a match
       is found. So if this function returns false, has_wrapped_around will have
-      the same value as the `propertySearchSettings:wrap-around` property.
+      the same value as the [gtksource.search_settings.SearchSettings.wrapAround] property.
   
       Params:
         iter = start of search.
@@ -309,12 +310,12 @@ class SearchContext : gobject.object.ObjectWrap
       It is recommended to use the asynchronous functions instead, to not block the user interface.
       However, if you are sure that the buffer is small, this function is more convenient to use.
       
-      If the `propertySearchSettings:wrap-around` property is false, this function
+      If the [gtksource.search_settings.SearchSettings.wrapAround] property is false, this function
       doesn't try to wrap around.
       
       The has_wrapped_around out parameter is set independently of whether a match
       is found. So if this function returns false, has_wrapped_around will have
-      the same value as the  `propertySearchSettings:wrap-around` property.
+      the same value as the  [gtksource.search_settings.SearchSettings.wrapAround] property.
   
       Params:
         iter = start of search.
@@ -459,7 +460,7 @@ class SearchContext : gobject.object.ObjectWrap
 
   /**
       Regular expression patterns must follow certain rules. If
-      `propertySearchSettings:search-text` breaks a rule, the error can be
+      [gtksource.search_settings.SearchSettings.searchText] breaks a rule, the error can be
       retrieved with this function.
       
       The error domain is [glib.types.RegexError].
@@ -580,7 +581,7 @@ class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `buffer` property.
       Params:
-        propval = The `class@Buffer` associated to the search context.
+        propval = The [gtksource.buffer.Buffer] associated to the search context.
       Returns: Builder instance for fluent chaining
   */
   T buffer(gtksource.buffer.Buffer propval)
@@ -602,7 +603,7 @@ class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `matchStyle` property.
       Params:
-        propval = A `class@Style`, or null for theme's scheme default style.
+        propval = A [gtksource.style.Style], or null for theme's scheme default style.
       Returns: Builder instance for fluent chaining
   */
   T matchStyle(gtksource.style.Style propval)
@@ -613,7 +614,7 @@ class SearchContextGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `settings` property.
       Params:
-        propval = The `class@SearchSettings` associated to the search context.
+        propval = The [gtksource.search_settings.SearchSettings] associated to the search context.
           
           This property is construct-only since version 4.0.
       Returns: Builder instance for fluent chaining

@@ -1,6 +1,7 @@
 /// Module for [Pixbuf] class
 module gdkpixbuf.pixbuf;
 
+public import gid.basictypes;
 import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_format;
@@ -55,7 +56,7 @@ import gobject.object;
     You can also copy an existing pixbuf with the [gdkpixbuf.pixbuf.Pixbuf.copy]
     function. This is not the same as just acquiring a reference to
     the old pixbuf instance: the copy function will actually duplicate
-    the pixel data in memory and create a new `class@Pixbuf` instance
+    the pixel data in memory and create a new [gdkpixbuf.pixbuf.Pixbuf] instance
     for it.
     
     ## Reference counting

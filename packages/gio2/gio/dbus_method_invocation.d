@@ -1,6 +1,7 @@
 /// Module for [DBusMethodInvocation] class
 module gio.dbus_method_invocation;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

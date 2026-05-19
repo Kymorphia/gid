@@ -1,6 +1,7 @@
 /// Module for [ImplementorIface] interface
 module atk.implementor_iface;
 
+public import gid.basictypes;
 public import atk.implementor_iface_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

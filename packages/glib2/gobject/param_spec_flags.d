@@ -1,6 +1,7 @@
 /// Module for [ParamSpecFlags] class
 module gobject.param_spec_flags;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

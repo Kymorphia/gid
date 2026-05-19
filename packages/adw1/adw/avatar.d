@@ -1,6 +1,7 @@
 /// Module for [Avatar] class
 module adw.avatar;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -28,15 +29,15 @@ import gtk.widget;
     [adw.avatar.Avatar] is a widget that shows a round avatar.
     
     [adw.avatar.Avatar] generates an avatar with the initials of  the
-    `property@Avatar:text` on top of a colored background.
+    [adw.avatar.Avatar.text] on top of a colored background.
     
-    The color is picked based on the hash of the `property@Avatar:text`.
+    The color is picked based on the hash of the [adw.avatar.Avatar.text].
     
-    If `property@Avatar:show-initials` is set to `FALSE`,
-    `property@Avatar:icon-name` or `avatar-default-symbolic` is shown instead of
+    If [adw.avatar.Avatar.showInitials] is set to `FALSE`,
+    [adw.avatar.Avatar.iconName] or `avatar-default-symbolic` is shown instead of
     the initials.
     
-    Use `property@Avatar:custom-image` to set a custom image.
+    Use [adw.avatar.Avatar.customImage] to set a custom image.
     
     ## CSS nodes
     
@@ -129,7 +130,7 @@ class Avatar : gtk.widget.Widget
       Get `showInitials` property.
       Returns: Whether initials are used instead of an icon on the fallback avatar.
         
-        See `property@Avatar:icon-name` for how to change the fallback icon.
+        See [adw.avatar.Avatar.iconName] for how to change the fallback icon.
   */
   @property bool showInitials()
   {
@@ -141,7 +142,7 @@ class Avatar : gtk.widget.Widget
       Params:
         propval = Whether initials are used instead of an icon on the fallback avatar.
           
-          See `property@Avatar:icon-name` for how to change the fallback icon.
+          See [adw.avatar.Avatar.iconName] for how to change the fallback icon.
   */
   @property void showInitials(bool propval)
   {
@@ -171,7 +172,7 @@ class Avatar : gtk.widget.Widget
       Get `text` property.
       Returns: Sets the text used to generate the fallback initials and color.
         
-        It's only used to generate the color if `property@Avatar:show-initials` is
+        It's only used to generate the color if [adw.avatar.Avatar.showInitials] is
         `FALSE`.
   */
   @property string text()
@@ -184,7 +185,7 @@ class Avatar : gtk.widget.Widget
       Params:
         propval = Sets the text used to generate the fallback initials and color.
           
-          It's only used to generate the color if `property@Avatar:show-initials` is
+          It's only used to generate the color if [adw.avatar.Avatar.showInitials] is
           `FALSE`.
   */
   @property void text(string propval)
@@ -317,7 +318,7 @@ class Avatar : gtk.widget.Widget
   /**
       Sets whether to use initials instead of an icon on the fallback avatar.
       
-      See `propertyAvatar:icon-name` for how to change the fallback icon.
+      See [adw.avatar.Avatar.iconName] for how to change the fallback icon.
   
       Params:
         showInitials = whether to use initials instead of an icon as fallback
@@ -341,7 +342,7 @@ class Avatar : gtk.widget.Widget
   /**
       Sets the text used to generate the fallback initials and color.
       
-      It's only used to generate the color if `propertyAvatar:show-initials` is
+      It's only used to generate the color if [adw.avatar.Avatar.showInitials] is
       `FALSE`.
   
       Params:
@@ -390,7 +391,7 @@ class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Whether initials are used instead of an icon on the fallback avatar.
           
-          See `property@Avatar:icon-name` for how to change the fallback icon.
+          See [adw.avatar.Avatar.iconName] for how to change the fallback icon.
       Returns: Builder instance for fluent chaining
   */
   T showInitials(bool propval)
@@ -414,7 +415,7 @@ class AvatarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Sets the text used to generate the fallback initials and color.
           
-          It's only used to generate the color if `property@Avatar:show-initials` is
+          It's only used to generate the color if [adw.avatar.Avatar.showInitials] is
           `FALSE`.
       Returns: Builder instance for fluent chaining
   */

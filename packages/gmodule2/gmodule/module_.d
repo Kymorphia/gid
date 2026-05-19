@@ -1,6 +1,7 @@
 /// Module for [Module] class
 module gmodule.module_;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.types;

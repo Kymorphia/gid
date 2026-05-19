@@ -1,6 +1,7 @@
 /// Module for [EventControllerMotion] class
 module gtk.event_controller_motion;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -15,8 +16,8 @@ import gtk.types;
     
     The event controller offers [gtk.event_controller_motion.EventControllerMotion.enter]
     and [gtk.event_controller_motion.EventControllerMotion.leave] signals, as well as
-    `property@Gtk.EventControllerMotion:is-pointer` and
-    `property@Gtk.EventControllerMotion:contains-pointer` properties
+    [gtk.event_controller_motion.EventControllerMotion.isPointer] and
+    [gtk.event_controller_motion.EventControllerMotion.containsPointer] properties
     which are updated to reflect changes in the pointer position as it
     moves over the widget.
 */

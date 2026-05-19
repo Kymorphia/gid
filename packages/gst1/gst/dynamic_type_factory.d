@@ -1,6 +1,7 @@
 /// Module for [DynamicTypeFactory] class
 module gst.dynamic_type_factory;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.types;

@@ -1,6 +1,7 @@
 /// Module for [TagMux] class
 module gsttag.tag_mux;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.element;

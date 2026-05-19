@@ -1,6 +1,7 @@
 /// Module for [ColorChooserRequest] class
 module webkit.color_chooser_request;
 
+public import gid.basictypes;
 import gdk.rectangle;
 import gdk.rgba;
 import gid.gid;

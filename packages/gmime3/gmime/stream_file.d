@@ -1,6 +1,7 @@
 /// Module for [StreamFile] class
 module gmime.stream_file;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gmime.c.functions;

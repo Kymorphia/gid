@@ -1,6 +1,7 @@
 /// Module for [SettingsBackend] class
 module gio.settings_backend;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

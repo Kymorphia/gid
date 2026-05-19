@@ -1,6 +1,7 @@
 /// Module for [Device] class
 module gst.device;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

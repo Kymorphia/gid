@@ -1,6 +1,7 @@
 /// Module for [VideoOverlayRectangle] class
 module gstvideo.video_overlay_rectangle;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.buffer;

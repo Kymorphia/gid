@@ -1,6 +1,7 @@
 /// Module for [ConstraintTarget] interface mixin
 module gtk.constraint_target_mixin;
 
+public import gid.basictypes;
 public import gtk.constraint_target_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

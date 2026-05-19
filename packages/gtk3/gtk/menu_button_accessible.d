@@ -1,6 +1,7 @@
 /// Module for [MenuButtonAccessible] class
 module gtk.menu_button_accessible;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.component;

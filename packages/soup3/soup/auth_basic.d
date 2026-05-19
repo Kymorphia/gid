@@ -1,6 +1,7 @@
 /// Module for [AuthBasic] class
 module soup.auth_basic;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import soup.auth;
@@ -11,7 +12,7 @@ import soup.types;
 /**
     HTTP "Basic" authentication.
     
-    `class@Session`s support this by default; if you want to disable
+    [soup.session.Session]s support this by default; if you want to disable
     support for it, call [soup.session.Session.removeFeatureByType],
     passing `SOUP_TYPE_AUTH_BASIC`.
 */

@@ -1,6 +1,7 @@
 /// Module for [ColorNode] class
 module gsk.color_node;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import graphene.rect;

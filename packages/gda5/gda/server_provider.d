@@ -1,6 +1,7 @@
 /// Module for [ServerProvider] class
 module gda.server_provider;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

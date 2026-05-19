@@ -1,6 +1,7 @@
 /// Module for [UserMessage] class
 module webkitwebprocessextension.user_message;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.unix_fdlist;
 import glib.variant;

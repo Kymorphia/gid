@@ -1,6 +1,7 @@
 /// Module for [FileChooserDialog] class
 module gtk.file_chooser_dialog;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;

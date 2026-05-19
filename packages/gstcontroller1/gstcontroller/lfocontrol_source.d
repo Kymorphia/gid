@@ -1,6 +1,7 @@
 /// Module for [LFOControlSource] class
 module gstcontroller.lfocontrol_source;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

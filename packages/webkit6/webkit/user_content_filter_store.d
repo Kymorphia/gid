@@ -1,6 +1,7 @@
 /// Module for [UserContentFilterStore] class
 module webkit.user_content_filter_store;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

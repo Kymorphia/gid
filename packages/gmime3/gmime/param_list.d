@@ -1,6 +1,7 @@
 /// Module for [ParamList] class
 module gmime.param_list;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.string_;
 import gmime.c.functions;

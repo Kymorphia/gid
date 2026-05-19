@@ -1,6 +1,7 @@
 /// Module for [DropControllerMotion] class
 module gtk.drop_controller_motion;
 
+public import gid.basictypes;
 import gdk.drop;
 import gid.gid;
 import gobject.dclosure;

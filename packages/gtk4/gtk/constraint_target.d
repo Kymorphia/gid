@@ -1,6 +1,7 @@
 /// Module for [ConstraintTarget] interface
 module gtk.constraint_target;
 
+public import gid.basictypes;
 public import gtk.constraint_target_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

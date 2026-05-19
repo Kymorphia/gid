@@ -1,6 +1,7 @@
 /// Module for [DataStream] class
 module arrowflight.data_stream;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

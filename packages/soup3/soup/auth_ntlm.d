@@ -1,6 +1,7 @@
 /// Module for [AuthNTLM] class
 module soup.auth_ntlm;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import soup.auth;
@@ -11,7 +12,7 @@ import soup.types;
 /**
     HTTP-based NTLM authentication.
     
-    `class@Session`s do not support this type by default; if you want to
+    [soup.session.Session]s do not support this type by default; if you want to
     enable support for it, call [soup.session.Session.addFeatureByType],
     passing `SOUP_TYPE_AUTH_NTLM`.
 */

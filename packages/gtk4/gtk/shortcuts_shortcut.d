@@ -1,6 +1,7 @@
 /// Module for [ShortcutsShortcut] class
 module gtk.shortcuts_shortcut;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.icon;
 import gobject.gid_builder;
@@ -76,7 +77,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Get `accelerator` property.
       Returns: The accelerator(s) represented by this object.
         
-        This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
+        This property is used if [gtk.shortcuts_shortcut.ShortcutsShortcut.shortcutType]
         is set to [gtk.types.ShortcutType.Accelerator].
         
         The syntax of this property is (an extension of) the syntax understood
@@ -112,7 +113,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Params:
         propval = The accelerator(s) represented by this object.
           
-          This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
+          This property is used if [gtk.shortcuts_shortcut.ShortcutsShortcut.shortcutType]
           is set to [gtk.types.ShortcutType.Accelerator].
           
           The syntax of this property is (an extension of) the syntax understood
@@ -201,7 +202,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Get `icon` property.
       Returns: An icon to represent the shortcut or gesture.
         
-        This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
+        This property is used if [gtk.shortcuts_shortcut.ShortcutsShortcut.shortcutType]
         is set to [gtk.types.ShortcutType.Gesture].
         
         For the other predefined gesture types, GTK provides an icon on its own.
@@ -216,7 +217,7 @@ class ShortcutsShortcut : gtk.widget.Widget
       Params:
         propval = An icon to represent the shortcut or gesture.
           
-          This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
+          This property is used if [gtk.shortcuts_shortcut.ShortcutsShortcut.shortcutType]
           is set to [gtk.types.ShortcutType.Gesture].
           
           For the other predefined gesture types, GTK provides an icon on its own.
@@ -371,7 +372,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The accelerator(s) represented by this object.
           
-          This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
+          This property is used if [gtk.shortcuts_shortcut.ShortcutsShortcut.shortcutType]
           is set to [gtk.types.ShortcutType.Accelerator].
           
           The syntax of this property is (an extension of) the syntax understood
@@ -438,7 +439,7 @@ class ShortcutsShortcutGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = An icon to represent the shortcut or gesture.
           
-          This property is used if `property@Gtk.ShortcutsShortcut:shortcut-type`
+          This property is used if [gtk.shortcuts_shortcut.ShortcutsShortcut.shortcutType]
           is set to [gtk.types.ShortcutType.Gesture].
           
           For the other predefined gesture types, GTK provides an icon on its own.

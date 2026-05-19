@@ -1,6 +1,7 @@
 /// Module for [TreeMgrLabel] class
 module gda.tree_mgr_label;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.tree_manager;

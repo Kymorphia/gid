@@ -1,6 +1,7 @@
 /// Module for [TextView] class
 module gtk.text_view;
 
+public import gid.basictypes;
 import gdk.event;
 import gdk.rectangle;
 import gid.gid;
@@ -129,7 +130,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
         the value set here is padding, and it is applied in addition
         to the padding from the theme.
         
-        Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
+        Don't confuse this property with [gtk.widget.Widget.marginBottom].
   */
   @property int bottomMargin()
   {
@@ -145,7 +146,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
           the value set here is padding, and it is applied in addition
           to the padding from the theme.
           
-          Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
+          Don't confuse this property with [gtk.widget.Widget.marginBottom].
   */
   @property void bottomMargin(int propval)
   {
@@ -228,7 +229,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
         See [gtk.immulticontext.IMMulticontext].
         
         Setting this to a non-null value overrides the system-wide IM module
-        setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
+        setting. See the GtkSettings [gtk.settings.Settings.gtkImModule] property.
   */
   @property string imModule()
   {
@@ -243,7 +244,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
           See [gtk.immulticontext.IMMulticontext].
           
           Setting this to a non-null value overrides the system-wide IM module
-          setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
+          setting. See the GtkSettings [gtk.settings.Settings.gtkImModule] property.
   */
   @property void imModule(string propval)
   {
@@ -279,7 +280,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Get `inputHints` property.
-      Returns: Additional hints (beyond `property@Gtk.TextView:input-purpose`)
+      Returns: Additional hints (beyond [gtk.text_view.TextView.inputPurpose])
         that allow input methods to fine-tune their behaviour.
   */
   @property gtk.types.InputHints inputHints()
@@ -290,7 +291,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   /**
       Set `inputHints` property.
       Params:
-        propval = Additional hints (beyond `property@Gtk.TextView:input-purpose`)
+        propval = Additional hints (beyond [gtk.text_view.TextView.inputPurpose])
           that allow input methods to fine-tune their behaviour.
   */
   @property void inputHints(gtk.types.InputHints propval)
@@ -497,7 +498,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
         the value set here is padding, and it is applied in addition
         to the padding from the theme.
         
-        Don't confuse this property with `property@Gtk.Widget:margin-top`.
+        Don't confuse this property with [gtk.widget.Widget.marginTop].
   */
   @property int topMargin()
   {
@@ -513,7 +514,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
           the value set here is padding, and it is applied in addition
           to the padding from the theme.
           
-          Don't confuse this property with `property@Gtk.Widget:margin-top`.
+          Don't confuse this property with [gtk.widget.Widget.marginTop].
   */
   @property void topMargin(int propval)
   {
@@ -1445,7 +1446,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
       cursor, so you may want to turn the cursor off.
       
       Note that this property may be overridden by the
-      `propertyGtk.Settings:gtk-keynav-use-caret` setting.
+      [gtk.settings.Settings.gtkKeynavUseCaret] setting.
   
       Params:
         setting = whether to show the insertion cursor
@@ -2496,7 +2497,7 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
           the value set here is padding, and it is applied in addition
           to the padding from the theme.
           
-          Don't confuse this property with `property@Gtk.Widget:margin-bottom`.
+          Don't confuse this property with [gtk.widget.Widget.marginBottom].
       Returns: Builder instance for fluent chaining
   */
   T bottomMargin(int propval)
@@ -2551,7 +2552,7 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
           See [gtk.immulticontext.IMMulticontext].
           
           Setting this to a non-null value overrides the system-wide IM module
-          setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module` property.
+          setting. See the GtkSettings [gtk.settings.Settings.gtkImModule] property.
       Returns: Builder instance for fluent chaining
   */
   T imModule(string propval)
@@ -2577,7 +2578,7 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
   /**
       Set `inputHints` property.
       Params:
-        propval = Additional hints (beyond `property@Gtk.TextView:input-purpose`)
+        propval = Additional hints (beyond [gtk.text_view.TextView.inputPurpose])
           that allow input methods to fine-tune their behaviour.
       Returns: Builder instance for fluent chaining
   */
@@ -2698,7 +2699,7 @@ class TextViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessi
           the value set here is padding, and it is applied in addition
           to the padding from the theme.
           
-          Don't confuse this property with `property@Gtk.Widget:margin-top`.
+          Don't confuse this property with [gtk.widget.Widget.marginTop].
       Returns: Builder instance for fluent chaining
   */
   T topMargin(int propval)

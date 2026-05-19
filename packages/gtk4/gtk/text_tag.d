@@ -1,6 +1,7 @@
 /// Module for [TextTag] class
 module gtk.text_tag;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gobject.gid_builder;
@@ -1565,7 +1566,7 @@ class TextTag : gobject.object.ObjectWrap
   }
 
   /**
-      Emits the `signalGtk.TextTagTable::tag-changed` signal on the
+      Emits the [gtk.text_tag_table.TextTagTable.tagChanged] signal on the
       [gtk.text_tag_table.TextTagTable] where the tag is included.
       
       The signal is already emitted when setting a [gtk.text_tag.TextTag] property.

@@ -1,6 +1,7 @@
 /// Module for [TagXmpWriter] interface
 module gsttag.tag_xmp_writer;
 
+public import gid.basictypes;
 public import gsttag.tag_xmp_writer_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

@@ -1,6 +1,7 @@
 /// Module for [TearoffMenuItem] class
 module gtk.tearoff_menu_item;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

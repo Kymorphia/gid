@@ -1,6 +1,7 @@
 /// Module for [AudioConverter] class
 module gstaudio.audio_converter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.structure;

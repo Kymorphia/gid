@@ -1,6 +1,7 @@
 /// Module for [ClipboardPermissionRequest] class
 module webkit.clipboard_permission_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

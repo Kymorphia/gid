@@ -1,6 +1,7 @@
 /// Module for [RTSPTransport] class
 module gstrtsp.rtsptransport;
 
+public import gid.basictypes;
 import gid.gid;
 import gstrtsp.c.functions;
 import gstrtsp.c.types;

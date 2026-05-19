@@ -1,6 +1,7 @@
 /// Module for [PropertyAnimationTarget] class
 module adw.property_animation_target;
 
+public import gid.basictypes;
 import adw.animation_target;
 import adw.c.functions;
 import adw.c.types;
@@ -11,7 +12,7 @@ import gobject.object;
 import gobject.param_spec;
 
 /**
-    An `class@AnimationTarget` changing the value of a property of a
+    An [adw.animation_target.AnimationTarget] changing the value of a property of a
     [gobject.object.ObjectWrap] instance.
 */
 class PropertyAnimationTarget : adw.animation_target.AnimationTarget

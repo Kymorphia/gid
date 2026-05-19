@@ -1,6 +1,7 @@
 /// Module for [ColorDialog] class
 module gtk.color_dialog;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gio.async_result;

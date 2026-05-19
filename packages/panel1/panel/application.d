@@ -1,6 +1,7 @@
 /// Module for [Application] class
 module panel.application;
 
+public import gid.basictypes;
 import adw.application;
 import gid.gid;
 import gio.action_group;

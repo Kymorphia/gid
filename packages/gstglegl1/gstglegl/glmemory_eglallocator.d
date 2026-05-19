@@ -1,6 +1,7 @@
 /// Module for [GLMemoryEGLAllocator] class
 module gstglegl.glmemory_eglallocator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstgl.glmemory_allocator;

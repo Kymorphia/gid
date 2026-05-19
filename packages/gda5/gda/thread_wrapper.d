@@ -1,6 +1,7 @@
 /// Module for [ThreadWrapper] class
 module gda.thread_wrapper;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

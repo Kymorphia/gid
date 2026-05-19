@@ -1,6 +1,7 @@
 /// Module for [FindController] class
 module webkit.find_controller;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

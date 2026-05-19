@@ -1,6 +1,7 @@
 /// Module for [Caps] class
 module gst.caps;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gobject.value;

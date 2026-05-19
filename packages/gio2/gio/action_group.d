@@ -1,6 +1,7 @@
 /// Module for [ActionGroup] interface
 module gio.action_group;
 
+public import gid.basictypes;
 public import gio.action_group_iface_proxy;
 import gid.gid;
 import gio.c.functions;

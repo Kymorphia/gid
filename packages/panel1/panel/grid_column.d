@@ -1,6 +1,7 @@
 /// Module for [GridColumn] class
 module panel.grid_column;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

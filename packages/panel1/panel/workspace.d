@@ -1,6 +1,7 @@
 /// Module for [Workspace] class
 module panel.workspace;
 
+public import gid.basictypes;
 import adw.application_window;
 import gid.gid;
 import gio.action_group;

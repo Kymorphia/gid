@@ -1,6 +1,7 @@
 /// Module for [VideoChromaResample] class
 module gstvideo.video_chroma_resample;
 
+public import gid.basictypes;
 import gid.gid;
 import gstvideo.c.functions;
 import gstvideo.c.types;

@@ -1,6 +1,7 @@
 /// Module for [ColorStop] class
 module gsk.color_stop;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gsk.c.functions;

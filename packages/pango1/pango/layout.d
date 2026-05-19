@@ -1,6 +1,7 @@
 /// Module for [Layout] class
 module pango.layout;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.error;

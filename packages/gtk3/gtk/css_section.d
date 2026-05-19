@@ -1,6 +1,7 @@
 /// Module for [CssSection] class
 module gtk.css_section;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.file;
 import gobject.boxed;

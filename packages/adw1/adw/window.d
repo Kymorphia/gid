@@ -1,6 +1,7 @@
 /// Module for [Window] class
 module adw.window;
 
+public import gid.basictypes;
 import adw.breakpoint;
 import adw.c.functions;
 import adw.c.types;
@@ -34,8 +35,8 @@ import gtk.window;
     </picture>
     
     The [adw.window.Window] widget is a subclass of [gtk.window.Window] which has no
-    titlebar area. Instead, `class@ToolbarView` can be used together with
-    `class@HeaderBar` or [gtk.header_bar.HeaderBar] as follows:
+    titlebar area. Instead, [adw.toolbar_view.ToolbarView] can be used together with
+    [adw.header_bar.HeaderBar] or [gtk.header_bar.HeaderBar] as follows:
     
     ```xml
     <object class="AdwWindow">
@@ -53,18 +54,18 @@ import gtk.window;
     ```
     
     Using [gtk.window.Window.titlebar] or [gtk.window.Window.child]
-    is not supported and will result in a crash. Use `property@Window:content`
+    is not supported and will result in a crash. Use [adw.window.Window.content]
     instead.
     
     ## Dialogs
     
-    [adw.window.Window] can contain `class@Dialog`. Use [adw.dialog.Dialog.present] with the
+    [adw.window.Window] can contain [adw.dialog.Dialog]. Use [adw.dialog.Dialog.present] with the
     window or a widget within a window to show a dialog.
     
     ## Breakpoints
     
-    [adw.window.Window] can be used with `class@Breakpoint` the same way as
-    `class@BreakpointBin`. Refer to that widget's documentation for details.
+    [adw.window.Window] can be used with [adw.breakpoint.Breakpoint] the same way as
+    [adw.breakpoint_bin.BreakpointBin]. Refer to that widget's documentation for details.
     
     Example:
     
@@ -98,8 +99,8 @@ import gtk.window;
     ```
     
     Like [adw.breakpoint_bin.BreakpointBin], if breakpoints are used, [adw.window.Window] doesn't have a
-    minimum size, and `property@Gtk.Widget:width-request` and
-    `property@Gtk.Widget:height-request` properties must be set manually.
+    minimum size, and [gtk.widget.Widget.widthRequest] and
+    [gtk.widget.Widget.heightRequest] properties must be set manually.
 */
 class Window : gtk.window.Window
 {

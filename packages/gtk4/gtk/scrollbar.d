@@ -1,6 +1,7 @@
 /// Module for [Scrollbar] class
 module gtk.scrollbar;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -27,12 +28,12 @@ import gtk.widget;
     or created by [gtk.scrollbar.Scrollbar.new_]. See [gtk.adjustment.Adjustment] for more
     details. The [gtk.adjustment.Adjustment.value] field sets the position of the
     thumb and must be between [gtk.adjustment.Adjustment.lower] and
-    [gtk.adjustment.Adjustment.upper] - `property@Gtk.Adjustment:page-size`.
-    The `property@Gtk.Adjustment:page-size` represents the size of the visible
+    [gtk.adjustment.Adjustment.upper] - [gtk.adjustment.Adjustment.pageSize].
+    The [gtk.adjustment.Adjustment.pageSize] represents the size of the visible
     scrollable area.
     
-    The fields `property@Gtk.Adjustment:step-increment` and
-    `property@Gtk.Adjustment:page-increment` fields are added to or subtracted
+    The fields [gtk.adjustment.Adjustment.stepIncrement] and
+    [gtk.adjustment.Adjustment.pageIncrement] fields are added to or subtracted
     from the [gtk.adjustment.Adjustment.value] when the user asks to move by a step
     (using e.g. the cursor arrow keys) or by a page (using e.g. the Page Down/Up
     keys).

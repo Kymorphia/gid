@@ -1,6 +1,7 @@
 /// Module for [Window] class
 module gdk.window;
 
+public import gid.basictypes;
 import cairo.context;
 import cairo.pattern;
 import cairo.region;

@@ -1,6 +1,7 @@
 /// Module for [ContentType] class
 module gmime.content_type;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

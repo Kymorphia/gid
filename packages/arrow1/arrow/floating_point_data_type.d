@@ -1,6 +1,7 @@
 /// Module for [FloatingPointDataType] class
 module arrow.floating_point_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.numeric_data_type;

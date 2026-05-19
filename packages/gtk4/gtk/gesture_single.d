@@ -1,6 +1,7 @@
 /// Module for [GestureSingle] class
 module gtk.gesture_single;
 
+public import gid.basictypes;
 import gdk.event_sequence;
 import gid.gid;
 import gobject.gid_builder;

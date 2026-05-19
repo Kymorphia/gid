@@ -1,6 +1,7 @@
 /// Module for [AuthenticationRequest] class
 module webkit.authentication_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.types;
 import gobject.dclosure;

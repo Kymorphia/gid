@@ -1,6 +1,7 @@
 /// Module for [Popup] interface mixin
 module gdk.popup_mixin;
 
+public import gid.basictypes;
 public import gdk.popup_iface_proxy;
 public import gdk.c.functions;
 public import gdk.c.types;

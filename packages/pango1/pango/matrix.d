@@ -1,6 +1,7 @@
 /// Module for [Matrix] struct
 module pango.matrix;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.c.functions;
 import pango.c.types;

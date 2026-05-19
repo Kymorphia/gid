@@ -1,6 +1,7 @@
 /// Module for [ComboBoxAccessible] class
 module gtk.combo_box_accessible;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.component;

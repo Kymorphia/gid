@@ -1,6 +1,7 @@
 /// Module for [Sorter] class
 module gtk.sorter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

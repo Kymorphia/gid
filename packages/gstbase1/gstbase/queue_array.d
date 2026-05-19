@@ -1,6 +1,7 @@
 /// Module for [QueueArray] class
 module gstbase.queue_array;
 
+public import gid.basictypes;
 import gid.gid;
 import gstbase.c.functions;
 import gstbase.c.types;

@@ -1,6 +1,7 @@
 /// Module for [GLArea] class
 module gtk.glarea;
 
+public import gid.basictypes;
 import gdk.glcontext;
 import gdk.types;
 import gid.gid;
@@ -125,7 +126,7 @@ import gtk.widget;
     ```
     
     If you need to change the options for creating the [gdk.glcontext.GLContext]
-    you should use the `signal@Gtk.GLArea::create-context` signal.
+    you should use the [gtk.glarea.GLArea.createContext] signal.
 */
 class GLArea : gtk.widget.Widget
 {
@@ -297,7 +298,7 @@ class GLArea : gtk.widget.Widget
       Returns: If set to true the widget will try to create a [gdk.glcontext.GLContext] using
         OpenGL ES instead of OpenGL.
   
-      Deprecated: Use `property@Gtk.GLArea:allowed-apis`
+      Deprecated: Use [gtk.glarea.GLArea.allowedApis]
   */
   @property bool useEs()
   {
@@ -310,7 +311,7 @@ class GLArea : gtk.widget.Widget
         propval = If set to true the widget will try to create a [gdk.glcontext.GLContext] using
           OpenGL ES instead of OpenGL.
   
-      Deprecated: Use `property@Gtk.GLArea:allowed-apis`
+      Deprecated: Use [gtk.glarea.GLArea.allowedApis]
   */
   @property void useEs(bool propval)
   {
@@ -529,7 +530,7 @@ class GLArea : gtk.widget.Widget
       Sets an error on the area which will be shown instead of the
       GL rendering.
       
-      This is useful in the `signalGtk.GLArea::create-context`
+      This is useful in the [gtk.glarea.GLArea.createContext]
       signal if GL context creation fails.
   
       Params:
@@ -831,7 +832,7 @@ class GLAreaGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
           OpenGL ES instead of OpenGL.
       Returns: Builder instance for fluent chaining
   
-      Deprecated: Use `property@Gtk.GLArea:allowed-apis`
+      Deprecated: Use [gtk.glarea.GLArea.allowedApis]
   */
   T useEs(bool propval)
   {

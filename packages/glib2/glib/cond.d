@@ -1,6 +1,7 @@
 /// Module for [Cond] class
 module glib.cond;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

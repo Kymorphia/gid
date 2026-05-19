@@ -1,6 +1,7 @@
 /// Module for [VideoRegionOfInterestMeta] class
 module gstvideo.video_region_of_interest_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gst.meta;

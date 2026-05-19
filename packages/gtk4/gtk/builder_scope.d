@@ -1,6 +1,7 @@
 /// Module for [BuilderScope] interface
 module gtk.builder_scope;
 
+public import gid.basictypes;
 public import gtk.builder_scope_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

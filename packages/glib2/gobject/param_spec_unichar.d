@@ -1,6 +1,7 @@
 /// Module for [ParamSpecUnichar] class
 module gobject.param_spec_unichar;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

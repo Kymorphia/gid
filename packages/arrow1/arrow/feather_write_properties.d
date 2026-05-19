@@ -1,6 +1,7 @@
 /// Module for [FeatherWriteProperties] class
 module arrow.feather_write_properties;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

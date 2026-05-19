@@ -1,6 +1,7 @@
 /// Module for [PreferencesWindow] class
 module adw.preferences_window;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.navigation_page;
@@ -93,7 +94,7 @@ class PreferencesWindow : adw.window.Window
         
         For right-to-left locales, gestures and shortcuts are reversed.
   
-      Deprecated: Use `property@NavigationPage:can-pop` instead.
+      Deprecated: Use [adw.navigation_page.NavigationPage.canPop] instead.
         
         Has no effect for subpages added with
         [adw.preferences_window.PreferencesWindow.pushSubpage].
@@ -119,7 +120,7 @@ class PreferencesWindow : adw.window.Window
           
           For right-to-left locales, gestures and shortcuts are reversed.
   
-      Deprecated: Use `property@NavigationPage:can-pop` instead.
+      Deprecated: Use [adw.navigation_page.NavigationPage.canPop] instead.
         
         Has no effect for subpages added with
         [adw.preferences_window.PreferencesWindow.pushSubpage].
@@ -171,7 +172,7 @@ class PreferencesWindow : adw.window.Window
       Get `visiblePageName` property.
       Returns: The name of the currently visible page.
         
-        See `property@PreferencesWindow:visible-page`.
+        See [adw.preferences_window.PreferencesWindow.visiblePage].
   */
   @property string visiblePageName()
   {
@@ -183,7 +184,7 @@ class PreferencesWindow : adw.window.Window
       Params:
         propval = The name of the currently visible page.
           
-          See `property@PreferencesWindow:visible-page`.
+          See [adw.preferences_window.PreferencesWindow.visiblePage].
   */
   @property void visiblePageName(string propval)
   {
@@ -387,7 +388,7 @@ class PreferencesWindow : adw.window.Window
   /**
       Makes the page with the given name visible.
       
-      See `propertyPreferencesWindow:visible-page`.
+      See [adw.preferences_window.PreferencesWindow.visiblePage].
   
       Params:
         name = the name of the page to make visible
@@ -421,7 +422,7 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
           For right-to-left locales, gestures and shortcuts are reversed.
       Returns: Builder instance for fluent chaining
   
-      Deprecated: Use `property@NavigationPage:can-pop` instead.
+      Deprecated: Use [adw.navigation_page.NavigationPage.canPop] instead.
         
         Has no effect for subpages added with
         [adw.preferences_window.PreferencesWindow.pushSubpage].
@@ -458,7 +459,7 @@ class PreferencesWindowGidBuilderImpl(T) : adw.window.WindowGidBuilderImpl!T
       Params:
         propval = The name of the currently visible page.
           
-          See `property@PreferencesWindow:visible-page`.
+          See [adw.preferences_window.PreferencesWindow.visiblePage].
       Returns: Builder instance for fluent chaining
   */
   T visiblePageName(string propval)

@@ -1,6 +1,7 @@
 /// Module for [TlsFileDatabase] interface mixin
 module gio.tls_file_database_mixin;
 
+public import gid.basictypes;
 public import gio.tls_file_database_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

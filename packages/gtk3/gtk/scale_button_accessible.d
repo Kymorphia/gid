@@ -1,6 +1,7 @@
 /// Module for [ScaleButtonAccessible] class
 module gtk.scale_button_accessible;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.component;

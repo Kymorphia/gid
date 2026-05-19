@@ -1,6 +1,7 @@
 /// Module for [MainLoop] class
 module glib.main_loop;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

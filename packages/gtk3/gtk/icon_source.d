@@ -1,6 +1,7 @@
 /// Module for [IconSource] class
 module gtk.icon_source;
 
+public import gid.basictypes;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gobject.boxed;

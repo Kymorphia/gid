@@ -1,6 +1,7 @@
 /// Module for [AppChooserButton] class
 module gtk.app_chooser_button;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

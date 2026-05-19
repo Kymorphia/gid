@@ -1,6 +1,7 @@
 /// Module for [Font] class
 module pango.font;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import glib.error;

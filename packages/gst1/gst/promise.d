@@ -1,6 +1,7 @@
 /// Module for [Promise] class
 module gst.promise;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.c.functions;

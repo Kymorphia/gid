@@ -1,6 +1,7 @@
 /// Module for [PluginDesc] class
 module gst.plugin_desc;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

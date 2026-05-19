@@ -1,6 +1,7 @@
 /// Module for [Serializable] interface
 module json.serializable;
 
+public import gid.basictypes;
 public import json.serializable_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

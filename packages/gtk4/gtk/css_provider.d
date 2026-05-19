@@ -1,6 +1,7 @@
 /// Module for [CssProvider] class
 module gtk.css_provider;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.file;
 import glib.bytes;
@@ -35,16 +36,16 @@ import gtk.types;
     `$XDG_DATA_DIRS/themes/THEME/gtk-VERSION/gtk-VARIANT.css` and
     `DATADIR/share/themes/THEME/gtk-VERSION/gtk-VARIANT.css`,
     where `THEME` is the name of the current theme (see the
-    `property@Gtk.Settings:gtk-theme-name` setting), `VARIANT` is the
+    [gtk.settings.Settings.gtkThemeName] setting), `VARIANT` is the
     variant to load (see the
-    `property@Gtk.Settings:gtk-application-prefer-dark-theme` setting),
+    [gtk.settings.Settings.gtkApplicationPreferDarkTheme] setting),
     `DATADIR` is the prefix configured when GTK was compiled (unless
     overridden by the `GTK_DATA_PREFIX` environment variable), and
     `VERSION` is the GTK version number. If no file is found for the
     current version, GTK tries older versions all the way back to 4.0.
     
     To track errors while loading CSS, connect to the
-    `signal@Gtk.CssProvider::parsing-error` signal.
+    [gtk.css_provider.CssProvider.parsingError] signal.
 */
 class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
 {

@@ -1,6 +1,7 @@
 /// Module for [IconTheme] class
 module gtk.icon_theme;
 
+public import gid.basictypes;
 import cairo.surface;
 import gdk.screen;
 import gdk.window;

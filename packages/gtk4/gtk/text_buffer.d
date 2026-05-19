@@ -1,6 +1,7 @@
 /// Module for [TextBuffer] class
 module gtk.text_buffer;
 
+public import gid.basictypes;
 import gdk.clipboard;
 import gdk.content_provider;
 import gdk.paintable;
@@ -178,7 +179,7 @@ class TextBuffer : gobject.object.ObjectWrap
       is not null then there must not be another mark in the buffer
       with the same name.
       
-      Emits the `signalGtk.TextBuffer::mark-set` signal as notification
+      Emits the [gtk.text_buffer.TextBuffer.markSet] signal as notification
       of the mark's initial placement.
   
       Params:
@@ -360,7 +361,7 @@ class TextBuffer : gobject.object.ObjectWrap
       return value if you like. Marks are owned by the buffer and go
       away when the buffer does.
       
-      Emits the `signalGtk.TextBuffer::mark-set` signal as notification
+      Emits the [gtk.text_buffer.TextBuffer.markSet] signal as notification
       of the mark's initial placement.
   
       Params:
@@ -444,7 +445,7 @@ class TextBuffer : gobject.object.ObjectWrap
       [gtk.text_buffer.TextBuffer.addMark]. Use [gtk.text_mark.TextMark.getDeleted]
       to find out if a mark has been removed from its buffer.
       
-      The `signalGtk.TextBuffer::mark-deleted` signal will be emitted as
+      The [gtk.text_buffer.TextBuffer.markDeleted] signal will be emitted as
       notification after the mark is deleted.
   
       Params:
@@ -1083,7 +1084,7 @@ class TextBuffer : gobject.object.ObjectWrap
       Inserts the text in markup at position iter.
       
       markup will be inserted in its entirety and must be nul-terminated
-      and valid UTF-8. Emits the `signalGtk.TextBuffer::insert-text` signal,
+      and valid UTF-8. Emits the [gtk.text_buffer.TextBuffer.insertText] signal,
       possibly multiple times; insertion actually occurs in the default handler
       for the signal. iter will point to the end of the inserted text on return.
   
@@ -1171,7 +1172,7 @@ class TextBuffer : gobject.object.ObjectWrap
   /**
       Moves mark to the new location where.
       
-      Emits the `signalGtk.TextBuffer::mark-set` signal
+      Emits the [gtk.text_buffer.TextBuffer.markSet] signal
       as notification of the move.
   
       Params:
@@ -1376,7 +1377,7 @@ class TextBuffer : gobject.object.ObjectWrap
       When the buffer is modified, it will automatically
       toggle on the modified bit again. When the modified
       bit flips, the buffer emits the
-      `signalGtk.TextBuffer::modified-changed` signal.
+      [gtk.text_buffer.TextBuffer.modifiedChanged] signal.
   
       Params:
         setting = modification flag setting

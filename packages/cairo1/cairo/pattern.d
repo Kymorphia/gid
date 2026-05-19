@@ -1,6 +1,7 @@
 /// Module for [Pattern] class
 module cairo.pattern;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.matrix;

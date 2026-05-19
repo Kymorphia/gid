@@ -1,6 +1,7 @@
 /// Module for [EnumListItem] class
 module adw.enum_list_item;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -9,7 +10,7 @@ import gobject.gid_builder;
 import gobject.object;
 
 /**
-    [adw.enum_list_item.EnumListItem] is the type of items in a `class@EnumListModel`.
+    [adw.enum_list_item.EnumListItem] is the type of items in a [adw.enum_list_model.EnumListModel].
 */
 class EnumListItem : gobject.object.ObjectWrap
 {

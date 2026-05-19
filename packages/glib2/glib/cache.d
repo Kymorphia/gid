@@ -1,6 +1,7 @@
 /// Module for [Cache] class
 module glib.cache;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

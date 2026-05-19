@@ -1,6 +1,7 @@
 /// Module for [DataType] class
 module arrow.data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

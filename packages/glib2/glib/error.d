@@ -1,6 +1,7 @@
 /// Module for [ErrorWrap] class
 module glib.error;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

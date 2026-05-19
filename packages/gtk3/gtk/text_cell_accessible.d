@@ -1,6 +1,7 @@
 /// Module for [TextCellAccessible] class
 module gtk.text_cell_accessible;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.component;

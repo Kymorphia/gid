@@ -1,6 +1,7 @@
 /// Module for [PadController] class
 module gtk.pad_controller;
 
+public import gid.basictypes;
 import gdk.device;
 import gid.gid;
 import gio.action_group;

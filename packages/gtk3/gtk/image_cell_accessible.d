@@ -1,6 +1,7 @@
 /// Module for [ImageCellAccessible] class
 module gtk.image_cell_accessible;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.component;

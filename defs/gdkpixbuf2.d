@@ -1,7 +1,7 @@
 //!gir GdkPixbuf-2.0
 //!info description "D binding for the GdkPixbuf library - Image loading library"
 //!info homepage https://gtk.org
-//!info docs https://www.kymorphia.com/gid/gdkpixbuf.html
+//!info docs https://www.kymorphia.com/gid/gid~gdkpixbuf2/
 //!info capi https://docs.gtk.org/gdk-pixbuf/
 
 //# Set basic parameters to out

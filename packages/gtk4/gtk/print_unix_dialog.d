@@ -1,6 +1,7 @@
 /// Module for [PrintUnixDialog] class
 module gtk.print_unix_dialog;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

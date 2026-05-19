@@ -1,6 +1,7 @@
 /// Module for [ChangesDialog] class
 module panel.changes_dialog;
 
+public import gid.basictypes;
 import adw.alert_dialog;
 import gid.gid;
 import gio.async_result;

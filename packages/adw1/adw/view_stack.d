@@ -1,6 +1,7 @@
 /// Module for [ViewStack] class
 module adw.view_stack;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -18,34 +19,34 @@ import gtk.selection_model;
 import gtk.widget;
 
 /**
-    A view container for `class@ViewSwitcher`.
+    A view container for [adw.view_switcher.ViewSwitcher].
     
     [adw.view_stack.ViewStack] is a container which only shows one page at a time.
     It is typically used to hold an application's main views.
     
     It doesn't provide a way to transition between pages.
-    Instead, a separate widget such as `class@ViewSwitcher` can be used with
+    Instead, a separate widget such as [adw.view_switcher.ViewSwitcher] can be used with
     [adw.view_stack.ViewStack] to provide this functionality.
     
     [adw.view_stack.ViewStack] pages can have a title, an icon, an attention request, and a
-    numbered badge that `class@ViewSwitcher` will use to let users identify which
-    page is which. Set them using the `property@ViewStackPage:title`,
-    `property@ViewStackPage:icon-name`,
-    `property@ViewStackPage:needs-attention`, and
-    `property@ViewStackPage:badge-number` properties.
+    numbered badge that [adw.view_switcher.ViewSwitcher] will use to let users identify which
+    page is which. Set them using the [adw.view_stack_page.ViewStackPage.title],
+    [adw.view_stack_page.ViewStackPage.iconName],
+    [adw.view_stack_page.ViewStackPage.needsAttention], and
+    [adw.view_stack_page.ViewStackPage.badgeNumber] properties.
     
     Unlike [gtk.stack.Stack], transitions between views are not animated.
     
-    [adw.view_stack.ViewStack] maintains a `class@ViewStackPage` object for each added child,
+    [adw.view_stack.ViewStack] maintains a [adw.view_stack_page.ViewStackPage] object for each added child,
     which holds additional per-child properties. You obtain the
-    `class@ViewStackPage` for a child with [adw.view_stack.ViewStack.getPage] and you
+    [adw.view_stack_page.ViewStackPage] for a child with [adw.view_stack.ViewStack.getPage] and you
     can obtain a [gtk.selection_model.SelectionModel] containing all the pages with
     [adw.view_stack.ViewStack.getPages].
     
     ## AdwViewStack as GtkBuildable
     
     To set child-specific properties in a .ui file, create
-    `class@ViewStackPage` objects explicitly, and set the child widget as a
+    [adw.view_stack_page.ViewStackPage] objects explicitly, and set the child widget as a
     property on it:
     
     ```xml
@@ -208,7 +209,7 @@ class ViewStack : gtk.widget.Widget
       Get `visibleChildName` property.
       Returns: The name of the widget currently visible in the stack.
         
-        See `property@ViewStack:visible-child`.
+        See [adw.view_stack.ViewStack.visibleChild].
   */
   @property string visibleChildName()
   {
@@ -220,7 +221,7 @@ class ViewStack : gtk.widget.Widget
       Params:
         propval = The name of the widget currently visible in the stack.
           
-          See `property@ViewStack:visible-child`.
+          See [adw.view_stack.ViewStack.visibleChild].
   */
   @property void visibleChildName(string propval)
   {
@@ -243,7 +244,7 @@ class ViewStack : gtk.widget.Widget
   
       Params:
         child = the widget to add
-      Returns: the `classViewStackPage` for child
+      Returns: the [adw.view_stack_page.ViewStackPage] for child
   */
   adw.view_stack_page.ViewStackPage add(gtk.widget.Widget child)
   {
@@ -276,7 +277,7 @@ class ViewStack : gtk.widget.Widget
       Adds a child to self.
       
       The child is identified by the name. The title will be used by
-      `classViewSwitcher` to represent child, so it should be short.
+      [adw.view_switcher.ViewSwitcher] to represent child, so it should be short.
   
       Params:
         child = the widget to add
@@ -298,7 +299,7 @@ class ViewStack : gtk.widget.Widget
       Adds a child to self.
       
       The child is identified by the name. The title and icon_name will be used
-      by `classViewSwitcher` to represent child.
+      by [adw.view_switcher.ViewSwitcher] to represent child.
   
       Params:
         child = the widget to add
@@ -346,7 +347,7 @@ class ViewStack : gtk.widget.Widget
   }
 
   /**
-      Gets the `classViewStackPage` object for child.
+      Gets the [adw.view_stack_page.ViewStackPage] object for child.
   
       Params:
         child = a child of self
@@ -470,7 +471,7 @@ class ViewStack : gtk.widget.Widget
   /**
       Makes the child with name visible.
       
-      See `propertyViewStack:visible-child`.
+      See [adw.view_stack.ViewStack.visibleChild].
   
       Params:
         name = the name of the child
@@ -537,7 +538,7 @@ class ViewStackGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The name of the widget currently visible in the stack.
           
-          See `property@ViewStack:visible-child`.
+          See [adw.view_stack.ViewStack.visibleChild].
       Returns: Builder instance for fluent chaining
   */
   T visibleChildName(string propval)

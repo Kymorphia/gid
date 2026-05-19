@@ -1,6 +1,7 @@
 /// Module for [Int32Scalar] class
 module arrow.int32_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;

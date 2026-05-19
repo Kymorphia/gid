@@ -1,6 +1,7 @@
 /// Module for [ScannerConfig] class
 module glib.scanner_config;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

@@ -1,6 +1,7 @@
 /// Module for [PadActionEntry] class
 module gtk.pad_action_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;

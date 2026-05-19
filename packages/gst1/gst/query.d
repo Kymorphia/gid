@@ -1,6 +1,7 @@
 /// Module for [Query] class
 module gst.query;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gobject.types;

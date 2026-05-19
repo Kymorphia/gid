@@ -1,6 +1,7 @@
 /// Module for [FilterGZip] class
 module gmime.filter_gzip;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

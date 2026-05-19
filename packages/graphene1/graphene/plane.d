@@ -1,6 +1,7 @@
 /// Module for [Plane] class
 module graphene.plane;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import graphene.c.functions;

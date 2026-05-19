@@ -1,6 +1,7 @@
 /// Module for [FilterStrip] class
 module gmime.filter_strip;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

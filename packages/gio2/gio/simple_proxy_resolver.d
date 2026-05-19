@@ -1,6 +1,7 @@
 /// Module for [SimpleProxyResolver] class
 module gio.simple_proxy_resolver;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

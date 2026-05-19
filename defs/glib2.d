@@ -1,7 +1,7 @@
 //!gir GLib-2.0
 //!info description "D binding for the GLib library - General purpose portable utility library"
 //!info homepage https://gtk.org
-//!info docs https://www.kymorphia.com/gid/glib.html
+//!info docs https://www.kymorphia.com/gid/gid~glib2/
 //!info capi https://docs.gtk.org/glib/
 
 //!kind OptionEntry StructAlias

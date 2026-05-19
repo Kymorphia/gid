@@ -1,6 +1,7 @@
 /// Module for [DataWrapper] class
 module gmime.data_wrapper;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

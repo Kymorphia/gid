@@ -1,6 +1,7 @@
 /// Module for [TestLogBuffer] class
 module glib.test_log_buffer;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

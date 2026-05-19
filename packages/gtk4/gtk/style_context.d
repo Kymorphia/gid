@@ -1,6 +1,7 @@
 /// Module for [StyleContext] class
 module gtk.style_context;
 
+public import gid.basictypes;
 import gdk.display;
 import gdk.rgba;
 import gid.gid;

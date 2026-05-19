@@ -1,6 +1,7 @@
 /// Module for [PollableInputStream] interface mixin
 module gio.pollable_input_stream_mixin;
 
+public import gid.basictypes;
 public import gio.pollable_input_stream_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

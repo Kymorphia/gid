@@ -1,6 +1,7 @@
 /// Module for [WebView] class
 module webkit.web_view;
 
+public import gid.basictypes;
 import gdk.rectangle;
 import gdk.rgba;
 import gdk.texture;

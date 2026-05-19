@@ -1,6 +1,7 @@
 /// Module for [GestureSwipe] class
 module gtk.gesture_swipe;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

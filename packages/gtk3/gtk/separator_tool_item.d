@@ -1,6 +1,7 @@
 /// Module for [SeparatorToolItem] class
 module gtk.separator_tool_item;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

@@ -1,6 +1,7 @@
 /// Module for [AuthNegotiate] class
 module soup.auth_negotiate;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import soup.auth;
@@ -12,7 +13,7 @@ import soup.types;
     HTTP-based GSS-Negotiate authentication, as defined by
     [RFC 4559](https://datatracker.ietf.org/doc/html/rfc4559).
     
-    `class@Session`s do not support this type by default; if you want to
+    [soup.session.Session]s do not support this type by default; if you want to
     enable support for it, call [soup.session.Session.addFeatureByType],
     passing `SOUP_TYPE_AUTH_NEGOTIATE`.
     
@@ -61,7 +62,7 @@ class AuthNegotiate : soup.auth.Auth
       Indicates whether libsoup was built with GSSAPI support.
       
       If this is false, `SOUP_TYPE_AUTH_NEGOTIATE` will still be defined and can
-      still be added to a `classSession`, but libsoup will never attempt to
+      still be added to a [soup.session.Session], but libsoup will never attempt to
       actually use this auth type.
       Returns: true if supported otherwise false
   */

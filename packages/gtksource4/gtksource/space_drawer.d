@@ -1,6 +1,7 @@
 /// Module for [SpaceDrawer] class
 module gtksource.space_drawer;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.settings;
 import gio.types;

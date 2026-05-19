@@ -1,6 +1,7 @@
 /// Module for [Variation] struct
 module harfbuzz.variation;
 
+public import gid.basictypes;
 import gid.gid;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;

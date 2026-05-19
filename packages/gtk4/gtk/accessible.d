@@ -1,6 +1,7 @@
 /// Module for [Accessible] interface
 module gtk.accessible;
 
+public import gid.basictypes;
 public import gtk.accessible_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

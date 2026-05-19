@@ -1,6 +1,7 @@
 /// Module for [PasswordEntryRow] class
 module adw.password_entry_row;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.entry_row;
@@ -19,7 +20,7 @@ import gtk.editable;
 import gtk.editable_mixin;
 
 /**
-    A `class@EntryRow` tailored for entering secrets.
+    A [adw.entry_row.EntryRow] tailored for entering secrets.
     
     <picture>
       <source srcset="password-entry-row-dark.png" media="(prefers-color-scheme: dark)">

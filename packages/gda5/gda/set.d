@@ -1,6 +1,7 @@
 /// Module for [Set] class
 module gda.set;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.data_model;

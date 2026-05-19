@@ -1,6 +1,7 @@
 /// Module for [FileSelector] class
 module arrow.file_selector;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.types;

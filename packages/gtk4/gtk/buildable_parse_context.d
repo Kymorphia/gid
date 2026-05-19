@@ -1,6 +1,7 @@
 /// Module for [BuildableParseContext] class
 module gtk.buildable_parse_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;

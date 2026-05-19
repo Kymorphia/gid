@@ -1,6 +1,7 @@
 /// Module for [Info] class
 module arrowflight.info;
 
+public import gid.basictypes;
 import arrow.read_options;
 import arrow.schema;
 import arrowflight.c.functions;

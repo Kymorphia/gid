@@ -1,6 +1,7 @@
 /// Module for [JSONReader] class
 module arrow.jsonreader;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.input_stream;

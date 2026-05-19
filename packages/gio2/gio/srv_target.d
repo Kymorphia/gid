@@ -1,6 +1,7 @@
 /// Module for [SrvTarget] class
 module gio.srv_target;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

@@ -1,6 +1,7 @@
 /// Module for [CompletionInfo] class
 module gtksource.completion_info;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

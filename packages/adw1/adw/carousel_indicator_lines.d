@@ -1,6 +1,7 @@
 /// Module for [CarouselIndicatorLines] class
 module adw.carousel_indicator_lines;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.carousel;
@@ -19,7 +20,7 @@ import gtk.orientable_mixin;
 import gtk.widget;
 
 /**
-    A lines indicator for `class@Carousel`.
+    A lines indicator for [adw.carousel.Carousel].
     
     <picture>
       <source srcset="carousel-indicator-dots-lines.png" media="(prefers-color-scheme: dark)">
@@ -27,10 +28,10 @@ import gtk.widget;
     </picture>
     
     The [adw.carousel_indicator_lines.CarouselIndicatorLines] widget shows a set of lines for each page of
-    a given `class@Carousel`. The carousel's active page is shown as another line
+    a given [adw.carousel.Carousel]. The carousel's active page is shown as another line
     that moves between them to match the carousel's position.
     
-    See also `class@CarouselIndicatorDots`.
+    See also [adw.carousel_indicator_dots.CarouselIndicatorDots].
     
     ## CSS nodes
     

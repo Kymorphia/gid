@@ -1,6 +1,7 @@
 /// Module for [StyleScheme] class
 module gtksource.style_scheme;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -10,10 +11,10 @@ import gtksource.style;
 import gtksource.types;
 
 /**
-    Controls the appearance of `class@View`.
+    Controls the appearance of [gtksource.view.View].
     
     #GtkSourceStyleScheme contains all the text styles to be used in
-    `class@View` and `class@Buffer`. For instance, it contains text styles
+    [gtksource.view.View] and [gtksource.buffer.Buffer]. For instance, it contains text styles
     for syntax highlighting, it may contain foreground and background color for
     non-highlighted text, color for the line numbers, current line highlighting,
     bracket matching, etc.
@@ -82,7 +83,7 @@ class StyleScheme : gobject.object.ObjectWrap
   /**
       Get `id` property.
       Returns: Style scheme id, a unique string used to identify the style scheme
-        in `class@StyleSchemeManager`.
+        in [gtksource.style_scheme_manager.StyleSchemeManager].
   */
   @property string id()
   {
@@ -190,7 +191,7 @@ class StyleSchemeGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Set `id` property.
       Params:
         propval = Style scheme id, a unique string used to identify the style scheme
-          in `class@StyleSchemeManager`.
+          in [gtksource.style_scheme_manager.StyleSchemeManager].
       Returns: Builder instance for fluent chaining
   */
   T id(string propval)

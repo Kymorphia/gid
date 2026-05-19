@@ -1,6 +1,7 @@
 /// Module for [PrintOperation] class
 module gtk.print_operation;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;
@@ -37,7 +38,7 @@ import gtk.window;
     It will then show a dialog, let the user select a printer and options.
     When the user finished the dialog, various signals will be emitted on
     the [gtk.print_operation.PrintOperation], the main one being
-    `signal@Gtk.PrintOperation::draw-page`, which you are supposed to handle
+    [gtk.print_operation.PrintOperation.drawPage], which you are supposed to handle
     and render the page on the provided [gtk.print_context.PrintContext] using Cairo.
     
     # The high-level printing API
@@ -217,7 +218,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         
         This page setup will be used by [gtk.print_operation.PrintOperation.run],
         but it can be overridden on a per-page basis by connecting
-        to the `signal@Gtk.PrintOperation::request-page-setup` signal.
+        to the [gtk.print_operation.PrintOperation.requestPageSetup] signal.
   */
   @property gtk.page_setup.PageSetup defaultPageSetup()
   {
@@ -231,7 +232,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
           
           This page setup will be used by [gtk.print_operation.PrintOperation.run],
           but it can be overridden on a per-page basis by connecting
-          to the `signal@Gtk.PrintOperation::request-page-setup` signal.
+          to the [gtk.print_operation.PrintOperation.requestPageSetup] signal.
   */
   @property void defaultPageSetup(gtk.page_setup.PageSetup propval)
   {
@@ -353,12 +354,12 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Returns: The number of pages in the document.
         
         This must be set to a positive number before the rendering
-        starts. It may be set in a `signal@Gtk.PrintOperation::begin-print`
+        starts. It may be set in a [gtk.print_operation.PrintOperation.beginPrint]
         signal handler.
         
         Note that the page numbers passed to the
-        `signal@Gtk.PrintOperation::request-page-setup` and
-        `signal@Gtk.PrintOperation::draw-page` signals are 0-based, i.e.
+        [gtk.print_operation.PrintOperation.requestPageSetup] and
+        [gtk.print_operation.PrintOperation.drawPage] signals are 0-based, i.e.
         if the user chooses to print all pages, the last ::draw-page signal
         will be for page @n_pages - 1.
   */
@@ -373,12 +374,12 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         propval = The number of pages in the document.
           
           This must be set to a positive number before the rendering
-          starts. It may be set in a `signal@Gtk.PrintOperation::begin-print`
+          starts. It may be set in a [gtk.print_operation.PrintOperation.beginPrint]
           signal handler.
           
           Note that the page numbers passed to the
-          `signal@Gtk.PrintOperation::request-page-setup` and
-          `signal@Gtk.PrintOperation::draw-page` signals are 0-based, i.e.
+          [gtk.print_operation.PrintOperation.requestPageSetup] and
+          [gtk.print_operation.PrintOperation.drawPage] signals are 0-based, i.e.
           if the user chooses to print all pages, the last ::draw-page signal
           will be for page @n_pages - 1.
   */
@@ -394,7 +395,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         Note that this value is set during print preparation phase
         ([gtk.types.PrintStatus.Preparing]), so this value should never be
         get before the data generation phase ([gtk.types.PrintStatus.GeneratingData]).
-        You can connect to the `signal@Gtk.PrintOperation::status-changed` signal
+        You can connect to the [gtk.print_operation.PrintOperation.statusChanged] signal
         and call [gtk.print_operation.PrintOperation.getNPagesToPrint] when
         print status is [gtk.types.PrintStatus.GeneratingData].
         
@@ -603,8 +604,8 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   /**
       Cancels a running print operation.
       
-      This function may be called from a `signalGtk.PrintOperation::begin-print`,
-      [gtk.print_operation.PrintOperation.paginate] or `signalGtk.PrintOperation::draw-page`
+      This function may be called from a [gtk.print_operation.PrintOperation.beginPrint],
+      [gtk.print_operation.PrintOperation.paginate] or [gtk.print_operation.PrintOperation.drawPage]
       signal handler to stop the currently running print operation.
   */
   void cancel()
@@ -684,7 +685,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Note that this value is set during print preparation phase
       ([gtk.types.PrintStatus.Preparing]), so this function should never be
       called before the data generation phase ([gtk.types.PrintStatus.GeneratingData]).
-      You can connect to the `signalGtk.PrintOperation::status-changed`
+      You can connect to the [gtk.print_operation.PrintOperation.statusChanged]
       signal and call [gtk.print_operation.PrintOperation.getNPagesToPrint] when
       print status is [gtk.types.PrintStatus.GeneratingData].
       
@@ -783,7 +784,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       
       Normally that this function does not return until the rendering
       of all pages is complete. You can connect to the
-      `signalGtk.PrintOperation::status-changed` signal on op to obtain
+      [gtk.print_operation.PrintOperation.statusChanged] signal on op to obtain
       some information about the progress of the print operation.
       
       Furthermore, it may use a recursive mainloop to show the print dialog.
@@ -908,7 +909,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       
       This page setup will be used by [gtk.print_operation.PrintOperation.run],
       but it can be overridden on a per-page basis by connecting
-      to the `signalGtk.PrintOperation::request-page-setup` signal.
+      to the [gtk.print_operation.PrintOperation.requestPageSetup] signal.
   
       Params:
         defaultPageSetup = a [gtk.page_setup.PageSetup]
@@ -925,7 +926,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       This can be used for drawing page in another thread.
       
       This function must be called in the callback of the
-      `signalGtk.PrintOperation::draw-page` signal.
+      [gtk.print_operation.PrintOperation.drawPage] signal.
   */
   void setDeferDrawing()
   {
@@ -971,7 +972,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       
       Application has to set number of pages to which the selection
       will draw by [gtk.print_operation.PrintOperation.setNPages] in a handler
-      for the `signalGtk.PrintOperation::begin-print` signal.
+      for the [gtk.print_operation.PrintOperation.beginPrint] signal.
   
       Params:
         hasSelection = true indicates that a selection exists
@@ -1003,12 +1004,12 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Sets the number of pages in the document.
       
       This must be set to a positive number before the rendering
-      starts. It may be set in a `signalGtk.PrintOperation::begin-print`
+      starts. It may be set in a [gtk.print_operation.PrintOperation.beginPrint]
       signal handler.
       
       Note that the page numbers passed to the
-      `signalGtk.PrintOperation::request-page-setup`
-      and `signalGtk.PrintOperation::draw-page` signals are 0-based, i.e.
+      [gtk.print_operation.PrintOperation.requestPageSetup]
+      and [gtk.print_operation.PrintOperation.drawPage] signals are 0-based, i.e.
       if the user chooses to print all pages, the last ::draw-page signal
       will be for page n_pages - 1.
   
@@ -1165,7 +1166,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
         
         The print dialog owns the returned widget, and its lifetime is not
         controlled by the application. However, the widget is guaranteed
-        to stay around until the `signalGtk.PrintOperation::custom-widget-apply`
+        to stay around until the [gtk.print_operation.PrintOperation.customWidgetApply]
         signal is emitted on the operation. Then you can read out any
         information you need from the widgets.
   
@@ -1410,7 +1411,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
       Emitted after all pages have been rendered.
         
         A handler for this signal can clean up any resources that have
-        been allocated in the `signalGtk.PrintOperation::begin-print` handler.
+        been allocated in the [gtk.print_operation.PrintOperation.beginPrint] handler.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1806,7 +1807,7 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
           
           This page setup will be used by [gtk.print_operation.PrintOperation.run],
           but it can be overridden on a per-page basis by connecting
-          to the `signal@Gtk.PrintOperation::request-page-setup` signal.
+          to the [gtk.print_operation.PrintOperation.requestPageSetup] signal.
       Returns: Builder instance for fluent chaining
   */
   T defaultPageSetup(gtk.page_setup.PageSetup propval)
@@ -1881,12 +1882,12 @@ class PrintOperationGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
         propval = The number of pages in the document.
           
           This must be set to a positive number before the rendering
-          starts. It may be set in a `signal@Gtk.PrintOperation::begin-print`
+          starts. It may be set in a [gtk.print_operation.PrintOperation.beginPrint]
           signal handler.
           
           Note that the page numbers passed to the
-          `signal@Gtk.PrintOperation::request-page-setup` and
-          `signal@Gtk.PrintOperation::draw-page` signals are 0-based, i.e.
+          [gtk.print_operation.PrintOperation.requestPageSetup] and
+          [gtk.print_operation.PrintOperation.drawPage] signals are 0-based, i.e.
           if the user chooses to print all pages, the last ::draw-page signal
           will be for page @n_pages - 1.
       Returns: Builder instance for fluent chaining

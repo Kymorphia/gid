@@ -1,6 +1,7 @@
 /// Module for [TargetPair] class
 module gtk.target_pair;
 
+public import gid.basictypes;
 import gdk.atom;
 import gid.gid;
 import gtk.c.functions;

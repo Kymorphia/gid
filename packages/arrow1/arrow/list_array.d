@@ -1,6 +1,7 @@
 /// Module for [ListArray] class
 module arrow.list_array;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.buffer;
 import arrow.c.functions;

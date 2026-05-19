@@ -1,6 +1,7 @@
 /// Module for [FilterCharset] class
 module gmime.filter_charset;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

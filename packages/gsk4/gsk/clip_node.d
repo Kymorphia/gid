@@ -1,6 +1,7 @@
 /// Module for [ClipNode] class
 module gsk.clip_node;
 
+public import gid.basictypes;
 import gid.gid;
 import graphene.rect;
 import gsk.c.functions;

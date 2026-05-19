@@ -1,6 +1,7 @@
 /// Module for [DsdPlaneOffsetMeta] class
 module gstaudio.dsd_plane_offset_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

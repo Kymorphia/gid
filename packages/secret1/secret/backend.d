@@ -1,6 +1,7 @@
 /// Module for [Backend] interface
 module secret.backend;
 
+public import gid.basictypes;
 public import secret.backend_iface_proxy;
 import gid.gid;
 import gio.async_result;

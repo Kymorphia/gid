@@ -1,6 +1,7 @@
 /// Module for [NavigationPolicyDecision] class
 module webkit.navigation_policy_decision;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import webkit.c.functions;

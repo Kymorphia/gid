@@ -1,6 +1,7 @@
 /// Module for [Indenter] interface mixin
 module gtksource.indenter_mixin;
 
+public import gid.basictypes;
 public import gtksource.indenter_iface_proxy;
 public import gdk.types;
 public import gid.gid;
@@ -14,12 +15,12 @@ public import gtksource.view;
 /**
     Auto-indentation interface.
     
-    By default, `class@View` can auto-indent as you type when
-    `property@View:auto-indent` is enabled. The indentation simply copies the
+    By default, [gtksource.view.View] can auto-indent as you type when
+    [gtksource.view.View.autoIndent] is enabled. The indentation simply copies the
     previous lines indentation.
     
     This can be changed by implementing [gtksource.indenter.Indenter] and setting the
-    `property@View:indenter` property.
+    [gtksource.view.View.indenter] property.
     
     Implementors of this interface should implement both
     `vfunc@Indenter.is_trigger` and `vfunc@Indenter.indent`.
@@ -30,7 +31,7 @@ public import gtksource.view;
     [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.ShiftMask] set.
     
     `vfunc@Indenter.indent` is called after text has been
-    inserted into `class@Buffer` when
+    inserted into [gtksource.buffer.Buffer] when
     `vfunc@Indenter.is_trigger` returned true. The [gtk.text_iter.TextIter]
     is placed directly after the inserted character or characters.
     

@@ -1,6 +1,7 @@
 /// Module for [StyleManager] class
 module adw.style_manager;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -16,7 +17,7 @@ import gobject.object;
     styles, such as whether to use dark or high contrast appearance.
     
     It allows to set the color scheme via the
-    `property@StyleManager:color-scheme` property, and to query the current
+    [adw.style_manager.StyleManager.colorScheme] property, and to query the current
     appearance, as well as whether a system-wide color scheme preference exists.
 */
 class StyleManager : gobject.object.ObjectWrap
@@ -62,7 +63,7 @@ class StyleManager : gobject.object.ObjectWrap
         
         The effective appearance will be decided based on the application color
         scheme and the system preferred color scheme. The
-        `property@StyleManager:dark` property can be used to query the current
+        [adw.style_manager.StyleManager.dark] property can be used to query the current
         effective appearance.
         
         The [adw.types.ColorScheme.PreferLight] color scheme results in the application
@@ -86,7 +87,7 @@ class StyleManager : gobject.object.ObjectWrap
         For the default style manager, [adw.types.ColorScheme.Default] is equivalent to
         [adw.types.ColorScheme.PreferLight].
         
-        The `property@StyleManager:system-supports-color-schemes` property can be
+        The [adw.style_manager.StyleManager.systemSupportsColorSchemes] property can be
         used to check if the current environment provides a color scheme
         preference.
   */
@@ -102,7 +103,7 @@ class StyleManager : gobject.object.ObjectWrap
           
           The effective appearance will be decided based on the application color
           scheme and the system preferred color scheme. The
-          `property@StyleManager:dark` property can be used to query the current
+          [adw.style_manager.StyleManager.dark] property can be used to query the current
           effective appearance.
           
           The [adw.types.ColorScheme.PreferLight] color scheme results in the application
@@ -126,7 +127,7 @@ class StyleManager : gobject.object.ObjectWrap
           For the default style manager, [adw.types.ColorScheme.Default] is equivalent to
           [adw.types.ColorScheme.PreferLight].
           
-          The `property@StyleManager:system-supports-color-schemes` property can be
+          The [adw.style_manager.StyleManager.systemSupportsColorSchemes] property can be
           used to check if the current environment provides a color scheme
           preference.
   */
@@ -140,7 +141,7 @@ class StyleManager : gobject.object.ObjectWrap
       Returns: Whether the application is using dark appearance.
         
         This property can be used to query the current appearance, as requested via
-        `property@StyleManager:color-scheme`.
+        [adw.style_manager.StyleManager.colorScheme].
   */
   @property bool dark()
   {
@@ -178,7 +179,7 @@ class StyleManager : gobject.object.ObjectWrap
         color scheme preference. For example, applications might want to show a
         separate appearance switcher if it's set to `FALSE`.
         
-        See `property@StyleManager:color-scheme`.
+        See [adw.style_manager.StyleManager.colorScheme].
   */
   @property bool systemSupportsColorSchemes()
   {
@@ -238,7 +239,7 @@ class StyleManager : gobject.object.ObjectWrap
       Gets whether the application is using dark appearance.
       
       This can be used to query the current appearance, as requested via
-      `propertyStyleManager:color-scheme`.
+      [adw.style_manager.StyleManager.colorScheme].
       Returns: whether the application is using dark appearance
   */
   bool getDark()
@@ -296,7 +297,7 @@ class StyleManager : gobject.object.ObjectWrap
       
       The effective appearance will be decided based on the application color
       scheme and the system preferred color scheme. The
-      `propertyStyleManager:dark` property can be used to query the current
+      [adw.style_manager.StyleManager.dark] property can be used to query the current
       effective appearance.
       
       The [adw.types.ColorScheme.PreferLight] color scheme results in the application
@@ -320,7 +321,7 @@ class StyleManager : gobject.object.ObjectWrap
       For the default style manager, [adw.types.ColorScheme.Default] is equivalent to
       [adw.types.ColorScheme.PreferLight].
       
-      The `propertyStyleManager:system-supports-color-schemes` property can be
+      The [adw.style_manager.StyleManager.systemSupportsColorSchemes] property can be
       used to check if the current environment provides a color scheme
       preference.
   
@@ -344,7 +345,7 @@ class StyleManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           
           The effective appearance will be decided based on the application color
           scheme and the system preferred color scheme. The
-          `property@StyleManager:dark` property can be used to query the current
+          [adw.style_manager.StyleManager.dark] property can be used to query the current
           effective appearance.
           
           The [adw.types.ColorScheme.PreferLight] color scheme results in the application
@@ -368,7 +369,7 @@ class StyleManagerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           For the default style manager, [adw.types.ColorScheme.Default] is equivalent to
           [adw.types.ColorScheme.PreferLight].
           
-          The `property@StyleManager:system-supports-color-schemes` property can be
+          The [adw.style_manager.StyleManager.systemSupportsColorSchemes] property can be
           used to check if the current environment provides a color scheme
           preference.
       Returns: Builder instance for fluent chaining

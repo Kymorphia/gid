@@ -1,6 +1,7 @@
 /// Module for [FontChooserDialog] class
 module gtk.font_chooser_dialog;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

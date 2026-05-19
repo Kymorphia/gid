@@ -3727,7 +3727,7 @@ struct GAppLaunchContextPrivate;
     any object paths that you wish to register are registered before #GApplication
     attempts to acquire the bus name of your application (which happens in
     [gio.application.Application.register]). Unfortunately, this means that you cannot
-    use `property@Gio.Application:is-remote` to decide if you want to register
+    use [gio.application.Application.isRemote] to decide if you want to register
     object paths.
     
     [gio.application.Application] also implements the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
@@ -3779,7 +3779,7 @@ struct GAppLaunchContextPrivate;
     [gtk.application.Application] adds startup notification data in this way.
     
     To parse commandline arguments you may handle the
-    `signal@Gio.Application::command-line` signal or override the
+    [gio.application.Application.commandLine] signal or override the
     `vfunc@Gio.Application.local_command_line` virtual funcion, to parse them in
     either the primary instance or the local instance, respectively.
     
@@ -3918,7 +3918,7 @@ struct GApplicationClass
     an application.
     
     It is created by [gio.application.Application] and emitted
-    in the `signal@Gio.Application::command-line` signal and virtual function.
+    in the [gio.application.Application.commandLine] signal and virtual function.
     
     The class contains the list of arguments that the program was invoked
     with. It is also possible to query if the commandline invocation was
@@ -3940,7 +3940,7 @@ struct GApplicationClass
     also automatically called when the object is disposed.
     
     The main use for [gio.application_command_line.ApplicationCommandLine] (and the
-    `signal@Gio.Application::command-line` signal) is 'Emacs server' like use cases:
+    [gio.application.Application.commandLine] signal) is 'Emacs server' like use cases:
     You can set the `EDITOR` environment variable to have e.g. git use
     your favourite editor to edit commit messages, and if you already
     have an instance of the editor running, the editing will happen
@@ -3949,7 +3949,7 @@ struct GApplicationClass
     does not return until the editing is done.
     
     Normally, the commandline is completely handled in the
-    `signal@Gio.Application::command-line` handler. The launching instance exits
+    [gio.application.Application.commandLine] handler. The launching instance exits
     once the signal handler in the primary instance has returned, and
     the return value of the signal handler becomes the exit status
     of the launching instance.
@@ -4034,7 +4034,7 @@ struct GApplicationClass
     
     In this example of split commandline handling, options that start
     with `--local-` are handled locally, all other options are passed
-    to the `signal@Gio.Application::command-line` handler which runs in the primary
+    to the [gio.application.Application.commandLine] handler which runs in the primary
     instance.
     
     The complete example can be found here:
@@ -4075,7 +4075,7 @@ struct GApplicationClass
     ```
     
     In this example the commandline is not completely handled before
-    the `signal@Gio.Application::command-line` handler returns. Instead, we keep
+    the [gio.application.Application.commandLine] handler returns. Instead, we keep
     a reference to the [gio.application_command_line.ApplicationCommandLine] object and handle it
     later (in this example, in an idle). Note that it is necessary to
     hold the application until you are done with the commandline.
@@ -5235,8 +5235,8 @@ struct GDBusObjectManager;
     interface).
     
     Once an instance of this type has been created, you can connect to
-    the `signal@Gio.DBusObjectManager::object-added` and
-    `signal@Gio.DBusObjectManager::object-removed signals` and inspect the
+    the [gio.dbus_object_manager.DBusObjectManager.objectAdded] and
+    [gio.dbus_object_manager.DBusObjectManager.objectRemoved] and inspect the
     [gio.dbus_object_proxy.DBusObjectProxy] objects returned by
     [gio.dbus_object_manager.DBusObjectManager.getObjects].
     
@@ -5250,29 +5250,29 @@ struct GDBusObjectManager;
     case, [gio.dbus_object_manager_client.DBusObjectManagerClient] object construction still succeeds but
     there will be no object proxies
     (e.g. [gio.dbus_object_manager.DBusObjectManager.getObjects] returns the empty list) and
-    the [gio.dbus_object_manager_client.DBusObjectManagerClient.name] property is `NULL`.
+    the [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] property is `NULL`.
     
     The owner of the requested name can come and go (for example
     consider a system service being restarted) – [gio.dbus_object_manager_client.DBusObjectManagerClient]
     handles this case too; simply connect to the [gobject.object.ObjectWrap.notify]
     signal to watch for changes on the
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] property. When the name
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] property. When the name
     owner vanishes, the behavior is that
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is set to `NULL` (this
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] is set to `NULL` (this
     includes emission of the [gobject.object.ObjectWrap.notify] signal) and then
-    `signal@Gio.DBusObjectManager::object-removed` signals are synthesized
+    [gio.dbus_object_manager.DBusObjectManager.objectRemoved] signals are synthesized
     for all currently existing object proxies. Since
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is `NULL` when this
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] is `NULL` when this
     happens, you can use this information to disambiguate a synthesized signal
     from a genuine signal caused by object removal on the remote
     [gio.dbus_object_manager.DBusObjectManager]. Similarly, when a new name owner appears,
-    `signal@Gio.DBusObjectManager::object-added` signals are synthesized
-    while [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is still `NULL`. Only
+    [gio.dbus_object_manager.DBusObjectManager.objectAdded] signals are synthesized
+    while [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] is still `NULL`. Only
     when all object proxies have been added, the
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is set to the new name
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] is set to the new name
     owner (this includes emission of the [gobject.object.ObjectWrap.notify] signal).
     Furthermore, you are guaranteed that
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] will alternate between a
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] will alternate between a
     name owner (e.g. `:1.42`) and `NULL` even in the case where
     the name of interest is atomically replaced
     
@@ -5287,16 +5287,16 @@ struct GDBusObjectManager;
     
     To avoid having the application connect to signals on the returned
     [gio.dbus_object_proxy.DBusObjectProxy] and [gio.dbus_proxy.DBusProxy] objects, the
-    `signal@Gio.DBusObject::interface-added`,
-    `signal@Gio.DBusObject::interface-removed`,
-    `signal@Gio.DBusProxy::g-properties-changed` and
-    `signal@Gio.DBusProxy::g-signal` signals
+    [gio.dbus_object.DBusObject.interfaceAdded],
+    [gio.dbus_object.DBusObject.interfaceRemoved],
+    [gio.dbus_proxy.DBusProxy.gPropertiesChanged] and
+    [gio.dbus_proxy.DBusProxy.gSignal] signals
     are also emitted on the [gio.dbus_object_manager_client.DBusObjectManagerClient] instance managing these
     objects. The signals emitted are
-    `signal@Gio.DBusObjectManager::interface-added`,
-    `signal@Gio.DBusObjectManager::interface-removed`,
-    `signal@Gio.DBusObjectManagerClient::interface-proxy-properties-changed` and
-    `signal@Gio.DBusObjectManagerClient::interface-proxy-signal`.
+    [gio.dbus_object_manager.DBusObjectManager.interfaceAdded],
+    [gio.dbus_object_manager.DBusObjectManager.interfaceRemoved],
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.interfaceProxyPropertiesChanged] and
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.interfaceProxySignal].
     
     Note that all callbacks and signals are emitted in the
     thread-default main context (see
@@ -5557,7 +5557,7 @@ struct GDBusPropertyInfo
     vanishes and reloaded when a name owner appears.
     
     The unique name owner of the proxy’s name is tracked and can be read from
-    `property@Gio.DBusProxy:g-name-owner`. Connect to the
+    [gio.dbus_proxy.DBusProxy.gNameOwner]. Connect to the
     [gobject.object.ObjectWrap.notify] signal to get notified of changes.
     Additionally, only signals and property changes emitted from the current name
     owner are considered and calls are always sent to the current name owner.
@@ -5569,22 +5569,22 @@ struct GDBusPropertyInfo
     
     If the proxy is for a stateless D-Bus service, where the name owner may
     be started and stopped between calls, the
-    `property@Gio.DBusProxy:g-name-owner` tracking of [gio.dbus_proxy.DBusProxy] will cause the
+    [gio.dbus_proxy.DBusProxy.gNameOwner] tracking of [gio.dbus_proxy.DBusProxy] will cause the
     proxy to drop signal and property changes from the service after it has
     restarted for the first time. When interacting with a stateless D-Bus
     service, do not use [gio.dbus_proxy.DBusProxy] — use direct D-Bus method calls and signal
     connections.
     
-    The generic `signal@Gio.DBusProxy::g-properties-changed` and
-    `signal@Gio.DBusProxy::g-signal` signals are not very convenient to work
+    The generic [gio.dbus_proxy.DBusProxy.gPropertiesChanged] and
+    [gio.dbus_proxy.DBusProxy.gSignal] signals are not very convenient to work
     with. Therefore, the recommended way of working with proxies is to subclass
     [gio.dbus_proxy.DBusProxy], and have more natural properties and signals in your derived
     class. This [example](migrating-gdbus.html#using-gdbus-codegen) shows how
     this can easily be done using the [`gdbus-codegen`](gdbus-codegen.html) tool.
     
     A [gio.dbus_proxy.DBusProxy] instance can be used from multiple threads but note
-    that all signals (e.g. `signal@Gio.DBusProxy::g-signal`,
-    `signal@Gio.DBusProxy::g-properties-changed` and
+    that all signals (e.g. [gio.dbus_proxy.DBusProxy.gSignal],
+    [gio.dbus_proxy.DBusProxy.gPropertiesChanged] and
     [gobject.object.ObjectWrap.notify]) are emitted in the thread-default main
     context (see [glib.main_context.MainContext.pushThreadDefault]) of the thread
     where the instance was constructed.
@@ -5879,7 +5879,7 @@ struct GDatagramBasedInterface
     features in this process.
     
     Whether debug output is enabled is exposed as
-    `property@Gio.DebugController:debug-enabled`. This controls
+    [gio.debug_controller.DebugController.debugEnabled]. This controls
     `func@GLib.log_set_debug_enabled` by default. Application code may
     connect to the [gobject.object.ObjectWrap.notify] signal for it
     to control other parts of its debug infrastructure as necessary.
@@ -5903,7 +5903,7 @@ struct GDebugController;
     This D-Bus object can be used by remote processes to enable or disable debug
     output in this process. Remote processes calling
     `org.gtk.Debugging.SetDebugEnabled()` will affect the value of
-    `property@Gio.DebugController:debug-enabled` and, by default,
+    [gio.debug_controller.DebugController.debugEnabled] and, by default,
     `func@GLib.log_get_debug_enabled`.
     
     By default, no processes are allowed to call `SetDebugEnabled()` unless a
@@ -6312,7 +6312,7 @@ struct GDtlsClientConnectionInterface
     As DTLS is datagram based, [gio.dtls_connection.DtlsConnection] implements
     [gio.datagram_based.DatagramBased], presenting a datagram-socket-like API for the
     encrypted connection. This operates over a base datagram connection, which is
-    also a [gio.datagram_based.DatagramBased] (`property@Gio.DtlsConnection:base-socket`).
+    also a [gio.datagram_based.DatagramBased] ([gio.dtls_connection.DtlsConnection.baseSocket]).
     
     To close a DTLS connection, use [gio.dtls_connection.DtlsConnection.close].
     
@@ -8226,7 +8226,7 @@ struct GInputVector
     
     Each object in the list may also report changes in itself via some
     mechanism (normally the [gobject.object.ObjectWrap.notify] signal).  Taken
-    together with the `signal@Gio.ListModel::items-changed` signal, this provides
+    together with the [gio.list_model.ListModel.itemsChanged] signal, this provides
     for a list that can change its membership, and in which the members can
     change their individual properties.
     
@@ -8447,7 +8447,7 @@ struct GMemoryInputStreamPrivate;
     }
     ```
     
-    Don’t forget to disconnect the `signal@Gio.MemoryMonitor::low-memory-warning`
+    Don’t forget to disconnect the [gio.memory_monitor.MemoryMonitor.lowMemoryWarning]
     signal, and unref the [gio.memory_monitor.MemoryMonitor] itself when exiting.
 */
 struct GMemoryMonitor;
@@ -9556,7 +9556,7 @@ struct GPollableOutputStreamInterface
     profile GPU usage.
     
     Don’t forget to disconnect the [gobject.object.ObjectWrap.notify] signal for
-    `property@Gio.PowerProfileMonitor:power-saver-enabled`, and unref the
+    [gio.power_profile_monitor.PowerProfileMonitor.powerSaverEnabled], and unref the
     [gio.power_profile_monitor.PowerProfileMonitor] itself when exiting.
 */
 struct GPowerProfileMonitor;
@@ -9664,7 +9664,7 @@ struct GProxyAddressClass
     [gio.socket_address_enumerator.SocketAddressEnumerator] which takes the [gio.socket_address.SocketAddress]
     instances returned by the [gio.socket_address_enumerator.SocketAddressEnumerator]
     and wraps them in [gio.proxy_address.ProxyAddress] instances, using the given
-    `property@Gio.ProxyAddressEnumerator:proxy-resolver`.
+    [gio.proxy_address_enumerator.ProxyAddressEnumerator.proxyResolver].
     
     This enumerator will be returned (for example, by
     [gio.socket_connectable.SocketConnectable.enumerate]) as appropriate when a proxy is

@@ -1,6 +1,7 @@
 /// Module for [Settings] class
 module gio.settings;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action;
 import gio.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [EventControllerScroll] class
 module gtk.event_controller_scroll;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import gobject.dclosure;
@@ -21,8 +22,8 @@ import gtk.types;
     
     In the case of continuous scroll events, [gtk.event_controller_scroll.EventControllerScroll]
     encloses all [gtk.event_controller_scroll.EventControllerScroll.scroll] emissions
-    between two [gtk.event_controller_scroll.EventControllerScroll.scroll] and
-    [gtk.event_controller_scroll.EventControllerScroll.scroll] signals.
+    between two [gtk.event_controller_scroll.EventControllerScroll.scrollBegin] and
+    [gtk.event_controller_scroll.EventControllerScroll.scrollEnd] signals.
     
     The behavior of the event controller can be modified by the flags
     given at creation time, or modified at a later point through

@@ -1,6 +1,7 @@
 /// Module for [Leaflet] class
 module adw.leaflet;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.leaflet_page;
@@ -111,7 +112,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
         If the orientation is horizontal, for right-to-left locales, gestures and
         shortcuts are reversed.
         
-        Only children that have `property@LeafletPage:navigatable` set to `TRUE`
+        Only children that have [adw.leaflet_page.LeafletPage.navigatable] set to `TRUE`
         can be navigated to.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
@@ -139,7 +140,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
           If the orientation is horizontal, for right-to-left locales, gestures and
           shortcuts are reversed.
           
-          Only children that have `property@LeafletPage:navigatable` set to `TRUE`
+          Only children that have [adw.leaflet_page.LeafletPage.navigatable] set to `TRUE`
           can be navigated to.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
@@ -166,7 +167,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
         If the orientation is horizontal, for right-to-left locales, gestures and
         shortcuts are reversed.
         
-        Only children that have `property@LeafletPage:navigatable` set to `TRUE`
+        Only children that have [adw.leaflet_page.LeafletPage.navigatable] set to `TRUE`
         can be navigated to.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
@@ -194,7 +195,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
           If the orientation is horizontal, for right-to-left locales, gestures and
           shortcuts are reversed.
           
-          Only children that have `property@LeafletPage:navigatable` set to `TRUE`
+          Only children that have [adw.leaflet_page.LeafletPage.navigatable] set to `TRUE`
           can be navigated to.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
@@ -316,7 +317,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
         
         The leaflet will be folded if the size allocated to it is smaller than the
         sum of the minimum or natural sizes of the children (see
-        `property@Leaflet:fold-threshold-policy`), it will be unfolded otherwise.
+        [adw.leaflet.Leaflet.foldThresholdPolicy]), it will be unfolded otherwise.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
@@ -427,8 +428,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       Get `visibleChild` property.
       Returns: The widget currently visible when the leaflet is folded.
         
-        The transition is determined by `property@Leaflet:transition-type` and
-        `property@Leaflet:child-transition-params`. The transition can be cancelled
+        The transition is determined by [adw.leaflet.Leaflet.transitionType] and
+        [adw.leaflet.Leaflet.childTransitionParams]. The transition can be cancelled
         by the user, in which case visible child will change back to the previously
         visible child.
   
@@ -444,8 +445,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       Params:
         propval = The widget currently visible when the leaflet is folded.
           
-          The transition is determined by `property@Leaflet:transition-type` and
-          `property@Leaflet:child-transition-params`. The transition can be cancelled
+          The transition is determined by [adw.leaflet.Leaflet.transitionType] and
+          [adw.leaflet.Leaflet.childTransitionParams]. The transition can be cancelled
           by the user, in which case visible child will change back to the previously
           visible child.
   
@@ -460,7 +461,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       Get `visibleChildName` property.
       Returns: The name of the widget currently visible when the leaflet is folded.
         
-        See `property@Leaflet:visible-child`.
+        See [adw.leaflet.Leaflet.visibleChild].
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
@@ -474,7 +475,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       Params:
         propval = The name of the widget currently visible when the leaflet is folded.
           
-          See `property@Leaflet:visible-child`.
+          See [adw.leaflet.Leaflet.visibleChild].
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
@@ -504,7 +505,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Params:
         child = the widget to add
-      Returns: the `classLeafletPage` for child
+      Returns: the [adw.leaflet_page.LeafletPage] for child
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
@@ -524,7 +525,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       
       If there's no child to navigate to, `NULL` will be returned instead.
       
-      See `propertyLeafletPage:navigatable`.
+      See [adw.leaflet_page.LeafletPage.navigatable].
   
       Params:
         direction = the direction
@@ -584,7 +585,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       
       Returns `NULL` if there is no child with this name.
       
-      See `propertyLeafletPage:name`.
+      See [adw.leaflet_page.LeafletPage.name].
   
       Params:
         name = the name of the child to find
@@ -647,7 +648,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       
       The leaflet will be folded if the size allocated to it is smaller than the
       sum of the minimum or natural sizes of the children (see
-      `propertyLeaflet:fold-threshold-policy`), it will be unfolded otherwise.
+      [adw.leaflet.Leaflet.foldThresholdPolicy]), it will be unfolded otherwise.
       Returns: whether self is folded.
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
@@ -686,7 +687,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   }
 
   /**
-      Returns the `classLeafletPage` object for child.
+      Returns the [adw.leaflet_page.LeafletPage] object for child.
   
       Params:
         child = a child of self
@@ -770,7 +771,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       Params:
         child = the widget to insert
         sibling = the sibling after which to insert child
-      Returns: the `classLeafletPage` for child
+      Returns: the [adw.leaflet_page.LeafletPage] for child
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
@@ -785,7 +786,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   /**
       Navigates to the previous or next child.
       
-      The child must have the `propertyLeafletPage:navigatable` property set to
+      The child must have the [adw.leaflet_page.LeafletPage.navigatable] property set to
       `TRUE`, otherwise it will be skipped.
       
       This will be the same child as returned by
@@ -809,7 +810,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   
       Params:
         child = the widget to prepend
-      Returns: the `classLeafletPage` for child
+      Returns: the [adw.leaflet_page.LeafletPage] for child
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
   */
@@ -866,7 +867,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       If the orientation is horizontal, for right-to-left locales, gestures and
       shortcuts are reversed.
       
-      Only children that have `propertyLeafletPage:navigatable` set to `TRUE` can
+      Only children that have [adw.leaflet_page.LeafletPage.navigatable] set to `TRUE` can
       be navigated to.
   
       Params:
@@ -895,7 +896,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
       If the orientation is horizontal, for right-to-left locales, gestures and
       shortcuts are reversed.
       
-      Only children that have `propertyLeafletPage:navigatable` set to `TRUE` can
+      Only children that have [adw.leaflet_page.LeafletPage.navigatable] set to `TRUE` can
       be navigated to.
   
       Params:
@@ -1009,8 +1010,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   /**
       Sets the widget currently visible when the leaflet is folded.
       
-      The transition is determined by `propertyLeaflet:transition-type` and
-      `propertyLeaflet:child-transition-params`. The transition can be cancelled
+      The transition is determined by [adw.leaflet.Leaflet.transitionType] and
+      [adw.leaflet.Leaflet.childTransitionParams]. The transition can be cancelled
       by the user, in which case visible child will change back to the previously
       visible child.
   
@@ -1027,7 +1028,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   /**
       Makes the child with the name name visible.
       
-      See `propertyLeaflet:visible-child`.
+      See [adw.leaflet.Leaflet.visibleChild].
   
       Params:
         name = the name of a child
@@ -1066,7 +1067,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
           If the orientation is horizontal, for right-to-left locales, gestures and
           shortcuts are reversed.
           
-          Only children that have `property@LeafletPage:navigatable` set to `TRUE`
+          Only children that have [adw.leaflet_page.LeafletPage.navigatable] set to `TRUE`
           can be navigated to.
       Returns: Builder instance for fluent chaining
   
@@ -1095,7 +1096,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
           If the orientation is horizontal, for right-to-left locales, gestures and
           shortcuts are reversed.
           
-          Only children that have `property@LeafletPage:navigatable` set to `TRUE`
+          Only children that have [adw.leaflet_page.LeafletPage.navigatable] set to `TRUE`
           can be navigated to.
       Returns: Builder instance for fluent chaining
   
@@ -1209,8 +1210,8 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
       Params:
         propval = The widget currently visible when the leaflet is folded.
           
-          The transition is determined by `property@Leaflet:transition-type` and
-          `property@Leaflet:child-transition-params`. The transition can be cancelled
+          The transition is determined by [adw.leaflet.Leaflet.transitionType] and
+          [adw.leaflet.Leaflet.childTransitionParams]. The transition can be cancelled
           by the user, in which case visible child will change back to the previously
           visible child.
       Returns: Builder instance for fluent chaining
@@ -1227,7 +1228,7 @@ class LeafletGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw.swipeabl
       Params:
         propval = The name of the widget currently visible when the leaflet is folded.
           
-          See `property@Leaflet:visible-child`.
+          See [adw.leaflet.Leaflet.visibleChild].
       Returns: Builder instance for fluent chaining
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)

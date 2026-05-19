@@ -1,6 +1,7 @@
 /// Module for [ViewStackPages] class
 module adw.view_stack_pages;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -14,9 +15,9 @@ import gtk.selection_model;
 import gtk.selection_model_mixin;
 
 /**
-    An auxiliary class used by `class@ViewStack`.
+    An auxiliary class used by [adw.view_stack.ViewStack].
     
-    See `property@ViewStack:pages`.
+    See [adw.view_stack.ViewStack.pages].
 */
 class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.selection_model.SelectionModel
 {
@@ -57,10 +58,10 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
 
   /**
       Get `selectedPage` property.
-      Returns: The selected `class@ViewStackPage` within the `class@ViewStackPages`.
+      Returns: The selected [adw.view_stack_page.ViewStackPage] within the [adw.view_stack_pages.ViewStackPages].
         
-        This can be used to keep an up-to-date view of the `class@ViewStackPage` for
-        The visible `class@ViewStackPage` within the associated `class@ViewStackPages`.
+        This can be used to keep an up-to-date view of the [adw.view_stack_page.ViewStackPage] for
+        The visible [adw.view_stack_page.ViewStackPage] within the associated [adw.view_stack_pages.ViewStackPages].
         
         This can be used to keep an up-to-date view of the visible child.
   */
@@ -72,10 +73,10 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   /**
       Set `selectedPage` property.
       Params:
-        propval = The selected `class@ViewStackPage` within the `class@ViewStackPages`.
+        propval = The selected [adw.view_stack_page.ViewStackPage] within the [adw.view_stack_pages.ViewStackPages].
           
-          This can be used to keep an up-to-date view of the `class@ViewStackPage` for
-          The visible `class@ViewStackPage` within the associated `class@ViewStackPages`.
+          This can be used to keep an up-to-date view of the [adw.view_stack_page.ViewStackPage] for
+          The visible [adw.view_stack_page.ViewStackPage] within the associated [adw.view_stack_pages.ViewStackPages].
           
           This can be used to keep an up-to-date view of the visible child.
   */
@@ -88,9 +89,9 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   mixin SelectionModelT!();
 
   /**
-      Gets the `classViewStackPage` for the visible child of a view stack
+      Gets the [adw.view_stack_page.ViewStackPage] for the visible child of a view stack
       
-      Gets the `classViewStackPage` for the visible child of the associated stack.
+      Gets the [adw.view_stack_page.ViewStackPage] for the visible child of the associated stack.
       
       Returns `NULL` if there's no selected page.
       Returns: the stack page
@@ -104,9 +105,9 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /**
-      Sets the visible child in the associated `classViewStack`.
+      Sets the visible child in the associated [adw.view_stack.ViewStack].
       
-      See `propertyViewStack:visible-child`.
+      See [adw.view_stack.ViewStack.visibleChild].
   
       Params:
         page = a stack page within the associated stack
@@ -127,10 +128,10 @@ class ViewStackPagesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
   /**
       Set `selectedPage` property.
       Params:
-        propval = The selected `class@ViewStackPage` within the `class@ViewStackPages`.
+        propval = The selected [adw.view_stack_page.ViewStackPage] within the [adw.view_stack_pages.ViewStackPages].
           
-          This can be used to keep an up-to-date view of the `class@ViewStackPage` for
-          The visible `class@ViewStackPage` within the associated `class@ViewStackPages`.
+          This can be used to keep an up-to-date view of the [adw.view_stack_page.ViewStackPage] for
+          The visible [adw.view_stack_page.ViewStackPage] within the associated [adw.view_stack_pages.ViewStackPages].
           
           This can be used to keep an up-to-date view of the visible child.
       Returns: Builder instance for fluent chaining

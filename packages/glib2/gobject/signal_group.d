@@ -1,6 +1,7 @@
 /// Module for [SignalGroup] class
 module gobject.signal_group;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

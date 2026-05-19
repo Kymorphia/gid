@@ -1,6 +1,7 @@
 /// Module for [Tensor] class
 module arrow.tensor;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;

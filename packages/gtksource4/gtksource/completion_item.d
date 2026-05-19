@@ -1,6 +1,7 @@
 /// Module for [CompletionItem] class
 module gtksource.completion_item;
 
+public import gid.basictypes;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;

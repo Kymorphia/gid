@@ -1,6 +1,7 @@
 /// Module for [Dir] class
 module glib.dir;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

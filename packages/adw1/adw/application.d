@@ -1,6 +1,7 @@
 /// Module for [Application] class
 module adw.application;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.style_manager;
@@ -35,13 +36,13 @@ import gtk.application;
     - `style.css` contains styles that are always present.
     
     - `style-dark.css` contains styles only used when
-    `property@StyleManager:dark` is `TRUE`.
+    [adw.style_manager.StyleManager.dark] is `TRUE`.
     
     - `style-hc.css` contains styles used when the system high contrast
       preference is enabled.
     
     - `style-hc-dark.css` contains styles used when the system high contrast
-      preference is enabled and `property@StyleManager:dark` is `TRUE`.
+      preference is enabled and [adw.style_manager.StyleManager.dark] is `TRUE`.
 */
 class Application : gtk.application.Application
 {

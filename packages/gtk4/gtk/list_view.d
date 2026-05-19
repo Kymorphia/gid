@@ -1,6 +1,7 @@
 /// Module for [ListView] class
 module gtk.list_view;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -29,13 +30,13 @@ import gtk.types;
     [gtk.list_view.ListView] uses its factory to generate one row widget for each visible
     item and shows them in a linear display, either vertically or horizontally.
     
-    The `property@Gtk.ListView:show-separators` property offers a simple way to
+    The [gtk.list_view.ListView.showSeparators] property offers a simple way to
     display separators between the rows.
     
     [gtk.list_view.ListView] allows the user to select items according to the selection
     characteristics of the model. For models that allow multiple selected items,
     it is possible to turn on _rubberband selection_, using
-    `property@Gtk.ListView:enable-rubberband`.
+    [gtk.list_view.ListView.enableRubberband].
     
     If you need multiple columns with headers, see [gtk.column_view.ColumnView].
     
@@ -107,7 +108,7 @@ import gtk.types;
     ```
     
     [gtk.list_view.ListView] uses a single CSS node named `listview`. It may carry the
-    `.separators` style class, when `property@Gtk.ListView:show-separators`
+    `.separators` style class, when [gtk.list_view.ListView.showSeparators]
     property is set. Each child widget uses a single CSS node named `row`.
     If the [gtk.list_item.ListItem.activatable] property is set, the
     corresponding row will have the `.activatable` style class. For

@@ -1,6 +1,7 @@
 /// Module for [ServerAuthHandler] class
 module arrowflight.server_auth_handler;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

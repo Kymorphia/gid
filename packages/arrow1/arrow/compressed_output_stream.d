@@ -1,6 +1,7 @@
 /// Module for [CompressedOutputStream] class
 module arrow.compressed_output_stream;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.codec;

@@ -1,6 +1,7 @@
 /// Module for [loader] class
 module gid.loader;
 
+public import gid.basictypes;
 
 import std.file : exists;
 import std.path : buildNormalizedPath, buildPath;

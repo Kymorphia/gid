@@ -1,6 +1,7 @@
 /// Module for [InternetAddressMailbox] class
 module gmime.internet_address_mailbox;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

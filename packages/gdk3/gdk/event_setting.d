@@ -1,6 +1,7 @@
 /// Module for [EventSetting] class
 module gdk.event_setting;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

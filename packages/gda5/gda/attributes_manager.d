@@ -1,6 +1,7 @@
 /// Module for [AttributesManager] class
 module gda.attributes_manager;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

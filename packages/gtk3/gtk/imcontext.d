@@ -1,6 +1,7 @@
 /// Module for [IMContext] class
 module gtk.imcontext;
 
+public import gid.basictypes;
 import gdk.event_key;
 import gdk.rectangle;
 import gdk.window;

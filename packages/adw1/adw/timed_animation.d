@@ -1,6 +1,7 @@
 /// Module for [TimedAnimation] class
 module adw.timed_animation;
 
+public import gid.basictypes;
 import adw.animation;
 import adw.animation_target;
 import adw.c.functions;
@@ -11,21 +12,21 @@ import gobject.gid_builder;
 import gtk.widget;
 
 /**
-    A time-based `class@Animation`.
+    A time-based [adw.animation.Animation].
     
     [adw.timed_animation.TimedAnimation] implements a simple animation interpolating the given
-    value from `property@TimedAnimation:value-from` to
-    `property@TimedAnimation:value-to` over
-    `property@TimedAnimation:duration` milliseconds using the curve described by
-    `property@TimedAnimation:easing`.
+    value from [adw.timed_animation.TimedAnimation.valueFrom] to
+    [adw.timed_animation.TimedAnimation.valueTo] over
+    [adw.timed_animation.TimedAnimation.duration] milliseconds using the curve described by
+    [adw.timed_animation.TimedAnimation.easing].
     
-    If `property@TimedAnimation:reverse` is set to `TRUE`, [adw.timed_animation.TimedAnimation]
-    will instead animate from `property@TimedAnimation:value-to` to
-    `property@TimedAnimation:value-from`, and the easing curve will be inverted.
+    If [adw.timed_animation.TimedAnimation.reverse] is set to `TRUE`, [adw.timed_animation.TimedAnimation]
+    will instead animate from [adw.timed_animation.TimedAnimation.valueTo] to
+    [adw.timed_animation.TimedAnimation.valueFrom], and the easing curve will be inverted.
     
     The animation can repeat a certain amount of times, or endlessly, depending
-    on the `property@TimedAnimation:repeat-count` value. If
-    `property@TimedAnimation:alternate` is set to `TRUE`, it will also change the
+    on the [adw.timed_animation.TimedAnimation.repeatCount] value. If
+    [adw.timed_animation.TimedAnimation.alternate] is set to `TRUE`, it will also change the
     direction every other iteration.
 */
 class TimedAnimation : adw.animation.Animation
@@ -119,7 +120,7 @@ class TimedAnimation : adw.animation.Animation
         
         Describes the curve the value is interpolated on.
         
-        See `enum@Easing` for the description of specific easing functions.
+        See [adw.types.Easing] for the description of specific easing functions.
   */
   @property adw.types.Easing easing()
   {
@@ -133,7 +134,7 @@ class TimedAnimation : adw.animation.Animation
           
           Describes the curve the value is interpolated on.
           
-          See `enum@Easing` for the description of specific easing functions.
+          See [adw.types.Easing] for the description of specific easing functions.
   */
   @property void easing(adw.types.Easing propval)
   {
@@ -187,9 +188,9 @@ class TimedAnimation : adw.animation.Animation
       Returns: The value to animate from.
         
         The animation will start at this value and end at
-        `property@TimedAnimation:value-to`.
+        [adw.timed_animation.TimedAnimation.valueTo].
         
-        If `property@TimedAnimation:reverse` is `TRUE`, the animation will end at
+        If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will end at
         this value instead.
   */
   @property double valueFrom()
@@ -203,9 +204,9 @@ class TimedAnimation : adw.animation.Animation
         propval = The value to animate from.
           
           The animation will start at this value and end at
-          `property@TimedAnimation:value-to`.
+          [adw.timed_animation.TimedAnimation.valueTo].
           
-          If `property@TimedAnimation:reverse` is `TRUE`, the animation will end at
+          If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will end at
           this value instead.
   */
   @property void valueFrom(double propval)
@@ -217,10 +218,10 @@ class TimedAnimation : adw.animation.Animation
       Get `valueTo` property.
       Returns: The value to animate to.
         
-        The animation will start at `property@TimedAnimation:value-from` and end at
+        The animation will start at [adw.timed_animation.TimedAnimation.valueFrom] and end at
         this value.
         
-        If `property@TimedAnimation:reverse` is `TRUE`, the animation will start
+        If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will start
         at this value instead.
   */
   @property double valueTo()
@@ -233,10 +234,10 @@ class TimedAnimation : adw.animation.Animation
       Params:
         propval = The value to animate to.
           
-          The animation will start at `property@TimedAnimation:value-from` and end at
+          The animation will start at [adw.timed_animation.TimedAnimation.valueFrom] and end at
           this value.
           
-          If `property@TimedAnimation:reverse` is `TRUE`, the animation will start
+          If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will start
           at this value instead.
   */
   @property void valueTo(double propval)
@@ -368,7 +369,7 @@ class TimedAnimation : adw.animation.Animation
   /**
       Sets the easing function self will use.
       
-      See `enumEasing` for the description of specific easing functions.
+      See [adw.types.Easing] for the description of specific easing functions.
   
       Params:
         easing = the easing function to use
@@ -406,9 +407,9 @@ class TimedAnimation : adw.animation.Animation
       Sets the value self will animate from.
       
       The animation will start at this value and end at
-      `propertyTimedAnimation:value-to`.
+      [adw.timed_animation.TimedAnimation.valueTo].
       
-      If `propertyTimedAnimation:reverse` is `TRUE`, the animation will end at
+      If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will end at
       this value instead.
   
       Params:
@@ -422,10 +423,10 @@ class TimedAnimation : adw.animation.Animation
   /**
       Sets the value self will animate to.
       
-      The animation will start at `propertyTimedAnimation:value-from` and end at
+      The animation will start at [adw.timed_animation.TimedAnimation.valueFrom] and end at
       this value.
       
-      If `propertyTimedAnimation:reverse` is `TRUE`, the animation will start
+      If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will start
       at this value instead.
   
       Params:
@@ -475,7 +476,7 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           
           Describes the curve the value is interpolated on.
           
-          See `enum@Easing` for the description of specific easing functions.
+          See [adw.types.Easing] for the description of specific easing functions.
       Returns: Builder instance for fluent chaining
   */
   T easing(adw.types.Easing propval)
@@ -513,9 +514,9 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
         propval = The value to animate from.
           
           The animation will start at this value and end at
-          `property@TimedAnimation:value-to`.
+          [adw.timed_animation.TimedAnimation.valueTo].
           
-          If `property@TimedAnimation:reverse` is `TRUE`, the animation will end at
+          If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will end at
           this value instead.
       Returns: Builder instance for fluent chaining
   */
@@ -529,10 +530,10 @@ class TimedAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
       Params:
         propval = The value to animate to.
           
-          The animation will start at `property@TimedAnimation:value-from` and end at
+          The animation will start at [adw.timed_animation.TimedAnimation.valueFrom] and end at
           this value.
           
-          If `property@TimedAnimation:reverse` is `TRUE`, the animation will start
+          If [adw.timed_animation.TimedAnimation.reverse] is `TRUE`, the animation will start
           at this value instead.
       Returns: Builder instance for fluent chaining
   */

@@ -1,6 +1,7 @@
 /// Module for [ParamSpecUInt64] class
 module gobject.param_spec_uint64;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

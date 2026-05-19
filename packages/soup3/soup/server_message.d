@@ -1,6 +1,7 @@
 /// Module for [ServerMessage] class
 module soup.server_message;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.iostream;
 import gio.socket;
@@ -22,9 +23,9 @@ import soup.types;
     An HTTP server request and response pair.
     
     A SoupServerMessage represents an HTTP message that is being sent or
-    received on a `class@Server`.
+    received on a [soup.server.Server].
     
-    `class@Server` will create [soup.server_message.ServerMessage]s automatically for
+    [soup.server.Server] will create [soup.server_message.ServerMessage]s automatically for
     incoming requests, which your application will receive via handlers.
     
     Note that libsoup's terminology here does not quite match the HTTP
@@ -324,7 +325,7 @@ class ServerMessage : gobject.object.ObjectWrap
 
   /**
       Sets msg's status_code to status_code and adds a Location header
-      pointing to redirect_uri. Use this from a `classServer` when you
+      pointing to redirect_uri. Use this from a [soup.server.Server] when you
       want to redirect the client to another URI.
       
       redirect_uri can be a relative URI, in which case it is
@@ -383,8 +384,8 @@ class ServerMessage : gobject.object.ObjectWrap
       happens immediately, regardless of the current state of the connection; if
       the response to msg has not yet finished being sent, then it will be
       discarded; you can steal the connection from a
-      `signalServerMessage::wrote-informational` or
-      `signalServerMessage::wrote-body` signal handler if you need to wait for
+      [soup.server_message.ServerMessage.wroteInformational] or
+      [soup.server_message.ServerMessage.wroteBody] signal handler if you need to wait for
       part or all of the response to be sent.
       
       Note that when calling this function from C, msg will most
@@ -549,7 +550,7 @@ class ServerMessage : gobject.object.ObjectWrap
       Connect to `Finished` signal.
   
       Emitted when all HTTP processing is finished for a message.
-        (After `signalServerMessage::wrote-body`).
+        (After [soup.server_message.ServerMessage.wroteBody]).
   
       Params:
         callback = signal callback delegate or function to connect
@@ -791,11 +792,11 @@ class ServerMessage : gobject.object.ObjectWrap
       Emitted immediately after writing a body chunk for a message.
         
         Note that this signal is not parallel to
-        `signalServerMessage::got-chunk`; it is emitted only when a complete
+        [soup.server_message.ServerMessage.gotChunk]; it is emitted only when a complete
         chunk (added with [soup.message_body.MessageBody.append] or
         [soup.message_body.MessageBody.appendBytes] has been written. To get
         more useful continuous progress information, use
-        `signalServerMessage::wrote-body-data`.
+        [soup.server_message.ServerMessage.wroteBodyData].
   
       Params:
         callback = signal callback delegate or function to connect

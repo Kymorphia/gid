@@ -1,6 +1,7 @@
 /// Module for [StyleProvider] interface
 module gtk.style_provider;
 
+public import gid.basictypes;
 public import gtk.style_provider_iface_proxy;
 import gid.gid;
 import gobject.dclosure;

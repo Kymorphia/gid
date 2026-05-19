@@ -1,6 +1,7 @@
 /// Module for [ColumnViewCell] class
 module gtk.column_view_cell;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

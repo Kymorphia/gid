@@ -1,6 +1,7 @@
 /// Module for [VariantBuilder] class
 module glib.variant_builder;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

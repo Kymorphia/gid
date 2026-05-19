@@ -1,6 +1,7 @@
 /// Module for [StackPage] class
 module gtk.stack_page;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;
@@ -198,7 +199,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 
   /**
       Returns the icon name of the page.
-      Returns: The value of the `propertyGtk.StackPage:icon-name` property
+      Returns: The value of the [gtk.stack_page.StackPage.iconName] property
   */
   string getIconName()
   {
@@ -222,7 +223,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 
   /**
       Returns whether the page is marked as “needs attention”.
-      Returns: The value of the `propertyGtk.StackPage:needs-attention`
+      Returns: The value of the [gtk.stack_page.StackPage.needsAttention]
           property.
   */
   bool getNeedsAttention()
@@ -246,7 +247,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 
   /**
       Gets whether underlines in the page title indicate mnemonics.
-      Returns: The value of the `propertyGtk.StackPage:use-underline` property
+      Returns: The value of the [gtk.stack_page.StackPage.useUnderline] property
   */
   bool getUseUnderline()
   {

@@ -1,6 +1,7 @@
 /// Module for [ThemeSelector] class
 module panel.theme_selector;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;

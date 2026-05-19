@@ -1,6 +1,7 @@
 /// Module for [EditableText] interface
 module atk.editable_text;
 
+public import gid.basictypes;
 public import atk.editable_text_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

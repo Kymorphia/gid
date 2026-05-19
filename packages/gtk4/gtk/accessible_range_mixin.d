@@ -1,6 +1,7 @@
 /// Module for [AccessibleRange] interface mixin
 module gtk.accessible_range_mixin;
 
+public import gid.basictypes;
 public import gtk.accessible_range_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

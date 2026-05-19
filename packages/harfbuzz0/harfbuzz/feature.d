@@ -1,6 +1,7 @@
 /// Module for [Feature] struct
 module harfbuzz.feature;
 
+public import gid.basictypes;
 import gid.gid;
 import harfbuzz.c.functions;
 import harfbuzz.c.types;

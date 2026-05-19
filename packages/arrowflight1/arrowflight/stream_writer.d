@@ -1,6 +1,7 @@
 /// Module for [StreamWriter] class
 module arrowflight.stream_writer;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.record_batch_writer;

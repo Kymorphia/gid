@@ -1,6 +1,7 @@
 /// Module for [NumericSorter] class
 module gtk.numeric_sorter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.c.functions;

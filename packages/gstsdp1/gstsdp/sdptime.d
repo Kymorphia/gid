@@ -1,6 +1,7 @@
 /// Module for [SDPTime] class
 module gstsdp.sdptime;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

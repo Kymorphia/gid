@@ -1,6 +1,7 @@
 /// Module for [DmaBufAllocator] class
 module gstallocators.dma_buf_allocator;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.allocator;

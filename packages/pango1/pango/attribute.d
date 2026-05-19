@@ -1,6 +1,7 @@
 /// Module for [Attribute] class
 module pango.attribute;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.attr_color;

@@ -1,6 +1,7 @@
 /// Module for [GLContext] class
 module gstgl.glcontext;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.thread;

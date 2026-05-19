@@ -1,6 +1,7 @@
 /// Module for [FontDescription] class
 module pango.font_description;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import pango.c.functions;

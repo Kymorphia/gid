@@ -1,6 +1,7 @@
 /// Module for [StreamReader] class
 module arrowflight.stream_reader;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.record_batch_reader;

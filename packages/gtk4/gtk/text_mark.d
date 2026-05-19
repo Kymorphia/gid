@@ -1,6 +1,7 @@
 /// Module for [TextMark] class
 module gtk.text_mark;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

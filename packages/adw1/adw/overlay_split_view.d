@@ -1,6 +1,7 @@
 /// Module for [OverlaySplitView] class
 module adw.overlay_split_view;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.swipeable;
@@ -33,28 +34,28 @@ import gtk.widget;
     [adw.overlay_split_view.OverlaySplitView] has two children: sidebar and content, and displays
     them side by side.
     
-    When `property@OverlaySplitView:collapsed` is set to `TRUE`, the sidebar is
+    When [adw.overlay_split_view.OverlaySplitView.collapsed] is set to `TRUE`, the sidebar is
     instead shown as an overlay above the content widget.
     
     The sidebar can be hidden or shown using the
-    `property@OverlaySplitView:show-sidebar` property.
+    [adw.overlay_split_view.OverlaySplitView.showSidebar] property.
     
     Sidebar can be displayed before or after the content, this can be controlled
-    with the `property@OverlaySplitView:sidebar-position` property.
+    with the [adw.overlay_split_view.OverlaySplitView.sidebarPosition] property.
     
     Collapsing the split view automatically hides the sidebar widget, and
     uncollapsing it shows the sidebar. If this behavior is not desired, the
-    `property@OverlaySplitView:pin-sidebar` property can be used to override it.
+    [adw.overlay_split_view.OverlaySplitView.pinSidebar] property can be used to override it.
     
     [adw.overlay_split_view.OverlaySplitView] supports an edge swipe gesture for showing the sidebar,
     and a swipe from the sidebar for hiding it. Gestures are only supported on
     touchscreen, but not touchpad. Gestures can be controlled with the
-    `property@OverlaySplitView:enable-show-gesture` and
-    `property@OverlaySplitView:enable-hide-gesture` properties.
+    [adw.overlay_split_view.OverlaySplitView.enableShowGesture] and
+    [adw.overlay_split_view.OverlaySplitView.enableHideGesture] properties.
     
-    See also `class@NavigationSplitView`.
+    See also [adw.navigation_split_view.NavigationSplitView].
     
-    [adw.overlay_split_view.OverlaySplitView] is typically used together with an `class@Breakpoint`
+    [adw.overlay_split_view.OverlaySplitView] is typically used together with an [adw.breakpoint.Breakpoint]
     setting the `collapsed` property to `TRUE` on small widths, as follows:
     
     ```xml
@@ -92,24 +93,24 @@ import gtk.widget;
     depending on its own width.
     
     If possible, it tries to allocate a fraction of the total width, controlled
-    with the `property@OverlaySplitView:sidebar-width-fraction` property.
+    with the [adw.overlay_split_view.OverlaySplitView.sidebarWidthFraction] property.
     
     The sidebar also has minimum and maximum sizes, controlled with the
-    `property@OverlaySplitView:min-sidebar-width` and
-    `property@OverlaySplitView:max-sidebar-width` properties.
+    [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+    [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth] properties.
     
     The minimum and maximum sizes are using the length unit specified with the
-    `property@OverlaySplitView:sidebar-width-unit`.
+    [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
     
     By default, sidebar is using 25% of the total width, with 180sp as the
     minimum size and 280sp as the maximum size.
     
     When collapsed, the preferred width fraction is ignored and the sidebar uses
-    `property@OverlaySplitView:max-sidebar-width` when possible.
+    [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth] when possible.
     
     ## Header Bar Integration
     
-    When used inside [adw.overlay_split_view.OverlaySplitView], `class@HeaderBar` will automatically
+    When used inside [adw.overlay_split_view.OverlaySplitView], [adw.header_bar.HeaderBar] will automatically
     hide the window buttons in the middle.
     
     ## [adw.overlay_split_view.OverlaySplitView] as [gtk.buildable.Buildable]
@@ -285,7 +286,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Returns: The maximum sidebar width.
         
         Maximum width is affected by
-        `property@OverlaySplitView:sidebar-width-unit`.
+        [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
         
         The sidebar widget can still be allocated with larger width if its own
         minimum width exceeds it.
@@ -301,7 +302,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         propval = The maximum sidebar width.
           
           Maximum width is affected by
-          `property@OverlaySplitView:sidebar-width-unit`.
+          [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
           
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
@@ -316,7 +317,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Returns: The minimum sidebar width.
         
         Minimum width is affected by
-        `property@OverlaySplitView:sidebar-width-unit`.
+        [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
         
         The sidebar widget can still be allocated with larger width if its own
         minimum width exceeds it.
@@ -332,7 +333,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         propval = The minimum sidebar width.
           
           Minimum width is affected by
-          `property@OverlaySplitView:sidebar-width-unit`.
+          [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
           
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
@@ -437,8 +438,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Returns: The preferred sidebar width as a fraction of the total width.
         
         The preferred width is additionally limited by
-        `property@OverlaySplitView:min-sidebar-width` and
-        `property@OverlaySplitView:max-sidebar-width`.
+        [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+        [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
         
         The sidebar widget can be allocated with larger width if its own minimum
         width exceeds the preferred width.
@@ -454,8 +455,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
         propval = The preferred sidebar width as a fraction of the total width.
           
           The preferred width is additionally limited by
-          `property@OverlaySplitView:min-sidebar-width` and
-          `property@OverlaySplitView:max-sidebar-width`.
+          [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+          [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
           
           The sidebar widget can be allocated with larger width if its own minimum
           width exceeds the preferred width.
@@ -469,8 +470,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Get `sidebarWidthUnit` property.
       Returns: The length unit for minimum and maximum sidebar widths.
         
-        See `property@OverlaySplitView:min-sidebar-width` and
-        `property@OverlaySplitView:max-sidebar-width`.
+        See [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+        [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
   */
   @property adw.types.LengthUnit sidebarWidthUnit()
   {
@@ -482,8 +483,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Params:
         propval = The length unit for minimum and maximum sidebar widths.
           
-          See `property@OverlaySplitView:min-sidebar-width` and
-          `property@OverlaySplitView:max-sidebar-width`.
+          See [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+          [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
   */
   @property void sidebarWidthUnit(adw.types.LengthUnit propval)
   {
@@ -693,7 +694,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Sets the maximum sidebar width for self.
       
-      Maximum width is affected by `propertyOverlaySplitView:sidebar-width-unit`.
+      Maximum width is affected by [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
       
       The sidebar widget can still be allocated with larger width if its own
       minimum width exceeds it.
@@ -709,7 +710,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Sets the minimum sidebar width for self.
       
-      Minimum width is affected by `propertyOverlaySplitView:sidebar-width-unit`.
+      Minimum width is affected by [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
       
       The sidebar widget can still be allocated with larger width if its own
       minimum width exceeds it.
@@ -777,8 +778,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
       Sets the preferred sidebar width as a fraction of the total width of self.
       
       The preferred width is additionally limited by
-      `propertyOverlaySplitView:min-sidebar-width` and
-      `propertyOverlaySplitView:max-sidebar-width`.
+      [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+      [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
       
       The sidebar widget can be allocated with larger width if its own minimum
       width exceeds the preferred width.
@@ -794,8 +795,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   /**
       Sets the length unit for minimum and maximum sidebar widths.
       
-      See `propertyOverlaySplitView:min-sidebar-width` and
-      `propertyOverlaySplitView:max-sidebar-width`.
+      See [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+      [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
   
       Params:
         unit = the length unit
@@ -869,7 +870,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
         propval = The maximum sidebar width.
           
           Maximum width is affected by
-          `property@OverlaySplitView:sidebar-width-unit`.
+          [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
           
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
@@ -886,7 +887,7 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
         propval = The minimum sidebar width.
           
           Minimum width is affected by
-          `property@OverlaySplitView:sidebar-width-unit`.
+          [adw.overlay_split_view.OverlaySplitView.sidebarWidthUnit].
           
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
@@ -954,8 +955,8 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
         propval = The preferred sidebar width as a fraction of the total width.
           
           The preferred width is additionally limited by
-          `property@OverlaySplitView:min-sidebar-width` and
-          `property@OverlaySplitView:max-sidebar-width`.
+          [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+          [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
           
           The sidebar widget can be allocated with larger width if its own minimum
           width exceeds the preferred width.
@@ -971,8 +972,8 @@ class OverlaySplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, adw
       Params:
         propval = The length unit for minimum and maximum sidebar widths.
           
-          See `property@OverlaySplitView:min-sidebar-width` and
-          `property@OverlaySplitView:max-sidebar-width`.
+          See [adw.overlay_split_view.OverlaySplitView.minSidebarWidth] and
+          [adw.overlay_split_view.OverlaySplitView.maxSidebarWidth].
       Returns: Builder instance for fluent chaining
   */
   T sidebarWidthUnit(adw.types.LengthUnit propval)

@@ -1,6 +1,7 @@
 /// Module for [GestureLongPress] class
 module gtk.gesture_long_press;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

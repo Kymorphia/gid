@@ -1,6 +1,7 @@
 /// Module for [DragSurface] interface
 module gdk.drag_surface;
 
+public import gid.basictypes;
 public import gdk.drag_surface_iface_proxy;
 import gdk.c.functions;
 import gdk.c.types;

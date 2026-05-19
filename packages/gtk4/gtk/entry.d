@@ -1,6 +1,7 @@
 /// Module for [Entry] class
 module gtk.entry;
 
+public import gid.basictypes;
 import gdk.content_provider;
 import gdk.paintable;
 import gdk.rectangle;
@@ -56,7 +57,7 @@ import pango.tab_array;
     and can have tooltips. To add an icon, use
     [gtk.entry.Entry.setIconFromGicon] or one of the various other functions
     that set an icon from an icon name or a paintable. To trigger an action when
-    the user clicks an icon, connect to the `signal@Gtk.Entry::icon-press` signal.
+    the user clicks an icon, connect to the [gtk.entry.Entry.iconPress] signal.
     To allow DND operations from an icon, use
     [gtk.entry.Entry.setIconDragSource]. To set a tooltip on an icon, use
     [gtk.entry.Entry.setIconTooltipText] or the corresponding function
@@ -312,7 +313,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         See [gtk.imcontext.IMContext].
         
         Setting this to a non-null value overrides the system-wide IM
-        module setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module`
+        module setting. See the GtkSettings [gtk.settings.Settings.gtkImModule]
         property.
   */
   @property string imModule()
@@ -328,7 +329,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
           See [gtk.imcontext.IMContext].
           
           Setting this to a non-null value overrides the system-wide IM
-          module setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module`
+          module setting. See the GtkSettings [gtk.settings.Settings.gtkImModule]
           property.
   */
   @property void imModule(string propval)
@@ -340,7 +341,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `inputHints` property.
       Returns: Additional hints that allow input methods to fine-tune their behavior.
         
-        Also see `property@Gtk.Entry:input-purpose`
+        Also see [gtk.entry.Entry.inputPurpose]
   */
   @property gtk.types.InputHints inputHints()
   {
@@ -352,7 +353,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = Additional hints that allow input methods to fine-tune their behavior.
           
-          Also see `property@Gtk.Entry:input-purpose`
+          Also see [gtk.entry.Entry.inputPurpose]
   */
   @property void inputHints(gtk.types.InputHints propval)
   {
@@ -493,8 +494,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `primaryIconActivatable` property.
       Returns: Whether the primary icon is activatable.
         
-        GTK emits the `signal@Gtk.Entry::icon-press` and
-        `signal@Gtk.Entry::icon-release` signals only on sensitive,
+        GTK emits the [gtk.entry.Entry.iconPress] and
+        [gtk.entry.Entry.iconRelease] signals only on sensitive,
         activatable icons.
         
         Sensitive, but non-activatable icons can be used for purely
@@ -510,8 +511,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = Whether the primary icon is activatable.
           
-          GTK emits the `signal@Gtk.Entry::icon-press` and
-          `signal@Gtk.Entry::icon-release` signals only on sensitive,
+          GTK emits the [gtk.entry.Entry.iconPress] and
+          [gtk.entry.Entry.iconRelease] signals only on sensitive,
           activatable icons.
           
           Sensitive, but non-activatable icons can be used for purely
@@ -584,7 +585,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: Whether the primary icon is sensitive.
         
         An insensitive icon appears grayed out. GTK does not emit the
-        `signal@Gtk.Entry::icon-press` and `signal@Gtk.Entry::icon-release`
+        [gtk.entry.Entry.iconPress] and [gtk.entry.Entry.iconRelease]
         signals and does not allow DND from insensitive icons.
         
         An icon should be set insensitive if the action that would trigger
@@ -601,7 +602,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         propval = Whether the primary icon is sensitive.
           
           An insensitive icon appears grayed out. GTK does not emit the
-          `signal@Gtk.Entry::icon-press` and `signal@Gtk.Entry::icon-release`
+          [gtk.entry.Entry.iconPress] and [gtk.entry.Entry.iconRelease]
           signals and does not allow DND from insensitive icons.
           
           An icon should be set insensitive if the action that would trigger
@@ -724,8 +725,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Get `secondaryIconActivatable` property.
       Returns: Whether the secondary icon is activatable.
         
-        GTK emits the `signal@Gtk.Entry::icon-press` and
-        `signal@Gtk.Entry::icon-release` signals only on sensitive,
+        GTK emits the [gtk.entry.Entry.iconPress] and
+        [gtk.entry.Entry.iconRelease] signals only on sensitive,
         activatable icons.
         
         Sensitive, but non-activatable icons can be used for purely
@@ -741,8 +742,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Params:
         propval = Whether the secondary icon is activatable.
           
-          GTK emits the `signal@Gtk.Entry::icon-press` and
-          `signal@Gtk.Entry::icon-release` signals only on sensitive,
+          GTK emits the [gtk.entry.Entry.iconPress] and
+          [gtk.entry.Entry.iconRelease] signals only on sensitive,
           activatable icons.
           
           Sensitive, but non-activatable icons can be used for purely
@@ -815,7 +816,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       Returns: Whether the secondary icon is sensitive.
         
         An insensitive icon appears grayed out. GTK does not emit the
-        `signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
+        [gtk.entry.Entry.iconPress]
         signals and does not allow DND from insensitive icons.
         
         An icon should be set insensitive if the action that would trigger
@@ -832,7 +833,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
         propval = Whether the secondary icon is sensitive.
           
           An insensitive icon appears grayed out. GTK does not emit the
-          `signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
+          [gtk.entry.Entry.iconPress]
           signals and does not allow DND from insensitive icons.
           
           An icon should be set insensitive if the action that would trigger
@@ -1143,7 +1144,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       The position’s coordinates are relative to the entry’s
       top left corner. If `x`, `y` doesn’t lie inside an icon,
       -1 is returned. This function is intended for use in a
-       `signalGtk.Widget::query-tooltip` signal handler.
+       [gtk.widget.Widget.queryTooltip] signal handler.
   
       Params:
         x = the x coordinate of the position to find, relative to entry
@@ -1694,10 +1695,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       If you unset the widget tooltip via
       [gtk.widget.Widget.setTooltipText] or
       [gtk.widget.Widget.setTooltipMarkup], this sets
-      `propertyGtk.Widget:has-tooltip` to false, which suppresses
+      [gtk.widget.Widget.hasTooltip] to false, which suppresses
       icon tooltips too. You can resolve this by then calling
       [gtk.widget.Widget.setHasTooltip] to set
-      `propertyGtk.Widget:has-tooltip` back to true, or
+      [gtk.widget.Widget.hasTooltip] back to true, or
       setting at least one non-empty tooltip on any icon
       achieves the same result.
   
@@ -1853,7 +1854,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
       in the current font, but it can be changed with
       [gtk.entry.Entry.setInvisibleChar].
       
-      Note that you probably want to set `propertyGtk.Entry:input-purpose`
+      Note that you probably want to set [gtk.entry.Entry.inputPurpose]
       to [gtk.types.InputPurpose.Password] or [gtk.types.InputPurpose.Pin] to
       inform input methods about the purpose of this entry,
       in addition to setting visibility to false.
@@ -2102,7 +2103,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
           See [gtk.imcontext.IMContext].
           
           Setting this to a non-null value overrides the system-wide IM
-          module setting. See the GtkSettings `property@Gtk.Settings:gtk-im-module`
+          module setting. See the GtkSettings [gtk.settings.Settings.gtkImModule]
           property.
       Returns: Builder instance for fluent chaining
   */
@@ -2116,7 +2117,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
       Params:
         propval = Additional hints that allow input methods to fine-tune their behavior.
           
-          Also see `property@Gtk.Entry:input-purpose`
+          Also see [gtk.entry.Entry.inputPurpose]
       Returns: Builder instance for fluent chaining
   */
   T inputHints(gtk.types.InputHints propval)
@@ -2203,8 +2204,8 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
       Params:
         propval = Whether the primary icon is activatable.
           
-          GTK emits the `signal@Gtk.Entry::icon-press` and
-          `signal@Gtk.Entry::icon-release` signals only on sensitive,
+          GTK emits the [gtk.entry.Entry.iconPress] and
+          [gtk.entry.Entry.iconRelease] signals only on sensitive,
           activatable icons.
           
           Sensitive, but non-activatable icons can be used for purely
@@ -2255,7 +2256,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = Whether the primary icon is sensitive.
           
           An insensitive icon appears grayed out. GTK does not emit the
-          `signal@Gtk.Entry::icon-press` and `signal@Gtk.Entry::icon-release`
+          [gtk.entry.Entry.iconPress] and [gtk.entry.Entry.iconRelease]
           signals and does not allow DND from insensitive icons.
           
           An icon should be set insensitive if the action that would trigger
@@ -2323,8 +2324,8 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
       Params:
         propval = Whether the secondary icon is activatable.
           
-          GTK emits the `signal@Gtk.Entry::icon-press` and
-          `signal@Gtk.Entry::icon-release` signals only on sensitive,
+          GTK emits the [gtk.entry.Entry.iconPress] and
+          [gtk.entry.Entry.iconRelease] signals only on sensitive,
           activatable icons.
           
           Sensitive, but non-activatable icons can be used for purely
@@ -2375,7 +2376,7 @@ class EntryGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.cell_edita
         propval = Whether the secondary icon is sensitive.
           
           An insensitive icon appears grayed out. GTK does not emit the
-          `signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
+          [gtk.entry.Entry.iconPress]
           signals and does not allow DND from insensitive icons.
           
           An icon should be set insensitive if the action that would trigger

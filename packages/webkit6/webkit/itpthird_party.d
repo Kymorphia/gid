@@ -1,6 +1,7 @@
 /// Module for [ITPThirdParty] class
 module webkit.itpthird_party;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

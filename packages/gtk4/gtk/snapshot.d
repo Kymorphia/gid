@@ -1,6 +1,7 @@
 /// Module for [Snapshot] class
 module gtk.snapshot;
 
+public import gid.basictypes;
 import cairo.context;
 import gdk.paintable;
 import gdk.rgba;

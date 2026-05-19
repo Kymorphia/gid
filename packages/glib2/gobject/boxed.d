@@ -1,6 +1,7 @@
 /// Module for [Boxed] class
 module gobject.boxed;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

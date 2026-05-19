@@ -1,6 +1,7 @@
 /// Module for [FloatStatistics] class
 module parquet.float_statistics;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import parquet.c.functions;

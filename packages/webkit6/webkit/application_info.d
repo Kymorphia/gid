@@ -1,6 +1,7 @@
 /// Module for [ApplicationInfo] class
 module webkit.application_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

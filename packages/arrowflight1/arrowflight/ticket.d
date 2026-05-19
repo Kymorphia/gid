@@ -1,6 +1,7 @@
 /// Module for [Ticket] class
 module arrowflight.ticket;
 
+public import gid.basictypes;
 import arrowflight.c.functions;
 import arrowflight.c.types;
 import arrowflight.types;

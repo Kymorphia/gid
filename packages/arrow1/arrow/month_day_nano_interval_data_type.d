@@ -1,6 +1,7 @@
 /// Module for [MonthDayNanoIntervalDataType] class
 module arrow.month_day_nano_interval_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.interval_data_type;

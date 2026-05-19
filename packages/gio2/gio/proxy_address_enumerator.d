@@ -1,6 +1,7 @@
 /// Module for [ProxyAddressEnumerator] class
 module gio.proxy_address_enumerator;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;
@@ -16,7 +17,7 @@ import gobject.object;
     [gio.socket_address_enumerator.SocketAddressEnumerator] which takes the [gio.socket_address.SocketAddress]
     instances returned by the [gio.socket_address_enumerator.SocketAddressEnumerator]
     and wraps them in [gio.proxy_address.ProxyAddress] instances, using the given
-    `property@Gio.ProxyAddressEnumerator:proxy-resolver`.
+    [gio.proxy_address_enumerator.ProxyAddressEnumerator.proxyResolver].
     
     This enumerator will be returned (for example, by
     [gio.socket_connectable.SocketConnectable.enumerate]) as appropriate when a proxy is

@@ -1,6 +1,7 @@
 /// Module for [Message] class
 module gst.message;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.boxed;

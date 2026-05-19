@@ -1,6 +1,7 @@
 /// Module for [Breakpoint] class
 module adw.breakpoint;
 
+public import gid.basictypes;
 import adw.breakpoint_condition;
 import adw.c.functions;
 import adw.c.types;
@@ -14,7 +15,7 @@ import gtk.buildable;
 import gtk.buildable_mixin;
 
 /**
-    Describes a breakpoint for `class@Window` or `class@Dialog`.
+    Describes a breakpoint for [adw.window.Window] or [adw.dialog.Dialog].
     
     Breakpoints are used to create adaptive UI, allowing to change the layout
     depending on available size.
@@ -27,11 +28,11 @@ import gtk.buildable_mixin;
     the specified value, and reset it back to the original value when it's
     unapplied.
     
-    For more complicated scenarios, `signal@Breakpoint::apply` and
-    `signal@Breakpoint::unapply` can be used instead.
+    For more complicated scenarios, [adw.breakpoint.Breakpoint.apply] and
+    [adw.breakpoint.Breakpoint.unapply] can be used instead.
     
-    Breakpoints can be used within `class@Window`, `class@ApplicationWindow`,
-    `class@Dialog` or `class@BreakpointBin`.
+    Breakpoints can be used within [adw.window.Window], [adw.application_window.ApplicationWindow],
+    [adw.dialog.Dialog] or [adw.breakpoint_bin.BreakpointBin].
     
     ## [adw.breakpoint.Breakpoint] as [gtk.buildable.Buildable]:
     
@@ -143,11 +144,11 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
       ::: note
           Setting properties to their original values does not work for properties
           that have irreversible side effects. For example, changing
-          [gtk.button.Button.label] while `propertyGtk.Button:icon-name` is set
+          [gtk.button.Button.label] while [gtk.button.Button.iconName] is set
           will reset the icon. However, resetting the label will not set
           `icon-name` to its original value.
       
-      Use the `signalBreakpoint::apply` and `signalBreakpoint::unapply` signals
+      Use the [adw.breakpoint.Breakpoint.apply] and [adw.breakpoint.Breakpoint.unapply] signals
       for those properties instead, as follows:
       
       ```c

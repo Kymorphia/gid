@@ -1,6 +1,7 @@
 /// Module for [CClosure] class
 module gobject.cclosure;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

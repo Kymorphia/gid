@@ -1,6 +1,7 @@
 /// Module for [VideoAffineTransformationMeta] class
 module gstvideo.video_affine_transformation_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

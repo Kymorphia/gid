@@ -1,6 +1,7 @@
 /// Module for [DiscovererVideoInfo] class
 module gstpbutils.discoverer_video_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gstpbutils.c.functions;

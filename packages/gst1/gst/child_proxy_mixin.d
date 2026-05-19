@@ -1,6 +1,7 @@
 /// Module for [ChildProxy] interface mixin
 module gst.child_proxy_mixin;
 
+public import gid.basictypes;
 public import gst.child_proxy_iface_proxy;
 public import gid.gid;
 public import gobject.dclosure;

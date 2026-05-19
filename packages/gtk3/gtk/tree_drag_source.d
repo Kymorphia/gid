@@ -1,6 +1,7 @@
 /// Module for [TreeDragSource] interface
 module gtk.tree_drag_source;
 
+public import gid.basictypes;
 public import gtk.tree_drag_source_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

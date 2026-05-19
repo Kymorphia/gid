@@ -1,6 +1,7 @@
 /// Module for [BuilderScope] interface mixin
 module gtk.builder_scope_mixin;
 
+public import gid.basictypes;
 public import gtk.builder_scope_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

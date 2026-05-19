@@ -1,6 +1,7 @@
 /// Module for [CellEditable] interface mixin
 module gtk.cell_editable_mixin;
 
+public import gid.basictypes;
 public import gtk.cell_editable_iface_proxy;
 public import gdk.event;
 public import gid.gid;

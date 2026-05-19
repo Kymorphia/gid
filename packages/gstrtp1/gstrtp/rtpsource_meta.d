@@ -1,6 +1,7 @@
 /// Module for [RTPSourceMeta] class
 module gstrtp.rtpsource_meta;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.meta;
 import gst.meta_info;

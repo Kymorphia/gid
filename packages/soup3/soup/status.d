@@ -16,8 +16,8 @@ struct Status
       
       *There is no reason for you to ever use this
       function.* If you wanted the textual description for the
-      `propertyMessage:status-code` of a given `classMessage`, you should just
-      look at the message's `propertyMessage:reason-phrase`. However, you
+      [soup.message.Message.statusCode] of a given [soup.message.Message], you should just
+      look at the message's [soup.message.Message.reasonPhrase]. However, you
       should only do that for use in debugging messages; HTTP reason
       phrases are not localized, and are not generally very descriptive
       anyway, and so they should never be presented to the user directly.

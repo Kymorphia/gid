@@ -1,6 +1,7 @@
 /// Module for [EncodingTarget] class
 module gstpbutils.encoding_target;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;

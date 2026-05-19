@@ -1,6 +1,7 @@
 /// Module for [InternetAddressList] class
 module gmime.internet_address_list;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.string_;
 import gmime.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [CellRendererProgress] class
 module gtk.cell_renderer_progress;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

@@ -1,6 +1,7 @@
 /// Module for [LoadableIcon] interface
 module gio.loadable_icon;
 
+public import gid.basictypes;
 public import gio.loadable_icon_iface_proxy;
 import gid.gid;
 import gio.async_result;

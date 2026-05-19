@@ -1,6 +1,7 @@
 /// Module for [AppLaunchContext] class
 module gio.app_launch_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.app_info;
 import gio.c.functions;

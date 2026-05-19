@@ -1,6 +1,7 @@
 /// Module for [S3FileSystem] class
 module arrow.s3_file_system;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.file_system;

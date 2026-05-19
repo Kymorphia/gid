@@ -1,6 +1,7 @@
 /// Module for [TextCluster] struct
 module cairo.text_cluster;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;

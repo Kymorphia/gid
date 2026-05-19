@@ -1,6 +1,7 @@
 /// Module for [Tooltip] class
 module gtk.tooltip;
 
+public import gid.basictypes;
 import gdk.display;
 import gdk.rectangle;
 import gdkpixbuf.pixbuf;

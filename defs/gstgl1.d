@@ -1,7 +1,7 @@
 //!gir GstGL-1.0
 //!info description "D binding for the GstGL library - OpenGL for the GStreamer multimedia framework"
 //!info homepage https://gstreamer.freedesktop.org
-//!info docs https://www.kymorphia.com/gid/gstgl.html
+//!info docs https://www.kymorphia.com/gid/gid~gstgl1/
 //!info capi https://gstreamer.freedesktop.org/documentation/gl/index.html
 
 //# Conflicts with copy method

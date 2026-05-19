@@ -1,6 +1,7 @@
 /// Module for [Squeezer] class
 module adw.squeezer;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.squeezer_page;
@@ -37,7 +38,7 @@ import gtk.widget;
     the widget seem to squeeze itself to fit in the available space.
     
     Transitions between children can be animated as fades. This can be controlled
-    with `property@Squeezer:transition-type`.
+    with [adw.squeezer.Squeezer.transitionType].
     
     ## CSS nodes
     
@@ -394,7 +395,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   
       Params:
         child = the widget to add
-      Returns: the `classSqueezerPage` for child
+      Returns: the [adw.squeezer_page.SqueezerPage] for child
   
       Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwsqueezer)
   */
@@ -446,7 +447,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /**
-      Returns the `classSqueezerPage` object for child.
+      Returns the [adw.squeezer_page.SqueezerPage] object for child.
   
       Params:
         child = a child of self

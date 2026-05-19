@@ -1,6 +1,7 @@
 /// Module for [MemoryOutputStream] class
 module gio.memory_output_stream;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

@@ -1,6 +1,7 @@
 /// Module for [ConstantExpression] class
 module gtk.constant_expression;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.value;
 import gtk.c.functions;

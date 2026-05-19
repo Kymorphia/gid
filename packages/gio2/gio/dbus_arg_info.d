@@ -1,6 +1,7 @@
 /// Module for [DBusArgInfo] class
 module gio.dbus_arg_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

@@ -1,6 +1,7 @@
 /// Module for [CellAreaContext] class
 module gtk.cell_area_context;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

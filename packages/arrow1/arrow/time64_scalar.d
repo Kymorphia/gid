@@ -1,6 +1,7 @@
 /// Module for [Time64Scalar] class
 module arrow.time64_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;

@@ -1,6 +1,7 @@
 /// Module for [FormatDefinition] class
 module gst.format_definition;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gst.c.functions;

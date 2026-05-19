@@ -1,6 +1,7 @@
 /// Module for [ContentFormatsBuilder] class
 module gdk.content_formats_builder;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.content_formats;

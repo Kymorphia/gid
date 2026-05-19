@@ -1,6 +1,7 @@
 /// Module for [DBusObjectManagerClient] class
 module gio.dbus_object_manager_client;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_initable;
 import gio.async_initable_mixin;
@@ -31,8 +32,8 @@ import gobject.types;
     interface).
     
     Once an instance of this type has been created, you can connect to
-    the `signal@Gio.DBusObjectManager::object-added` and
-    `signal@Gio.DBusObjectManager::object-removed signals` and inspect the
+    the [gio.dbus_object_manager.DBusObjectManager.objectAdded] and
+    [gio.dbus_object_manager.DBusObjectManager.objectRemoved] and inspect the
     [gio.dbus_object_proxy.DBusObjectProxy] objects returned by
     [gio.dbus_object_manager.DBusObjectManager.getObjects].
     
@@ -46,29 +47,29 @@ import gobject.types;
     case, [gio.dbus_object_manager_client.DBusObjectManagerClient] object construction still succeeds but
     there will be no object proxies
     (e.g. [gio.dbus_object_manager.DBusObjectManager.getObjects] returns the empty list) and
-    the [gio.dbus_object_manager_client.DBusObjectManagerClient.name] property is `NULL`.
+    the [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] property is `NULL`.
     
     The owner of the requested name can come and go (for example
     consider a system service being restarted) – [gio.dbus_object_manager_client.DBusObjectManagerClient]
     handles this case too; simply connect to the [gobject.object.ObjectWrap.notify]
     signal to watch for changes on the
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] property. When the name
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] property. When the name
     owner vanishes, the behavior is that
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is set to `NULL` (this
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] is set to `NULL` (this
     includes emission of the [gobject.object.ObjectWrap.notify] signal) and then
-    `signal@Gio.DBusObjectManager::object-removed` signals are synthesized
+    [gio.dbus_object_manager.DBusObjectManager.objectRemoved] signals are synthesized
     for all currently existing object proxies. Since
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is `NULL` when this
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] is `NULL` when this
     happens, you can use this information to disambiguate a synthesized signal
     from a genuine signal caused by object removal on the remote
     [gio.dbus_object_manager.DBusObjectManager]. Similarly, when a new name owner appears,
-    `signal@Gio.DBusObjectManager::object-added` signals are synthesized
-    while [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is still `NULL`. Only
+    [gio.dbus_object_manager.DBusObjectManager.objectAdded] signals are synthesized
+    while [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] is still `NULL`. Only
     when all object proxies have been added, the
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] is set to the new name
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] is set to the new name
     owner (this includes emission of the [gobject.object.ObjectWrap.notify] signal).
     Furthermore, you are guaranteed that
-    [gio.dbus_object_manager_client.DBusObjectManagerClient.name] will alternate between a
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.nameOwner] will alternate between a
     name owner (e.g. `:1.42`) and `NULL` even in the case where
     the name of interest is atomically replaced
     
@@ -83,16 +84,16 @@ import gobject.types;
     
     To avoid having the application connect to signals on the returned
     [gio.dbus_object_proxy.DBusObjectProxy] and [gio.dbus_proxy.DBusProxy] objects, the
-    `signal@Gio.DBusObject::interface-added`,
-    `signal@Gio.DBusObject::interface-removed`,
-    `signal@Gio.DBusProxy::g-properties-changed` and
-    `signal@Gio.DBusProxy::g-signal` signals
+    [gio.dbus_object.DBusObject.interfaceAdded],
+    [gio.dbus_object.DBusObject.interfaceRemoved],
+    [gio.dbus_proxy.DBusProxy.gPropertiesChanged] and
+    [gio.dbus_proxy.DBusProxy.gSignal] signals
     are also emitted on the [gio.dbus_object_manager_client.DBusObjectManagerClient] instance managing these
     objects. The signals emitted are
-    `signal@Gio.DBusObjectManager::interface-added`,
-    `signal@Gio.DBusObjectManager::interface-removed`,
-    `signal@Gio.DBusObjectManagerClient::interface-proxy-properties-changed` and
-    `signal@Gio.DBusObjectManagerClient::interface-proxy-signal`.
+    [gio.dbus_object_manager.DBusObjectManager.interfaceAdded],
+    [gio.dbus_object_manager.DBusObjectManager.interfaceRemoved],
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.interfaceProxyPropertiesChanged] and
+    [gio.dbus_object_manager_client.DBusObjectManagerClient.interfaceProxySignal].
     
     Note that all callbacks and signals are emitted in the
     thread-default main context (see

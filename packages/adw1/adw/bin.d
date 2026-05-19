@@ -1,6 +1,7 @@
 /// Module for [Bin] class
 module adw.bin;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -23,7 +24,7 @@ import gtk.widget;
       <img src="bin.png" alt="bin">
     </picture>
     
-    The [adw.bin.Bin] widget has only one child, set with the `property@Bin:child`
+    The [adw.bin.Bin] widget has only one child, set with the [adw.bin.Bin.child]
     property.
     
     It is useful for deriving subclasses, since it provides common code needed

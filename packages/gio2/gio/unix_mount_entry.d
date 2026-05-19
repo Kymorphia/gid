@@ -1,6 +1,7 @@
 /// Module for [UnixMountEntry] class
 module gio.unix_mount_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

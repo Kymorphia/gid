@@ -1,6 +1,7 @@
 /// Module for [ListStore] class
 module gtk.list_store;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

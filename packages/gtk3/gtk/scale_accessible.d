@@ -1,6 +1,7 @@
 /// Module for [ScaleAccessible] class
 module gtk.scale_accessible;
 
+public import gid.basictypes;
 import atk.component;
 import atk.component_mixin;
 import atk.value;

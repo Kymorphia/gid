@@ -1,6 +1,7 @@
 /// Module for [Action] interface
 module atk.action;
 
+public import gid.basictypes;
 public import atk.action_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

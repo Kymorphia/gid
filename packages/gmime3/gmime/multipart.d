@@ -1,6 +1,7 @@
 /// Module for [Multipart] class
 module gmime.multipart;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

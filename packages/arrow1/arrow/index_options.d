@@ -1,6 +1,7 @@
 /// Module for [IndexOptions] class
 module arrow.index_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.function_options;

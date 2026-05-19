@@ -1,6 +1,7 @@
 /// Module for [GeolocationPermissionRequest] class
 module webkit.geolocation_permission_request;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

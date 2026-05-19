@@ -1,6 +1,7 @@
 /// Module for [Lockable] interface mixin
 module gda.lockable_mixin;
 
+public import gid.basictypes;
 public import gda.lockable_iface_proxy;
 public import gda.c.functions;
 public import gda.c.types;

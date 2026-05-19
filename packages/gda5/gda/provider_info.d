@@ -1,6 +1,7 @@
 /// Module for [ProviderInfo] class
 module gda.provider_info;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.set;

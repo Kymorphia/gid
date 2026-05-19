@@ -1,6 +1,7 @@
 /// Module for [SimpleAction] class
 module gio.simple_action;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action;
 import gio.action_mixin;

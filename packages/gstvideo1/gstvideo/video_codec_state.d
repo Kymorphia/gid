@@ -1,6 +1,7 @@
 /// Module for [VideoCodecState] class
 module gstvideo.video_codec_state;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gst.buffer;

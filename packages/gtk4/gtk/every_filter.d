@@ -1,6 +1,7 @@
 /// Module for [EveryFilter] class
 module gtk.every_filter;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.list_model;
 import gio.list_model_mixin;

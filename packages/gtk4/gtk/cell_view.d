@@ -1,6 +1,7 @@
 /// Module for [CellView] class
 module gtk.cell_view;
 
+public import gid.basictypes;
 import gdk.texture;
 import gid.gid;
 import gobject.gid_builder;

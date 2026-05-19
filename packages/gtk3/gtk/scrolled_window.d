@@ -1,6 +1,7 @@
 /// Module for [ScrolledWindow] class
 module gtk.scrolled_window;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

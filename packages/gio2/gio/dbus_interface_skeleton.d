@@ -1,6 +1,7 @@
 /// Module for [DBusInterfaceSkeleton] class
 module gio.dbus_interface_skeleton;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

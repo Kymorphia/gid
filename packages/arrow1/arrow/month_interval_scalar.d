@@ -1,6 +1,7 @@
 /// Module for [MonthIntervalScalar] class
 module arrow.month_interval_scalar;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.scalar;

@@ -1,6 +1,7 @@
 /// Module for [Session] class
 module soup.session;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;
@@ -38,25 +39,25 @@ import soup.websocket_connection;
     reason you might need multiple sessions is if you need to have
     multiple independent authentication contexts. (Eg, you are
     connecting to a server and authenticating as two different users at
-    different times; the easiest way to ensure that each `class@Message`
+    different times; the easiest way to ensure that each [soup.message.Message]
     is sent with the authentication information you intended is to use
     one session for the first user, and a second session for the other
     user.)
     
     Additional #SoupSession functionality is provided by
-    `iface@SessionFeature` objects, which can be added to a session with
+    [soup.session_feature.SessionFeature] objects, which can be added to a session with
     [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType]
-    For example, `class@Logger` provides support for
-    logging HTTP traffic, `class@ContentDecoder` provides support for
-    compressed response handling, and `class@ContentSniffer` provides
+    For example, [soup.logger.Logger] provides support for
+    logging HTTP traffic, [soup.content_decoder.ContentDecoder] provides support for
+    compressed response handling, and [soup.content_sniffer.ContentSniffer] provides
     support for HTML5-style response body content sniffing.
-    Additionally, subtypes of `class@Auth` can be added
+    Additionally, subtypes of [soup.auth.Auth] can be added
     as features, to add support for additional authentication types.
     
-    All [soup.session.Session]s are created with a `class@AuthManager`, and support
+    All [soup.session.Session]s are created with a [soup.auth_manager.AuthManager], and support
     for `SOUP_TYPE_AUTH_BASIC` and `SOUP_TYPE_AUTH_DIGEST`. Additionally,
     sessions using the plain #SoupSession class (rather than one of its deprecated
-    subtypes) have a `class@ContentDecoder` by default.
+    subtypes) have a [soup.content_decoder.ContentDecoder] by default.
     
     Note that all async methods will invoke their callbacks on the thread-default
     context at the time of the function call.
@@ -101,9 +102,9 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `acceptLanguage` property.
       Returns: If non-null, the value to use for the "Accept-Language" header
-        on `class@Message`s sent from this session.
+        on [soup.message.Message]s sent from this session.
         
-        Setting this will disable `property@Session:accept-language-auto`.
+        Setting this will disable [soup.session.Session.acceptLanguageAuto].
   */
   @property string acceptLanguage()
   {
@@ -114,9 +115,9 @@ class Session : gobject.object.ObjectWrap
       Set `acceptLanguage` property.
       Params:
         propval = If non-null, the value to use for the "Accept-Language" header
-          on `class@Message`s sent from this session.
+          on [soup.message.Message]s sent from this session.
           
-          Setting this will disable `property@Session:accept-language-auto`.
+          Setting this will disable [soup.session.Session.acceptLanguageAuto].
   */
   @property void acceptLanguage(string propval)
   {
@@ -126,11 +127,11 @@ class Session : gobject.object.ObjectWrap
   /**
       Get `acceptLanguageAuto` property.
       Returns: If true, #SoupSession will automatically set the string
-        for the "Accept-Language" header on every `class@Message`
+        for the "Accept-Language" header on every [soup.message.Message]
         sent, based on the return value of `func@GLib.get_language_names`.
         
         Setting this will override any previous value of
-        `property@Session:accept-language`.
+        [soup.session.Session.acceptLanguage].
   */
   @property bool acceptLanguageAuto()
   {
@@ -141,11 +142,11 @@ class Session : gobject.object.ObjectWrap
       Set `acceptLanguageAuto` property.
       Params:
         propval = If true, #SoupSession will automatically set the string
-          for the "Accept-Language" header on every `class@Message`
+          for the "Accept-Language" header on every [soup.message.Message]
           sent, based on the return value of `func@GLib.get_language_names`.
           
           Setting this will override any previous value of
-          `property@Session:accept-language`.
+          [soup.session.Session.acceptLanguage].
   */
   @property void acceptLanguageAuto(bool propval)
   {
@@ -275,7 +276,7 @@ class Session : gobject.object.ObjectWrap
         if you want to ensure that all future connections will have
         this timeout value.
         
-        Not to be confused with `property@Session:idle-timeout` (which is
+        Not to be confused with [soup.session.Session.idleTimeout] (which is
         the length of time that idle persistent connections will be
         kept open).
   */
@@ -297,7 +298,7 @@ class Session : gobject.object.ObjectWrap
           if you want to ensure that all future connections will have
           this timeout value.
           
-          Not to be confused with `property@Session:idle-timeout` (which is
+          Not to be confused with [soup.session.Session.idleTimeout] (which is
           the length of time that idle persistent connections will be
           kept open).
   */
@@ -363,7 +364,7 @@ class Session : gobject.object.ObjectWrap
       Returns: User-Agent string.
         
         If non-null, the value to use for the "User-Agent" header
-        on `class@Message`s sent from this session.
+        on [soup.message.Message]s sent from this session.
         
         RFC 2616 says: "The User-Agent request-header field
         contains information about the user agent originating the
@@ -381,7 +382,7 @@ class Session : gobject.object.ObjectWrap
         followed by a version string. You may also put comments,
         enclosed in parentheses, between or after the tokens.
         
-        If you set a `property@Session:user-agent` property that has trailing
+        If you set a [soup.session.Session.userAgent] property that has trailing
         whitespace, #SoupSession will append its own product token
         (eg, `libsoup/2.3.2`) to the end of the
         header for you.
@@ -397,7 +398,7 @@ class Session : gobject.object.ObjectWrap
         propval = User-Agent string.
           
           If non-null, the value to use for the "User-Agent" header
-          on `class@Message`s sent from this session.
+          on [soup.message.Message]s sent from this session.
           
           RFC 2616 says: "The User-Agent request-header field
           contains information about the user agent originating the
@@ -415,7 +416,7 @@ class Session : gobject.object.ObjectWrap
           followed by a version string. You may also put comments,
           enclosed in parentheses, between or after the tokens.
           
-          If you set a `property@Session:user-agent` property that has trailing
+          If you set a [soup.session.Session.userAgent] property that has trailing
           whitespace, #SoupSession will append its own product token
           (eg, `libsoup/2.3.2`) to the end of the
           header for you.
@@ -462,14 +463,14 @@ class Session : gobject.object.ObjectWrap
 
   /**
       If feature_type is the type of a class that implements
-      `ifaceSessionFeature`, this creates a new feature of that type and
+      [soup.session_feature.SessionFeature], this creates a new feature of that type and
       adds it to session as with [soup.session.Session.addFeature]. You can use
       this when you don't need to customize the new feature in any way.
       Adding multiple features of the same feature_type is not allowed.
       
-      If feature_type is not a `ifaceSessionFeature` type, this gives each
+      If feature_type is not a [soup.session_feature.SessionFeature] type, this gives each
       existing feature on session the chance to accept feature_type as
-      a "subfeature". This can be used to add new `classAuth` types, for instance.
+      a "subfeature". This can be used to add new [soup.auth.Auth] types, for instance.
       
       See the main #SoupSession documentation for information on what
       features are present in sessions by default.
@@ -509,8 +510,8 @@ class Session : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the `classMessage` of the result asynchronous operation This is useful
-      to get the `classMessage` of an asynchronous operation started by session
+      Gets the [soup.message.Message] of the result asynchronous operation This is useful
+      to get the [soup.message.Message] of an asynchronous operation started by session
       from its [gio.types.AsyncReadyCallback].
   
       Params:
@@ -683,8 +684,8 @@ class Session : gobject.object.ObjectWrap
 
   /**
       Tests if session has at a feature of type feature_type (which can
-      be the type of either a `ifaceSessionFeature`, or else a subtype of
-      some class managed by another feature, such as `classAuth`).
+      be the type of either a [soup.session_feature.SessionFeature], or else a subtype of
+      some class managed by another feature, such as [soup.auth.Auth]).
   
       Params:
         featureType = the #GType of the class of features to check for
@@ -1011,11 +1012,11 @@ class Session : gobject.object.ObjectWrap
   }
 
   /**
-      Set the value to use for the "Accept-Language" header on `classMessage`s
+      Set the value to use for the "Accept-Language" header on [soup.message.Message]s
       sent from session.
       
       If accept_language is null then no "Accept-Language" will be included in
-      requests. See `propertySession:accept-language` for more information.
+      requests. See [soup.session.Session.acceptLanguage] for more information.
   
       Params:
         acceptLanguage = the languages string
@@ -1031,7 +1032,7 @@ class Session : gobject.object.ObjectWrap
       requests using a value generated from system languages based on
       `funcGLib.get_language_names`.
       
-      See `propertySession:accept-language-auto` for more information.
+      See [soup.session.Session.acceptLanguageAuto] for more information.
   
       Params:
         acceptLanguageAuto = the value to set
@@ -1045,7 +1046,7 @@ class Session : gobject.object.ObjectWrap
       Set a timeout in seconds for idle connection lifetime to be used by session
       on new connections.
       
-      See `propertySession:idle-timeout` for more information.
+      See [soup.session.Session.idleTimeout] for more information.
   
       Params:
         timeout = a timeout in seconds
@@ -1059,7 +1060,7 @@ class Session : gobject.object.ObjectWrap
       Set a [gio.proxy_resolver.ProxyResolver] to be used by session on new connections.
       
       If proxy_resolver is null then no proxies will be used. See
-      `propertySession:proxy-resolver` for more information.
+      [soup.session.Session.proxyResolver] for more information.
   
       Params:
         proxyResolver = a #GProxyResolver or null
@@ -1073,7 +1074,7 @@ class Session : gobject.object.ObjectWrap
       Set a timeout in seconds for socket I/O operations to be used by session
       on new connections.
       
-      See `propertySession:timeout` for more information.
+      See [soup.session.Session.timeout] for more information.
   
       Params:
         timeout = a timeout in seconds
@@ -1087,7 +1088,7 @@ class Session : gobject.object.ObjectWrap
       Set a `classGIo.TlsDatabase` to be used by session on new connections.
       
       If tls_database is null then certificate validation will always fail. See
-      `propertySession:tls-database` for more information.
+      [soup.session.Session.tlsDatabase] for more information.
   
       Params:
         tlsDatabase = a #GTlsDatabase
@@ -1103,7 +1104,7 @@ class Session : gobject.object.ObjectWrap
       If tls_interaction is null then client certificate validation will always
       fail.
       
-      See `propertySession:tls-interaction` for more information.
+      See [soup.session.Session.tlsInteraction] for more information.
   
       Params:
         tlsInteraction = a #GTlsInteraction
@@ -1114,13 +1115,13 @@ class Session : gobject.object.ObjectWrap
   }
 
   /**
-      Set the value to use for the "User-Agent" header on `classMessage`s sent
+      Set the value to use for the "User-Agent" header on [soup.message.Message]s sent
       from session.
       
       If user_agent has trailing whitespace, session will append its own product
       token (eg, `libsoup/3.0.0`) to the end of the header for you. If user_agent
       is null then no "User-Agent" will be included in requests. See
-      `propertySession:user-agent` for more information.
+      [soup.session.Session.userAgent] for more information.
   
       Params:
         userAgent = the user agent string
@@ -1132,7 +1133,7 @@ class Session : gobject.object.ObjectWrap
   }
 
   /**
-      Asynchronously creates a `classWebsocketConnection` to communicate with a
+      Asynchronously creates a [soup.websocket_connection.WebsocketConnection] to communicate with a
       remote server.
       
       All necessary WebSocket-related headers will be added to msg, and
@@ -1143,7 +1144,7 @@ class Session : gobject.object.ObjectWrap
       code and response headers will be updated, and then the WebSocket
       handshake will be completed. On success,
       [soup.session.Session.websocketConnectFinish] will return a new
-      `classWebsocketConnection`. On failure it will return a #GError.
+      [soup.websocket_connection.WebsocketConnection]. On failure it will return a #GError.
       
       If the server returns a status other than "101 Switching Protocols", then
       msg will contain the complete response headers and body from the server's
@@ -1181,10 +1182,10 @@ class Session : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the `classWebsocketConnection` response to a
+      Gets the [soup.websocket_connection.WebsocketConnection] response to a
       [soup.session.Session.websocketConnectAsync] call.
       
-      If successful, returns a `classWebsocketConnection` that can be used to
+      If successful, returns a [soup.websocket_connection.WebsocketConnection] that can be used to
       communicate with the server.
   
       Params:
@@ -1209,17 +1210,17 @@ class Session : gobject.object.ObjectWrap
   
       Emitted when a request is queued on session.
         
-        When sending a request, first `signalSession::request-queued`
+        When sending a request, first [soup.session.Session.requestQueued]
         is emitted, indicating that the session has become aware of
         the request.
         
         After a connection is available to send the request various
-        `classMessage` signals are emitted as the message is
+        [soup.message.Message] signals are emitted as the message is
         processed. If the message is requeued, it will emit
-        `signalMessage::restarted`, which will then be followed by other
-        `classMessage` signals when the message is re-sent.
+        [soup.message.Message.restarted], which will then be followed by other
+        [soup.message.Message] signals when the message is re-sent.
         
-        Eventually, the message will emit `signalMessage::finished`.
+        Eventually, the message will emit [soup.message.Message.finished].
         Normally, this signals the completion of message
         processing. However, it is possible that the application
         will requeue the message from the "finished" handler.
@@ -1227,13 +1228,13 @@ class Session : gobject.object.ObjectWrap
         
         Eventually, a message will reach "finished" and not be
         requeued. At that point, the session will emit
-        `signalSession::request-unqueued` to indicate that it is done
+        [soup.session.Session.requestUnqueued] to indicate that it is done
         with the message.
         
-        To sum up: `signalSession::request-queued` and
-        `signalSession::request-unqueued` are guaranteed to be emitted
-        exactly once, but `signalMessage::finished` (and all of the other
-        `classMessage` signals) may be invoked multiple times for a given
+        To sum up: [soup.session.Session.requestQueued] and
+        [soup.session.Session.requestUnqueued] are guaranteed to be emitted
+        exactly once, but [soup.message.Message.finished] (and all of the other
+        [soup.message.Message] signals) may be invoked multiple times for a given
         message.
   
       Params:
@@ -1280,7 +1281,7 @@ class Session : gobject.object.ObjectWrap
       Emitted when a request is removed from session's queue,
         indicating that session is done with it.
         
-        See `signalSession::request-queued` for a detailed description of
+        See [soup.session.Session.requestQueued] for a detailed description of
         the message lifecycle within a session.
   
       Params:
@@ -1330,9 +1331,9 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Set `acceptLanguage` property.
       Params:
         propval = If non-null, the value to use for the "Accept-Language" header
-          on `class@Message`s sent from this session.
+          on [soup.message.Message]s sent from this session.
           
-          Setting this will disable `property@Session:accept-language-auto`.
+          Setting this will disable [soup.session.Session.acceptLanguageAuto].
       Returns: Builder instance for fluent chaining
   */
   T acceptLanguage(string propval)
@@ -1344,11 +1345,11 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Set `acceptLanguageAuto` property.
       Params:
         propval = If true, #SoupSession will automatically set the string
-          for the "Accept-Language" header on every `class@Message`
+          for the "Accept-Language" header on every [soup.message.Message]
           sent, based on the return value of `func@GLib.get_language_names`.
           
           Setting this will override any previous value of
-          `property@Session:accept-language`.
+          [soup.session.Session.acceptLanguage].
       Returns: Builder instance for fluent chaining
   */
   T acceptLanguageAuto(bool propval)
@@ -1459,7 +1460,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           if you want to ensure that all future connections will have
           this timeout value.
           
-          Not to be confused with `property@Session:idle-timeout` (which is
+          Not to be confused with [soup.session.Session.idleTimeout] (which is
           the length of time that idle persistent connections will be
           kept open).
       Returns: Builder instance for fluent chaining
@@ -1504,7 +1505,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = User-Agent string.
           
           If non-null, the value to use for the "User-Agent" header
-          on `class@Message`s sent from this session.
+          on [soup.message.Message]s sent from this session.
           
           RFC 2616 says: "The User-Agent request-header field
           contains information about the user agent originating the
@@ -1522,7 +1523,7 @@ class SessionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           followed by a version string. You may also put comments,
           enclosed in parentheses, between or after the tokens.
           
-          If you set a `property@Session:user-agent` property that has trailing
+          If you set a [soup.session.Session.userAgent] property that has trailing
           whitespace, #SoupSession will append its own product token
           (eg, `libsoup/2.3.2`) to the end of the
           header for you.

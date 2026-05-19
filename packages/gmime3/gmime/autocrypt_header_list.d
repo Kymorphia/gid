@@ -1,6 +1,7 @@
 /// Module for [AutocryptHeaderList] class
 module gmime.autocrypt_header_list;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.autocrypt_header;
 import gmime.c.functions;

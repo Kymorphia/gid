@@ -1,6 +1,7 @@
 /// Module for [RTPBuffer] class
 module gstrtp.rtpbuffer;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gst.buffer;

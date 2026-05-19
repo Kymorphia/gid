@@ -1,6 +1,7 @@
 /// Module for [DecryptResult] class
 module gmime.decrypt_result;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

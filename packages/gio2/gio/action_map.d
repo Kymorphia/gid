@@ -1,6 +1,7 @@
 /// Module for [ActionMap] interface
 module gio.action_map;
 
+public import gid.basictypes;
 public import gio.action_map_iface_proxy;
 import gid.gid;
 import gio.action;

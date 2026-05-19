@@ -1,6 +1,7 @@
 /// Module for [SqlCase] class
 module gda.sql_case;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.sql_expr;

@@ -1,6 +1,7 @@
 /// Module for [TreeModel] interface
 module gtk.tree_model;
 
+public import gid.basictypes;
 public import gtk.tree_model_iface_proxy;
 import gid.gid;
 import gobject.dclosure;

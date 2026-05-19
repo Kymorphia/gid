@@ -1,6 +1,7 @@
 /// Module for [MetaInfo] struct
 module gst.meta_info;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.types;
 import gst.c.functions;

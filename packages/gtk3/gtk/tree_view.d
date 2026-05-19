@@ -1,6 +1,7 @@
 /// Module for [TreeView] class
 module gtk.tree_view;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import cairo.surface;

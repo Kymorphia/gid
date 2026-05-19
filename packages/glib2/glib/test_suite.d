@@ -1,6 +1,7 @@
 /// Module for [TestSuite] class
 module glib.test_suite;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.c.functions;
 import glib.c.types;

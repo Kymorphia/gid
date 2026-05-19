@@ -1,6 +1,7 @@
 /// Module for [CellRenderer] class
 module gtk.cell_renderer;
 
+public import gid.basictypes;
 import cairo.context;
 import gdk.color;
 import gdk.event;

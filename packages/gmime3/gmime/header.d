@@ -1,6 +1,7 @@
 /// Module for [Header] class
 module gmime.header;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

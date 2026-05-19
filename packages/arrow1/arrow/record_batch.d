@@ -1,6 +1,7 @@
 /// Module for [RecordBatch] class
 module arrow.record_batch;
 
+public import gid.basictypes;
 import arrow.array;
 import arrow.boolean_array;
 import arrow.buffer;

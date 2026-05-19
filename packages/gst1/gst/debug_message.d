@@ -1,6 +1,7 @@
 /// Module for [DebugMessage] class
 module gst.debug_message;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.c.functions;
 import gst.c.types;

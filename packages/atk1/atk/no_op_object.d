@@ -1,6 +1,7 @@
 /// Module for [NoOpObject] class
 module atk.no_op_object;
 
+public import gid.basictypes;
 import atk.action;
 import atk.action_mixin;
 import atk.c.functions;

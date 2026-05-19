@@ -1,6 +1,7 @@
 /// Module for [DtlsConnection] interface mixin
 module gio.dtls_connection_mixin;
 
+public import gid.basictypes;
 public import gio.dtls_connection_iface_proxy;
 public import gid.gid;
 public import gio.async_result;
@@ -29,7 +30,7 @@ public import gobject.object;
     As DTLS is datagram based, [gio.dtls_connection.DtlsConnection] implements
     [gio.datagram_based.DatagramBased], presenting a datagram-socket-like API for the
     encrypted connection. This operates over a base datagram connection, which is
-    also a [gio.datagram_based.DatagramBased] (`property@Gio.DtlsConnection:base-socket`).
+    also a [gio.datagram_based.DatagramBased] ([gio.dtls_connection.DtlsConnection.baseSocket]).
     
     To close a DTLS connection, use [gio.dtls_connection.DtlsConnection.close].
     

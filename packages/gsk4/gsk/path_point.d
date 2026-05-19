@@ -1,6 +1,7 @@
 /// Module for [PathPoint] class
 module gsk.path_point;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import graphene.point;

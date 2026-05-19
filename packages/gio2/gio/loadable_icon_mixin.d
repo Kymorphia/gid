@@ -1,6 +1,7 @@
 /// Module for [LoadableIcon] interface mixin
 module gio.loadable_icon_mixin;
 
+public import gid.basictypes;
 public import gio.loadable_icon_iface_proxy;
 public import gid.gid;
 public import gio.async_result;

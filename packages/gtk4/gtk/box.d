@@ -1,6 +1,7 @@
 /// Module for [Box] class
 module gtk.box;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;

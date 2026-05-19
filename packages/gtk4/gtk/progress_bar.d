@@ -1,6 +1,7 @@
 /// Module for [ProgressBar] class
 module gtk.progress_bar;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;
@@ -206,7 +207,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
         value, as a percentage.
         
         To make a progress bar that is styled and sized suitably for showing text
-        (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
+        (even if the actual text is blank), set [gtk.progress_bar.ProgressBar.showText]
         to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
   */
   @property bool showText()
@@ -225,7 +226,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
           value, as a percentage.
           
           To make a progress bar that is styled and sized suitably for showing text
-          (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
+          (even if the actual text is blank), set [gtk.progress_bar.ProgressBar.showText]
           to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
   */
   @property void showText(bool propval)
@@ -421,7 +422,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
       as a percentage.
       
       To make a progress bar that is styled and sized suitably for containing
-      text (even if the actual text is blank), set `propertyGtk.ProgressBar:show-text`
+      text (even if the actual text is blank), set [gtk.progress_bar.ProgressBar.showText]
       to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
   
       Params:
@@ -435,15 +436,15 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   /**
       Causes the given text to appear next to the progress bar.
       
-      If text is null and `propertyGtk.ProgressBar:show-text` is true,
+      If text is null and [gtk.progress_bar.ProgressBar.showText] is true,
       the current value of [gtk.progress_bar.ProgressBar.fraction] will be displayed
       as a percentage.
       
-      If text is non-null and `propertyGtk.ProgressBar:show-text` is true,
+      If text is non-null and [gtk.progress_bar.ProgressBar.showText] is true,
       the text will be displayed. In this case, it will not display the progress
       percentage. If text is the empty string, the progress bar will still
       be styled and sized suitably for containing text, as long as
-      `propertyGtk.ProgressBar:show-text` is true.
+      [gtk.progress_bar.ProgressBar.showText] is true.
   
       Params:
         text = a UTF-8 string
@@ -525,7 +526,7 @@ class ProgressBarGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.acce
           value, as a percentage.
           
           To make a progress bar that is styled and sized suitably for showing text
-          (even if the actual text is blank), set `property@Gtk.ProgressBar:show-text`
+          (even if the actual text is blank), set [gtk.progress_bar.ProgressBar.showText]
           to true and [gtk.progress_bar.ProgressBar.text] to the empty string (not null).
       Returns: Builder instance for fluent chaining
   */

@@ -1,6 +1,7 @@
 /// Module for [SpringAnimation] class
 module adw.spring_animation;
 
+public import gid.basictypes;
 import adw.animation;
 import adw.animation_target;
 import adw.c.functions;
@@ -12,32 +13,32 @@ import gobject.gid_builder;
 import gtk.widget;
 
 /**
-    A spring-based `class@Animation`.
+    A spring-based [adw.animation.Animation].
     
     [adw.spring_animation.SpringAnimation] implements an animation driven by a physical model of a
-    spring described by `struct@SpringParams`, with a resting position in
-    `property@SpringAnimation:value-to`, stretched to
-    `property@SpringAnimation:value-from`.
+    spring described by [adw.spring_params.SpringParams], with a resting position in
+    [adw.spring_animation.SpringAnimation.valueTo], stretched to
+    [adw.spring_animation.SpringAnimation.valueFrom].
     
     Since the animation is physically simulated, spring animations don't have a
     fixed duration. The animation will stop when the simulated spring comes to a
     rest - when the amplitude of the oscillations becomes smaller than
-    `property@SpringAnimation:epsilon`, or immediately when it reaches
-    `property@SpringAnimation:value-to` if
-    `property@SpringAnimation:clamp` is set to `TRUE`. The estimated duration can
-    be obtained with `property@SpringAnimation:estimated-duration`.
+    [adw.spring_animation.SpringAnimation.epsilon], or immediately when it reaches
+    [adw.spring_animation.SpringAnimation.valueTo] if
+    [adw.spring_animation.SpringAnimation.clamp] is set to `TRUE`. The estimated duration can
+    be obtained with [adw.spring_animation.SpringAnimation.estimatedDuration].
     
     Due to the nature of spring-driven motion the animation can overshoot
-    `property@SpringAnimation:value-to` before coming to a rest. Whether the
+    [adw.spring_animation.SpringAnimation.valueTo] before coming to a rest. Whether the
     animation will overshoot or not depends on the damping ratio of the spring.
-    See `struct@SpringParams` for more information about specific damping ratio
+    See [adw.spring_params.SpringParams] for more information about specific damping ratio
     values.
     
-    If `property@SpringAnimation:clamp` is `TRUE`, the animation will abruptly
+    If [adw.spring_animation.SpringAnimation.clamp] is `TRUE`, the animation will abruptly
     end as soon as it reaches the final value, preventing overshooting.
     
     Animations can have an initial velocity value, set via
-    `property@SpringAnimation:initial-velocity`, which adjusts the curve without
+    [adw.spring_animation.SpringAnimation.initialVelocity], which adjusts the curve without
     changing the duration. This makes spring animations useful for deceleration
     at the end of gestures.
     
@@ -88,8 +89,8 @@ class SpringAnimation : adw.animation.Animation
         If set to `TRUE`, the animation will abruptly end as soon as it reaches the
         final value, preventing overshooting.
         
-        It won't prevent overshooting `property@SpringAnimation:value-from` if a
-        relative negative `property@SpringAnimation:initial-velocity` is set.
+        It won't prevent overshooting [adw.spring_animation.SpringAnimation.valueFrom] if a
+        relative negative [adw.spring_animation.SpringAnimation.initialVelocity] is set.
   */
   @property bool clamp()
   {
@@ -104,8 +105,8 @@ class SpringAnimation : adw.animation.Animation
           If set to `TRUE`, the animation will abruptly end as soon as it reaches the
           final value, preventing overshooting.
           
-          It won't prevent overshooting `property@SpringAnimation:value-from` if a
-          relative negative `property@SpringAnimation:initial-velocity` is set.
+          It won't prevent overshooting [adw.spring_animation.SpringAnimation.valueFrom] if a
+          relative negative [adw.spring_animation.SpringAnimation.initialVelocity] is set.
   */
   @property void clamp(bool propval)
   {
@@ -157,7 +158,7 @@ class SpringAnimation : adw.animation.Animation
       Get `estimatedDuration` property.
       Returns: Estimated duration of the animation, in milliseconds.
         
-        Can be `const@DURATION_INFINITE` if the spring damping is set to 0.
+        Can be [adw.types.DURATION_INFINITE] if the spring damping is set to 0.
   */
   @property uint estimatedDuration()
   {
@@ -211,7 +212,7 @@ class SpringAnimation : adw.animation.Animation
       Returns: The value to animate from.
         
         The animation will start at this value and end at
-        `property@SpringAnimation:value-to`.
+        [adw.spring_animation.SpringAnimation.valueTo].
   */
   @property double valueFrom()
   {
@@ -224,7 +225,7 @@ class SpringAnimation : adw.animation.Animation
         propval = The value to animate from.
           
           The animation will start at this value and end at
-          `property@SpringAnimation:value-to`.
+          [adw.spring_animation.SpringAnimation.valueTo].
   */
   @property void valueFrom(double propval)
   {
@@ -235,7 +236,7 @@ class SpringAnimation : adw.animation.Animation
       Get `valueTo` property.
       Returns: The value to animate to.
         
-        The animation will start at `property@SpringAnimation:value-from` and end
+        The animation will start at [adw.spring_animation.SpringAnimation.valueFrom] and end
         at this value.
   */
   @property double valueTo()
@@ -248,7 +249,7 @@ class SpringAnimation : adw.animation.Animation
       Params:
         propval = The value to animate to.
           
-          The animation will start at `property@SpringAnimation:value-from` and end
+          The animation will start at [adw.spring_animation.SpringAnimation.valueFrom] and end
           at this value.
   */
   @property void valueTo(double propval)
@@ -349,7 +350,7 @@ class SpringAnimation : adw.animation.Animation
   /**
       Gets the estimated duration of self, in milliseconds.
       
-      Can be `constDURATION_INFINITE` if the spring damping is set to 0.
+      Can be [adw.types.DURATION_INFINITE] if the spring damping is set to 0.
       Returns: the estimated duration
   */
   uint getEstimatedDuration()
@@ -421,8 +422,8 @@ class SpringAnimation : adw.animation.Animation
       If set to `TRUE`, the animation will abruptly end as soon as it reaches the
       final value, preventing overshooting.
       
-      It won't prevent overshooting `propertySpringAnimation:value-from` if a
-      relative negative `propertySpringAnimation:initial-velocity` is set.
+      It won't prevent overshooting [adw.spring_animation.SpringAnimation.valueFrom] if a
+      relative negative [adw.spring_animation.SpringAnimation.initialVelocity] is set.
   
       Params:
         clamp = the new value
@@ -482,7 +483,7 @@ class SpringAnimation : adw.animation.Animation
       Sets the value self will animate from.
       
       The animation will start at this value and end at
-      `propertySpringAnimation:value-to`.
+      [adw.spring_animation.SpringAnimation.valueTo].
   
       Params:
         value = the value to animate from
@@ -495,7 +496,7 @@ class SpringAnimation : adw.animation.Animation
   /**
       Sets the value self will animate to.
       
-      The animation will start at `propertySpringAnimation:value-from` and end at
+      The animation will start at [adw.spring_animation.SpringAnimation.valueFrom] and end at
       this value.
   
       Params:
@@ -519,8 +520,8 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
           If set to `TRUE`, the animation will abruptly end as soon as it reaches the
           final value, preventing overshooting.
           
-          It won't prevent overshooting `property@SpringAnimation:value-from` if a
-          relative negative `property@SpringAnimation:initial-velocity` is set.
+          It won't prevent overshooting [adw.spring_animation.SpringAnimation.valueFrom] if a
+          relative negative [adw.spring_animation.SpringAnimation.initialVelocity] is set.
       Returns: Builder instance for fluent chaining
   */
   T clamp(bool propval)
@@ -580,7 +581,7 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
         propval = The value to animate from.
           
           The animation will start at this value and end at
-          `property@SpringAnimation:value-to`.
+          [adw.spring_animation.SpringAnimation.valueTo].
       Returns: Builder instance for fluent chaining
   */
   T valueFrom(double propval)
@@ -593,7 +594,7 @@ class SpringAnimationGidBuilderImpl(T) : adw.animation.AnimationGidBuilderImpl!T
       Params:
         propval = The value to animate to.
           
-          The animation will start at `property@SpringAnimation:value-from` and end
+          The animation will start at [adw.spring_animation.SpringAnimation.valueFrom] and end
           at this value.
       Returns: Builder instance for fluent chaining
   */

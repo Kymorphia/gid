@@ -1,6 +1,7 @@
 /// Module for [CellAccessibleParent] interface
 module gtk.cell_accessible_parent;
 
+public import gid.basictypes;
 public import gtk.cell_accessible_parent_iface_proxy;
 import atk.object;
 import atk.relation_set;

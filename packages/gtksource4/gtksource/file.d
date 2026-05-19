@@ -1,6 +1,7 @@
 /// Module for [File] class
 module gtksource.file;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.file;
 import gobject.gid_builder;

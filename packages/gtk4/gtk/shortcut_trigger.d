@@ -1,6 +1,7 @@
 /// Module for [ShortcutTrigger] class
 module gtk.shortcut_trigger;
 
+public import gid.basictypes;
 import gdk.display;
 import gdk.event;
 import gdk.types;

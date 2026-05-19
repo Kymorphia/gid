@@ -1,6 +1,7 @@
 /// Module for [SqlOperation] class
 module gda.sql_operation;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

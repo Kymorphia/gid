@@ -1,6 +1,7 @@
 /// Module for [FontMap] interface
 module pangocairo.font_map;
 
+public import gid.basictypes;
 public import pangocairo.font_map_iface_proxy;
 import cairo.types;
 import gid.gid;

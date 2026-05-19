@@ -1,6 +1,7 @@
 /// Module for [ParamSpecDouble] class
 module gobject.param_spec_double;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

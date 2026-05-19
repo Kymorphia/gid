@@ -1,6 +1,7 @@
 /// Module for [LinkButton] class
 module gtk.link_button;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -34,7 +35,7 @@ import gtk.types;
     
     By default, [gtk.link_button.LinkButton] calls [gtk.file_launcher.FileLauncher.launch] when the button
     is clicked. This behaviour can be overridden by connecting to the
-    `signal@Gtk.LinkButton::activate-link` signal and returning true from
+    [gtk.link_button.LinkButton.activateLink] signal and returning true from
     the signal handler.
     
     # CSS nodes

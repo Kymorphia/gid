@@ -1,6 +1,7 @@
 /// Module for [Selection] interface
 module atk.selection;
 
+public import gid.basictypes;
 public import atk.selection_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

@@ -1,6 +1,7 @@
 /// Module for [Completion] class
 module gtksource.completion;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;

@@ -1,6 +1,7 @@
 /// Module for [BufferPool] class
 module gst.buffer_pool;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.allocation_params;

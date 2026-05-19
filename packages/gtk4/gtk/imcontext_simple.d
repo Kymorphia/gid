@@ -1,6 +1,7 @@
 /// Module for [IMContextSimple] class
 module gtk.imcontext_simple;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.c.functions;

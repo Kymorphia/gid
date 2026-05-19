@@ -1,6 +1,7 @@
 /// Module for [ListModel] interface
 module gio.list_model;
 
+public import gid.basictypes;
 public import gio.list_model_iface_proxy;
 import gid.gid;
 import gio.c.functions;
@@ -20,7 +21,7 @@ import gobject.types;
     
     Each object in the list may also report changes in itself via some
     mechanism (normally the [gobject.object.ObjectWrap.notify] signal).  Taken
-    together with the `signal@Gio.ListModel::items-changed` signal, this provides
+    together with the [gio.list_model.ListModel.itemsChanged] signal, this provides
     for a list that can change its membership, and in which the members can
     change their individual properties.
     

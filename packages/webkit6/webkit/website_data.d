@@ -1,6 +1,7 @@
 /// Module for [WebsiteData] class
 module webkit.website_data;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import webkit.c.functions;

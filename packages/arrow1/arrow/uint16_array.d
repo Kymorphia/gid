@@ -1,6 +1,7 @@
 /// Module for [UInt16Array] class
 module arrow.uint16_array;
 
+public import gid.basictypes;
 import arrow.buffer;
 import arrow.c.functions;
 import arrow.c.types;

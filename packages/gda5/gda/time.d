@@ -1,6 +1,7 @@
 /// Module for [Time] struct
 module gda.time;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

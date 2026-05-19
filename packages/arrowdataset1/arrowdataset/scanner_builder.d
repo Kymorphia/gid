@@ -1,6 +1,7 @@
 /// Module for [ScannerBuilder] class
 module arrowdataset.scanner_builder;
 
+public import gid.basictypes;
 import arrow.expression;
 import arrow.record_batch_reader;
 import arrowdataset.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [SocketConnectable] interface
 module gio.socket_connectable;
 
+public import gid.basictypes;
 public import gio.socket_connectable_iface_proxy;
 import gid.gid;
 import gio.c.functions;

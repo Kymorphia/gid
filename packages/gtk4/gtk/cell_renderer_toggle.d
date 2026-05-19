@@ -1,6 +1,7 @@
 /// Module for [CellRendererToggle] class
 module gtk.cell_renderer_toggle;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

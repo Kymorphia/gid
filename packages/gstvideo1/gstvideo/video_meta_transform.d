@@ -1,6 +1,7 @@
 /// Module for [VideoMetaTransform] class
 module gstvideo.video_meta_transform;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gstvideo.c.functions;

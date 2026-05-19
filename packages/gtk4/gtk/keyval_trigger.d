@@ -1,6 +1,7 @@
 /// Module for [KeyvalTrigger] class
 module gtk.keyval_trigger;
 
+public import gid.basictypes;
 import gdk.types;
 import gid.gid;
 import gobject.gid_builder;

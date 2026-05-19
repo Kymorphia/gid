@@ -1,6 +1,7 @@
 /// Module for [UnixCredentialsMessage] class
 module gio.unix_credentials_message;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

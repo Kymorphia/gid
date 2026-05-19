@@ -1,6 +1,7 @@
 /// Module for [Snapshot] class
 module gdk.snapshot;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

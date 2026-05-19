@@ -1,6 +1,7 @@
 /// Module for [IconSet] class
 module gtk.icon_set;
 
+public import gid.basictypes;
 import cairo.surface;
 import gdk.window;
 import gdkpixbuf.pixbuf;

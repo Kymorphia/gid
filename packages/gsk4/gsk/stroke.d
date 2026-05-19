@@ -1,6 +1,7 @@
 /// Module for [Stroke] class
 module gsk.stroke;
 
+public import gid.basictypes;
 import cairo.context;
 import gid.gid;
 import gobject.boxed;

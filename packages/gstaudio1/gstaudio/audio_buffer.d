@@ -1,6 +1,7 @@
 /// Module for [AudioBuffer] class
 module gstaudio.audio_buffer;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.buffer;
 import gst.segment;

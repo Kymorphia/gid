@@ -1,6 +1,7 @@
 /// Module for [Native] interface
 module gtk.native;
 
+public import gid.basictypes;
 public import gtk.native_iface_proxy;
 import gdk.surface;
 import gid.gid;

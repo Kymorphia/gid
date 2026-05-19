@@ -8,7 +8,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 | --- | --- |
 | **Dub Package**          | [gid:cairo1](https://code.dlang.org/packages/gid%3Acairo1)                       |
 | **Library Homepage**     | https://cairographics.org                                                        |
-| **D API Reference**      | https://www.kymorphia.com/gid/cairo.html                                         |
+| **D API Reference**      | https://www.kymorphia.com/gid/gid~cairo1/                                        |
 | **C API Reference**      | https://www.cairographics.org/manual/                                            |
 
 Consult the [giD README](https://github.com/Kymorphia/gid) for more information on programming with giD and links to examples.

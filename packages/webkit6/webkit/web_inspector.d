@@ -1,6 +1,7 @@
 /// Module for [WebInspector] class
 module webkit.web_inspector;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

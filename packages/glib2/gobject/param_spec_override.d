@@ -1,6 +1,7 @@
 /// Module for [ParamSpecOverride] class
 module gobject.param_spec_override;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

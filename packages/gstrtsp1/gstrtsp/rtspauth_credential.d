@@ -1,6 +1,7 @@
 /// Module for [RTSPAuthCredential] class
 module gstrtsp.rtspauth_credential;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstrtsp.c.functions;

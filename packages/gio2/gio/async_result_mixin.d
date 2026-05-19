@@ -1,6 +1,7 @@
 /// Module for [AsyncResult] interface mixin
 module gio.async_result_mixin;
 
+public import gid.basictypes;
 public import gio.async_result_iface_proxy;
 public import gid.gid;
 public import gio.c.functions;

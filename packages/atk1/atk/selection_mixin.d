@@ -1,6 +1,7 @@
 /// Module for [Selection] interface mixin
 module atk.selection_mixin;
 
+public import gid.basictypes;
 public import atk.selection_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

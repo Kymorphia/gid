@@ -1,6 +1,7 @@
 /// Module for [AboutDialog] class
 module adw.about_dialog;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.dialog;
@@ -31,15 +32,15 @@ import gtk.types;
     ## Main page
     
     [adw.about_dialog.AboutDialog] prominently displays the application's icon, name, developer
-    name and version. They can be set with the `property@AboutDialog:application-icon`,
-    `property@AboutDialog:application-name`,
-    `property@AboutDialog:developer-name` and `property@AboutDialog:version`
+    name and version. They can be set with the [adw.about_dialog.AboutDialog.applicationIcon],
+    [adw.about_dialog.AboutDialog.applicationName],
+    [adw.about_dialog.AboutDialog.developerName] and [adw.about_dialog.AboutDialog.version_]
     respectively.
     
     ## What's New
     
     [adw.about_dialog.AboutDialog] provides a way for applications to display their release
-    notes, set with the `property@AboutDialog:release-notes` property.
+    notes, set with the [adw.about_dialog.AboutDialog.releaseNotes] property.
     
     Release notes are formatted the same way as
     [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
@@ -59,18 +60,18 @@ import gtk.types;
     Nested lists are not supported.
     
     Only one version can be shown at a time. By default, the displayed version
-    number matches `property@AboutDialog:version`. Use
-    `property@AboutDialog:release-notes-version` to override it.
+    number matches [adw.about_dialog.AboutDialog.version_]. Use
+    [adw.about_dialog.AboutDialog.releaseNotesVersion] to override it.
     
     ## Details
     
     The Details page displays the application comments and links.
     
-    The comments can be set with the `property@AboutDialog:comments` property.
+    The comments can be set with the [adw.about_dialog.AboutDialog.comments] property.
     Unlike [gtk.about_dialog.AboutDialog.comments], this string can be long and
     detailed. It can also contain links and Pango markup.
     
-    To set the application website, use `property@AboutDialog:website`.
+    To set the application website, use [adw.about_dialog.AboutDialog.website].
     To add extra links below the website, use [adw.about_dialog.AboutDialog.addLink].
     
     If the Details page doesn't have any other content besides website, the
@@ -80,29 +81,29 @@ import gtk.types;
     
     [adw.about_dialog.AboutDialog] displays the following two links on the main page:
     
-    * Support Questions, set with the `property@AboutDialog:support-url` property,
-    * Report an Issue, set with the `property@AboutDialog:issue-url` property.
+    * Support Questions, set with the [adw.about_dialog.AboutDialog.supportUrl] property,
+    * Report an Issue, set with the [adw.about_dialog.AboutDialog.issueUrl] property.
     
     Additionally, applications can provide debugging information. It will be
     shown separately on the Troubleshooting page. Use the
-    `property@AboutDialog:debug-info` property to specify it.
+    [adw.about_dialog.AboutDialog.debugInfo] property to specify it.
     
     It's intended to be attached to issue reports when reporting issues against
     the application. As such, it cannot contain markup or links.
     
     [adw.about_dialog.AboutDialog] provides a quick way to save debug information to a file.
-    When saving, `property@AboutDialog:debug-info-filename` would be used as
+    When saving, [adw.about_dialog.AboutDialog.debugInfoFilename] would be used as
     the suggested filename.
     
     ## Credits and Acknowledgements
     
     The Credits page has the following default sections:
     
-    * Developers, set with the `property@AboutDialog:developers` property,
-    * Designers, set with the `property@AboutDialog:designers` property,
-    * Artists, set with the `property@AboutDialog:artists` property,
-    * Documenters, set with the `property@AboutDialog:documenters` property,
-    * Translators, set with the `property@AboutDialog:translator-credits` property.
+    * Developers, set with the [adw.about_dialog.AboutDialog.developers] property,
+    * Designers, set with the [adw.about_dialog.AboutDialog.designers] property,
+    * Artists, set with the [adw.about_dialog.AboutDialog.artists] property,
+    * Documenters, set with the [adw.about_dialog.AboutDialog.documenters] property,
+    * Translators, set with the [adw.about_dialog.AboutDialog.translatorCredits] property.
     
     When setting translator credits, use the strings `"translator-credits"` or
     `"translator_credits"` and mark them as translatable.
@@ -133,13 +134,13 @@ import gtk.types;
     The Legal page displays the copyright and licensing information for the
     application and other modules.
     
-    The copyright string is set with the `property@AboutDialog:copyright`
+    The copyright string is set with the [adw.about_dialog.AboutDialog.copyright]
     property and should be a short string of one or two lines, for example:
     `© 2022 Example`.
     
     Licensing information can be quickly set from a list of known licenses with
-    the `property@AboutDialog:license-type` property. If the application's
-    license is not in the list, `property@AboutDialog:license` can be used
+    the [adw.about_dialog.AboutDialog.licenseType] property. If the application's
+    license is not in the list, [adw.about_dialog.AboutDialog.license] can be used
     instead.
     
     To add information about other modules, such as application dependencies or
@@ -342,7 +343,7 @@ class AboutDialog : adw.dialog.Dialog
         application.
         
         [adw.about_dialog.AboutDialog] provides a quick way to save debug information to a file.
-        When saving, `property@AboutDialog:debug-info-filename` would be used as
+        When saving, [adw.about_dialog.AboutDialog.debugInfoFilename] would be used as
         the suggested filename.
         
         Debug information cannot contain markup or links.
@@ -362,7 +363,7 @@ class AboutDialog : adw.dialog.Dialog
           application.
           
           [adw.about_dialog.AboutDialog] provides a quick way to save debug information to a file.
-          When saving, `property@AboutDialog:debug-info-filename` would be used as
+          When saving, [adw.about_dialog.AboutDialog.debugInfoFilename] would be used as
           the suggested filename.
           
           Debug information cannot contain markup or links.
@@ -379,7 +380,7 @@ class AboutDialog : adw.dialog.Dialog
         It will be used as the suggested filename when saving debug information to
         a file.
         
-        See `property@AboutDialog:debug-info`.
+        See [adw.about_dialog.AboutDialog.debugInfo].
   */
   @property string debugInfoFilename()
   {
@@ -394,7 +395,7 @@ class AboutDialog : adw.dialog.Dialog
           It will be used as the suggested filename when saving debug information to
           a file.
           
-          See `property@AboutDialog:debug-info`.
+          See [adw.about_dialog.AboutDialog.debugInfo].
   */
   @property void debugInfoFilename(string propval)
   {
@@ -411,7 +412,7 @@ class AboutDialog : adw.dialog.Dialog
         If the application is developed by multiple people, the developer name can
         be set to values like "AppName team", "AppName developers" or
         "The AppName project", and the individual contributors can be listed on the
-        Credits page, with `property@AboutDialog:developers` and related
+        Credits page, with [adw.about_dialog.AboutDialog.developers] and related
         properties.
   */
   @property string developerName()
@@ -430,7 +431,7 @@ class AboutDialog : adw.dialog.Dialog
           If the application is developed by multiple people, the developer name can
           be set to values like "AppName team", "AppName developers" or
           "The AppName project", and the individual contributors can be listed on the
-          Credits page, with `property@AboutDialog:developers` and related
+          Credits page, with [adw.about_dialog.AboutDialog.developers] and related
           properties.
   */
   @property void developerName(string propval)
@@ -466,9 +467,9 @@ class AboutDialog : adw.dialog.Dialog
       Returns: The license text.
         
         This can be used to set a custom text for the license if it can't be set
-        via `property@AboutDialog:license-type`.
+        via [adw.about_dialog.AboutDialog.licenseType].
         
-        When set, `property@AboutDialog:license-type` will be set to
+        When set, [adw.about_dialog.AboutDialog.licenseType] will be set to
         [gtk.types.License.Custom].
         
         The license text will be displayed on the Legal page, below the copyright
@@ -490,9 +491,9 @@ class AboutDialog : adw.dialog.Dialog
         propval = The license text.
           
           This can be used to set a custom text for the license if it can't be set
-          via `property@AboutDialog:license-type`.
+          via [adw.about_dialog.AboutDialog.licenseType].
           
-          When set, `property@AboutDialog:license-type` will be set to
+          When set, [adw.about_dialog.AboutDialog.licenseType] will be set to
           [gtk.types.License.Custom].
           
           The license text will be displayed on the Legal page, below the copyright
@@ -515,13 +516,13 @@ class AboutDialog : adw.dialog.Dialog
         Allows to set the application's license froma list of known licenses.
         
         If the application's license is not in the list,
-        `property@AboutDialog:license` can be used instead. The license type will
+        [adw.about_dialog.AboutDialog.license] can be used instead. The license type will
         be automatically set to [gtk.types.License.Custom] in that case.
         
         If set to [gtk.types.License.Unknown], no information will be displayed.
         
         If the license type is different from [gtk.types.License.Custom].
-        `property@AboutDialog:license` will be cleared out.
+        [adw.about_dialog.AboutDialog.license] will be cleared out.
         
         The license description will be displayed on the Legal page, below the
         copyright information.
@@ -542,13 +543,13 @@ class AboutDialog : adw.dialog.Dialog
           Allows to set the application's license froma list of known licenses.
           
           If the application's license is not in the list,
-          `property@AboutDialog:license` can be used instead. The license type will
+          [adw.about_dialog.AboutDialog.license] can be used instead. The license type will
           be automatically set to [gtk.types.License.Custom] in that case.
           
           If set to [gtk.types.License.Unknown], no information will be displayed.
           
           If the license type is different from [gtk.types.License.Custom].
-          `property@AboutDialog:license` will be cleared out.
+          [adw.about_dialog.AboutDialog.license] will be cleared out.
           
           The license description will be displayed on the Legal page, below the
           copyright information.
@@ -585,8 +586,8 @@ class AboutDialog : adw.dialog.Dialog
         Nested lists are not supported.
         
         [adw.about_dialog.AboutDialog] displays the version above the release notes. If set, the
-        `property@AboutDialog:release-notes-version` of the property will be used
-        as the version; otherwise, `property@AboutDialog:version` is used.
+        [adw.about_dialog.AboutDialog.releaseNotesVersion] of the property will be used
+        as the version; otherwise, [adw.about_dialog.AboutDialog.version_] is used.
   */
   @property string releaseNotes()
   {
@@ -618,8 +619,8 @@ class AboutDialog : adw.dialog.Dialog
           Nested lists are not supported.
           
           [adw.about_dialog.AboutDialog] displays the version above the release notes. If set, the
-          `property@AboutDialog:release-notes-version` of the property will be used
-          as the version; otherwise, `property@AboutDialog:version` is used.
+          [adw.about_dialog.AboutDialog.releaseNotesVersion] of the property will be used
+          as the version; otherwise, [adw.about_dialog.AboutDialog.version_] is used.
   */
   @property void releaseNotes(string propval)
   {
@@ -633,13 +634,13 @@ class AboutDialog : adw.dialog.Dialog
         The release notes version is displayed on the What's New page, above the
         release notes.
         
-        If not set, `property@AboutDialog:version` will be used instead.
+        If not set, [adw.about_dialog.AboutDialog.version_] will be used instead.
         
         For example, an application with the current version 2.0.2 might want to
         keep the release notes from 2.0.0, and set the release notes version
         accordingly.
         
-        See `property@AboutDialog:release-notes`.
+        See [adw.about_dialog.AboutDialog.releaseNotes].
   */
   @property string releaseNotesVersion()
   {
@@ -654,13 +655,13 @@ class AboutDialog : adw.dialog.Dialog
           The release notes version is displayed on the What's New page, above the
           release notes.
           
-          If not set, `property@AboutDialog:version` will be used instead.
+          If not set, [adw.about_dialog.AboutDialog.version_] will be used instead.
           
           For example, an application with the current version 2.0.2 might want to
           keep the release notes from 2.0.0, and set the release notes version
           accordingly.
           
-          See `property@AboutDialog:release-notes`.
+          See [adw.about_dialog.AboutDialog.releaseNotes].
   */
   @property void releaseNotesVersion(string propval)
   {
@@ -704,10 +705,10 @@ class AboutDialog : adw.dialog.Dialog
         
         See also:
         
-        * `property@AboutDialog:developers`
-        * `property@AboutDialog:designers`
-        * `property@AboutDialog:artists`
-        * `property@AboutDialog:documenters`
+        * [adw.about_dialog.AboutDialog.developers]
+        * [adw.about_dialog.AboutDialog.designers]
+        * [adw.about_dialog.AboutDialog.artists]
+        * [adw.about_dialog.AboutDialog.documenters]
         * [adw.about_dialog.AboutDialog.addCreditSection]
         * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   */
@@ -731,10 +732,10 @@ class AboutDialog : adw.dialog.Dialog
           
           See also:
           
-          * `property@AboutDialog:developers`
-          * `property@AboutDialog:designers`
-          * `property@AboutDialog:artists`
-          * `property@AboutDialog:documenters`
+          * [adw.about_dialog.AboutDialog.developers]
+          * [adw.about_dialog.AboutDialog.designers]
+          * [adw.about_dialog.AboutDialog.artists]
+          * [adw.about_dialog.AboutDialog.documenters]
           * [adw.about_dialog.AboutDialog.addCreditSection]
           * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   */
@@ -749,7 +750,7 @@ class AboutDialog : adw.dialog.Dialog
         
         The version is displayed on the main page.
         
-        If `property@AboutDialog:release-notes-version` is not set, the version
+        If [adw.about_dialog.AboutDialog.releaseNotesVersion] is not set, the version
         will also be displayed above the release notes on the What's New page.
   */
   @property string version_()
@@ -764,7 +765,7 @@ class AboutDialog : adw.dialog.Dialog
           
           The version is displayed on the main page.
           
-          If `property@AboutDialog:release-notes-version` is not set, the version
+          If [adw.about_dialog.AboutDialog.releaseNotesVersion] is not set, the version
           will also be displayed above the release notes on the What's New page.
   */
   @property void version_(string propval)
@@ -818,21 +819,21 @@ class AboutDialog : adw.dialog.Dialog
       This automatically sets the following properties with the following AppStream
       values:
       
-      * `propertyAboutDialog:application-icon` is set from the `<id>`
-      * `propertyAboutDialog:application-name` is set from the `<name>`
-      * `propertyAboutDialog:developer-name` is set from the `<name>` within
+      * [adw.about_dialog.AboutDialog.applicationIcon] is set from the `<id>`
+      * [adw.about_dialog.AboutDialog.applicationName] is set from the `<name>`
+      * [adw.about_dialog.AboutDialog.developerName] is set from the `<name>` within
            `<developer>`
-      * `propertyAboutDialog:version` is set from the version of the latest release
-      * `propertyAboutDialog:website` is set from the `<url type="homepage">`
-      * `propertyAboutDialog:support-url` is set from the `<url type="help">`
-      * `propertyAboutDialog:issue-url` is set from the `<url type="bugtracker">`
-      * `propertyAboutDialog:license-type` is set from the `<project_license>`.
+      * [adw.about_dialog.AboutDialog.version_] is set from the version of the latest release
+      * [adw.about_dialog.AboutDialog.website] is set from the `<url type="homepage">`
+      * [adw.about_dialog.AboutDialog.supportUrl] is set from the `<url type="help">`
+      * [adw.about_dialog.AboutDialog.issueUrl] is set from the `<url type="bugtracker">`
+      * [adw.about_dialog.AboutDialog.licenseType] is set from the `<project_license>`.
           If the license type retrieved from AppStream is not listed in
           [gtk.types.License], it will be set to `GTK_LICENCE_CUSTOM`.
       
       If release_notes_version is not `NULL`,
-      `propertyAboutDialog:release-notes-version` is set to match it, while
-      `propertyAboutDialog:release-notes` is set from the AppStream release
+      [adw.about_dialog.AboutDialog.releaseNotesVersion] is set to match it, while
+      [adw.about_dialog.AboutDialog.releaseNotes] is set from the AppStream release
       description for that version.
   
       Params:
@@ -862,11 +863,11 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      * `propertyAboutDialog:developers`
-      * `propertyAboutDialog:designers`
-      * `propertyAboutDialog:artists`
-      * `propertyAboutDialog:documenters`
-      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.developers]
+      * [adw.about_dialog.AboutDialog.designers]
+      * [adw.about_dialog.AboutDialog.artists]
+      * [adw.about_dialog.AboutDialog.documenters]
+      * [adw.about_dialog.AboutDialog.translatorCredits]
       * [adw.about_dialog.AboutDialog.addCreditSection]
   
       Params:
@@ -895,11 +896,11 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      * `propertyAboutDialog:developers`
-      * `propertyAboutDialog:designers`
-      * `propertyAboutDialog:artists`
-      * `propertyAboutDialog:documenters`
-      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.developers]
+      * [adw.about_dialog.AboutDialog.designers]
+      * [adw.about_dialog.AboutDialog.artists]
+      * [adw.about_dialog.AboutDialog.documenters]
+      * [adw.about_dialog.AboutDialog.translatorCredits]
       * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
       Params:
@@ -924,8 +925,8 @@ class AboutDialog : adw.dialog.Dialog
       Extra sections will be displayed below the application's own information.
       
       The parameters copyright, license_type and license will be used to present
-      the it the same way as `propertyAboutDialog:copyright`,
-      `propertyAboutDialog:license-type` and `propertyAboutDialog:license` are
+      the it the same way as [adw.about_dialog.AboutDialog.copyright],
+      [adw.about_dialog.AboutDialog.licenseType] and [adw.about_dialog.AboutDialog.license] are
       for the application's own information.
       
       See those properties for more details.
@@ -981,7 +982,7 @@ class AboutDialog : adw.dialog.Dialog
       
       Underlines in title will be interpreted as indicating a mnemonic.
       
-      See `propertyAboutDialog:website`.
+      See [adw.about_dialog.AboutDialog.website].
   
       Params:
         title = the link title
@@ -1312,10 +1313,10 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      * `propertyAboutDialog:developers`
-      * `propertyAboutDialog:designers`
-      * `propertyAboutDialog:documenters`
-      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.developers]
+      * [adw.about_dialog.AboutDialog.designers]
+      * [adw.about_dialog.AboutDialog.documenters]
+      * [adw.about_dialog.AboutDialog.translatorCredits]
       * [adw.about_dialog.AboutDialog.addCreditSection]
       * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
@@ -1379,7 +1380,7 @@ class AboutDialog : adw.dialog.Dialog
       application.
       
       [adw.about_dialog.AboutDialog] provides a quick way to save debug information to a file.
-      When saving, `propertyAboutDialog:debug-info-filename` would be used as
+      When saving, [adw.about_dialog.AboutDialog.debugInfoFilename] would be used as
       the suggested filename.
       
       Debug information cannot contain markup or links.
@@ -1399,7 +1400,7 @@ class AboutDialog : adw.dialog.Dialog
       It will be used as the suggested filename when saving debug information to a
       file.
       
-      See `propertyAboutDialog:debug-info`.
+      See [adw.about_dialog.AboutDialog.debugInfo].
   
       Params:
         filename = the debug info filename
@@ -1420,10 +1421,10 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      * `propertyAboutDialog:developers`
-      * `propertyAboutDialog:artists`
-      * `propertyAboutDialog:documenters`
-      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.developers]
+      * [adw.about_dialog.AboutDialog.artists]
+      * [adw.about_dialog.AboutDialog.documenters]
+      * [adw.about_dialog.AboutDialog.translatorCredits]
       * [adw.about_dialog.AboutDialog.addCreditSection]
       * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
@@ -1449,7 +1450,7 @@ class AboutDialog : adw.dialog.Dialog
       If the application is developed by multiple people, the developer name can be
       set to values like "AppName team", "AppName developers" or
       "The AppName project", and the individual contributors can be listed on the
-      Credits page, with `propertyAboutDialog:developers` and related properties.
+      Credits page, with [adw.about_dialog.AboutDialog.developers] and related properties.
   
       Params:
         developerName = the developer name
@@ -1470,10 +1471,10 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      * `propertyAboutDialog:designers`
-      * `propertyAboutDialog:artists`
-      * `propertyAboutDialog:documenters`
-      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.designers]
+      * [adw.about_dialog.AboutDialog.artists]
+      * [adw.about_dialog.AboutDialog.documenters]
+      * [adw.about_dialog.AboutDialog.translatorCredits]
       * [adw.about_dialog.AboutDialog.addCreditSection]
       * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
@@ -1501,10 +1502,10 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      * `propertyAboutDialog:developers`
-      * `propertyAboutDialog:designers`
-      * `propertyAboutDialog:artists`
-      * `propertyAboutDialog:translator-credits`
+      * [adw.about_dialog.AboutDialog.developers]
+      * [adw.about_dialog.AboutDialog.designers]
+      * [adw.about_dialog.AboutDialog.artists]
+      * [adw.about_dialog.AboutDialog.translatorCredits]
       * [adw.about_dialog.AboutDialog.addCreditSection]
       * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
@@ -1540,9 +1541,9 @@ class AboutDialog : adw.dialog.Dialog
       Sets the license for self.
       
       This can be used to set a custom text for the license if it can't be set via
-      `propertyAboutDialog:license-type`.
+      [adw.about_dialog.AboutDialog.licenseType].
       
-      When set, `propertyAboutDialog:license-type` will be set to
+      When set, [adw.about_dialog.AboutDialog.licenseType] will be set to
       [gtk.types.License.Custom].
       
       The license text will be displayed on the Legal page, below the copyright
@@ -1566,13 +1567,13 @@ class AboutDialog : adw.dialog.Dialog
       Sets the license for self from a list of known licenses.
       
       If the application's license is not in the list,
-      `propertyAboutDialog:license` can be used instead. The license type will be
+      [adw.about_dialog.AboutDialog.license] can be used instead. The license type will be
       automatically set to [gtk.types.License.Custom] in that case.
       
       If license_type is [gtk.types.License.Unknown], no information will be displayed.
       
       If license_type is different from [gtk.types.License.Custom].
-      `propertyAboutDialog:license` will be cleared out.
+      [adw.about_dialog.AboutDialog.license] will be cleared out.
       
       The license description will be displayed on the Legal page, below the
       copyright information.
@@ -1611,8 +1612,8 @@ class AboutDialog : adw.dialog.Dialog
       Nested lists are not supported.
       
       [adw.about_dialog.AboutDialog] displays the version above the release notes. If set, the
-      `propertyAboutDialog:release-notes-version` of the property will be used
-      as the version; otherwise, `propertyAboutDialog:version` is used.
+      [adw.about_dialog.AboutDialog.releaseNotesVersion] of the property will be used
+      as the version; otherwise, [adw.about_dialog.AboutDialog.version_] is used.
   
       Params:
         releaseNotes = the release notes
@@ -1629,13 +1630,13 @@ class AboutDialog : adw.dialog.Dialog
       The release notes version is displayed on the What's New page, above the
       release notes.
       
-      If not set, `propertyAboutDialog:version` will be used instead.
+      If not set, [adw.about_dialog.AboutDialog.version_] will be used instead.
       
       For example, an application with the current version 2.0.2 might want to
       keep the release notes from 2.0.0, and set the release notes version
       accordingly.
       
-      See `propertyAboutDialog:release-notes`.
+      See [adw.about_dialog.AboutDialog.releaseNotes].
   
       Params:
         version_ = the release notes version
@@ -1673,10 +1674,10 @@ class AboutDialog : adw.dialog.Dialog
       
       See also:
       
-      * `propertyAboutDialog:developers`
-      * `propertyAboutDialog:designers`
-      * `propertyAboutDialog:artists`
-      * `propertyAboutDialog:documenters`
+      * [adw.about_dialog.AboutDialog.developers]
+      * [adw.about_dialog.AboutDialog.designers]
+      * [adw.about_dialog.AboutDialog.artists]
+      * [adw.about_dialog.AboutDialog.documenters]
       * [adw.about_dialog.AboutDialog.addCreditSection]
       * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
   
@@ -1694,7 +1695,7 @@ class AboutDialog : adw.dialog.Dialog
       
       The version is displayed on the main page.
       
-      If `propertyAboutDialog:release-notes-version` is not set, the version will
+      If [adw.about_dialog.AboutDialog.releaseNotesVersion] is not set, the version will
       also be displayed above the release notes on the What's New page.
   
       Params:
@@ -1850,7 +1851,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           application.
           
           [adw.about_dialog.AboutDialog] provides a quick way to save debug information to a file.
-          When saving, `property@AboutDialog:debug-info-filename` would be used as
+          When saving, [adw.about_dialog.AboutDialog.debugInfoFilename] would be used as
           the suggested filename.
           
           Debug information cannot contain markup or links.
@@ -1869,7 +1870,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           It will be used as the suggested filename when saving debug information to
           a file.
           
-          See `property@AboutDialog:debug-info`.
+          See [adw.about_dialog.AboutDialog.debugInfo].
       Returns: Builder instance for fluent chaining
   */
   T debugInfoFilename(string propval)
@@ -1888,7 +1889,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           If the application is developed by multiple people, the developer name can
           be set to values like "AppName team", "AppName developers" or
           "The AppName project", and the individual contributors can be listed on the
-          Credits page, with `property@AboutDialog:developers` and related
+          Credits page, with [adw.about_dialog.AboutDialog.developers] and related
           properties.
       Returns: Builder instance for fluent chaining
   */
@@ -1916,9 +1917,9 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
         propval = The license text.
           
           This can be used to set a custom text for the license if it can't be set
-          via `property@AboutDialog:license-type`.
+          via [adw.about_dialog.AboutDialog.licenseType].
           
-          When set, `property@AboutDialog:license-type` will be set to
+          When set, [adw.about_dialog.AboutDialog.licenseType] will be set to
           [gtk.types.License.Custom].
           
           The license text will be displayed on the Legal page, below the copyright
@@ -1943,13 +1944,13 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           Allows to set the application's license froma list of known licenses.
           
           If the application's license is not in the list,
-          `property@AboutDialog:license` can be used instead. The license type will
+          [adw.about_dialog.AboutDialog.license] can be used instead. The license type will
           be automatically set to [gtk.types.License.Custom] in that case.
           
           If set to [gtk.types.License.Unknown], no information will be displayed.
           
           If the license type is different from [gtk.types.License.Custom].
-          `property@AboutDialog:license` will be cleared out.
+          [adw.about_dialog.AboutDialog.license] will be cleared out.
           
           The license description will be displayed on the Legal page, below the
           copyright information.
@@ -1988,8 +1989,8 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           Nested lists are not supported.
           
           [adw.about_dialog.AboutDialog] displays the version above the release notes. If set, the
-          `property@AboutDialog:release-notes-version` of the property will be used
-          as the version; otherwise, `property@AboutDialog:version` is used.
+          [adw.about_dialog.AboutDialog.releaseNotesVersion] of the property will be used
+          as the version; otherwise, [adw.about_dialog.AboutDialog.version_] is used.
       Returns: Builder instance for fluent chaining
   */
   T releaseNotes(string propval)
@@ -2005,13 +2006,13 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           The release notes version is displayed on the What's New page, above the
           release notes.
           
-          If not set, `property@AboutDialog:version` will be used instead.
+          If not set, [adw.about_dialog.AboutDialog.version_] will be used instead.
           
           For example, an application with the current version 2.0.2 might want to
           keep the release notes from 2.0.0, and set the release notes version
           accordingly.
           
-          See `property@AboutDialog:release-notes`.
+          See [adw.about_dialog.AboutDialog.releaseNotes].
       Returns: Builder instance for fluent chaining
   */
   T releaseNotesVersion(string propval)
@@ -2047,10 +2048,10 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           
           See also:
           
-          * `property@AboutDialog:developers`
-          * `property@AboutDialog:designers`
-          * `property@AboutDialog:artists`
-          * `property@AboutDialog:documenters`
+          * [adw.about_dialog.AboutDialog.developers]
+          * [adw.about_dialog.AboutDialog.designers]
+          * [adw.about_dialog.AboutDialog.artists]
+          * [adw.about_dialog.AboutDialog.documenters]
           * [adw.about_dialog.AboutDialog.addCreditSection]
           * [adw.about_dialog.AboutDialog.addAcknowledgementSection]
       Returns: Builder instance for fluent chaining
@@ -2067,7 +2068,7 @@ class AboutDialogGidBuilderImpl(T) : adw.dialog.DialogGidBuilderImpl!T
           
           The version is displayed on the main page.
           
-          If `property@AboutDialog:release-notes-version` is not set, the version
+          If [adw.about_dialog.AboutDialog.releaseNotesVersion] is not set, the version
           will also be displayed above the release notes on the What's New page.
       Returns: Builder instance for fluent chaining
   */

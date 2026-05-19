@@ -1,6 +1,7 @@
 /// Module for [CallbackAnimationTarget] class
 module adw.callback_animation_target;
 
+public import gid.basictypes;
 import adw.animation_target;
 import adw.c.functions;
 import adw.c.types;
@@ -9,7 +10,7 @@ import gid.gid;
 import gobject.gid_builder;
 
 /**
-    An `class@AnimationTarget` that calls a given callback during the
+    An [adw.animation_target.AnimationTarget] that calls a given callback during the
     animation.
 */
 class CallbackAnimationTarget : adw.animation_target.AnimationTarget

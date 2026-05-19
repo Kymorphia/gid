@@ -1,6 +1,7 @@
 /// Module for [DrawState] class
 module harfbuzz.draw_state;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import harfbuzz.c.functions;

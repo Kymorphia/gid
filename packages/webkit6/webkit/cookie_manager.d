@@ -1,6 +1,7 @@
 /// Module for [CookieManager] class
 module webkit.cookie_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.cancellable;

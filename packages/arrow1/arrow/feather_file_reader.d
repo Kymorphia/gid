@@ -1,6 +1,7 @@
 /// Module for [FeatherFileReader] class
 module arrow.feather_file_reader;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.seekable_input_stream;

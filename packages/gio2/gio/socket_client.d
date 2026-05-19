@@ -1,6 +1,7 @@
 /// Module for [SocketClient] class
 module gio.socket_client;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_result;
 import gio.c.functions;

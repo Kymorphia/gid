@@ -1,6 +1,7 @@
 /// Module for [HalfFloatDataType] class
 module arrow.half_float_data_type;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.floating_point_data_type;

@@ -1,6 +1,7 @@
 /// Module for [Message] class
 module soup.message;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.input_stream;
 import gio.iostream;
@@ -32,14 +33,14 @@ import soup.types;
     You would create a #SoupMessage with [soup.message.Message.new_] or
     [soup.message.Message.newFromUri], set up its fields appropriately, and send it.
     
-    `property@Message:status-code` will normally be a `enum@Status` value, eg,
+    [soup.message.Message.statusCode] will normally be a [soup.types.Status] value, eg,
     [soup.types.Status.Ok], though of course it might actually be an unknown status
-    code. `property@Message:reason-phrase` is the actual text returned from the
+    code. [soup.message.Message.reasonPhrase] is the actual text returned from the
     server, which may or may not correspond to the "standard" description of
     @status_code. At any rate, it is almost certainly not localized, and not very
     descriptive even if it is in the user's language; you should not use
-    `property@Message:reason-phrase` in user-visible messages. Rather, you should
-    look at `property@Message:status-code`, and determine an end-user-appropriate
+    [soup.message.Message.reasonPhrase] in user-visible messages. Rather, you should
+    look at [soup.message.Message.statusCode], and determine an end-user-appropriate
     message based on that and on what you were trying to do.
     
     Note that libsoup's terminology here does not quite match the HTTP
@@ -139,8 +140,8 @@ class Message : gobject.object.ObjectWrap
         
         The #SoupMessage is intended to be used to send
         `OPTIONS *` to a server. When set to true, the
-        path of `property@Message:uri` will be ignored and
-        `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
+        path of [soup.message.Message.uri] will be ignored and
+        [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
   */
   @property bool isOptionsPing()
   {
@@ -154,8 +155,8 @@ class Message : gobject.object.ObjectWrap
           
           The #SoupMessage is intended to be used to send
           `OPTIONS *` to a server. When set to true, the
-          path of `property@Message:uri` will be ignored and
-          `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
+          path of [soup.message.Message.uri] will be ignored and
+          [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
   */
   @property void isOptionsPing(bool propval)
   {
@@ -306,7 +307,7 @@ class Message : gobject.object.ObjectWrap
 
   /**
       Get `tlsPeerCertificateErrors` property.
-      Returns: The verification errors on `property@Message:tls-peer-certificate`.
+      Returns: The verification errors on [soup.message.Message.tlsPeerCertificate].
   */
   @property gio.types.TlsCertificateFlags tlsPeerCertificateErrors()
   {
@@ -451,7 +452,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Disables the actions of `ifaceSessionFeature`s with the
+      Disables the actions of [soup.session_feature.SessionFeature]s with the
       given feature_type (or a subclass of that type) on msg.
       
       msg is processed as though the feature(s) hadn't been added to the
@@ -572,7 +573,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Get the `structMessageMetrics` of msg.
+      Get the [soup.message_metrics.MessageMetrics] of msg.
       
       If the flag [soup.types.MessageFlags.CollectMetrics] is not enabled for msg this will
       return null.
@@ -587,7 +588,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Retrieves the `enumMessagePriority`.
+      Retrieves the [soup.types.MessagePriority].
       
       If not set this value defaults to #SOUP_MESSAGE_PRIORITY_NORMAL.
       Returns: the priority of the message.
@@ -619,7 +620,7 @@ class Message : gobject.object.ObjectWrap
       The returned address can be null if the connection hasn't been established
       yet, or the resource was loaded from the disk cache. In case of proxy
       connections, the remote address returned is a [gio.proxy_address.ProxyAddress]. If
-      `propertySession:remote-connectable` is set the returned address id for the
+      [soup.session.Session.remoteConnectable] is set the returned address id for the
       connection to the session's remote connectable.
       Returns: a #GSocketAddress or null if the connection
             hasn't been established
@@ -697,7 +698,7 @@ class Message : gobject.object.ObjectWrap
       Gets the peer's [gio.tls_certificate.TlsCertificate] associated with msg's connection.
       
       Note that this is not set yet during the emission of
-      `signalMessage::accept-certificate` signal.
+      [soup.message.Message.acceptCertificate] signal.
       Returns: msg's TLS peer certificate,
           or null if msg's connection is not SSL.
   */
@@ -712,7 +713,7 @@ class Message : gobject.object.ObjectWrap
   /**
       Gets the errors associated with validating msg's TLS peer certificate.
       Note that this is not set yet during the emission of
-      `signalMessage::accept-certificate` signal.
+      [soup.message.Message.acceptCertificate] signal.
       Returns: a #GTlsCertificateFlags with msg's TLS peer certificate errors.
   */
   gio.types.TlsCertificateFlags getTlsPeerCertificateErrors()
@@ -750,7 +751,7 @@ class Message : gobject.object.ObjectWrap
   }
 
   /**
-      Get whether `ifaceSessionFeature`s of the given feature_type
+      Get whether [soup.session_feature.SessionFeature]s of the given feature_type
       (or a subclass of that type) are disabled on msg.
       
       See [soup.message.Message.disableFeature].
@@ -809,7 +810,7 @@ class Message : gobject.object.ObjectWrap
       Sets first_party as the main document #GUri for msg.
       
       For details of when and how this is used refer to the documentation for
-      `enumCookieJarAcceptPolicy`.
+      [soup.types.CookieJarAcceptPolicy].
   
       Params:
         firstParty = the #GUri for the msg's first party
@@ -847,8 +848,8 @@ class Message : gobject.object.ObjectWrap
   /**
       Set whether msg is intended to be used to send `OPTIONS *` to a server.
       
-      When set to true, the path of `propertyMessage:uri` will be ignored and
-      `propertyMessage:method` set to `SOUP_METHOD_OPTIONS`.
+      When set to true, the path of [soup.message.Message.uri] will be ignored and
+      [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
   
       Params:
         isOptionsPing = the value to set
@@ -966,11 +967,11 @@ class Message : gobject.object.ObjectWrap
       Sets the certificate to be used by msg's connection when a
       client certificate is requested during the TLS handshake.
       
-      You can call this as a response to `signalMessage::request-certificate`
+      You can call this as a response to [soup.message.Message.requestCertificate]
       signal, or before the connection is started. If certificate is null
       the handshake will continue without providing a GTlsCertificate.
       Note that the [gio.tls_certificate.TlsCertificate] set by this function will be ignored if
-      `propertySession:tls-interaction` is not null.
+      [soup.session.Session.tlsInteraction] is not null.
   
       Params:
         certificate = the #GTlsCertificate to set, or null
@@ -998,7 +999,7 @@ class Message : gobject.object.ObjectWrap
       Completes a certificate password request.
       
       You must call this as a response to
-      `signalMessage::request-certificate-password` signal, to notify msg that
+      [soup.message.Message.requestCertificatePassword] signal, to notify msg that
       the [gio.tls_password.TlsPassword] has already been updated.
   */
   void tlsClientCertificatePasswordRequestComplete()
@@ -1133,12 +1134,12 @@ class Message : gobject.object.ObjectWrap
   /**
       Connect to `ContentSniffed` signal.
   
-      This signal is emitted after `signalMessage::got-headers`.
+      This signal is emitted after [soup.message.Message.gotHeaders].
         
         If content sniffing is disabled, or no content sniffing will be
         performed, due to the sniffer deciding to trust the
         Content-Type sent by the server, this signal is emitted
-        immediately after `signalMessage::got-headers`, and type is
+        immediately after [soup.message.Message.gotHeaders], and type is
         null.
   
       Params:
@@ -1319,7 +1320,7 @@ class Message : gobject.object.ObjectWrap
         emission finished, and msg's connection will be closed.
         (If you need to requeue a message--eg, after handling
         authentication or redirection--it is usually better to
-        requeue it from a `signalMessage::got-body` handler rather
+        requeue it from a [soup.message.Message.gotBody] handler rather
         than a `signalMessage::got_headers` handler, so that the
         existing HTTP connection can be reused.)
   
@@ -1404,7 +1405,7 @@ class Message : gobject.object.ObjectWrap
   /**
       Connect to `HstsEnforced` signal.
   
-      Emitted when `classHSTSEnforcer` has upgraded the protocol
+      Emitted when [soup.hstsenforcer.HSTSEnforcer] has upgraded the protocol
         for msg to HTTPS as a result of matching its domain with
         a HSTS policy.
   
@@ -1511,7 +1512,7 @@ class Message : gobject.object.ObjectWrap
         possible to handle the request asynchornously by returning true and
         call [soup.message.Message.setTlsClientCertificate] later once the
         certificate is available. Note that this signal is not emitted if
-        `propertySession:tls-interaction` was set, or if
+        [soup.session.Session.tlsInteraction] was set, or if
         [soup.message.Message.setTlsClientCertificate] was called before the
         connection TLS handshake started.
   
@@ -1571,7 +1572,7 @@ class Message : gobject.object.ObjectWrap
         call
         [soup.message.Message.tlsClientCertificatePasswordRequestComplete]
         later after setting the password on password. Note that this signal
-        is not emitted if `propertySession:tls-interaction` was set.
+        is not emitted if [soup.session.Session.tlsInteraction] was set.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1849,8 +1850,8 @@ class MessageGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           
           The #SoupMessage is intended to be used to send
           `OPTIONS *` to a server. When set to true, the
-          path of `property@Message:uri` will be ignored and
-          `property@Message:method` set to `SOUP_METHOD_OPTIONS`.
+          path of [soup.message.Message.uri] will be ignored and
+          [soup.message.Message.method] set to `SOUP_METHOD_OPTIONS`.
       Returns: Builder instance for fluent chaining
   */
   T isOptionsPing(bool propval)

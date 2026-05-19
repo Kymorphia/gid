@@ -1,6 +1,7 @@
 /// Module for [TreePath] class
 module gtk.tree_path;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gtk.c.functions;

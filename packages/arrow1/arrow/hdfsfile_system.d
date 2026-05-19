@@ -1,6 +1,7 @@
 /// Module for [HDFSFileSystem] class
 module arrow.hdfsfile_system;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.file_system;

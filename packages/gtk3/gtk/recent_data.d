@@ -1,6 +1,7 @@
 /// Module for [RecentData] class
 module gtk.recent_data;
 
+public import gid.basictypes;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;

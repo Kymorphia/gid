@@ -1,6 +1,7 @@
 /// Module for [Document] interface mixin
 module atk.document_mixin;
 
+public import gid.basictypes;
 public import atk.document_iface_proxy;
 public import atk.c.functions;
 public import atk.c.types;

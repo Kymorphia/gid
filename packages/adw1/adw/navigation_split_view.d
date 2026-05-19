@@ -1,6 +1,7 @@
 /// Module for [NavigationSplitView] class
 module adw.navigation_split_view;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.navigation_page;
@@ -28,17 +29,17 @@ import gtk.widget;
       <img src="navigation-split-view-collapsed.png" alt="navigation-split-view-collapsed">
     </picture>
     
-    [adw.navigation_split_view.NavigationSplitView] has two `class@NavigationPage` children: sidebar and
+    [adw.navigation_split_view.NavigationSplitView] has two [adw.navigation_page.NavigationPage] children: sidebar and
     content, and displays them side by side.
     
-    When `property@NavigationSplitView:collapsed` is set to `TRUE`, it instead
-    puts both children inside an `class@NavigationView`. The
-    `property@NavigationSplitView:show-content` controls which child is visible
+    When [adw.navigation_split_view.NavigationSplitView.collapsed] is set to `TRUE`, it instead
+    puts both children inside an [adw.navigation_view.NavigationView]. The
+    [adw.navigation_split_view.NavigationSplitView.showContent] controls which child is visible
     while collapsed.
     
-    See also `class@OverlaySplitView`.
+    See also [adw.overlay_split_view.OverlaySplitView].
     
-    [adw.navigation_split_view.NavigationSplitView] is typically used together with an `class@Breakpoint`
+    [adw.navigation_split_view.NavigationSplitView] is typically used together with an [adw.breakpoint.Breakpoint]
     setting the `collapsed` property to `TRUE` on small widths, as follows:
     
     ```xml
@@ -82,25 +83,25 @@ import gtk.widget;
     depending on its own width.
     
     If possible, it tries to allocate a fraction of the total width, controlled
-    with the `property@NavigationSplitView:sidebar-width-fraction` property.
+    with the [adw.navigation_split_view.NavigationSplitView.sidebarWidthFraction] property.
     
     The sidebar also has minimum and maximum sizes, controlled with the
-    `property@NavigationSplitView:min-sidebar-width` and
-    `property@NavigationSplitView:max-sidebar-width` properties.
+    [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+    [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth] properties.
     
     The minimum and maximum sizes are using the length unit specified with the
-    `property@NavigationSplitView:sidebar-width-unit`.
+    [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
     
     By default, sidebar is using 25% of the total width, with 180sp as the
     minimum size and 280sp as the maximum size.
     
     ## Header Bar Integration
     
-    When used inside [adw.navigation_split_view.NavigationSplitView], `class@HeaderBar` will
+    When used inside [adw.navigation_split_view.NavigationSplitView], [adw.header_bar.HeaderBar] will
     automatically hide the window buttons in the middle.
     
     When collapsed, it also displays a back button for the content widget, as
-    well as the page titles. See `class@NavigationView` documentation for details.
+    well as the page titles. See [adw.navigation_view.NavigationView] documentation for details.
     
     ## Actions
     
@@ -109,10 +110,10 @@ import gtk.widget;
     
     - `navigation.push` takes a string parameter specifying the tag of the page
     to push. If it matches the tag of the content widget, it sets
-    `property@NavigationSplitView:show-content` to `TRUE`.
+    [adw.navigation_split_view.NavigationSplitView.showContent] to `TRUE`.
     
     - `navigation.pop` doesn't take any parameters and sets
-    `property@NavigationSplitView:show-content` to `FALSE`.
+    [adw.navigation_split_view.NavigationSplitView.showContent] to `FALSE`.
     
     ## [adw.navigation_split_view.NavigationSplitView] as [gtk.buildable.Buildable]
     
@@ -193,10 +194,10 @@ class NavigationSplitView : gtk.widget.Widget
       Get `collapsed` property.
       Returns: Whether the split view is collapsed.
         
-        When collapsed, the children are put inside an `class@NavigationView`,
+        When collapsed, the children are put inside an [adw.navigation_view.NavigationView],
         otherwise they are displayed side by side.
         
-        The `property@NavigationSplitView:show-content` controls which child is
+        The [adw.navigation_split_view.NavigationSplitView.showContent] controls which child is
         visible while collapsed.
   */
   @property bool collapsed()
@@ -209,10 +210,10 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         propval = Whether the split view is collapsed.
           
-          When collapsed, the children are put inside an `class@NavigationView`,
+          When collapsed, the children are put inside an [adw.navigation_view.NavigationView],
           otherwise they are displayed side by side.
           
-          The `property@NavigationSplitView:show-content` controls which child is
+          The [adw.navigation_split_view.NavigationSplitView.showContent] controls which child is
           visible while collapsed.
   */
   @property void collapsed(bool propval)
@@ -244,7 +245,7 @@ class NavigationSplitView : gtk.widget.Widget
       Returns: The maximum sidebar width.
         
         Maximum width is affected by
-        `property@NavigationSplitView:sidebar-width-unit`.
+        [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
         
         The sidebar widget can still be allocated with larger width if its own
         minimum width exceeds it.
@@ -260,7 +261,7 @@ class NavigationSplitView : gtk.widget.Widget
         propval = The maximum sidebar width.
           
           Maximum width is affected by
-          `property@NavigationSplitView:sidebar-width-unit`.
+          [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
           
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
@@ -275,7 +276,7 @@ class NavigationSplitView : gtk.widget.Widget
       Returns: The minimum sidebar width.
         
         Minimum width is affected by
-        `property@NavigationSplitView:sidebar-width-unit`.
+        [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
         
         The sidebar widget can still be allocated with larger width if its own
         minimum width exceeds it.
@@ -291,7 +292,7 @@ class NavigationSplitView : gtk.widget.Widget
         propval = The minimum sidebar width.
           
           Minimum width is affected by
-          `property@NavigationSplitView:sidebar-width-unit`.
+          [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
           
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
@@ -306,7 +307,7 @@ class NavigationSplitView : gtk.widget.Widget
       Returns: Determines the visible page when collapsed.
         
         If set to `TRUE`, the content widget will be the visible page when
-        `property@NavigationSplitView:collapsed` is `TRUE`; otherwise the sidebar
+        [adw.navigation_split_view.NavigationSplitView.collapsed] is `TRUE`; otherwise the sidebar
         widget will be visible.
         
         If the split view is already collapsed, the visible page changes
@@ -323,7 +324,7 @@ class NavigationSplitView : gtk.widget.Widget
         propval = Determines the visible page when collapsed.
           
           If set to `TRUE`, the content widget will be the visible page when
-          `property@NavigationSplitView:collapsed` is `TRUE`; otherwise the sidebar
+          [adw.navigation_split_view.NavigationSplitView.collapsed] is `TRUE`; otherwise the sidebar
           widget will be visible.
           
           If the split view is already collapsed, the visible page changes
@@ -358,8 +359,8 @@ class NavigationSplitView : gtk.widget.Widget
       Returns: The preferred sidebar width as a fraction of the total width.
         
         The preferred width is additionally limited by
-        `property@NavigationSplitView:min-sidebar-width` and
-        `property@NavigationSplitView:max-sidebar-width`.
+        [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+        [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
         
         The sidebar widget can be allocated with larger width if its own minimum
         width exceeds the preferred width.
@@ -375,8 +376,8 @@ class NavigationSplitView : gtk.widget.Widget
         propval = The preferred sidebar width as a fraction of the total width.
           
           The preferred width is additionally limited by
-          `property@NavigationSplitView:min-sidebar-width` and
-          `property@NavigationSplitView:max-sidebar-width`.
+          [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+          [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
           
           The sidebar widget can be allocated with larger width if its own minimum
           width exceeds the preferred width.
@@ -390,8 +391,8 @@ class NavigationSplitView : gtk.widget.Widget
       Get `sidebarWidthUnit` property.
       Returns: The length unit for minimum and maximum sidebar widths.
         
-        See `property@NavigationSplitView:min-sidebar-width` and
-        `property@NavigationSplitView:max-sidebar-width`.
+        See [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+        [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
   */
   @property adw.types.LengthUnit sidebarWidthUnit()
   {
@@ -403,8 +404,8 @@ class NavigationSplitView : gtk.widget.Widget
       Params:
         propval = The length unit for minimum and maximum sidebar widths.
           
-          See `property@NavigationSplitView:min-sidebar-width` and
-          `property@NavigationSplitView:max-sidebar-width`.
+          See [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+          [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
   */
   @property void sidebarWidthUnit(adw.types.LengthUnit propval)
   {
@@ -516,10 +517,10 @@ class NavigationSplitView : gtk.widget.Widget
   /**
       Sets whether self is collapsed.
       
-      When collapsed, the children are put inside an `classNavigationView`,
+      When collapsed, the children are put inside an [adw.navigation_view.NavigationView],
       otherwise they are displayed side by side.
       
-      The `propertyNavigationSplitView:show-content` controls which child is
+      The [adw.navigation_split_view.NavigationSplitView.showContent] controls which child is
       visible while collapsed.
   
       Params:
@@ -545,7 +546,7 @@ class NavigationSplitView : gtk.widget.Widget
       Sets the maximum sidebar width for self.
       
       Maximum width is affected by
-      `propertyNavigationSplitView:sidebar-width-unit`.
+      [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
       
       The sidebar widget can still be allocated with larger width if its own
       minimum width exceeds it.
@@ -562,7 +563,7 @@ class NavigationSplitView : gtk.widget.Widget
       Sets the minimum sidebar width for self.
       
       Minimum width is affected by
-      `propertyNavigationSplitView:sidebar-width-unit`.
+      [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
       
       The sidebar widget can still be allocated with larger width if its own
       minimum width exceeds it.
@@ -579,7 +580,7 @@ class NavigationSplitView : gtk.widget.Widget
       Sets which page is visible when self is collapsed.
       
       If set to `TRUE`, the content widget will be the visible page when
-      `propertyNavigationSplitView:collapsed` is `TRUE`; otherwise the sidebar
+      [adw.navigation_split_view.NavigationSplitView.collapsed] is `TRUE`; otherwise the sidebar
       widget will be visible.
       
       If the split view is already collapsed, the visible page changes immediately.
@@ -607,8 +608,8 @@ class NavigationSplitView : gtk.widget.Widget
       Sets the preferred sidebar width as a fraction of the total width of self.
       
       The preferred width is additionally limited by
-      `propertyNavigationSplitView:min-sidebar-width` and
-      `propertyNavigationSplitView:max-sidebar-width`.
+      [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+      [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
       
       The sidebar widget can be allocated with larger width if its own minimum
       width exceeds the preferred width.
@@ -624,8 +625,8 @@ class NavigationSplitView : gtk.widget.Widget
   /**
       Sets the length unit for minimum and maximum sidebar widths.
       
-      See `propertyNavigationSplitView:min-sidebar-width` and
-      `propertyNavigationSplitView:max-sidebar-width`.
+      See [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+      [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
   
       Params:
         unit = the length unit
@@ -646,10 +647,10 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Whether the split view is collapsed.
           
-          When collapsed, the children are put inside an `class@NavigationView`,
+          When collapsed, the children are put inside an [adw.navigation_view.NavigationView],
           otherwise they are displayed side by side.
           
-          The `property@NavigationSplitView:show-content` controls which child is
+          The [adw.navigation_split_view.NavigationSplitView.showContent] controls which child is
           visible while collapsed.
       Returns: Builder instance for fluent chaining
   */
@@ -675,7 +676,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The maximum sidebar width.
           
           Maximum width is affected by
-          `property@NavigationSplitView:sidebar-width-unit`.
+          [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
           
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
@@ -692,7 +693,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The minimum sidebar width.
           
           Minimum width is affected by
-          `property@NavigationSplitView:sidebar-width-unit`.
+          [adw.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
           
           The sidebar widget can still be allocated with larger width if its own
           minimum width exceeds it.
@@ -709,7 +710,7 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Determines the visible page when collapsed.
           
           If set to `TRUE`, the content widget will be the visible page when
-          `property@NavigationSplitView:collapsed` is `TRUE`; otherwise the sidebar
+          [adw.navigation_split_view.NavigationSplitView.collapsed] is `TRUE`; otherwise the sidebar
           widget will be visible.
           
           If the split view is already collapsed, the visible page changes
@@ -738,8 +739,8 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = The preferred sidebar width as a fraction of the total width.
           
           The preferred width is additionally limited by
-          `property@NavigationSplitView:min-sidebar-width` and
-          `property@NavigationSplitView:max-sidebar-width`.
+          [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+          [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
           
           The sidebar widget can be allocated with larger width if its own minimum
           width exceeds the preferred width.
@@ -755,8 +756,8 @@ class NavigationSplitViewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The length unit for minimum and maximum sidebar widths.
           
-          See `property@NavigationSplitView:min-sidebar-width` and
-          `property@NavigationSplitView:max-sidebar-width`.
+          See [adw.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+          [adw.navigation_split_view.NavigationSplitView.maxSidebarWidth].
       Returns: Builder instance for fluent chaining
   */
   T sidebarWidthUnit(adw.types.LengthUnit propval)

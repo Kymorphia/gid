@@ -1,6 +1,7 @@
 /// Module for [VButtonBox] class
 module gtk.vbutton_box;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

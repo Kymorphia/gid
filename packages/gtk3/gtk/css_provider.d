@@ -1,6 +1,7 @@
 /// Module for [CssProvider] class
 module gtk.css_provider;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.file;
 import glib.error;

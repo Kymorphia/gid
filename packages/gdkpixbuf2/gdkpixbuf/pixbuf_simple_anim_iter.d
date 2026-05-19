@@ -1,6 +1,7 @@
 /// Module for [PixbufSimpleAnimIter] class
 module gdkpixbuf.pixbuf_simple_anim_iter;
 
+public import gid.basictypes;
 import gdkpixbuf.c.functions;
 import gdkpixbuf.c.types;
 import gdkpixbuf.pixbuf_animation_iter;

@@ -1,6 +1,7 @@
 /// Module for [DeviceTool] class
 module gdk.device_tool;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.types;

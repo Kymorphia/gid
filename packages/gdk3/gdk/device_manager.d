@@ -1,6 +1,7 @@
 /// Module for [DeviceManager] class
 module gdk.device_manager;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.device;

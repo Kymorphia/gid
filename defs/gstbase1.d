@@ -1,7 +1,7 @@
 //!gir GstBase-1.0
 //!info description "D binding for the GstBase library - Base and Utility classes for the GStreamer multimedia framework"
 //!info homepage https://gstreamer.freedesktop.org
-//!info docs https://www.kymorphia.com/gid/gstbase.html
+//!info docs https://www.kymorphia.com/gid/gid~gstbase1/
 //!info capi https://gstreamer.freedesktop.org/documentation/base/index.html
 
 //# Disable methods with arrays with sizes not described by parameters (FIXME)

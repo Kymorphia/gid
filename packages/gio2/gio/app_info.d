@@ -1,6 +1,7 @@
 /// Module for [AppInfo] interface
 module gio.app_info;
 
+public import gid.basictypes;
 public import gio.app_info_iface_proxy;
 import gid.gid;
 import gio.app_launch_context;

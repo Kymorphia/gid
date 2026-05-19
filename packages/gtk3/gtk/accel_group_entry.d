@@ -1,6 +1,7 @@
 /// Module for [AccelGroupEntry] class
 module gtk.accel_group_entry;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.types;
 import gobject.closure;

@@ -1,6 +1,7 @@
 /// Module for [Gradient] class
 module gtk.gradient;
 
+public import gid.basictypes;
 import cairo.pattern;
 import gid.gid;
 import gobject.boxed;

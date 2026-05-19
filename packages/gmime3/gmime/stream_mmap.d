@@ -1,6 +1,7 @@
 /// Module for [StreamMmap] class
 module gmime.stream_mmap;
 
+public import gid.basictypes;
 import gid.gid;
 import gmime.c.functions;
 import gmime.c.types;

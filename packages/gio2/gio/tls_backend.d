@@ -1,6 +1,7 @@
 /// Module for [TlsBackend] interface
 module gio.tls_backend;
 
+public import gid.basictypes;
 public import gio.tls_backend_iface_proxy;
 import gid.gid;
 import gio.c.functions;

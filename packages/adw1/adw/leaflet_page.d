@@ -1,6 +1,7 @@
 /// Module for [LeafletPage] class
 module adw.leaflet_page;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -10,7 +11,7 @@ import gobject.object;
 import gtk.widget;
 
 /**
-    An auxiliary class used by `class@Leaflet`.
+    An auxiliary class used by [adw.leaflet.Leaflet].
 
     Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
 */

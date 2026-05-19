@@ -1,6 +1,7 @@
 /// Module for [SDPAttribute] class
 module gstsdp.sdpattribute;
 
+public import gid.basictypes;
 import gid.gid;
 import gstsdp.c.functions;
 import gstsdp.c.types;

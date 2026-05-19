@@ -1,6 +1,7 @@
 /// Module for [FontMetrics] struct
 module pango.font_metrics;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.c.functions;
 import pango.c.types;

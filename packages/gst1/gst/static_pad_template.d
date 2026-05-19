@@ -1,6 +1,7 @@
 /// Module for [StaticPadTemplate] class
 module gst.static_pad_template;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.object;
 import gst.c.functions;

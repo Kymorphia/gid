@@ -1,6 +1,7 @@
 /// Module for [MarkAttributes] class
 module gtksource.mark_attributes;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gdkpixbuf.pixbuf;
 import gid.gid;

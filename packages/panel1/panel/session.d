@@ -1,6 +1,7 @@
 /// Module for [Session] class
 module panel.session;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import glib.variant;

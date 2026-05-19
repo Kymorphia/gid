@@ -1,6 +1,7 @@
 /// Module for [VideoContentLightLevel] struct
 module gstvideo.video_content_light_level;
 
+public import gid.basictypes;
 import gid.gid;
 import gst.caps;
 import gstvideo.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [DropTargetAsync] class
 module gtk.drop_target_async;
 
+public import gid.basictypes;
 import gdk.content_formats;
 import gdk.drop;
 import gdk.types;
@@ -32,10 +33,10 @@ import gtk.types;
     a compatible data format and an action that is supported on both sides.
     
     If it is, and the widget becomes a target, you will receive a
-    `signal@Gtk.DropTargetAsync::drag-enter` signal, followed by
-    `signal@Gtk.DropTargetAsync::drag-motion` signals as the pointer moves,
+    [gtk.drop_target_async.DropTargetAsync.dragEnter] signal, followed by
+    [gtk.drop_target_async.DropTargetAsync.dragMotion] signals as the pointer moves,
     optionally a [gtk.drop_target_async.DropTargetAsync.drop] signal when a drop happens,
-    and finally a `signal@Gtk.DropTargetAsync::drag-leave` signal when the
+    and finally a [gtk.drop_target_async.DropTargetAsync.dragLeave] signal when the
     pointer moves off the widget.
     
     The ::drag-enter and ::drag-motion handler return a [gdk.types.DragAction]

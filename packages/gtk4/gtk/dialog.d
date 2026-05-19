@@ -1,6 +1,7 @@
 /// Module for [Dialog] class
 module gtk.dialog;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -199,7 +200,7 @@ class Dialog : gtk.window.Window
         
         Builtin [gtk.dialog.Dialog] subclasses such as [gtk.color_chooser_dialog.ColorChooserDialog]
         set this property according to platform conventions (using the
-        `property@Gtk.Settings:gtk-dialogs-use-header` setting).
+        [gtk.settings.Settings.gtkDialogsUseHeader] setting).
         
         Here is how you can achieve the same:
         
@@ -296,7 +297,7 @@ class Dialog : gtk.window.Window
       Returns the header bar of dialog.
       
       Note that the headerbar is only used by the dialog if the
-      `propertyGtk.Dialog:use-header-bar` property is true.
+      [gtk.dialog.Dialog.useHeaderBar] property is true.
       Returns: the header bar
   
       Deprecated: Use [gtk.window.Window] instead
@@ -505,7 +506,7 @@ class DialogGidBuilderImpl(T) : gtk.window.WindowGidBuilderImpl!T
           
           Builtin [gtk.dialog.Dialog] subclasses such as [gtk.color_chooser_dialog.ColorChooserDialog]
           set this property according to platform conventions (using the
-          `property@Gtk.Settings:gtk-dialogs-use-header` setting).
+          [gtk.settings.Settings.gtkDialogsUseHeader] setting).
           
           Here is how you can achieve the same:
           

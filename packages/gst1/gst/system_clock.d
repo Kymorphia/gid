@@ -1,6 +1,7 @@
 /// Module for [SystemClock] class
 module gst.system_clock;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

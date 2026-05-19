@@ -1,6 +1,7 @@
 /// Module for [VideoVBIParser] class
 module gstvideo.video_vbiparser;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gstvideo.c.functions;

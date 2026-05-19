@@ -1,6 +1,7 @@
 /// Module for [Root] interface mixin
 module gtk.root_mixin;
 
+public import gid.basictypes;
 public import gtk.root_iface_proxy;
 public import gdk.display;
 public import gid.gid;

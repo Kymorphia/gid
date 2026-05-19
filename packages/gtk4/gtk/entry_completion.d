@@ -1,6 +1,7 @@
 /// Module for [EntryCompletion] class
 module gtk.entry_completion;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;
@@ -35,7 +36,7 @@ import gtk.widget;
     When the user selects a completion, the content of the entry is
     updated. By default, the content of the entry is replaced by the
     text column of the model, but this can be overridden by connecting
-    to the `signal@Gtk.EntryCompletion::match-selected` signal and updating the
+    to the [gtk.entry_completion.EntryCompletion.matchSelected] signal and updating the
     entry in the signal handler. Note that you should return true from
     the signal handler to suppress the default behaviour.
     
@@ -45,11 +46,11 @@ import gtk.widget;
     [gtk.entry_completion.EntryCompletion] uses a [gtk.tree_model_filter.TreeModelFilter] model to
     represent the subset of the entire model that is currently matching.
     While the [gtk.entry_completion.EntryCompletion] signals
-    `signal@Gtk.EntryCompletion::match-selected` and
-    `signal@Gtk.EntryCompletion::cursor-on-match` take the original model
+    [gtk.entry_completion.EntryCompletion.matchSelected] and
+    [gtk.entry_completion.EntryCompletion.cursorOnMatch] take the original model
     and an iter pointing to that model as arguments, other callbacks and
     signals (such as [gtk.types.CellLayoutDataFunc] or
-    `signal@Gtk.CellArea::apply-attributes)`
+    [gtk.cell_area.CellArea.applyAttributes]
     will generally take the filter model as argument. As long as you are
     only calling [gtk.tree_model.TreeModel.get], this will make no difference to
     you. If for some reason, you need the original model, use
@@ -227,7 +228,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
         for a single possible completion.
         
         You probably want to set this to false if you are using
-        `property@Gtk.EntryCompletion:inline-completion`.
+        [gtk.entry_completion.EntryCompletion.inlineCompletion].
   */
   @property bool popupSingleMatch()
   {
@@ -241,7 +242,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
           for a single possible completion.
           
           You probably want to set this to false if you are using
-          `property@Gtk.EntryCompletion:inline-completion`.
+          [gtk.entry_completion.EntryCompletion.inlineCompletion].
   */
   @property void popupSingleMatch(bool propval)
   {
@@ -621,7 +622,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       only a single match.
       
       You may want to set this to false if you
-      are using `propertyGtk.EntryCompletion:inline-completion`.
+      are using [gtk.entry_completion.EntryCompletion.inlineCompletion].
   
       Params:
         popupSingleMatch = true if the popup should appear even for a single match
@@ -644,7 +645,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       This functions creates and adds a [gtk.cell_renderer_text.CellRendererText] for the selected
       column. If you need to set the text column, but don't want the cell
       renderer, use [gobject.object.ObjectWrap.set] to set the
-      `propertyGtk.EntryCompletion:text-column` property directly.
+      [gtk.entry_completion.EntryCompletion.textColumn] property directly.
   
       Params:
         column = the column in the model of completion to get strings from
@@ -961,7 +962,7 @@ class EntryCompletionGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
           for a single possible completion.
           
           You probably want to set this to false if you are using
-          `property@Gtk.EntryCompletion:inline-completion`.
+          [gtk.entry_completion.EntryCompletion.inlineCompletion].
       Returns: Builder instance for fluent chaining
   */
   T popupSingleMatch(bool propval)

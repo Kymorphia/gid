@@ -1,6 +1,7 @@
 /// Module for [PropertyValues] class
 module atk.property_values;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;

@@ -1,6 +1,7 @@
 /// Module for [Component] interface
 module atk.component;
 
+public import gid.basictypes;
 public import atk.component_iface_proxy;
 import atk.c.functions;
 import atk.c.types;

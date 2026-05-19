@@ -1,6 +1,7 @@
 /// Module for [WidgetPaintable] class
 module gtk.widget_paintable;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gdk.paintable_mixin;
 import gid.gid;
@@ -21,16 +22,16 @@ import gtk.widget;
     report no size in that case.
     
     Of course, [gtk.widget_paintable.WidgetPaintable] allows you to monitor widgets for size
-    changes by emitting the `signal@Gdk.Paintable::invalidate-size` signal
+    changes by emitting the [gdk.paintable.Paintable.invalidateSize] signal
     whenever the size of the widget changes as well as for visual changes by
-    emitting the `signal@Gdk.Paintable::invalidate-contents` signal whenever
+    emitting the [gdk.paintable.Paintable.invalidateContents] signal whenever
     the widget changes.
     
     You can use a [gtk.widget_paintable.WidgetPaintable] everywhere a [gdk.paintable.Paintable] is allowed,
     including using it on a [gtk.picture.Picture] (or one of its parents) that it was
     set on itself via [gtk.picture.Picture.setPaintable]. The paintable will take care
     of recursion when this happens. If you do this however, ensure that the
-    `property@Gtk.Picture:can-shrink` property is set to true or you might
+    [gtk.picture.Picture.canShrink] property is set to true or you might
     end up with an infinitely growing widget.
 */
 class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable

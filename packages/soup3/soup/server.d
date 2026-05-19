@@ -1,6 +1,7 @@
 /// Module for [Server] class
 module soup.server;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.iostream;
 import gio.socket;
@@ -35,16 +36,16 @@ import soup.websocket_connection;
     
     When a new connection is accepted (or a new request is started on
     an existing persistent connection), the #SoupServer will emit
-    `signal@Server::request-started` and then begin processing the request
+    [soup.server.Server.requestStarted] and then begin processing the request
     as described below, but note that once the message is assigned a
     status-code, then callbacks after that point will be
     skipped. Note also that it is not defined when the callbacks happen
-    relative to various `class@ServerMessage` signals.
+    relative to various [soup.server_message.ServerMessage] signals.
     
     Once the headers have been read, #SoupServer will check if there is
-    a `class@AuthDomain` `(qv)` covering the Request-URI; if so, and if the
+    a [soup.auth_domain.AuthDomain] `(qv)` covering the Request-URI; if so, and if the
     message does not contain suitable authorization, then the
-    `class@AuthDomain` will set a status of [soup.types.Status.Unauthorized] on
+    [soup.auth_domain.AuthDomain] will set a status of [soup.types.Status.Unauthorized] on
     the message.
     
     After checking for authorization, #SoupServer will look for "early"
@@ -82,8 +83,8 @@ import soup.websocket_connection;
     given a status of [soup.types.Status.InternalServerError] (because at
     least one handler ran, but returned without assigning a status).
     
-    Finally, the server will emit `signal@Server::request-finished` (or
-    `signal@Server::request-aborted` if an I/O error occurred before
+    Finally, the server will emit [soup.server.Server.requestFinished] (or
+    [soup.server.Server.requestAborted] if an I/O error occurred before
     handling was completed).
     
     If you want to handle the special "*" URI (eg, "OPTIONS *"), you
@@ -91,7 +92,7 @@ import soup.websocket_connection;
     will not be used for that case.
     
     If you want to process https connections in addition to (or instead
-    of) http connections, you can set the `property@Server:tls-certificate`
+    of) http connections, you can set the [soup.server.Server.tlsCertificate]
     property.
     
     Once the server is set up, make one or more calls to
@@ -159,7 +160,7 @@ class Server : gobject.object.ObjectWrap
       Returns: Server header.
         
         If non-null, the value to use for the "Server" header on
-        `class@ServerMessage`s processed by this server.
+        [soup.server_message.ServerMessage]s processed by this server.
         
         The Server header is the server equivalent of the
         User-Agent header, and provides information about the
@@ -178,7 +179,7 @@ class Server : gobject.object.ObjectWrap
         holes.
         
         As with `property@Session:user_agent`, if you set a
-        `property@Server:server-header` property that has trailing
+        [soup.server.Server.serverHeader] property that has trailing
         whitespace, #SoupServer will append its own product token (eg,
         `libsoup/2.3.2`) to the end of the header for you.
   */
@@ -193,7 +194,7 @@ class Server : gobject.object.ObjectWrap
         propval = Server header.
           
           If non-null, the value to use for the "Server" header on
-          `class@ServerMessage`s processed by this server.
+          [soup.server_message.ServerMessage]s processed by this server.
           
           The Server header is the server equivalent of the
           User-Agent header, and provides information about the
@@ -212,7 +213,7 @@ class Server : gobject.object.ObjectWrap
           holes.
           
           As with `property@Session:user_agent`, if you set a
-          `property@Server:server-header` property that has trailing
+          [soup.server.Server.serverHeader] property that has trailing
           whitespace, #SoupServer will append its own product token (eg,
           `libsoup/2.3.2`) to the end of the header for you.
   */
@@ -243,7 +244,7 @@ class Server : gobject.object.ObjectWrap
   /**
       Get `tlsCertificate` property.
       Returns: A [gio.tls_certificate.TlsCertificate] that has a
-        `property@Gio.TlsCertificate:private-key` set.
+        [gio.tls_certificate.TlsCertificate.privateKey] set.
         
         If this is set, then the server will be able to speak
         https in addition to (or instead of) plain http.
@@ -257,7 +258,7 @@ class Server : gobject.object.ObjectWrap
       Set `tlsCertificate` property.
       Params:
         propval = A [gio.tls_certificate.TlsCertificate] that has a
-          `property@Gio.TlsCertificate:private-key` set.
+          [gio.tls_certificate.TlsCertificate.privateKey] set.
           
           If this is set, then the server will be able to speak
           https in addition to (or instead of) plain http.
@@ -342,7 +343,7 @@ class Server : gobject.object.ObjectWrap
       (But if you add both handlers at the same path, then both will get run.)
       
       For requests under path (that have not already been assigned a
-      status code by a `classAuthDomain` or a signal handler), callback
+      status code by a [soup.auth_domain.AuthDomain] or a signal handler), callback
       will be invoked after receiving the request headers, but before
       receiving the request body; the message's method and
       request-headers properties will be set.
@@ -351,14 +352,14 @@ class Server : gobject.object.ObjectWrap
       in a streaming fashion. If you determine that the request will contain a
       message body, normally you would call [soup.message_body.MessageBody.setAccumulate] on
       the message's request-body to turn off request-body accumulation, and connect
-      to the message's `signalServerMessage::got-chunk` signal to process each
+      to the message's [soup.server_message.ServerMessage.gotChunk] signal to process each
       chunk as it comes in.
       
       To complete the message processing after the full message body has
-      been read, you can either also connect to `signalServerMessage::got-body`,
+      been read, you can either also connect to [soup.server_message.ServerMessage.gotBody],
       or else you can register a non-early handler for path as well. As
       long as you have not set the status-code by the time
-      `signalServerMessage::got-body` is emitted, the non-early handler will be
+      [soup.server_message.ServerMessage.gotBody] is emitted, the non-early handler will be
       run as well.
   
       Params:
@@ -392,9 +393,9 @@ class Server : gobject.object.ObjectWrap
       a handler for "*"; the default handler will not be used for that case.)
       
       For requests under path (that have not already been assigned a
-      status code by a `classAuthDomain`, an early server handler, or a
+      status code by a [soup.auth_domain.AuthDomain], an early server handler, or a
       signal handler), callback will be invoked after receiving the
-      request body; the `classServerMessage`'s method, request-headers,
+      request body; the [soup.server_message.ServerMessage]'s method, request-headers,
       and request-body properties will be set.
       
       After determining what to do with the request, the callback must at a minimum
@@ -444,10 +445,10 @@ class Server : gobject.object.ObjectWrap
       Add support for a WebSocket extension of the given extension_type.
       
       When a WebSocket client requests an extension of extension_type,
-      a new `classWebsocketExtension` of type extension_type will be created
+      a new [soup.websocket_extension.WebsocketExtension] of type extension_type will be created
       to handle the request.
       
-      Note that `classWebsocketExtensionDeflate` is supported by default, use
+      Note that [soup.websocket_extension_deflate.WebsocketExtensionDeflate] is supported by default, use
       [soup.server.Server.removeWebsocketExtension] if you want to disable it.
   
       Params:
@@ -602,7 +603,7 @@ class Server : gobject.object.ObjectWrap
       
       In order for a server to run https, you must call
       [soup.server.Server.setTlsCertificate], or set the
-      `propertyServer:tls-certificate` property, to provide it with a
+      [soup.server.Server.tlsCertificate] property, to provide it with a
       certificate to use.
       
       If you are using the deprecated single-listener APIs, then a return value of
@@ -743,9 +744,9 @@ class Server : gobject.object.ObjectWrap
       having the full response ready yet. Use [soup.server.Server.unpauseMessage] to
       resume I/O.
       
-      This must only be called on a `classServerMessage` which was created by the
+      This must only be called on a [soup.server_message.ServerMessage] which was created by the
       #SoupServer and are currently doing I/O, such as those passed into a
-      `callbackServerCallback` or emitted in a `signalServer::request-read`
+      [soup.types.ServerCallback] or emitted in a [soup.server.Server.requestRead]
       signal.
   
       Params:
@@ -834,9 +835,9 @@ class Server : gobject.object.ObjectWrap
       
       I/O won't actually resume until you return to the main loop.
       
-      This must only be called on a `classServerMessage` which was created by the
+      This must only be called on a [soup.server_message.ServerMessage] which was created by the
       #SoupServer and are currently doing I/O, such as those passed into a
-      `callbackServerCallback` or emitted in a `signalServer::request-read`
+      [soup.types.ServerCallback] or emitted in a [soup.server.Server.requestRead]
       signal.
   
       Params:
@@ -855,14 +856,14 @@ class Server : gobject.object.ObjectWrap
       Emitted when processing has failed for a message.
         
         This could mean either that it could not be read (if
-        `signalServer::request-read` has not been emitted for it yet), or that
-        the response could not be written back (if `signalServer::request-read`
-        has been emitted but `signalServer::request-finished` has not been).
+        [soup.server.Server.requestRead] has not been emitted for it yet), or that
+        the response could not be written back (if [soup.server.Server.requestRead]
+        has been emitted but [soup.server.Server.requestFinished] has not been).
         
         message is in an undefined state when this signal is
         emitted; the signal exists primarily to allow the server to
         free any state that it may have allocated in
-        `signalServer::request-started`.
+        [soup.server.Server.requestStarted].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1008,9 +1009,9 @@ class Server : gobject.object.ObjectWrap
         If the request is read successfully, this will eventually
         be followed by a `signalServer::request_read signal`. If a
         response is then sent, the request processing will end with
-        a `signalServer::request-finished` signal. If a network error
+        a [soup.server.Server.requestFinished] signal. If a network error
         occurs, the processing will instead end with
-        `signalServer::request-aborted`.
+        [soup.server.Server.requestAborted].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -1073,7 +1074,7 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Server header.
           
           If non-null, the value to use for the "Server" header on
-          `class@ServerMessage`s processed by this server.
+          [soup.server_message.ServerMessage]s processed by this server.
           
           The Server header is the server equivalent of the
           User-Agent header, and provides information about the
@@ -1092,7 +1093,7 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           holes.
           
           As with `property@Session:user_agent`, if you set a
-          `property@Server:server-header` property that has trailing
+          [soup.server.Server.serverHeader] property that has trailing
           whitespace, #SoupServer will append its own product token (eg,
           `libsoup/2.3.2`) to the end of the header for you.
       Returns: Builder instance for fluent chaining
@@ -1117,7 +1118,7 @@ class ServerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Set `tlsCertificate` property.
       Params:
         propval = A [gio.tls_certificate.TlsCertificate] that has a
-          `property@Gio.TlsCertificate:private-key` set.
+          [gio.tls_certificate.TlsCertificate.privateKey] set.
           
           If this is set, then the server will be able to speak
           https in addition to (or instead of) plain http.

@@ -1,6 +1,7 @@
 /// Module for [CellAreaBox] class
 module gtk.cell_area_box;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.buildable;

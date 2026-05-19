@@ -1,6 +1,7 @@
 /// Module for [Collection] class
 module secret.collection;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.async_initable;
 import gio.async_initable_mixin;
@@ -166,7 +167,7 @@ class Collection : gio.dbus_proxy.DBusProxy
 
   /**
       Get `service` property.
-      Returns: The `class@Service` object that this collection is associated with and
+      Returns: The [secret.service.Service] object that this collection is associated with and
         uses to interact with the actual D-Bus Secret Service.
   */
   @property secret.service.Service service()
@@ -188,7 +189,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       be created. The previous one will be returned instead.
       
       If service is null, then [secret.service.Service.get] will be called to get the
-      default `classService` proxy.
+      default [secret.service.Service] proxy.
   
       Params:
         service = a secret service object
@@ -248,7 +249,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       be created. The previous one will be returned instead.
       
       If service is null, then [secret.service.Service.getSync] will be called to get the
-      default `classService` proxy.
+      default [secret.service.Service] proxy.
   
       Params:
         service = a secret service object
@@ -278,7 +279,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       well known collections, such as 'default'.
       
       If service is null, then [secret.service.Service.get] will be called to get the
-      default `classService` proxy.
+      default [secret.service.Service] proxy.
       
       This method will return immediately and complete asynchronously.
   
@@ -329,7 +330,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       well known collections, such as `default`.
       
       If service is null, then [secret.service.Service.getSync] will be called to get the
-      default `classService` proxy.
+      default [secret.service.Service] proxy.
       
       This method may block and should not be used in user interface threads.
   
@@ -827,7 +828,7 @@ class CollectionGidBuilderImpl(T) : gio.dbus_proxy.DBusProxyGidBuilderImpl!T
   /**
       Set `service` property.
       Params:
-        propval = The `class@Service` object that this collection is associated with and
+        propval = The [secret.service.Service] object that this collection is associated with and
           uses to interact with the actual D-Bus Secret Service.
       Returns: Builder instance for fluent chaining
   */

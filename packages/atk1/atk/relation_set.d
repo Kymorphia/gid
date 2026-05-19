@@ -1,6 +1,7 @@
 /// Module for [RelationSet] class
 module atk.relation_set;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.object;

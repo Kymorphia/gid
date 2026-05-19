@@ -1,6 +1,7 @@
 /// Module for [ShortcutLabel] class
 module gtk.shortcut_label;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;

@@ -1,6 +1,7 @@
 /// Module for [RepeatingLinearGradientNode] class
 module gsk.repeating_linear_gradient_node;
 
+public import gid.basictypes;
 import gid.gid;
 import gsk.c.functions;
 import gsk.c.types;

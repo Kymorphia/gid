@@ -1,6 +1,7 @@
 /// Module for [PartitioningFactoryOptions] class
 module arrowdataset.partitioning_factory_options;
 
+public import gid.basictypes;
 import arrow.schema;
 import arrowdataset.c.functions;
 import arrowdataset.c.types;

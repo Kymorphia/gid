@@ -1,6 +1,7 @@
 /// Module for [ColorButton] class
 module gtk.color_button;
 
+public import gid.basictypes;
 import gdk.rgba;
 import gid.gid;
 import gobject.dclosure;

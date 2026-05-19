@@ -1,6 +1,7 @@
 /// Module for [GLAsyncDebug] class
 module gstgl.glasync_debug;
 
+public import gid.basictypes;
 import gid.gid;
 import gstgl.c.functions;
 import gstgl.c.types;

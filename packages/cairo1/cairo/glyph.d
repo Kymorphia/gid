@@ -1,6 +1,7 @@
 /// Module for [Glyph] struct
 module cairo.glyph;
 
+public import gid.basictypes;
 import cairo.c.functions;
 import cairo.c.types;
 import cairo.types;

@@ -1,6 +1,7 @@
 /// Module for [Application] class
 module gio.application;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.action_group;
 import gio.action_group_mixin;
@@ -82,7 +83,7 @@ import gobject.object;
     any object paths that you wish to register are registered before #GApplication
     attempts to acquire the bus name of your application (which happens in
     [gio.application.Application.register]). Unfortunately, this means that you cannot
-    use `property@Gio.Application:is-remote` to decide if you want to register
+    use [gio.application.Application.isRemote] to decide if you want to register
     object paths.
     
     [gio.application.Application] also implements the [gio.action_group.ActionGroup] and [gio.action_map.ActionMap]
@@ -134,7 +135,7 @@ import gobject.object;
     [gtk.application.Application] adds startup notification data in this way.
     
     To parse commandline arguments you may handle the
-    `signal@Gio.Application::command-line` signal or override the
+    [gio.application.Application.commandLine] signal or override the
     `vfunc@Gio.Application.local_command_line` virtual funcion, to parse them in
     either the primary instance or the local instance, respectively.
     

@@ -1,6 +1,7 @@
 /// Module for [Path] class
 module json.path;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.gid_builder;

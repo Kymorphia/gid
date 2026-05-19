@@ -1,6 +1,7 @@
 /// Module for [GeolocationManager] class
 module webkit.geolocation_manager;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

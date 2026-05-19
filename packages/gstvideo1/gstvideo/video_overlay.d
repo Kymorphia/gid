@@ -1,6 +1,7 @@
 /// Module for [VideoOverlay] interface
 module gstvideo.video_overlay;
 
+public import gid.basictypes;
 public import gstvideo.video_overlay_iface_proxy;
 import gid.gid;
 import gobject.gid_builder;

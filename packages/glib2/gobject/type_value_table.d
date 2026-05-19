@@ -1,6 +1,7 @@
 /// Module for [TypeValueTable] class
 module gobject.type_value_table;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

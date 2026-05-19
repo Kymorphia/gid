@@ -1,6 +1,7 @@
 /// Module for [DNDEvent] class
 module gdk.dndevent;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.drop;

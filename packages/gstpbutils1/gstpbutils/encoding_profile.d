@@ -1,6 +1,7 @@
 /// Module for [EncodingProfile] class
 module gstpbutils.encoding_profile;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gobject.object;

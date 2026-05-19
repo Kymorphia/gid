@@ -1,6 +1,7 @@
 /// Module for [SqlStatement] class
 module gda.sql_statement;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.connection;

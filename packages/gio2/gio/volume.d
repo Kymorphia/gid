@@ -1,6 +1,7 @@
 /// Module for [Volume] interface
 module gio.volume;
 
+public import gid.basictypes;
 public import gio.volume_iface_proxy;
 import gid.gid;
 import gio.async_result;

@@ -1,6 +1,7 @@
 /// Module for [Socket] class
 module atk.socket;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.component;

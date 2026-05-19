@@ -1,6 +1,7 @@
 /// Module for [ChildProxy] interface
 module gst.child_proxy;
 
+public import gid.basictypes;
 public import gst.child_proxy_iface_proxy;
 import gid.gid;
 import gobject.dclosure;

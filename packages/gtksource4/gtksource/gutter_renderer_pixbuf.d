@@ -1,6 +1,7 @@
 /// Module for [GutterRendererPixbuf] class
 module gtksource.gutter_renderer_pixbuf;
 
+public import gid.basictypes;
 import gdkpixbuf.pixbuf;
 import gid.gid;
 import gio.icon;

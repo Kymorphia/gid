@@ -1,6 +1,7 @@
 /// Module for [ShortcutsShortcut] class
 module gtk.shortcuts_shortcut;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gid.gid;

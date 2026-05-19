@@ -1,6 +1,7 @@
 /// Module for [Adapter] class
 module gstbase.adapter;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.gid_builder;

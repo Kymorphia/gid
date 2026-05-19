@@ -1,6 +1,7 @@
 /// Module for [TestDBus] class
 module gio.test_dbus;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

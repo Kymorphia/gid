@@ -1,6 +1,7 @@
 /// Module for [Clamp] class
 module adw.clamp;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.types;
@@ -38,9 +39,9 @@ import gtk.widget;
     allocated the minimum size it can fit in instead.
     
     [adw.clamp.Clamp] can scale with the text scale factor, use the
-    `property@Clamp:unit` property to enable that behavior.
+    [adw.clamp.Clamp.unit] property to enable that behavior.
     
-    See also: `class@ClampLayout`, `class@ClampScrollable`.
+    See also: [adw.clamp_layout.ClampLayout], [adw.clamp_scrollable.ClampScrollable].
     
     ## CSS nodes
     

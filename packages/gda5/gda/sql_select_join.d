@@ -1,6 +1,7 @@
 /// Module for [SqlSelectJoin] class
 module gda.sql_select_join;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.sql_expr;

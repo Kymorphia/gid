@@ -1,6 +1,7 @@
 /// Module for [ContentSniffer] class
 module soup.content_sniffer;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.gid_builder;
@@ -17,8 +18,8 @@ import soup.types;
     
     A #SoupContentSniffer tries to detect the actual content type of
     the files that are being downloaded by looking at some of the data
-    before the `class@Message` emits its `signal@Message::got-headers` signal.
-    #SoupContentSniffer implements `iface@SessionFeature`, so you can add
+    before the [soup.message.Message] emits its [soup.message.Message.gotHeaders] signal.
+    #SoupContentSniffer implements [soup.session_feature.SessionFeature], so you can add
     content sniffing to a session with [soup.session.Session.addFeature] or
     [soup.session.Session.addFeatureByType].
 */

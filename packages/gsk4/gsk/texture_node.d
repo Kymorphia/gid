@@ -1,6 +1,7 @@
 /// Module for [TextureNode] class
 module gsk.texture_node;
 
+public import gid.basictypes;
 import gdk.texture;
 import gid.gid;
 import gobject.object;

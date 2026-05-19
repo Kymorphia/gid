@@ -1,6 +1,7 @@
 /// Module for [Stream] class
 module gst.stream;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gst.c.functions;

@@ -1,6 +1,7 @@
 /// Module for [Label] class
 module gtk.label;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.menu_model;
 import gobject.dclosure;
@@ -27,7 +28,7 @@ import pango.types;
     The [gtk.label.Label] widget displays a small amount of text.
     
     As the name implies, most labels are used to label another widget
-    such as a `class@Button`.
+    such as a [gtk.button.Button].
     
     ![An example GtkLabel](label.png)
     
@@ -173,7 +174,7 @@ import pango.types;
     in its available space, see the [gtk.widget.Widget.halign] and
     [gtk.widget.Widget.valign] properties.
     
-    The `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+    The [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
     properties can be used to control the size allocation of ellipsized or
     wrapped labels. For ellipsizing labels, if either is specified (and less
     than the actual text size), it is used as the minimum width, and the actual
@@ -203,7 +204,7 @@ import pango.types;
     ```
     
     It is possible to implement custom handling for links and their tooltips
-    with the `signal@Gtk.Label::activate-link` signal and the
+    with the [gtk.label.Label.activateLink] signal and the
     [gtk.label.Label.getCurrentUri] function.
 */
 class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
@@ -271,7 +272,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         [pango.types.EllipsizeMode.None] has the side-effect that the label requests
         only enough space to display the ellipsis "...". In particular, this
         means that ellipsizing labels do not work well in notebook tabs, unless
-        the [gtk.notebook_page.NotebookPage.tab] child property is set to true.
+        the [gtk.notebook_page.NotebookPage.tabExpand] child property is set to true.
         Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
         and [gtk.label.Label.setWidthChars].
   */
@@ -290,7 +291,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           [pango.types.EllipsizeMode.None] has the side-effect that the label requests
           only enough space to display the ellipsis "...". In particular, this
           means that ellipsizing labels do not work well in notebook tabs, unless
-          the [gtk.notebook_page.NotebookPage.tab] child property is set to true.
+          the [gtk.notebook_page.NotebookPage.tabExpand] child property is set to true.
           Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
           and [gtk.label.Label.setWidthChars].
   */
@@ -348,14 +349,14 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Returns: The contents of the label.
         
         If the string contains Pango markup (see `func@Pango.parse_markup`),
-        you will have to set the `property@Gtk.Label:use-markup` property to
+        you will have to set the [gtk.label.Label.useMarkup] property to
         true in order for the label to display the markup attributes. See also
         [gtk.label.Label.setMarkup] for a convenience function that sets both
-        this property and the `property@Gtk.Label:use-markup` property at the
+        this property and the [gtk.label.Label.useMarkup] property at the
         same time.
         
         If the string contains underlines acting as mnemonics, you will have to
-        set the `property@Gtk.Label:use-underline` property to true in order
+        set the [gtk.label.Label.useUnderline] property to true in order
         for the label to display them.
   */
   @property string label()
@@ -369,14 +370,14 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         propval = The contents of the label.
           
           If the string contains Pango markup (see `func@Pango.parse_markup`),
-          you will have to set the `property@Gtk.Label:use-markup` property to
+          you will have to set the [gtk.label.Label.useMarkup] property to
           true in order for the label to display the markup attributes. See also
           [gtk.label.Label.setMarkup] for a convenience function that sets both
-          this property and the `property@Gtk.Label:use-markup` property at the
+          this property and the [gtk.label.Label.useMarkup] property at the
           same time.
           
           If the string contains underlines acting as mnemonics, you will have to
-          set the `property@Gtk.Label:use-underline` property to true in order
+          set the [gtk.label.Label.useUnderline] property to true in order
           for the label to display them.
   */
   @property void label(string propval)
@@ -418,7 +419,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         If this property is set to -1, the width will be calculated automatically.
         
         See the section on [text layout](class.Label.html#text-layout) for details of how
-        `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+        [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
         determine the width of ellipsized and wrapped labels.
   */
   @property int maxWidthChars()
@@ -434,7 +435,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           If this property is set to -1, the width will be calculated automatically.
           
           See the section on [text layout](class.Label.html#text-layout) for details of how
-          `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+          [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
           determine the width of ellipsized and wrapped labels.
   */
   @property void maxWidthChars(int propval)
@@ -475,10 +476,10 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Returns: Select the line wrapping for the natural size request.
         
         This only affects the natural size requested. For the actual wrapping used,
-        see the [gtk.label.Label.wrap] property.
+        see the [gtk.label.Label.wrapMode] property.
         
         The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
-        [gtk.label.Label.wrap] property.
+        [gtk.label.Label.wrapMode] property.
   */
   @property gtk.types.NaturalWrapMode naturalWrapMode()
   {
@@ -491,10 +492,10 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         propval = Select the line wrapping for the natural size request.
           
           This only affects the natural size requested. For the actual wrapping used,
-          see the [gtk.label.Label.wrap] property.
+          see the [gtk.label.Label.wrapMode] property.
           
           The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
-          [gtk.label.Label.wrap] property.
+          [gtk.label.Label.wrapMode] property.
   */
   @property void naturalWrapMode(gtk.types.NaturalWrapMode propval)
   {
@@ -619,7 +620,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         If this property is set to -1, the width will be calculated automatically.
         
         See the section on [text layout](class.Label.html#text-layout) for details of how
-        `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+        [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
         determine the width of ellipsized and wrapped labels.
   */
   @property int widthChars()
@@ -635,7 +636,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           If this property is set to -1, the width will be calculated automatically.
           
           See the section on [text layout](class.Label.html#text-layout) for details of how
-          `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+          [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
           determine the width of ellipsized and wrapped labels.
   */
   @property void widthChars(int propval)
@@ -670,7 +671,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
         [gtk.label.Label.wrap] property). The default is [pango.types.WrapMode.Word],
         which means wrap on word boundaries.
         
-        For sizing behavior, also consider the `property@Gtk.Label:natural-wrap-mode`
+        For sizing behavior, also consider the [gtk.label.Label.naturalWrapMode]
         property.
   */
   @property pango.types.WrapMode wrapMode()
@@ -687,7 +688,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
           [gtk.label.Label.wrap] property). The default is [pango.types.WrapMode.Word],
           which means wrap on word boundaries.
           
-          For sizing behavior, also consider the `property@Gtk.Label:natural-wrap-mode`
+          For sizing behavior, also consider the [gtk.label.Label.naturalWrapMode]
           property.
   */
   @property void wrapMode(pango.types.WrapMode propval)
@@ -820,8 +821,8 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       selectable label, the link in which the text cursor is currently
       positioned.
       
-      This function is intended for use in a `signalGtk.Label::activate-link`
-      handler or for use in a `signalGtk.Widget::query-tooltip` handler.
+      This function is intended for use in a [gtk.label.Label.activateLink]
+      handler or for use in a [gtk.widget.Widget.queryTooltip] handler.
       Returns: the currently active URI
   */
   string getCurrentUri()
@@ -1183,7 +1184,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       
       The attributes set with this function will be applied and merged with
       any other attributes previously effected by way of the
-      `propertyGtk.Label:use-underline` or `propertyGtk.Label:use-markup`
+      [gtk.label.Label.useUnderline] or [gtk.label.Label.useMarkup]
       properties. While it is not recommended to mix markup strings with
       manually set attributes, if you must; know that the attributes will
       be applied to the label after the markup string is parsed.
@@ -1244,8 +1245,8 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Sets the text of the label.
       
       The label is interpreted as including embedded underlines and/or Pango
-      markup depending on the values of the `propertyGtk.Label:use-underline`
-      and `propertyGtk.Label:use-markup` properties.
+      markup depending on the values of the [gtk.label.Label.useUnderline]
+      and [gtk.label.Label.useMarkup] properties.
   
       Params:
         str = the new text to set for the label
@@ -1291,12 +1292,12 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       g_free (markup);
       ```
       
-      This function will set the `propertyGtk.Label:use-markup` property
+      This function will set the [gtk.label.Label.useMarkup] property
       to true as a side effect.
       
       If you set the label contents using the [gtk.label.Label.label]
       property you should also ensure that you set the
-      `propertyGtk.Label:use-markup` property accordingly.
+      [gtk.label.Label.useMarkup] property accordingly.
       
       See also: [gtk.label.Label.setText]
   
@@ -1355,7 +1356,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       the label) you need to set it explicitly using this function.
       
       The target widget will be accelerated by emitting the
-      `signalGtk.Widget::mnemonic-activate` signal on it. The default handler for
+      [gtk.widget.Widget.mnemonicActivate] signal on it. The default handler for
       this signal will activate the widget if there are no mnemonic collisions
       and toggle focus between the colliding widgets otherwise.
   
@@ -1371,7 +1372,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       Select the line wrapping for the natural size request.
       
       This only affects the natural size requested, for the actual wrapping used,
-      see the [gtk.label.Label.wrap] property.
+      see the [gtk.label.Label.wrapMode] property.
   
       Params:
         wrapMode = the line wrapping mode
@@ -1423,10 +1424,10 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       It overwrites any text that was there before.
       
       This function will clear any previously set mnemonic accelerators,
-      and set the `propertyGtk.Label:use-underline` property to false as
+      and set the [gtk.label.Label.useUnderline] property to false as
       a side effect.
       
-      This function will set the `propertyGtk.Label:use-markup` property
+      This function will set the [gtk.label.Label.useMarkup] property
       to false as a side effect.
       
       See also: [gtk.label.Label.setMarkup]
@@ -1520,7 +1521,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
       [gtk.label.Label.setWrap]) The default is [pango.types.WrapMode.Word]
       which means wrap on word boundaries.
       
-      For sizing behavior, also consider the `propertyGtk.Label:natural-wrap-mode`
+      For sizing behavior, also consider the [gtk.label.Label.naturalWrapMode]
       property.
   
       Params:
@@ -1792,7 +1793,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           [pango.types.EllipsizeMode.None] has the side-effect that the label requests
           only enough space to display the ellipsis "...". In particular, this
           means that ellipsizing labels do not work well in notebook tabs, unless
-          the [gtk.notebook_page.NotebookPage.tab] child property is set to true.
+          the [gtk.notebook_page.NotebookPage.tabExpand] child property is set to true.
           Other ways to set a label's width are [gtk.widget.Widget.setSizeRequest]
           and [gtk.label.Label.setWidthChars].
       Returns: Builder instance for fluent chaining
@@ -1833,14 +1834,14 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = The contents of the label.
           
           If the string contains Pango markup (see `func@Pango.parse_markup`),
-          you will have to set the `property@Gtk.Label:use-markup` property to
+          you will have to set the [gtk.label.Label.useMarkup] property to
           true in order for the label to display the markup attributes. See also
           [gtk.label.Label.setMarkup] for a convenience function that sets both
-          this property and the `property@Gtk.Label:use-markup` property at the
+          this property and the [gtk.label.Label.useMarkup] property at the
           same time.
           
           If the string contains underlines acting as mnemonics, you will have to
-          set the `property@Gtk.Label:use-underline` property to true in order
+          set the [gtk.label.Label.useUnderline] property to true in order
           for the label to display them.
       Returns: Builder instance for fluent chaining
   */
@@ -1872,7 +1873,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           If this property is set to -1, the width will be calculated automatically.
           
           See the section on [text layout](class.Label.html#text-layout) for details of how
-          `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+          [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
           determine the width of ellipsized and wrapped labels.
       Returns: Builder instance for fluent chaining
   */
@@ -1898,10 +1899,10 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
         propval = Select the line wrapping for the natural size request.
           
           This only affects the natural size requested. For the actual wrapping used,
-          see the [gtk.label.Label.wrap] property.
+          see the [gtk.label.Label.wrapMode] property.
           
           The default is [gtk.types.NaturalWrapMode.Inherit], which inherits the behavior of the
-          [gtk.label.Label.wrap] property.
+          [gtk.label.Label.wrapMode] property.
       Returns: Builder instance for fluent chaining
   */
   T naturalWrapMode(gtk.types.NaturalWrapMode propval)
@@ -1980,7 +1981,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           If this property is set to -1, the width will be calculated automatically.
           
           See the section on [text layout](class.Label.html#text-layout) for details of how
-          `property@Gtk.Label:width-chars` and `property@Gtk.Label:max-width-chars`
+          [gtk.label.Label.widthChars] and [gtk.label.Label.maxWidthChars]
           determine the width of ellipsized and wrapped labels.
       Returns: Builder instance for fluent chaining
   */
@@ -2009,7 +2010,7 @@ class LabelGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T, gtk.accessible
           [gtk.label.Label.wrap] property). The default is [pango.types.WrapMode.Word],
           which means wrap on word boundaries.
           
-          For sizing behavior, also consider the `property@Gtk.Label:natural-wrap-mode`
+          For sizing behavior, also consider the [gtk.label.Label.naturalWrapMode]
           property.
       Returns: Builder instance for fluent chaining
   */

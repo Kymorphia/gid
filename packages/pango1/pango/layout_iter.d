@@ -1,6 +1,7 @@
 /// Module for [LayoutIter] class
 module pango.layout_iter;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gobject.object;

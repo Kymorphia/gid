@@ -1,6 +1,7 @@
 /// Module for [DsnInfo] class
 module gda.dsn_info;
 
+public import gid.basictypes;
 import gda.c.functions;
 import gda.c.types;
 import gda.types;

@@ -1,6 +1,7 @@
 /// Module for [AttrFontFeatures] class
 module pango.attr_font_features;
 
+public import gid.basictypes;
 import gid.gid;
 import pango.attribute;
 import pango.c.functions;

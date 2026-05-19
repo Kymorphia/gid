@@ -1,6 +1,7 @@
 /// Module for [Multipart] class
 module soup.multipart;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.bytes;
 import gobject.boxed;

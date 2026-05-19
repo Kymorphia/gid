@@ -1,6 +1,7 @@
 /// Module for [IOSchedulerJob] class
 module gio.ioscheduler_job;
 
+public import gid.basictypes;
 import gid.gid;
 import gio.c.functions;
 import gio.c.types;

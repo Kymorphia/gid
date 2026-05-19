@@ -1,6 +1,7 @@
 /// Module for [TabOverview] class
 module adw.tab_overview;
 
+public import gid.basictypes;
 import adw.c.functions;
 import adw.c.types;
 import adw.tab_page;
@@ -23,7 +24,7 @@ import gtk.constraint_target_mixin;
 import gtk.widget;
 
 /**
-    A tab overview for `class@TabView`.
+    A tab overview for [adw.tab_view.TabView].
     
     <picture>
       <source srcset="tab-overview-dark.png" media="(prefers-color-scheme: dark)">
@@ -35,37 +36,37 @@ import gtk.widget;
     
     [adw.tab_overview.TabOverview] shows a thumbnail for each tab. By default thumbnails are
     static for all pages except the selected one. They can be made always live
-    by setting `property@TabPage:live-thumbnail` to `TRUE`, or refreshed with
+    by setting [adw.tab_page.TabPage.liveThumbnail] to `TRUE`, or refreshed with
     [adw.tab_page.TabPage.invalidateThumbnail] or
     [adw.tab_view.TabView.invalidateThumbnails] otherwise.
     
     If the pages are too tall or too wide, the thumbnails will be cropped; use
-    `property@TabPage:thumbnail-xalign` and `property@TabPage:thumbnail-yalign` to
+    [adw.tab_page.TabPage.thumbnailXalign] and [adw.tab_page.TabPage.thumbnailYalign] to
     control which part of the page should be visible in this case.
     
     Pinned tabs are shown as smaller cards without thumbnails above the other
-    tabs. Unlike in `class@TabBar`, they still have titles, as well as an unpin
+    tabs. Unlike in [adw.tab_bar.TabBar], they still have titles, as well as an unpin
     button.
     
     [adw.tab_overview.TabOverview] provides search in open tabs. It searches in tab titles and
-    tooltips, as well as `property@TabPage:keyword`.
+    tooltips, as well as [adw.tab_page.TabPage.keyword].
     
-    If `property@TabOverview:enable-new-tab` is set to `TRUE`, a new tab button
-    will be shown. Connect to the `signal@TabOverview::create-tab` signal to use
+    If [adw.tab_overview.TabOverview.enableNewTab] is set to `TRUE`, a new tab button
+    will be shown. Connect to the [adw.tab_overview.TabOverview.createTab] signal to use
     it.
     
-    `property@TabOverview:secondary-menu` can be used to provide a secondary menu
+    [adw.tab_overview.TabOverview.secondaryMenu] can be used to provide a secondary menu
     for the overview. Use it to add extra actions, e.g. to open a new window or
     undo closed tab.
     
     [adw.tab_overview.TabOverview] is intended to be used as the direct child of the window,
-    with the rest of the window contents set as the `property@TabOverview:child`.
-    The child is expected to contain an `class@TabView`.
+    with the rest of the window contents set as the [adw.tab_overview.TabOverview.child].
+    The child is expected to contain an [adw.tab_view.TabView].
     
     [adw.tab_overview.TabOverview] shows window buttons by default. They can be disabled by
-    setting `property@TabOverview:show-start-title-buttons` and/or
-    `property@TabOverview:show-start-title-buttons` and/or
-    `property@TabOverview:show-end-title-buttons` to `FALSE`.
+    setting [adw.tab_overview.TabOverview.showStartTitleButtons] and/or
+    [adw.tab_overview.TabOverview.showStartTitleButtons] and/or
+    [adw.tab_overview.TabOverview.showEndTitleButtons] to `FALSE`.
     
     If search and window buttons are disabled, and secondary menu is not set, the
     header bar will be hidden.
@@ -74,7 +75,7 @@ import gtk.widget;
     
     [adw.tab_overview.TabOverview] defines the `overview.open` and `overview.close` actions for
     opening and closing itself. They can be convenient when used together with
-    `class@TabButton`.
+    [adw.tab_button.TabButton].
     
     ## CSS nodes
     
@@ -140,7 +141,7 @@ class TabOverview : gtk.widget.Widget
       Get `enableNewTab` property.
       Returns: Whether to enable new tab button.
         
-        Connect to the `signal@TabOverview::create-tab` signal to use it.
+        Connect to the [adw.tab_overview.TabOverview.createTab] signal to use it.
   */
   @property bool enableNewTab()
   {
@@ -152,7 +153,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         propval = Whether to enable new tab button.
           
-          Connect to the `signal@TabOverview::create-tab` signal to use it.
+          Connect to the [adw.tab_overview.TabOverview.createTab] signal to use it.
   */
   @property void enableNewTab(bool propval)
   {
@@ -164,12 +165,12 @@ class TabOverview : gtk.widget.Widget
       Returns: Whether to enable search in tabs.
         
         Search matches tab titles and tooltips, as well as keywords, set via
-        `property@TabPage:keyword`. Use keywords to search in e.g. page URLs in a
+        [adw.tab_page.TabPage.keyword]. Use keywords to search in e.g. page URLs in a
         web browser.
         
         During search, tab reordering and drag-n-drop are disabled.
         
-        Use `property@TabOverview:search-active` to check out if search is
+        Use [adw.tab_overview.TabOverview.searchActive] to check out if search is
         currently active.
   */
   @property bool enableSearch()
@@ -183,12 +184,12 @@ class TabOverview : gtk.widget.Widget
         propval = Whether to enable search in tabs.
           
           Search matches tab titles and tooltips, as well as keywords, set via
-          `property@TabPage:keyword`. Use keywords to search in e.g. page URLs in a
+          [adw.tab_page.TabPage.keyword]. Use keywords to search in e.g. page URLs in a
           web browser.
           
           During search, tab reordering and drag-n-drop are disabled.
           
-          Use `property@TabOverview:search-active` to check out if search is
+          Use [adw.tab_overview.TabOverview.searchActive] to check out if search is
           currently active.
   */
   @property void enableSearch(bool propval)
@@ -199,10 +200,10 @@ class TabOverview : gtk.widget.Widget
   /**
       Get `extraDragPreferredAction` property.
       Returns: The unique action on the `current-drop` of the
-        `signal@TabOverview::extra-drag-drop`.
+        [adw.tab_overview.TabOverview.extraDragDrop].
         
         This property should only be used during a
-        `signal@TabOverview::extra-drag-drop` and is always a subset of what was
+        [adw.tab_overview.TabOverview.extraDragDrop] and is always a subset of what was
         originally passed to [adw.tab_overview.TabOverview.setupExtraDropTarget].
   */
   @property gdk.types.DragAction extraDragPreferredAction()
@@ -281,7 +282,7 @@ class TabOverview : gtk.widget.Widget
       Get `searchActive` property.
       Returns: Whether search is currently active.
         
-        See `property@TabOverview:enable-search`.
+        See [adw.tab_overview.TabOverview.enableSearch].
   */
   @property bool searchActive()
   {
@@ -315,7 +316,7 @@ class TabOverview : gtk.widget.Widget
       Get `showEndTitleButtons` property.
       Returns: Whether to show end title buttons in the overview's header bar.
         
-        See `property@HeaderBar:show-start-title-buttons` for the other side.
+        See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
   */
   @property bool showEndTitleButtons()
   {
@@ -327,7 +328,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         propval = Whether to show end title buttons in the overview's header bar.
           
-          See `property@HeaderBar:show-start-title-buttons` for the other side.
+          See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
   */
   @property void showEndTitleButtons(bool propval)
   {
@@ -338,7 +339,7 @@ class TabOverview : gtk.widget.Widget
       Get `showStartTitleButtons` property.
       Returns: Whether to show start title buttons in the overview's header bar.
         
-        See `property@HeaderBar:show-end-title-buttons` for the other side.
+        See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
   */
   @property bool showStartTitleButtons()
   {
@@ -350,7 +351,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         propval = Whether to show start title buttons in the overview's header bar.
           
-          See `property@HeaderBar:show-end-title-buttons` for the other side.
+          See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
   */
   @property void showStartTitleButtons(bool propval)
   {
@@ -361,7 +362,7 @@ class TabOverview : gtk.widget.Widget
       Get `view` property.
       Returns: The tab view the overview controls.
         
-        The view must be inside the tab overview, see `property@TabOverview:child`.
+        The view must be inside the tab overview, see [adw.tab_overview.TabOverview.child].
   */
   @property adw.tab_view.TabView view()
   {
@@ -373,7 +374,7 @@ class TabOverview : gtk.widget.Widget
       Params:
         propval = The tab view the overview controls.
           
-          The view must be inside the tab overview, see `property@TabOverview:child`.
+          The view must be inside the tab overview, see [adw.tab_overview.TabOverview.child].
   */
   @property void view(adw.tab_view.TabView propval)
   {
@@ -473,7 +474,7 @@ class TabOverview : gtk.widget.Widget
   /**
       Gets whether search is currently active for self.
       
-      See `propertyTabOverview:enable-search`.
+      See [adw.tab_overview.TabOverview.enableSearch].
       Returns: whether search is active
   */
   bool getSearchActive()
@@ -543,7 +544,7 @@ class TabOverview : gtk.widget.Widget
   /**
       Sets whether to enable new tab button for self.
       
-      Connect to the `signalTabOverview::create-tab` signal to use it.
+      Connect to the [adw.tab_overview.TabOverview.createTab] signal to use it.
   
       Params:
         enableNewTab = whether to enable new tab button
@@ -557,12 +558,12 @@ class TabOverview : gtk.widget.Widget
       Sets whether to enable search in tabs for self.
       
       Search matches tab titles and tooltips, as well as keywords, set via
-      `propertyTabPage:keyword`. Use keywords to search in e.g. page URLs in a web
+      [adw.tab_page.TabPage.keyword]. Use keywords to search in e.g. page URLs in a web
       browser.
       
       During search, tab reordering and drag-n-drop are disabled.
       
-      Use `propertyTabOverview:search-active` to check out if search is currently
+      Use [adw.tab_overview.TabOverview.searchActive] to check out if search is currently
       active.
   
       Params:
@@ -627,7 +628,7 @@ class TabOverview : gtk.widget.Widget
   /**
       Sets whether to show end title buttons in self's header bar.
       
-      See `propertyHeaderBar:show-start-title-buttons` for the other side.
+      See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
   
       Params:
         showEndTitleButtons = whether to show end title buttons
@@ -640,7 +641,7 @@ class TabOverview : gtk.widget.Widget
   /**
       Sets whether to show start title buttons in self's header bar.
       
-      See `propertyHeaderBar:show-end-title-buttons` for the other side.
+      See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
   
       Params:
         showStartTitleButtons = whether to show start title buttons
@@ -653,7 +654,7 @@ class TabOverview : gtk.widget.Widget
   /**
       Sets the tab view to control.
       
-      The view must be inside self, see `propertyTabOverview:child`.
+      The view must be inside self, see [adw.tab_overview.TabOverview.child].
   
       Params:
         view = a tab view
@@ -674,7 +675,7 @@ class TabOverview : gtk.widget.Widget
       If a tab is hovered for a certain period of time while dragging the content,
       it will be automatically selected.
       
-      The `signalTabOverview::extra-drag-drop` signal can be used to handle the
+      The [adw.tab_overview.TabOverview.extraDragDrop] signal can be used to handle the
       drop.
   
       Params:
@@ -697,10 +698,10 @@ class TabOverview : gtk.widget.Widget
       Emitted when a tab needs to be created.
         
         This can happen after the new tab button has been pressed, see
-        `propertyTabOverview:enable-new-tab`.
+        [adw.tab_overview.TabOverview.enableNewTab].
         
         The signal handler is expected to create a new page in the corresponding
-        `classTabView` and return it.
+        [adw.tab_view.TabView] and return it.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -799,7 +800,7 @@ class TabOverview : gtk.widget.Widget
   
       This signal is emitted when the dropped content is preloaded.
         
-        In order for data to be preloaded, `propertyTabOverview:extra-drag-preload`
+        In order for data to be preloaded, [adw.tab_overview.TabOverview.extraDragPreload]
         must be set to `TRUE`.
         
         The content must be of one of the types set up via
@@ -876,7 +877,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Whether to enable new tab button.
           
-          Connect to the `signal@TabOverview::create-tab` signal to use it.
+          Connect to the [adw.tab_overview.TabOverview.createTab] signal to use it.
       Returns: Builder instance for fluent chaining
   */
   T enableNewTab(bool propval)
@@ -890,12 +891,12 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
         propval = Whether to enable search in tabs.
           
           Search matches tab titles and tooltips, as well as keywords, set via
-          `property@TabPage:keyword`. Use keywords to search in e.g. page URLs in a
+          [adw.tab_page.TabPage.keyword]. Use keywords to search in e.g. page URLs in a
           web browser.
           
           During search, tab reordering and drag-n-drop are disabled.
           
-          Use `property@TabOverview:search-active` to check out if search is
+          Use [adw.tab_overview.TabOverview.searchActive] to check out if search is
           currently active.
       Returns: Builder instance for fluent chaining
   */
@@ -960,7 +961,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Whether to show end title buttons in the overview's header bar.
           
-          See `property@HeaderBar:show-start-title-buttons` for the other side.
+          See [adw.header_bar.HeaderBar.showStartTitleButtons] for the other side.
       Returns: Builder instance for fluent chaining
   */
   T showEndTitleButtons(bool propval)
@@ -973,7 +974,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = Whether to show start title buttons in the overview's header bar.
           
-          See `property@HeaderBar:show-end-title-buttons` for the other side.
+          See [adw.header_bar.HeaderBar.showEndTitleButtons] for the other side.
       Returns: Builder instance for fluent chaining
   */
   T showStartTitleButtons(bool propval)
@@ -986,7 +987,7 @@ class TabOverviewGidBuilderImpl(T) : gtk.widget.WidgetGidBuilderImpl!T
       Params:
         propval = The tab view the overview controls.
           
-          The view must be inside the tab overview, see `property@TabOverview:child`.
+          The view must be inside the tab overview, see [adw.tab_overview.TabOverview.child].
       Returns: Builder instance for fluent chaining
   */
   T view(adw.tab_view.TabView propval)

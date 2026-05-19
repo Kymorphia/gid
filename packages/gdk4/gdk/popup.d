@@ -1,6 +1,7 @@
 /// Module for [Popup] interface
 module gdk.popup;
 
+public import gid.basictypes;
 public import gdk.popup_iface_proxy;
 import gdk.c.functions;
 import gdk.c.types;

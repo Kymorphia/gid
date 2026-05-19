@@ -1,6 +1,7 @@
 /// Module for [DmabufTexture] class
 module gdk.dmabuf_texture;
 
+public import gid.basictypes;
 import gdk.c.functions;
 import gdk.c.types;
 import gdk.paintable;

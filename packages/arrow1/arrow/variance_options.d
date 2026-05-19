@@ -1,6 +1,7 @@
 /// Module for [VarianceOptions] class
 module arrow.variance_options;
 
+public import gid.basictypes;
 import arrow.c.functions;
 import arrow.c.types;
 import arrow.function_options;

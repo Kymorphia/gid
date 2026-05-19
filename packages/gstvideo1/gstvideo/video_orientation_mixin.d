@@ -1,6 +1,7 @@
 /// Module for [VideoOrientation] interface mixin
 module gstvideo.video_orientation_mixin;
 
+public import gid.basictypes;
 public import gstvideo.video_orientation_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

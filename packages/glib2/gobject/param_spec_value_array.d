@@ -1,6 +1,7 @@
 /// Module for [ParamSpecValueArray] class
 module gobject.param_spec_value_array;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;

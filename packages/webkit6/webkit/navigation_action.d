@@ -1,6 +1,7 @@
 /// Module for [NavigationAction] class
 module webkit.navigation_action;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.boxed;
 import gobject.object;

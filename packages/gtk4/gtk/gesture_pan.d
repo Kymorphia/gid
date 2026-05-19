@@ -1,6 +1,7 @@
 /// Module for [GesturePan] class
 module gtk.gesture_pan;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.dclosure;
 import gobject.gid_builder;

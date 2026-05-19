@@ -1,6 +1,7 @@
 /// Module for [Misc] class
 module atk.misc;
 
+public import gid.basictypes;
 import atk.c.functions;
 import atk.c.types;
 import atk.types;

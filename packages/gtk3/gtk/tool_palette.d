@@ -1,6 +1,7 @@
 /// Module for [ToolPalette] class
 module gtk.tool_palette;
 
+public import gid.basictypes;
 import atk.implementor_iface;
 import atk.implementor_iface_mixin;
 import gdk.types;

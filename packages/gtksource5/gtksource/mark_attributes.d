@@ -1,6 +1,7 @@
 /// Module for [MarkAttributes] class
 module gtksource.mark_attributes;
 
+public import gid.basictypes;
 import gdk.paintable;
 import gdk.rgba;
 import gdkpixbuf.pixbuf;
@@ -19,7 +20,7 @@ import gtksource.types;
     The source mark attributes object.
     
     [gtksource.mark_attributes.MarkAttributes] is an object specifying attributes used by
-    a `class@View` to visually show lines marked with `class@Mark`s
+    a [gtksource.view.View] to visually show lines marked with [gtksource.mark.Mark]s
     of a specific category. It allows you to define a background color of a line,
     an icon shown in gutter and tooltips.
     
@@ -44,8 +45,8 @@ import gtksource.types;
     value, but it is just not used when rendering the proper icon.
     
     To provide meaningful tooltips for a given mark of a category, you should
-    connect to `signal@MarkAttributes::query-tooltip-text` or
-    `signal@MarkAttributes::query-tooltip-markup` where the latter
+    connect to [gtksource.mark_attributes.MarkAttributes.queryTooltipText] or
+    [gtksource.mark_attributes.MarkAttributes.queryTooltipMarkup] where the latter
     takes precedence.
 */
 class MarkAttributes : gobject.object.ObjectWrap
@@ -232,7 +233,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   }
 
   /**
-      Queries for a tooltip by emitting a `signalMarkAttributes::query-tooltip-markup` signal.
+      Queries for a tooltip by emitting a [gtksource.mark_attributes.MarkAttributes.queryTooltipMarkup] signal.
       
       The tooltip may contain a markup.
   
@@ -250,7 +251,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   }
 
   /**
-      Queries for a tooltip by emitting a `signalMarkAttributes::query-tooltip-text` signal.
+      Queries for a tooltip by emitting a [gtksource.mark_attributes.MarkAttributes.queryTooltipText] signal.
       
       The tooltip is a plain text.
   

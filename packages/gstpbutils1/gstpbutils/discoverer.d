@@ -1,6 +1,7 @@
 /// Module for [Discoverer] class
 module gstpbutils.discoverer;
 
+public import gid.basictypes;
 import gid.gid;
 import glib.error;
 import gobject.dclosure;

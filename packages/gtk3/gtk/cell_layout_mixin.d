@@ -1,6 +1,7 @@
 /// Module for [CellLayout] interface mixin
 module gtk.cell_layout_mixin;
 
+public import gid.basictypes;
 public import gtk.cell_layout_iface_proxy;
 public import gid.gid;
 public import gobject.gid_builder;

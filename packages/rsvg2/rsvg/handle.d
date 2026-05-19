@@ -1,6 +1,7 @@
 /// Module for [Handle] class
 module rsvg.handle;
 
+public import gid.basictypes;
 import cairo.context;
 import gdkpixbuf.pixbuf;
 import gid.gid;

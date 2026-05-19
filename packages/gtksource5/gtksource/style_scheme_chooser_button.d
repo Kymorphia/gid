@@ -1,6 +1,7 @@
 /// Module for [StyleSchemeChooserButton] class
 module gtksource.style_scheme_chooser_button;
 
+public import gid.basictypes;
 import gid.gid;
 import gobject.gid_builder;
 import gtk.accessible;
@@ -26,7 +27,7 @@ import gtksource.types;
     selection dialog to change the style scheme.
     It is suitable widget for selecting a style scheme in a preference dialog.
     
-    In [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton], a `class@StyleSchemeChooserWidget`
+    In [gtksource.style_scheme_chooser_button.StyleSchemeChooserButton], a [gtksource.style_scheme_chooser_widget.StyleSchemeChooserWidget]
     is used to provide a dialog for selecting style schemes.
 */
 class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_chooser.StyleSchemeChooser
