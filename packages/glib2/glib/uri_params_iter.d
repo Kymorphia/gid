@@ -52,7 +52,7 @@ class UriParamsIter
       string will be replaced with spaces in the output. For example, `foo=bar+baz`
       will give attribute `foo` with value `bar baz`. This is commonly used on the
       web (the `https` and `http` schemes only), but is deprecated in favour of
-      the equivalent of encoding spaces as ``20``.
+      the equivalent of encoding spaces as `%20`.
       
       Unlike with [glib.uri.Uri.parseParams], `G_URI_PARAMS_CASE_INSENSITIVE` has no
       effect if passed to flags for [glib.uri_params_iter.UriParamsIter.init_]. The caller is

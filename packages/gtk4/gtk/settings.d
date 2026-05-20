@@ -940,9 +940,9 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Get `gtkPrintPreviewCommand` property.
       Returns: A command to run for displaying the print preview.
         
-        The command should contain a ``f`` placeholder, which will get
+        The command should contain a `%f` placeholder, which will get
         replaced by the path to the pdf file. The command may also
-        contain a ``s`` placeholder, which will get replaced by the
+        contain a `%s` placeholder, which will get replaced by the
         path to a file containing the print settings in the format
         produced by [gtk.print_settings.PrintSettings.toFile].
         
@@ -959,9 +959,9 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
       Params:
         propval = A command to run for displaying the print preview.
           
-          The command should contain a ``f`` placeholder, which will get
+          The command should contain a `%f` placeholder, which will get
           replaced by the path to the pdf file. The command may also
-          contain a ``s`` placeholder, which will get replaced by the
+          contain a `%s` placeholder, which will get replaced by the
           path to a file containing the print settings in the format
           produced by [gtk.print_settings.PrintSettings.toFile].
           
@@ -1929,9 +1929,9 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T, gtk
       Params:
         propval = A command to run for displaying the print preview.
           
-          The command should contain a ``f`` placeholder, which will get
+          The command should contain a `%f` placeholder, which will get
           replaced by the path to the pdf file. The command may also
-          contain a ``s`` placeholder, which will get replaced by the
+          contain a `%s` placeholder, which will get replaced by the
           path to a file containing the print settings in the format
           produced by [gtk.print_settings.PrintSettings.toFile].
           

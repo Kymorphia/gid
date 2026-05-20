@@ -653,10 +653,10 @@ class DateTime : gobject.boxed.Boxed
       Creates a newly allocated string representing the requested format.
       
       The format strings understood by this function are a subset of the
-      `strftime()` format language as specified by C99.  The ``D``, ``U`` and ``W``
+      `strftime()` format language as specified by C99.  The `%D`, `%U` and `%W`
       conversions are not supported, nor is the `E` modifier.  The GNU
-      extensions ``k``, ``l``, ``s`` and ``P`` are supported, however, as are the
-      `0`, `_` and `-` modifiers. The Python extension ``f`` is also supported.
+      extensions `%k`, `%l`, `%s` and `%P` are supported, however, as are the
+      `0`, `_` and `-` modifiers. The Python extension `%f` is also supported.
       
       In contrast to `strftime()`, this function always produces a UTF-8
       string, regardless of the current locale.  Note that the rendering of
@@ -665,69 +665,69 @@ class DateTime : gobject.boxed.Boxed
       
       The following format specifiers are supported:
       
-      - ``a``: the abbreviated weekday name according to the current locale
-      - ``A``: the full weekday name according to the current locale
-      - ``b``: the abbreviated month name according to the current locale
-      - ``B``: the full month name according to the current locale
-      - ``c``: the preferred date and time representation for the current locale
-      - ``C``: the century number (year/100) as a 2-digit integer (00-99)
-      - ``d``: the day of the month as a decimal number (range 01 to 31)
-      - ``e``: the day of the month as a decimal number (range 1 to 31);
+      - `%a`: the abbreviated weekday name according to the current locale
+      - `%A`: the full weekday name according to the current locale
+      - `%b`: the abbreviated month name according to the current locale
+      - `%B`: the full month name according to the current locale
+      - `%c`: the preferred date and time representation for the current locale
+      - `%C`: the century number (year/100) as a 2-digit integer (00-99)
+      - `%d`: the day of the month as a decimal number (range 01 to 31)
+      - `%e`: the day of the month as a decimal number (range 1 to 31);
         single digits are preceded by a figure space (U+2007)
-      - ``F``: equivalent to ``Y`-`m`-`d`` (the ISO 8601 date format)
-      - ``g``: the last two digits of the ISO 8601 week-based year as a
-        decimal number (00-99). This works well with ``V`` and ``u``.
-      - ``G``: the ISO 8601 week-based year as a decimal number. This works
-        well with ``V`` and ``u``.
-      - ``h``: equivalent to ``b``
-      - ``H``: the hour as a decimal number using a 24-hour clock (range 00 to 23)
-      - ``I``: the hour as a decimal number using a 12-hour clock (range 01 to 12)
-      - ``j``: the day of the year as a decimal number (range 001 to 366)
-      - ``k``: the hour (24-hour clock) as a decimal number (range 0 to 23);
+      - `%F`: equivalent to `%Y-%m-%d` (the ISO 8601 date format)
+      - `%g`: the last two digits of the ISO 8601 week-based year as a
+        decimal number (00-99). This works well with `%V` and `%u`.
+      - `%G`: the ISO 8601 week-based year as a decimal number. This works
+        well with `%V` and `%u`.
+      - `%h`: equivalent to `%b`
+      - `%H`: the hour as a decimal number using a 24-hour clock (range 00 to 23)
+      - `%I`: the hour as a decimal number using a 12-hour clock (range 01 to 12)
+      - `%j`: the day of the year as a decimal number (range 001 to 366)
+      - `%k`: the hour (24-hour clock) as a decimal number (range 0 to 23);
         single digits are preceded by a figure space (U+2007)
-      - ``l``: the hour (12-hour clock) as a decimal number (range 1 to 12);
+      - `%l`: the hour (12-hour clock) as a decimal number (range 1 to 12);
         single digits are preceded by a figure space (U+2007)
-      - ``m``: the month as a decimal number (range 01 to 12)
-      - ``M``: the minute as a decimal number (range 00 to 59)
-      - ``f``: the microsecond as a decimal number (range 000000 to 999999)
-      - ``p``: either ‘AM’ or ‘PM’ according to the given time value, or the
+      - `%m`: the month as a decimal number (range 01 to 12)
+      - `%M`: the minute as a decimal number (range 00 to 59)
+      - `%f`: the microsecond as a decimal number (range 000000 to 999999)
+      - `%p`: either ‘AM’ or ‘PM’ according to the given time value, or the
         corresponding  strings for the current locale.  Noon is treated as
         ‘PM’ and midnight as ‘AM’. Use of this format specifier is discouraged, as
-        many locales have no concept of AM/PM formatting. Use ``c`` or ``X`` instead.
-      - ``P``: like ``p`` but lowercase: ‘am’ or ‘pm’ or a corresponding string for
+        many locales have no concept of AM/PM formatting. Use `%c` or `%X` instead.
+      - `%P`: like `%p` but lowercase: ‘am’ or ‘pm’ or a corresponding string for
         the current locale. Use of this format specifier is discouraged, as
-        many locales have no concept of AM/PM formatting. Use ``c`` or ``X`` instead.
-      - ``r``: the time in a.m. or p.m. notation. Use of this format specifier is
-        discouraged, as many locales have no concept of AM/PM formatting. Use ``c``
-        or ``X`` instead.
-      - ``R``: the time in 24-hour notation (``H`:`M``)
-      - ``s``: the number of seconds since the Epoch, that is, since 1970-01-01
+        many locales have no concept of AM/PM formatting. Use `%c` or `%X` instead.
+      - `%r`: the time in a.m. or p.m. notation. Use of this format specifier is
+        discouraged, as many locales have no concept of AM/PM formatting. Use `%c`
+        or `%X` instead.
+      - `%R`: the time in 24-hour notation (`%H:%M`)
+      - `%s`: the number of seconds since the Epoch, that is, since 1970-01-01
         00:00:00 UTC
-      - ``S``: the second as a decimal number (range 00 to 60)
-      - ``t``: a tab character
-      - ``T``: the time in 24-hour notation with seconds (``H`:`M`:`S``)
-      - ``u``: the ISO 8601 standard day of the week as a decimal, range 1 to 7,
-         Monday being 1. This works well with ``G`` and ``V``.
-      - ``V``: the ISO 8601 standard week number of the current year as a decimal
+      - `%S`: the second as a decimal number (range 00 to 60)
+      - `%t`: a tab character
+      - `%T`: the time in 24-hour notation with seconds (`%H:%M:%S`)
+      - `%u`: the ISO 8601 standard day of the week as a decimal, range 1 to 7,
+         Monday being 1. This works well with `%G` and `%V`.
+      - `%V`: the ISO 8601 standard week number of the current year as a decimal
         number, range 01 to 53, where week 1 is the first week that has at
         least 4 days in the new year. See [glib.date_time.DateTime.getWeekOfYear].
-        This works well with ``G`` and ``u``.
-      - ``w``: the day of the week as a decimal, range 0 to 6, Sunday being 0.
-        This is not the ISO 8601 standard format — use ``u`` instead.
-      - ``x``: the preferred date representation for the current locale without
+        This works well with `%G` and `%u`.
+      - `%w`: the day of the week as a decimal, range 0 to 6, Sunday being 0.
+        This is not the ISO 8601 standard format — use `%u` instead.
+      - `%x`: the preferred date representation for the current locale without
         the time
-      - ``X``: the preferred time representation for the current locale without
+      - `%X`: the preferred time representation for the current locale without
         the date
-      - ``y``: the year as a decimal number without the century
-      - ``Y``: the year as a decimal number including the century
-      - ``z``: the time zone as an offset from UTC (`+hhmm`)
+      - `%y`: the year as a decimal number without the century
+      - `%Y`: the year as a decimal number including the century
+      - `%z`: the time zone as an offset from UTC (`+hhmm`)
       - `%:z`: the time zone as an offset from UTC (`+hh:mm`).
         This is a gnulib `strftime()` extension. Since: 2.38
       - `%::z`: the time zone as an offset from UTC (`+hh:mm:ss`). This is a
         gnulib `strftime()` extension. Since: 2.38
       - `%:::z`: the time zone as an offset from UTC, with `:` to necessary
         precision (e.g., `-04`, `+05:30`). This is a gnulib `strftime()` extension. Since: 2.38
-      - ``Z``: the time zone or name or abbreviation
+      - `%Z`: the time zone or name or abbreviation
       - `%%`: a literal `%` character
       
       Some conversion specifications can be modified by preceding the
@@ -755,25 +755,25 @@ class DateTime : gobject.boxed.Boxed
       form of a month name. The alternative form should be used when the month
       name is used without a day number (e.g., standalone). It is required in
       some languages (Baltic, Slavic, Greek, and more) due to their grammatical
-      rules. For other languages there is no difference. ``OB`` is a GNU and BSD
+      rules. For other languages there is no difference. `%OB` is a GNU and BSD
       `strftime()` extension expected to be added to the future POSIX specification,
-      ``Ob`` and ``Oh`` are GNU `strftime()` extensions. Since: 2.56
+      `%Ob` and `%Oh` are GNU `strftime()` extensions. Since: 2.56
       
-      Since GLib 2.80, when `E` is used with ``c``, ``C``, ``x``, ``X``, ``y`` or ``Y``,
+      Since GLib 2.80, when `E` is used with `%c`, `%C`, `%x`, `%X`, `%y` or `%Y`,
       the date is formatted using an alternate era representation specific to the
       locale. This is typically used for the Thai solar calendar or Japanese era
       names, for example.
       
-      - ``Ec``: the preferred date and time representation for the current locale,
+      - `%Ec`: the preferred date and time representation for the current locale,
         using the alternate era representation
-      - ``EC``: the name of the era
-      - ``Ex``: the preferred date representation for the current locale without
+      - `%EC`: the name of the era
+      - `%Ex`: the preferred date representation for the current locale without
         the time, using the alternate era representation
-      - ``EX``: the preferred time representation for the current locale without
+      - `%EX`: the preferred time representation for the current locale without
         the date, using the alternate era representation
-      - ``Ey``: the year since the beginning of the era denoted by the ``EC``
+      - `%Ey`: the year since the beginning of the era denoted by the `%EC`
         specifier
-      - ``EY``: the full alternative year representation
+      - `%EY`: the full alternative year representation
   
       Params:
         format = a valid UTF-8 string, containing the format for the

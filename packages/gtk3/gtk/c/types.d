@@ -4430,7 +4430,7 @@ enum GtkWrapMode
     use the function [gtk.global.showAboutDialog] which constructs and shows a dialog
     and keeps it around so that it can be shown again.
     
-    Note that GTK+ sets a default title of `_("About `s`")` on the dialog
+    Note that GTK+ sets a default title of `_("About %s")` on the dialog
     window (where \`s` is replaced by the name of the application, but in
     order to ensure proper translation of the title, applications should
     set the title property explicitly when constructing a GtkAboutDialog,

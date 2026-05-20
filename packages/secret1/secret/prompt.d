@@ -81,7 +81,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
       Returns true if the prompt was completed and not dismissed.
       
       If window_id is non-null then it is used as an XWindow id on Linux. The API
-      expects this id to be converted to a string using the ``d`` printf format. The
+      expects this id to be converted to a string using the `%d` printf format. The
       Secret Service can make its prompt transient for the window with this id. In
       some Secret Service implementations this is not possible, so the behavior
       depending on this should degrade gracefully.
@@ -141,7 +141,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
       in the Secret Service DBus API specification.
       
       If window_id is non-null then it is used as an XWindow id on Linux. The API
-      expects this id to be converted to a string using the ``d`` printf format. The
+      expects this id to be converted to a string using the `%d` printf format. The
       Secret Service can make its prompt transient for the window with this id. In
       some Secret Service implementations this is not possible, so the behavior
       depending on this should degrade gracefully.
@@ -176,7 +176,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
       in the Secret Service DBus API specification.
       
       If window_id is non-null then it is used as an XWindow id on Linux. The API
-      expects this id to be converted to a string using the ``d`` printf format. The
+      expects this id to be converted to a string using the `%d` printf format. The
       Secret Service can make its prompt transient for the window with this id. In
       some Secret Service implementations this is not possible, so the behavior
       depending on this should degrade gracefully.

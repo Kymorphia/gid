@@ -8638,7 +8638,7 @@ void testBug(string bugUriSnippet)
     case only.
     Bug URIs are constructed by appending a bug specific URI
     portion to uri_pattern, or by replacing the special string
-    ``s`` within uri_pattern if that is present.
+    `%s` within uri_pattern if that is present.
     
     If [glib.global.testBugBase] is not called, bug URIs are formed solely
     from the value provided by [glib.global.testBug].

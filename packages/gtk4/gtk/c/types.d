@@ -5006,8 +5006,8 @@ struct GtkATContextClass;
     use the function `func@Gtk.show_about_dialog` which constructs and shows
     a dialog and keeps it around so that it can be shown again.
     
-    Note that GTK sets a default title of `_("About `s`")` on the dialog
-    window (where ``s`` is replaced by the name of the application, but in
+    Note that GTK sets a default title of `_("About %s")` on the dialog
+    window (where `%s` is replaced by the name of the application, but in
     order to ensure proper translation of the title, applications should
     set the title property explicitly when constructing a [gtk.about_dialog.AboutDialog],
     as shown in the following example:
@@ -12102,7 +12102,7 @@ struct GtkIMContextClass
     following files that is found: ~/.config/gtk-4.0/Compose, ~/.XCompose,
     /usr/share/X11/locale/$locale/Compose (for locales that have a nontrivial
     Compose file). A subset of the file syntax described in the Compose(5)
-    manual page is supported. Additionally, `include "`L`"` loads GTK’s built-in
+    manual page is supported. Additionally, `include "%L"` loads GTK’s built-in
     table of compose sequences rather than the locale-specific one from X11.
     
     If none of these files is found, [gtk.imcontext_simple.IMContextSimple] uses a built-in table

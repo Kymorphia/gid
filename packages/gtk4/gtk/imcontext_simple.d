@@ -18,7 +18,7 @@ import gtk.types;
     following files that is found: ~/.config/gtk-4.0/Compose, ~/.XCompose,
     /usr/share/X11/locale/$locale/Compose (for locales that have a nontrivial
     Compose file). A subset of the file syntax described in the Compose(5)
-    manual page is supported. Additionally, `include "`L`"` loads GTK’s built-in
+    manual page is supported. Additionally, `include "%L"` loads GTK’s built-in
     table of compose sequences rather than the locale-specific one from X11.
     
     If none of these files is found, [gtk.imcontext_simple.IMContextSimple] uses a built-in table

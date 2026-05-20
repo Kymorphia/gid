@@ -104,7 +104,7 @@ template IconT()
         (such as `/path/to/my icon.png`) without escaping
         if the #GFile for icon is a native file.  If the file is not
         native, the returned string is the result of [gio.file.File.getUri]
-        (such as `sftp://path/to/my`20icon`.png`).
+        (such as `sftp://path/to/my%20icon.png`).
       
       - If icon is a #GThemedIcon with exactly one name and no fallbacks,
         the encoding is simply the name (such as `network-server`).

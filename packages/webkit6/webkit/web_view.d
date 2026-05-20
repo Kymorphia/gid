@@ -127,7 +127,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get `cameraCaptureState` property.
       Returns: Capture state of the camera device. Whenever the user grants a media-request sent by the web
         page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
-        true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+        true})`) this property will be set to %WEBKIT_MEDIA_CAPTURE_STATE_ACTIVE.
         
         The application can monitor this property and provide a visual indicator allowing to optionally
         deactivate or mute the capture device by setting this property respectively to
@@ -147,7 +147,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         propval = Capture state of the camera device. Whenever the user grants a media-request sent by the web
           page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
-          true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+          true})`) this property will be set to %WEBKIT_MEDIA_CAPTURE_STATE_ACTIVE.
           
           The application can monitor this property and provide a visual indicator allowing to optionally
           deactivate or mute the capture device by setting this property respectively to
@@ -299,7 +299,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get `microphoneCaptureState` property.
       Returns: Capture state of the microphone device. Whenever the user grants a media-request sent by the web
         page, requesting audio capture capabilities (`navigator.mediaDevices.getUserMedia({audio:
-        true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+        true})`) this property will be set to %WEBKIT_MEDIA_CAPTURE_STATE_ACTIVE.
         
         The application can monitor this property and provide a visual indicator allowing to
         optionally deactivate or mute the capture device by setting this property respectively to
@@ -319,7 +319,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         propval = Capture state of the microphone device. Whenever the user grants a media-request sent by the web
           page, requesting audio capture capabilities (`navigator.mediaDevices.getUserMedia({audio:
-          true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+          true})`) this property will be set to %WEBKIT_MEDIA_CAPTURE_STATE_ACTIVE.
           
           The application can monitor this property and provide a visual indicator allowing to
           optionally deactivate or mute the capture device by setting this property respectively to
@@ -3548,7 +3548,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
       Params:
         propval = Capture state of the camera device. Whenever the user grants a media-request sent by the web
           page, requesting video capture capabilities (`navigator.mediaDevices.getUserMedia({video:
-          true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+          true})`) this property will be set to %WEBKIT_MEDIA_CAPTURE_STATE_ACTIVE.
           
           The application can monitor this property and provide a visual indicator allowing to optionally
           deactivate or mute the capture device by setting this property respectively to
@@ -3634,7 +3634,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
       Params:
         propval = Capture state of the microphone device. Whenever the user grants a media-request sent by the web
           page, requesting audio capture capabilities (`navigator.mediaDevices.getUserMedia({audio:
-          true})`) this property will be set to [webkit.types.MediaCaptureState.Active].
+          true})`) this property will be set to %WEBKIT_MEDIA_CAPTURE_STATE_ACTIVE.
           
           The application can monitor this property and provide a visual indicator allowing to
           optionally deactivate or mute the capture device by setting this property respectively to

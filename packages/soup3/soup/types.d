@@ -226,7 +226,7 @@ alias MessageHeadersForeachFunc = void delegate(string name, string value);
     path and query contain the likewise-named components of the
     Request-URI, subject to certain assumptions. By default,
     [soup.server.Server] decodes all percent-encoding in the URI path, such that
-    `"/foo`2Fbar`"` is treated the same as `"/foo/bar"`. If your
+    `"/foo%2Fbar"` is treated the same as `"/foo/bar"`. If your
     server is serving resources in some non-POSIX-filesystem namespace,
     you may want to distinguish those as two distinct paths. In that
     case, you can set the [soup.server.Server.rawPaths] property when creating

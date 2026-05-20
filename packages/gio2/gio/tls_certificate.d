@@ -317,7 +317,7 @@ class TlsCertificate : gobject.object.ObjectWrap
       Creates a #GTlsCertificate from a
       [PKCS \#11](https://docs.oasis-open.org/pkcs11/pkcs11-base/v3.0/os/pkcs11-base-v3.0-os.html) URI.
       
-      An example pkcs11_uri would be `pkcs11:model=Model;manufacturer=Manufacture;serial=1;token=My`20Client``20Certificate`;id=`01``
+      An example pkcs11_uri would be `pkcs11:model=Model;manufacturer=Manufacture;serial=1;token=My%20Client%20Certificate;id=%01`
       
       Where the token’s layout is:
       

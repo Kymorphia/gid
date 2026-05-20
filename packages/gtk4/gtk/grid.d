@@ -276,8 +276,8 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
       left or right placement) or column 0 (for top or bottom placement),
       at the end indicated by side.
       
-      Attaching widgets labeled `[1]`, `[2]`, `[3]` with `sibling == null` and
-      `side == [gtk.types.PositionType.Left]` yields a layout of `[3][2][1]`.
+      Attaching widgets labeled `[1]`, `[2]`, `[3]` with `sibling == %NULL` and
+      `side == %GTK_POS_LEFT` yields a layout of `[3][2][1]`.
   
       Params:
         child = the widget to add
