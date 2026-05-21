@@ -19,7 +19,7 @@ import std.exception : enforce;
 import std.traits : isNumeric;
 import gobject.types : GTypeEnum;
 import glib.c.functions : g_strfreev;
-import gobject.c.functions : g_object_unref;
+import gobject.c.functions : g_object_ref, g_object_unref;
 
   /**
   * Create a function in context which calls a D callback.
@@ -93,7 +93,7 @@ import gobject.c.functions : g_object_unref;
   */
   static Value from(T)(Context ctx, T val)
   {
-    return createJsVal!T(cast(JSCContext*)ctx._cPtr, val);
+    return new Value (createJsVal!T(cast(JSCContext*)ctx._cPtr, val), Yes.Take);
   }
 
   /**
@@ -177,7 +177,7 @@ import gobject.c.functions : g_object_unref;
     else static if (is(T == string))
       return jsc_value_new_string(ctx, val.toCString(No.Alloc));
     else static if (is(T == Value))
-      return cast(JSCValue*)g_object_ref(val._cPtr);
+      return cast(JSCValue*)g_object_ref(cast(GObject*)val._cPtr);
     else static if (is(T == U[], U))
     {
       JSCValue* array = jsc_value_new_array(ctx, GTypeEnum.None);
