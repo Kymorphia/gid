@@ -12,6 +12,31 @@
 //!set class[Context].method[evaluate_in_object].parameters.parameter[code].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 //!set class[Context].method[evaluate_with_source_uri].parameters.parameter[code].type '<array length="1" c:type="const char*"><type name="char" c:type="char"/></array>'
 
+//!class Context
+
+import std.traits : isFunction;
+
+  /**
+   * Register a D function/delegate as a JavaScript function.
+   */
+  void registerFunction(T)(string name, T callback)
+  {
+    auto jsFunc = Value.newFunction(this, name, callback);
+    setValue(name, jsFunc);
+  }
+
+  /**
+   * Register with automatic name from the function symbol.
+   * Only works with function pointers/aliases, not runtime delegates.
+   */
+  void registerFunction(alias Func)()
+    if (isFunction!Func)
+  {
+    string name = __traits(identifier, Func);
+    registerFunction(name, &Func);
+  }
+
+
 //!class Value
 
 import core.memory : GC;

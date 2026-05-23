@@ -69,6 +69,30 @@ class Context : gobject.object.ObjectWrap
     return getVirtualMachine();
   }
 
+  import std.traits : isFunction;
+
+  /**
+  * Register a D function/delegate as a JavaScript function.
+  */
+  void registerFunction(T)(string name, T callback)
+  {
+    auto jsFunc = Value.newFunction(this, name, callback);
+    setValue(name, jsFunc);
+  }
+
+  /**
+  * Register with automatic name from the function symbol.
+  * Only works with function pointers/aliases, not runtime delegates.
+  */
+  void registerFunction(alias Func)()
+  if (isFunction!Func)
+  {
+    string name = __traits(identifier, Func);
+    registerFunction(name, &Func);
+  }
+
+
+
   /**
       Create a new #JSCContext. The context is created in a new #JSCVirtualMachine.
       Use [javascriptcore.context.Context.newWithVirtualMachine] to create a new #JSCContext in an
