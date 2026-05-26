@@ -15,7 +15,7 @@ import javascriptcore.value;
 import javascriptcore.virtual_machine;
 
 
-import std.traits : isFunction;
+import std.traits;
 
 import gobject.c.functions;
 import javascriptcore.class_;
@@ -99,11 +99,20 @@ class Context : gobject.object.ObjectWrap
 
   /**
   * Register a D class to a JSC Context.
+  *
+  * If the Mode is RegisterClassMode.UdaOnly then a constructor must be marked with the @JsCtor attribute
+  * and all methods and properties which are to be exposed must be marked with the @JsExpose attribute.
+  *
+  * The @JsName attribute is used to set the name (string) of a method or property.
+  * The @JsReadOnly attribute is used to mark a member variable property as read-only.
+  *
   * Params:
   *   DClass = The D class to register
-  *   name = Class name to use or empty/null to use D class name (default)
+  *   Mode = The registration mode (defaults to RegisterClassMode.UdaOnly)
+  *   className = Class name to use or empty/null to use D class name (default)
+  * Returns: The registered Class (returns the existing instance if it was already registered)
   */
-  Class registerClass(alias DClass)(string name = null)
+  Class registerClass(alias DClass, RegisterClassMode Mode = RegisterClassMode.UdaOnly)(string className = null)
   {
     extern(C) void classDestroyNotify(const(void*) data)
     {
@@ -119,19 +128,148 @@ class Context : gobject.object.ObjectWrap
     if (auto existing = classRegistry.get(ti, null))
       return existing;
 
-    if (name.length == 0)
-      name = __traits(identifier, typeof(this));
+    if (className.length == 0)
+      className = __traits(identifier, DClass);
 
     auto parent = classRegistry.get(ti.base, null);
     auto jscParent = parent ? cast(JSCClass*)parent._cPtr : null;
 
-    auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, name.toCString(No.Alloc), jscParent, null,
-    &classDestroyNotify);
+    auto jscClass = jsc_context_register_class(cast(JSCContext*)this._cPtr, className.toCString(No.Alloc), jscParent, null, &classDestroyNotify);
 
     auto jsClass = new Class(cast(void*)jscClass, Yes.Take);
     classRegistry[ti] = jsClass;
-    classNameToType[name] = ti;
+    classNameToType[className] = ti;
+
+    static if (Mode == RegisterClassMode.Manual)
+      return jsClass;
+
+    alias SelectedCtor = findBestConstructor!DClass;
+
+    static if (is(SelectedCtor == void))
+    {
+      static assert(0, "No suitable constructor found for " ~ DClass.stringof ~
+      ". Mark a static method returning " ~ DClass.stringof ~ " with @JsConstructor");
+    }
+
+    static foreach (memberName; __traits(derivedMembers, DClass))
+    {{
+      alias Member = __traits(getMember, DClass, memberName);
+
+      static if (isFunction!(Member))
+      {
+        static if (hasFunctionAttributes!(Member, "@property"))
+        {{
+          alias PropInfo = PropertyPair!(__traits(parent, Member), memberName, Mode);
+
+          static if (PropInfo.isValid)
+          {
+            static if (is(PropInfo.Setter == void))
+              jsClass.addProperty!(PropInfo.Getter)(memberName); // Read only
+            else
+              jsClass.addProperty!(PropInfo.Getter, PropInfo.Setter)(memberName);
+          }
+          else static if (isMethodExposable!(Member, Mode))
+            jsClass.addMethod!Member(getUDAName!(Member, memberName));
+        }}
+        else static if (isMethodExposable!(Member, Mode))
+          jsClass.addMethod!(Member)(getUDAName!(Member, memberName));
+      }
+    }}
+
+    auto ctor = jsClass.addConstructor!(SelectedCtor)(getUDAName!(SelectedCtor, __traits(identifier, SelectedCtor)));
+    setValue(className, ctor);
+
     return jsClass;
+  }
+
+  // Helper to get custom name from @JsName or fall back to D name
+  private template getUDAName(alias Member, string defaultName)
+  {
+    alias udas = getUDAs!(Member, JsName);
+    static if (udas.length > 0)
+      enum getUDAName = udas[0].name;
+    else
+      enum getUDAName = defaultName;
+  }
+
+  private template findBestConstructor(alias DClass)
+  {
+    alias findBestConstructor = FindBestCtor!DClass;
+  }
+
+  private template FindBestCtor(alias DClass)
+  {
+    alias BestConstructor = void;
+    alias BestFallback = void;
+
+    static foreach (memberName; __traits(derivedMembers, DClass))
+    {
+      static if (isCallable!(__traits(getMember, DClass, memberName))
+        && __traits(isStaticFunction, __traits(getMember, DClass, memberName))
+      && is(ReturnType!(__traits(getMember, DClass, memberName)) == DClass))
+      {
+        static if (hasUDA!(__traits(getMember, DClass, memberName), JsConstructor))
+          BestConstructor = __traits(getMember, DClass, memberName); // Prioritize explicit @JsConstructor
+        else
+          BestFallback = __traits(getMember, DClass, memberName);
+      }
+    }
+
+    static if (is(BestConstructor == void))
+      alias FindBestCtor = BestFallback;
+    else
+      alias FindBestCtor = BestConstructor;
+  }
+
+  private template isMethodExposable(alias Method, RegisterClassMode Mode)
+  {
+    static bool compute()
+    {
+      bool isValid = true;
+
+      // Check visibility / UDA
+      static if (!hasUDA!(Method, JsExpose))
+      {
+        static if (Mode == RegisterClassMode.Full)
+        {
+          static if (__traits(getVisibility, Method) != "public")
+            isValid = false;
+        }
+        else
+          isValid = false;
+      }
+
+      static foreach (T; Parameters!Method) // Check parameters
+      static if (!isValidJsVal!T)
+        isValid = false;
+
+      static if (!is(ReturnType!Method == void) && !isValidJsVal!(ReturnType!Method))
+        isValid = false;
+
+      return isValid;
+    }
+
+    enum bool isMethodExposable = compute();
+  }
+
+  private template PropertyPair(alias DClass, string propName, RegisterClassMode Mode)
+  {
+    alias Overloads = __traits(getOverloads, DClass, propName);
+
+    alias Getter = void;
+    alias Setter = void;
+
+    static foreach (i, F; Overloads)
+    {
+      static if (isCallable!F && Parameters!F.length == 0 && !is(ReturnType!F == void)
+        && (Mode == RegisterClassMode.Full || hasUDA!(F, JsExpose)))
+      Getter = F;
+      else static if (isCallable!F && Parameters!F.length == 1 && is(ReturnType!F == void)
+        && (Mode == RegisterClassMode.Full || hasUDA!(F, JsExpose)))
+      Setter = F;
+    }
+
+    enum bool isValid = !is(Getter == void);
   }
 
   /**
@@ -518,3 +656,16 @@ final class ContextGidBuilder : ContextGidBuilderImpl!ContextGidBuilder
     return new Context(cast(void*)createGObject(Context._getGType), Yes.Take);
   }
 }
+
+/// Value used with registerClass template
+enum RegisterClassMode
+{
+  UdaOnly, /// Only add methods and members which are marked with @JsExpose
+  Full, /// Bind all public methods and public members as properties, first method which returns an instance is used (or the one marked @JsCtor)
+  Manual, /// Don't do any automatic class registration, leaving it up to the caller to do all that
+}
+
+struct JsConstructor {} /// Attribute to mark a constructor method
+struct JsExpose {} /// Attribute to mark a method or member variable (property) for exposing to javascriptcore
+struct JsName { string name; } /// Attribute to set the name of a method or member variable property
+struct JsReadOnly {} /// Attribute to set a member variable property as read-only

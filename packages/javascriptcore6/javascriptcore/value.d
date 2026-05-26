@@ -1135,3 +1135,14 @@ static JSCValue* createJsVal(T)(JSCContext* ctx, T val)
   else
     static assert(0, "Unsupported type " ~ T.stringof ~ " in javascriptcore.Value.createJsVal");
 }
+
+/**
+* Check if a D type is a valid JS Value type (a value of the type can be created with createJsVal)
+* Params:
+*   T = The D type
+* Returns: true if createJsVal is supported for the type, false otherwise
+*/
+bool isValidJsVal(T)()
+{
+  return is(T == bool) || isNumeric!T || is(T == string) || is(T == Value) || is(T == U[], U) || is(T == U[string], U);
+}
