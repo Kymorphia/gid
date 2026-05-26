@@ -13,6 +13,14 @@ import javascriptcore.class_;
 import javascriptcore.context;
 import javascriptcore.types;
 
+
+import core.memory : GC;
+import std.exception : enforce;
+import std.traits : isNumeric;
+import gobject.types : GTypeEnum;
+import glib.c.functions : g_strfreev;
+import gobject.c.functions : g_object_ref, g_object_unref;
+
 /**
     JSCValue represents a reference to a value in a #JSCContext. The JSCValue
     protects the referenced value from being garbage collected.
@@ -62,14 +70,6 @@ class Value : gobject.object.ObjectWrap
   {
     return getContext();
   }
-
-  import core.memory : GC;
-  import std.exception : enforce;
-  import std.traits : isNumeric;
-  import gobject.types : GTypeEnum;
-  import glib.c.functions : g_strfreev;
-  import gobject.c.functions : g_object_ref, g_object_unref;
-
   /**
   * Create a function in context which calls a D callback.
   * Params:
@@ -143,118 +143,6 @@ class Value : gobject.object.ObjectWrap
   static Value from(T)(Context ctx, T val)
   {
     return new Value (createJsVal!T(cast(JSCContext*)ctx._cPtr, val), Yes.Take);
-  }
-
-  /**
-  * Template to get a value from a JSCValue of a given D type (must contain the correct type)
-  * Params:
-  *   T = D type which the C GValue structure contains
-  *   jsval = C JSCValue structure pointer
-  * Returns: The value of type `T`
-  */
-  static T getJsVal(T)(JSCValue* jsval)
-  {
-    static if (is(T == bool))
-      return cast(bool)jsc_value_to_boolean(jsval);
-    else static if (is(T == int))
-      return jsc_value_to_int32(jsval);
-    else static if (is(T == double))
-      return jsc_value_to_double(jsval);
-    else static if (is(T == string))
-      return jsc_value_to_string(jsval).fromCString(Yes.Free);
-    else static if (is(T == Value))
-      return gobject.object.ObjectWrap._getDObject!Value(jsval, No.Take);
-    else static if (is(T == U[], U))
-    {
-      enforce(jsc_value_is_array(jsval), "JSCValue is not a JavaScript array");
-
-      auto lenVal = jsc_value_object_get_property(jsval, "length");
-      scope(exit) if (lenVal) g_object_unref(cast(GObject*)lenVal);
-      auto len = cast(size_t)jsc_value_to_double(lenVal);
-
-      U[] array;
-      array.length = len;
-
-      foreach (i; 0 .. len)
-      {
-        auto v = jsc_value_object_get_property_at_index(jsval, cast(uint)i);
-        scope(exit) if (v) g_object_unref(cast(GObject*)v);
-        array[i] = getJsVal!U(v);
-      }
-
-      return array;
-    }
-    else static if (is(T == U[string], U))
-    {
-      enforce(jsc_value_is_object(jsval), "JSCValue is not a JavaScript object");
-
-      U[string] obj;
-
-      char** propNames = jsc_value_object_enumerate_properties(jsval);
-      if (!propNames)
-        return obj;
-
-      scope(exit) g_strfreev(propNames);
-
-      for (size_t i = 0; propNames[i]; i++)
-      {
-        auto v = jsc_value_object_get_property(jsval, propNames[i]);
-        scope(exit) if (v) g_object_unref(cast(GObject*)v);
-        obj[propNames[i].fromCString(No.Free)] = getJsVal!U(v); // Free the individual strings
-      }
-
-      return obj;
-    }
-    else
-      static assert(0, "Unsupported type " ~ T.stringof ~ " in javascriptcore.Value.getJsVal");
-  }
-
-  /**
-  * Template to create a JSCValue from a given D value
-  * Params:
-  *   T = D type to create the C JSCValue from
-  *   ctx = The JSCContext to create the value in
-  *   val = The value to create the JSCValue from
-  * Returns: The new JSCValue which the caller owns
-  */
-  static JSCValue* createJsVal(T)(JSCContext* ctx, T val)
-  {
-    static if (is(T == bool))
-      return jsc_value_new_boolean(ctx, cast(gboolean)val);
-    else static if (isNumeric!T)
-      return jsc_value_new_number(ctx, val);
-    else static if (is(T == string))
-      return jsc_value_new_string(ctx, val.toCString(No.Alloc));
-    else static if (is(T == Value))
-      return cast(JSCValue*)g_object_ref(cast(GObject*)val._cPtr);
-    else static if (is(T == U[], U))
-    {
-      JSCValue* array = jsc_value_new_array(ctx, GTypeEnum.None);
-
-      foreach (i, item; val)
-      {
-        auto itemVal = createJsVal(ctx, item);
-        scope(exit) if (itemVal) g_object_unref(cast(GObject*)itemVal);
-        jsc_value_object_set_property_at_index(array, cast(uint)i, itemVal);
-      }
-
-      return array;
-    }
-    else static if (is(T == U[string], U))
-    {
-      JSCValue* obj = jsc_value_new_object(ctx, null, null);
-
-      foreach (k, v; val)
-      {
-        auto itemVal = createJsVal(ctx, v);
-        scope(exit) if (itemVal) g_object_unref(cast(GObject*)itemVal);
-        jsc_value_object_set_property(obj, k.toCString(No.Alloc), itemVal);
-      }
-
-      return obj;
-    }
-    else
-      static assert(0, "Unsupported type " ~ T.stringof ~ " in javascriptcore.Value.createJsVal");
   }
 
   /**
@@ -1134,4 +1022,116 @@ final class ValueGidBuilder : ValueGidBuilderImpl!ValueGidBuilder
   {
     return new Value(cast(void*)createGObject(Value._getGType), No.Take);
   }
+}
+
+/**
+* Template to get a value from a JSCValue of a given D type (must contain the correct type)
+* Params:
+*   T = D type which the C GValue structure contains
+*   jsval = C JSCValue structure pointer
+* Returns: The value of type `T`
+*/
+static T getJsVal(T)(JSCValue* jsval)
+{
+  static if (is(T == bool))
+    return cast(bool)jsc_value_to_boolean(jsval);
+  else static if (is(T == int))
+    return jsc_value_to_int32(jsval);
+  else static if (is(T == double))
+    return jsc_value_to_double(jsval);
+  else static if (is(T == string))
+    return jsc_value_to_string(jsval).fromCString(Yes.Free);
+  else static if (is(T == Value))
+    return gobject.object.ObjectWrap._getDObject!Value(jsval, No.Take);
+  else static if (is(T == U[], U))
+  {
+    enforce(jsc_value_is_array(jsval), "JSCValue is not a JavaScript array");
+
+    auto lenVal = jsc_value_object_get_property(jsval, "length");
+    scope(exit) if (lenVal) g_object_unref(cast(GObject*)lenVal);
+    auto len = cast(size_t)jsc_value_to_double(lenVal);
+
+    U[] array;
+    array.length = len;
+
+    foreach (i; 0 .. len)
+    {
+      auto v = jsc_value_object_get_property_at_index(jsval, cast(uint)i);
+      scope(exit) if (v) g_object_unref(cast(GObject*)v);
+      array[i] = getJsVal!U(v);
+    }
+
+    return array;
+  }
+  else static if (is(T == U[string], U))
+  {
+    enforce(jsc_value_is_object(jsval), "JSCValue is not a JavaScript object");
+
+    U[string] obj;
+
+    char** propNames = jsc_value_object_enumerate_properties(jsval);
+    if (!propNames)
+      return obj;
+
+    scope(exit) g_strfreev(propNames);
+
+    for (size_t i = 0; propNames[i]; i++)
+    {
+      auto v = jsc_value_object_get_property(jsval, propNames[i]);
+      scope(exit) if (v) g_object_unref(cast(GObject*)v);
+      obj[propNames[i].fromCString(No.Free)] = getJsVal!U(v); // Free the individual strings
+    }
+
+    return obj;
+  }
+  else
+    static assert(0, "Unsupported type " ~ T.stringof ~ " in javascriptcore.Value.getJsVal");
+}
+
+/**
+* Template to create a JSCValue from a given D value
+* Params:
+*   T = D type to create the C JSCValue from
+*   ctx = The JSCContext to create the value in
+*   val = The value to create the JSCValue from
+* Returns: The new JSCValue which the caller owns
+*/
+static JSCValue* createJsVal(T)(JSCContext* ctx, T val)
+{
+  static if (is(T == bool))
+    return jsc_value_new_boolean(ctx, cast(gboolean)val);
+  else static if (isNumeric!T)
+    return jsc_value_new_number(ctx, val);
+  else static if (is(T == string))
+    return jsc_value_new_string(ctx, val.toCString(No.Alloc));
+  else static if (is(T == Value))
+    return cast(JSCValue*)g_object_ref(cast(GObject*)val._cPtr);
+  else static if (is(T == U[], U))
+  {
+    JSCValue* array = jsc_value_new_array(ctx, GTypeEnum.None);
+
+    foreach (i, item; val)
+    {
+      auto itemVal = createJsVal(ctx, item);
+      scope(exit) if (itemVal) g_object_unref(cast(GObject*)itemVal);
+      jsc_value_object_set_property_at_index(array, cast(uint)i, itemVal);
+    }
+
+    return array;
+  }
+  else static if (is(T == U[string], U))
+  {
+    JSCValue* obj = jsc_value_new_object(ctx, null, null);
+
+    foreach (k, v; val)
+    {
+      auto itemVal = createJsVal(ctx, v);
+      scope(exit) if (itemVal) g_object_unref(cast(GObject*)itemVal);
+      jsc_value_object_set_property(obj, k.toCString(No.Alloc), itemVal);
+    }
+
+    return obj;
+  }
+  else
+    static assert(0, "Unsupported type " ~ T.stringof ~ " in javascriptcore.Value.createJsVal");
 }
