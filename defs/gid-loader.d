@@ -98,12 +98,15 @@ else // Linux or OSX
       {
         debug
         {
-          if (gidLoaderDebug)
+          version(Android) // Android doesn't have dlinfo
           {
-            char[PATH_MAX + 1] path;
-
-            version(linux)
+          }
+          else version(linux)
+          {
+            if (gidLoaderDebug)
             {
+              char[PATH_MAX + 1] path;
+
               import core.sys.linux.dlfcn : dlinfo, RTLD_DI_ORIGIN;
 
               if (dlinfo(handle, RTLD_DI_ORIGIN, path.ptr) == 0)
