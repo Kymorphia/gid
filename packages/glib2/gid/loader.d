@@ -3,6 +3,7 @@ module gid.loader;
 
 public import gid.basictypes;
 
+import std.exception : assumeWontThrow;
 import std.file : exists;
 import std.path : buildNormalizedPath, buildPath;
 import std.process : environment;
@@ -19,7 +20,7 @@ debug
   shared static this()
   {
     import std.process : environment;
-    gidLoaderDebug = environment.get("GID_LOADER_DEBUG", "0") == "1";
+    gidLoaderDebug = assumeWontThrow(environment.get("GID_LOADER_DEBUG", "0")) == "1";
   }
 }
 
@@ -51,7 +52,7 @@ version(Windows)
         debug
         {
           if (gidLoaderDebug)
-            stderr.writeln("giD library '" ~ libVariations ~ "'not found");
+            assumeWontThrow(stderr.writeln("giD library '" ~ libVariations ~ "'not found"));
         }
 
         gidUnresolvedLibs ~= libVariations;
@@ -78,7 +79,7 @@ version(Windows)
     debug
     {
       if (gidLoaderDebug)
-        stderr.writeln("giD symbol '" ~ symbol ~ "' not found");
+        assumeWontThrow(stderr.writeln("giD symbol '" ~ symbol ~ "' not found"));
     }
   }
 }
@@ -112,9 +113,9 @@ else // Linux or OSX
               import core.sys.linux.dlfcn : dlinfo, RTLD_DI_ORIGIN;
 
               if (dlinfo(handle, RTLD_DI_ORIGIN, path.ptr) == 0)
-                stderr.writeln("Found ", libPath, " at ", path.fromStringz.idup);
+                assumeWontThrow(stderr.writeln("Found ", libPath, " at ", path.fromStringz.idup));
               else
-                stderr.writeln("dlinfo() returned error: ", dlerror().fromStringz.idup);
+                assumeWontThrow(stderr.writeln("dlinfo() returned error: ", dlerror().fromStringz.idup));
             }
           }
         }
@@ -126,7 +127,7 @@ else // Linux or OSX
         debug
         {
           if (gidLoaderDebug)
-            stderr.writeln("giD library '" ~ lib ~ "' not found: " ~ dlerror().fromStringz.idup);
+            assumeWontThrow(stderr.writeln("giD library '" ~ lib ~ "' not found: " ~ dlerror().fromStringz.idup));
         }
 
         gidUnresolvedLibs ~= lib;
@@ -153,7 +154,7 @@ else // Linux or OSX
     debug
     {
       if (gidLoaderDebug)
-        stderr.writeln("giD symbol '" ~ symbol ~ "' not found");
+        assumeWontThrow(stderr.writeln("giD symbol '" ~ symbol ~ "' not found"));
     }
   }
 
@@ -165,11 +166,11 @@ else // Linux or OSX
 
       if (path is null)
       {
-        path = environment.get("GTK_BASEPATH");
+        path = assumeWontThrow(environment.get("GTK_BASEPATH"));
 
         if(!path)
         {
-          path = environment.get("HOMEBREW_PREFIX");
+          path = assumeWontThrow(environment.get("HOMEBREW_PREFIX"));
 
           if (path)
             path = buildPath(path, "lib");
@@ -179,7 +180,7 @@ else // Linux or OSX
       debug
       {
         if (gidLoaderDebug)
-          stderr.writeln("Found giD DLL path: ", path);
+          assumeWontThrow(stderr.writeln("Found giD DLL path: ", path));
       }
 
       return path;
@@ -212,13 +213,7 @@ string gidLoaderUnresolvedReport() nothrow
 void gidSymbolNotFound() nothrow
 {
   if (gidUnresolvedLibs.length > 0 || gidUnresolvedSymbols.length > 0)
-  {
-    try
-    stderr.writeln(gidLoaderUnresolvedReport);
-    catch (Exception)
-    {
-    }
-  }
+    assumeWontThrow(stderr.writeln(gidLoaderUnresolvedReport));
 
   throw new Error("Attempt to execute an unresolved giD function");
 }
